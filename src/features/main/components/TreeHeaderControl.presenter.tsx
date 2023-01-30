@@ -51,24 +51,27 @@ function TreeHeaderControl(props: TreeHeaderControlProps) {
         justify-content: start;
         padding: 0 0.5rem;
         font-weight: bold;
-        &>div:nth-of-type(3) {
+        & > div:nth-of-type(3) {
           display: none;
         }
         &:hover {
-          &>div:nth-of-type(3) {
+          & > div:nth-of-type(3) {
             display: inherit;
           }
         }
       `}>
-      <ChevronLeftIcon
+      <div
         aria-disabled={disabled}
         aria-label={intl.formatMessage(messages.Back)}
         role="button"
         title={intl.formatMessage(messages.Back)}
         css={css`
           font-size: 1rem;
+          line-height: 1rem;
         `}
-        onClick={(e) => !disabled && onClick?.(e)} />
+        onClick={(e) => !disabled && onClick?.(e)}>
+        <ChevronLeftIcon />
+      </div>
       <div
         css={css`
           overflow: hidden;
@@ -86,11 +89,15 @@ function TreeHeaderControl(props: TreeHeaderControlProps) {
       </div>
       <Menu>
         <MenuTrigger>
-          <div role="button">
-            <MoreVerticalIcon
-              css={css`
-                font-size: 1rem;
-              `} />
+          <div
+            aria-label={intl.formatMessage(messages.MoreOption)}
+            role="button"
+            title={intl.formatMessage(messages.MoreOption)}
+            css={css`
+              font-size: 1rem;
+              line-height: 1rem;
+            `}>
+            <MoreVerticalIcon />
           </div>
         </MenuTrigger>
         <MenuPopover>

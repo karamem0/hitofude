@@ -8,51 +8,40 @@
 
 import React from 'react';
 
-import { MessageDescriptor } from 'react-intl';
-import { useError } from 'react-use';
-
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { updateFolder } from '../../../stores/Action';
 import {
-  FolderConflictError,
-  FolderNotFoundError
-} from '../../../types/Error';
-import { Event, EventHandler } from '../../../types/Event';
+  setDialogAction,
+  setError,
+  updateExploreFolder
+} from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 import { Folder } from '../../../types/Model';
-import messages from '../messages';
 import { FolderRenameDialogFormState } from '../types/Form';
 
 import Presenter from './FolderRenameDialog.presenter';
 
 interface FolderRenameDialogProps {
-  folder?: Folder,
-  onOpenChange?: EventHandler<boolean>
+  folder?: Folder
 }
 
 function FolderRenameDialog(props: FolderRenameDialogProps) {
 
-  const {
-    folder,
-    onOpenChange
-  } = props;
+  const { folder } = props;
 
-  const setError = useError();
   const { dispatch } = useStore();
   const { graph } = useService();
-  const [ alert, setAlert ] = React.useState<MessageDescriptor>();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleDismiss = React.useCallback(() => {
-    setAlert(undefined);
-  }, []);
-
-  const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
-    setOpen(data || false);
-    onOpenChange?.(e, data);
+  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+    const open = data || false;
+    setOpen(open);
+    if (!open) {
+      dispatch(setDialogAction(undefined));
+    }
   }, [
-    onOpenChange
+    dispatch
   ]);
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FolderRenameDialogFormState) => {
@@ -65,39 +54,28 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
       }
       setLoading(true);
       const folder = await graph.renameFolder(data, data.name);
-      dispatch(updateFolder(folder));
-      handleOpenChange?.(e, false);
+      dispatch(updateExploreFolder(folder));
     } catch (e) {
-      if (e instanceof FolderConflictError) {
-        setAlert(messages.FolderAlreadyExists);
-        return;
-      }
-      if (e instanceof FolderNotFoundError) {
-        setAlert(messages.FolderDoesNotExists);
-        return;
-      }
       if (e instanceof Error) {
-        setError(e);
+        dispatch(setError(e));
         return;
       }
       throw e;
     } finally {
       setLoading(false);
+      handleOpenChange?.(e, false);
     }
   }, [
     dispatch,
     graph,
-    handleOpenChange,
-    setError
+    handleOpenChange
   ]);
 
   return (
     <Presenter
-      alert={alert}
       folder={folder}
       loading={loading}
       open={open}
-      onDismiss={handleDismiss}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

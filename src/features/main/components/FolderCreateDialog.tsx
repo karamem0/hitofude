@@ -8,49 +8,38 @@
 
 import React from 'react';
 
-import { MessageDescriptor } from 'react-intl';
-import { useError } from 'react-use';
-
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { appendFolder } from '../../../stores/Action';
 import {
-  FileConflictError,
-  FileNotFoundError
-} from '../../../types/Error';
-import { Event, EventHandler } from '../../../types/Event';
-import messages from '../messages';
+  appendExploreFolder,
+  setDialogAction,
+  setError
+} from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 import { FolderCreateDialogFormState } from '../types/Form';
 
 import Presenter from './FolderCreateDialog.presenter';
 
-interface FolderCreateDialogProps {
-  onOpenChange?: EventHandler<boolean>
-}
+function FolderCreateDialog() {
 
-function FolderCreateDialog(props: FolderCreateDialogProps) {
-
-  const { onOpenChange } = props;
-
-  const setError = useError();
   const {
     dispatch,
-    state: { workFolder }
+    state: {
+      workFolder
+    }
   } = useStore();
   const { graph } = useService();
-  const [ alert, setAlert ] = React.useState<MessageDescriptor>();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleDismiss = React.useCallback(() => {
-    setAlert(undefined);
-  }, []);
-
-  const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
-    setOpen(data || false);
-    onOpenChange?.(e, data);
+  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+    const open = data || false;
+    setOpen(open);
+    if (!open) {
+      dispatch(setDialogAction(undefined));
+    }
   }, [
-    onOpenChange
+    dispatch
   ]);
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FolderCreateDialogFormState) => {
@@ -63,39 +52,28 @@ function FolderCreateDialog(props: FolderCreateDialogProps) {
       }
       setLoading(true);
       const folder = await graph.createFolder(workFolder, `${data.name}`);
-      dispatch(appendFolder(folder));
-      handleOpenChange?.(e, false);
+      dispatch(appendExploreFolder(folder));
     } catch (e) {
-      if (e instanceof FileConflictError) {
-        setAlert(messages.FileAlreadyExists);
-        return;
-      }
-      if (e instanceof FileNotFoundError) {
-        setAlert(messages.FileDoesNotExists);
-        return;
-      }
       if (e instanceof Error) {
-        setError(e);
+        dispatch(setError(e));
         return;
       }
       throw e;
     } finally {
       setLoading(false);
+      handleOpenChange?.(e, false);
     }
   }, [
     dispatch,
     graph,
     handleOpenChange,
-    setError,
     workFolder
   ]);
 
   return (
     <Presenter
-      alert={alert}
       loading={loading}
       open={open}
-      onDismiss={handleDismiss}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

@@ -6,7 +6,12 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { File, Folder } from './Model';
+import {
+  DialogAction,
+  File,
+  Folder,
+  TabMode
+} from './Model';
 
 export interface Action {
   type: ActionType,
@@ -14,22 +19,31 @@ export interface Action {
 }
 
 export enum ActionType {
-  appendFile = 'appendFile',
-  appendFolder = 'appendFolder',
-  deleteFile = 'removeFile',
-  deleteFolder = 'deleteFolder',
-  setEditMode = 'setEditMode',
+  appendExploreFile = 'appendExploreFile',
+  appendExploreFolder = 'appendExploreFolder',
+  deleteExploreFile = 'deleteExploreFile',
+  deleteExploreFolder = 'deleteExploreFolder',
+  setDialogAction = 'setDialogAction',
+  setError = 'setError',
+  setLoading = 'setLoading',
+  setSearchFiles = 'setSearchFiles',
+  setSearchQuery = 'setSearchQuery',
   setTabMode = 'setTabMode',
   setWorkFile = 'setWorkFile',
   setWorkFolder = 'setWorkFolder',
-  updateFile = 'updateFile',
-  updateFolder = 'updateFolder'
+  updateExploreFile = 'updateExploreFile',
+  updateExploreFolder = 'updateExploreFolder'
 }
 
 export type DispatchAction<T> = (payload: T) => void;
 
 export interface State {
-  tabMode?: boolean,
+  dialogAction?: DialogAction,
+  error?: Error,
+  loading?: boolean,
+  searchFiles?: File[],
+  searchQuery?: string,
+  tabMode?: TabMode,
   workFile?: File,
   workFolder?: Folder
 }

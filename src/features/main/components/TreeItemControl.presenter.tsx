@@ -8,6 +8,8 @@
 
 import React from 'react';
 
+import { useIntl } from 'react-intl';
+
 import { css } from '@emotion/react';
 import {
   Menu,
@@ -19,6 +21,7 @@ import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
 
 import { themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
+import messages from '../messages';
 
 interface TreeItemControlProps {
   icon?: React.ReactNode,
@@ -40,6 +43,8 @@ function TreeItemControl(props: TreeItemControlProps) {
     onClick
   } = props;
 
+  const intl = useIntl();
+
   return (
     <div
       key={key}
@@ -55,22 +60,22 @@ function TreeItemControl(props: TreeItemControlProps) {
         justify-content: start;
         padding: 0.5rem;
         cursor: pointer;
+        & > div:nth-of-type(2) {
+          display: none;
+        }
         &:hover {
           background-color: ${themeConfig.colorNeutralBackground2Hover};
-          &>div:nth-of-type(2) {
+          & > div:nth-of-type(2) {
             display: inherit;
           }
         }
         &:focus {
-          &>div:nth-of-type(2) {
+          & > div:nth-of-type(2) {
             display: inherit;
           }
         }
-        &[aria-selected=true] {
+        &[aria-selected='true'] {
           background-color: ${themeConfig.colorNeutralBackground2Selected};
-        }
-        &>div:nth-of-type(2) {
-          display: none;
         }
       `}>
       <div
@@ -98,11 +103,15 @@ function TreeItemControl(props: TreeItemControlProps) {
       </div>
       <Menu>
         <MenuTrigger>
-          <div role="button">
-            <MoreVerticalIcon
-              css={css`
-                font-size: 1rem;
-              `} />
+          <div
+            aria-label={intl.formatMessage(messages.MoreOption)}
+            role="button"
+            title={intl.formatMessage(messages.MoreOption)}
+            css={css`
+              font-size: 1rem;
+              line-height: 1rem;
+            `}>
+            <MoreVerticalIcon />
           </div>
         </MenuTrigger>
         <MenuPopover>

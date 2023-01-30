@@ -9,11 +9,7 @@
 import React from 'react';
 
 import { Controller, useForm } from 'react-hook-form';
-import {
-  FormattedMessage,
-  MessageDescriptor,
-  useIntl
-} from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { css } from '@emotion/react';
 import {
@@ -25,23 +21,18 @@ import {
   DialogSurface,
   DialogTitle,
   DialogTrigger,
-  Input,
-  Link
+  Input
 } from '@fluentui/react-components';
-import { Alert } from '@fluentui/react-components/unstable';
 
-import { themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import messages from '../messages';
 import { FileRenameDialogFormState } from '../types/Form';
 
 interface FileRenameDialogProps {
-  alert?: MessageDescriptor,
   file?: File,
   loading?: boolean,
   open?: boolean,
-  onDismiss?: EventHandler,
   onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FileRenameDialogFormState>
 }
@@ -49,11 +40,9 @@ interface FileRenameDialogProps {
 function FileRenameDialog(props: FileRenameDialogProps) {
 
   const {
-    alert,
     file,
     loading,
     open,
-    onDismiss,
     onOpenChange,
     onSubmit
   } = props;
@@ -78,24 +67,6 @@ function FileRenameDialog(props: FileRenameDialogProps) {
               <FormattedMessage {...messages.RenameFile} />
             </DialogTitle>
             <DialogContent>
-              {
-                alert ? (
-                  <Alert
-                    intent="error"
-                    action={
-                      <Link
-                        as="button"
-                        onClick={onDismiss}>
-                        <FormattedMessage {...messages.Dismiss} />
-                      </Link>
-                    }
-                    css={css`
-                      background-color: ${themeConfig.colorNeutralBackground2};
-                    `}>
-                    <FormattedMessage {...alert} />
-                  </Alert>
-                ) : null
-              }
               <div
                 css={css`
                   display: flex;

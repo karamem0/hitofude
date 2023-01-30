@@ -14,7 +14,7 @@ export interface File {
   downloadUrl?: string,
   parentId?: string,
   content?: string,
-  editMode?: boolean
+  editing?: boolean
 }
 
 export interface Folder {
@@ -27,4 +27,29 @@ export interface Folder {
   parentId?: string,
   folders?: Folder[],
   files?: File[]
+}
+
+export interface DialogAction {
+  type: DialogType,
+  payload: unknown
+}
+
+export enum DialogType {
+  copyFile = 'copyFile',
+  createFile = 'createFile',
+  createFolder = 'createFolder',
+  deleteFile = 'deleteFile',
+  deleteFolder = 'deleteFolder',
+  renameFile = 'renameFile',
+  renameFolder = 'renameFolder'
+}
+
+export interface TabMode {
+  type?: TabType,
+  open?: boolean
+}
+
+export enum TabType {
+  explorer = 0,
+  search = 1,
 }

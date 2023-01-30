@@ -69,7 +69,7 @@ export class GraphService {
     }
   }
 
-  async deleteFile(file: Pick<File, 'id'>): Promise<void> {
+  async deleteExploreFile(file: Pick<File, 'id'>): Promise<void> {
     try {
       await this.client
         .api(`/me/drive/items/${file.id}`)
@@ -84,7 +84,7 @@ export class GraphService {
     }
   }
 
-  async deleteFolder(file: Pick<Folder, 'id'>): Promise<void> {
+  async deleteExploreFolder(file: Pick<Folder, 'id'>): Promise<void> {
     try {
       await this.client
         .api(`/me/drive/items/${file.id}`)
@@ -284,6 +284,34 @@ export class GraphService {
         }
         if (e.statusCode === 409) {
           throw new FolderConflictError(e.message);
+        }
+      }
+      throw e;
+    }
+  }
+
+  async searchFiles(query: string): Promise<File[]> {
+    try {
+      const data = await this.client
+        .api(`/me/drive/root/search(q='${query}')`)
+        .get();
+      const array: DriveItem[] = [];
+      const iterator = new PageIterator(
+        this.client,
+        data,
+        (value) => Boolean(array.push(value)));
+      await iterator.iterate();
+      return mapper
+        .mapArray<DriveItem, File>(
+          array.filter((item) => item.file && item.name?.endsWith('.md')),
+          'DriveItem',
+          'File'
+        );
+    } catch (e) {
+      if (e instanceof GraphError) {
+        if (e.statusCode === 400 ||
+            e.statusCode === 404) {
+          throw new FileNotFoundError(e.message);
         }
       }
       throw e;

@@ -108,7 +108,7 @@ createMap<DriveItem, File>(
     mapFrom((source) => (source as Record<string, string>)['@microsoft.graph.downloadUrl'])
   ),
   forMember(
-    (target) => target.editMode,
+    (target) => target.editing,
     fromValue(false)
   )
 );

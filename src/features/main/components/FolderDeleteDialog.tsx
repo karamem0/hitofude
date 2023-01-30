@@ -8,32 +8,26 @@
 
 import React from 'react';
 
-import { MessageDescriptor } from 'react-intl';
-import { useError } from 'react-use';
-
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { deleteFolder } from '../../../stores/Action';
-import { FolderNotFoundError } from '../../../types/Error';
-import { Event, EventHandler } from '../../../types/Event';
+import {
+  deleteExploreFolder,
+  setDialogAction,
+  setError
+} from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 import { Folder } from '../../../types/Model';
-import messages from '../messages';
 
 import Presenter from './FolderDeleteDialog.presenter';
 
 interface FolderDeleteDialogProps {
-  folder?: Folder,
-  onOpenChange?: EventHandler<boolean>
+  folder?: Folder
 }
 
 function FileDeleteDialog(props: FolderDeleteDialogProps) {
 
-  const {
-    folder,
-    onOpenChange
-  } = props;
+  const { folder } = props;
 
-  const setError = useError();
   const {
     dispatch,
     state: {
@@ -41,19 +35,17 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
     }
   } = useStore();
   const { graph } = useService();
-  const [ alert, setAlert ] = React.useState<MessageDescriptor>();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleDismiss = React.useCallback(() => {
-    setAlert(undefined);
-  }, []);
-
-  const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
-    setOpen(data || false);
-    onOpenChange?.(e, data);
+  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+    const open = data || false;
+    setOpen(open);
+    if (!open) {
+      dispatch(setDialogAction(undefined));
+    }
   }, [
-    onOpenChange
+    dispatch
   ]);
 
   const handleSubmit = React.useCallback(async (e?: Event) => {
@@ -64,37 +56,30 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
       if (!folder) {
         throw new Error();
       }
-      await graph.deleteFolder(folder);
-      dispatch(deleteFolder(folder));
-      handleOpenChange?.(e, false);
+      await graph.deleteExploreFolder(folder);
+      dispatch(deleteExploreFolder(folder));
     } catch (e) {
-      if (e instanceof FolderNotFoundError) {
-        setAlert(messages.FolderDoesNotExists);
-        return;
-      }
       if (e instanceof Error) {
-        setError(e);
+        dispatch(setError(e));
         return;
       }
       throw e;
     } finally {
       setLoading(false);
+      handleOpenChange?.(e, false);
     }
   }, [
     dispatch,
     folder,
     graph,
     handleOpenChange,
-    setError,
     workFolder
   ]);
 
   return (
     <Presenter
-      alert={alert}
       loading={loading}
       open={open}
-      onDismiss={handleDismiss}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

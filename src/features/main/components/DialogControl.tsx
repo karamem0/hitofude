@@ -8,27 +8,20 @@
 
 import React from 'react';
 
-import { EventHandler } from '../../../types/Event';
-import { DialogAction } from '../types/Dialog';
+import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './DialogControl.presenter';
 
-interface DialogControlProps {
-  action?: DialogAction,
-  onOpenDialog?: EventHandler<DialogAction>
-}
-
-function DialogControl(props: DialogControlProps) {
+function DialogControl() {
 
   const {
-    action,
-    onOpenDialog
-  } = props;
+    state: {
+      dialogAction
+    }
+  } = useStore();
 
   return (
-    <Presenter
-      action={action}
-      onOpenDialog={onOpenDialog} />
+    <Presenter action={dialogAction} />
   );
 
 }

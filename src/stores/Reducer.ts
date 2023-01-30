@@ -6,7 +6,12 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { File, Folder } from '../types/Model';
+import {
+  DialogAction,
+  File,
+  Folder,
+  TabMode
+} from '../types/Model';
 import {
   Action,
   ActionType,
@@ -16,7 +21,7 @@ import { compare } from '../utils/String';
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case ActionType.appendFile: {
+    case ActionType.appendExploreFile: {
       const payload = action.payload as File | undefined;
       if (!payload) {
         return state;
@@ -36,7 +41,7 @@ export const reducer = (state: State, action: Action): State => {
         }
       };
     }
-    case ActionType.appendFolder: {
+    case ActionType.appendExploreFolder: {
       const payload = action.payload as Folder | undefined;
       if (!payload) {
         return state;
@@ -56,7 +61,7 @@ export const reducer = (state: State, action: Action): State => {
         }
       };
     }
-    case ActionType.deleteFile: {
+    case ActionType.deleteExploreFile: {
       const payload = action.payload as File | undefined;
       if (!payload) {
         return state;
@@ -72,7 +77,7 @@ export const reducer = (state: State, action: Action): State => {
         }
       };
     }
-    case ActionType.deleteFolder: {
+    case ActionType.deleteExploreFolder: {
       const payload = action.payload as Folder | undefined;
       if (!payload) {
         return state;
@@ -88,21 +93,43 @@ export const reducer = (state: State, action: Action): State => {
         }
       };
     }
-    case ActionType.setEditMode: {
-      const payload = action.payload as boolean | undefined;
-      if (!state.workFile) {
-        return state;
-      }
+    case ActionType.setDialogAction: {
+      const payload = action.payload as DialogAction | undefined;
       return {
         ...state,
-        workFile: {
-          ...state.workFile,
-          editMode: payload
-        }
+        dialogAction: payload
+      };
+    }
+    case ActionType.setError: {
+      const payload = action.payload as Error | undefined;
+      return {
+        ...state,
+        error: payload
+      };
+    }
+    case ActionType.setLoading: {
+      const payload = action.payload as boolean | undefined;
+      return {
+        ...state,
+        loading: payload
+      };
+    }
+    case ActionType.setSearchFiles: {
+      const payload = action.payload as File[] | undefined;
+      return {
+        ...state,
+        searchFiles: payload
+      };
+    }
+    case ActionType.setSearchQuery: {
+      const payload = action.payload as string | undefined;
+      return {
+        ...state,
+        searchQuery: payload
       };
     }
     case ActionType.setTabMode: {
-      const payload = action.payload as boolean | undefined;
+      const payload = action.payload as TabMode | undefined;
       return {
         ...state,
         tabMode: payload
@@ -122,7 +149,7 @@ export const reducer = (state: State, action: Action): State => {
         workFolder: payload
       };
     }
-    case ActionType.updateFile: {
+    case ActionType.updateExploreFile: {
       const payload = action.payload as File | undefined;
       if (!payload) {
         return state;
@@ -142,7 +169,7 @@ export const reducer = (state: State, action: Action): State => {
         }
       };
     }
-    case ActionType.updateFolder: {
+    case ActionType.updateExploreFolder: {
       const payload = action.payload as Folder | undefined;
       if (!payload) {
         return state;

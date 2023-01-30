@@ -8,35 +8,27 @@
 
 import React from 'react';
 
-import { MessageDescriptor } from 'react-intl';
-import { useError } from 'react-use';
-
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  deleteFile,
+  deleteExploreFile,
+  setDialogAction,
+  setError,
   setWorkFile
 } from '../../../stores/Action';
-import { FileNotFoundError } from '../../../types/Error';
-import { Event, EventHandler } from '../../../types/Event';
+import { Event } from '../../../types/Event';
 import { File } from '../../../types/Model';
-import messages from '../messages';
 
 import Presenter from './FileDeleteDialog.presenter';
 
 interface FileDeleteDialogProps {
-  file?: File,
-  onOpenChange?: EventHandler<boolean>
+  file?: File
 }
 
 function FileDeleteDialog(props: FileDeleteDialogProps) {
 
-  const {
-    file,
-    onOpenChange
-  } = props;
+  const { file } = props;
 
-  const setError = useError();
   const {
     dispatch,
     state: {
@@ -45,19 +37,17 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
     }
   } = useStore();
   const { graph } = useService();
-  const [ alert, setAlert ] = React.useState<MessageDescriptor>();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleDismiss = React.useCallback(() => {
-    setAlert(undefined);
-  }, []);
-
-  const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
-    setOpen(data || false);
-    onOpenChange?.(e, data);
+  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+    const open = data || false;
+    setOpen(open);
+    if (!open) {
+      dispatch(setDialogAction(undefined));
+    }
   }, [
-    onOpenChange
+    dispatch
   ]);
 
   const handleSubmit = React.useCallback(async (e?: Event) => {
@@ -68,41 +58,34 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       if (!file) {
         throw new Error();
       }
-      await graph.deleteFile(file);
-      dispatch(deleteFile(file));
+      await graph.deleteExploreFile(file);
+      dispatch(deleteExploreFile(file));
       if (file.id === workFile?.id) {
         dispatch(setWorkFile(workFolder.files?.filter((item) => item.id !== file.id)?.at(-1)));
       }
-      handleOpenChange?.(e, false);
     } catch (e) {
-      if (e instanceof FileNotFoundError) {
-        setAlert(messages.FileDoesNotExists);
-        return;
-      }
       if (e instanceof Error) {
-        setError(e);
+        dispatch(setError(e));
         return;
       }
       throw e;
     } finally {
       setLoading(false);
+      handleOpenChange?.(e, false);
     }
   }, [
     dispatch,
     file,
     graph,
     handleOpenChange,
-    setError,
     workFile,
     workFolder
   ]);
 
   return (
     <Presenter
-      alert={alert}
       loading={loading}
       open={open}
-      onDismiss={handleDismiss}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

@@ -6,34 +6,64 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { File, Folder } from '../types/Model';
+import {
+  DialogAction,
+  File,
+  Folder,
+  TabMode
+} from '../types/Model';
 import {
   Action,
   ActionType
 } from '../types/Store';
 
-export const appendFile = (payload?: File): Action => ({
-  type: ActionType.appendFile,
+export const appendExploreFile = (payload?: File): Action => ({
+  type: ActionType.appendExploreFile,
   payload
 });
 
-export const appendFolder = (payload?: Folder): Action => ({
-  type: ActionType.appendFolder,
+export const appendExploreFolder = (payload?: Folder): Action => ({
+  type: ActionType.appendExploreFolder,
   payload
 });
 
-export const deleteFile = (payload?: File): Action => ({
-  type: ActionType.deleteFile,
+export const deleteExploreFile = (payload?: File): Action => ({
+  type: ActionType.deleteExploreFile,
   payload
 });
 
-export const deleteFolder = (payload?: Folder): Action => ({
-  type: ActionType.deleteFolder,
+export const deleteExploreFolder = (payload?: Folder): Action => ({
+  type: ActionType.deleteExploreFolder,
   payload
 });
 
-export const setEditMode = (payload?: boolean): Action => ({
-  type: ActionType.setEditMode,
+export const setDialogAction = (payload?: DialogAction): Action => ({
+  type: ActionType.setDialogAction,
+  payload
+});
+
+export const setError = (payload?: Error): Action => ({
+  type: ActionType.setError,
+  payload
+});
+
+export const setLoading = (payload?: boolean): Action => ({
+  type: ActionType.setLoading,
+  payload
+});
+
+export const setSearchFiles = (payload?: File[]): Action => ({
+  type: ActionType.setSearchFiles,
+  payload
+});
+
+export const setSearchQuery = (payload?: string): Action => ({
+  type: ActionType.setSearchQuery,
+  payload
+});
+
+export const setTabMode = (payload?: TabMode): Action => ({
+  type: ActionType.setTabMode,
   payload
 });
 
@@ -47,17 +77,12 @@ export const setWorkFolder = (payload?: Folder): Action => ({
   payload
 });
 
-export const setTabMode = (payload?: boolean): Action => ({
-  type: ActionType.setTabMode,
+export const updateExploreFile = (payload?: File): Action => ({
+  type: ActionType.updateExploreFile,
   payload
 });
 
-export const updateFile = (payload?: File): Action => ({
-  type: ActionType.updateFile,
-  payload
-});
-
-export const updateFolder = (payload?: Folder): Action => ({
-  type: ActionType.updateFolder,
+export const updateExploreFolder = (payload?: Folder): Action => ({
+  type: ActionType.updateExploreFolder,
   payload
 });

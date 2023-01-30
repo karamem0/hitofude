@@ -8,9 +8,12 @@
 
 import React from 'react';
 
-import { EventHandler } from '../../../types/Event';
-import { File, Folder } from '../../../types/Model';
-import { DialogAction, DialogType } from '../types/Dialog';
+import {
+  DialogAction,
+  DialogType,
+  File,
+  Folder
+} from '../../../types/Model';
 
 import FileCopyDialog from './FileCopyDialog';
 import FileCreateDialog from './FileCreateDialog';
@@ -21,63 +24,47 @@ import FolderDeleteDialog from './FolderDeleteDialog';
 import FolderRenameDialog from './FolderRenameDialog';
 
 interface DialogControlProps {
-  action?: DialogAction,
-  onOpenDialog?: EventHandler<DialogAction>
+  action?: DialogAction
 }
 
 function DialogControl(props: DialogControlProps) {
 
   const {
-    action,
-    onOpenDialog
+    action
   } = props;
 
-  return action ? (
-    (() => {
-      switch (action.type) {
-        case DialogType.copyFile:
-          return (
-            <FileCopyDialog
-              file={action.payload as File}
-              onOpenChange={(e, data) => !data && onOpenDialog?.(e, undefined)} />
-          );
-        case DialogType.createFile:
-          return (
-            <FileCreateDialog onOpenChange={(e, data) => !data && onOpenDialog?.(e, undefined)} />
-          );
-        case DialogType.createFolder:
-          return (
-            <FolderCreateDialog onOpenChange={(e, data) => !data && onOpenDialog?.(e, undefined)} />
-          );
-        case DialogType.deleteFile:
-          return (
-            <FileDeleteDialog
-              file={action.payload as File}
-              onOpenChange={(e, data) => !data && onOpenDialog?.(e, undefined)} />
-          );
-        case DialogType.deleteFolder:
-          return (
-            <FolderDeleteDialog
-              folder={action.payload as Folder}
-              onOpenChange={(e, data) => !data && onOpenDialog?.(e, undefined)} />
-          );
-        case DialogType.renameFile:
-          return (
-            <FileRenameDialog
-              file={action.payload as File}
-              onOpenChange={(e, data) => !data && onOpenDialog?.(e, undefined)} />
-          );
-        case DialogType.renameFolder:
-          return (
-            <FolderRenameDialog
-              folder={action.payload as Folder}
-              onOpenChange={(e, data) => !data && onOpenDialog?.(e, undefined)} />
-          );
-        default:
-          return null;
-      }
-    })()
-  ) : null;
+  switch (action?.type) {
+    case DialogType.copyFile:
+      return (
+        <FileCopyDialog file={action.payload as File} />
+      );
+    case DialogType.createFile:
+      return (
+        <FileCreateDialog />
+      );
+    case DialogType.createFolder:
+      return (
+        <FolderCreateDialog />
+      );
+    case DialogType.deleteFile:
+      return (
+        <FileDeleteDialog file={action.payload as File} />
+      );
+    case DialogType.deleteFolder:
+      return (
+        <FolderDeleteDialog folder={action.payload as Folder} />
+      );
+    case DialogType.renameFile:
+      return (
+        <FileRenameDialog file={action.payload as File} />
+      );
+    case DialogType.renameFolder:
+      return (
+        <FolderRenameDialog folder={action.payload as Folder} />
+      );
+    default:
+      return null;
+  }
 
 }
 

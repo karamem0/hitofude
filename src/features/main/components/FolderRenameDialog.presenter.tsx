@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { Controller, useForm } from 'react-hook-form';
-import { FormattedMessage, MessageDescriptor, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { css } from '@emotion/react';
 import {
@@ -21,23 +21,18 @@ import {
   DialogSurface,
   DialogTitle,
   DialogTrigger,
-  Input,
-  Link
+  Input
 } from '@fluentui/react-components';
-import { Alert } from '@fluentui/react-components/unstable';
 
-import { themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import { Folder } from '../../../types/Model';
 import messages from '../messages';
 import { FolderRenameDialogFormState } from '../types/Form';
 
 interface FolderRenameDialogProps {
-  alert?: MessageDescriptor,
   folder?: Folder,
   loading?: boolean,
   open?: boolean,
-  onDismiss?: EventHandler,
   onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FolderRenameDialogFormState>
 }
@@ -45,12 +40,10 @@ interface FolderRenameDialogProps {
 function FolderRenameDialog(props: FolderRenameDialogProps) {
 
   const {
-    alert,
     folder,
     loading,
     open,
     onOpenChange,
-    onDismiss,
     onSubmit
   } = props;
 
@@ -74,24 +67,6 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
               <FormattedMessage {...messages.RenameFolder} />
             </DialogTitle>
             <DialogContent>
-              {
-                alert ? (
-                  <Alert
-                    intent="error"
-                    action={
-                      <Link
-                        as="button"
-                        onClick={onDismiss}>
-                        <FormattedMessage {...messages.Dismiss} />
-                      </Link>
-                    }
-                    css={css`
-                      background-color: ${themeConfig.colorNeutralBackground2};
-                    `}>
-                    <FormattedMessage {...alert} />
-                  </Alert>
-                ) : null
-              }
               <div
                 css={css`
                   display: flex;

@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-import {
-  FormattedMessage,
-  MessageDescriptor,
-  useIntl
-} from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { css } from '@emotion/react';
 import {
@@ -24,20 +20,15 @@ import {
   DialogSurface,
   DialogTitle,
   DialogTrigger,
-  Link,
   Text
 } from '@fluentui/react-components';
-import { Alert } from '@fluentui/react-components/unstable';
 
-import { themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface FolderDeleteDialogProps {
-  alert?: MessageDescriptor,
   loading?: boolean,
   open?: boolean,
-  onDismiss?: EventHandler,
   onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler
 }
@@ -45,10 +36,8 @@ interface FolderDeleteDialogProps {
 function FolderDeleteDialog(props: FolderDeleteDialogProps) {
 
   const {
-    alert,
     loading,
     open,
-    onDismiss,
     onOpenChange,
     onSubmit
   } = props;
@@ -66,24 +55,6 @@ function FolderDeleteDialog(props: FolderDeleteDialogProps) {
             <FormattedMessage {...messages.DeleteFolder} />
           </DialogTitle>
           <DialogContent>
-            {
-              alert ? (
-                <Alert
-                  intent="error"
-                  action={
-                    <Link
-                      as="button"
-                      onClick={onDismiss}>
-                      <FormattedMessage {...messages.Dismiss} />
-                    </Link>
-                  }
-                  css={css`
-                    background-color: ${themeConfig.colorNeutralBackground2};
-                  `}>
-                  <FormattedMessage {...alert} />
-                </Alert>
-              ) : null
-            }
             <div
               css={css`
                 display: flex;

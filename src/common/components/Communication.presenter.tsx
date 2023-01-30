@@ -36,7 +36,8 @@ function Communication(props: CommunicationProps) {
       <img
         src={image}
         css={css`
-          max-width: 20rem;
+          max-width: 16rem;
+          max-height: 12rem;
           margin: auto;
         `} />
       <div

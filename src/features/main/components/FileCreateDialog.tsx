@@ -8,52 +8,39 @@
 
 import React from 'react';
 
-import { MessageDescriptor } from 'react-intl';
-import { useError } from 'react-use';
-
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  appendFile,
+  appendExploreFile,
+  setDialogAction,
+  setError,
   setWorkFile
 } from '../../../stores/Action';
-import {
-  FileConflictError,
-  FileNotFoundError
-} from '../../../types/Error';
-import { Event, EventHandler } from '../../../types/Event';
-import messages from '../messages';
+import { Event } from '../../../types/Event';
 import { FileCreateDialogFormState } from '../types/Form';
 
 import Presenter from './FileCreateDialog.presenter';
 
-interface FileCreateDialogProps {
-  onOpenChange?: EventHandler<boolean>
-}
+function FileCreateDialog() {
 
-function FileCreateDialog(props: FileCreateDialogProps) {
-
-  const { onOpenChange } = props;
-
-  const setError = useError();
   const {
     dispatch,
-    state: { workFolder }
+    state: {
+      workFolder
+    }
   } = useStore();
   const { graph } = useService();
-  const [ alert, setAlert ] = React.useState<MessageDescriptor>();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleDismiss = React.useCallback(() => {
-    setAlert(undefined);
-  }, []);
-
-  const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
-    setOpen(data || false);
-    onOpenChange?.(e, data);
+  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+    const open = data || false;
+    setOpen(open);
+    if (!open) {
+      dispatch(setDialogAction(undefined));
+    }
   }, [
-    onOpenChange
+    dispatch
   ]);
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FileCreateDialogFormState) => {
@@ -68,40 +55,29 @@ function FileCreateDialog(props: FileCreateDialogProps) {
       const file = await Promise.resolve()
         .then(() => graph.createFile(workFolder, `${data.name}.md`))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
-      dispatch(appendFile(file));
+      dispatch(appendExploreFile(file));
       dispatch(setWorkFile(file));
-      handleOpenChange?.(e, false);
     } catch (e) {
-      if (e instanceof FileConflictError) {
-        setAlert(messages.FileAlreadyExists);
-        return;
-      }
-      if (e instanceof FileNotFoundError) {
-        setAlert(messages.FileDoesNotExists);
-        return;
-      }
       if (e instanceof Error) {
-        setError(e);
+        dispatch(setError(e));
         return;
       }
       throw e;
     } finally {
       setLoading(false);
+      handleOpenChange?.(e, false);
     }
   }, [
     dispatch,
     graph,
     handleOpenChange,
-    setError,
     workFolder
   ]);
 
   return (
     <Presenter
-      alert={alert}
       loading={loading}
       open={open}
-      onDismiss={handleDismiss}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

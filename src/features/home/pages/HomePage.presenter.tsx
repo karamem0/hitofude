@@ -139,10 +139,10 @@ function HomePage(props: HomePageProps) {
         <Text
           as="h2"
           css={css`
+          padding: 2rem 0;
           font-size: 1.6rem;
           font-weight: bold;
           line-height: calc(1.6rem * 1.25);
-          padding: 2rem 0;
         `}>
           <FormattedMessage {...messages.FeatureTitle} />
         </Text>

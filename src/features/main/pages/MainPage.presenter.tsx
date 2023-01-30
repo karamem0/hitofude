@@ -8,68 +8,26 @@
 
 import React from 'react';
 
-import { FormattedMessage, MessageDescriptor } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { css } from '@emotion/react';
-import { Link, Text } from '@fluentui/react-components';
-import { Alert } from '@fluentui/react-components/unstable';
+import { Text } from '@fluentui/react-components';
 
 import { themeConfig } from '../../../providers/ThemeProvider';
-import { EventHandler } from '../../../types/Event';
+import AlertControl from '../components/AlertControl';
+import AppBarControl from '../components/AppBarControl';
 import DialogControl from '../components/DialogControl';
 import MarkdownControl from '../components/MarkdownControl';
 import MeControl from '../components/MeControl';
-import TreeControl from '../components/TreeControl';
+import AppTabControl from '../components/AppTabControl';
 import messages from '../messages';
-import { DialogAction } from '../types/Dialog';
 
-interface MainPageProps {
-  alert?: MessageDescriptor,
-  dialogAction?: DialogAction,
-  loading?: boolean,
-  onDismiss?: EventHandler,
-  onOpenDialog?: EventHandler<DialogAction>,
-  onError?: EventHandler<unknown>
-}
+function MainPage() {
 
-function MainPage(props: MainPageProps) {
-
-  const {
-    alert,
-    dialogAction,
-    loading,
-    onDismiss,
-    onOpenDialog,
-    onError
-  } = props;
-
-  return loading ? null : (
+  return (
     <React.Fragment>
-      {
-        alert ? (
-          <Alert
-            intent="warning"
-            action={
-              <Link
-                as="button"
-                onClick={onDismiss}>
-                <FormattedMessage {...messages.Dismiss} />
-              </Link>
-            }
-            css={css`
-              position: fixed;
-              z-index: 900;
-              width: calc(100% - 1rem);
-              margin: 0.5rem;
-              background-color: ${themeConfig.colorNeutralBackground2};
-            `}>
-            <FormattedMessage {...alert} />
-          </Alert>
-        ) : null
-      }
-      <DialogControl
-        action={dialogAction}
-        onOpenDialog={onOpenDialog} />
+      <AlertControl />
+      <DialogControl />
       <div
         css={css`
           display: flex;
@@ -105,24 +63,21 @@ function MainPage(props: MainPageProps) {
             margin: 2rem 0 0;
             @media (max-width: 959px) {
               grid-template-rows: calc(100vh - 2rem);
-              grid-template-columns: 1fr;
-              &>section:nth-of-type(1) {
+              grid-template-columns: auto 1fr;
+              & > section:nth-of-type(2) {
                 position: fixed;
                 z-index: 100;
-              }
-              &>section:nth-of-type(2) {
                 margin: 0 0 0 3rem;
               }
             }
             @media (min-width: 960px) {
               grid-template-rows: calc(100vh - 2rem);
-              grid-template-columns: auto 1fr;
+              grid-template-columns: auto auto 1fr;
             }
           `}>
-          <TreeControl
-            onError={onError}
-            onOpenDialog={onOpenDialog} />
-          <MarkdownControl onError={onError} />
+          <AppBarControl />
+          <AppTabControl />
+          <MarkdownControl />
         </div>
       </div>
     </React.Fragment>

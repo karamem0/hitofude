@@ -7,5 +7,5 @@
 //
 
 export function getBaseName(value: string | null | undefined): string | undefined {
-  return value ? value.replace(/\..+$/, '') : undefined;
+  return value ? value.replace(/\.[^.]*$/, '') : undefined;
 }

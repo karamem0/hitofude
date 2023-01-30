@@ -22,6 +22,7 @@ jobs:
           $content = $content -replace "{{APPLICATIONINSIGHTS_INSTRUMENTATION_KEY}}", "${{secrets.APPLICATIONINSIGHTS_INSTRUMENTATION_KEY}}"
           $content = $content -replace "{{MSAL_AUTHORITY}}", "${{secrets.MSAL_AUTHORITY}}"
           $content = $content -replace "{{MSAL_CLIENT_ID}}", "${{secrets.MSAL_CLIENT_ID}}"
+          $content = $content -replace "{{PUBLIC_URL}}", "${{secrets.PUBLIC_URL}}"
           Out-File -FilePath .env -InputObject $content -Encoding UTF8
       - name: Build source
         run: |

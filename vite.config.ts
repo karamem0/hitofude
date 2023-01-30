@@ -8,24 +8,37 @@
 
 import fs from 'fs';
 
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import reactPlugin from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [
-          'react-intl-auto'
-        ]
-      },
-      jsxImportSource: '@emotion/react'
-    })
-  ],
-  server: {
-    https: {
-      cert: fs.readFileSync('./cert/localhost.crt'),
-      key: fs.readFileSync('./cert/localhost.key')
+export default defineConfig(({ mode }) => {
+
+  const htmlPlugin = (env: ReturnType<typeof loadEnv>) => ({
+    name: 'html-transform',
+    transformIndexHtml: {
+      enforce: 'pre' as const,
+      transform: (html: string): string => html.replace(/%(.*?)%/g, (match, p1) => env[p1] ?? match)
     }
-  }
+  });
+
+  return {
+    plugins: [
+      reactPlugin({
+        babel: {
+          plugins: [
+            'react-intl-auto'
+          ]
+        },
+        jsxImportSource: '@emotion/react'
+      }),
+      htmlPlugin(loadEnv(mode, '.'))
+    ],
+    server: {
+      https: {
+        cert: fs.readFileSync('./cert/localhost.crt'),
+        key: fs.readFileSync('./cert/localhost.key')
+      }
+    }
+  };
+
 });

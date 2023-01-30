@@ -10,22 +10,16 @@ import React from 'react';
 
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setEditMode, setWorkFile } from '../../../stores/Action';
-import { EventHandler } from '../../../types/Event';
+import { setError, setWorkFile } from '../../../stores/Action';
 
 import Presenter from './MarkdownControl.presenter';
 
-interface MarkdownControlProps {
-  onError?: EventHandler<unknown>
-}
-
-function MarkdownControl(props: MarkdownControlProps) {
-
-  const { onError } = props;
+function MarkdownControl() {
 
   const {
     dispatch,
     state: {
+      loading,
       workFile,
       workFolder
     }
@@ -44,32 +38,54 @@ function MarkdownControl(props: MarkdownControlProps) {
       dispatch(setWorkFile({
         ...file,
         content: data,
-        editMode: false
+        editing: false
       }));
     } catch (e) {
-      onError?.({}, e as Error);
+      dispatch(setError(e as Error));
     }
   }, [
     dispatch,
     graph,
-    onError,
     workFile
   ]);
 
   const handleCancel = React.useCallback(() => {
-    dispatch(setEditMode(false));
+    try {
+      if (!workFile) {
+        throw new Error();
+      }
+      dispatch(setWorkFile({
+        ...workFile,
+        editing: false
+      }));
+    } catch (e) {
+      dispatch(setError(e as Error));
+    }
   }, [
-    dispatch
+    dispatch,
+    workFile
   ]);
 
   const handleEdit = React.useCallback(() => {
-    dispatch(setEditMode(true));
+    try {
+      if (!workFile) {
+        throw new Error();
+      }
+      dispatch(setWorkFile({
+        ...workFile,
+        editing: true
+      }));
+    } catch (e) {
+      dispatch(setError(e as Error));
+    }
   }, [
-    dispatch
+    dispatch,
+    workFile
   ]);
 
   return (
     <Presenter
+      loading={loading}
       workFile={workFile}
       workFolder={workFolder}
       onCancel={handleCancel}

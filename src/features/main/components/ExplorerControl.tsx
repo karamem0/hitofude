@@ -11,62 +11,72 @@ import React from 'react';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  setTabMode,
+  setDialogAction,
+  setError,
   setWorkFile,
   setWorkFolder
 } from '../../../stores/Action';
-import { EventHandler } from '../../../types/Event';
-import { File } from '../../../types/Model';
-import { DialogAction } from '../types/Dialog';
+import {
+  DialogAction,
+  File,
+  Folder
+} from '../../../types/Model';
 
-import Presenter from './TreeControl.presenter';
+import Presenter from './ExplorerControl.presenter';
 
-interface TreeControlProps {
-  onOpenDialog?: EventHandler<DialogAction>,
-  onError?: EventHandler<unknown>
-}
-
-function TreeControl(props: TreeControlProps) {
-
-  const {
-    onOpenDialog,
-    onError
-  } = props;
+function ExplorerControl() {
 
   const {
     dispatch,
     state: {
-      tabMode,
       workFile,
       workFolder
     }
   } = useStore();
-  const { graph, storage } = useService();
+  const { graph } = useService();
+
+  const handleOpenDialog = React.useCallback((_, data?: DialogAction) => {
+    dispatch(setDialogAction(data));
+  }, [
+    dispatch
+  ]);
 
   const handleOpenUrl = React.useCallback((_, data?: string) => {
     if (!data) {
       throw new Error();
     }
-    window.open(data, '_blank');
+    window.open(data, '_blank', 'noreferrer');
   }, []);
+
+  const handleRefreshFolder = React.useCallback(async (_, data?: Folder) => {
+    try {
+      if (!data) {
+        throw new Error();
+      }
+      dispatch(setWorkFolder(await graph.getFolderById(data.id)));
+    } catch (e) {
+      dispatch(setError(e as Error));
+    }
+  }, [
+    dispatch,
+    graph
+  ]);
 
   const handleSelectFile = React.useCallback(async (_, data?: File) => {
     try {
       if (!data) {
         throw new Error();
       }
-      const content = await graph.getFileContent(data);
       dispatch(setWorkFile({
         ...data,
-        content
+        content: await graph.getFileContent(data)
       }));
     } catch (e) {
-      onError?.({}, e as Error);
+      dispatch(setError(e as Error));
     }
   }, [
     dispatch,
-    graph,
-    onError
+    graph
   ]);
 
   const handleSelectFolder = React.useCallback(async (_, data?: string) => {
@@ -75,7 +85,6 @@ function TreeControl(props: TreeControlProps) {
         throw new Error();
       }
       const workFolder = await graph.getFolderById(data);
-      storage.setWorkFolderId(workFolder?.id);
       dispatch(setWorkFolder(workFolder));
       const workFile = workFolder.files?.at(0);
       if (workFile) {
@@ -84,38 +93,27 @@ function TreeControl(props: TreeControlProps) {
           content: await graph.getFileContent(workFile)
         }));
       } else {
-        dispatch(setWorkFile(undefined));
+        dispatch(setWorkFile());
       }
     } catch (e) {
-      onError?.({}, e as Error);
+      dispatch(setError(e as Error));
     }
   }, [
-    graph,
     dispatch,
-    onError,
-    storage
-  ]);
-
-  const handleToggleTab = React.useCallback((_, data?: boolean) => {
-    storage.setTabMode(data);
-    dispatch(setTabMode(data));
-  }, [
-    dispatch,
-    storage
+    graph
   ]);
 
   return (
     <Presenter
-      tabMode={tabMode}
       workFile={workFile}
       workFolder={workFolder}
-      onOpenDialog={onOpenDialog}
+      onOpenDialog={handleOpenDialog}
       onOpenUrl={handleOpenUrl}
+      onRefreshFolder={handleRefreshFolder}
       onSelectFile={handleSelectFile}
-      onSelectFolder={handleSelectFolder}
-      onToggleTab={handleToggleTab} />
+      onSelectFolder={handleSelectFolder} />
   );
 
 }
 
-export default TreeControl;
+export default ExplorerControl;

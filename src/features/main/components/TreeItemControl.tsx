@@ -14,7 +14,6 @@ import Presenter from './TreeItemControl.presenter';
 
 interface TreeItemControlProps {
   icon?: React.ReactNode,
-  key?: React.Key,
   menu?: React.ReactNode,
   name?: string,
   selected?: boolean,
@@ -25,7 +24,6 @@ function TreeItemControl(props: TreeItemControlProps) {
 
   const {
     icon,
-    key,
     menu,
     name,
     selected,
@@ -34,7 +32,6 @@ function TreeItemControl(props: TreeItemControlProps) {
 
   return (
     <Presenter
-      key={key}
       icon={icon}
       menu={menu}
       name={name}
