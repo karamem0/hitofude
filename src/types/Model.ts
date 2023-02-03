@@ -12,8 +12,11 @@ export interface File {
   createdDate?: Date,
   updatedDate?: Date,
   downloadUrl?: string,
-  parentId?: string,
-  content?: string,
+  parentId?: string
+}
+
+export interface FileContent {
+  content: string,
   editing?: boolean
 }
 

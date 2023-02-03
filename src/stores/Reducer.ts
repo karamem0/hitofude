@@ -6,9 +6,11 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+import { StorageService } from '../services/StorageService';
 import {
   DialogAction,
   File,
+  FileContent,
   Folder,
   TabMode
 } from '../types/Model';
@@ -19,22 +21,22 @@ import {
 } from '../types/Store';
 import { compare } from '../utils/String';
 
-export const reducer = (state: State, action: Action): State => {
+export const reducer = (storage: StorageService) => (state: State, action: Action): State => {
   switch (action.type) {
     case ActionType.appendExploreFile: {
       const payload = action.payload as File | undefined;
       if (!payload) {
         return state;
       }
-      if (!state.workFolder) {
+      if (!state.exploreFolder) {
         return state;
       }
       return {
         ...state,
-        workFolder: {
-          ...state.workFolder,
-          files: state.workFolder.files ? (
-            [ ...state.workFolder.files, payload ].sort((a, b) => compare(a.name, b.name))
+        exploreFolder: {
+          ...state.exploreFolder,
+          files: state.exploreFolder.files ? (
+            [ ...state.exploreFolder.files, payload ].sort((a, b) => compare(a.name, b.name))
           ) : (
             [ payload ]
           )
@@ -46,15 +48,15 @@ export const reducer = (state: State, action: Action): State => {
       if (!payload) {
         return state;
       }
-      if (!state.workFolder) {
+      if (!state.exploreFolder) {
         return state;
       }
       return {
         ...state,
-        workFolder: {
-          ...state.workFolder,
-          folders: state.workFolder.folders ? (
-            [ ...state.workFolder.folders, payload ].sort((a, b) => compare(a.name, b.name))
+        exploreFolder: {
+          ...state.exploreFolder,
+          folders: state.exploreFolder.folders ? (
+            [ ...state.exploreFolder.folders, payload ].sort((a, b) => compare(a.name, b.name))
           ) : (
             [ payload ]
           )
@@ -66,14 +68,14 @@ export const reducer = (state: State, action: Action): State => {
       if (!payload) {
         return state;
       }
-      if (!state.workFolder) {
+      if (!state.exploreFolder) {
         return state;
       }
       return {
         ...state,
-        workFolder: {
-          ...state.workFolder,
-          files: state.workFolder.files?.filter((item) => item.id !== payload.id)
+        exploreFolder: {
+          ...state.exploreFolder,
+          files: state.exploreFolder.files?.filter((item) => item.id !== payload.id)
         }
       };
     }
@@ -82,14 +84,14 @@ export const reducer = (state: State, action: Action): State => {
       if (!payload) {
         return state;
       }
-      if (!state.workFolder) {
+      if (!state.exploreFolder) {
         return state;
       }
       return {
         ...state,
-        workFolder: {
-          ...state.workFolder,
-          folders: state.workFolder.folders?.filter((item) => item.id !== payload.id)
+        exploreFolder: {
+          ...state.exploreFolder,
+          folders: state.exploreFolder.folders?.filter((item) => item.id !== payload.id)
         }
       };
     }
@@ -107,6 +109,22 @@ export const reducer = (state: State, action: Action): State => {
         error: payload
       };
     }
+    case ActionType.setExploreFile: {
+      const payload = action.payload as File | undefined;
+      storage.setExploreFileId(payload?.id);
+      return {
+        ...state,
+        exploreFile: payload
+      };
+    }
+    case ActionType.setExploreFolder: {
+      const payload = action.payload as Folder | undefined;
+      storage.setExploreFolderId(payload?.id);
+      return {
+        ...state,
+        exploreFolder: payload
+      };
+    }
     case ActionType.setLoading: {
       const payload = action.payload as boolean | undefined;
       return {
@@ -114,11 +132,18 @@ export const reducer = (state: State, action: Action): State => {
         loading: payload
       };
     }
-    case ActionType.setSearchFiles: {
+    case ActionType.setSearchFile: {
+      const payload = action.payload as File | undefined;
+      return {
+        ...state,
+        searchFile: payload
+      };
+    }
+    case ActionType.setSearchResults: {
       const payload = action.payload as File[] | undefined;
       return {
         ...state,
-        searchFiles: payload
+        searchResults: payload
       };
     }
     case ActionType.setSearchQuery: {
@@ -130,23 +155,17 @@ export const reducer = (state: State, action: Action): State => {
     }
     case ActionType.setTabMode: {
       const payload = action.payload as TabMode | undefined;
+      storage.setTabMode(payload);
       return {
         ...state,
         tabMode: payload
       };
     }
     case ActionType.setWorkFile: {
-      const payload = action.payload as File | undefined;
+      const payload = action.payload as File & FileContent | undefined;
       return {
         ...state,
         workFile: payload
-      };
-    }
-    case ActionType.setWorkFolder: {
-      const payload = action.payload as Folder | undefined;
-      return {
-        ...state,
-        workFolder: payload
       };
     }
     case ActionType.updateExploreFile: {
@@ -154,15 +173,15 @@ export const reducer = (state: State, action: Action): State => {
       if (!payload) {
         return state;
       }
-      if (!state.workFolder) {
+      if (!state.exploreFolder) {
         return state;
       }
       return {
         ...state,
-        workFolder: {
-          ...state.workFolder,
-          files: state.workFolder.files ? (
-            state.workFolder.files
+        exploreFolder: {
+          ...state.exploreFolder,
+          files: state.exploreFolder.files ? (
+            state.exploreFolder.files
               .map((item) => item.id === payload.id ? payload : item)
               .sort((a, b) => compare(a.name, b.name))
           ) : []
@@ -174,15 +193,15 @@ export const reducer = (state: State, action: Action): State => {
       if (!payload) {
         return state;
       }
-      if (!state.workFolder) {
+      if (!state.exploreFolder) {
         return state;
       }
       return {
         ...state,
-        workFolder: {
-          ...state.workFolder,
-          folders: state.workFolder.folders ? (
-            state.workFolder.folders
+        exploreFolder: {
+          ...state.exploreFolder,
+          folders: state.exploreFolder.folders ? (
+            state.exploreFolder.folders
               .map((item) => item.id === payload.id ? payload : item)
               .sort((a, b) => compare(a.name, b.name))
           ) : []

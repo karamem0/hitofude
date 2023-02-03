@@ -33,7 +33,8 @@ import TreeItemControl from './TreeItemControl';
 
 interface SearchControlProps {
   loading?: boolean,
-  searchFiles?: File[],
+  searchFile?: File,
+  searchResults?: File[],
   searchQuery?: string,
   onChangeInput?: EventHandler<string>,
   onClearInput?: EventHandler,
@@ -46,7 +47,8 @@ function SearchControl(props: SearchControlProps) {
 
   const {
     loading,
-    searchFiles,
+    searchFile,
+    searchResults,
     searchQuery,
     onChangeInput,
     onClearInput,
@@ -126,11 +128,12 @@ function SearchControl(props: SearchControlProps) {
           overflow-y: auto;
         `}>
         {
-          searchFiles && searchFiles.length > 0 ? (
-            searchFiles.map((item) => (
+          searchResults && searchResults.length > 0 ? (
+            searchResults.map((item) => (
               <TreeItemControl
                 key={item.id}
                 name={item.name}
+                selected={searchFile?.id === item.id}
                 icon={(
                   <TextDocumentIcon
                     css={css`

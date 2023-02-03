@@ -21,24 +21,24 @@ import { Folder } from '../../../types/Model';
 import Presenter from './FolderDeleteDialog.presenter';
 
 interface FolderDeleteDialogProps {
-  folder?: Folder
+  value?: Folder
 }
 
 function FileDeleteDialog(props: FolderDeleteDialogProps) {
 
-  const { folder } = props;
+  const { value } = props;
 
   const {
     dispatch,
     state: {
-      workFolder
+      exploreFolder
     }
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     const open = data || false;
     setOpen(open);
     if (!open) {
@@ -50,14 +50,14 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
 
   const handleSubmit = React.useCallback(async (e?: Event) => {
     try {
-      if (!workFolder) {
+      if (!exploreFolder) {
         throw new Error();
       }
-      if (!folder) {
+      if (!value) {
         throw new Error();
       }
-      await graph.deleteExploreFolder(folder);
-      dispatch(deleteExploreFolder(folder));
+      await graph.deleteExploreFolder(value);
+      dispatch(deleteExploreFolder(value));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -70,10 +70,10 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
     }
   }, [
     dispatch,
-    folder,
+    exploreFolder,
     graph,
     handleOpenChange,
-    workFolder
+    value
   ]);
 
   return (

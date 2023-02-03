@@ -30,9 +30,9 @@ import messages from '../messages';
 import { FileCopyDialogFormState } from '../types/Form';
 
 interface FileCopyDialogProps {
-  file?: File,
   loading?: boolean,
   open?: boolean,
+  value?: File,
   onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FileCopyDialogFormState>
 }
@@ -40,9 +40,9 @@ interface FileCopyDialogProps {
 function FileCopyDialog(props: FileCopyDialogProps) {
 
   const {
-    file,
     loading,
     open,
+    value,
     onOpenChange,
     onSubmit
   } = props;
@@ -50,8 +50,8 @@ function FileCopyDialog(props: FileCopyDialogProps) {
   const intl = useIntl();
   const form = useForm<FileCopyDialogFormState>({
     defaultValues: {
-      name: file?.name,
-      downloadUrl: file?.downloadUrl
+      name: value?.name,
+      downloadUrl: value?.downloadUrl
     }
   });
 
@@ -89,7 +89,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
                   )}
                   rules={{
                     required: true,
-                    validate: (value) => value !== file?.name
+                    validate: (item) => item !== value?.name
                   }} />
               </div>
             </DialogContent>

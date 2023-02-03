@@ -290,7 +290,7 @@ export class GraphService {
     }
   }
 
-  async searchFiles(query: string): Promise<File[]> {
+  async searchResults(query: string): Promise<File[]> {
     try {
       const data = await this.client
         .api(`/me/drive/root/search(q='${query}')`)

@@ -44,8 +44,8 @@ import TreeHeaderControl from './TreeHeaderControl';
 import TreeItemControl from './TreeItemControl';
 
 interface ExplorerControlProps {
-  workFile?: File,
-  workFolder?: Folder,
+  exploreFile?: File,
+  exploreFolder?: Folder,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>,
   onRefreshFolder?: EventHandler<Folder>,
@@ -56,8 +56,8 @@ interface ExplorerControlProps {
 function ExplorerControl(props: ExplorerControlProps) {
 
   const {
-    workFile,
-    workFolder,
+    exploreFile,
+    exploreFolder,
     onOpenDialog,
     onOpenUrl,
     onRefreshFolder,
@@ -67,7 +67,7 @@ function ExplorerControl(props: ExplorerControlProps) {
 
   const intl = useIntl();
 
-  return workFolder ? (
+  return exploreFolder ? (
     <div
       css={css`
         display: grid;
@@ -83,8 +83,8 @@ function ExplorerControl(props: ExplorerControlProps) {
         <FormattedMessage {...messages.Explorer} />
       </Caption1>
       <TreeHeaderControl
-        disabled={!workFolder.parentId}
-        name={workFolder.parentId ? workFolder.name : intl.formatMessage(messages.RootFolder)}
+        disabled={!exploreFolder.parentId}
+        name={exploreFolder.parentId ? exploreFolder.name : intl.formatMessage(messages.RootFolder)}
         menu={(
           <MenuList>
             <MenuGroup>
@@ -97,7 +97,7 @@ function ExplorerControl(props: ExplorerControlProps) {
                       line-height: 1rem;
                     `} />
                 )}
-                onClick={(e) => onRefreshFolder?.(e, workFolder)}>
+                onClick={(e) => onRefreshFolder?.(e, exploreFolder)}>
                 <FormattedMessage {...messages.Refresh} />
               </MenuItem>
             </MenuGroup>
@@ -145,13 +145,13 @@ function ExplorerControl(props: ExplorerControlProps) {
                       line-height: 1rem;
                     `} />
                 )}
-                onClick={(e) => onOpenUrl?.(e, workFolder.webUrl)}>
+                onClick={(e) => onOpenUrl?.(e, exploreFolder.webUrl)}>
                 <FormattedMessage {...messages.OpenWithOneDrive} />
               </MenuItem>
             </MenuGroup>
           </MenuList>
         )}
-        onClick={(e) => onSelectFolder?.(e, workFolder?.parentId)} />
+        onClick={(e) => onSelectFolder?.(e, exploreFolder?.parentId)} />
       <div
         role="list"
         css={css`
@@ -162,7 +162,7 @@ function ExplorerControl(props: ExplorerControlProps) {
           overflow-y: auto;
         `}>
         {
-          workFolder.folders?.map((item) => (
+          exploreFolder.folders?.map((item) => (
             <TreeItemControl
               key={item.id}
               name={item.name}
@@ -211,11 +211,11 @@ function ExplorerControl(props: ExplorerControlProps) {
           ))
         }
         {
-          workFolder.files?.map((item) => (
+          exploreFolder.files?.map((item) => (
             <TreeItemControl
               key={item.id}
               name={item.name}
-              selected={workFile?.id === item.id}
+              selected={exploreFile?.id === item.id}
               icon={(
                 <TextDocumentIcon
                   css={css`

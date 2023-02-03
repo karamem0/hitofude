@@ -8,11 +8,8 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-import { Spinner } from '@fluentui/react-components';
-
 interface MsalLoaderProps {
-  loading: boolean
+  loading?: boolean
 }
 
 function MsalLoader(props: React.PropsWithChildren<MsalLoaderProps>) {
@@ -22,18 +19,7 @@ function MsalLoader(props: React.PropsWithChildren<MsalLoaderProps>) {
     loading
   } = props;
 
-  return loading ? (
-    <div
-      css={css`
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    `}>
-      <Spinner />
-    </div>
-  ) : (
+  return loading ? null : (
     <React.Fragment>
       {children}
     </React.Fragment>

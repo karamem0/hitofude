@@ -22,19 +22,19 @@ import { FileRenameDialogFormState } from '../types/Form';
 import Presenter from './FileRenameDialog.presenter';
 
 interface FileRenameDialogProps {
-  file?: File
+  value?: File
 }
 
 function FileRenameDialog(props: FileRenameDialogProps) {
 
-  const { file } = props;
+  const { value } = props;
 
   const { dispatch } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     const open = data || false;
     setOpen(open);
     if (!open) {
@@ -73,9 +73,9 @@ function FileRenameDialog(props: FileRenameDialogProps) {
 
   return (
     <Presenter
-      file={file}
       loading={loading}
       open={open}
+      value={value}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

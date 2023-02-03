@@ -23,8 +23,12 @@ export class StorageService {
     };
   }
 
-  getWorkFolderId(): string | undefined {
-    return this.storage.getItem('workFolderId') || undefined;
+  getExploreFileId(): string | undefined {
+    return this.storage.getItem('exploreFileId') || undefined;
+  }
+
+  getExploreFolderId(): string | undefined {
+    return this.storage.getItem('exploreFolderId') || undefined;
   }
 
   setTabMode(value?: TabMode): void {
@@ -32,11 +36,19 @@ export class StorageService {
     this.storage.setItem('tabOpen', String(Number(value?.open)));
   }
 
-  setWorkFolderId(value?: string): void {
+  setExploreFileId(value?: string): void {
     if (value) {
-      this.storage.setItem('workFolderId', value);
+      this.storage.setItem('exploreFileId', value);
     } else {
-      this.storage.removeItem('workFolderId');
+      this.storage.removeItem('exploreFileId');
+    }
+  }
+
+  setExploreFolderId(value?: string): void {
+    if (value) {
+      this.storage.setItem('exploreFolderId', value);
+    } else {
+      this.storage.removeItem('exploreFolderId');
     }
   }
 

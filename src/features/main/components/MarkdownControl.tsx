@@ -11,6 +11,7 @@ import React from 'react';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import { setError, setWorkFile } from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 
 import Presenter from './MarkdownControl.presenter';
 
@@ -20,18 +21,20 @@ function MarkdownControl() {
     dispatch,
     state: {
       loading,
-      workFile,
-      workFolder
+      workFile
     }
   } = useStore();
   const { graph } = useService();
 
-  const handleSave = React.useCallback(async (_, data?: string) => {
+  const handleSave = React.useCallback(async (_?: Event, data?: string) => {
     try {
       if (!workFile) {
         throw new Error();
       }
-      const file = await graph.setFileContent(workFile, data || '');
+      if (!data) {
+        throw new Error();
+      }
+      const file = await graph.setFileContent(workFile, data);
       if (!file) {
         throw new Error();
       }
@@ -86,8 +89,7 @@ function MarkdownControl() {
   return (
     <Presenter
       loading={loading}
-      workFile={workFile}
-      workFolder={workFolder}
+      value={workFile}
       onCancel={handleCancel}
       onEdit={handleEdit}
       onSave={handleSave} />

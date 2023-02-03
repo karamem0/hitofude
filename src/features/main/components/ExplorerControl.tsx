@@ -13,9 +13,11 @@ import { useStore } from '../../../providers/StoreProvider';
 import {
   setDialogAction,
   setError,
-  setWorkFile,
-  setWorkFolder
+  setExploreFile,
+  setExploreFolder,
+  setWorkFile
 } from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 import {
   DialogAction,
   File,
@@ -29,31 +31,31 @@ function ExplorerControl() {
   const {
     dispatch,
     state: {
-      workFile,
-      workFolder
+      exploreFile,
+      exploreFolder
     }
   } = useStore();
   const { graph } = useService();
 
-  const handleOpenDialog = React.useCallback((_, data?: DialogAction) => {
+  const handleOpenDialog = React.useCallback((_?: Event, data?: DialogAction) => {
     dispatch(setDialogAction(data));
   }, [
     dispatch
   ]);
 
-  const handleOpenUrl = React.useCallback((_, data?: string) => {
+  const handleOpenUrl = React.useCallback((_?: Event, data?: string) => {
     if (!data) {
       throw new Error();
     }
     window.open(data, '_blank', 'noreferrer');
   }, []);
 
-  const handleRefreshFolder = React.useCallback(async (_, data?: Folder) => {
+  const handleRefreshFolder = React.useCallback(async (_?: Event, data?: Folder) => {
     try {
       if (!data) {
         throw new Error();
       }
-      dispatch(setWorkFolder(await graph.getFolderById(data.id)));
+      dispatch(setExploreFolder(await graph.getFolderById(data.id)));
     } catch (e) {
       dispatch(setError(e as Error));
     }
@@ -62,11 +64,12 @@ function ExplorerControl() {
     graph
   ]);
 
-  const handleSelectFile = React.useCallback(async (_, data?: File) => {
+  const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
       if (!data) {
         throw new Error();
       }
+      dispatch(setExploreFile(data));
       dispatch(setWorkFile({
         ...data,
         content: await graph.getFileContent(data)
@@ -79,20 +82,22 @@ function ExplorerControl() {
     graph
   ]);
 
-  const handleSelectFolder = React.useCallback(async (_, data?: string) => {
+  const handleSelectFolder = React.useCallback(async (_?: Event, data?: string) => {
     try {
       if (!data) {
         throw new Error();
       }
-      const workFolder = await graph.getFolderById(data);
-      dispatch(setWorkFolder(workFolder));
-      const workFile = workFolder.files?.at(0);
-      if (workFile) {
+      const exploreFolder = await graph.getFolderById(data);
+      dispatch(setExploreFolder(exploreFolder));
+      const exploreFile = exploreFolder.files?.at(0);
+      if (exploreFile) {
+        dispatch(setExploreFile(exploreFile));
         dispatch(setWorkFile({
-          ...workFile,
-          content: await graph.getFileContent(workFile)
+          ...exploreFile,
+          content: await graph.getFileContent(exploreFile)
         }));
       } else {
+        dispatch(setExploreFile());
         dispatch(setWorkFile());
       }
     } catch (e) {
@@ -105,8 +110,8 @@ function ExplorerControl() {
 
   return (
     <Presenter
-      workFile={workFile}
-      workFolder={workFolder}
+      exploreFile={exploreFile}
+      exploreFolder={exploreFolder}
       onOpenDialog={handleOpenDialog}
       onOpenUrl={handleOpenUrl}
       onRefreshFolder={handleRefreshFolder}

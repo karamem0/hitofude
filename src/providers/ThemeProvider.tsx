@@ -32,6 +32,37 @@ export const themeConfig = createLightTheme({
   160: '#f1ebeb'
 });
 
+export const codeStyle = {
+  hljs: {},
+  'hljs-addition': {
+    color: themeConfig.colorPaletteLightGreenForeground1
+  },
+  'hljs-built_in': {
+    color: themeConfig.colorPaletteRedForeground1
+  },
+  'hljs-comment': {
+    color: themeConfig.colorPaletteLightGreenForeground1
+  },
+  'hljs-deletion': {
+    color: themeConfig.colorPaletteRedForeground1
+  },
+  'hljs-keyword': {
+    color: themeConfig.colorPaletteBlueForeground2
+  },
+  'hljs-literal': {
+    color: themeConfig.colorPaletteRedForeground1
+  },
+  'hljs-number': {
+    color: themeConfig.colorPaletteCranberryForeground2
+  },
+  'hljs-quote': {
+    color: themeConfig.colorPaletteLightGreenForeground1
+  },
+  'hljs-string': {
+    color: themeConfig.colorPaletteCranberryForeground2
+  }
+};
+
 function ThemeProvider(props: React.PropsWithChildren<unknown>) {
 
   const { children } = props;

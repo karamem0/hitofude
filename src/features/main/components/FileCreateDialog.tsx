@@ -26,14 +26,14 @@ function FileCreateDialog() {
   const {
     dispatch,
     state: {
-      workFolder
+      exploreFolder
     }
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     const open = data || false;
     setOpen(open);
     if (!open) {
@@ -45,7 +45,7 @@ function FileCreateDialog() {
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FileCreateDialogFormState) => {
     try {
-      if (!workFolder) {
+      if (!exploreFolder) {
         throw new Error();
       }
       if (!data?.name) {
@@ -53,10 +53,16 @@ function FileCreateDialog() {
       }
       setLoading(true);
       const file = await Promise.resolve()
-        .then(() => graph.createFile(workFolder, `${data.name}.md`))
+        .then(() => graph.createFile(exploreFolder, `${data.name}.md`))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
+      if (!file) {
+        throw new Error();
+      }
       dispatch(appendExploreFile(file));
-      dispatch(setWorkFile(file));
+      dispatch(setWorkFile({
+        ...file,
+        content: ''
+      }));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -69,9 +75,9 @@ function FileCreateDialog() {
     }
   }, [
     dispatch,
+    exploreFolder,
     graph,
-    handleOpenChange,
-    workFolder
+    handleOpenChange
   ]);
 
   return (

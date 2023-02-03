@@ -30,9 +30,9 @@ import messages from '../messages';
 import { FileRenameDialogFormState } from '../types/Form';
 
 interface FileRenameDialogProps {
-  file?: File,
   loading?: boolean,
   open?: boolean,
+  value?: File,
   onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FileRenameDialogFormState>
 }
@@ -40,9 +40,9 @@ interface FileRenameDialogProps {
 function FileRenameDialog(props: FileRenameDialogProps) {
 
   const {
-    file,
     loading,
     open,
+    value,
     onOpenChange,
     onSubmit
   } = props;
@@ -50,8 +50,8 @@ function FileRenameDialog(props: FileRenameDialogProps) {
   const intl = useIntl();
   const form = useForm<FileRenameDialogFormState>({
     defaultValues: {
-      id: file?.id,
-      name: file?.name
+      id: value?.id,
+      name: value?.name
     }
   });
 

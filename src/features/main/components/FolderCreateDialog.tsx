@@ -25,14 +25,14 @@ function FolderCreateDialog() {
   const {
     dispatch,
     state: {
-      workFolder
+      exploreFolder
     }
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     const open = data || false;
     setOpen(open);
     if (!open) {
@@ -44,14 +44,14 @@ function FolderCreateDialog() {
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FolderCreateDialogFormState) => {
     try {
-      if (!workFolder) {
+      if (!exploreFolder) {
         throw new Error();
       }
       if (!data?.name) {
         throw new Error();
       }
       setLoading(true);
-      const folder = await graph.createFolder(workFolder, `${data.name}`);
+      const folder = await graph.createFolder(exploreFolder, `${data.name}`);
       dispatch(appendExploreFolder(folder));
     } catch (e) {
       if (e instanceof Error) {
@@ -67,7 +67,7 @@ function FolderCreateDialog() {
     dispatch,
     graph,
     handleOpenChange,
-    workFolder
+    exploreFolder
   ]);
 
   return (

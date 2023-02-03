@@ -11,6 +11,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import ReactMarkdown from 'react-markdown';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { css } from '@emotion/react';
 import {
@@ -22,16 +23,15 @@ import {
 import remarkGfm from 'remark-gfm';
 
 import Communication from '../../../common/components/Communication';
-import { themeConfig } from '../../../providers/ThemeProvider';
+import { codeStyle, themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
-import { File, Folder } from '../../../types/Model';
+import { File, FileContent } from '../../../types/Model';
 import messages from '../messages';
 import { MarkdownControlFormState } from '../types/Form';
 
 interface MarkdownControlProps {
   loading?: boolean,
-  workFile?: File,
-  workFolder?: Folder,
+  value?: File & FileContent,
   onCancel?: EventHandler,
   onEdit?: EventHandler,
   onSave?: EventHandler<string>
@@ -41,8 +41,7 @@ function MarkdownControl(props: MarkdownControlProps) {
 
   const {
     loading,
-    workFile,
-    workFolder,
+    value,
     onCancel,
     onEdit,
     onSave
@@ -51,7 +50,7 @@ function MarkdownControl(props: MarkdownControlProps) {
   const intl = useIntl();
   const form = useForm<MarkdownControlFormState>();
 
-  return workFolder ? (
+  return (
     <section
       css={css`
           display: grid;
@@ -60,7 +59,7 @@ function MarkdownControl(props: MarkdownControlProps) {
         loading ? (
           <Spinner />
         ) : (
-          workFile ? (
+          value ? (
             <form
               css={css`
                 display: grid;
@@ -95,7 +94,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                     text-overflow: ellipsis;
                     white-space: nowrap;
                   `}>
-                  {workFile.name}
+                  {value.name}
                 </Text>
               </div>
               <div
@@ -112,7 +111,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                   }
                 `}>
                 {
-                  workFile.editing ? (
+                  value.editing ? (
                     <div
                       css={css`
                         display: flex;
@@ -140,7 +139,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                         title={intl.formatMessage(messages.Edit)}
                         onClick={(e) => {
                           form.reset({
-                            content: workFile.content
+                            content: value.content
                           });
                           onEdit?.(e);
                         }}>
@@ -156,7 +155,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                     white-space: nowrap;
                   `}>
                   {
-                    workFile.createdDate ? (
+                    value.createdDate ? (
                       <FormattedDate
                         {...{
                           year: 'numeric',
@@ -165,7 +164,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                           hour: '2-digit',
                           minute: '2-digit'
                         }}
-                        value={workFile.updatedDate} />
+                        value={value.updatedDate} />
                     ) : null
                   }
                 </Text>
@@ -185,7 +184,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                   }
                 `}>
                 {
-                  workFile.editing ? (
+                  value.editing ? (
                     <Controller
                       control={form.control}
                       name="content"
@@ -264,9 +263,11 @@ function MarkdownControl(props: MarkdownControlProps) {
                           margin-inline: 2rem 0;
                           list-style-type: decimal;
                         }
-                        pre {
+                        & > pre {
                           padding: 0.5rem;
                           margin-block: 0.5rem;
+                        }
+                        pre {
                           font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
                           white-space: pre-wrap;
                           background-color: ${themeConfig.colorNeutralBackground3};
@@ -297,8 +298,24 @@ function MarkdownControl(props: MarkdownControlProps) {
                           list-style-type: disc;
                         }
                       `}>
-                      <ReactMarkdown remarkPlugins={[ remarkGfm ]}>
-                        {workFile.content || ''}
+                      <ReactMarkdown
+                        remarkPlugins={[ remarkGfm ]}
+                        components={{
+                          code: ({ inline, className, children }) => {
+                            const match = /language-(\w+)/.exec(className || '');
+                            const lang = match && match[1] ? match[1] : '';
+                            return inline ? (
+                              <code className={className}>{children}</code>
+                            ) : (
+                              <SyntaxHighlighter
+                                language={lang}
+                                style={codeStyle}>
+                                {String(children).replace(/\n$/, '')}
+                              </SyntaxHighlighter>
+                            );
+                          }
+                        }}>
+                        {value.content}
                       </ReactMarkdown>
                     </div>
                   )
@@ -322,7 +339,7 @@ function MarkdownControl(props: MarkdownControlProps) {
         )
       }
     </section>
-  ) : null;
+  );
 
 }
 

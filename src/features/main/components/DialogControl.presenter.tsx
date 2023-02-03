@@ -36,7 +36,7 @@ function DialogControl(props: DialogControlProps) {
   switch (action?.type) {
     case DialogType.copyFile:
       return (
-        <FileCopyDialog file={action.payload as File} />
+        <FileCopyDialog value={action.payload as File} />
       );
     case DialogType.createFile:
       return (
@@ -48,19 +48,19 @@ function DialogControl(props: DialogControlProps) {
       );
     case DialogType.deleteFile:
       return (
-        <FileDeleteDialog file={action.payload as File} />
+        <FileDeleteDialog value={action.payload as File} />
       );
     case DialogType.deleteFolder:
       return (
-        <FolderDeleteDialog folder={action.payload as Folder} />
+        <FolderDeleteDialog value={action.payload as Folder} />
       );
     case DialogType.renameFile:
       return (
-        <FileRenameDialog file={action.payload as File} />
+        <FileRenameDialog value={action.payload as File} />
       );
     case DialogType.renameFolder:
       return (
-        <FolderRenameDialog folder={action.payload as Folder} />
+        <FolderRenameDialog value={action.payload as Folder} />
       );
     default:
       return null;

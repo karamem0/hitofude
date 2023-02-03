@@ -11,6 +11,8 @@ import React from 'react';
 import { reducer } from '../stores/Reducer';
 import { Action, State } from '../types/Store';
 
+import { useService } from './ServiceProvider';
+
 interface StoreContextState {
   dispatch: React.Dispatch<Action>,
   state: State
@@ -30,7 +32,12 @@ function StoreProvider(props: React.PropsWithChildren<unknown>) {
 
   const { children } = props;
 
-  const [ state, dispatch ] = React.useReducer(reducer, {});
+  const { storage } = useService();
+  const [ state, dispatch ] = React.useReducer(
+    reducer(storage),
+    {
+      loading: true
+    });
 
   return (
     <StoreContext.Provider

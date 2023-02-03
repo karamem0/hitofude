@@ -10,7 +10,6 @@ import {
   createMap,
   createMapper,
   forMember,
-  fromValue,
   mapFrom
 } from '@automapper/core';
 import { pojos, PojosMetadataMap } from '@automapper/pojos';
@@ -106,9 +105,5 @@ createMap<DriveItem, File>(
   forMember(
     (target) => target.downloadUrl,
     mapFrom((source) => (source as Record<string, string>)['@microsoft.graph.downloadUrl'])
-  ),
-  forMember(
-    (target) => target.editing,
-    fromValue(false)
   )
 );

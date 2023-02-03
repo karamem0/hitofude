@@ -22,19 +22,19 @@ import { FolderRenameDialogFormState } from '../types/Form';
 import Presenter from './FolderRenameDialog.presenter';
 
 interface FolderRenameDialogProps {
-  folder?: Folder
+  value?: Folder
 }
 
 function FolderRenameDialog(props: FolderRenameDialogProps) {
 
-  const { folder } = props;
+  const { value } = props;
 
   const { dispatch } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     const open = data || false;
     setOpen(open);
     if (!open) {
@@ -73,9 +73,9 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
 
   return (
     <Presenter
-      folder={folder}
       loading={loading}
       open={open}
+      value={value}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

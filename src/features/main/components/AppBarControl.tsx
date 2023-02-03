@@ -10,6 +10,7 @@ import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
 import { setTabMode } from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 import { TabType } from '../../../types/Model';
 
 import Presenter from './AppBarControl.presenter';
@@ -23,7 +24,7 @@ function AppBarControl() {
     }
   } = useStore();
 
-  const handleToggleTab = React.useCallback((_, data?: TabType) => {
+  const handleToggleTab = React.useCallback((_?: Event, data?: TabType) => {
     dispatch(setTabMode({
       type: data || TabType.explorer,
       open: data === tabMode?.type ? !tabMode?.open : true

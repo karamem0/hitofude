@@ -23,24 +23,24 @@ import { FileCopyDialogFormState } from '../types/Form';
 import Presenter from './FileCopyDialog.presenter';
 
 interface FileCopyDialogProps {
-  file?: File
+  value?: File
 }
 
 function FileCopyDialog(props: FileCopyDialogProps) {
 
-  const { file } = props;
+  const { value } = props;
 
   const {
     dispatch,
     state: {
-      workFolder
+      exploreFolder
     }
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     const open = data || false;
     setOpen(open);
     if (!open) {
@@ -52,7 +52,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FileCopyDialogFormState) => {
     try {
-      if (!workFolder) {
+      if (!exploreFolder) {
         throw new Error();
       }
       if (!data?.name) {
@@ -62,9 +62,9 @@ function FileCopyDialog(props: FileCopyDialogProps) {
         throw new Error();
       }
       setLoading(true);
-      const content = await graph.getFileContent(data);
+      const fileContent = await graph.getFileContent(data);
       const file = await Promise.resolve()
-        .then(() => graph.createFile(workFolder, `${data.name}.md`, content))
+        .then(() => graph.createFile(exploreFolder, `${data.name}.md`, fileContent))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
       if (!file) {
         throw new Error();
@@ -72,7 +72,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       dispatch(appendExploreFile(file));
       dispatch(setWorkFile({
         ...file,
-        content
+        content: fileContent
       }));
     } catch (e) {
       if (e instanceof Error) {
@@ -86,16 +86,16 @@ function FileCopyDialog(props: FileCopyDialogProps) {
     }
   }, [
     dispatch,
+    exploreFolder,
     graph,
-    handleOpenChange,
-    workFolder
+    handleOpenChange
   ]);
 
   return (
     <Presenter
-      file={file}
       loading={loading}
       open={open}
+      value={value}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );

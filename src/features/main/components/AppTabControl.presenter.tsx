@@ -30,10 +30,10 @@ function AppTabControl(props: AppTabControlProps) {
     <section
       css={css`
         display: grid;
-        visibility: ${tabMode?.open ? undefined : 'hidden'};
         width: ${tabMode?.open ? '20rem' : '0'};
         max-width: calc(100vw - 4rem);
         padding: 1rem 0;
+        visibility: ${tabMode?.open ? undefined : 'hidden'};
         background-color: ${themeConfig.colorNeutralBackground2};
       `}>
       {

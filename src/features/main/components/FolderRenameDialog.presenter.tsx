@@ -30,9 +30,9 @@ import messages from '../messages';
 import { FolderRenameDialogFormState } from '../types/Form';
 
 interface FolderRenameDialogProps {
-  folder?: Folder,
   loading?: boolean,
   open?: boolean,
+  value?: Folder,
   onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FolderRenameDialogFormState>
 }
@@ -40,9 +40,9 @@ interface FolderRenameDialogProps {
 function FolderRenameDialog(props: FolderRenameDialogProps) {
 
   const {
-    folder,
     loading,
     open,
+    value,
     onOpenChange,
     onSubmit
   } = props;
@@ -50,8 +50,8 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
   const intl = useIntl();
   const form = useForm<FolderRenameDialogFormState>({
     defaultValues: {
-      id: folder?.id,
-      name: folder?.name
+      id: value?.id,
+      name: value?.name
     }
   });
 

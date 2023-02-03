@@ -14,6 +14,7 @@ import {
   deleteExploreFile,
   setDialogAction,
   setError,
+  setExploreFile,
   setWorkFile
 } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
@@ -22,25 +23,25 @@ import { File } from '../../../types/Model';
 import Presenter from './FileDeleteDialog.presenter';
 
 interface FileDeleteDialogProps {
-  file?: File
+  value?: File
 }
 
 function FileDeleteDialog(props: FileDeleteDialogProps) {
 
-  const { file } = props;
+  const { value } = props;
 
   const {
     dispatch,
     state: {
-      workFile,
-      workFolder
+      exploreFile,
+      exploreFolder
     }
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     const open = data || false;
     setOpen(open);
     if (!open) {
@@ -52,16 +53,26 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
 
   const handleSubmit = React.useCallback(async (e?: Event) => {
     try {
-      if (!workFolder) {
+      if (!exploreFolder) {
         throw new Error();
       }
-      if (!file) {
+      if (!value) {
         throw new Error();
       }
-      await graph.deleteExploreFile(file);
-      dispatch(deleteExploreFile(file));
-      if (file.id === workFile?.id) {
-        dispatch(setWorkFile(workFolder.files?.filter((item) => item.id !== file.id)?.at(-1)));
+      await graph.deleteExploreFile(value);
+      dispatch(deleteExploreFile(value));
+      if (value.id === exploreFile?.id) {
+        const file = exploreFolder.files?.filter((item) => item.id !== value.id).at(-1);
+        if (file) {
+          dispatch(setExploreFile(file));
+          dispatch(setWorkFile({
+            ...file,
+            content: await graph.getFileContent(exploreFile)
+          }));
+        } else {
+          dispatch(setExploreFile());
+          dispatch(setWorkFile());
+        }
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -75,11 +86,11 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
     }
   }, [
     dispatch,
-    file,
+    exploreFile,
+    exploreFolder,
     graph,
     handleOpenChange,
-    workFile,
-    workFolder
+    value
   ]);
 
   return (

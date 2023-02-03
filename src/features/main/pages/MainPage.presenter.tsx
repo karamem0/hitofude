@@ -11,20 +11,39 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { css } from '@emotion/react';
-import { Text } from '@fluentui/react-components';
+import { Spinner, Text } from '@fluentui/react-components';
 
 import { themeConfig } from '../../../providers/ThemeProvider';
 import AlertControl from '../components/AlertControl';
 import AppBarControl from '../components/AppBarControl';
+import AppTabControl from '../components/AppTabControl';
 import DialogControl from '../components/DialogControl';
 import MarkdownControl from '../components/MarkdownControl';
 import MeControl from '../components/MeControl';
-import AppTabControl from '../components/AppTabControl';
 import messages from '../messages';
 
-function MainPage() {
+interface MainPageProps {
+  loading?: boolean
+}
 
-  return (
+function MainPage(props: MainPageProps) {
+
+  const {
+    loading
+  } = props;
+
+  return loading ? (
+    <div
+      css={css`
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      `}>
+      <Spinner />
+    </div>
+  ) : (
     <React.Fragment>
       <AlertControl />
       <DialogControl />

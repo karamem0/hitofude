@@ -19,8 +19,7 @@ function MainPage() {
   const {
     dispatch,
     state: {
-      tabMode,
-      workFolder
+      tabMode
     }
   } = useStore();
   const { storage } = useService();
@@ -32,22 +31,8 @@ function MainPage() {
     storage
   ]);
 
-  React.useEffect(() => {
-    storage.setTabMode(tabMode);
-  }, [
-    storage,
-    tabMode
-  ]);
-
-  React.useEffect(() => {
-    storage.setWorkFolderId(workFolder?.id);
-  }, [
-    storage,
-    workFolder
-  ]);
-
   return (
-    <Presenter />
+    <Presenter loading={!tabMode} />
   );
 
 }

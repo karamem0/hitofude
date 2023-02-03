@@ -9,6 +9,7 @@
 import {
   DialogAction,
   File,
+  FileContent,
   Folder,
   TabMode
 } from '../types/Model';
@@ -47,13 +48,28 @@ export const setError = (payload?: Error): Action => ({
   payload
 });
 
+export const setExploreFile = (payload?: File): Action => ({
+  type: ActionType.setExploreFile,
+  payload
+});
+
+export const setExploreFolder = (payload?: Folder): Action => ({
+  type: ActionType.setExploreFolder,
+  payload
+});
+
 export const setLoading = (payload?: boolean): Action => ({
   type: ActionType.setLoading,
   payload
 });
 
-export const setSearchFiles = (payload?: File[]): Action => ({
-  type: ActionType.setSearchFiles,
+export const setSearchFile = (payload?: File): Action => ({
+  type: ActionType.setSearchFile,
+  payload
+});
+
+export const setSearchResults = (payload?: File[]): Action => ({
+  type: ActionType.setSearchResults,
   payload
 });
 
@@ -67,13 +83,8 @@ export const setTabMode = (payload?: TabMode): Action => ({
   payload
 });
 
-export const setWorkFile = (payload?: File): Action => ({
+export const setWorkFile = (payload?: File & FileContent): Action => ({
   type: ActionType.setWorkFile,
-  payload
-});
-
-export const setWorkFolder = (payload?: Folder): Action => ({
-  type: ActionType.setWorkFolder,
   payload
 });
 

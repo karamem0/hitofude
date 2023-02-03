@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -28,8 +28,9 @@ import ThemeProvider from './providers/ThemeProvider';
 
 import 'ress';
 
-ReactDOM.render(
-  <React.StrictMode>
+ReactDOM
+  .createRoot(document.getElementById('root') as Element)
+  .render(
     <BrowserRouter>
       <TelemetryProvider>
         <IntlProvider>
@@ -38,7 +39,7 @@ ReactDOM.render(
               <Route
                 path="/"
                 element={(
-                  <ErrorBoundary fallback={<Error500Page />}>
+                  <ErrorBoundary fallbackRender={(props) => <Error500Page {...props} />}>
                     <MsalProvider>
                       <MsalLoader>
                         <AuthenticatedTemplate>
@@ -63,6 +64,4 @@ ReactDOM.render(
         </IntlProvider>
       </TelemetryProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  );

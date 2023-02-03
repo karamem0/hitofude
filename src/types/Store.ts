@@ -9,6 +9,7 @@
 import {
   DialogAction,
   File,
+  FileContent,
   Folder,
   TabMode
 } from './Model';
@@ -25,12 +26,14 @@ export enum ActionType {
   deleteExploreFolder = 'deleteExploreFolder',
   setDialogAction = 'setDialogAction',
   setError = 'setError',
+  setExploreFile = 'setExploreFile',
+  setExploreFolder = 'setWorkFolder',
   setLoading = 'setLoading',
-  setSearchFiles = 'setSearchFiles',
+  setSearchFile = 'setSearchFile',
+  setSearchResults = 'setSearchResults',
   setSearchQuery = 'setSearchQuery',
   setTabMode = 'setTabMode',
   setWorkFile = 'setWorkFile',
-  setWorkFolder = 'setWorkFolder',
   updateExploreFile = 'updateExploreFile',
   updateExploreFolder = 'updateExploreFolder'
 }
@@ -41,9 +44,11 @@ export interface State {
   dialogAction?: DialogAction,
   error?: Error,
   loading?: boolean,
-  searchFiles?: File[],
+  searchFile?: File,
+  searchResults?: File[],
   searchQuery?: string,
   tabMode?: TabMode,
-  workFile?: File,
-  workFolder?: Folder
+  exploreFile?: File,
+  exploreFolder?: Folder,
+  workFile?: File & FileContent
 }

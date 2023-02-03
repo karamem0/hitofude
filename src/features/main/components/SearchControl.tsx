@@ -12,13 +12,16 @@ import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
   setError,
-  setSearchFiles,
+  setExploreFile,
+  setExploreFolder,
+  setSearchResults,
   setSearchQuery,
   setTabMode,
   setWorkFile,
-  setWorkFolder
+  setSearchFile
 } from '../../../stores/Action';
 import { FolderNotFoundError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
 import { File, TabType } from '../../../types/Model';
 import { SearchControlFormState } from '../types/Form';
 
@@ -29,14 +32,15 @@ function SearchControl() {
   const {
     dispatch,
     state: {
-      searchFiles,
+      searchFile,
+      searchResults,
       searchQuery
     }
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState(false);
 
-  const handleChangeInput = React.useCallback((_, data?: string) => {
+  const handleChangeInput = React.useCallback((_?: Event, data?: string) => {
     dispatch(setSearchQuery(data));
   }, [
     dispatch
@@ -44,13 +48,13 @@ function SearchControl() {
 
   const handleClearInput = React.useCallback(() => {
     dispatch(setSearchQuery());
-    dispatch(setSearchFiles());
+    dispatch(setSearchResults());
     dispatch(setWorkFile());
   }, [
     dispatch
   ]);
 
-  const handleOpenFileLocation = React.useCallback(async (_, data?: File) => {
+  const handleOpenFileLocation = React.useCallback(async (_?: Event, data?: File) => {
     try {
       if (!data) {
         throw new Error();
@@ -60,7 +64,12 @@ function SearchControl() {
         throw new FolderNotFoundError();
       }
       const folder = await graph.getFolderById(file.parentId);
-      dispatch(setWorkFolder(folder));
+      dispatch(setExploreFolder(folder));
+      dispatch(setExploreFile(file));
+      dispatch(setWorkFile({
+        ...file,
+        content: await graph.getFileContent(file)
+      }));
       dispatch(setTabMode({
         type: TabType.explorer,
         open: true
@@ -73,16 +82,17 @@ function SearchControl() {
     graph
   ]);
 
-  const handleSelectFile = React.useCallback(async (_, data?: File) => {
+  const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
       if (!data) {
         throw new Error();
       }
       const file = await graph.getFileById(data.id);
-      const content = await graph.getFileContent(file);
+      const fileContent = await graph.getFileContent(file);
+      dispatch(setSearchFile(file));
       dispatch(setWorkFile({
         ...file,
-        content
+        content: fileContent
       }));
     } catch (e) {
       dispatch(setError(e as Error));
@@ -92,7 +102,7 @@ function SearchControl() {
     graph
   ]);
 
-  const handleSubmit = React.useCallback(async (_, data?: SearchControlFormState) => {
+  const handleSubmit = React.useCallback(async (_?: Event, data?: SearchControlFormState) => {
     try {
       if (!data) {
         throw new Error();
@@ -102,7 +112,7 @@ function SearchControl() {
       }
       setLoading(true);
       dispatch(setSearchQuery(data.query));
-      dispatch(setSearchFiles(await graph.searchFiles(data.query)));
+      dispatch(setSearchResults(await graph.searchResults(data.query)));
     } catch (e) {
       dispatch(setError(e as Error));
     } finally {
@@ -117,8 +127,9 @@ function SearchControl() {
   return (
     <Presenter
       loading={loading}
-      searchFiles={searchFiles}
+      searchFile={searchFile}
       searchQuery={searchQuery}
+      searchResults={searchResults}
       onChangeInput={handleChangeInput}
       onClearInput={handleClearInput}
       onOpenFileLocation={handleOpenFileLocation}

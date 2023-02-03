@@ -22,6 +22,7 @@ if (instrumentationKey) {
     }
   });
   appInsights.loadAppInsights();
+  appInsights.trackPageView();
 }
 
 function TelemetryProvider(props: React.PropsWithChildren<unknown>) {
