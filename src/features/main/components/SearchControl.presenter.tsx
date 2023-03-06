@@ -132,7 +132,7 @@ function SearchControl(props: SearchControlProps) {
             searchResults.map((item) => (
               <TreeItemControl
                 key={item.id}
-                name={item.name}
+                name={item.baseName}
                 selected={searchFile?.id === item.id}
                 icon={(
                   <TextDocumentIcon

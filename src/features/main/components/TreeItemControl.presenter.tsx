@@ -55,25 +55,28 @@ function TreeItemControl(props: TreeItemControlProps) {
         display: grid;
         grid-template-rows: auto;
         grid-template-columns: 1fr auto;
-        grid-gap: 0.5rem;
         align-items: center;
         justify-content: start;
-        padding: 0.5rem;
         cursor: pointer;
+
         & > div:nth-of-type(2) {
           display: none;
         }
+
         &:hover {
           background-color: ${themeConfig.colorNeutralBackground2Hover};
+
           & > div:nth-of-type(2) {
             display: inherit;
           }
         }
+
         &:focus {
           & > div:nth-of-type(2) {
             display: inherit;
           }
         }
+
         &[aria-selected='true'] {
           background-color: ${themeConfig.colorNeutralBackground2Selected};
         }
@@ -89,6 +92,7 @@ function TreeItemControl(props: TreeItemControlProps) {
           grid-gap: 0.5rem;
           align-items: center;
           justify-content: start;
+          padding: 0.5rem 0 0.5rem 0.5rem;
         `}
         onClick={onClick}>
         {icon}
@@ -101,23 +105,28 @@ function TreeItemControl(props: TreeItemControlProps) {
           {name}
         </Text>
       </div>
-      <Menu>
-        <MenuTrigger>
-          <div
-            aria-label={intl.formatMessage(messages.MoreOption)}
-            role="button"
-            title={intl.formatMessage(messages.MoreOption)}
-            css={css`
-              font-size: 1rem;
-              line-height: 1rem;
-            `}>
-            <MoreVerticalIcon />
-          </div>
-        </MenuTrigger>
-        <MenuPopover>
-          {menu}
-        </MenuPopover>
-      </Menu>
+      {
+        menu ? (
+          <Menu>
+            <MenuTrigger>
+              <div
+                aria-label={intl.formatMessage(messages.MoreOption)}
+                role="button"
+                title={intl.formatMessage(messages.MoreOption)}
+                css={css`
+                  padding: 0.5rem;
+                  font-size: 1rem;
+                  line-height: 1rem;
+                `}>
+                <MoreVerticalIcon />
+              </div>
+            </MenuTrigger>
+            <MenuPopover>
+              {menu}
+            </MenuPopover>
+          </Menu>
+        ) : null
+      }
     </div>
   );
 }

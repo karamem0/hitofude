@@ -22,6 +22,7 @@ import {
   FolderNotFoundError
 } from '../types/Error';
 import { File, Folder } from '../types/Model';
+import { isSupportedFile } from '../utils/File';
 
 export class GraphService {
 
@@ -120,33 +121,13 @@ export class GraphService {
     }
   }
 
-  async getFiles(folder: Pick<Folder, 'id' | 'name'>): Promise<File[]> {
-    const data = await this.client
-      .api(`/me/drive/items/${folder.id}/children`)
-      .get();
-    const array: DriveItem[] = [];
-    const iterator = new PageIterator(
-      this.client,
-      data,
-      (value) => Boolean(array.push(value)));
-    await iterator.iterate();
-    return mapper
-      .mapArray<DriveItem, File>(
-        array.filter((item) => item.file && item.name?.endsWith('.md')),
-        'DriveItem',
-        'File'
-      )
-      .map((item) => ({
-        ...item,
-        path: `${folder.name}/${item.name}`,
-        parent: folder
-      }));
-  }
-
-  async getFileContent(file: Pick<File, 'downloadUrl'>): Promise<string> {
+  async getFileContent(file: Pick<File, 'downloadUrl' | 'fullName'>): Promise<string> {
     try {
       if (!file.downloadUrl) {
         throw new FileNotFoundError();
+      }
+      if (!isSupportedFile(file)) {
+        return '';
       }
       const data = await fetch(file.downloadUrl, { method: 'GET' });
       const value = await data.text();
@@ -180,29 +161,6 @@ export class GraphService {
       }
       throw e;
     }
-  }
-
-  async getFolders(folder: Pick<Folder, 'id' | 'name'>): Promise<Folder[]> {
-    const data = await this.client
-      .api(`/me/drive/items/${folder.id}/children`)
-      .get();
-    const array: DriveItem[] = [];
-    const iterator = new PageIterator(
-      this.client,
-      data,
-      (value) => Boolean(array.push(value)));
-    await iterator.iterate();
-    return mapper
-      .mapArray<DriveItem, Folder>(
-        array.filter((item) => item.folder),
-        'DriveItem',
-        'Folder'
-      )
-      .map((item) => ({
-        ...item,
-        path: `${folder.name}/${item.name}`,
-        parent: folder
-      }));
   }
 
   async getPhoto(): Promise<string> {
@@ -303,7 +261,7 @@ export class GraphService {
       await iterator.iterate();
       return mapper
         .mapArray<DriveItem, File>(
-          array.filter((item) => item.file && item.name?.endsWith('.md')),
+          array.filter((item) => item.file && (item.name?.endsWith('.md'))),
           'DriveItem',
           'File'
         );

@@ -15,6 +15,7 @@ import {
   setError,
   setExploreFile,
   setExploreFolder,
+  setIncludeUnsupportedFiles,
   setWorkFile
 } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
@@ -23,6 +24,7 @@ import {
   File,
   Folder
 } from '../../../types/Model';
+import { isSupportedFile } from '../../../utils/File';
 
 import Presenter from './ExplorerControl.presenter';
 
@@ -31,6 +33,7 @@ function ExplorerControl() {
   const {
     dispatch,
     state: {
+      includeUnsupportedFiles,
       exploreFile,
       exploreFolder
     }
@@ -64,6 +67,37 @@ function ExplorerControl() {
     graph
   ]);
 
+  const handleToggleIncludeUnsupportedFiles = React.useCallback(async (_?: Event, data?: boolean) => {
+    try {
+      if (!exploreFolder) {
+        throw new Error();
+      }
+      dispatch(setIncludeUnsupportedFiles(data));
+      if (!data) {
+        if (!exploreFile || !isSupportedFile(exploreFile)) {
+          const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
+          if (file) {
+            dispatch(setExploreFile(file));
+            dispatch(setWorkFile({
+              ...file,
+              content: await graph.getFileContent(file)
+            }));
+          } else {
+            dispatch(setExploreFile());
+            dispatch(setWorkFile());
+          }
+        }
+      }
+    } catch (e) {
+      dispatch(setError(e as Error));
+    }
+  }, [
+    dispatch,
+    exploreFile,
+    exploreFolder,
+    graph
+  ]);
+
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
       if (!data) {
@@ -89,7 +123,7 @@ function ExplorerControl() {
       }
       const exploreFolder = await graph.getFolderById(data);
       dispatch(setExploreFolder(exploreFolder));
-      const exploreFile = exploreFolder.files?.at(0);
+      const exploreFile = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
       if (exploreFile) {
         dispatch(setExploreFile(exploreFile));
         dispatch(setWorkFile({
@@ -112,11 +146,13 @@ function ExplorerControl() {
     <Presenter
       exploreFile={exploreFile}
       exploreFolder={exploreFolder}
+      includeUnsupportedFiles={includeUnsupportedFiles}
       onOpenDialog={handleOpenDialog}
       onOpenUrl={handleOpenUrl}
       onRefreshFolder={handleRefreshFolder}
       onSelectFile={handleSelectFile}
-      onSelectFolder={handleSelectFolder} />
+      onSelectFolder={handleSelectFolder}
+      onToggleIncludeUnsupportedFiles={handleToggleIncludeUnsupportedFiles} />
   );
 
 }

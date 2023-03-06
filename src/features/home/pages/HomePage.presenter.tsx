@@ -74,12 +74,14 @@ function HomePage(props: HomePageProps) {
         <div
           css={css`
             display: grid;
+
             @media (max-width: 959px) {
               grid-template-rows: auto auto;
               grid-template-columns: auto;
               grid-gap: 2rem;
               padding: 2rem;
             }
+
             @media (min-width: 960px) {
               grid-template-rows: auto;
               grid-template-columns: auto auto;

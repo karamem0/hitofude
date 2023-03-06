@@ -15,7 +15,8 @@ import {
 } from '../types/Model';
 import {
   Action,
-  ActionType
+  ActionType,
+  State
 } from '../types/Store';
 
 export const appendExploreFile = (payload?: File): Action => ({
@@ -55,6 +56,16 @@ export const setExploreFile = (payload?: File): Action => ({
 
 export const setExploreFolder = (payload?: Folder): Action => ({
   type: ActionType.setExploreFolder,
+  payload
+});
+
+export const setIncludeUnsupportedFiles = (payload?: boolean): Action => ({
+  type: ActionType.setIncludeUnsupportedFiles,
+  payload
+});
+
+export const setInitialValue = (payload?: Pick<State, 'includeUnsupportedFiles' | 'tabMode'>): Action => ({
+  type: ActionType.setInitialValue,
   payload
 });
 

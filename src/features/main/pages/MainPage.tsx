@@ -10,7 +10,7 @@ import React from 'react';
 
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setTabMode } from '../../../stores/Action';
+import { setInitialValue } from '../../../stores/Action';
 
 import Presenter from './MainPage.presenter';
 
@@ -25,7 +25,10 @@ function MainPage() {
   const { storage } = useService();
 
   React.useEffect(() => {
-    dispatch(setTabMode(storage.getTabMode()));
+    dispatch(setInitialValue({
+      includeUnsupportedFiles: storage.getIncludeUnsupportedFiles(),
+      tabMode: storage.getTabMode()
+    }));
   }, [
     dispatch,
     storage

@@ -24,10 +24,12 @@ import {
   CopyIcon,
   DeleteIcon,
   FolderHorizontalIcon,
+  Hide3Icon,
   PageAddIcon,
   RefreshIcon,
   RenameIcon,
-  TextDocumentIcon
+  TextDocumentIcon,
+  ViewIcon
 } from '@fluentui/react-icons-mdl2';
 import { FabricNewFolderIcon, OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 
@@ -38,6 +40,8 @@ import {
   File,
   Folder
 } from '../../../types/Model';
+import { isSupportedFile } from '../../../utils/File';
+import { isEmpty } from '../../../utils/Folder';
 import messages from '../messages';
 
 import TreeHeaderControl from './TreeHeaderControl';
@@ -46,11 +50,13 @@ import TreeItemControl from './TreeItemControl';
 interface ExplorerControlProps {
   exploreFile?: File,
   exploreFolder?: Folder,
+  includeUnsupportedFiles?: boolean,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>,
   onRefreshFolder?: EventHandler<Folder>,
   onSelectFile?: EventHandler<File>,
-  onSelectFolder?: EventHandler<string>
+  onSelectFolder?: EventHandler<string>,
+  onToggleIncludeUnsupportedFiles ?: EventHandler<boolean>
 }
 
 function ExplorerControl(props: ExplorerControlProps) {
@@ -58,11 +64,13 @@ function ExplorerControl(props: ExplorerControlProps) {
   const {
     exploreFile,
     exploreFolder,
+    includeUnsupportedFiles,
     onOpenDialog,
     onOpenUrl,
     onRefreshFolder,
     onSelectFile,
-    onSelectFolder
+    onSelectFolder,
+    onToggleIncludeUnsupportedFiles
   } = props;
 
   const intl = useIntl();
@@ -99,6 +107,33 @@ function ExplorerControl(props: ExplorerControlProps) {
                 )}
                 onClick={(e) => onRefreshFolder?.(e, exploreFolder)}>
                 <FormattedMessage {...messages.Refresh} />
+              </MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup>
+              <MenuItem
+                key="IncludeUnsupportedFiles"
+                icon={includeUnsupportedFiles ? (
+                  <Hide3Icon
+                    css={css`
+                      font-size: 1rem;
+                      line-height: 1rem;
+                    `} />
+                ) : (
+                  <ViewIcon
+                    css={css`
+                      font-size: 1rem;
+                      line-height: 1rem;
+                    `} />
+                )}
+                onClick={(e) => onToggleIncludeUnsupportedFiles?.(e, !includeUnsupportedFiles)}>
+                {
+                  includeUnsupportedFiles ? (
+                    <FormattedMessage {...messages.HideUnsupportedFiles} />
+                  ) : (
+                    <FormattedMessage {...messages.ShowUnsupportedFiles} />
+                  )
+                }
               </MenuItem>
             </MenuGroup>
             <MenuDivider />
@@ -162,123 +197,136 @@ function ExplorerControl(props: ExplorerControlProps) {
           overflow-y: auto;
         `}>
         {
-          exploreFolder.folders?.map((item) => (
-            <TreeItemControl
-              key={item.id}
-              name={item.name}
-              icon={(
-                <FolderHorizontalIcon
-                  css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
-              )}
-              menu={(
-                <MenuList>
-                  <MenuItem
-                    key="RenameFolder"
+          isEmpty(exploreFolder, includeUnsupportedFiles) ? (
+            <Caption1
+              css={css`
+                text-align: center;
+              `}>
+              <FormattedMessage {...messages.NoItemFound} />
+            </Caption1>
+          ) : (
+            <React.Fragment>
+              {
+                exploreFolder.folders?.map((item) => (
+                  <TreeItemControl
+                    key={item.id}
+                    name={item.name}
                     icon={(
-                      <RenameIcon
+                      <FolderHorizontalIcon
                         css={css`
                           font-size: 1rem;
                           line-height: 1rem;
                         `} />
                     )}
-                    onClick={(e) => onOpenDialog?.(e, {
-                      type: DialogType.renameFolder,
-                      payload: item
-                    })}>
-                    <FormattedMessage {...messages.RenameFolder} />
-                  </MenuItem>
-                  <MenuItem
-                    key="DeleteFolder"
+                    menu={(
+                      <MenuList>
+                        <MenuItem
+                          key="RenameFolder"
+                          icon={(
+                            <RenameIcon
+                              css={css`
+                                font-size: 1rem;
+                                line-height: 1rem;
+                              `} />
+                          )}
+                          onClick={(e) => onOpenDialog?.(e, {
+                            type: DialogType.renameFolder,
+                            payload: item
+                          })}>
+                          <FormattedMessage {...messages.RenameFolder} />
+                        </MenuItem>
+                        <MenuItem
+                          key="DeleteFolder"
+                          icon={(
+                            <DeleteIcon
+                              css={css`
+                                font-size: 1rem;
+                                line-height: 1rem;
+                              `} />
+                          )}
+                          onClick={(e) => onOpenDialog?.(e, {
+                            type: DialogType.deleteFolder,
+                            payload: item
+                          })}>
+                          <FormattedMessage {...messages.DeleteFolder} />
+                        </MenuItem>
+                      </MenuList>
+                    )}
+                    onClick={(e) => onSelectFolder?.(e, item.id)} />
+                ))
+              }
+              {
+                exploreFolder.files?.filter((item) => includeUnsupportedFiles || isSupportedFile(item)).map((item) => (
+                  <TreeItemControl
+                    key={item.id}
+                    name={includeUnsupportedFiles ? item.fullName : item.baseName}
+                    selected={exploreFile?.id === item.id}
                     icon={(
-                      <DeleteIcon
+                      <TextDocumentIcon
                         css={css`
                           font-size: 1rem;
                           line-height: 1rem;
                         `} />
                     )}
-                    onClick={(e) => onOpenDialog?.(e, {
-                      type: DialogType.deleteFolder,
-                      payload: item
-                    })}>
-                    <FormattedMessage {...messages.DeleteFolder} />
-                  </MenuItem>
-                </MenuList>
-              )}
-              onClick={(e) => onSelectFolder?.(e, item.id)} />
-          ))
-        }
-        {
-          exploreFolder.files?.map((item) => (
-            <TreeItemControl
-              key={item.id}
-              name={item.name}
-              selected={exploreFile?.id === item.id}
-              icon={(
-                <TextDocumentIcon
-                  css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
-              )}
-              menu={(
-                <MenuList>
-                  <MenuGroup>
-                    <MenuItem
-                      key="CopyFile"
-                      icon={(
-                        <CopyIcon
-                          css={css`
-                            font-size: 1rem;
-                            line-height: 1rem;
-                          `} />
-                      )}
-                      onClick={(e) => onOpenDialog?.(e, {
-                        type: DialogType.copyFile,
-                        payload: item
-                      })}>
-                      <FormattedMessage {...messages.CopyFile} />
-                    </MenuItem>
-                  </MenuGroup>
-                  <MenuDivider />
-                  <MenuGroup>
-                    <MenuItem
-                      key="RenameFile"
-                      icon={(
-                        <RenameIcon
-                          css={css`
-                            font-size: 1rem;
-                            line-height: 1rem;
-                          `} />
-                      )}
-                      onClick={(e) => onOpenDialog?.(e, {
-                        type: DialogType.renameFile,
-                        payload: item
-                      })}>
-                      <FormattedMessage {...messages.RenameFile} />
-                    </MenuItem>
-                    <MenuItem
-                      key="DeleteFile"
-                      icon={(
-                        <DeleteIcon
-                          css={css`
-                            font-size: 1rem;
-                            line-height: 1rem;
-                          `} />
-                      )}
-                      onClick={(e) => onOpenDialog?.(e, {
-                        type: DialogType.deleteFile,
-                        payload: item
-                      })}>
-                      <FormattedMessage {...messages.DeleteFile} />
-                    </MenuItem>
-                  </MenuGroup>
-                </MenuList>
-              )}
-              onClick={(e) => onSelectFile?.(e, item)} />
-          ))
+                    menu={isSupportedFile(item) ? (
+                      <MenuList>
+                        <MenuGroup>
+                          <MenuItem
+                            key="CopyFile"
+                            icon={(
+                              <CopyIcon
+                                css={css`
+                                  font-size: 1rem;
+                                  line-height: 1rem;
+                                `} />
+                            )}
+                            onClick={(e) => onOpenDialog?.(e, {
+                              type: DialogType.copyFile,
+                              payload: item
+                            })}>
+                            <FormattedMessage {...messages.CopyFile} />
+                          </MenuItem>
+                        </MenuGroup>
+                        <MenuDivider />
+                        <MenuGroup>
+                          <MenuItem
+                            key="RenameFile"
+                            icon={(
+                              <RenameIcon
+                                css={css`
+                                  font-size: 1rem;
+                                  line-height: 1rem;
+                                `} />
+                            )}
+                            onClick={(e) => onOpenDialog?.(e, {
+                              type: DialogType.renameFile,
+                              payload: item
+                            })}>
+                            <FormattedMessage {...messages.RenameFile} />
+                          </MenuItem>
+                          <MenuItem
+                            key="DeleteFile"
+                            icon={(
+                              <DeleteIcon
+                                css={css`
+                                  font-size: 1rem;
+                                  line-height: 1rem;
+                                `} />
+                            )}
+                            onClick={(e) => onOpenDialog?.(e, {
+                              type: DialogType.deleteFile,
+                              payload: item
+                            })}>
+                            <FormattedMessage {...messages.DeleteFile} />
+                          </MenuItem>
+                        </MenuGroup>
+                      </MenuList>
+                    ) : null}
+                    onClick={(e) => onSelectFile?.(e, item)} />
+                ))
+              }
+            </React.Fragment>
+          )
         }
       </div>
       <div

@@ -8,7 +8,8 @@
 
 export interface File {
   id: string,
-  name?: string,
+  baseName?: string,
+  fullName?: string,
   createdDate?: Date,
   updatedDate?: Date,
   downloadUrl?: string,
@@ -17,7 +18,7 @@ export interface File {
 
 export interface FileContent {
   content: string,
-  editing?: boolean
+  editable?: boolean
 }
 
 export interface Folder {

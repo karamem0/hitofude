@@ -33,7 +33,8 @@ PojosMetadataMap.create<DriveItem>('DriveItem', {
 
 PojosMetadataMap.create<File>('File', {
   id: String,
-  name: String,
+  baseName: String,
+  fullName: String,
   createdDate: Date,
   updatedDate: Date,
   parentId: String
@@ -70,7 +71,7 @@ createMap<DriveItem, Folder>(
     (target) => target.files,
     mapFrom((source) => source.children ? (
       mapper.mapArray<DriveItem, File>(
-        source.children.filter((item) => item.file && item.name?.endsWith('.md')),
+        source.children.filter((item) => item.file),
         'DriveItem',
         'File'
       )
@@ -91,8 +92,11 @@ createMap<DriveItem, File>(
   'DriveItem',
   'File',
   forMember(
-    (target) => target.name,
+    (target) => target.baseName,
     mapFrom((source) => getBaseName(source.name))),
+  forMember(
+    (target) => target.fullName,
+    mapFrom((source) => source.name)),
   forMember(
     (target) => target.createdDate,
     mapFrom((source) => toDate(source.createdDateTime))),

@@ -36,7 +36,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         exploreFolder: {
           ...state.exploreFolder,
           files: state.exploreFolder.files ? (
-            [ ...state.exploreFolder.files, payload ].sort((a, b) => compare(a.name, b.name))
+            [ ...state.exploreFolder.files, payload ].sort((a, b) => compare(a.baseName, b.baseName))
           ) : (
             [ payload ]
           )
@@ -125,6 +125,21 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         exploreFolder: payload
       };
     }
+    case ActionType.setIncludeUnsupportedFiles: {
+      const payload = action.payload as boolean | undefined;
+      storage.setIncludeUnsupportedFiles(payload);
+      return {
+        ...state,
+        includeUnsupportedFiles: payload
+      };
+    }
+    case ActionType.setInitialValue: {
+      const payload = action.payload as Pick<State, 'includeUnsupportedFiles' | 'tabMode'> | undefined;
+      return {
+        ...state,
+        ...payload
+      };
+    }
     case ActionType.setLoading: {
       const payload = action.payload as boolean | undefined;
       return {
@@ -183,7 +198,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
           files: state.exploreFolder.files ? (
             state.exploreFolder.files
               .map((item) => item.id === payload.id ? payload : item)
-              .sort((a, b) => compare(a.name, b.name))
+              .sort((a, b) => compare(a.baseName, b.baseName))
           ) : []
         }
       };

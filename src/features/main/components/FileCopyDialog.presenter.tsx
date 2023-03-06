@@ -50,7 +50,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
   const intl = useIntl();
   const form = useForm<FileCopyDialogFormState>({
     defaultValues: {
-      name: value?.name,
+      name: value?.baseName,
       downloadUrl: value?.downloadUrl
     }
   });
@@ -89,7 +89,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
                   )}
                   rules={{
                     required: true,
-                    validate: (item) => item !== value?.name
+                    validate: (item) => item !== value?.baseName
                   }} />
               </div>
             </DialogContent>

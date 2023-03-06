@@ -27,7 +27,9 @@ export enum ActionType {
   setDialogAction = 'setDialogAction',
   setError = 'setError',
   setExploreFile = 'setExploreFile',
-  setExploreFolder = 'setWorkFolder',
+  setExploreFolder = 'setExploreFolder',
+  setIncludeUnsupportedFiles = 'setIncludeUnsupportedFiles',
+  setInitialValue = 'setInitialValue',
   setLoading = 'setLoading',
   setSearchFile = 'setSearchFile',
   setSearchResults = 'setSearchResults',
@@ -43,12 +45,13 @@ export type DispatchAction<T> = (payload: T) => void;
 export interface State {
   dialogAction?: DialogAction,
   error?: Error,
+  exploreFile?: File,
+  exploreFolder?: Folder,
+  includeUnsupportedFiles?: boolean,
   loading?: boolean,
   searchFile?: File,
   searchResults?: File[],
   searchQuery?: string,
   tabMode?: TabMode,
-  exploreFile?: File,
-  exploreFolder?: Folder,
   workFile?: File & FileContent
 }

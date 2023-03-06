@@ -51,7 +51,7 @@ function FileRenameDialog(props: FileRenameDialogProps) {
   const form = useForm<FileRenameDialogFormState>({
     defaultValues: {
       id: value?.id,
-      name: value?.name
+      name: value?.baseName
     }
   });
 

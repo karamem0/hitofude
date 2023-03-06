@@ -29,9 +29,10 @@
   "src.features.main.FileAlreadyExists": "指定した名前のファイルはすでに存在します",
   "src.features.main.FileDoesNotExists": "指定した名前のファイルは存在しません",
   "src.features.main.FileName": "ファイル名",
-  "src.features.main.FolderAlreadyExists": "指定した名前のフォルダー　はすでに存在します",
+  "src.features.main.FolderAlreadyExists": "指定した名前のフォルダーはすでに存在します",
   "src.features.main.FolderDoesNotExists": "指定した名前のフォルダーは存在しません",
   "src.features.main.FolderName": "フォルダー名",
+  "src.features.main.HideUnsupportedFiles": "その他のファイルを非表示",
   "src.features.main.ItemNotFound": "アイテムが見つかりません",
   "src.features.main.MoreOption": "その他のオプション",
   "src.features.main.Name": "名前",
@@ -49,7 +50,10 @@
   "src.features.main.RootFolder": "ファイル",
   "src.features.main.Save": "保存",
   "src.features.main.Search": "検索",
+  "src.features.main.ShowUnsupportedFiles": "その他のファイルを表示",
   "src.features.main.SignOut": "サインアウト",
+  "src.features.main.UnsupportedFileDescription": "サポートされていないファイル形式です",
+  "src.features.main.UnsupportedFileTitle": "ファイルを開けません",
   "src.features.main.UpdatedDate": "更新日時",
   "src.features.main.WorkFolderSelection": "作業ディレクトリの選択"
 }

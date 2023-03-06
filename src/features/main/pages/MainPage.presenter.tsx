@@ -80,15 +80,18 @@ function MainPage(props: MainPageProps) {
           css={css`
             display: grid;
             margin: 2rem 0 0;
+
             @media (max-width: 959px) {
               grid-template-rows: calc(100vh - 2rem);
               grid-template-columns: auto 1fr;
+
               & > section:nth-of-type(2) {
                 position: fixed;
                 z-index: 100;
                 margin: 0 0 0 3rem;
               }
             }
+
             @media (min-width: 960px) {
               grid-template-rows: calc(100vh - 2rem);
               grid-template-columns: auto auto 1fr;

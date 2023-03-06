@@ -27,6 +27,7 @@ const messages = defineMessages({
   FolderAlreadyExists: 'The file with the name already exists',
   FolderDoesNotExists: 'The folder with the name does not exists',
   FolderName: 'Folder name',
+  HideUnsupportedFiles: 'Hide other files',
   ItemNotFound: 'No items found',
   MoreOption: 'More option',
   NewFile: 'New file',
@@ -44,7 +45,10 @@ const messages = defineMessages({
   RootFolder: 'My files',
   Save: 'Save',
   Search: 'Search',
+  ShowUnsupportedFiles: 'Show other files',
   SignOut: 'Sign out',
+  UnsupportedFileDescription: 'Unsupported file format',
+  UnsupportedFileTitle: 'Cannot open this file',
   UpdatedDate: 'Updated date',
   WorkFolderSelection: 'Select working directory'
 });

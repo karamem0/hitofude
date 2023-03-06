@@ -32,6 +32,7 @@
   "src.features.main.FolderAlreadyExists": "The file with the name already exists",
   "src.features.main.FolderDoesNotExists": "The folder with the name does not exists",
   "src.features.main.FolderName": "Folder name",
+  "src.features.main.HideUnsupportedFiles": "Hide other files",
   "src.features.main.ItemNotFound": "No items found",
   "src.features.main.MoreOption": "More option",
   "src.features.main.Name": "Name",
@@ -49,7 +50,10 @@
   "src.features.main.RootFolder": "My files",
   "src.features.main.Save": "Save",
   "src.features.main.Search": "Search",
+  "src.features.main.ShowUnsupportedFiles": "Show other files",
   "src.features.main.SignOut": "Sign out",
+  "src.features.main.UnsupportedFileDescription": "Unsupported file format",
+  "src.features.main.UnsupportedFileTitle": "Cannot open this file",
   "src.features.main.UpdatedDate": "Updated date",
   "src.features.main.WorkFolderSelection": "Select working directory"
 }

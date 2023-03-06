@@ -52,6 +52,9 @@ export const codeStyle = {
   'hljs-literal': {
     color: themeConfig.colorPaletteRedForeground1
   },
+  'hljs-meta': {
+    color: themeConfig.colorPaletteLightTealForeground2
+  },
   'hljs-number': {
     color: themeConfig.colorPaletteCranberryForeground2
   },

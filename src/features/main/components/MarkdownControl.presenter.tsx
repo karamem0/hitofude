@@ -26,6 +26,7 @@ import Communication from '../../../common/components/Communication';
 import { codeStyle, themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import { File, FileContent } from '../../../types/Model';
+import { isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
 import { MarkdownControlFormState } from '../types/Form';
 
@@ -65,10 +66,12 @@ function MarkdownControl(props: MarkdownControlProps) {
                 display: grid;
                 grid-gap: 0.5rem;
                 padding: 1rem;
+
                 @media (max-width: 959px) {
                   grid-template-rows: auto auto 1fr;
                   grid-template-columns: auto;
                 }
+
                 @media (min-width: 960px) {
                   grid-template-rows: 3rem 1fr;
                   grid-template-columns: 1fr auto;
@@ -80,6 +83,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                   display: grid;
                   align-items: center;
                   justify-content: left;
+
                   @media (min-width: 960px) {
                     grid-row: 1 / 2;
                     grid-column: 1 / 2;
@@ -94,7 +98,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                     text-overflow: ellipsis;
                     white-space: nowrap;
                   `}>
-                  {value.name}
+                  {value.baseName}
                 </Text>
               </div>
               <div
@@ -105,13 +109,14 @@ function MarkdownControl(props: MarkdownControlProps) {
                   grid-gap: 0.5rem;
                   align-items: center;
                   justify-content: right;
+
                   @media (min-width: 960px) {
                     grid-row: 1 / 2;
                     grid-column: 2 / 3;
                   }
                 `}>
                 {
-                  value.editing ? (
+                  value.editable ? (
                     <div
                       css={css`
                         display: flex;
@@ -136,6 +141,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                     <div>
                       <Button
                         aria-label={intl.formatMessage(messages.Edit)}
+                        disabled={!isSupportedFile(value)}
                         title={intl.formatMessage(messages.Edit)}
                         onClick={(e) => {
                           form.reset({
@@ -174,9 +180,11 @@ function MarkdownControl(props: MarkdownControlProps) {
                   display: grid;
                   overflow-x: auto;
                   overflow-y: auto;
+
                   @media (max-width: 959px) {
                     height: calc(100vh - 9.5rem);
                   }
+
                   @media (min-width: 960px) {
                     grid-row: 2 / 3;
                     grid-column: 1 / 3;
@@ -184,7 +192,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                   }
                 `}>
                 {
-                  value.editing ? (
+                  value.editable ? (
                     <Controller
                       control={form.control}
                       name="content"
@@ -195,6 +203,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                           value={field.value}
                           css={css`
                             display: grid;
+
                             textarea {
                               height: auto;
                               font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
@@ -204,120 +213,155 @@ function MarkdownControl(props: MarkdownControlProps) {
                           onChange={field.onChange} />
                       )} />
                   ) : (
-                    <div
-                      css={css`
-                        padding: 0 1rem 0 0;
-                        a {
-                          color: ${themeConfig.colorBrandForegroundLink};
-                        }
-                        a:hover {
-                          color: ${themeConfig.colorBrandForegroundLinkHover};
-                        }
-                        a:focus {
-                          color: ${themeConfig.colorBrandForegroundLinkHover};
-                        }
-                        blockquote {
-                          padding: 0 0 0 1rem;
-                          margin-block: 0.5rem;
-                          border-left: ${themeConfig.colorBrandStroke2} 0.25rem solid;
-                        }
-                        code {
-                          padding: 0.25rem;
-                          font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
-                          background-color: ${themeConfig.colorNeutralBackground3};
-                        }
-                        h1 {
-                          margin-block: 0.5rem;
-                          font-size: 1.75rem;
-                          line-height: calc(1.75rem * 1.25);
-                        }
-                        h2 {
-                          margin-block: 0.5rem;
-                          font-size: 1.6rem;
-                          line-height: calc(1.6rem * 1.25);
-                        }
-                        h3 {
-                          margin-block: 0.5rem;
-                          font-size: 1.45rem;
-                          line-height: calc(1.45rem * 1.25);
-                        }
-                        h4 {
-                          margin-block: 0.5rem;
-                          font-size: 1.3rem;
-                          line-height: calc(1.3rem * 1.25);
-                        }
-                        h5 {
-                          margin-block: 0.5rem;
-                          font-size: 1.15rem;
-                          line-height: calc(1.15rem * 1.25);
-                        }
-                        h6 {
-                          margin-block: 0.5rem;
-                          font-size: 1rem;
-                          line-height: calc(1rem * 1.25);
-                        }
-                        li {
-                          margin-block: 0.5rem;
-                        }
-                        ol {
-                          margin-inline: 2rem 0;
-                          list-style-type: decimal;
-                        }
-                        & > pre {
-                          padding: 0.5rem;
-                          margin-block: 0.5rem;
-                        }
-                        pre {
-                          font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
-                          white-space: pre-wrap;
-                          background-color: ${themeConfig.colorNeutralBackground3};
-                          & code {
-                            padding: 0;
+                    isSupportedFile(value) ? (
+                      <div
+                        css={css`
+                          padding: 0 1rem 0 0;
+
+                          a {
+                            color: ${themeConfig.colorBrandForegroundLink};
                           }
-                        }
-                        table,
-                        th,
-                        td {
-                          padding: 0.5rem;
-                          border-spacing: 0;
-                          border-collapse: collapse;
-                          border: ${themeConfig.colorNeutralBackground5} 1px solid;
-                          -webkit-border-horizontal-spacing: 0;
-                          -webkit-border-vertical-spacing: 0;
-                        }
-                        thead {
-                          background-color: ${themeConfig.colorNeutralBackground3};
-                        }
-                        tbody {
-                          & > tr:nth-of-type(even) {
-                            background-color: ${themeConfig.colorNeutralBackground2};
+
+                          a:hover {
+                            color: ${themeConfig.colorBrandForegroundLinkHover};
                           }
-                        }
-                        ul {
-                          margin-inline: 2rem 0;
-                          list-style-type: disc;
-                        }
-                      `}>
-                      <ReactMarkdown
-                        remarkPlugins={[ remarkGfm ]}
-                        components={{
-                          code: ({ inline, className, children }) => {
-                            const match = /language-(\w+)/.exec(className || '');
-                            const lang = match && match[1] ? match[1] : '';
-                            return inline ? (
-                              <code className={className}>{children}</code>
-                            ) : (
-                              <SyntaxHighlighter
-                                language={lang}
-                                style={codeStyle}>
-                                {String(children).replace(/\n$/, '')}
-                              </SyntaxHighlighter>
-                            );
+
+                          a:focus {
+                            color: ${themeConfig.colorBrandForegroundLinkHover};
                           }
-                        }}>
-                        {value.content}
-                      </ReactMarkdown>
-                    </div>
+
+                          blockquote {
+                            padding: 0 0 0 1rem;
+                            margin-block: 0.5rem;
+                            border-left: ${themeConfig.colorBrandStroke2} 0.25rem solid;
+                          }
+
+                          code {
+                            padding: 0.25rem;
+                            font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
+                            background-color: ${themeConfig.colorNeutralBackground3};
+                          }
+
+                          h1 {
+                            margin-block: 0.5rem;
+                            font-size: 1.75rem;
+                            line-height: calc(1.75rem * 1.25);
+                          }
+
+                          h2 {
+                            margin-block: 0.5rem;
+                            font-size: 1.6rem;
+                            line-height: calc(1.6rem * 1.25);
+                          }
+
+                          h3 {
+                            margin-block: 0.5rem;
+                            font-size: 1.45rem;
+                            line-height: calc(1.45rem * 1.25);
+                          }
+
+                          h4 {
+                            margin-block: 0.5rem;
+                            font-size: 1.3rem;
+                            line-height: calc(1.3rem * 1.25);
+                          }
+
+                          h5 {
+                            margin-block: 0.5rem;
+                            font-size: 1.15rem;
+                            line-height: calc(1.15rem * 1.25);
+                          }
+
+                          h6 {
+                            margin-block: 0.5rem;
+                            font-size: 1rem;
+                            line-height: calc(1rem * 1.25);
+                          }
+
+                          li {
+                            margin-block: 0.5rem;
+                          }
+
+                          ol {
+                            margin-inline: 2rem 0;
+                            list-style-type: decimal;
+                          }
+
+                          & > pre {
+                            padding: 0.5rem;
+                            margin-block: 0.5rem;
+                          }
+
+                          pre {
+                            font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
+                            white-space: pre-wrap;
+                            background-color: ${themeConfig.colorNeutralBackground3};
+
+                            & code {
+                              padding: 0;
+                            }
+                          }
+
+                          table,
+                          th,
+                          td {
+                            padding: 0.5rem;
+                            border-spacing: 0;
+                            border-collapse: collapse;
+                            border: ${themeConfig.colorNeutralBackground5} 1px solid;
+                            -webkit-border-horizontal-spacing: 0;
+                            -webkit-border-vertical-spacing: 0;
+                          }
+
+                          thead {
+                            background-color: ${themeConfig.colorNeutralBackground3};
+                          }
+
+                          tbody {
+                            & > tr:nth-of-type(even) {
+                              background-color: ${themeConfig.colorNeutralBackground2};
+                            }
+                          }
+
+                          ul {
+                            margin-inline: 2rem 0;
+                            list-style-type: disc;
+                          }
+                        `}>
+                        <ReactMarkdown
+                          remarkPlugins={[ remarkGfm ]}
+                          components={{
+                            code: ({ inline, className, children }) => {
+                              const match = /language-(\w+)/.exec(className || '');
+                              const lang = match && match[1] ? match[1] : '';
+                              return inline ? (
+                                <code className={className}>{children}</code>
+                              ) : (
+                                <SyntaxHighlighter
+                                  language={lang}
+                                  style={codeStyle}>
+                                  {String(children).replace(/\n$/, '')}
+                                </SyntaxHighlighter>
+                              );
+                            }
+                          }}>
+                          {value.content || ''}
+                        </ReactMarkdown>
+                      </div>
+                    ) : (
+                      <div
+                        css={css`
+                          display: flex;
+                          flex-flow: column;
+                          align-items: center;
+                          justify-content: center;
+                        `}>
+                        <Communication
+                          description={intl.formatMessage(messages.UnsupportedFileDescription)}
+                          image="/assets/Cancel.svg"
+                          title={intl.formatMessage(messages.UnsupportedFileTitle)} />
+                      </div>
+                    )
                   )
                 }
               </div>
@@ -332,7 +376,7 @@ function MarkdownControl(props: MarkdownControlProps) {
               `}>
               <Communication
                 description={intl.formatMessage(messages.NoDataDescription)}
-                image="/assets/NoData.svg"
+                image="/assets/BlankCanvas.svg"
                 title={intl.formatMessage(messages.NoDataTitle)} />
             </div>
           )

@@ -30,7 +30,7 @@ export interface FolderRenameDialogFormState {
 }
 
 export interface MarkdownControlFormState {
-  content?: string
+  content: string
 }
 
 export interface SearchControlFormState {
