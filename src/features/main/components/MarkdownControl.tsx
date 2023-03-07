@@ -41,7 +41,7 @@ function MarkdownControl() {
       dispatch(setWorkFile({
         ...file,
         content: data,
-        editable: false
+        editing: false
       }));
     } catch (e) {
       dispatch(setError(e as Error));
@@ -59,7 +59,7 @@ function MarkdownControl() {
       }
       dispatch(setWorkFile({
         ...workFile,
-        editable: false
+        editing: false
       }));
     } catch (e) {
       dispatch(setError(e as Error));
@@ -76,7 +76,7 @@ function MarkdownControl() {
       }
       dispatch(setWorkFile({
         ...workFile,
-        editable: true
+        editing: true
       }));
     } catch (e) {
       dispatch(setError(e as Error));

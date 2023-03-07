@@ -18,7 +18,7 @@ export interface File {
 
 export interface FileContent {
   content: string,
-  editable?: boolean
+  editing?: boolean
 }
 
 export interface Folder {

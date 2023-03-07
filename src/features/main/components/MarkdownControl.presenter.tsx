@@ -66,12 +66,10 @@ function MarkdownControl(props: MarkdownControlProps) {
                 display: grid;
                 grid-gap: 0.5rem;
                 padding: 1rem;
-
                 @media (max-width: 959px) {
                   grid-template-rows: auto auto 1fr;
                   grid-template-columns: auto;
                 }
-
                 @media (min-width: 960px) {
                   grid-template-rows: 3rem 1fr;
                   grid-template-columns: 1fr auto;
@@ -83,7 +81,6 @@ function MarkdownControl(props: MarkdownControlProps) {
                   display: grid;
                   align-items: center;
                   justify-content: left;
-
                   @media (min-width: 960px) {
                     grid-row: 1 / 2;
                     grid-column: 1 / 2;
@@ -109,14 +106,13 @@ function MarkdownControl(props: MarkdownControlProps) {
                   grid-gap: 0.5rem;
                   align-items: center;
                   justify-content: right;
-
                   @media (min-width: 960px) {
                     grid-row: 1 / 2;
                     grid-column: 2 / 3;
                   }
                 `}>
                 {
-                  value.editable ? (
+                  value.editing ? (
                     <div
                       css={css`
                         display: flex;
@@ -180,11 +176,9 @@ function MarkdownControl(props: MarkdownControlProps) {
                   display: grid;
                   overflow-x: auto;
                   overflow-y: auto;
-
                   @media (max-width: 959px) {
                     height: calc(100vh - 9.5rem);
                   }
-
                   @media (min-width: 960px) {
                     grid-row: 2 / 3;
                     grid-column: 1 / 3;
@@ -192,7 +186,7 @@ function MarkdownControl(props: MarkdownControlProps) {
                   }
                 `}>
                 {
-                  value.editable ? (
+                  value.editing ? (
                     <Controller
                       control={form.control}
                       name="content"

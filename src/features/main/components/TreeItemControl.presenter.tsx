@@ -92,7 +92,7 @@ function TreeItemControl(props: TreeItemControlProps) {
           grid-gap: 0.5rem;
           align-items: center;
           justify-content: start;
-          padding: 0.5rem 0 0.5rem 0.5rem;
+          padding: 0.5rem;
         `}
         onClick={onClick}>
         {icon}

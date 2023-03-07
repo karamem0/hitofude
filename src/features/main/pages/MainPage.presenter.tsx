@@ -80,7 +80,6 @@ function MainPage(props: MainPageProps) {
           css={css`
             display: grid;
             margin: 2rem 0 0;
-
             @media (max-width: 959px) {
               grid-template-rows: calc(100vh - 2rem);
               grid-template-columns: auto 1fr;
@@ -91,7 +90,6 @@ function MainPage(props: MainPageProps) {
                 margin: 0 0 0 3rem;
               }
             }
-
             @media (min-width: 960px) {
               grid-template-rows: calc(100vh - 2rem);
               grid-template-columns: auto auto 1fr;
