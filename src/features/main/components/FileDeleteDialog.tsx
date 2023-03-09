@@ -19,6 +19,7 @@ import {
 } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
 import { File } from '../../../types/Model';
+import { isSupportedFile } from '../../../utils/File';
 
 import Presenter from './FileDeleteDialog.presenter';
 
@@ -34,7 +35,8 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
     dispatch,
     state: {
       exploreFile,
-      exploreFolder
+      exploreFolder,
+      includeUnsupportedFiles
     }
   } = useStore();
   const { graph } = useService();
@@ -62,7 +64,10 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       await graph.deleteExploreFile(value);
       dispatch(deleteExploreFile(value));
       if (value.id === exploreFile?.id) {
-        const file = exploreFolder.files?.filter((item) => item.id !== value.id).at(-1);
+        const file = exploreFolder.files
+          ?.filter((item) => includeUnsupportedFiles || isSupportedFile(item))
+          .filter((item) => item.id !== value.id)
+          .at(-1);
         if (file) {
           dispatch(setExploreFile(file));
           dispatch(setWorkFile({
@@ -90,6 +95,7 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
     exploreFolder,
     graph,
     handleOpenChange,
+    includeUnsupportedFiles,
     value
   ]);
 

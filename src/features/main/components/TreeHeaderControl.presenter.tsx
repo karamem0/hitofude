@@ -51,11 +51,9 @@ function TreeHeaderControl(props: TreeHeaderControlProps) {
         justify-content: start;
         padding: 0 0.5rem;
         font-weight: bold;
-
         & > div:nth-of-type(3) {
           display: none;
         }
-
         &:hover {
           & > div:nth-of-type(3) {
             display: inherit;

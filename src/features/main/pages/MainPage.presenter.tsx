@@ -83,7 +83,6 @@ function MainPage(props: MainPageProps) {
             @media (max-width: 959px) {
               grid-template-rows: calc(100vh - 2rem);
               grid-template-columns: auto 1fr;
-
               & > section:nth-of-type(2) {
                 position: fixed;
                 z-index: 100;

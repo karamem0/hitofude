@@ -11,6 +11,8 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { Text } from '@fluentui/react-components';
 
+import { themeConfig } from '../../providers/ThemeProvider';
+
 interface CommunicationProps {
   description?: string,
   image?: string,
@@ -42,17 +44,18 @@ function Communication(props: CommunicationProps) {
         `} />
       <div
         css={css`
-        display: flex;
-        flex-direction: column;
-        grid-gap: 1rem;
-        align-items: center;
-        justify-content: center;
-      `}>
+          display: flex;
+          color: ${themeConfig.colorNeutralForeground4};
+          flex-direction: column;
+          grid-gap: 1rem;
+          align-items: center;
+          justify-content: center;
+        `}>
         <Text
           css={css`
-          font-size: 2rem;
-          line-height: calc(2rem * 1.25);
-        `}>
+            font-size: 2rem;
+            line-height: calc(2rem * 1.25);
+          `}>
           {title}
         </Text>
         <Text>

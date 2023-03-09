@@ -58,25 +58,20 @@ function TreeItemControl(props: TreeItemControlProps) {
         align-items: center;
         justify-content: start;
         cursor: pointer;
-
         & > div:nth-of-type(2) {
           display: none;
         }
-
         &:hover {
           background-color: ${themeConfig.colorNeutralBackground2Hover};
-
           & > div:nth-of-type(2) {
             display: inherit;
           }
         }
-
         &:focus {
           & > div:nth-of-type(2) {
             display: inherit;
           }
         }
-
         &[aria-selected='true'] {
           background-color: ${themeConfig.colorNeutralBackground2Selected};
         }

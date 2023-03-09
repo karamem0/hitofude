@@ -12,7 +12,7 @@
       ],
       "rules": {
         "at-rule-empty-line-before": "never",
-        "comment-no-empty": null
+        "rule-empty-line-before": "never"
       }
     }
   ]
