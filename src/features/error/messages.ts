@@ -9,11 +9,11 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  AppName: 'Hitofude',
-  Error404Description: 'Page not found',
-  Error404Title: 'We can\'t find the page you\'re looking for',
-  Error500Description: 'Please try refreshing your browser',
-  Error500Title: 'Something went wrong'
+  AppName: { defaultMessage: 'Hitofude' },
+  Error404Description: { defaultMessage: 'Page not found' },
+  Error404Title: { defaultMessage: 'We can\'t find the page you\'re looking for' },
+  Error500Description: { defaultMessage: 'Please try refreshing your browser' },
+  Error500Title: { defaultMessage: 'Something went wrong' }
 });
 
 export default messages;

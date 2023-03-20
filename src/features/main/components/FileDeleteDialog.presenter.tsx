@@ -54,7 +54,10 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
           <DialogTitle>
             <FormattedMessage {...messages.DeleteFile} />
           </DialogTitle>
-          <DialogContent>
+          <DialogContent
+            css={css`
+              overflow: hidden;
+            `}>
             <div
               css={css`
                 display: flex;

@@ -66,7 +66,10 @@ function FileRenameDialog(props: FileRenameDialogProps) {
             <DialogTitle>
               <FormattedMessage {...messages.RenameFile} />
             </DialogTitle>
-            <DialogContent>
+            <DialogContent
+              css={css`
+                overflow: hidden;
+              `}>
               <div
                 css={css`
                   display: flex;

@@ -30,6 +30,7 @@ interface AppBarControlProps {
 function AppBarControl(props: AppBarControlProps) {
 
   const {
+    tabMode,
     onToggleTab
   } = props;
 
@@ -49,10 +50,19 @@ function AppBarControl(props: AppBarControlProps) {
         aria-label={intl.formatMessage(messages.Explorer)}
         title={intl.formatMessage(messages.Explorer)}
         icon={
-          <TextDocumentIcon
-            css={css`
-              font-size: 1rem;
-            `} />
+          tabMode?.type === TabType.explorer ? (
+            <TextDocumentIcon
+              css={css`
+                font-size: 1rem;
+                color: ${themeConfig.colorNeutralForeground1};
+              `} />
+          ) : (
+            <TextDocumentIcon
+              css={css`
+                font-size: 1rem;
+                color: ${themeConfig.colorNeutralForeground4};
+              `} />
+          )
         }
         onClick={(e) => onToggleTab?.(e, TabType.explorer)} />
       <Button
@@ -60,10 +70,19 @@ function AppBarControl(props: AppBarControlProps) {
         aria-label={intl.formatMessage(messages.Search)}
         title={intl.formatMessage(messages.Search)}
         icon={
-          <SearchIcon
-            css={css`
-              font-size: 1rem;
-            `} />
+          tabMode?.type === TabType.search ? (
+            <SearchIcon
+              css={css`
+                font-size: 1rem;
+                color: ${themeConfig.colorNeutralForeground1};
+              `} />
+          ) : (
+            <SearchIcon
+              css={css`
+                font-size: 1rem;
+                color: ${themeConfig.colorNeutralForeground4};
+              `} />
+          )
         }
         onClick={(e) => onToggleTab?.(e, TabType.search)} />
     </section>

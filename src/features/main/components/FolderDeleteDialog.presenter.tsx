@@ -54,7 +54,10 @@ function FolderDeleteDialog(props: FolderDeleteDialogProps) {
           <DialogTitle>
             <FormattedMessage {...messages.DeleteFolder} />
           </DialogTitle>
-          <DialogContent>
+          <DialogContent
+            css={css`
+              overflow: hidden;
+            `}>
             <div
               css={css`
                 display: flex;

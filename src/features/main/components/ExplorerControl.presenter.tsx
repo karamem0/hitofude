@@ -202,7 +202,7 @@ function ExplorerControl(props: ExplorerControlProps) {
               css={css`
                 text-align: center;
               `}>
-              <FormattedMessage {...messages.NoItemFound} />
+              <FormattedMessage {...messages.NoItemsFound} />
             </Caption1>
           ) : (
             <React.Fragment>
@@ -220,36 +220,53 @@ function ExplorerControl(props: ExplorerControlProps) {
                     )}
                     menu={(
                       <MenuList>
-                        <MenuItem
-                          key="RenameFolder"
-                          icon={(
-                            <RenameIcon
-                              css={css`
-                                font-size: 1rem;
-                                line-height: 1rem;
-                              `} />
-                          )}
-                          onClick={(e) => onOpenDialog?.(e, {
-                            type: DialogType.renameFolder,
-                            payload: item
-                          })}>
-                          <FormattedMessage {...messages.RenameFolder} />
-                        </MenuItem>
-                        <MenuItem
-                          key="DeleteFolder"
-                          icon={(
-                            <DeleteIcon
-                              css={css`
-                                font-size: 1rem;
-                                line-height: 1rem;
-                              `} />
-                          )}
-                          onClick={(e) => onOpenDialog?.(e, {
-                            type: DialogType.deleteFolder,
-                            payload: item
-                          })}>
-                          <FormattedMessage {...messages.DeleteFolder} />
-                        </MenuItem>
+                        <MenuGroup>
+                          <MenuItem
+                            key="RenameFolder"
+                            icon={(
+                              <RenameIcon
+                                css={css`
+                                  font-size: 1rem;
+                                  line-height: 1rem;
+                                `} />
+                            )}
+                            onClick={(e) => onOpenDialog?.(e, {
+                              type: DialogType.renameFolder,
+                              payload: item
+                            })}>
+                            <FormattedMessage {...messages.RenameFolder} />
+                          </MenuItem>
+                          <MenuItem
+                            key="DeleteFolder"
+                            icon={(
+                              <DeleteIcon
+                                css={css`
+                                  font-size: 1rem;
+                                  line-height: 1rem;
+                                `} />
+                            )}
+                            onClick={(e) => onOpenDialog?.(e, {
+                              type: DialogType.deleteFolder,
+                              payload: item
+                            })}>
+                            <FormattedMessage {...messages.DeleteFolder} />
+                          </MenuItem>
+                        </MenuGroup>
+                        <MenuDivider />
+                        <MenuGroup>
+                          <MenuItem
+                            key="OpenWithOneDrive"
+                            icon={(
+                              <OneDriveLogoIcon
+                                css={css`
+                                    font-size: 1rem;
+                                    line-height: 1rem;
+                                  `} />
+                                )}
+                            onClick={(e) => onOpenUrl?.(e, item.webUrl)}>
+                            <FormattedMessage {...messages.OpenWithOneDrive} />
+                          </MenuItem>
+                        </MenuGroup>
                       </MenuList>
                     )}
                     onClick={(e) => onSelectFolder?.(e, item.id)} />
@@ -318,6 +335,21 @@ function ExplorerControl(props: ExplorerControlProps) {
                               payload: item
                             })}>
                             <FormattedMessage {...messages.DeleteFile} />
+                          </MenuItem>
+                        </MenuGroup>
+                        <MenuDivider />
+                        <MenuGroup>
+                          <MenuItem
+                            key="OpenWithOneDrive"
+                            icon={(
+                              <OneDriveLogoIcon
+                                css={css`
+                                    font-size: 1rem;
+                                    line-height: 1rem;
+                                  `} />
+                                )}
+                            onClick={(e) => onOpenUrl?.(e, item.webUrl)}>
+                            <FormattedMessage {...messages.OpenWithOneDrive} />
                           </MenuItem>
                         </MenuGroup>
                       </MenuList>

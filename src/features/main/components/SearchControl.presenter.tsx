@@ -164,7 +164,7 @@ function SearchControl(props: SearchControlProps) {
               css={css`
                 text-align: center;
               `}>
-              <FormattedMessage {...messages.NoItemFound} />
+              <FormattedMessage {...messages.NoItemsFound} />
             </Caption1>
           )
         }

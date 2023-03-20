@@ -26,7 +26,14 @@ export default defineConfig(({ mode }) => {
       reactPlugin({
         babel: {
           plugins: [
-            'react-intl-auto'
+            '@emotion/babel-plugin',
+            [
+              'formatjs',
+              {
+                idInterpolationPattern: '[sha512:contenthash:base64:6]',
+                ast: true
+              }
+            ]
           ]
         },
         jsxImportSource: '@emotion/react'

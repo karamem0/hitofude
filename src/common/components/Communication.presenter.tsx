@@ -45,11 +45,11 @@ function Communication(props: CommunicationProps) {
       <div
         css={css`
           display: flex;
-          color: ${themeConfig.colorNeutralForeground4};
           flex-direction: column;
           grid-gap: 1rem;
           align-items: center;
           justify-content: center;
+          color: ${themeConfig.colorNeutralForeground4};
         `}>
         <Text
           css={css`

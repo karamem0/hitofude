@@ -12,6 +12,7 @@ export interface File {
   fullName?: string,
   createdDate?: Date,
   updatedDate?: Date,
+  webUrl?: string,
   downloadUrl?: string,
   parentId?: string
 }

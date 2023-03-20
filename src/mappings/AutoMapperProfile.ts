@@ -37,6 +37,8 @@ PojosMetadataMap.create<File>('File', {
   fullName: String,
   createdDate: Date,
   updatedDate: Date,
+  webUrl: String,
+  downloadUrl: String,
   parentId: String
 });
 
@@ -104,10 +106,13 @@ createMap<DriveItem, File>(
     (target) => target.updatedDate,
     mapFrom((source) => toDate(source.lastModifiedDateTime))),
   forMember(
-    (target) => target.parentId,
-    mapFrom((source) => source.parentReference?.id)),
+    (target) => target.webUrl,
+    mapFrom((source) => source.webUrl + '?web=1')),
   forMember(
     (target) => target.downloadUrl,
     mapFrom((source) => (source as Record<string, string>)['@microsoft.graph.downloadUrl'])
-  )
+  ),
+  forMember(
+    (target) => target.parentId,
+    mapFrom((source) => source.parentReference?.id))
 );

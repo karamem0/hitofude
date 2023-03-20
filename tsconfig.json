@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2021",
+    "target": "es2022",
     "lib": [
       "dom",
       "dom.iterable",
-      "es2021"
+      "es2022"
     ],
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "module": "es2020",
+    "module": "es2022",
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -23,7 +23,6 @@
     "useDefineForClassFields": true,
   },
   "include": [
-    "src",
-    "node_modules/babel-plugin-react-intl-auto/**/*.d.ts"
+    "src"
   ]
 }

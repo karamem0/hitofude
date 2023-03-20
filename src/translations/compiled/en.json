@@ -1,0 +1,326 @@
+{
+  "/rjLPg": [
+    {
+      "type": 0,
+      "value": "Please select or create a file to start"
+    }
+  ],
+  "0L2J5T": [
+    {
+      "type": 0,
+      "value": "New file"
+    }
+  ],
+  "14KiwR": [
+    {
+      "type": 0,
+      "value": "There is nothing here"
+    }
+  ],
+  "47FYwb": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
+  "6qF/vN": [
+    {
+      "type": 0,
+      "value": "Terms and Conditions"
+    }
+  ],
+  "6tm4ZV": [
+    {
+      "type": 0,
+      "value": "What is Hitofude?"
+    }
+  ],
+  "7BAvD0": [
+    {
+      "type": 0,
+      "value": "Show other files"
+    }
+  ],
+  "7DoGdQ": [
+    {
+      "type": 0,
+      "value": "Hitofude"
+    }
+  ],
+  "7atPs2": [
+    {
+      "type": 0,
+      "value": "Are you sure to delete this folder?"
+    }
+  ],
+  "8Epn0E": [
+    {
+      "type": 0,
+      "value": "More option"
+    }
+  ],
+  "8ExVYq": [
+    {
+      "type": 0,
+      "value": "Rename folder"
+    }
+  ],
+  "9ZoFpI": [
+    {
+      "type": 0,
+      "value": "Delete file"
+    }
+  ],
+  "AbnnL+": [
+    {
+      "type": 0,
+      "value": "Sign in with Microsoft account"
+    }
+  ],
+  "B60rtd": [
+    {
+      "type": 0,
+      "value": "Open with OneDrive"
+    }
+  ],
+  "DcY8fl": [
+    {
+      "type": 0,
+      "value": "Updated date"
+    }
+  ],
+  "HAlOn1": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "HKsvaG": [
+    {
+      "type": 0,
+      "value": "Hide other files"
+    }
+  ],
+  "HjkLKL": [
+    {
+      "type": 0,
+      "value": "Unsupported file format"
+    }
+  ],
+  "JqiqNj": [
+    {
+      "type": 0,
+      "value": "Something went wrong"
+    }
+  ],
+  "M0iO6Z": [
+    {
+      "type": 0,
+      "value": "Delete folder"
+    }
+  ],
+  "OijyGx": [
+    {
+      "type": 0,
+      "value": "We can't find the page you're looking for"
+    }
+  ],
+  "QRccCM": [
+    {
+      "type": 0,
+      "value": "Page not found"
+    }
+  ],
+  "RolcOL": [
+    {
+      "type": 0,
+      "value": "Only runs client JavaScript, no server code is executed."
+    }
+  ],
+  "TDaF6J": [
+    {
+      "type": 0,
+      "value": "Dismiss"
+    }
+  ],
+  "TNqh3Y": [
+    {
+      "type": 0,
+      "value": "A web application that enables to you to write Markdown file via OneDrive (Personal, work or school)."
+    }
+  ],
+  "VCHJad": [
+    {
+      "type": 0,
+      "value": "New folder"
+    }
+  ],
+  "Vb7Qzm": [
+    {
+      "type": 0,
+      "value": "The folder with the name does not exists"
+    }
+  ],
+  "VcZRoJ": [
+    {
+      "type": 0,
+      "value": "Rename file"
+    }
+  ],
+  "VlCOJS": [
+    {
+      "type": 0,
+      "value": "The file with the name already exists"
+    }
+  ],
+  "WSCjCg": [
+    {
+      "type": 0,
+      "value": "No items found"
+    }
+  ],
+  "Z5spcL": [
+    {
+      "type": 0,
+      "value": "Please try refreshing your browser"
+    }
+  ],
+  "bJIPmM": [
+    {
+      "type": 0,
+      "value": "The folder with the name already exists"
+    }
+  ],
+  "bYbrKK": [
+    {
+      "type": 0,
+      "value": "My files"
+    }
+  ],
+  "cyR7Kh": [
+    {
+      "type": 0,
+      "value": "Back"
+    }
+  ],
+  "f/YV6d": [
+    {
+      "type": 0,
+      "value": "It's easy to get started. Just sign in."
+    }
+  ],
+  "gfMwV+": [
+    {
+      "type": 0,
+      "value": "Cannot open this file"
+    }
+  ],
+  "gyrIEl": [
+    {
+      "type": 0,
+      "value": "File"
+    }
+  ],
+  "hYNDAD": [
+    {
+      "type": 0,
+      "value": "Open file location"
+    }
+  ],
+  "jvo0vs": [
+    {
+      "type": 0,
+      "value": "Save"
+    }
+  ],
+  "kAEQyV": [
+    {
+      "type": 0,
+      "value": "OK"
+    }
+  ],
+  "lR/7o8": [
+    {
+      "type": 0,
+      "value": "Folder name"
+    }
+  ],
+  "mJN/zn": [
+    {
+      "type": 0,
+      "value": "Explorer"
+    }
+  ],
+  "olfaAj": [
+    {
+      "type": 0,
+      "value": "The file with the name does not exists"
+    }
+  ],
+  "p69pc3": [
+    {
+      "type": 0,
+      "value": "Online Markdown Editor for Microsoft 365"
+    }
+  ],
+  "pFkv/g": [
+    {
+      "type": 0,
+      "value": "Copy file"
+    }
+  ],
+  "ppAn7O": [
+    {
+      "type": 0,
+      "value": "File name"
+    }
+  ],
+  "rELDbB": [
+    {
+      "type": 0,
+      "value": "Refresh"
+    }
+  ],
+  "sQtSD2": [
+    {
+      "type": 0,
+      "value": "Are you sure to delete this file?"
+    }
+  ],
+  "utNSND": [
+    {
+      "type": 0,
+      "value": "Select working directory"
+    }
+  ],
+  "vx0nkZ": [
+    {
+      "type": 0,
+      "value": "Privacy Policy"
+    }
+  ],
+  "wEQDC6": [
+    {
+      "type": 0,
+      "value": "Edit"
+    }
+  ],
+  "wO9wb5": [
+    {
+      "type": 0,
+      "value": "GitHub"
+    }
+  ],
+  "xXbJso": [
+    {
+      "type": 0,
+      "value": "Sign out"
+    }
+  ],
+  "xmcVZ0": [
+    {
+      "type": 0,
+      "value": "Search"
+    }
+  ]
+}

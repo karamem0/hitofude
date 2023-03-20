@@ -67,37 +67,6 @@ function ExplorerControl() {
     graph
   ]);
 
-  const handleToggleIncludeUnsupportedFiles = React.useCallback(async (_?: Event, data?: boolean) => {
-    try {
-      if (!exploreFolder) {
-        throw new Error();
-      }
-      dispatch(setIncludeUnsupportedFiles(data));
-      if (!data) {
-        if (!exploreFile || !isSupportedFile(exploreFile)) {
-          const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
-          if (file) {
-            dispatch(setExploreFile(file));
-            dispatch(setWorkFile({
-              ...file,
-              content: await graph.getFileContent(file)
-            }));
-          } else {
-            dispatch(setExploreFile());
-            dispatch(setWorkFile());
-          }
-        }
-      }
-    } catch (e) {
-      dispatch(setError(e as Error));
-    }
-  }, [
-    dispatch,
-    exploreFile,
-    exploreFolder,
-    graph
-  ]);
-
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
       if (!data) {
@@ -141,6 +110,37 @@ function ExplorerControl() {
     dispatch,
     graph,
     includeUnsupportedFiles
+  ]);
+
+  const handleToggleIncludeUnsupportedFiles = React.useCallback(async (_?: Event, data?: boolean) => {
+    try {
+      if (!exploreFolder) {
+        throw new Error();
+      }
+      dispatch(setIncludeUnsupportedFiles(data));
+      if (!data) {
+        if (!exploreFile || !isSupportedFile(exploreFile)) {
+          const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
+          if (file) {
+            dispatch(setExploreFile(file));
+            dispatch(setWorkFile({
+              ...file,
+              content: await graph.getFileContent(file)
+            }));
+          } else {
+            dispatch(setExploreFile());
+            dispatch(setWorkFile());
+          }
+        }
+      }
+    } catch (e) {
+      dispatch(setError(e as Error));
+    }
+  }, [
+    dispatch,
+    exploreFile,
+    exploreFolder,
+    graph
   ]);
 
   return (

@@ -58,7 +58,10 @@ function FileCreateDialog(props: FileCreateDialogProps) {
             <DialogTitle>
               <FormattedMessage {...messages.NewFile} />
             </DialogTitle>
-            <DialogContent>
+            <DialogContent
+              css={css`
+                overflow: hidden;
+              `}>
               <div
                 css={css`
                   display: flex;

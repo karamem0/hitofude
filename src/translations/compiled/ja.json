@@ -1,0 +1,326 @@
+{
+  "/rjLPg": [
+    {
+      "type": 0,
+      "value": "開始するにはファイルを選択または作成してください"
+    }
+  ],
+  "0L2J5T": [
+    {
+      "type": 0,
+      "value": "新しいファイル"
+    }
+  ],
+  "14KiwR": [
+    {
+      "type": 0,
+      "value": "ここには何もありません"
+    }
+  ],
+  "47FYwb": [
+    {
+      "type": 0,
+      "value": "キャンセル"
+    }
+  ],
+  "6qF/vN": [
+    {
+      "type": 0,
+      "value": "利用規約"
+    }
+  ],
+  "6tm4ZV": [
+    {
+      "type": 0,
+      "value": "Hitofude とは？"
+    }
+  ],
+  "7BAvD0": [
+    {
+      "type": 0,
+      "value": "その他のファイルを表示"
+    }
+  ],
+  "7DoGdQ": [
+    {
+      "type": 0,
+      "value": "Hitofude"
+    }
+  ],
+  "7atPs2": [
+    {
+      "type": 0,
+      "value": "フォルダーを削除します。よろしいですか？"
+    }
+  ],
+  "8Epn0E": [
+    {
+      "type": 0,
+      "value": "その他のオプション"
+    }
+  ],
+  "8ExVYq": [
+    {
+      "type": 0,
+      "value": "フォルダー名の変更"
+    }
+  ],
+  "9ZoFpI": [
+    {
+      "type": 0,
+      "value": "ファイルの削除"
+    }
+  ],
+  "AbnnL+": [
+    {
+      "type": 0,
+      "value": "Microsoft アカウントでサインイン"
+    }
+  ],
+  "B60rtd": [
+    {
+      "type": 0,
+      "value": "OneDrive で開く"
+    }
+  ],
+  "DcY8fl": [
+    {
+      "type": 0,
+      "value": "更新日時"
+    }
+  ],
+  "HAlOn1": [
+    {
+      "type": 0,
+      "value": "名前"
+    }
+  ],
+  "HKsvaG": [
+    {
+      "type": 0,
+      "value": "その他のファイルを非表示"
+    }
+  ],
+  "HjkLKL": [
+    {
+      "type": 0,
+      "value": "サポートされていないファイル形式です"
+    }
+  ],
+  "JqiqNj": [
+    {
+      "type": 0,
+      "value": "問題が発生しました"
+    }
+  ],
+  "M0iO6Z": [
+    {
+      "type": 0,
+      "value": "フォルダーの削除"
+    }
+  ],
+  "OijyGx": [
+    {
+      "type": 0,
+      "value": "お探しのページを見つけることができませんでした"
+    }
+  ],
+  "QRccCM": [
+    {
+      "type": 0,
+      "value": "ページが見つかりません"
+    }
+  ],
+  "RolcOL": [
+    {
+      "type": 0,
+      "value": "クライアントの JavaScript コードのみで動作し、サーバーのコードを含みません。"
+    }
+  ],
+  "TDaF6J": [
+    {
+      "type": 0,
+      "value": "閉じる"
+    }
+  ],
+  "TNqh3Y": [
+    {
+      "type": 0,
+      "value": "OneDrive (個人、職場または学校) で Markdown ファイルを書くための Web アプリケーションです。"
+    }
+  ],
+  "VCHJad": [
+    {
+      "type": 0,
+      "value": "新しいフォルダー"
+    }
+  ],
+  "Vb7Qzm": [
+    {
+      "type": 0,
+      "value": "指定した名前のフォルダーは存在しません"
+    }
+  ],
+  "VcZRoJ": [
+    {
+      "type": 0,
+      "value": "ファイル名の変更"
+    }
+  ],
+  "VlCOJS": [
+    {
+      "type": 0,
+      "value": "指定した名前のファイルはすでに存在します"
+    }
+  ],
+  "WSCjCg": [
+    {
+      "type": 0,
+      "value": "アイテムが見つかりません"
+    }
+  ],
+  "Z5spcL": [
+    {
+      "type": 0,
+      "value": "お使いのブラウザーを更新してください"
+    }
+  ],
+  "bJIPmM": [
+    {
+      "type": 0,
+      "value": "指定した名前のフォルダーはすでに存在します"
+    }
+  ],
+  "bYbrKK": [
+    {
+      "type": 0,
+      "value": "ファイル"
+    }
+  ],
+  "f/YV6d": [
+    {
+      "type": 0,
+      "value": "はじめるのは簡単です。サインインするだけです。"
+    }
+  ],
+  "fqNVDv": [
+    {
+      "type": 0,
+      "value": "戻る"
+    }
+  ],
+  "gfMwV+": [
+    {
+      "type": 0,
+      "value": "ファイルを開けません"
+    }
+  ],
+  "gyrIEl": [
+    {
+      "type": 0,
+      "value": "ファイル"
+    }
+  ],
+  "hYNDAD": [
+    {
+      "type": 0,
+      "value": "ファイルの場所を開く"
+    }
+  ],
+  "jvo0vs": [
+    {
+      "type": 0,
+      "value": "保存"
+    }
+  ],
+  "kAEQyV": [
+    {
+      "type": 0,
+      "value": "OK"
+    }
+  ],
+  "lR/7o8": [
+    {
+      "type": 0,
+      "value": "フォルダー名"
+    }
+  ],
+  "mJN/zn": [
+    {
+      "type": 0,
+      "value": "エクスプローラー"
+    }
+  ],
+  "olfaAj": [
+    {
+      "type": 0,
+      "value": "指定した名前のファイルは存在しません"
+    }
+  ],
+  "p69pc3": [
+    {
+      "type": 0,
+      "value": "オンライン Markdown エディター for Microsoft 365"
+    }
+  ],
+  "pFkv/g": [
+    {
+      "type": 0,
+      "value": "ファイルのコピー"
+    }
+  ],
+  "ppAn7O": [
+    {
+      "type": 0,
+      "value": "ファイル名"
+    }
+  ],
+  "rELDbB": [
+    {
+      "type": 0,
+      "value": "最新の状態に更新"
+    }
+  ],
+  "sQtSD2": [
+    {
+      "type": 0,
+      "value": "ファイルを削除します。よろしいですか？"
+    }
+  ],
+  "utNSND": [
+    {
+      "type": 0,
+      "value": "作業ディレクトリの選択"
+    }
+  ],
+  "vx0nkZ": [
+    {
+      "type": 0,
+      "value": "プライバシー ポリシー"
+    }
+  ],
+  "wEQDC6": [
+    {
+      "type": 0,
+      "value": "編集"
+    }
+  ],
+  "wO9wb5": [
+    {
+      "type": 0,
+      "value": "GitHub"
+    }
+  ],
+  "xXbJso": [
+    {
+      "type": 0,
+      "value": "サインアウト"
+    }
+  ],
+  "xmcVZ0": [
+    {
+      "type": 0,
+      "value": "検索"
+    }
+  ]
+}

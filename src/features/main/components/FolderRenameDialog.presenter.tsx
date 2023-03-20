@@ -66,7 +66,10 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
             <DialogTitle>
               <FormattedMessage {...messages.RenameFolder} />
             </DialogTitle>
-            <DialogContent>
+            <DialogContent
+              css={css`
+                overflow: hidden;
+              `}>
               <div
                 css={css`
                   display: flex;

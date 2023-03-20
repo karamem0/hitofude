@@ -58,7 +58,10 @@ function FolderCreateDialog(props: FolderCreateDialogProps) {
             <DialogTitle>
               <FormattedMessage {...messages.NewFolder} />
             </DialogTitle>
-            <DialogContent>
+            <DialogContent
+              css={css`
+                overflow: hidden;
+              `}>
               <div
                 css={css`
                   display: flex;

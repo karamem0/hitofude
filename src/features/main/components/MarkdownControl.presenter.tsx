@@ -266,16 +266,18 @@ function MarkdownControl(props: MarkdownControlProps) {
                             margin-inline: 2rem 0;
                             list-style-type: decimal;
                           }
-                          & > pre {
+                          pre {
                             padding: 0.5rem;
                             margin-block: 0.5rem;
-                          }
-                          pre {
                             font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
                             white-space: pre-wrap;
                             background-color: ${themeConfig.colorNeutralBackground3};
                             & code {
                               padding: 0;
+                            }
+                            & pre {
+                              padding: 0;
+                              margin-block: 0;
                             }
                           }
                           table,
