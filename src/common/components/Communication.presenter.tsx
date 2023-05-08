@@ -67,4 +67,4 @@ function Communication(props: CommunicationProps) {
 
 }
 
-export default Communication;
+export default React.memo(Communication);

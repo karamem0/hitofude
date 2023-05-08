@@ -66,4 +66,4 @@ function Error404Page() {
 
 }
 
-export default Error404Page;
+export default React.memo(Error404Page);

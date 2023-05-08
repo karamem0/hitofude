@@ -23,17 +23,17 @@ import {
   Text
 } from '@fluentui/react-components';
 
-import { EventHandler } from '../../../types/Event';
-import messages from '../messages';
+import { EventHandler } from '../../../../types/Event';
+import messages from '../../messages';
 
-interface FolderDeleteDialogProps {
+interface FileDeleteDialogProps {
   loading?: boolean,
   open?: boolean,
   onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler
 }
 
-function FolderDeleteDialog(props: FolderDeleteDialogProps) {
+function FileDeleteDialog(props: FileDeleteDialogProps) {
 
   const {
     loading,
@@ -52,7 +52,7 @@ function FolderDeleteDialog(props: FolderDeleteDialogProps) {
       <DialogSurface>
         <DialogBody>
           <DialogTitle>
-            <FormattedMessage {...messages.DeleteFolder} />
+            <FormattedMessage {...messages.DeleteFile} />
           </DialogTitle>
           <DialogContent
             css={css`
@@ -65,7 +65,7 @@ function FolderDeleteDialog(props: FolderDeleteDialogProps) {
                 padding: 1rem 0;
               `}>
               <Text>
-                <FormattedMessage {...messages.DeleteFolderConfirm} />
+                <FormattedMessage {...messages.DeleteFileConfirm} />
               </Text>
             </div>
           </DialogContent>
@@ -94,4 +94,4 @@ function FolderDeleteDialog(props: FolderDeleteDialogProps) {
 
 }
 
-export default React.memo(FolderDeleteDialog);
+export default React.memo(FileDeleteDialog);

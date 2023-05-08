@@ -6,6 +6,10 @@
 
 Online Markdown Editor for Microsoft 365
 
+## Screenshots
+
+![screenshot](/assets/screenshot.png)
+
 ## Features
 
 - Enables to you to write Markdown file via OneDrive (Personal, work or school).

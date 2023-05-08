@@ -39,12 +39,16 @@ function StoreProvider(props: React.PropsWithChildren<unknown>) {
       loading: true
     });
 
+  const value = React.useMemo(() => ({
+    dispatch,
+    state
+  }), [
+    dispatch,
+    state
+  ]);
+
   return (
-    <StoreContext.Provider
-      value={{
-        dispatch,
-        state
-      }}>
+    <StoreContext.Provider value={value}>
       {children}
     </StoreContext.Provider>
   );

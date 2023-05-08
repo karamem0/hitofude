@@ -9,8 +9,8 @@
 import {
   DialogAction,
   File,
-  FileContent,
   Folder,
+  SidePanelAction,
   TabMode
 } from '../types/Model';
 import {
@@ -44,6 +44,11 @@ export const setDialogAction = (payload?: DialogAction): Action => ({
   payload
 });
 
+export const setEditing = (payload?: boolean): Action => ({
+  type: ActionType.setEditing,
+  payload
+});
+
 export const setError = (payload?: Error): Action => ({
   type: ActionType.setError,
   payload
@@ -64,7 +69,7 @@ export const setIncludeUnsupportedFiles = (payload?: boolean): Action => ({
   payload
 });
 
-export const setInitialValue = (payload?: Pick<State, 'includeUnsupportedFiles' | 'tabMode'>): Action => ({
+export const setInitialValue = (payload?: Pick<State, 'includeUnsupportedFiles' | 'rootFolder' | 'tabMode'>): Action => ({
   type: ActionType.setInitialValue,
   payload
 });
@@ -89,12 +94,17 @@ export const setSearchQuery = (payload?: string): Action => ({
   payload
 });
 
+export const setSidePanelAction = (payload?: SidePanelAction): Action => ({
+  type: ActionType.setSidePanelAction,
+  payload
+});
+
 export const setTabMode = (payload?: TabMode): Action => ({
   type: ActionType.setTabMode,
   payload
 });
 
-export const setWorkFile = (payload?: File & FileContent): Action => ({
+export const setWorkFile = (payload?: File): Action => ({
   type: ActionType.setWorkFile,
   payload
 });

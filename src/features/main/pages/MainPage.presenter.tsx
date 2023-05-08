@@ -10,16 +10,17 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import { css } from '@emotion/react';
+import { Global, css } from '@emotion/react';
 import { Spinner, Text } from '@fluentui/react-components';
 
 import { themeConfig } from '../../../providers/ThemeProvider';
 import AlertControl from '../components/AlertControl';
 import AppBarControl from '../components/AppBarControl';
 import AppTabControl from '../components/AppTabControl';
+import ContentControl from '../components/ContentControl';
 import DialogControl from '../components/DialogControl';
-import MarkdownControl from '../components/MarkdownControl';
 import MeControl from '../components/MeControl';
+import SidePanelControl from '../components/SidePanelControl';
 import messages from '../messages';
 
 interface MainPageProps {
@@ -45,8 +46,15 @@ function MainPage(props: MainPageProps) {
     </div>
   ) : (
     <React.Fragment>
+      <Global
+        styles={css`
+          body {
+            overflow: hidden;
+          }
+        `} />
       <AlertControl />
       <DialogControl />
+      <SidePanelControl />
       <div
         css={css`
           display: flex;
@@ -79,24 +87,27 @@ function MainPage(props: MainPageProps) {
         <div
           css={css`
             display: grid;
+            grid-template-rows: calc(100vh - 2rem);
+            grid-template-columns: auto 1fr;
             margin: 2rem 0 0;
-            @media (max-width: 959px) {
-              grid-template-rows: calc(100vh - 2rem);
-              grid-template-columns: auto 1fr;
-              & > section:nth-of-type(2) {
-                position: fixed;
-                z-index: 100;
-                margin: 0 0 0 3rem;
-              }
+            & > section:nth-of-type(2) {
+              position: fixed;
+              z-index: 100;
+              margin: 0 0 0 3rem;
             }
-            @media (min-width: 960px) {
+            @media (width >= 960px) {
               grid-template-rows: calc(100vh - 2rem);
               grid-template-columns: auto auto 1fr;
+              & > section:nth-of-type(2) {
+                position: static;
+                z-index: auto;
+                margin: 0;
+              }
             }
           `}>
           <AppBarControl />
           <AppTabControl />
-          <MarkdownControl />
+          <ContentControl />
         </div>
       </div>
     </React.Fragment>
@@ -104,4 +115,4 @@ function MainPage(props: MainPageProps) {
 
 }
 
-export default MainPage;
+export default React.memo(MainPage);

@@ -22,15 +22,19 @@ function MainPage() {
       tabMode
     }
   } = useStore();
-  const { storage } = useService();
+  const { graph, storage } = useService();
 
   React.useEffect(() => {
-    dispatch(setInitialValue({
-      includeUnsupportedFiles: storage.getIncludeUnsupportedFiles(),
-      tabMode: storage.getTabMode()
-    }));
+    (async () => {
+      dispatch(setInitialValue({
+        includeUnsupportedFiles: storage.getIncludeUnsupportedFiles(),
+        rootFolder: await graph.getRootFolder(),
+        tabMode: storage.getTabMode()
+      }));
+    })();
   }, [
     dispatch,
+    graph,
     storage
   ]);
 

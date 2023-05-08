@@ -35,7 +35,7 @@ function AlertControl() {
   const [ message, setMessage ] = React.useState<MessageDescriptor>();
 
   const handleDismiss = React.useCallback(() => {
-    dispatch(setError(undefined));
+    dispatch(setError());
   }, [
     dispatch
   ]);
@@ -74,7 +74,7 @@ function AlertControl() {
   React.useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
-        dispatch(setError(undefined));
+        dispatch(setError());
       }, 5000);
       return () => clearTimeout(timer);
     }

@@ -6,18 +6,22 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+import { MimeType } from '../../../types/Model';
+
 export interface FileCopyDialogFormState {
-  name?: string,
+  baseName?: string,
+  fullName?: string,
+  mimeType?: MimeType,
   downloadUrl?: string
 }
 
 export interface FileCreateDialogFormState {
-  name?: string
+  baseName?: string
 }
 
 export interface FileRenameDialogFormState {
   id: string,
-  name?: string
+  baseName?: string
 }
 
 export interface FolderCreateDialogFormState {
@@ -29,7 +33,7 @@ export interface FolderRenameDialogFormState {
   name?: string
 }
 
-export interface MarkdownControlFormState {
+export interface ContentControlFormState {
   content: string
 }
 

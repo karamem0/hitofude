@@ -66,4 +66,4 @@ function Error500Page() {
 
 }
 
-export default Error500Page;
+export default React.memo(Error500Page);

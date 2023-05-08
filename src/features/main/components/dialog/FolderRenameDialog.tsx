@@ -8,32 +8,28 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { useService } from '../../../../providers/ServiceProvider';
+import { useStore } from '../../../../providers/StoreProvider';
 import {
-  deleteExploreFolder,
   setDialogAction,
-  setError
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { Folder } from '../../../types/Model';
+  setError,
+  updateExploreFolder
+} from '../../../../stores/Action';
+import { Event } from '../../../../types/Event';
+import { Folder } from '../../../../types/Model';
+import { FolderRenameDialogFormState } from '../../types/Form';
 
-import Presenter from './FolderDeleteDialog.presenter';
+import Presenter from './FolderRenameDialog.presenter';
 
-interface FolderDeleteDialogProps {
+interface FolderRenameDialogProps {
   value?: Folder
 }
 
-function FileDeleteDialog(props: FolderDeleteDialogProps) {
+function FolderRenameDialog(props: FolderRenameDialogProps) {
 
   const { value } = props;
 
-  const {
-    dispatch,
-    state: {
-      exploreFolder
-    }
-  } = useStore();
+  const { dispatch } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
@@ -42,22 +38,23 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
     const open = data || false;
     setOpen(open);
     if (!open) {
-      dispatch(setDialogAction(undefined));
+      dispatch(setDialogAction());
     }
   }, [
     dispatch
   ]);
 
-  const handleSubmit = React.useCallback(async (e?: Event) => {
+  const handleSubmit = React.useCallback(async (e?: Event, data?: FolderRenameDialogFormState) => {
     try {
-      if (!exploreFolder) {
+      if (!data?.id) {
         throw new Error();
       }
-      if (!value) {
+      if (!data?.name) {
         throw new Error();
       }
-      await graph.deleteExploreFolder(value);
-      dispatch(deleteExploreFolder(value));
+      setLoading(true);
+      const folder = await graph.renameFolder(data, data.name);
+      dispatch(updateExploreFolder(folder));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -70,20 +67,19 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
     }
   }, [
     dispatch,
-    exploreFolder,
     graph,
-    handleOpenChange,
-    value
+    handleOpenChange
   ]);
 
   return (
     <Presenter
       loading={loading}
       open={open}
+      value={value}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 
 }
 
-export default FileDeleteDialog;
+export default FolderRenameDialog;

@@ -28,6 +28,7 @@ function AppTabControl() {
   const {
     dispatch,
     state: {
+      rootFolder,
       tabMode = {
         type: TabType.explorer,
         open: true
@@ -38,34 +39,47 @@ function AppTabControl() {
   const [ tabOpen, setTabOpen ] = React.useState(tabMode.open);
   const [ tabType, setTabType ] = React.useState(tabMode.type);
 
+  const handleExplorerOpen = React.useCallback(async () => {
+    const exploreFolderId = storage.getExploreFolderId();
+    const exploreFileId = storage.getExploreFileId();
+    const exploreFolder = await Promise.resolve()
+      .then(() => exploreFolderId ? graph.getFolderById(exploreFolderId) : Promise.reject(new FileNotFoundError()))
+      .catch(() => rootFolder);
+    const exploreFile = exploreFolder?.files?.filter((item) => item.id === exploreFileId)?.at(0);
+    dispatch(setExploreFolder(exploreFolder));
+    if (exploreFile) {
+      dispatch(setExploreFile(exploreFile));
+      dispatch(setWorkFile(exploreFile));
+    } else {
+      dispatch(setExploreFile());
+      dispatch(setWorkFile());
+    }
+  }, [
+    dispatch,
+    graph,
+    rootFolder,
+    storage
+  ]);
+
+  const handleSearchOpen = React.useCallback(async () => {
+    dispatch(setSearchFile());
+    dispatch(setWorkFile());
+    await Promise.resolve();
+  }, [
+    dispatch
+  ]);
+
   React.useEffect(() => {
     (async () => {
       try {
         dispatch(setLoading(true));
         switch (tabMode.type) {
           case TabType.explorer: {
-            const exploreFolderId = storage.getExploreFolderId();
-            const exploreFileId = storage.getExploreFileId();
-            const exploreFolder = await Promise.resolve()
-              .then(() => exploreFolderId ? graph.getFolderById(exploreFolderId) : Promise.reject(new FileNotFoundError()))
-              .catch(() => graph.getRootFolder());
-            const exploreFile = exploreFolder.files?.filter((item) => item.id === exploreFileId)?.at(0);
-            dispatch(setExploreFolder(exploreFolder));
-            if (exploreFile) {
-              dispatch(setExploreFile(exploreFile));
-              dispatch(setWorkFile({
-                ...exploreFile,
-                content: await graph.getFileContent(exploreFile)
-              }));
-            } else {
-              dispatch(setExploreFile());
-              dispatch(setWorkFile());
-            }
+            await handleExplorerOpen();
             break;
           }
           case TabType.search: {
-            dispatch(setSearchFile());
-            dispatch(setWorkFile());
+            await handleSearchOpen();
             break;
           }
           default:
@@ -80,8 +94,8 @@ function AppTabControl() {
     })();
   }, [
     dispatch,
-    graph,
-    storage,
+    handleExplorerOpen,
+    handleSearchOpen,
     tabMode.type
   ]);
 

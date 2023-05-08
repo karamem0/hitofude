@@ -8,20 +8,19 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { useService } from '../../../../providers/ServiceProvider';
+import { useStore } from '../../../../providers/StoreProvider';
 import {
-  appendExploreFile,
+  appendExploreFolder,
   setDialogAction,
-  setError,
-  setWorkFile
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { FileCreateDialogFormState } from '../types/Form';
+  setError
+} from '../../../../stores/Action';
+import { Event } from '../../../../types/Event';
+import { FolderCreateDialogFormState } from '../../types/Form';
 
-import Presenter from './FileCreateDialog.presenter';
+import Presenter from './FolderCreateDialog.presenter';
 
-function FileCreateDialog() {
+function FolderCreateDialog() {
 
   const {
     dispatch,
@@ -37,13 +36,13 @@ function FileCreateDialog() {
     const open = data || false;
     setOpen(open);
     if (!open) {
-      dispatch(setDialogAction(undefined));
+      dispatch(setDialogAction());
     }
   }, [
     dispatch
   ]);
 
-  const handleSubmit = React.useCallback(async (e?: Event, data?: FileCreateDialogFormState) => {
+  const handleSubmit = React.useCallback(async (e?: Event, data?: FolderCreateDialogFormState) => {
     try {
       if (!exploreFolder) {
         throw new Error();
@@ -52,17 +51,8 @@ function FileCreateDialog() {
         throw new Error();
       }
       setLoading(true);
-      const file = await Promise.resolve()
-        .then(() => graph.createFile(exploreFolder, `${data.name}.md`))
-        .then((file) => file ? graph.getFileById(file.id) : undefined);
-      if (!file) {
-        throw new Error();
-      }
-      dispatch(appendExploreFile(file));
-      dispatch(setWorkFile({
-        ...file,
-        content: ''
-      }));
+      const folder = await graph.createFolder(exploreFolder, `${data.name}`);
+      dispatch(appendExploreFolder(folder));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -75,9 +65,9 @@ function FileCreateDialog() {
     }
   }, [
     dispatch,
-    exploreFolder,
     graph,
-    handleOpenChange
+    handleOpenChange,
+    exploreFolder
   ]);
 
   return (
@@ -90,4 +80,4 @@ function FileCreateDialog() {
 
 }
 
-export default FileCreateDialog;
+export default FolderCreateDialog;

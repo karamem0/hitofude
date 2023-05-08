@@ -8,35 +8,30 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { useService } from '../../../../providers/ServiceProvider';
+import { useStore } from '../../../../providers/StoreProvider';
 import {
-  deleteExploreFile,
+  deleteExploreFolder,
   setDialogAction,
-  setError,
-  setExploreFile,
-  setWorkFile
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { File } from '../../../types/Model';
-import { isSupportedFile } from '../../../utils/File';
+  setError
+} from '../../../../stores/Action';
+import { Event } from '../../../../types/Event';
+import { Folder } from '../../../../types/Model';
 
-import Presenter from './FileDeleteDialog.presenter';
+import Presenter from './FolderDeleteDialog.presenter';
 
-interface FileDeleteDialogProps {
-  value?: File
+interface FolderDeleteDialogProps {
+  value?: Folder
 }
 
-function FileDeleteDialog(props: FileDeleteDialogProps) {
+function FileDeleteDialog(props: FolderDeleteDialogProps) {
 
   const { value } = props;
 
   const {
     dispatch,
     state: {
-      exploreFile,
-      exploreFolder,
-      includeUnsupportedFiles
+      exploreFolder
     }
   } = useStore();
   const { graph } = useService();
@@ -47,7 +42,7 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
     const open = data || false;
     setOpen(open);
     if (!open) {
-      dispatch(setDialogAction(undefined));
+      dispatch(setDialogAction());
     }
   }, [
     dispatch
@@ -61,24 +56,8 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       if (!value) {
         throw new Error();
       }
-      await graph.deleteExploreFile(value);
-      dispatch(deleteExploreFile(value));
-      if (value.id === exploreFile?.id) {
-        const file = exploreFolder.files
-          ?.filter((item) => includeUnsupportedFiles || isSupportedFile(item))
-          .filter((item) => item.id !== value.id)
-          .at(-1);
-        if (file) {
-          dispatch(setExploreFile(file));
-          dispatch(setWorkFile({
-            ...file,
-            content: await graph.getFileContent(exploreFile)
-          }));
-        } else {
-          dispatch(setExploreFile());
-          dispatch(setWorkFile());
-        }
-      }
+      await graph.deleteExploreFolder(value);
+      dispatch(deleteExploreFolder(value));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -91,11 +70,9 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
     }
   }, [
     dispatch,
-    exploreFile,
     exploreFolder,
     graph,
     handleOpenChange,
-    includeUnsupportedFiles,
     value
   ]);
 

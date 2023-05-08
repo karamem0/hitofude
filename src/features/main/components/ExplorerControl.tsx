@@ -66,23 +66,18 @@ function ExplorerControl() {
     dispatch,
     graph
   ]);
-
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
       if (!data) {
         throw new Error();
       }
       dispatch(setExploreFile(data));
-      dispatch(setWorkFile({
-        ...data,
-        content: await graph.getFileContent(data)
-      }));
+      dispatch(setWorkFile(data));
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch,
-    graph
+    dispatch
   ]);
 
   const handleSelectFolder = React.useCallback(async (_?: Event, data?: string) => {
@@ -95,10 +90,7 @@ function ExplorerControl() {
       const exploreFile = exploreFolder.files?.filter((item) => includeUnsupportedFiles || isSupportedFile(item)).at(0);
       if (exploreFile) {
         dispatch(setExploreFile(exploreFile));
-        dispatch(setWorkFile({
-          ...exploreFile,
-          content: await graph.getFileContent(exploreFile)
-        }));
+        dispatch(setWorkFile(exploreFile));
       } else {
         dispatch(setExploreFile());
         dispatch(setWorkFile());
@@ -123,10 +115,7 @@ function ExplorerControl() {
           const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
           if (file) {
             dispatch(setExploreFile(file));
-            dispatch(setWorkFile({
-              ...file,
-              content: await graph.getFileContent(file)
-            }));
+            dispatch(setWorkFile(file));
           } else {
             dispatch(setExploreFile());
             dispatch(setWorkFile());
@@ -139,10 +128,8 @@ function ExplorerControl() {
   }, [
     dispatch,
     exploreFile,
-    exploreFolder,
-    graph
+    exploreFolder
   ]);
-
   return (
     <Presenter
       exploreFile={exploreFile}

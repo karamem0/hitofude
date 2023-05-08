@@ -107,6 +107,12 @@
       "value": "Unsupported file format"
     }
   ],
+  "I3b4hn": [
+    {
+      "type": 0,
+      "value": "Version"
+    }
+  ],
   "JqiqNj": [
     {
       "type": 0,
@@ -149,6 +155,12 @@
       "value": "A web application that enables to you to write Markdown file via OneDrive (Personal, work or school)."
     }
   ],
+  "TkEsoc": [
+    {
+      "type": 0,
+      "value": "Version history"
+    }
+  ],
   "VCHJad": [
     {
       "type": 0,
@@ -183,6 +195,12 @@
     {
       "type": 0,
       "value": "Please try refreshing your browser"
+    }
+  ],
+  "agOXPD": [
+    {
+      "type": 0,
+      "value": "Size"
     }
   ],
   "bJIPmM": [

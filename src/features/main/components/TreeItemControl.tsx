@@ -15,6 +15,7 @@ import Presenter from './TreeItemControl.presenter';
 interface TreeItemControlProps {
   icon?: React.ReactNode,
   menu?: React.ReactNode,
+  menuEnabled?: boolean,
   name?: string,
   selected?: boolean,
   onClick?: EventHandler
@@ -25,6 +26,7 @@ function TreeItemControl(props: TreeItemControlProps) {
   const {
     icon,
     menu,
+    menuEnabled = true,
     name,
     selected,
     onClick
@@ -34,6 +36,7 @@ function TreeItemControl(props: TreeItemControlProps) {
     <Presenter
       icon={icon}
       menu={menu}
+      menuEnabled={menuEnabled}
       name={name}
       selected={selected}
       onClick={onClick} />

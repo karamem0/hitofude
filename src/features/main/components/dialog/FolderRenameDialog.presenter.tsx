@@ -24,28 +24,36 @@ import {
   Input
 } from '@fluentui/react-components';
 
-import { EventHandler } from '../../../types/Event';
-import messages from '../messages';
-import { FolderCreateDialogFormState } from '../types/Form';
+import { EventHandler } from '../../../../types/Event';
+import { Folder } from '../../../../types/Model';
+import messages from '../../messages';
+import { FolderRenameDialogFormState } from '../../types/Form';
 
-interface FolderCreateDialogProps {
+interface FolderRenameDialogProps {
   loading?: boolean,
   open?: boolean,
+  value?: Folder,
   onOpenChange?: EventHandler<boolean>,
-  onSubmit?: EventHandler<FolderCreateDialogFormState>
+  onSubmit?: EventHandler<FolderRenameDialogFormState>
 }
 
-function FolderCreateDialog(props: FolderCreateDialogProps) {
+function FolderRenameDialog(props: FolderRenameDialogProps) {
 
   const {
     loading,
     open,
+    value,
     onOpenChange,
     onSubmit
   } = props;
 
   const intl = useIntl();
-  const form = useForm<FolderCreateDialogFormState>();
+  const form = useForm<FolderRenameDialogFormState>({
+    defaultValues: {
+      id: value?.id,
+      name: value?.name
+    }
+  });
 
   return (
     <Dialog
@@ -56,7 +64,7 @@ function FolderCreateDialog(props: FolderCreateDialogProps) {
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>
-              <FormattedMessage {...messages.NewFolder} />
+              <FormattedMessage {...messages.RenameFolder} />
             </DialogTitle>
             <DialogContent
               css={css`
@@ -77,6 +85,7 @@ function FolderCreateDialog(props: FolderCreateDialogProps) {
                       appearance="outline"
                       aria-label={intl.formatMessage(messages.FolderName)}
                       placeholder={intl.formatMessage(messages.FolderName)}
+                      value={field.value}
                       onBlur={field.onBlur}
                       onChange={field.onChange} />
                   )}
@@ -111,4 +120,4 @@ function FolderCreateDialog(props: FolderCreateDialogProps) {
 
 }
 
-export default React.memo(FolderCreateDialog);
+export default React.memo(FolderRenameDialog);

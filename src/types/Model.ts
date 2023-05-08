@@ -6,10 +6,26 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+export interface DialogAction {
+  type: DialogType,
+  payload: unknown
+}
+
+export enum DialogType {
+  copyFile = 'copyFile',
+  createFile = 'createFile',
+  createFolder = 'createFolder',
+  deleteFile = 'deleteFile',
+  deleteFolder = 'deleteFolder',
+  renameFile = 'renameFile',
+  renameFolder = 'renameFolder'
+}
+
 export interface File {
   id: string,
   baseName?: string,
   fullName?: string,
+  mimeType?: MimeType,
   createdDate?: Date,
   updatedDate?: Date,
   webUrl?: string,
@@ -17,9 +33,10 @@ export interface File {
   parentId?: string
 }
 
-export interface FileContent {
-  content: string,
-  editing?: boolean
+export interface FileVersion {
+  version: string,
+  updatedDate?: Date,
+  size?: number
 }
 
 export interface Folder {
@@ -34,19 +51,18 @@ export interface Folder {
   files?: File[]
 }
 
-export interface DialogAction {
-  type: DialogType,
+export interface MimeType {
+  type: string,
+  subtype: string
+}
+
+export interface SidePanelAction {
+  type: SidePanelType,
   payload: unknown
 }
 
-export enum DialogType {
-  copyFile = 'copyFile',
-  createFile = 'createFile',
-  createFolder = 'createFolder',
-  deleteFile = 'deleteFile',
-  deleteFolder = 'deleteFolder',
-  renameFile = 'renameFile',
-  renameFolder = 'renameFolder'
+export enum SidePanelType {
+  fileVersion = 'fileVersion'
 }
 
 export interface TabMode {

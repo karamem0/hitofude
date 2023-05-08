@@ -12,7 +12,7 @@ import {
   PageIterator,
   ResponseType
 } from '@microsoft/microsoft-graph-client';
-import { DriveItem } from '@microsoft/microsoft-graph-types';
+import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
 
 import { mapper } from '../mappings/AutoMapperProfile';
 import {
@@ -21,7 +21,11 @@ import {
   FolderConflictError,
   FolderNotFoundError
 } from '../types/Error';
-import { File, Folder } from '../types/Model';
+import {
+  File,
+  FileVersion,
+  Folder
+} from '../types/Model';
 import { isSupportedFile } from '../utils/File';
 
 export class GraphService {
@@ -121,20 +125,60 @@ export class GraphService {
     }
   }
 
-  async getFileContent(file: Pick<File, 'downloadUrl' | 'fullName'>): Promise<string> {
+  async getFileByUrl(path: string): Promise<File> {
     try {
-      if (!file.downloadUrl) {
+      const data = await this.client
+        .api(`/me/drive/root:/${path}`)
+        .get();
+      const value = data as DriveItem;
+      if (!value.file) {
         throw new FileNotFoundError();
       }
+      return mapper.map(value, 'DriveItem', 'File');
+    } catch (e) {
+      if (e instanceof GraphError) {
+        if (e.statusCode === 400 ||
+            e.statusCode === 404) {
+          throw new FileNotFoundError(e.message);
+        }
+      }
+      throw e;
+    }
+  }
+
+  async getFileContent(file: Pick<File, 'mimeType' | 'downloadUrl'>): Promise<string> {
+    try {
       if (!isSupportedFile(file)) {
         return '';
       }
-      const data = await fetch(file.downloadUrl, { method: 'GET' });
+      const url = typeof (file) === 'string' ? file : file.downloadUrl;
+      if (!url) {
+        throw new FileNotFoundError();
+      }
+      const data = await fetch(url, { method: 'GET' });
       const value = await data.text();
       return value;
     } catch (e) {
       if (e instanceof GraphError) {
         if (e.statusCode === 404) {
+          throw new FileNotFoundError(e.message);
+        }
+      }
+      throw e;
+    }
+  }
+
+  async getFileVersions(id: string): Promise<FileVersion[]> {
+    try {
+      const data = await this.client
+        .api(`/me/drive/items/${id}/versions`)
+        .get();
+      const value = data.value as DriveItemVersion[];
+      return mapper.mapArray(value, 'DriveItemVersion', 'FileVersion');
+    } catch (e) {
+      if (e instanceof GraphError) {
+        if (e.statusCode === 400 ||
+            e.statusCode === 404) {
           throw new FileNotFoundError(e.message);
         }
       }
@@ -261,7 +305,7 @@ export class GraphService {
       await iterator.iterate();
       return mapper
         .mapArray<DriveItem, File>(
-          array.filter((item) => item.file && (item.name?.endsWith('.md'))),
+          array.filter((item) => item.file),
           'DriveItem',
           'File'
         );

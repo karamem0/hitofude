@@ -35,24 +35,27 @@ function ServiceProvider(props: React.PropsWithChildren<unknown>) {
 
   const msal = useMsal();
 
+  const value = React.useMemo(() => ({
+    graph: new GraphService(Client.initWithMiddleware({
+      authProvider: {
+        getAccessToken: () => msal.instance
+          .acquireTokenSilent({
+            account: msal.accounts[0],
+            scopes: [
+              'User.Read',
+              'Files.ReadWrite'
+            ]
+          })
+          .then((result) => result.accessToken)
+      }
+    })),
+    storage: new StorageService(localStorage)
+  }), [
+    msal
+  ]);
+
   return (
-    <ServiceContext.Provider
-      value={{
-        graph: new GraphService(Client.initWithMiddleware({
-          authProvider: {
-            getAccessToken: () => msal.instance
-              .acquireTokenSilent({
-                account: msal.accounts[0],
-                scopes: [
-                  'User.Read',
-                  'Files.ReadWrite'
-                ]
-              })
-              .then((result) => result.accessToken)
-          }
-        })),
-        storage: new StorageService(localStorage)
-      }}>
+    <ServiceContext.Provider value={value}>
       {children}
     </ServiceContext.Provider>
   );

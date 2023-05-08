@@ -8,17 +8,17 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { useService } from '../../../../providers/ServiceProvider';
+import { useStore } from '../../../../providers/StoreProvider';
 import {
   appendExploreFile,
   setDialogAction,
   setError,
   setWorkFile
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { File } from '../../../types/Model';
-import { FileCopyDialogFormState } from '../types/Form';
+} from '../../../../stores/Action';
+import { Event } from '../../../../types/Event';
+import { File } from '../../../../types/Model';
+import { FileCopyDialogFormState } from '../../types/Form';
 
 import Presenter from './FileCopyDialog.presenter';
 
@@ -44,7 +44,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
     const open = data || false;
     setOpen(open);
     if (!open) {
-      dispatch(setDialogAction(undefined));
+      dispatch(setDialogAction());
     }
   }, [
     dispatch
@@ -55,7 +55,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       if (!exploreFolder) {
         throw new Error();
       }
-      if (!data?.name) {
+      if (!data?.baseName) {
         throw new Error();
       }
       if (!data?.downloadUrl) {
@@ -64,16 +64,13 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       setLoading(true);
       const fileContent = await graph.getFileContent(data);
       const file = await Promise.resolve()
-        .then(() => graph.createFile(exploreFolder, `${data.name}.md`, fileContent))
+        .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`, fileContent))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
       if (!file) {
         throw new Error();
       }
       dispatch(appendExploreFile(file));
-      dispatch(setWorkFile({
-        ...file,
-        content: fileContent
-      }));
+      dispatch(setWorkFile(file));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));

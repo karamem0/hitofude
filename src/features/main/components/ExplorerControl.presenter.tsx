@@ -11,27 +11,12 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { css } from '@emotion/react';
-import {
-  Button,
-  Caption1,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList
-} from '@fluentui/react-components';
+import { Button, Caption1 } from '@fluentui/react-components';
 import {
   AddIcon,
-  CopyIcon,
-  DeleteIcon,
   FolderHorizontalIcon,
-  Hide3Icon,
-  PageAddIcon,
-  RefreshIcon,
-  RenameIcon,
-  TextDocumentIcon,
-  ViewIcon
+  TextDocumentIcon
 } from '@fluentui/react-icons-mdl2';
-import { FabricNewFolderIcon, OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 
 import { EventHandler } from '../../../types/Event';
 import {
@@ -44,6 +29,9 @@ import { isSupportedFile } from '../../../utils/File';
 import { isEmpty } from '../../../utils/Folder';
 import messages from '../messages';
 
+import ExplorerFileMenu from './ExplorerFileMenu';
+import ExplorerFolderMenu from './ExplorerFolderMenu';
+import ExplorerHeaderMenu from './ExplorerHeaderMenu';
 import TreeHeaderControl from './TreeHeaderControl';
 import TreeItemControl from './TreeItemControl';
 
@@ -94,97 +82,13 @@ function ExplorerControl(props: ExplorerControlProps) {
         disabled={!exploreFolder.parentId}
         name={exploreFolder.parentId ? exploreFolder.name : intl.formatMessage(messages.RootFolder)}
         menu={(
-          <MenuList>
-            <MenuGroup>
-              <MenuItem
-                key="RefreshFolder"
-                icon={(
-                  <RefreshIcon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
-                )}
-                onClick={(e) => onRefreshFolder?.(e, exploreFolder)}>
-                <FormattedMessage {...messages.Refresh} />
-              </MenuItem>
-            </MenuGroup>
-            <MenuDivider />
-            <MenuGroup>
-              <MenuItem
-                key="IncludeUnsupportedFiles"
-                icon={includeUnsupportedFiles ? (
-                  <Hide3Icon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
-                ) : (
-                  <ViewIcon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
-                )}
-                onClick={(e) => onToggleIncludeUnsupportedFiles?.(e, !includeUnsupportedFiles)}>
-                {
-                  includeUnsupportedFiles ? (
-                    <FormattedMessage {...messages.HideUnsupportedFiles} />
-                  ) : (
-                    <FormattedMessage {...messages.ShowUnsupportedFiles} />
-                  )
-                }
-              </MenuItem>
-            </MenuGroup>
-            <MenuDivider />
-            <MenuGroup>
-              <MenuItem
-                key="CreateFile"
-                icon={(
-                  <PageAddIcon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
-                )}
-                onClick={(e) => onOpenDialog?.(e, {
-                  type: DialogType.createFile,
-                  payload: undefined
-                })}>
-                <FormattedMessage {...messages.NewFile} />
-              </MenuItem>
-              <MenuItem
-                key="CreateFolder"
-                icon={(
-                  <FabricNewFolderIcon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
-                )}
-                onClick={(e) => onOpenDialog?.(e, {
-                  type: DialogType.createFolder,
-                  payload: undefined
-                })}>
-                <FormattedMessage {...messages.NewFolder} />
-              </MenuItem>
-            </MenuGroup>
-            <MenuDivider />
-            <MenuGroup>
-              <MenuItem
-                key="OpenWithOneDrive"
-                icon={(
-                  <OneDriveLogoIcon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
-                )}
-                onClick={(e) => onOpenUrl?.(e, exploreFolder.webUrl)}>
-                <FormattedMessage {...messages.OpenWithOneDrive} />
-              </MenuItem>
-            </MenuGroup>
-          </MenuList>
+          <ExplorerHeaderMenu
+            exploreFolder={exploreFolder}
+            includeUnsupportedFiles={includeUnsupportedFiles}
+            onOpenDialog={onOpenDialog}
+            onOpenUrl={onOpenUrl}
+            onRefreshFolder={onRefreshFolder}
+            onToggleIncludeUnsupportedFiles={onToggleIncludeUnsupportedFiles} />
         )}
         onClick={(e) => onSelectFolder?.(e, exploreFolder?.parentId)} />
       <div
@@ -219,55 +123,10 @@ function ExplorerControl(props: ExplorerControlProps) {
                         `} />
                     )}
                     menu={(
-                      <MenuList>
-                        <MenuGroup>
-                          <MenuItem
-                            key="RenameFolder"
-                            icon={(
-                              <RenameIcon
-                                css={css`
-                                  font-size: 1rem;
-                                  line-height: 1rem;
-                                `} />
-                            )}
-                            onClick={(e) => onOpenDialog?.(e, {
-                              type: DialogType.renameFolder,
-                              payload: item
-                            })}>
-                            <FormattedMessage {...messages.RenameFolder} />
-                          </MenuItem>
-                          <MenuItem
-                            key="DeleteFolder"
-                            icon={(
-                              <DeleteIcon
-                                css={css`
-                                  font-size: 1rem;
-                                  line-height: 1rem;
-                                `} />
-                            )}
-                            onClick={(e) => onOpenDialog?.(e, {
-                              type: DialogType.deleteFolder,
-                              payload: item
-                            })}>
-                            <FormattedMessage {...messages.DeleteFolder} />
-                          </MenuItem>
-                        </MenuGroup>
-                        <MenuDivider />
-                        <MenuGroup>
-                          <MenuItem
-                            key="OpenWithOneDrive"
-                            icon={(
-                              <OneDriveLogoIcon
-                                css={css`
-                                    font-size: 1rem;
-                                    line-height: 1rem;
-                                  `} />
-                                )}
-                            onClick={(e) => onOpenUrl?.(e, item.webUrl)}>
-                            <FormattedMessage {...messages.OpenWithOneDrive} />
-                          </MenuItem>
-                        </MenuGroup>
-                      </MenuList>
+                      <ExplorerFolderMenu
+                        value={item}
+                        onOpenDialog={onOpenDialog}
+                        onOpenUrl={onOpenUrl} />
                     )}
                     onClick={(e) => onSelectFolder?.(e, item.id)} />
                 ))
@@ -276,7 +135,8 @@ function ExplorerControl(props: ExplorerControlProps) {
                 exploreFolder.files?.filter((item) => includeUnsupportedFiles || isSupportedFile(item)).map((item) => (
                   <TreeItemControl
                     key={item.id}
-                    name={includeUnsupportedFiles ? item.fullName : item.baseName}
+                    menuEnabled={isSupportedFile(item)}
+                    name={item.fullName}
                     selected={exploreFile?.id === item.id}
                     icon={(
                       <TextDocumentIcon
@@ -285,75 +145,12 @@ function ExplorerControl(props: ExplorerControlProps) {
                           line-height: 1rem;
                         `} />
                     )}
-                    menu={isSupportedFile(item) ? (
-                      <MenuList>
-                        <MenuGroup>
-                          <MenuItem
-                            key="CopyFile"
-                            icon={(
-                              <CopyIcon
-                                css={css`
-                                  font-size: 1rem;
-                                  line-height: 1rem;
-                                `} />
-                            )}
-                            onClick={(e) => onOpenDialog?.(e, {
-                              type: DialogType.copyFile,
-                              payload: item
-                            })}>
-                            <FormattedMessage {...messages.CopyFile} />
-                          </MenuItem>
-                        </MenuGroup>
-                        <MenuDivider />
-                        <MenuGroup>
-                          <MenuItem
-                            key="RenameFile"
-                            icon={(
-                              <RenameIcon
-                                css={css`
-                                  font-size: 1rem;
-                                  line-height: 1rem;
-                                `} />
-                            )}
-                            onClick={(e) => onOpenDialog?.(e, {
-                              type: DialogType.renameFile,
-                              payload: item
-                            })}>
-                            <FormattedMessage {...messages.RenameFile} />
-                          </MenuItem>
-                          <MenuItem
-                            key="DeleteFile"
-                            icon={(
-                              <DeleteIcon
-                                css={css`
-                                  font-size: 1rem;
-                                  line-height: 1rem;
-                                `} />
-                            )}
-                            onClick={(e) => onOpenDialog?.(e, {
-                              type: DialogType.deleteFile,
-                              payload: item
-                            })}>
-                            <FormattedMessage {...messages.DeleteFile} />
-                          </MenuItem>
-                        </MenuGroup>
-                        <MenuDivider />
-                        <MenuGroup>
-                          <MenuItem
-                            key="OpenWithOneDrive"
-                            icon={(
-                              <OneDriveLogoIcon
-                                css={css`
-                                    font-size: 1rem;
-                                    line-height: 1rem;
-                                  `} />
-                                )}
-                            onClick={(e) => onOpenUrl?.(e, item.webUrl)}>
-                            <FormattedMessage {...messages.OpenWithOneDrive} />
-                          </MenuItem>
-                        </MenuGroup>
-                      </MenuList>
-                    ) : null}
+                    menu={(
+                      <ExplorerFileMenu
+                        value={item}
+                        onOpenDialog={onOpenDialog}
+                        onOpenUrl={onOpenUrl} />
+                    )}
                     onClick={(e) => onSelectFile?.(e, item)} />
                 ))
               }
@@ -379,7 +176,7 @@ function ExplorerControl(props: ExplorerControlProps) {
             }
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.createFile,
-            payload: undefined
+            payload: null
           })}>
           <FormattedMessage {...messages.NewFile} />
         </Button>

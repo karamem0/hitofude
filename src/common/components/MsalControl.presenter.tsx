@@ -8,11 +8,11 @@
 
 import React from 'react';
 
-interface MsalLoaderProps {
+interface MsalControlProps {
   loading?: boolean
 }
 
-function MsalLoader(props: React.PropsWithChildren<MsalLoaderProps>) {
+function MsalControl(props: React.PropsWithChildren<MsalControlProps>) {
 
   const {
     children,
@@ -27,4 +27,4 @@ function MsalLoader(props: React.PropsWithChildren<MsalLoaderProps>) {
 
 }
 
-export default MsalLoader;
+export default React.memo(MsalControl);

@@ -10,89 +10,50 @@ import React from 'react';
 
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setError, setWorkFile } from '../../../stores/Action';
-import { Event } from '../../../types/Event';
+import { EventHandler } from '../../../types/Event';
+import { File } from '../../../types/Model';
 
 import Presenter from './MarkdownControl.presenter';
 
-function MarkdownControl() {
+interface MarkdownControlProps {
+  value: File,
+  onChange?: EventHandler<string>
+}
+
+function MarkdownControl(props: MarkdownControlProps) {
 
   const {
-    dispatch,
+    value,
+    onChange
+  } = props;
+
+  const {
     state: {
-      loading,
-      workFile
+      editing
     }
   } = useStore();
+
   const { graph } = useService();
 
-  const handleSave = React.useCallback(async (_?: Event, data?: string) => {
-    try {
-      if (!workFile) {
-        throw new Error();
-      }
-      if (!data) {
-        throw new Error();
-      }
-      const file = await graph.setFileContent(workFile, data);
-      if (!file) {
-        throw new Error();
-      }
-      dispatch(setWorkFile({
-        ...file,
-        content: data,
-        editing: false
-      }));
-    } catch (e) {
-      dispatch(setError(e as Error));
-    }
+  const [ content, setContent ] = React.useState<string>('');
+
+  React.useEffect(() => {
+    (async () => {
+      const fileContent = await graph.getFileContent(value);
+      setContent(fileContent);
+      onChange?.({}, fileContent);
+    })();
   }, [
-    dispatch,
     graph,
-    workFile
-  ]);
-
-  const handleCancel = React.useCallback(() => {
-    try {
-      if (!workFile) {
-        throw new Error();
-      }
-      dispatch(setWorkFile({
-        ...workFile,
-        editing: false
-      }));
-    } catch (e) {
-      dispatch(setError(e as Error));
-    }
-  }, [
-    dispatch,
-    workFile
-  ]);
-
-  const handleEdit = React.useCallback(() => {
-    try {
-      if (!workFile) {
-        throw new Error();
-      }
-      dispatch(setWorkFile({
-        ...workFile,
-        editing: true
-      }));
-    } catch (e) {
-      dispatch(setError(e as Error));
-    }
-  }, [
-    dispatch,
-    workFile
+    onChange,
+    value
   ]);
 
   return (
     <Presenter
-      loading={loading}
-      value={workFile}
-      onCancel={handleCancel}
-      onEdit={handleEdit}
-      onSave={handleSave} />
+      content={content}
+      editing={editing}
+      onChange={onChange} />
   );
 
 }

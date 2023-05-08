@@ -20,7 +20,7 @@ const translations: { [key: string]: Record<string, string> } = {
 
 const intl = createIntl({
   defaultLocale: 'en',
-  locale: window.navigator.language,
+  locale: window.navigator.language.substring(0, 2),
   messages: translations[window.navigator.language]
 });
 

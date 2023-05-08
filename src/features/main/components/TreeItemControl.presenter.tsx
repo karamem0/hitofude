@@ -27,6 +27,7 @@ interface TreeItemControlProps {
   icon?: React.ReactNode,
   key?: React.Key,
   menu?: React.ReactNode,
+  menuEnabled?: boolean,
   name?: string,
   selected?: boolean,
   onClick?: EventHandler
@@ -38,6 +39,7 @@ function TreeItemControl(props: TreeItemControlProps) {
     icon,
     key,
     menu,
+    menuEnabled,
     name,
     selected,
     onClick
@@ -101,7 +103,7 @@ function TreeItemControl(props: TreeItemControlProps) {
         </Text>
       </div>
       {
-        menu ? (
+        menuEnabled ? (
           <Menu>
             <MenuTrigger>
               <div

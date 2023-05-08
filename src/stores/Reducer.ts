@@ -10,8 +10,8 @@ import { StorageService } from '../services/StorageService';
 import {
   DialogAction,
   File,
-  FileContent,
   Folder,
+  SidePanelAction,
   TabMode
 } from '../types/Model';
 import {
@@ -33,6 +33,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       }
       return {
         ...state,
+        exploreFile: payload,
         exploreFolder: {
           ...state.exploreFolder,
           files: state.exploreFolder.files ? (
@@ -102,6 +103,13 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         dialogAction: payload
       };
     }
+    case ActionType.setEditing: {
+      const payload = action.payload as boolean | undefined;
+      return {
+        ...state,
+        editing: payload
+      };
+    }
     case ActionType.setError: {
       const payload = action.payload as Error | undefined;
       return {
@@ -168,6 +176,13 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         searchQuery: payload
       };
     }
+    case ActionType.setSidePanelAction: {
+      const payload = action.payload as SidePanelAction | undefined;
+      return {
+        ...state,
+        sidePanelAction: payload
+      };
+    }
     case ActionType.setTabMode: {
       const payload = action.payload as TabMode | undefined;
       storage.setTabMode(payload);
@@ -177,9 +192,10 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       };
     }
     case ActionType.setWorkFile: {
-      const payload = action.payload as File & FileContent | undefined;
+      const payload = action.payload as File | undefined;
       return {
         ...state,
+        editing: false,
         workFile: payload
       };
     }

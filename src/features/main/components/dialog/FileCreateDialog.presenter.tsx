@@ -24,36 +24,28 @@ import {
   Input
 } from '@fluentui/react-components';
 
-import { EventHandler } from '../../../types/Event';
-import { File } from '../../../types/Model';
-import messages from '../messages';
-import { FileRenameDialogFormState } from '../types/Form';
+import { EventHandler } from '../../../../types/Event';
+import messages from '../../messages';
+import { FileCreateDialogFormState } from '../../types/Form';
 
-interface FileRenameDialogProps {
+interface FileCreateDialogProps {
   loading?: boolean,
   open?: boolean,
-  value?: File,
   onOpenChange?: EventHandler<boolean>,
-  onSubmit?: EventHandler<FileRenameDialogFormState>
+  onSubmit?: EventHandler<FileCreateDialogFormState>
 }
 
-function FileRenameDialog(props: FileRenameDialogProps) {
+function FileCreateDialog(props: FileCreateDialogProps) {
 
   const {
     loading,
     open,
-    value,
     onOpenChange,
     onSubmit
   } = props;
 
   const intl = useIntl();
-  const form = useForm<FileRenameDialogFormState>({
-    defaultValues: {
-      id: value?.id,
-      name: value?.baseName
-    }
-  });
+  const form = useForm<FileCreateDialogFormState>();
 
   return (
     <Dialog
@@ -64,7 +56,7 @@ function FileRenameDialog(props: FileRenameDialogProps) {
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>
-              <FormattedMessage {...messages.RenameFile} />
+              <FormattedMessage {...messages.NewFile} />
             </DialogTitle>
             <DialogContent
               css={css`
@@ -78,7 +70,7 @@ function FileRenameDialog(props: FileRenameDialogProps) {
                 `}>
                 <Controller
                   control={form.control}
-                  name="name"
+                  name="baseName"
                   render={({ field }) => (
                     <Input
                       ref={field.ref}
@@ -86,7 +78,6 @@ function FileRenameDialog(props: FileRenameDialogProps) {
                       aria-label={intl.formatMessage(messages.FileName)}
                       contentAfter=".md"
                       placeholder={intl.formatMessage(messages.FileName)}
-                      value={field.value}
                       onBlur={field.onBlur}
                       onChange={field.onChange} />
                   )}
@@ -121,4 +112,4 @@ function FileRenameDialog(props: FileRenameDialogProps) {
 
 }
 
-export default React.memo(FileRenameDialog);
+export default React.memo(FileCreateDialog);

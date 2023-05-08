@@ -8,28 +8,27 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { useService } from '../../../../providers/ServiceProvider';
+import { useStore } from '../../../../providers/StoreProvider';
 import {
+  appendExploreFile,
   setDialogAction,
   setError,
-  updateExploreFolder
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { Folder } from '../../../types/Model';
-import { FolderRenameDialogFormState } from '../types/Form';
+  setWorkFile
+} from '../../../../stores/Action';
+import { Event } from '../../../../types/Event';
+import { FileCreateDialogFormState } from '../../types/Form';
 
-import Presenter from './FolderRenameDialog.presenter';
+import Presenter from './FileCreateDialog.presenter';
 
-interface FolderRenameDialogProps {
-  value?: Folder
-}
+function FileCreateDialog() {
 
-function FolderRenameDialog(props: FolderRenameDialogProps) {
-
-  const { value } = props;
-
-  const { dispatch } = useStore();
+  const {
+    dispatch,
+    state: {
+      exploreFolder
+    }
+  } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
@@ -38,23 +37,29 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
     const open = data || false;
     setOpen(open);
     if (!open) {
-      dispatch(setDialogAction(undefined));
+      dispatch(setDialogAction());
     }
   }, [
     dispatch
   ]);
 
-  const handleSubmit = React.useCallback(async (e?: Event, data?: FolderRenameDialogFormState) => {
+  const handleSubmit = React.useCallback(async (e?: Event, data?: FileCreateDialogFormState) => {
     try {
-      if (!data?.id) {
+      if (!exploreFolder) {
         throw new Error();
       }
-      if (!data?.name) {
+      if (!data?.baseName) {
         throw new Error();
       }
       setLoading(true);
-      const folder = await graph.renameFolder(data, data.name);
-      dispatch(updateExploreFolder(folder));
+      const file = await Promise.resolve()
+        .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`))
+        .then((file) => file ? graph.getFileById(file.id) : undefined);
+      if (!file) {
+        throw new Error();
+      }
+      dispatch(appendExploreFile(file));
+      dispatch(setWorkFile(file));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -67,6 +72,7 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
     }
   }, [
     dispatch,
+    exploreFolder,
     graph,
     handleOpenChange
   ]);
@@ -75,11 +81,10 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
     <Presenter
       loading={loading}
       open={open}
-      value={value}
       onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 
 }
 
-export default FolderRenameDialog;
+export default FileCreateDialog;

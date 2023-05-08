@@ -13,8 +13,10 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
+import { Global } from '@emotion/react';
+import ress from 'ress';
 
-import MsalLoader from './common/components/MsalLoader';
+import MsalControl from './common/components/MsalControl';
 import Error404Page from './features/error/pages/Error404Page';
 import Error500Page from './features/error/pages/Error500Page';
 import HomePage from './features/home/pages/HomePage';
@@ -26,42 +28,43 @@ import StoreProvider from './providers/StoreProvider';
 import TelemetryProvider from './providers/TelemetryProvider';
 import ThemeProvider from './providers/ThemeProvider';
 
-import 'ress';
-
 ReactDOM
   .createRoot(document.getElementById('root') as Element)
   .render(
-    <BrowserRouter>
-      <TelemetryProvider>
-        <IntlProvider>
-          <ThemeProvider>
-            <Routes>
-              <Route
-                path="/"
-                element={(
-                  <ErrorBoundary fallbackRender={(props) => <Error500Page {...props} />}>
-                    <MsalProvider>
-                      <MsalLoader>
-                        <AuthenticatedTemplate>
-                          <ServiceProvider>
-                            <StoreProvider>
-                              <MainPage />
-                            </StoreProvider>
-                          </ServiceProvider>
-                        </AuthenticatedTemplate>
-                        <UnauthenticatedTemplate>
-                          <HomePage />
-                        </UnauthenticatedTemplate>
-                      </MsalLoader>
-                    </MsalProvider>
-                  </ErrorBoundary>
+    <React.Fragment>
+      <Global styles={ress} />
+      <BrowserRouter>
+        <TelemetryProvider>
+          <IntlProvider>
+            <ThemeProvider>
+              <Routes>
+                <Route
+                  path="/"
+                  element={(
+                    <ErrorBoundary fallbackRender={(props) => <Error500Page {...props} />}>
+                      <MsalProvider>
+                        <MsalControl>
+                          <AuthenticatedTemplate>
+                            <ServiceProvider>
+                              <StoreProvider>
+                                <MainPage />
+                              </StoreProvider>
+                            </ServiceProvider>
+                          </AuthenticatedTemplate>
+                          <UnauthenticatedTemplate>
+                            <HomePage />
+                          </UnauthenticatedTemplate>
+                        </MsalControl>
+                      </MsalProvider>
+                    </ErrorBoundary>
                 )} />
-              <Route
-                element={<Error404Page />}
-                path="*" />
-            </Routes>
-          </ThemeProvider>
-        </IntlProvider>
-      </TelemetryProvider>
-    </BrowserRouter>
+                <Route
+                  element={<Error404Page />}
+                  path="*" />
+              </Routes>
+            </ThemeProvider>
+          </IntlProvider>
+        </TelemetryProvider>
+      </BrowserRouter>
+    </React.Fragment>
   );

@@ -45,10 +45,13 @@ const messages = defineMessages({
   Save: { defaultMessage: 'Save' },
   Search: { defaultMessage: 'Search' },
   ShowUnsupportedFiles: { defaultMessage: 'Show other files' },
+  Size: { defaultMessage: 'Size' },
   SignOut: { defaultMessage: 'Sign out' },
   UnsupportedFileDescription: { defaultMessage: 'Unsupported file format' },
   UnsupportedFileTitle: { defaultMessage: 'Cannot open this file' },
   UpdatedDate: { defaultMessage: 'Updated date' },
+  Version: { defaultMessage: 'Version' },
+  VersionHistory: { defaultMessage: 'Version history' },
   WorkFolderSelection: { defaultMessage: 'Select working directory' }
 });
 

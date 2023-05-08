@@ -6,6 +6,8 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+declare module 'ress';
+
 interface ImportMeta {
   readonly env: {
     readonly VITE_APPLICATIONINSIGHTS_INSTRUMENTATION_KEY: string,

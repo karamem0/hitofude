@@ -24,28 +24,38 @@ import {
   Input
 } from '@fluentui/react-components';
 
-import { EventHandler } from '../../../types/Event';
-import messages from '../messages';
-import { FileCreateDialogFormState } from '../types/Form';
+import { EventHandler } from '../../../../types/Event';
+import { File } from '../../../../types/Model';
+import messages from '../../messages';
+import { FileCopyDialogFormState } from '../../types/Form';
 
-interface FileCreateDialogProps {
+interface FileCopyDialogProps {
   loading?: boolean,
   open?: boolean,
+  value?: File,
   onOpenChange?: EventHandler<boolean>,
-  onSubmit?: EventHandler<FileCreateDialogFormState>
+  onSubmit?: EventHandler<FileCopyDialogFormState>
 }
 
-function FileCreateDialog(props: FileCreateDialogProps) {
+function FileCopyDialog(props: FileCopyDialogProps) {
 
   const {
     loading,
     open,
+    value,
     onOpenChange,
     onSubmit
   } = props;
 
   const intl = useIntl();
-  const form = useForm<FileCreateDialogFormState>();
+  const form = useForm<FileCopyDialogFormState>({
+    defaultValues: {
+      baseName: value?.baseName,
+      fullName: value?.fullName,
+      mimeType: value?.mimeType,
+      downloadUrl: value?.downloadUrl
+    }
+  });
 
   return (
     <Dialog
@@ -56,7 +66,7 @@ function FileCreateDialog(props: FileCreateDialogProps) {
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>
-              <FormattedMessage {...messages.NewFile} />
+              <FormattedMessage {...messages.CopyFile} />
             </DialogTitle>
             <DialogContent
               css={css`
@@ -70,7 +80,7 @@ function FileCreateDialog(props: FileCreateDialogProps) {
                 `}>
                 <Controller
                   control={form.control}
-                  name="name"
+                  name="baseName"
                   render={({ field }) => (
                     <Input
                       ref={field.ref}
@@ -78,11 +88,13 @@ function FileCreateDialog(props: FileCreateDialogProps) {
                       aria-label={intl.formatMessage(messages.FileName)}
                       contentAfter=".md"
                       placeholder={intl.formatMessage(messages.FileName)}
+                      value={field.value}
                       onBlur={field.onBlur}
                       onChange={field.onChange} />
                   )}
                   rules={{
-                    required: true
+                    required: true,
+                    validate: (item) => item !== value?.baseName
                   }} />
               </div>
             </DialogContent>
@@ -112,4 +124,4 @@ function FileCreateDialog(props: FileCreateDialogProps) {
 
 }
 
-export default React.memo(FileCreateDialog);
+export default React.memo(FileCopyDialog);

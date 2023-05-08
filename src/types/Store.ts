@@ -9,8 +9,8 @@
 import {
   DialogAction,
   File,
-  FileContent,
   Folder,
+  SidePanelAction,
   TabMode
 } from './Model';
 
@@ -25,6 +25,7 @@ export enum ActionType {
   deleteExploreFile = 'deleteExploreFile',
   deleteExploreFolder = 'deleteExploreFolder',
   setDialogAction = 'setDialogAction',
+  setEditing = 'setEditing',
   setError = 'setError',
   setExploreFile = 'setExploreFile',
   setExploreFolder = 'setExploreFolder',
@@ -34,6 +35,7 @@ export enum ActionType {
   setSearchFile = 'setSearchFile',
   setSearchResults = 'setSearchResults',
   setSearchQuery = 'setSearchQuery',
+  setSidePanelAction = 'setSidePanelAction',
   setTabMode = 'setTabMode',
   setWorkFile = 'setWorkFile',
   updateExploreFile = 'updateExploreFile',
@@ -45,13 +47,16 @@ export type DispatchAction<T> = (payload: T) => void;
 export interface State {
   dialogAction?: DialogAction,
   error?: Error,
+  editing?: boolean,
   exploreFile?: File,
   exploreFolder?: Folder,
   includeUnsupportedFiles?: boolean,
   loading?: boolean,
+  rootFolder?: Folder,
   searchFile?: File,
   searchResults?: File[],
   searchQuery?: string,
+  sidePanelAction?: SidePanelAction,
   tabMode?: TabMode,
-  workFile?: File & FileContent
+  workFile?: File
 }

@@ -24,20 +24,20 @@ import {
   Input
 } from '@fluentui/react-components';
 
-import { EventHandler } from '../../../types/Event';
-import { Folder } from '../../../types/Model';
-import messages from '../messages';
-import { FolderRenameDialogFormState } from '../types/Form';
+import { EventHandler } from '../../../../types/Event';
+import { File } from '../../../../types/Model';
+import messages from '../../messages';
+import { FileRenameDialogFormState } from '../../types/Form';
 
-interface FolderRenameDialogProps {
+interface FileRenameDialogProps {
   loading?: boolean,
   open?: boolean,
-  value?: Folder,
+  value?: File,
   onOpenChange?: EventHandler<boolean>,
-  onSubmit?: EventHandler<FolderRenameDialogFormState>
+  onSubmit?: EventHandler<FileRenameDialogFormState>
 }
 
-function FolderRenameDialog(props: FolderRenameDialogProps) {
+function FileRenameDialog(props: FileRenameDialogProps) {
 
   const {
     loading,
@@ -48,10 +48,10 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
   } = props;
 
   const intl = useIntl();
-  const form = useForm<FolderRenameDialogFormState>({
+  const form = useForm<FileRenameDialogFormState>({
     defaultValues: {
       id: value?.id,
-      name: value?.name
+      baseName: value?.baseName
     }
   });
 
@@ -64,7 +64,7 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>
-              <FormattedMessage {...messages.RenameFolder} />
+              <FormattedMessage {...messages.RenameFile} />
             </DialogTitle>
             <DialogContent
               css={css`
@@ -78,13 +78,14 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
                 `}>
                 <Controller
                   control={form.control}
-                  name="name"
+                  name="baseName"
                   render={({ field }) => (
                     <Input
                       ref={field.ref}
                       appearance="outline"
-                      aria-label={intl.formatMessage(messages.FolderName)}
-                      placeholder={intl.formatMessage(messages.FolderName)}
+                      aria-label={intl.formatMessage(messages.FileName)}
+                      contentAfter=".md"
+                      placeholder={intl.formatMessage(messages.FileName)}
                       value={field.value}
                       onBlur={field.onBlur}
                       onChange={field.onChange} />
@@ -120,4 +121,4 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
 
 }
 
-export default React.memo(FolderRenameDialog);
+export default React.memo(FileRenameDialog);

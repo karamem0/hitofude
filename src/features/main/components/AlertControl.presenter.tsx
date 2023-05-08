@@ -55,4 +55,4 @@ function AlertControl(props: AlertControlProps) {
 
 }
 
-export default AlertControl;
+export default React.memo(AlertControl);

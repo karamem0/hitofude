@@ -15,13 +15,13 @@ import {
   Folder
 } from '../../../types/Model';
 
-import FileCopyDialog from './FileCopyDialog';
-import FileCreateDialog from './FileCreateDialog';
-import FileDeleteDialog from './FileDeleteDialog';
-import FileRenameDialog from './FileRenameDialog';
-import FolderCreateDialog from './FolderCreateDialog';
-import FolderDeleteDialog from './FolderDeleteDialog';
-import FolderRenameDialog from './FolderRenameDialog';
+import FileCopyDialog from './dialog/FileCopyDialog';
+import FileCreateDialog from './dialog/FileCreateDialog';
+import FileDeleteDialog from './dialog/FileDeleteDialog';
+import FileRenameDialog from './dialog/FileRenameDialog';
+import FolderCreateDialog from './dialog/FolderCreateDialog';
+import FolderDeleteDialog from './dialog/FolderDeleteDialog';
+import FolderRenameDialog from './dialog/FolderRenameDialog';
 
 interface DialogControlProps {
   action?: DialogAction
