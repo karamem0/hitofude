@@ -55,33 +55,33 @@ function MarkdownViewer(props: MarkdownViewerProps) {
         }
         h1 {
           margin-block: 0.5rem;
-          font-size: 1.75rem;
-          line-height: calc(1.75rem * 1.25);
+          font-size: ${themeConfig.fontSizeHero900};
+          line-height: calc(${themeConfig.fontSizeHero900} * 1.25);
         }
         h2 {
           margin-block: 0.5rem;
-          font-size: 1.6rem;
-          line-height: calc(1.6rem * 1.25);
+          font-size: ${themeConfig.fontSizeHero800};
+          line-height: calc(${themeConfig.fontSizeHero800} * 1.25);
         }
         h3 {
           margin-block: 0.5rem;
-          font-size: 1.45rem;
-          line-height: calc(1.45rem * 1.25);
+          font-size: ${themeConfig.fontSizeHero700};
+          line-height: calc(${themeConfig.fontSizeHero700} * 1.25);
         }
         h4 {
           margin-block: 0.5rem;
-          font-size: 1.3rem;
-          line-height: calc(1.3rem * 1.25);
+          font-size: ${themeConfig.fontSizeBase600};
+          line-height: calc(${themeConfig.fontSizeBase600} * 1.25);
         }
         h5 {
           margin-block: 0.5rem;
-          font-size: 1.15rem;
-          line-height: calc(1.15rem * 1.25);
+          font-size: ${themeConfig.fontSizeBase500};
+          line-height: calc(${themeConfig.fontSizeBase500} * 1.25);
         }
         h6 {
           margin-block: 0.5rem;
-          font-size: 1rem;
-          line-height: calc(1rem * 1.25);
+          font-size: ${themeConfig.fontSizeBase400};
+          line-height: calc(${themeConfig.fontSizeBase400} * 1.25);
         }
         li {
           margin-block: 0.5rem;

@@ -33,6 +33,11 @@ export interface File {
   parentId?: string
 }
 
+export interface FileContent {
+  content: string,
+  editing: boolean
+}
+
 export interface FileVersion {
   version: string,
   updatedDate?: Date,
@@ -54,6 +59,11 @@ export interface Folder {
 export interface MimeType {
   type: string,
   subtype: string
+}
+
+export enum ProgressType {
+  none = 'none',
+  save = 'save',
 }
 
 export interface SidePanelAction {

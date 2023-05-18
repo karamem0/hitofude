@@ -70,7 +70,11 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
           .at(-1);
         if (file) {
           dispatch(setExploreFile(file));
-          dispatch(setWorkFile(file));
+          dispatch(setWorkFile({
+            ...file,
+            content: await graph.getFileContent(file),
+            editing: false
+          }));
         } else {
           dispatch(setExploreFile());
           dispatch(setWorkFile());

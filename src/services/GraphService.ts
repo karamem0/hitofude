@@ -26,7 +26,7 @@ import {
   FileVersion,
   Folder
 } from '../types/Model';
-import { isSupportedFile } from '../utils/File';
+import { isMimeType } from '../utils/File';
 
 export class GraphService {
 
@@ -148,7 +148,7 @@ export class GraphService {
 
   async getFileContent(file: Pick<File, 'mimeType' | 'downloadUrl'>): Promise<string> {
     try {
-      if (!isSupportedFile(file)) {
+      if (!isMimeType(file, { type: 'text' })) {
         return '';
       }
       const url = typeof (file) === 'string' ? file : file.downloadUrl;

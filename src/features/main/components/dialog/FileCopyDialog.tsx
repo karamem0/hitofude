@@ -70,7 +70,11 @@ function FileCopyDialog(props: FileCopyDialogProps) {
         throw new Error();
       }
       dispatch(appendExploreFile(file));
-      dispatch(setWorkFile(file));
+      dispatch(setWorkFile({
+        ...file,
+        content: fileContent,
+        editing: false
+      }));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));

@@ -9,6 +9,7 @@
 import {
   DialogAction,
   File,
+  FileContent,
   Folder,
   SidePanelAction,
   TabMode
@@ -41,11 +42,6 @@ export const deleteExploreFolder = (payload?: Folder): Action => ({
 
 export const setDialogAction = (payload?: DialogAction): Action => ({
   type: ActionType.setDialogAction,
-  payload
-});
-
-export const setEditing = (payload?: boolean): Action => ({
-  type: ActionType.setEditing,
   payload
 });
 
@@ -104,7 +100,7 @@ export const setTabMode = (payload?: TabMode): Action => ({
   payload
 });
 
-export const setWorkFile = (payload?: File): Action => ({
+export const setWorkFile = (payload?: File & FileContent): Action => ({
   type: ActionType.setWorkFile,
   payload
 });

@@ -13,6 +13,7 @@ import { useStore } from '../../../../providers/StoreProvider';
 import {
   setDialogAction,
   setError,
+  setWorkFile,
   updateExploreFile
 } from '../../../../stores/Action';
 import { Event } from '../../../../types/Event';
@@ -29,7 +30,12 @@ function FileRenameDialog(props: FileRenameDialogProps) {
 
   const { value } = props;
 
-  const { dispatch } = useStore();
+  const {
+    dispatch,
+    state: {
+      workFile
+    }
+  } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
   const [ open, setOpen ] = React.useState<boolean>(true);
@@ -46,6 +52,9 @@ function FileRenameDialog(props: FileRenameDialogProps) {
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FileRenameDialogFormState) => {
     try {
+      if (!workFile) {
+        throw new Error();
+      }
       if (!data?.id) {
         throw new Error();
       }
@@ -55,6 +64,13 @@ function FileRenameDialog(props: FileRenameDialogProps) {
       setLoading(true);
       const file = await graph.renameFile(data, `${data.baseName}.md`);
       dispatch(updateExploreFile(file));
+      if (data.id === workFile.id) {
+        dispatch(setWorkFile({
+          ...workFile,
+          baseName: file.baseName,
+          fullName: file.fullName
+        }));
+      }
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -68,7 +84,8 @@ function FileRenameDialog(props: FileRenameDialogProps) {
   }, [
     dispatch,
     graph,
-    handleOpenChange
+    handleOpenChange,
+    workFile
   ]);
 
   return (

@@ -66,7 +66,11 @@ function SearchControl() {
       const folder = await graph.getFolderById(file.parentId);
       dispatch(setExploreFolder(folder));
       dispatch(setExploreFile(file));
-      dispatch(setWorkFile(file));
+      dispatch(setWorkFile({
+        ...file,
+        content: await graph.getFileContent(file),
+        editing: false
+      }));
       dispatch(setTabMode({
         type: TabType.explorer,
         open: true
@@ -86,7 +90,11 @@ function SearchControl() {
       }
       const file = await graph.getFileById(data.id);
       dispatch(setSearchFile(file));
-      dispatch(setWorkFile(file));
+      dispatch(setWorkFile({
+        ...file,
+        content: await graph.getFileContent(file),
+        editing: false
+      }));
     } catch (e) {
       dispatch(setError(e as Error));
     }

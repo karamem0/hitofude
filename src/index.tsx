@@ -16,13 +16,13 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-reac
 import { Global } from '@emotion/react';
 import ress from 'ress';
 
-import MsalControl from './common/components/MsalControl';
 import Error404Page from './features/error/pages/Error404Page';
 import Error500Page from './features/error/pages/Error500Page';
 import HomePage from './features/home/pages/HomePage';
 import MainPage from './features/main/pages/MainPage';
 import IntlProvider from './providers/IntlProvider';
 import MsalProvider from './providers/MsalProvider';
+import ProgressProvider from './providers/ProgressProvider';
 import ServiceProvider from './providers/ServiceProvider';
 import StoreProvider from './providers/StoreProvider';
 import TelemetryProvider from './providers/TelemetryProvider';
@@ -43,18 +43,18 @@ ReactDOM
                   element={(
                     <ErrorBoundary fallbackRender={(props) => <Error500Page {...props} />}>
                       <MsalProvider>
-                        <MsalControl>
-                          <AuthenticatedTemplate>
-                            <ServiceProvider>
-                              <StoreProvider>
+                        <AuthenticatedTemplate>
+                          <ServiceProvider>
+                            <StoreProvider>
+                              <ProgressProvider>
                                 <MainPage />
-                              </StoreProvider>
-                            </ServiceProvider>
-                          </AuthenticatedTemplate>
-                          <UnauthenticatedTemplate>
-                            <HomePage />
-                          </UnauthenticatedTemplate>
-                        </MsalControl>
+                              </ProgressProvider>
+                            </StoreProvider>
+                          </ServiceProvider>
+                        </AuthenticatedTemplate>
+                        <UnauthenticatedTemplate>
+                          <HomePage />
+                        </UnauthenticatedTemplate>
                       </MsalProvider>
                     </ErrorBoundary>
                 )} />

@@ -8,46 +8,23 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
-import { File } from '../../../types/Model';
 
 import Presenter from './MarkdownControl.presenter';
 
 interface MarkdownControlProps {
-  value: File,
+  content?: string,
+  editing?: boolean,
   onChange?: EventHandler<string>
 }
 
 function MarkdownControl(props: MarkdownControlProps) {
 
   const {
-    value,
+    content,
+    editing,
     onChange
   } = props;
-
-  const {
-    state: {
-      editing
-    }
-  } = useStore();
-
-  const { graph } = useService();
-
-  const [ content, setContent ] = React.useState<string>('');
-
-  React.useEffect(() => {
-    (async () => {
-      const fileContent = await graph.getFileContent(value);
-      setContent(fileContent);
-      onChange?.({}, fileContent);
-    })();
-  }, [
-    graph,
-    onChange,
-    value
-  ]);
 
   return (
     <Presenter

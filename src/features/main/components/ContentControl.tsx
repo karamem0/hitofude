@@ -8,11 +8,19 @@
 
 import React from 'react';
 
+import { useForm } from 'react-hook-form';
+
+import { useProgress } from '../../../providers/ProgressProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setEditing, setError, setSidePanelAction, setWorkFile } from '../../../stores/Action';
+import {
+  setError,
+  setSidePanelAction,
+  setWorkFile
+} from '../../../stores/Action';
 import { Event } from '../../../types/Event';
-import { SidePanelAction } from '../../../types/Model';
+import { ProgressType, SidePanelAction } from '../../../types/Model';
+import { ContentControlFormState } from '../types/Form';
 
 import Presenter from './ContentControl.presenter';
 
@@ -21,31 +29,53 @@ function ContentControl() {
   const {
     dispatch,
     state: {
-      editing,
       loading,
       workFile
     }
   } = useStore();
   const { graph } = useService();
+  const { setProgress } = useProgress();
+
+  const form = useForm<ContentControlFormState>();
 
   const handleCancel = React.useCallback(() => {
     try {
-      dispatch(setEditing(false));
+      if (!workFile) {
+        throw new Error();
+      }
+      dispatch(setWorkFile({
+        ...workFile,
+        editing: false
+      }));
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch
+    dispatch,
+    workFile
+  ]);
+
+  const handleChange = React.useCallback((_?: Event, data?: string) => {
+    form.setValue('content', data || '');
+  }, [
+    form
   ]);
 
   const handleEdit = React.useCallback(() => {
     try {
-      dispatch(setEditing(true));
+      if (!workFile) {
+        throw new Error();
+      }
+      dispatch(setWorkFile({
+        ...workFile,
+        editing: true
+      }));
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch
+    dispatch,
+    workFile
   ]);
 
   const handleOpenSidePanel = React.useCallback((_?: Event, data?: SidePanelAction) => {
@@ -59,26 +89,37 @@ function ContentControl() {
       if (!workFile) {
         throw new Error();
       }
-      const file = await graph.setFileContent(workFile, data || '');
+      setProgress(ProgressType.save);
+      const file = await Promise.resolve()
+        .then(() => graph.setFileContent(workFile, data || ''))
+        .then((file) => file ? graph.getFileById(file.id) : undefined);
       if (!file) {
         throw new Error();
       }
-      dispatch(setWorkFile(file));
+      dispatch(setWorkFile({
+        ...file,
+        content: data || '',
+        editing: false
+      }));
     } catch (e) {
       dispatch(setError(e as Error));
+    } finally {
+      setProgress();
     }
   }, [
     dispatch,
     graph,
+    setProgress,
     workFile
   ]);
 
   return (
     <Presenter
-      editing={editing}
+      form={form}
       loading={loading}
       value={workFile}
       onCancel={handleCancel}
+      onChange={handleChange}
       onEdit={handleEdit}
       onOpenSidePanel={handleOpenSidePanel}
       onSave={handleSave} />

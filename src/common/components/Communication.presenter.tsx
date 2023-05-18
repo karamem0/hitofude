@@ -53,8 +53,8 @@ function Communication(props: CommunicationProps) {
         `}>
         <Text
           css={css`
-            font-size: 2rem;
-            line-height: calc(2rem * 1.25);
+            font-size: ${themeConfig.fontSizeHero800};
+            line-height: calc(${themeConfig.fontSizeHero800} * 1.25);
           `}>
           {title}
         </Text>

@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import {
   FormattedDate,
   FormattedMessage,
@@ -30,13 +30,15 @@ import { HistoryIcon, MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
 
 import Communication from '../../../common/components/Communication';
 import Loader from '../../../common/components/Loader';
+import { themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import {
   File,
+  FileContent,
   SidePanelAction,
   SidePanelType
 } from '../../../types/Model';
-import { isImageFile, isMarkdownFile, isSupportedFile } from '../../../utils/File';
+import { isMimeType, isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
 import { ContentControlFormState } from '../types/Form';
 
@@ -44,10 +46,11 @@ import ImageControl from './ImageControl';
 import MarkdownControl from './MarkdownControl';
 
 interface ContentControlProps {
+  form: UseFormReturn<ContentControlFormState, unknown>,
   loading?: boolean,
-  editing?: boolean,
-  value?: File,
+  value?: File & FileContent,
   onCancel?: EventHandler,
+  onChange?: EventHandler<string>,
   onEdit?: EventHandler,
   onOpenSidePanel?: EventHandler<SidePanelAction>,
   onSave?: EventHandler<string>
@@ -56,17 +59,17 @@ interface ContentControlProps {
 function ContentControl(props: ContentControlProps) {
 
   const {
+    form,
     loading,
-    editing,
     value,
     onCancel,
+    onChange,
     onEdit,
     onOpenSidePanel,
     onSave
   } = props;
 
   const intl = useIntl();
-  const form = useForm<ContentControlFormState>();
 
   return (
     <section
@@ -117,7 +120,7 @@ function ContentControl(props: ContentControlProps) {
                   grid-gap: 0.5rem;
                   padding: 1rem;
                   @media (width >= 960px) {
-                    grid-template-rows: 3rem 1fr;
+                    grid-template-rows: auto 1fr;
                     grid-template-columns: 1fr auto;
                   }
                 `}
@@ -135,9 +138,9 @@ function ContentControl(props: ContentControlProps) {
                   <Text
                     css={css`
                       overflow: hidden;
-                      font-size: 2rem;
+                      font-size: ${themeConfig.fontSizeHero900};
                       font-weight: bold;
-                      line-height: calc(2rem * 1.25);
+                      line-height: calc(${themeConfig.fontSizeHero900} * 1.25);
                       text-overflow: ellipsis;
                       white-space: nowrap;
                     `}>
@@ -158,7 +161,7 @@ function ContentControl(props: ContentControlProps) {
                     }
                   `}>
                   {
-                    editing ? (
+                    value.editing ? (
                       <div
                         css={css`
                           display: flex;
@@ -182,7 +185,7 @@ function ContentControl(props: ContentControlProps) {
                       <div>
                         <Button
                           aria-label={intl.formatMessage(messages.Edit)}
-                          disabled={!isMarkdownFile(value)}
+                          disabled={!isMimeType(value, { subtype: 'markdown' })}
                           title={intl.formatMessage(messages.Edit)}
                           onClick={onEdit}>
                           <FormattedMessage {...messages.Edit} />
@@ -259,16 +262,17 @@ function ContentControl(props: ContentControlProps) {
                   `}>
                   {
                   (() => {
-                    if (isImageFile(value)) {
+                    if (isMimeType(value, { type: 'image' })) {
                       return (
                         <ImageControl value={value} />
                       );
                     }
-                    if (isMarkdownFile(value)) {
+                    if (isMimeType(value, { subtype: 'markdown' })) {
                       return (
                         <MarkdownControl
-                          value={value}
-                          onChange={(_, data) => form.setValue('content', data || '')} />
+                          content={value.content}
+                          editing={value.editing}
+                          onChange={onChange} />
                       );
                     }
                     return null;

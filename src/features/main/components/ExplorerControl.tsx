@@ -72,12 +72,17 @@ function ExplorerControl() {
         throw new Error();
       }
       dispatch(setExploreFile(data));
-      dispatch(setWorkFile(data));
+      dispatch(setWorkFile({
+        ...data,
+        content: await graph.getFileContent(data),
+        editing: false
+      }));
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch
+    dispatch,
+    graph
   ]);
 
   const handleSelectFolder = React.useCallback(async (_?: Event, data?: string) => {
@@ -90,7 +95,11 @@ function ExplorerControl() {
       const exploreFile = exploreFolder.files?.filter((item) => includeUnsupportedFiles || isSupportedFile(item)).at(0);
       if (exploreFile) {
         dispatch(setExploreFile(exploreFile));
-        dispatch(setWorkFile(exploreFile));
+        dispatch(setWorkFile({
+          ...exploreFile,
+          content: await graph.getFileContent(exploreFile),
+          editing: false
+        }));
       } else {
         dispatch(setExploreFile());
         dispatch(setWorkFile());
@@ -115,7 +124,11 @@ function ExplorerControl() {
           const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
           if (file) {
             dispatch(setExploreFile(file));
-            dispatch(setWorkFile(file));
+            dispatch(setWorkFile({
+              ...file,
+              content: await graph.getFileContent(file),
+              editing: false
+            }));
           } else {
             dispatch(setExploreFile());
             dispatch(setWorkFile());
@@ -128,7 +141,8 @@ function ExplorerControl() {
   }, [
     dispatch,
     exploreFile,
-    exploreFolder
+    exploreFolder,
+    graph
   ]);
   return (
     <Presenter

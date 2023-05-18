@@ -10,6 +10,7 @@ import { StorageService } from '../services/StorageService';
 import {
   DialogAction,
   File,
+  FileContent,
   Folder,
   SidePanelAction,
   TabMode
@@ -103,13 +104,6 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         dialogAction: payload
       };
     }
-    case ActionType.setEditing: {
-      const payload = action.payload as boolean | undefined;
-      return {
-        ...state,
-        editing: payload
-      };
-    }
     case ActionType.setError: {
       const payload = action.payload as Error | undefined;
       return {
@@ -192,10 +186,9 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       };
     }
     case ActionType.setWorkFile: {
-      const payload = action.payload as File | undefined;
+      const payload = action.payload as File & FileContent | undefined;
       return {
         ...state,
-        editing: false,
         workFile: payload
       };
     }

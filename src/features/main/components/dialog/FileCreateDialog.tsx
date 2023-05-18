@@ -59,7 +59,11 @@ function FileCreateDialog() {
         throw new Error();
       }
       dispatch(appendExploreFile(file));
-      dispatch(setWorkFile(file));
+      dispatch(setWorkFile({
+        ...file,
+        content: '',
+        editing: false
+      }));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));

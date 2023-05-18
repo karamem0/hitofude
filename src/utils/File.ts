@@ -33,14 +33,19 @@ export function getMimeType(fileName: string | null | undefined, mimeType: strin
   };
 }
 
-export function isImageFile(value?: Pick<File, 'mimeType'>): boolean {
-  return !!value && value.mimeType?.type === 'image';
-}
-
-export function isMarkdownFile(value?: Pick<File, 'mimeType'>): boolean {
-  return !!value && value.mimeType?.subtype === 'markdown';
+export function isMimeType(value?: Pick<File, 'mimeType'>, option?: { type?: string, subtype?: string }): boolean {
+  if (!value?.mimeType) {
+    return false;
+  }
+  if (option && value.mimeType.type === option.type) {
+    return true;
+  }
+  if (option && value.mimeType.subtype === option.subtype) {
+    return true;
+  }
+  return false;
 }
 
 export function isSupportedFile(value?: Pick<File, 'mimeType'>): boolean {
-  return isImageFile(value) || isMarkdownFile(value);
+  return isMimeType(value, { type: 'image' }) || isMimeType(value, { subtype: 'markdown' });
 }

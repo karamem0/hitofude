@@ -94,15 +94,16 @@ function HomePage(props: HomePageProps) {
             <Text
               as="h1"
               css={css`
-                font-size: 3rem;
-                line-height: calc(3rem * 1.25);
-                color: ${themeConfig.colorBrandBackgroundInverted};
+                font-size: ${themeConfig.fontSizeHero900};
+                font-weight: bold;
+                line-height: calc(${themeConfig.fontSizeHero900} * 1.25);
+                color: ${themeConfig.colorBrandForeground1};
               `}>
               <FormattedMessage {...messages.AppName} />
             </Text>
             <Text
               css={css`
-                color: ${themeConfig.colorBrandBackgroundInverted};
+                color: ${themeConfig.colorBrandForeground1};
               `}>
               <FormattedMessage {...messages.AppDescription} />
             </Text>
@@ -138,9 +139,9 @@ function HomePage(props: HomePageProps) {
           as="h2"
           css={css`
           padding: 2rem 0;
-          font-size: 1.6rem;
+          font-size: ${themeConfig.fontSizeBase600};
           font-weight: bold;
-          line-height: calc(1.6rem * 1.25);
+          line-height: calc(${themeConfig.fontSizeBase600} * 1.25);
         `}>
           <FormattedMessage {...messages.FeatureTitle} />
         </Text>

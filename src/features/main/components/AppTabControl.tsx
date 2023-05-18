@@ -49,7 +49,11 @@ function AppTabControl() {
     dispatch(setExploreFolder(exploreFolder));
     if (exploreFile) {
       dispatch(setExploreFile(exploreFile));
-      dispatch(setWorkFile(exploreFile));
+      dispatch(setWorkFile({
+        ...exploreFile,
+        content: await graph.getFileContent(exploreFile),
+        editing: false
+      }));
     } else {
       dispatch(setExploreFile());
       dispatch(setWorkFile());

@@ -9,6 +9,7 @@
 import {
   DialogAction,
   File,
+  FileContent,
   Folder,
   SidePanelAction,
   TabMode
@@ -25,7 +26,6 @@ export enum ActionType {
   deleteExploreFile = 'deleteExploreFile',
   deleteExploreFolder = 'deleteExploreFolder',
   setDialogAction = 'setDialogAction',
-  setEditing = 'setEditing',
   setError = 'setError',
   setExploreFile = 'setExploreFile',
   setExploreFolder = 'setExploreFolder',
@@ -47,7 +47,6 @@ export type DispatchAction<T> = (payload: T) => void;
 export interface State {
   dialogAction?: DialogAction,
   error?: Error,
-  editing?: boolean,
   exploreFile?: File,
   exploreFolder?: Folder,
   includeUnsupportedFiles?: boolean,
@@ -58,5 +57,5 @@ export interface State {
   searchQuery?: string,
   sidePanelAction?: SidePanelAction,
   tabMode?: TabMode,
-  workFile?: File
+  workFile?: File & FileContent
 }

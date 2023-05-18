@@ -10,7 +10,7 @@ import React from 'react';
 
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
-import { isAbsoluteUrl } from '../../../../utils/Url';
+import { getParentUrl, isAbsoluteUrl } from '../../../../utils/Url';
 
 import Presenter from './MarkdownImgRenderer.presenter';
 
@@ -30,8 +30,8 @@ function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
 
   const {
     state: {
-      exploreFolder,
-      rootFolder
+      rootFolder,
+      workFile
     }
   } = useStore();
   const { graph } = useService();
@@ -40,10 +40,10 @@ function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
 
   React.useEffect(() => {
     (async () => {
-      if (!exploreFolder?.webUrl) {
+      if (!rootFolder?.webUrl) {
         return;
       }
-      if (!rootFolder?.webUrl) {
+      if (!workFile?.webUrl) {
         return;
       }
       if (!src) {
@@ -52,17 +52,17 @@ function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
       if (isAbsoluteUrl(src)) {
         setUrl(src);
       } else {
-        const absoluteUrl = new URL(src, `${exploreFolder.webUrl}/`).href;
+        const absoluteUrl = new URL(src, `${getParentUrl(workFile.webUrl)}/`).href;
         const relativeUrl = absoluteUrl.substring(absoluteUrl.indexOf(rootFolder.webUrl) + rootFolder.webUrl.length);
         const file = await graph.getFileByUrl(relativeUrl);
         setUrl(file.downloadUrl);
       }
     })();
   }, [
-    exploreFolder,
     graph,
     rootFolder,
-    src
+    src,
+    workFile
   ]);
 
   return (
