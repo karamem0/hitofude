@@ -10,7 +10,7 @@ declare module 'ress';
 
 interface ImportMeta {
   readonly env: {
-    readonly VITE_APPLICATIONINSIGHTS_INSTRUMENTATION_KEY: string,
+    readonly VITE_TELEMETRY_CONNECTION_STRING: string,
     readonly VITE_MSAL_AUTHORITY: string,
     readonly VITE_MSAL_CLIENT_ID: string,
     readonly VITE_MSAL_TENANT_ID: string

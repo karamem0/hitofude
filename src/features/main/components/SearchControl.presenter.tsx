@@ -84,7 +84,7 @@ function SearchControl(props: SearchControlProps) {
         onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
         <Controller
           control={form.control}
-          defaultValue={searchQuery || ''}
+          defaultValue={searchQuery ?? ''}
           name="query"
           render={({ field }) => (
             <Input

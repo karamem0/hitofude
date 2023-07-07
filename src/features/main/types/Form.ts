@@ -33,10 +33,6 @@ export interface FolderRenameDialogFormState {
   name?: string
 }
 
-export interface ContentControlFormState {
-  content: string
-}
-
 export interface SearchControlFormState {
   query?: string
 }

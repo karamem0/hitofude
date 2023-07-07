@@ -43,6 +43,7 @@ const messages = defineMessages({
   RenameFolder: { defaultMessage: 'Rename folder' },
   RootFolder: { defaultMessage: 'My files' },
   Save: { defaultMessage: 'Save' },
+  SaveAndClose: { defaultMessage: 'Save and Close' },
   Search: { defaultMessage: 'Search' },
   ShowUnsupportedFiles: { defaultMessage: 'Show other files' },
   Size: { defaultMessage: 'Size' },

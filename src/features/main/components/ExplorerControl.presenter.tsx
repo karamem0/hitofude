@@ -132,7 +132,7 @@ function ExplorerControl(props: ExplorerControlProps) {
                 ))
               }
               {
-                exploreFolder.files?.filter((item) => includeUnsupportedFiles || isSupportedFile(item)).map((item) => (
+                exploreFolder.files?.filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item)).map((item) => (
                   <TreeItemControl
                     key={item.id}
                     menuEnabled={isSupportedFile(item)}

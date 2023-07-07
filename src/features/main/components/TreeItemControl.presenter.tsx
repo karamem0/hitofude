@@ -60,6 +60,7 @@ function TreeItemControl(props: TreeItemControlProps) {
         align-items: center;
         justify-content: start;
         cursor: pointer;
+        user-select: none;
         & > div:nth-of-type(2) {
           display: none;
         }

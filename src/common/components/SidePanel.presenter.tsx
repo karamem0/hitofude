@@ -58,7 +58,7 @@ function SidePanel(props: SidePanelProps) {
               onClick={(e) => onOpenChange?.(e, false)} />
             <div
               css={css`
-                width: ${width || '20rem'};
+                width: ${width ?? '20rem'};
                 max-width: calc(100vw - 2rem);
                 background-color: #fff;
                 box-shadow: rgb(0 0 0 / 35%) 0 0 2rem 0;

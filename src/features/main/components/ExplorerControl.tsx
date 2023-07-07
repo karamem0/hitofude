@@ -92,7 +92,7 @@ function ExplorerControl() {
       }
       const exploreFolder = await graph.getFolderById(data);
       dispatch(setExploreFolder(exploreFolder));
-      const exploreFile = exploreFolder.files?.filter((item) => includeUnsupportedFiles || isSupportedFile(item)).at(0);
+      const exploreFile = exploreFolder.files?.filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item)).at(0);
       if (exploreFile) {
         dispatch(setExploreFile(exploreFile));
         dispatch(setWorkFile({

@@ -32,10 +32,10 @@ function SidePanel(props: SidePanelProps) {
     onOpenChange
   } = props;
 
-  const [ open, setOpen ] = React.useState<boolean>(defaultOpen || false);
+  const [ open, setOpen ] = React.useState<boolean>(defaultOpen ?? false);
 
   const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
-    setOpen(data || false);
+    setOpen(data ?? false);
     onOpenChange?.(e, data);
   }, [ onOpenChange ]);
 

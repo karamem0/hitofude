@@ -12,11 +12,11 @@ import { ReactPlugin, withAITracking } from '@microsoft/applicationinsights-reac
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
 const reactPlugin = new ReactPlugin();
-const instrumentationKey = import.meta.env.VITE_APPLICATIONINSIGHTS_INSTRUMENTATION_KEY;
-if (instrumentationKey) {
+const connectionString = import.meta.env.VITE_TELEMETRY_CONNECTION_STRING;
+if (connectionString) {
   const appInsights = new ApplicationInsights({
     config: {
-      instrumentationKey,
+      connectionString,
       enableAutoRouteTracking: true,
       extensions: [ reactPlugin ]
     }

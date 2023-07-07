@@ -8,7 +8,6 @@
 
 import React from 'react';
 
-import { UseFormReturn } from 'react-hook-form';
 import {
   FormattedDate,
   FormattedMessage,
@@ -40,26 +39,23 @@ import {
 } from '../../../types/Model';
 import { isMimeType, isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
-import { ContentControlFormState } from '../types/Form';
 
 import ImageControl from './ImageControl';
 import MarkdownControl from './MarkdownControl';
 
 interface ContentControlProps {
-  form: UseFormReturn<ContentControlFormState, unknown>,
   loading?: boolean,
   value?: File & FileContent,
   onCancel?: EventHandler,
   onChange?: EventHandler<string>,
   onEdit?: EventHandler,
   onOpenSidePanel?: EventHandler<SidePanelAction>,
-  onSave?: EventHandler<string>
+  onSave?: EventHandler<boolean>
 }
 
 function ContentControl(props: ContentControlProps) {
 
   const {
-    form,
     loading,
     value,
     onCancel,
@@ -112,7 +108,7 @@ function ContentControl(props: ContentControlProps) {
               );
             }
             return (
-              <form
+              <div
                 css={css`
                   display: grid;
                   grid-template-rows: auto auto 1fr;
@@ -123,8 +119,7 @@ function ContentControl(props: ContentControlProps) {
                     grid-template-rows: auto 1fr;
                     grid-template-columns: 1fr auto;
                   }
-                `}
-                onSubmit={form.handleSubmit((formState) => onSave?.({}, formState.content))}>
+                `}>
                 <div
                   css={css`
                     display: grid;
@@ -171,7 +166,7 @@ function ContentControl(props: ContentControlProps) {
                           appearance="primary"
                           aria-label={intl.formatMessage(messages.Save)}
                           title={intl.formatMessage(messages.Save)}
-                          type="submit">
+                          onClick={(e) => onSave?.(e, false)}>
                           <FormattedMessage {...messages.Save} />
                         </Button>
                         <Button
@@ -279,7 +274,7 @@ function ContentControl(props: ContentControlProps) {
                   })()
                 }
                 </div>
-              </form>
+              </div>
             );
           })()
         }

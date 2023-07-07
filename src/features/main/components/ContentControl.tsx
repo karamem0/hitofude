@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useForm } from 'react-hook-form';
-
 import { useProgress } from '../../../providers/ProgressProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
@@ -20,7 +18,6 @@ import {
 } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
 import { ProgressType, SidePanelAction } from '../../../types/Model';
-import { ContentControlFormState } from '../types/Form';
 
 import Presenter from './ContentControl.presenter';
 
@@ -36,7 +33,7 @@ function ContentControl() {
   const { graph } = useService();
   const { setProgress } = useProgress();
 
-  const form = useForm<ContentControlFormState>();
+  const [ content, setContent ] = React.useState<string>('');
 
   const handleCancel = React.useCallback(() => {
     try {
@@ -56,10 +53,8 @@ function ContentControl() {
   ]);
 
   const handleChange = React.useCallback((_?: Event, data?: string) => {
-    form.setValue('content', data || '');
-  }, [
-    form
-  ]);
+    setContent(data ?? '');
+  }, []);
 
   const handleEdit = React.useCallback(() => {
     try {
@@ -84,22 +79,22 @@ function ContentControl() {
     dispatch
   ]);
 
-  const handleSave = React.useCallback(async (_?: Event, data?: string) => {
+  const handleSave = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
       if (!workFile) {
         throw new Error();
       }
       setProgress(ProgressType.save);
       const file = await Promise.resolve()
-        .then(() => graph.setFileContent(workFile, data || ''))
+        .then(() => graph.setFileContent(workFile, content))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
       if (!file) {
         throw new Error();
       }
       dispatch(setWorkFile({
         ...file,
-        content: data || '',
-        editing: false
+        content,
+        editing: data ?? false
       }));
     } catch (e) {
       dispatch(setError(e as Error));
@@ -107,15 +102,21 @@ function ContentControl() {
       setProgress();
     }
   }, [
+    content,
     dispatch,
     graph,
     setProgress,
     workFile
   ]);
 
+  React.useEffect(() => {
+    setContent(workFile?.content ?? '');
+  }, [
+    workFile?.content
+  ]);
+
   return (
     <Presenter
-      form={form}
       loading={loading}
       value={workFile}
       onCancel={handleCancel}

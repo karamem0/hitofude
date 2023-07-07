@@ -97,13 +97,13 @@ function HomePage(props: HomePageProps) {
                 font-size: ${themeConfig.fontSizeHero900};
                 font-weight: bold;
                 line-height: calc(${themeConfig.fontSizeHero900} * 1.25);
-                color: ${themeConfig.colorBrandForeground1};
+                color: ${themeConfig.colorNeutralForeground2};
               `}>
               <FormattedMessage {...messages.AppName} />
             </Text>
             <Text
               css={css`
-                color: ${themeConfig.colorBrandForeground1};
+                color: ${themeConfig.colorNeutralForeground2};
               `}>
               <FormattedMessage {...messages.AppDescription} />
             </Text>

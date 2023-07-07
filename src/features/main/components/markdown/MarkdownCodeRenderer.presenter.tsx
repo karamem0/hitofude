@@ -26,8 +26,8 @@ function MarkdownCodeRenderer(props: MarkdownCodeRendererProps) {
     inline
   } = props;
 
-  const match = /language-(\w+)/.exec(className || '');
-  const lang = match && match[1] ? match[1] : '';
+  const match = /language-(\w+)/.exec(className ?? '');
+  const lang = match?.at(1) ?? '';
 
   return inline ? (
     <code className={className}>

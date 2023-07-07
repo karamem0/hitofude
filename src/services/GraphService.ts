@@ -40,7 +40,7 @@ export class GraphService {
     try {
       const data = await this.client
         .api(`/me/drive/items/${folder.id}:/${name}:/content?@microsoft.graph.conflictBehavior=fail`)
-        .put(content || '');
+        .put(content ?? '');
       const value = data as DriveItem;
       return mapper.map(value, 'DriveItem', 'File');
     } catch (e) {

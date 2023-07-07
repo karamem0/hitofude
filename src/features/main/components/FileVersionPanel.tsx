@@ -32,7 +32,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
   const [ items, setItems ] = React.useState<FileVersion[]>();
 
   const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data || false;
+    const open = data ?? false;
     if (!open) {
       dispatch(setSidePanelAction());
     }

@@ -44,7 +44,7 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
   const [ open, setOpen ] = React.useState<boolean>(true);
 
   const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data || false;
+    const open = data ?? false;
     setOpen(open);
     if (!open) {
       dispatch(setDialogAction());
@@ -64,8 +64,8 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       await graph.deleteExploreFile(value);
       dispatch(deleteExploreFile(value));
       if (value.id === exploreFile?.id) {
-        const file = (exploreFolder.files || [])
-          .filter((item) => includeUnsupportedFiles || isSupportedFile(item))
+        const file = (exploreFolder.files ?? [])
+          .filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item))
           .filter((item) => item.id !== value.id)
           .at(-1);
         if (file) {

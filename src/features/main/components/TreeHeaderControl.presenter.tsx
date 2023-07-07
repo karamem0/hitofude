@@ -51,6 +51,7 @@ function TreeHeaderControl(props: TreeHeaderControlProps) {
         justify-content: start;
         padding: 0 0.5rem;
         font-weight: bold;
+        user-select: none;
         & > div:nth-of-type(3) {
           display: none;
         }

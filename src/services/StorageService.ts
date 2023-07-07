@@ -17,21 +17,21 @@ export class StorageService {
   }
 
   getExploreFileId(): string | undefined {
-    return this.storage.getItem('exploreFileId') || undefined;
+    return this.storage.getItem('exploreFileId') ?? undefined;
   }
 
   getExploreFolderId(): string | undefined {
-    return this.storage.getItem('exploreFolderId') || undefined;
+    return this.storage.getItem('exploreFolderId') ?? undefined;
   }
 
   getIncludeUnsupportedFiles(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('includeUnsupportedFiles') || undefined));
+    return Boolean(Number(this.storage.getItem('includeUnsupportedFiles') ?? undefined));
   }
 
   getTabMode(): TabMode | undefined {
     return {
       type: Number(this.storage.getItem('tabType')) || TabType.explorer,
-      open: Boolean(Number(this.storage.getItem('tabOpen') || true))
+      open: Boolean(Number(this.storage.getItem('tabOpen') ?? true))
     };
   }
 

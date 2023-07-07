@@ -1,13 +1,13 @@
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: development
     steps:
       - name: Checkout repos
         uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
         shell: pwsh
         run: |
           $content = Get-Content -Path .env
-          $content = $content -replace "{{APPLICATIONINSIGHTS_INSTRUMENTATION_KEY}}", "${{secrets.APPLICATIONINSIGHTS_INSTRUMENTATION_KEY}}"
+          $content = $content -replace "{{TELEMETRY_CONNECTION_STRING}}", "${{secrets.TELEMETRY_CONNECTION_STRING}}"
           $content = $content -replace "{{MSAL_AUTHORITY}}", "${{secrets.MSAL_AUTHORITY}}"
           $content = $content -replace "{{MSAL_CLIENT_ID}}", "${{secrets.MSAL_CLIENT_ID}}"
           $content = $content -replace "{{PUBLIC_URL}}", "${{secrets.PUBLIC_URL}}"
@@ -37,7 +37,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: development
     steps:
       - name: Download build files
         uses: actions/download-artifact@v3

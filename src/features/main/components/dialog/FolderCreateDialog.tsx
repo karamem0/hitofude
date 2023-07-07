@@ -33,7 +33,7 @@ function FolderCreateDialog() {
   const [ open, setOpen ] = React.useState<boolean>(true);
 
   const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data || false;
+    const open = data ?? false;
     setOpen(open);
     if (!open) {
       dispatch(setDialogAction());
