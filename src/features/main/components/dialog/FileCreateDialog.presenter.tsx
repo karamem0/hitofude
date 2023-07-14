@@ -14,7 +14,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { css } from '@emotion/react';
 import {
   Button,
-  Dialog,
   DialogActions,
   DialogBody,
   DialogContent,
@@ -24,14 +23,13 @@ import {
   Input
 } from '@fluentui/react-components';
 
+import ModalDialog from '../../../../common/components/ModalDialog';
 import { EventHandler } from '../../../../types/Event';
 import messages from '../../messages';
 import { FileCreateDialogFormState } from '../../types/Form';
 
 interface FileCreateDialogProps {
   loading?: boolean,
-  open?: boolean,
-  onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FileCreateDialogFormState>
 }
 
@@ -39,8 +37,6 @@ function FileCreateDialog(props: FileCreateDialogProps) {
 
   const {
     loading,
-    open,
-    onOpenChange,
     onSubmit
   } = props;
 
@@ -48,10 +44,7 @@ function FileCreateDialog(props: FileCreateDialogProps) {
   const form = useForm<FileCreateDialogFormState>();
 
   return (
-    <Dialog
-      modalType="modal"
-      open={open}
-      onOpenChange={(e, data) => onOpenChange?.(e, data.open)}>
+    <ModalDialog>
       <DialogSurface>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
@@ -107,7 +100,7 @@ function FileCreateDialog(props: FileCreateDialogProps) {
           </DialogBody>
         </form>
       </DialogSurface>
-    </Dialog>
+    </ModalDialog>
   );
 
 }

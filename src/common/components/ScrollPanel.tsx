@@ -36,7 +36,7 @@ function ScrollPanel(props: ScrollPanelProps) {
 
   const handleResize = React.useCallback(() => {
     const { current: element } = ref;
-    if (!element) {
+    if (element == null) {
       return;
     }
     setState({
@@ -47,7 +47,7 @@ function ScrollPanel(props: ScrollPanelProps) {
 
   React.useEffect(() => {
     const { current: element } = ref;
-    if (!element) {
+    if (element == null) {
       return;
     }
     const observer = new ResizeObserver(handleResize);

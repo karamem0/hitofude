@@ -75,7 +75,13 @@ function MeControl(props: MeControlProps) {
               </Text>
             </MenuGroupHeader>
             <MenuItem
-              icon={<SignOutIcon />}
+              icon={(
+                <SignOutIcon
+                  css={css`
+                    font-size: 1rem;
+                    line-height: 1rem;
+                  `} />
+              )}
               onClick={onSignOut}>
               <FormattedMessage {...messages.SignOut} />
             </MenuItem>

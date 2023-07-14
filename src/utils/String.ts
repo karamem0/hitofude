@@ -10,10 +10,10 @@ export function compare(a: string | null | undefined, b: string | null | undefin
   if (a === b) {
     return 0;
   }
-  if (!a) {
+  if (a == null) {
     return 1;
   }
-  if (!b) {
+  if (b == null) {
     return -1;
   }
   return String.prototype.localeCompare.call(a, b);

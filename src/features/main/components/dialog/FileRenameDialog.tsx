@@ -16,6 +16,7 @@ import {
   setWorkFile,
   updateExploreFile
 } from '../../../../stores/Action';
+import { ArgumentNullError, FolderNotFoundError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { File } from '../../../../types/Model';
 import { FileRenameDialogFormState } from '../../types/Form';
@@ -38,28 +39,17 @@ function FileRenameDialog(props: FileRenameDialogProps) {
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
-  const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data ?? false;
-    setOpen(open);
-    if (!open) {
-      dispatch(setDialogAction());
-    }
-  }, [
-    dispatch
-  ]);
-
-  const handleSubmit = React.useCallback(async (e?: Event, data?: FileRenameDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_?: Event, data?: FileRenameDialogFormState) => {
     try {
-      if (!workFile) {
-        throw new Error();
+      if (data?.id == null) {
+        throw new ArgumentNullError();
       }
-      if (!data?.id) {
-        throw new Error();
+      if (data?.baseName == null) {
+        throw new ArgumentNullError();
       }
-      if (!data?.baseName) {
-        throw new Error();
+      if (workFile == null) {
+        throw new FolderNotFoundError();
       }
       setLoading(true);
       const file = await graph.renameFile(data, `${data.baseName}.md`);
@@ -79,21 +69,18 @@ function FileRenameDialog(props: FileRenameDialogProps) {
       throw e;
     } finally {
       setLoading(false);
-      handleOpenChange?.(e, false);
+      dispatch(setDialogAction());
     }
   }, [
     dispatch,
     graph,
-    handleOpenChange,
     workFile
   ]);
 
   return (
     <Presenter
       loading={loading}
-      open={open}
       value={value}
-      onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 

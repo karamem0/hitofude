@@ -15,6 +15,7 @@ import {
   setDialogAction,
   setError
 } from '../../../../stores/Action';
+import { ArgumentNullError, FolderNotFoundError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { FolderCreateDialogFormState } from '../../types/Form';
 
@@ -30,25 +31,14 @@ function FolderCreateDialog() {
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
-  const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data ?? false;
-    setOpen(open);
-    if (!open) {
-      dispatch(setDialogAction());
-    }
-  }, [
-    dispatch
-  ]);
-
-  const handleSubmit = React.useCallback(async (e?: Event, data?: FolderCreateDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_?: Event, data?: FolderCreateDialogFormState) => {
     try {
-      if (!exploreFolder) {
-        throw new Error();
+      if (data?.name == null) {
+        throw new ArgumentNullError();
       }
-      if (!data?.name) {
-        throw new Error();
+      if (exploreFolder == null) {
+        throw new FolderNotFoundError();
       }
       setLoading(true);
       const folder = await graph.createFolder(exploreFolder, `${data.name}`);
@@ -61,20 +51,17 @@ function FolderCreateDialog() {
       throw e;
     } finally {
       setLoading(false);
-      handleOpenChange?.(e, false);
+      dispatch(setDialogAction());
     }
   }, [
     dispatch,
     graph,
-    handleOpenChange,
     exploreFolder
   ]);
 
   return (
     <Presenter
       loading={loading}
-      open={open}
-      onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 

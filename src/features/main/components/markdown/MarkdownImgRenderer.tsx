@@ -10,6 +10,7 @@ import React from 'react';
 
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
+import { FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
 import { getParentUrl, isAbsoluteUrl } from '../../../../utils/Url';
 
 import Presenter from './MarkdownImgRenderer.presenter';
@@ -40,13 +41,13 @@ function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
 
   React.useEffect(() => {
     (async () => {
-      if (!rootFolder?.webUrl) {
-        return;
+      if (rootFolder?.webUrl == null) {
+        throw new FolderNotFoundError();
       }
-      if (!workFile?.webUrl) {
-        return;
+      if (workFile?.webUrl == null) {
+        throw new FileNotFoundError();
       }
-      if (!src) {
+      if (src == null) {
         return;
       }
       if (isAbsoluteUrl(src)) {

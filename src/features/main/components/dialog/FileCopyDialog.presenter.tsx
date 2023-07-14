@@ -14,7 +14,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { css } from '@emotion/react';
 import {
   Button,
-  Dialog,
   DialogActions,
   DialogBody,
   DialogContent,
@@ -24,6 +23,7 @@ import {
   Input
 } from '@fluentui/react-components';
 
+import ModalDialog from '../../../../common/components/ModalDialog';
 import { EventHandler } from '../../../../types/Event';
 import { File } from '../../../../types/Model';
 import messages from '../../messages';
@@ -31,9 +31,7 @@ import { FileCopyDialogFormState } from '../../types/Form';
 
 interface FileCopyDialogProps {
   loading?: boolean,
-  open?: boolean,
   value?: File,
-  onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FileCopyDialogFormState>
 }
 
@@ -41,9 +39,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
 
   const {
     loading,
-    open,
     value,
-    onOpenChange,
     onSubmit
   } = props;
 
@@ -58,10 +54,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
   });
 
   return (
-    <Dialog
-      modalType="modal"
-      open={open}
-      onOpenChange={(e, data) => onOpenChange?.(e, data.open)}>
+    <ModalDialog>
       <DialogSurface>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
@@ -119,7 +112,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
           </DialogBody>
         </form>
       </DialogSurface>
-    </Dialog>
+    </ModalDialog>
   );
 
 }

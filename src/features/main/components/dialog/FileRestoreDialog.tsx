@@ -11,27 +11,28 @@ import React from 'react';
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import {
-  deleteExploreFolder,
   setDialogAction,
-  setError
+  setError,
+  setSidePanelAction,
+  setWorkFile
 } from '../../../../stores/Action';
-import { FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
-import { Folder } from '../../../../types/Model';
+import { FileNotFoundError } from '../../../../types/Error';
+import { FileVersion } from '../../../../types/Model';
 
-import Presenter from './FolderDeleteDialog.presenter';
+import Presenter from './FileRestoreDialog.presenter';
 
-interface FolderDeleteDialogProps {
-  value?: Folder
+interface FileRestoreDialogProps {
+  value?: FileVersion
 }
 
-function FileDeleteDialog(props: FolderDeleteDialogProps) {
+function FileDeleteDialog(props: FileRestoreDialogProps) {
 
   const { value } = props;
 
   const {
     dispatch,
     state: {
-      exploreFolder
+      workFile
     }
   } = useStore();
   const { graph } = useService();
@@ -39,14 +40,18 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
 
   const handleSubmit = React.useCallback(async () => {
     try {
-      if (exploreFolder == null) {
-        throw new FolderNotFoundError();
-      }
       if (value == null) {
         throw new FileNotFoundError();
       }
-      await graph.deleteExploreFolder(value);
-      dispatch(deleteExploreFolder(value));
+      if (workFile == null) {
+        throw new FileNotFoundError();
+      }
+      await graph.restoreFile(value);
+      const content = await graph.getFileContent(workFile);
+      dispatch(setWorkFile({
+        ...workFile,
+        content
+      }));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -56,12 +61,13 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
+      dispatch(setSidePanelAction());
     }
   }, [
     dispatch,
-    exploreFolder,
     graph,
-    value
+    value,
+    workFile
   ]);
 
   return (

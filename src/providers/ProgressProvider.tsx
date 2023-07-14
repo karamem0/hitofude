@@ -20,7 +20,7 @@ const ProgressContext = React.createContext<ProgressContextState | undefined>(un
 
 export const useProgress = (): ProgressContextState => {
   const value = React.useContext(ProgressContext);
-  if (!value) {
+  if (value == null) {
     throw new Error();
   }
   return value;

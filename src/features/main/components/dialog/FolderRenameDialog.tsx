@@ -15,6 +15,7 @@ import {
   setError,
   updateExploreFolder
 } from '../../../../stores/Action';
+import { ArgumentNullError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { Folder } from '../../../../types/Model';
 import { FolderRenameDialogFormState } from '../../types/Form';
@@ -32,25 +33,14 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
   const { dispatch } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
-  const [ open, setOpen ] = React.useState<boolean>(true);
-
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data ?? false;
-    setOpen(open);
-    if (!open) {
-      dispatch(setDialogAction());
-    }
-  }, [
-    dispatch
-  ]);
 
   const handleSubmit = React.useCallback(async (e?: Event, data?: FolderRenameDialogFormState) => {
     try {
-      if (!data?.id) {
-        throw new Error();
+      if (data?.id == null) {
+        throw new ArgumentNullError();
       }
-      if (!data?.name) {
-        throw new Error();
+      if (data?.name == null) {
+        throw new ArgumentNullError();
       }
       setLoading(true);
       const folder = await graph.renameFolder(data, data.name);
@@ -63,20 +53,17 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
       throw e;
     } finally {
       setLoading(false);
-      handleOpenChange?.(e, false);
+      dispatch(setDialogAction());
     }
   }, [
     dispatch,
-    graph,
-    handleOpenChange
+    graph
   ]);
 
   return (
     <Presenter
       loading={loading}
-      open={open}
       value={value}
-      onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 

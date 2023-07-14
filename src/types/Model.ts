@@ -18,7 +18,8 @@ export enum DialogType {
   deleteFile = 'deleteFile',
   deleteFolder = 'deleteFolder',
   renameFile = 'renameFile',
-  renameFolder = 'renameFolder'
+  renameFolder = 'renameFolder',
+  restoreFile = 'restoreFile'
 }
 
 export interface File {
@@ -39,6 +40,7 @@ export interface FileContent {
 }
 
 export interface FileVersion {
+  id: string,
   version: string,
   updatedDate?: Date,
   size?: number

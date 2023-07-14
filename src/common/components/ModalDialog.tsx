@@ -9,32 +9,24 @@
 import React from 'react';
 
 import { useStore } from '../../providers/StoreProvider';
-import { setSidePanelAction } from '../../stores/Action';
+import { setDialogAction } from '../../stores/Action';
 import { ArgumentNullError } from '../../types/Error';
 import { Event } from '../../types/Event';
 
-import Presenter from './SidePanel.presenter';
+import Presenter from './ModalDialog.presenter';
 
-interface SidePanelProps {
-  children?: React.ReactNode,
-  content?: React.ReactNode,
-  title?: React.ReactNode,
-  width?: string
+interface ModalDialogProps {
+  children?: [React.JSX.Element, React.JSX.Element] | React.JSX.Element
 }
 
-function SidePanel(props: SidePanelProps) {
+function ModalDialog(props: ModalDialogProps) {
 
-  const {
-    children,
-    content,
-    title,
-    width
-  } = props;
+  const { children } = props;
 
   const { dispatch } = useStore();
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     if (data == null) {
       throw new ArgumentNullError();
     }
@@ -42,17 +34,14 @@ function SidePanel(props: SidePanelProps) {
     if (data) {
       return;
     }
-    dispatch(setSidePanelAction());
+    dispatch(setDialogAction());
   }, [
     dispatch
   ]);
 
   return (
     <Presenter
-      content={content}
       open={open}
-      title={title}
-      width={width}
       onOpenChange={handleOpenChange}>
       {children}
     </Presenter>
@@ -60,4 +49,4 @@ function SidePanel(props: SidePanelProps) {
 
 }
 
-export default SidePanel;
+export default ModalDialog;

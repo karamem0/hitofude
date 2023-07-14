@@ -47,7 +47,7 @@ function AppTabControl() {
       .catch(() => rootFolder);
     const exploreFile = exploreFolder?.files?.filter((item) => item.id === exploreFileId)?.at(0);
     dispatch(setExploreFolder(exploreFolder));
-    if (exploreFile) {
+    if (exploreFile != null) {
       dispatch(setExploreFile(exploreFile));
       dispatch(setWorkFile({
         ...exploreFile,

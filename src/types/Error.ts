@@ -6,6 +6,14 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+export class ArgumentNullError extends Error {
+
+  constructor(message?: string) {
+    super(message);
+    this.name = 'ArgumentNullError';
+  }
+
+}
 export class FileConflictError extends Error {
 
   constructor(message?: string) {

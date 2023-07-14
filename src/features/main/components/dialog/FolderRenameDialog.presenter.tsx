@@ -14,7 +14,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { css } from '@emotion/react';
 import {
   Button,
-  Dialog,
   DialogActions,
   DialogBody,
   DialogContent,
@@ -24,6 +23,7 @@ import {
   Input
 } from '@fluentui/react-components';
 
+import ModalDialog from '../../../../common/components/ModalDialog';
 import { EventHandler } from '../../../../types/Event';
 import { Folder } from '../../../../types/Model';
 import messages from '../../messages';
@@ -31,9 +31,7 @@ import { FolderRenameDialogFormState } from '../../types/Form';
 
 interface FolderRenameDialogProps {
   loading?: boolean,
-  open?: boolean,
   value?: Folder,
-  onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FolderRenameDialogFormState>
 }
 
@@ -41,9 +39,7 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
 
   const {
     loading,
-    open,
     value,
-    onOpenChange,
     onSubmit
   } = props;
 
@@ -56,10 +52,7 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
   });
 
   return (
-    <Dialog
-      modalType="modal"
-      open={open}
-      onOpenChange={(e, data) => onOpenChange?.(e, data.open)}>
+    <ModalDialog>
       <DialogSurface>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
@@ -115,7 +108,7 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
           </DialogBody>
         </form>
       </DialogSurface>
-    </Dialog>
+    </ModalDialog>
   );
 
 }

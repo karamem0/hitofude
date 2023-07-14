@@ -33,11 +33,12 @@ function ContentControl() {
   const { graph } = useService();
   const { setProgress } = useProgress();
 
+  const [ changed, setChanged ] = React.useState<boolean>(false);
   const [ content, setContent ] = React.useState<string>('');
 
   const handleCancel = React.useCallback(() => {
     try {
-      if (!workFile) {
+      if (workFile == null) {
         throw new Error();
       }
       dispatch(setWorkFile({
@@ -58,7 +59,7 @@ function ContentControl() {
 
   const handleEdit = React.useCallback(() => {
     try {
-      if (!workFile) {
+      if (workFile == null) {
         throw new Error();
       }
       dispatch(setWorkFile({
@@ -81,14 +82,14 @@ function ContentControl() {
 
   const handleSave = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
-      if (!workFile) {
+      if (workFile == null) {
         throw new Error();
       }
       setProgress(ProgressType.save);
       const file = await Promise.resolve()
         .then(() => graph.setFileContent(workFile, content))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
-      if (!file) {
+      if (file == null) {
         throw new Error();
       }
       dispatch(setWorkFile({
@@ -112,11 +113,19 @@ function ContentControl() {
   React.useEffect(() => {
     setContent(workFile?.content ?? '');
   }, [
-    workFile?.content
+    workFile
+  ]);
+
+  React.useEffect(() => {
+    setChanged(workFile?.content !== content);
+  }, [
+    workFile?.content,
+    content
   ]);
 
   return (
     <Presenter
+      changed={changed}
       loading={loading}
       value={workFile}
       onCancel={handleCancel}

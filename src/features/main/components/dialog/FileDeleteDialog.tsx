@@ -17,7 +17,7 @@ import {
   setExploreFile,
   setWorkFile
 } from '../../../../stores/Action';
-import { Event } from '../../../../types/Event';
+import { FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
 import { File } from '../../../../types/Model';
 import { isSupportedFile } from '../../../../utils/File';
 
@@ -41,25 +41,14 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
-  const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data ?? false;
-    setOpen(open);
-    if (!open) {
-      dispatch(setDialogAction());
-    }
-  }, [
-    dispatch
-  ]);
-
-  const handleSubmit = React.useCallback(async (e?: Event) => {
+  const handleSubmit = React.useCallback(async () => {
     try {
-      if (!exploreFolder) {
-        throw new Error();
+      if (value == null) {
+        throw new FileNotFoundError();
       }
-      if (!value) {
-        throw new Error();
+      if (exploreFolder == null) {
+        throw new FolderNotFoundError();
       }
       await graph.deleteExploreFile(value);
       dispatch(deleteExploreFile(value));
@@ -68,7 +57,7 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
           .filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item))
           .filter((item) => item.id !== value.id)
           .at(-1);
-        if (file) {
+        if (file != null) {
           dispatch(setExploreFile(file));
           dispatch(setWorkFile({
             ...file,
@@ -88,14 +77,13 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       throw e;
     } finally {
       setLoading(false);
-      handleOpenChange?.(e, false);
+      dispatch(setDialogAction());
     }
   }, [
     dispatch,
     exploreFile,
     exploreFolder,
     graph,
-    handleOpenChange,
     includeUnsupportedFiles,
     value
   ]);
@@ -103,8 +91,6 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
   return (
     <Presenter
       loading={loading}
-      open={open}
-      onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 

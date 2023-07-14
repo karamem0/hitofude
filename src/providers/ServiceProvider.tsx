@@ -23,7 +23,7 @@ const ServiceContext = React.createContext<ServiceContextState | undefined>(unde
 
 export const useService = (): ServiceContextState => {
   const value = React.useContext(ServiceContext);
-  if (!value) {
+  if (value == null) {
     throw new Error();
   }
   return value;

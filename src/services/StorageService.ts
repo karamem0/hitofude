@@ -30,7 +30,7 @@ export class StorageService {
 
   getTabMode(): TabMode | undefined {
     return {
-      type: Number(this.storage.getItem('tabType')) || TabType.explorer,
+      type: Number(this.storage.getItem('tabType')) ?? TabType.explorer,
       open: Boolean(Number(this.storage.getItem('tabOpen') ?? true))
     };
   }

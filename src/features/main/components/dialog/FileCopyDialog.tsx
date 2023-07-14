@@ -16,6 +16,7 @@ import {
   setError,
   setWorkFile
 } from '../../../../stores/Action';
+import { ArgumentNullError, FileNotFoundError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { File } from '../../../../types/Model';
 import { FileCopyDialogFormState } from '../../types/Form';
@@ -38,36 +39,25 @@ function FileCopyDialog(props: FileCopyDialogProps) {
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
-  const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data || false;
-    setOpen(open);
-    if (!open) {
-      dispatch(setDialogAction());
-    }
-  }, [
-    dispatch
-  ]);
-
-  const handleSubmit = React.useCallback(async (e?: Event, data?: FileCopyDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_?: Event, data?: FileCopyDialogFormState) => {
     try {
-      if (!exploreFolder) {
-        throw new Error();
+      if (data?.baseName == null) {
+        throw new ArgumentNullError();
       }
-      if (!data?.baseName) {
-        throw new Error();
+      if (data?.downloadUrl == null) {
+        throw new ArgumentNullError();
       }
-      if (!data?.downloadUrl) {
-        throw new Error();
+      if (exploreFolder == null) {
+        throw new ArgumentNullError();
       }
       setLoading(true);
       const fileContent = await graph.getFileContent(data);
       const file = await Promise.resolve()
         .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`, fileContent))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
-      if (!file) {
-        throw new Error();
+      if (file == null) {
+        throw new FileNotFoundError();
       }
       dispatch(appendExploreFile(file));
       dispatch(setWorkFile({
@@ -83,21 +73,18 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       throw e;
     } finally {
       setLoading(false);
-      handleOpenChange?.(e, false);
+      dispatch(setDialogAction());
     }
   }, [
     dispatch,
     exploreFolder,
-    graph,
-    handleOpenChange
+    graph
   ]);
 
   return (
     <Presenter
       loading={loading}
-      open={open}
       value={value}
-      onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 

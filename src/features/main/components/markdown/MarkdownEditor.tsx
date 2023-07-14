@@ -45,7 +45,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
   useEvent('resize', handleResize, window);
 
   React.useEffect(() => {
-    if (!editorRef.current) {
+    if (editorRef.current == null) {
       return;
     }
     monacoRef.current = monaco.editor.create(

@@ -55,6 +55,7 @@ PojosMetadataMap.create<File>('File', {
 });
 
 PojosMetadataMap.create<FileVersion>('FileVersion', {
+  id: String,
   version: String,
   updatedDate: Date,
   size: Number

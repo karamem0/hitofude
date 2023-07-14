@@ -21,9 +21,10 @@ function Error500Page(props: FallbackProps) {
   const appInsights = useAppInsightsContext();
 
   React.useCallback(() => {
-    if (error) {
-      appInsights.trackException({ error });
+    if (error == null) {
+      return;
     }
+    appInsights.trackException({ error });
   }, [
     appInsights,
     error

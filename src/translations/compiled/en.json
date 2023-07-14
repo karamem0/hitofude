@@ -65,6 +65,12 @@
       "value": "Rename folder"
     }
   ],
+  "9GLOiw": [
+    {
+      "type": 0,
+      "value": "Restore file"
+    }
+  ],
   "9ZoFpI": [
     {
       "type": 0,
@@ -233,10 +239,22 @@
       "value": "It's easy to get started. Just sign in."
     }
   ],
+  "f5cgv/": [
+    {
+      "type": 0,
+      "value": "Are you sure to restore this file?"
+    }
+  ],
   "gfMwV+": [
     {
       "type": 0,
       "value": "Cannot open this file"
+    }
+  ],
+  "ghuZox": [
+    {
+      "type": 0,
+      "value": "Save and Close"
     }
   ],
   "gyrIEl": [

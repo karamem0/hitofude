@@ -13,10 +13,10 @@ export function getBaseName(value: string | null | undefined): string | undefine
 }
 
 export function getMimeType(fileName: string | null | undefined, mimeType: string | null | undefined): MimeType | undefined {
-  if (!fileName) {
+  if (fileName == null) {
     return undefined;
   }
-  if (!mimeType) {
+  if (mimeType == null) {
     return undefined;
   }
   if (fileName.endsWith('.md')) {
@@ -24,17 +24,17 @@ export function getMimeType(fileName: string | null | undefined, mimeType: strin
   }
   const regex = /^([-\w.]+)\/([-\w.]+)/;
   const match = regex.exec(mimeType);
-  if (!match) {
-    return undefined;
+  if (match) {
+    return {
+      type: match[1],
+      subtype: match[2]
+    };
   }
-  return {
-    type: match[1],
-    subtype: match[2]
-  };
+  return undefined;
 }
 
 export function isMimeType(value?: Pick<File, 'mimeType'>, option?: { type?: string, subtype?: string }): boolean {
-  if (!value?.mimeType) {
+  if (value?.mimeType == null) {
     return false;
   }
   if (option && value.mimeType.type === option.type) {

@@ -19,35 +19,36 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableCellActions,
   TableCellLayout,
   TableHeader,
   TableHeaderCell,
   TableRow
 } from '@fluentui/react-components';
+import { HistoryIcon } from '@fluentui/react-icons-mdl2';
 import bytes from 'bytes';
 
-import SidePanel from '../../../common/components/SidePanel';
-import { EventHandler } from '../../../types/Event';
-import { FileVersion } from '../../../types/Model';
-import messages from '../messages';
+import SidePanel from '../../../../common/components/SidePanel';
+import { EventHandler } from '../../../../types/Event';
+import { DialogAction, DialogType, FileVersion } from '../../../../types/Model';
+import messages from '../../messages';
 
 interface FileVersionPanelProps {
   items?: FileVersion[],
-  onOpenChange: EventHandler<boolean>
+  onRestore?: EventHandler<DialogAction>
 }
 
 function FileVersionPanel(props: FileVersionPanelProps) {
 
   const {
     items,
-    onOpenChange
+    onRestore
   } = props;
 
   const intl = useIntl();
 
   return (
     <SidePanel
-      defaultOpen
       title={intl.formatMessage(messages.VersionHistory)}
       width="30rem"
       content={
@@ -74,12 +75,37 @@ function FileVersionPanel(props: FileVersionPanelProps) {
               </TableHeader>
               <TableBody>
                 {
-                  items.map((item) => (
+                  items.map((item, index) => (
                     <TableRow key={item.version}>
                       <TableCell>
                         <TableCellLayout appearance="primary">
                           {item.version}
                         </TableCellLayout>
+                        <TableCellActions>
+                          {
+                            index > 0 && (
+                              <div
+                                css={css`
+                                  padding: 0 0.5rem;
+                                `}>
+                                <div
+                                  aria-label={intl.formatMessage(messages.RestoreFile)}
+                                  role="button"
+                                  title={intl.formatMessage(messages.RestoreFile)}
+                                  css={css`
+                                    font-size: 1rem;
+                                    line-height: 1rem;
+                                  `}
+                                  onClick={(e) => onRestore?.(e, {
+                                    type: DialogType.restoreFile,
+                                    payload: item
+                                  })}>
+                                  <HistoryIcon />
+                                </div>
+                              </div>
+                            )
+                          }
+                        </TableCellActions>
                       </TableCell>
                       <TableCell>
                         <TableCellLayout>
@@ -96,7 +122,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
                       </TableCell>
                       <TableCell>
                         <TableCellLayout>
-                          {bytes(item.size || 0, { unitSeparator: ' ' })}
+                          {bytes(item.size ?? 0, { unitSeparator: ' ' })}
                         </TableCellLayout>
                       </TableCell>
                     </TableRow>
@@ -106,8 +132,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
             </Table>
           </div>
         ) : null
-      }
-      onOpenChange={onOpenChange} />
+      } />
   );
 
 }

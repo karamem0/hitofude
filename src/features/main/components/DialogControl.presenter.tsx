@@ -12,6 +12,7 @@ import {
   DialogAction,
   DialogType,
   File,
+  FileVersion,
   Folder
 } from '../../../types/Model';
 
@@ -19,6 +20,7 @@ import FileCopyDialog from './dialog/FileCopyDialog';
 import FileCreateDialog from './dialog/FileCreateDialog';
 import FileDeleteDialog from './dialog/FileDeleteDialog';
 import FileRenameDialog from './dialog/FileRenameDialog';
+import FileRestoreDialog from './dialog/FileRestoreDialog';
 import FolderCreateDialog from './dialog/FolderCreateDialog';
 import FolderDeleteDialog from './dialog/FolderDeleteDialog';
 import FolderRenameDialog from './dialog/FolderRenameDialog';
@@ -61,6 +63,10 @@ function DialogControl(props: DialogControlProps) {
     case DialogType.renameFolder:
       return (
         <FolderRenameDialog value={action.payload as Folder} />
+      );
+    case DialogType.restoreFile:
+      return (
+        <FileRestoreDialog value={action.payload as FileVersion} />
       );
     default:
       return null;

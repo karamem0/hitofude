@@ -26,10 +26,10 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
   switch (action.type) {
     case ActionType.appendExploreFile: {
       const payload = action.payload as File | undefined;
-      if (!payload) {
+      if (payload == null) {
         return state;
       }
-      if (!state.exploreFolder) {
+      if (state.exploreFolder == null) {
         return state;
       }
       return {
@@ -47,10 +47,10 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
     }
     case ActionType.appendExploreFolder: {
       const payload = action.payload as Folder | undefined;
-      if (!payload) {
+      if (payload == null) {
         return state;
       }
-      if (!state.exploreFolder) {
+      if (state.exploreFolder == null) {
         return state;
       }
       return {
@@ -67,10 +67,10 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
     }
     case ActionType.deleteExploreFile: {
       const payload = action.payload as File | undefined;
-      if (!payload) {
+      if (payload == null) {
         return state;
       }
-      if (!state.exploreFolder) {
+      if (state.exploreFolder == null) {
         return state;
       }
       return {
@@ -83,10 +83,10 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
     }
     case ActionType.deleteExploreFolder: {
       const payload = action.payload as Folder | undefined;
-      if (!payload) {
+      if (payload == null) {
         return state;
       }
-      if (!state.exploreFolder) {
+      if (state.exploreFolder == null) {
         return state;
       }
       return {
@@ -194,10 +194,10 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
     }
     case ActionType.updateExploreFile: {
       const payload = action.payload as File | undefined;
-      if (!payload) {
+      if (payload == null) {
         return state;
       }
-      if (!state.exploreFolder) {
+      if (state.exploreFolder == null) {
         return state;
       }
       return {
@@ -214,10 +214,10 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
     }
     case ActionType.updateExploreFolder: {
       const payload = action.payload as Folder | undefined;
-      if (!payload) {
+      if (payload == null) {
         return state;
       }
-      if (!state.exploreFolder) {
+      if (state.exploreFolder == null) {
         return state;
       }
       return {

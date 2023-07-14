@@ -8,11 +8,11 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
-import { setSidePanelAction } from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { File, FileVersion } from '../../../types/Model';
+import { useService } from '../../../../providers/ServiceProvider';
+import { useStore } from '../../../../providers/StoreProvider';
+import { setDialogAction } from '../../../../stores/Action';
+import { Event } from '../../../../types/Event';
+import { DialogAction, File, FileVersion } from '../../../../types/Model';
 
 import Presenter from './FileVersionPanel.presenter';
 
@@ -31,17 +31,17 @@ function FileVersionPanel(props: FileVersionPanelProps) {
 
   const [ items, setItems ] = React.useState<FileVersion[]>();
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data ?? false;
-    if (!open) {
-      dispatch(setSidePanelAction());
+  const handleRestore = React.useCallback((_?: Event, data?: DialogAction) => {
+    if (data == null) {
+      throw new Error();
     }
+    dispatch(setDialogAction(data));
   }, [
     dispatch
   ]);
 
   React.useEffect(() => {
-    if (!value) {
+    if (value == null) {
       return;
     }
     (async () => {
@@ -55,7 +55,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
   return (
     <Presenter
       items={items}
-      onOpenChange={handleOpenChange} />
+      onRestore={handleRestore} />
   );
 
 }

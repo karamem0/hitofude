@@ -41,6 +41,8 @@ const messages = defineMessages({
   Refresh: { defaultMessage: 'Refresh' },
   RenameFile: { defaultMessage: 'Rename file' },
   RenameFolder: { defaultMessage: 'Rename folder' },
+  RestoreFile: { defaultMessage: 'Restore file' },
+  RestoreFileConfirm: { defaultMessage: 'Are you sure to restore this file?' },
   RootFolder: { defaultMessage: 'My files' },
   Save: { defaultMessage: 'Save' },
   SaveAndClose: { defaultMessage: 'Save and Close' },

@@ -20,7 +20,7 @@ import {
   setWorkFile,
   setSearchFile
 } from '../../../stores/Action';
-import { FolderNotFoundError } from '../../../types/Error';
+import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { File, TabType } from '../../../types/Model';
 import { SearchControlFormState } from '../types/Form';
@@ -56,11 +56,11 @@ function SearchControl() {
 
   const handleOpenFileLocation = React.useCallback(async (_?: Event, data?: File) => {
     try {
-      if (!data) {
-        throw new Error();
+      if (data == null) {
+        throw new ArgumentNullError();
       }
       const file = await graph.getFileById(data.id);
-      if (!file.parentId) {
+      if (file.parentId == null) {
         throw new FolderNotFoundError();
       }
       const folder = await graph.getFolderById(file.parentId);
@@ -85,8 +85,8 @@ function SearchControl() {
 
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
-      if (!data) {
-        throw new Error();
+      if (data == null) {
+        throw new ArgumentNullError();
       }
       const file = await graph.getFileById(data.id);
       dispatch(setSearchFile(file));
@@ -105,11 +105,8 @@ function SearchControl() {
 
   const handleSubmit = React.useCallback(async (_?: Event, data?: SearchControlFormState) => {
     try {
-      if (!data) {
-        throw new Error();
-      }
-      if (!data.query) {
-        return;
+      if (data?.query == null) {
+        throw new ArgumentNullError();
       }
       setLoading(true);
       dispatch(setSearchQuery(data.query));

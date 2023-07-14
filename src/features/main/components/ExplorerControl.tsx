@@ -47,7 +47,7 @@ function ExplorerControl() {
   ]);
 
   const handleOpenUrl = React.useCallback((_?: Event, data?: string) => {
-    if (!data) {
+    if (data == null) {
       throw new Error();
     }
     window.open(data, '_blank', 'noreferrer');
@@ -55,7 +55,7 @@ function ExplorerControl() {
 
   const handleRefreshFolder = React.useCallback(async (_?: Event, data?: Folder) => {
     try {
-      if (!data) {
+      if (data == null) {
         throw new Error();
       }
       dispatch(setExploreFolder(await graph.getFolderById(data.id)));
@@ -68,7 +68,7 @@ function ExplorerControl() {
   ]);
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
-      if (!data) {
+      if (data == null) {
         throw new Error();
       }
       dispatch(setExploreFile(data));
@@ -87,22 +87,22 @@ function ExplorerControl() {
 
   const handleSelectFolder = React.useCallback(async (_?: Event, data?: string) => {
     try {
-      if (!data) {
+      if (data == null) {
         throw new Error();
       }
       const exploreFolder = await graph.getFolderById(data);
       dispatch(setExploreFolder(exploreFolder));
       const exploreFile = exploreFolder.files?.filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item)).at(0);
-      if (exploreFile) {
+      if (exploreFile == null) {
+        dispatch(setExploreFile());
+        dispatch(setWorkFile());
+      } else {
         dispatch(setExploreFile(exploreFile));
         dispatch(setWorkFile({
           ...exploreFile,
           content: await graph.getFileContent(exploreFile),
           editing: false
         }));
-      } else {
-        dispatch(setExploreFile());
-        dispatch(setWorkFile());
       }
     } catch (e) {
       dispatch(setError(e as Error));
@@ -115,26 +115,27 @@ function ExplorerControl() {
 
   const handleToggleIncludeUnsupportedFiles = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
-      if (!exploreFolder) {
+      if (exploreFolder == null) {
         throw new Error();
       }
       dispatch(setIncludeUnsupportedFiles(data));
-      if (!data) {
-        if (!exploreFile || !isSupportedFile(exploreFile)) {
-          const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
-          if (file) {
-            dispatch(setExploreFile(file));
-            dispatch(setWorkFile({
-              ...file,
-              content: await graph.getFileContent(file),
-              editing: false
-            }));
-          } else {
-            dispatch(setExploreFile());
-            dispatch(setWorkFile());
-          }
+      if (data != null) {
+        return;
+      }
+      if (exploreFile != null && isSupportedFile(exploreFile)) {
+        const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
+        if (file != null) {
+          dispatch(setExploreFile(file));
+          dispatch(setWorkFile({
+            ...file,
+            content: await graph.getFileContent(file),
+            editing: false
+          }));
+          return;
         }
       }
+      dispatch(setExploreFile());
+      dispatch(setWorkFile());
     } catch (e) {
       dispatch(setError(e as Error));
     }

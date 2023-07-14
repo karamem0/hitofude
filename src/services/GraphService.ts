@@ -110,7 +110,7 @@ export class GraphService {
         .api(`/me/drive/items/${id}`)
         .get();
       const value = data as DriveItem;
-      if (!value.file) {
+      if (value.file == null) {
         throw new FileNotFoundError();
       }
       return mapper.map(value, 'DriveItem', 'File');
@@ -131,7 +131,7 @@ export class GraphService {
         .api(`/me/drive/root:/${path}`)
         .get();
       const value = data as DriveItem;
-      if (!value.file) {
+      if (value.file == null) {
         throw new FileNotFoundError();
       }
       return mapper.map(value, 'DriveItem', 'File');
@@ -148,16 +148,17 @@ export class GraphService {
 
   async getFileContent(file: Pick<File, 'mimeType' | 'downloadUrl'>): Promise<string> {
     try {
-      if (!isMimeType(file, { type: 'text' })) {
+      if (isMimeType(file, { type: 'text' })) {
+        const downloadUrl = typeof (file) === 'string' ? file : file.downloadUrl;
+        if (downloadUrl == null) {
+          throw new FileNotFoundError();
+        }
+        const data = await fetch(downloadUrl, { method: 'GET' });
+        const value = await data.text();
+        return value;
+      } else {
         return '';
       }
-      const url = typeof (file) === 'string' ? file : file.downloadUrl;
-      if (!url) {
-        throw new FileNotFoundError();
-      }
-      const data = await fetch(url, { method: 'GET' });
-      const value = await data.text();
-      return value;
     } catch (e) {
       if (e instanceof GraphError) {
         if (e.statusCode === 404) {
@@ -174,7 +175,12 @@ export class GraphService {
         .api(`/me/drive/items/${id}/versions`)
         .get();
       const value = data.value as DriveItemVersion[];
-      return mapper.mapArray(value, 'DriveItemVersion', 'FileVersion');
+      return mapper
+        .mapArray<DriveItemVersion, FileVersion>(value, 'DriveItemVersion', 'FileVersion')
+        .map((item) => ({
+          ...item,
+          id
+        }));
     } catch (e) {
       if (e instanceof GraphError) {
         if (e.statusCode === 400 ||
@@ -192,7 +198,7 @@ export class GraphService {
         .api(`/me/drive/items/${id}?$expand=children`)
         .get();
       const value = data as DriveItem;
-      if (!value.folder) {
+      if (value.folder == null) {
         throw new FolderNotFoundError();
       }
       return mapper.map(value, 'DriveItem', 'Folder');
@@ -231,7 +237,7 @@ export class GraphService {
         .api('/me/drive/items/root:/?$expand=children')
         .get();
       const value = data as DriveItem;
-      if (!value.folder) {
+      if (value.folder == null) {
         throw new GraphError(404);
       }
       return mapper.map(value, 'DriveItem', 'Folder');
@@ -286,6 +292,21 @@ export class GraphService {
         }
         if (e.statusCode === 409) {
           throw new FolderConflictError(e.message);
+        }
+      }
+      throw e;
+    }
+  }
+
+  async restoreFile(file: Pick<FileVersion, 'id' | 'version'>): Promise<void> {
+    try {
+      await this.client
+        .api(`/me/drive/items/${file.id}/versions/${file.version}/restoreVersion`)
+        .post(null);
+    } catch (e) {
+      if (e instanceof GraphError) {
+        if (e.statusCode === 404) {
+          throw new FileNotFoundError(e.message);
         }
       }
       throw e;

@@ -14,7 +14,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { css } from '@emotion/react';
 import {
   Button,
-  Dialog,
   DialogActions,
   DialogBody,
   DialogContent,
@@ -24,6 +23,7 @@ import {
   Input
 } from '@fluentui/react-components';
 
+import ModalDialog from '../../../../common/components/ModalDialog';
 import { EventHandler } from '../../../../types/Event';
 import { File } from '../../../../types/Model';
 import messages from '../../messages';
@@ -31,9 +31,7 @@ import { FileRenameDialogFormState } from '../../types/Form';
 
 interface FileRenameDialogProps {
   loading?: boolean,
-  open?: boolean,
   value?: File,
-  onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler<FileRenameDialogFormState>
 }
 
@@ -41,9 +39,7 @@ function FileRenameDialog(props: FileRenameDialogProps) {
 
   const {
     loading,
-    open,
     value,
-    onOpenChange,
     onSubmit
   } = props;
 
@@ -56,10 +52,7 @@ function FileRenameDialog(props: FileRenameDialogProps) {
   });
 
   return (
-    <Dialog
-      modalType="modal"
-      open={open}
-      onOpenChange={(e, data) => onOpenChange?.(e, data.open)}>
+    <ModalDialog>
       <DialogSurface>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
@@ -116,7 +109,7 @@ function FileRenameDialog(props: FileRenameDialogProps) {
           </DialogBody>
         </form>
       </DialogSurface>
-    </Dialog>
+    </ModalDialog>
   );
 
 }

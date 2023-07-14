@@ -22,7 +22,7 @@ const StoreContext = React.createContext<StoreContextState | undefined>(undefine
 
 export const useStore = (): StoreContextState => {
   const value = React.useContext(StoreContext);
-  if (!value) {
+  if (value == null) {
     throw new Error();
   }
   return value;

@@ -16,6 +16,7 @@ import {
   setError,
   setWorkFile
 } from '../../../../stores/Action';
+import { ArgumentNullError, FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { FileCreateDialogFormState } from '../../types/Form';
 
@@ -31,32 +32,21 @@ function FileCreateDialog() {
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
-  const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
-    const open = data || false;
-    setOpen(open);
-    if (!open) {
-      dispatch(setDialogAction());
-    }
-  }, [
-    dispatch
-  ]);
-
-  const handleSubmit = React.useCallback(async (e?: Event, data?: FileCreateDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_?: Event, data?: FileCreateDialogFormState) => {
     try {
-      if (!exploreFolder) {
-        throw new Error();
+      if (data?.baseName == null) {
+        throw new ArgumentNullError();
       }
-      if (!data?.baseName) {
-        throw new Error();
+      if (exploreFolder == null) {
+        throw new FolderNotFoundError();
       }
       setLoading(true);
       const file = await Promise.resolve()
         .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
-      if (!file) {
-        throw new Error();
+      if (file == null) {
+        throw new FileNotFoundError();
       }
       dispatch(appendExploreFile(file));
       dispatch(setWorkFile({
@@ -72,20 +62,17 @@ function FileCreateDialog() {
       throw e;
     } finally {
       setLoading(false);
-      handleOpenChange?.(e, false);
+      dispatch(setDialogAction());
     }
   }, [
     dispatch,
     exploreFolder,
-    graph,
-    handleOpenChange
+    graph
   ]);
 
   return (
     <Presenter
       loading={loading}
-      open={open}
-      onOpenChange={handleOpenChange}
       onSubmit={handleSubmit} />
   );
 

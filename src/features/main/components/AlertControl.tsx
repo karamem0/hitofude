@@ -41,7 +41,7 @@ function AlertControl() {
   ]);
 
   React.useEffect(() => {
-    if (!error) {
+    if (error == null) {
       setMessage(undefined);
       return;
     }
@@ -72,12 +72,13 @@ function AlertControl() {
   ]);
 
   React.useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        dispatch(setError());
-      }, 5000);
-      return () => clearTimeout(timer);
+    if (message == null) {
+      return;
     }
+    const timer = setTimeout(() => {
+      dispatch(setError());
+    }, 5000);
+    return () => clearTimeout(timer);
   }, [
     dispatch,
     message

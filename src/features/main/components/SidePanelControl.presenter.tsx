@@ -14,7 +14,7 @@ import {
   SidePanelType
 } from '../../../types/Model';
 
-import FileVersionPanel from './FileVersionPanel';
+import FileVersionPanel from './panel/FileVersionPanel';
 
 interface SidePanelControlProps {
   action?: SidePanelAction

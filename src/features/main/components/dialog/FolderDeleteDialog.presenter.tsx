@@ -13,7 +13,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { css } from '@emotion/react';
 import {
   Button,
-  Dialog,
   DialogActions,
   DialogBody,
   DialogContent,
@@ -23,13 +22,12 @@ import {
   Text
 } from '@fluentui/react-components';
 
+import ModalDialog from '../../../../common/components/ModalDialog';
 import { EventHandler } from '../../../../types/Event';
 import messages from '../../messages';
 
 interface FolderDeleteDialogProps {
   loading?: boolean,
-  open?: boolean,
-  onOpenChange?: EventHandler<boolean>,
   onSubmit?: EventHandler
 }
 
@@ -37,18 +35,13 @@ function FolderDeleteDialog(props: FolderDeleteDialogProps) {
 
   const {
     loading,
-    open,
-    onOpenChange,
     onSubmit
   } = props;
 
   const intl = useIntl();
 
   return (
-    <Dialog
-      modalType="modal"
-      open={open}
-      onOpenChange={(e, data) => onOpenChange?.(e, data.open)}>
+    <ModalDialog>
       <DialogSurface>
         <DialogBody>
           <DialogTitle>
@@ -89,7 +82,7 @@ function FolderDeleteDialog(props: FolderDeleteDialogProps) {
           </DialogActions>
         </DialogBody>
       </DialogSurface>
-    </Dialog>
+    </ModalDialog>
   );
 
 }

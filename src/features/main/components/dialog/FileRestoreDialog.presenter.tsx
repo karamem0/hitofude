@@ -26,12 +26,12 @@ import ModalDialog from '../../../../common/components/ModalDialog';
 import { EventHandler } from '../../../../types/Event';
 import messages from '../../messages';
 
-interface FileDeleteDialogProps {
+interface FileRestoreDialogProps {
   loading?: boolean,
   onSubmit?: EventHandler
 }
 
-function FileDeleteDialog(props: FileDeleteDialogProps) {
+function FileRestoreDialog(props: FileRestoreDialogProps) {
 
   const {
     loading,
@@ -45,7 +45,7 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       <DialogSurface>
         <DialogBody>
           <DialogTitle>
-            <FormattedMessage {...messages.DeleteFile} />
+            <FormattedMessage {...messages.RestoreFile} />
           </DialogTitle>
           <DialogContent
             css={css`
@@ -58,7 +58,7 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
                 padding: 1rem 0;
               `}>
               <Text>
-                <FormattedMessage {...messages.DeleteFileConfirm} />
+                <FormattedMessage {...messages.RestoreFileConfirm} />
               </Text>
             </div>
           </DialogContent>
@@ -87,4 +87,4 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
 
 }
 
-export default React.memo(FileDeleteDialog);
+export default React.memo(FileRestoreDialog);

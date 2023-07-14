@@ -167,13 +167,13 @@ function ExplorerControl(props: ExplorerControlProps) {
           appearance="outline"
           aria-label={intl.formatMessage(messages.NewFile)}
           title={intl.formatMessage(messages.NewFile)}
-          icon={
+          icon={(
             <AddIcon
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;
               `} />
-            }
+          )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.createFile,
             payload: null
