@@ -14,16 +14,16 @@ import { css } from '@emotion/react';
 import { Link } from '@fluentui/react-components';
 import { Alert } from '@fluentui/react-components/unstable';
 
-import { themeConfig } from '../../../providers/ThemeProvider';
-import { EventHandler } from '../../../types/Event';
+import { themeConfig } from '../../providers/ThemeProvider';
+import { EventHandler } from '../../types/Event';
 import messages from '../messages';
 
-interface AlertControlProps {
+interface ErrorNotificationProps {
   message?: MessageDescriptor,
   onDismiss?: EventHandler
 }
 
-function AlertControl(props: AlertControlProps) {
+function ErrorNotification(props: ErrorNotificationProps) {
 
   const {
     message,
@@ -55,4 +55,4 @@ function AlertControl(props: AlertControlProps) {
 
 }
 
-export default React.memo(AlertControl);
+export default React.memo(ErrorNotification);

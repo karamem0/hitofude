@@ -23,7 +23,7 @@ import { themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
-interface TreeItemControlProps {
+interface TreeItemProps {
   icon?: React.ReactNode,
   key?: React.Key,
   menu?: React.ReactNode,
@@ -33,7 +33,7 @@ interface TreeItemControlProps {
   onClick?: EventHandler
 }
 
-function TreeItemControl(props: TreeItemControlProps) {
+function TreeItem(props: TreeItemProps) {
 
   const {
     icon,
@@ -129,4 +129,4 @@ function TreeItemControl(props: TreeItemControlProps) {
   );
 }
 
-export default React.memo(TreeItemControl);
+export default React.memo(TreeItem);

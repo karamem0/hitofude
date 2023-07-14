@@ -18,6 +18,7 @@ import {
   setIncludeUnsupportedFiles,
   setWorkFile
 } from '../../../stores/Action';
+import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import {
   DialogAction,
@@ -26,9 +27,9 @@ import {
 } from '../../../types/Model';
 import { isSupportedFile } from '../../../utils/File';
 
-import Presenter from './ExplorerControl.presenter';
+import Presenter from './ExplorerTabItem.presenter';
 
-function ExplorerControl() {
+function ExplorerTabItem() {
 
   const {
     dispatch,
@@ -48,7 +49,7 @@ function ExplorerControl() {
 
   const handleOpenUrl = React.useCallback((_?: Event, data?: string) => {
     if (data == null) {
-      throw new Error();
+      throw new ArgumentNullError();
     }
     window.open(data, '_blank', 'noreferrer');
   }, []);
@@ -56,7 +57,7 @@ function ExplorerControl() {
   const handleRefreshFolder = React.useCallback(async (_?: Event, data?: Folder) => {
     try {
       if (data == null) {
-        throw new Error();
+        throw new ArgumentNullError();
       }
       dispatch(setExploreFolder(await graph.getFolderById(data.id)));
     } catch (e) {
@@ -66,10 +67,11 @@ function ExplorerControl() {
     dispatch,
     graph
   ]);
+
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
       if (data == null) {
-        throw new Error();
+        throw new ArgumentNullError();
       }
       dispatch(setExploreFile(data));
       dispatch(setWorkFile({
@@ -88,7 +90,7 @@ function ExplorerControl() {
   const handleSelectFolder = React.useCallback(async (_?: Event, data?: string) => {
     try {
       if (data == null) {
-        throw new Error();
+        throw new ArgumentNullError();
       }
       const exploreFolder = await graph.getFolderById(data);
       dispatch(setExploreFolder(exploreFolder));
@@ -115,13 +117,13 @@ function ExplorerControl() {
 
   const handleToggleIncludeUnsupportedFiles = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
+      if (data == null) {
+        throw new ArgumentNullError();
+      }
       if (exploreFolder == null) {
-        throw new Error();
+        throw new FolderNotFoundError();
       }
       dispatch(setIncludeUnsupportedFiles(data));
-      if (data != null) {
-        return;
-      }
       if (exploreFile != null && isSupportedFile(exploreFile)) {
         const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
         if (file != null) {
@@ -145,6 +147,7 @@ function ExplorerControl() {
     exploreFolder,
     graph
   ]);
+
   return (
     <Presenter
       exploreFile={exploreFile}
@@ -160,4 +163,4 @@ function ExplorerControl() {
 
 }
 
-export default ExplorerControl;
+export default ExplorerTabItem;

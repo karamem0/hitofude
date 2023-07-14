@@ -10,9 +10,9 @@ import React from 'react';
 
 import { EventHandler } from '../../../types/Event';
 
-import Presenter from './TreeItemControl.presenter';
+import Presenter from './TreeItem.presenter';
 
-interface TreeItemControlProps {
+interface TreeItemProps {
   icon?: React.ReactNode,
   menu?: React.ReactNode,
   menuEnabled?: boolean,
@@ -21,7 +21,7 @@ interface TreeItemControlProps {
   onClick?: EventHandler
 }
 
-function TreeItemControl(props: TreeItemControlProps) {
+function TreeItem(props: TreeItemProps) {
 
   const {
     icon,
@@ -44,4 +44,4 @@ function TreeItemControl(props: TreeItemControlProps) {
 
 }
 
-export default TreeItemControl;
+export default TreeItem;

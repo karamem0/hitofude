@@ -13,21 +13,34 @@ import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
   setError,
+  setMinimapEnabled,
   setSidePanelAction,
   setWorkFile
 } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
-import { ProgressType, SidePanelAction } from '../../../types/Model';
+import {
+  File,
+  FileContent,
+  ProgressType,
+  SidePanelAction
+} from '../../../types/Model';
 
-import Presenter from './ContentControl.presenter';
+import Presenter from './ContentSupported.presenter';
 
-function ContentControl() {
+interface ContentSupportedProps {
+  value?: File & FileContent
+}
+
+function ContentSupported(props: ContentSupportedProps) {
+
+  const {
+    value
+  } = props;
 
   const {
     dispatch,
     state: {
-      loading,
-      workFile
+      minimapEnabled
     }
   } = useStore();
   const { graph } = useService();
@@ -38,11 +51,11 @@ function ContentControl() {
 
   const handleCancel = React.useCallback(() => {
     try {
-      if (workFile == null) {
+      if (value == null) {
         throw new Error();
       }
       dispatch(setWorkFile({
-        ...workFile,
+        ...value,
         editing: false
       }));
     } catch (e) {
@@ -50,7 +63,7 @@ function ContentControl() {
     }
   }, [
     dispatch,
-    workFile
+    value
   ]);
 
   const handleChange = React.useCallback((_?: Event, data?: string) => {
@@ -59,11 +72,11 @@ function ContentControl() {
 
   const handleEdit = React.useCallback(() => {
     try {
-      if (workFile == null) {
+      if (value == null) {
         throw new Error();
       }
       dispatch(setWorkFile({
-        ...workFile,
+        ...value,
         editing: true
       }));
     } catch (e) {
@@ -71,7 +84,7 @@ function ContentControl() {
     }
   }, [
     dispatch,
-    workFile
+    value
   ]);
 
   const handleOpenSidePanel = React.useCallback((_?: Event, data?: SidePanelAction) => {
@@ -80,14 +93,20 @@ function ContentControl() {
     dispatch
   ]);
 
+  const handleToggleMinimapEnabled = React.useCallback((_?: Event, data?: boolean) => {
+    dispatch(setMinimapEnabled(data));
+  }, [
+    dispatch
+  ]);
+
   const handleSave = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
-      if (workFile == null) {
+      if (value == null) {
         throw new Error();
       }
       setProgress(ProgressType.save);
       const file = await Promise.resolve()
-        .then(() => graph.setFileContent(workFile, content))
+        .then(() => graph.setFileContent(value, content))
         .then((file) => file ? graph.getFileById(file.id) : undefined);
       if (file == null) {
         throw new Error();
@@ -107,34 +126,35 @@ function ContentControl() {
     dispatch,
     graph,
     setProgress,
-    workFile
+    value
   ]);
 
   React.useEffect(() => {
-    setContent(workFile?.content ?? '');
+    setContent(value?.content ?? '');
   }, [
-    workFile
+    value
   ]);
 
   React.useEffect(() => {
-    setChanged(workFile?.content !== content);
+    setChanged(value?.content !== content);
   }, [
-    workFile?.content,
+    value?.content,
     content
   ]);
 
   return (
     <Presenter
       changed={changed}
-      loading={loading}
-      value={workFile}
+      minimapEnabled={minimapEnabled}
+      value={value}
       onCancel={handleCancel}
       onChange={handleChange}
       onEdit={handleEdit}
       onOpenSidePanel={handleOpenSidePanel}
-      onSave={handleSave} />
+      onSave={handleSave}
+      onToggleMinimapEnabled={handleToggleMinimapEnabled} />
   );
 
 }
 
-export default ContentControl;
+export default ContentSupported;

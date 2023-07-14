@@ -11,19 +11,19 @@ import React from 'react';
 import { MessageDescriptor } from 'react-intl';
 import { useError } from 'react-use';
 
-import { useStore } from '../../../providers/StoreProvider';
-import { setError } from '../../../stores/Action';
+import { useStore } from '../../providers/StoreProvider';
+import { setError } from '../../stores/Action';
 import {
   FileConflictError,
   FileNotFoundError,
   FolderConflictError,
   FolderNotFoundError
-} from '../../../types/Error';
+} from '../../types/Error';
 import messages from '../messages';
 
-import Presenter from './AlertControl.presenter';
+import Presenter from './ErrorNotification.presenter';
 
-function AlertControl() {
+function ErrorNotification() {
 
   const dispatchError = useError();
   const {
@@ -92,4 +92,4 @@ function AlertControl() {
 
 }
 
-export default AlertControl;
+export default ErrorNotification;

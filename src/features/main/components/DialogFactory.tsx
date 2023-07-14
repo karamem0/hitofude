@@ -10,9 +10,9 @@ import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
 
-import Presenter from './DialogControl.presenter';
+import Presenter from './DialogFactory.presenter';
 
-function DialogControl() {
+function DialogFactory() {
 
   const {
     state: {
@@ -26,4 +26,4 @@ function DialogControl() {
 
 }
 
-export default DialogControl;
+export default DialogFactory;

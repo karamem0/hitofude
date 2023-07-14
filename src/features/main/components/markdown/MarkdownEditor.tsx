@@ -31,6 +31,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
 
   const {
     state: {
+      minimapEnabled,
       tabMode
     }
   } = useStore();
@@ -56,7 +57,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
         fontFamily: 'Consolas, Menlo, Monaco, Meiryo, monospace',
         language: 'markdown',
         minimap: {
-          enabled: false
+          enabled: minimapEnabled
         },
         value
       });
@@ -67,6 +68,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
       monacoRef.current?.dispose();
     };
   }, [
+    minimapEnabled,
     value,
     onChange
   ]);

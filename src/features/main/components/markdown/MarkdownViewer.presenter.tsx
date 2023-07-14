@@ -16,7 +16,7 @@ import remarkGfm from 'remark-gfm';
 import { themeConfig } from '../../../../providers/ThemeProvider';
 
 import MarkdownCodeRenderer from './MarkdownCodeRenderer';
-import MarkdownImgRenderer from './MarkdownImgRenderer';
+import MarkdownImageRenderer from './MarkdownImageRenderer';
 
 interface MarkdownViewerProps {
   className?: string,
@@ -131,7 +131,7 @@ function MarkdownViewer(props: MarkdownViewerProps) {
         remarkPlugins={[ remarkGfm ]}
         components={{
           code: MarkdownCodeRenderer,
-          img: MarkdownImgRenderer
+          img: MarkdownImageRenderer
         }}>
         {value || ''}
       </ReactMarkdown>

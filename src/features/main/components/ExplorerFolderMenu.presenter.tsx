@@ -58,7 +58,7 @@ function ExplorerFolderMenu(props: ExplorerFolderMenuProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.renameFolder,
-            payload: value
+            data: value
           })}>
           <FormattedMessage {...messages.RenameFolder} />
         </MenuItem>
@@ -73,7 +73,7 @@ function ExplorerFolderMenu(props: ExplorerFolderMenuProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.deleteFolder,
-            payload: value
+            data: value
           })}>
           <FormattedMessage {...messages.DeleteFolder} />
         </MenuItem>

@@ -11,18 +11,24 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { Image } from '@fluentui/react-components';
 
-interface ImageControlProps {
+interface ImageViewerProps {
+  alt?: string,
+  className?: string,
   src?: string
 }
 
-function ImageControl(props: ImageControlProps) {
+function ImageViewer(props: ImageViewerProps) {
 
   const {
+    alt,
+    className,
     src
   } = props;
 
   return (
     <Image
+      alt={alt}
+      className={className}
       src={src}
       css={css`
         max-width: 100%;
@@ -32,4 +38,4 @@ function ImageControl(props: ImageControlProps) {
 
 }
 
-export default React.memo(ImageControl);
+export default React.memo(ImageViewer);

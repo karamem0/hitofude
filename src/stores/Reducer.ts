@@ -18,6 +18,7 @@ import {
 import {
   Action,
   ActionType,
+  InitialState,
   State
 } from '../types/Store';
 import { compare } from '../utils/String';
@@ -25,8 +26,8 @@ import { compare } from '../utils/String';
 export const reducer = (storage: StorageService) => (state: State, action: Action): State => {
   switch (action.type) {
     case ActionType.appendExploreFile: {
-      const payload = action.payload as File | undefined;
-      if (payload == null) {
+      const data = action.data as File | undefined;
+      if (data == null) {
         return state;
       }
       if (state.exploreFolder == null) {
@@ -34,20 +35,20 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       }
       return {
         ...state,
-        exploreFile: payload,
+        exploreFile: data,
         exploreFolder: {
           ...state.exploreFolder,
           files: state.exploreFolder.files ? (
-            [ ...state.exploreFolder.files, payload ].sort((a, b) => compare(a.baseName, b.baseName))
+            [ ...state.exploreFolder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
           ) : (
-            [ payload ]
+            [ data ]
           )
         }
       };
     }
     case ActionType.appendExploreFolder: {
-      const payload = action.payload as Folder | undefined;
-      if (payload == null) {
+      const data = action.data as Folder | undefined;
+      if (data == null) {
         return state;
       }
       if (state.exploreFolder == null) {
@@ -58,16 +59,16 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         exploreFolder: {
           ...state.exploreFolder,
           folders: state.exploreFolder.folders ? (
-            [ ...state.exploreFolder.folders, payload ].sort((a, b) => compare(a.name, b.name))
+            [ ...state.exploreFolder.folders, data ].sort((a, b) => compare(a.name, b.name))
           ) : (
-            [ payload ]
+            [ data ]
           )
         }
       };
     }
     case ActionType.deleteExploreFile: {
-      const payload = action.payload as File | undefined;
-      if (payload == null) {
+      const data = action.data as File | undefined;
+      if (data == null) {
         return state;
       }
       if (state.exploreFolder == null) {
@@ -77,13 +78,13 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...state,
         exploreFolder: {
           ...state.exploreFolder,
-          files: state.exploreFolder.files?.filter((item) => item.id !== payload.id)
+          files: state.exploreFolder.files?.filter((item) => item.id !== data.id)
         }
       };
     }
     case ActionType.deleteExploreFolder: {
-      const payload = action.payload as Folder | undefined;
-      if (payload == null) {
+      const data = action.data as Folder | undefined;
+      if (data == null) {
         return state;
       }
       if (state.exploreFolder == null) {
@@ -93,108 +94,116 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...state,
         exploreFolder: {
           ...state.exploreFolder,
-          folders: state.exploreFolder.folders?.filter((item) => item.id !== payload.id)
+          folders: state.exploreFolder.folders?.filter((item) => item.id !== data.id)
         }
       };
     }
     case ActionType.setDialogAction: {
-      const payload = action.payload as DialogAction | undefined;
+      const data = action.data as DialogAction | undefined;
       return {
         ...state,
-        dialogAction: payload
+        dialogAction: data
       };
     }
     case ActionType.setError: {
-      const payload = action.payload as Error | undefined;
+      const data = action.data as Error | undefined;
       return {
         ...state,
-        error: payload
+        error: data
       };
     }
     case ActionType.setExploreFile: {
-      const payload = action.payload as File | undefined;
-      storage.setExploreFileId(payload?.id);
+      const data = action.data as File | undefined;
+      storage.setExploreFileId(data?.id);
       return {
         ...state,
-        exploreFile: payload
+        exploreFile: data
       };
     }
     case ActionType.setExploreFolder: {
-      const payload = action.payload as Folder | undefined;
-      storage.setExploreFolderId(payload?.id);
+      const data = action.data as Folder | undefined;
+      storage.setExploreFolderId(data?.id);
       return {
         ...state,
-        exploreFolder: payload
+        exploreFolder: data
       };
     }
     case ActionType.setIncludeUnsupportedFiles: {
-      const payload = action.payload as boolean | undefined;
-      storage.setIncludeUnsupportedFiles(payload);
+      const data = action.data as boolean | undefined;
+      storage.setIncludeUnsupportedFiles(data);
       return {
         ...state,
-        includeUnsupportedFiles: payload
+        includeUnsupportedFiles: data
       };
     }
-    case ActionType.setInitialValue: {
-      const payload = action.payload as Pick<State, 'includeUnsupportedFiles' | 'tabMode'> | undefined;
+    case ActionType.setInitialState: {
+      const data = action.data as InitialState | undefined;
       return {
         ...state,
-        ...payload
+        ...data
       };
     }
     case ActionType.setLoading: {
-      const payload = action.payload as boolean | undefined;
+      const data = action.data as boolean | undefined;
       return {
         ...state,
-        loading: payload
+        loading: data
+      };
+    }
+    case ActionType.setMinimapEnabled: {
+      const data = action.data as boolean | undefined;
+      storage.setMinimapEnabled(data);
+      return {
+        ...state,
+        minimapEnabled: data
       };
     }
     case ActionType.setSearchFile: {
-      const payload = action.payload as File | undefined;
+      const data = action.data as File | undefined;
       return {
         ...state,
-        searchFile: payload
+        searchFile: data
       };
     }
     case ActionType.setSearchResults: {
-      const payload = action.payload as File[] | undefined;
+      const data = action.data as File[] | undefined;
       return {
         ...state,
-        searchResults: payload
+        searchResults: data
       };
     }
     case ActionType.setSearchQuery: {
-      const payload = action.payload as string | undefined;
+      const data = action.data as string | undefined;
       return {
         ...state,
-        searchQuery: payload
+        searchQuery: data
       };
     }
     case ActionType.setSidePanelAction: {
-      const payload = action.payload as SidePanelAction | undefined;
+      const data = action.data as SidePanelAction | undefined;
       return {
         ...state,
-        sidePanelAction: payload
+        sidePanelAction: data
       };
     }
     case ActionType.setTabMode: {
-      const payload = action.payload as TabMode | undefined;
-      storage.setTabMode(payload);
+      const data = action.data as TabMode | undefined;
+      storage.setTabMode(data);
       return {
         ...state,
-        tabMode: payload
+        tabMode: data
       };
     }
     case ActionType.setWorkFile: {
-      const payload = action.payload as File & FileContent | undefined;
+      const data = action.data as File & FileContent | undefined;
       return {
         ...state,
-        workFile: payload
+        workFile: data
       };
     }
     case ActionType.updateExploreFile: {
-      const payload = action.payload as File | undefined;
-      if (payload == null) {
+      const data = action.data as File | undefined;
+      if (data == null) {
         return state;
       }
       if (state.exploreFolder == null) {
@@ -206,15 +215,15 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
           ...state.exploreFolder,
           files: state.exploreFolder.files ? (
             state.exploreFolder.files
-              .map((item) => item.id === payload.id ? payload : item)
+              .map((item) => item.id === data.id ? data : item)
               .sort((a, b) => compare(a.baseName, b.baseName))
           ) : []
         }
       };
     }
     case ActionType.updateExploreFolder: {
-      const payload = action.payload as Folder | undefined;
-      if (payload == null) {
+      const data = action.data as Folder | undefined;
+      if (data == null) {
         return state;
       }
       if (state.exploreFolder == null) {
@@ -226,7 +235,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
           ...state.exploreFolder,
           folders: state.exploreFolder.folders ? (
             state.exploreFolder.folders
-              .map((item) => item.id === payload.id ? payload : item)
+              .map((item) => item.id === data.id ? data : item)
               .sort((a, b) => compare(a.name, b.name))
           ) : []
         }

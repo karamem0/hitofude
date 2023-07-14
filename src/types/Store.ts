@@ -17,7 +17,7 @@ import {
 
 export interface Action {
   type: ActionType,
-  payload: unknown
+  data: unknown
 }
 
 export enum ActionType {
@@ -30,8 +30,9 @@ export enum ActionType {
   setExploreFile = 'setExploreFile',
   setExploreFolder = 'setExploreFolder',
   setIncludeUnsupportedFiles = 'setIncludeUnsupportedFiles',
-  setInitialValue = 'setInitialValue',
+  setInitialState = 'setInitialState',
   setLoading = 'setLoading',
+  setMinimapEnabled = 'setMinimapEnabled',
   setSearchFile = 'setSearchFile',
   setSearchResults = 'setSearchResults',
   setSearchQuery = 'setSearchQuery',
@@ -42,7 +43,7 @@ export enum ActionType {
   updateExploreFolder = 'updateExploreFolder'
 }
 
-export type DispatchAction<T> = (payload: T) => void;
+export type DispatchAction<T> = (data: T) => void;
 
 export interface State {
   dialogAction?: DialogAction,
@@ -51,6 +52,7 @@ export interface State {
   exploreFolder?: Folder,
   includeUnsupportedFiles?: boolean,
   loading?: boolean,
+  minimapEnabled?: boolean,
   rootFolder?: Folder,
   searchFile?: File,
   searchResults?: File[],
@@ -59,3 +61,5 @@ export interface State {
   tabMode?: TabMode,
   workFile?: File & FileContent
 }
+
+export type InitialState = Pick<State, 'includeUnsupportedFiles' | 'minimapEnabled' | 'rootFolder' | 'tabMode'>;

@@ -10,9 +10,9 @@ import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
 
-import Presenter from './SidePanelControl.presenter';
+import Presenter from './SidePanelFactory.presenter';
 
-function SidePanelControl() {
+function SidePanelFactory() {
 
   const {
     state: {
@@ -26,4 +26,4 @@ function SidePanelControl() {
 
 }
 
-export default SidePanelControl;
+export default SidePanelFactory;

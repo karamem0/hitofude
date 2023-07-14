@@ -13,14 +13,14 @@ import { FormattedMessage } from 'react-intl';
 import { Global, css } from '@emotion/react';
 import { Spinner, Text } from '@fluentui/react-components';
 
+import ErrorNotification from '../../../common/components/ErrorNotification';
 import { themeConfig } from '../../../providers/ThemeProvider';
-import AlertControl from '../components/AlertControl';
-import AppBarControl from '../components/AppBarControl';
-import AppTabControl from '../components/AppTabControl';
-import ContentControl from '../components/ContentControl';
-import DialogControl from '../components/DialogControl';
+import AppBar from '../components/AppBar';
+import AppContent from '../components/AppContent';
+import AppTab from '../components/AppTab';
+import DialogFactory from '../components/DialogFactory';
 import MeControl from '../components/MeControl';
-import SidePanelControl from '../components/SidePanelControl';
+import SidePanelFactory from '../components/SidePanelFactory';
 import messages from '../messages';
 
 interface MainPageProps {
@@ -52,9 +52,9 @@ function MainPage(props: MainPageProps) {
             overflow: hidden;
           }
         `} />
-      <AlertControl />
-      <DialogControl />
-      <SidePanelControl />
+      <ErrorNotification />
+      <DialogFactory />
+      <SidePanelFactory />
       <div
         css={css`
           display: flex;
@@ -105,9 +105,9 @@ function MainPage(props: MainPageProps) {
               }
             }
           `}>
-          <AppBarControl />
-          <AppTabControl />
-          <ContentControl />
+          <AppBar />
+          <AppTab />
+          <AppContent />
         </div>
       </div>
     </React.Fragment>

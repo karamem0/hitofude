@@ -9,6 +9,11 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
+  Dismiss: { defaultMessage: 'Dismiss' },
+  FileAlreadyExists: { defaultMessage: 'The file with the name already exists' },
+  FileDoesNotExists: { defaultMessage: 'The file with the name does not exists' },
+  FolderAlreadyExists: { defaultMessage: 'The folder with the name already exists' },
+  FolderDoesNotExists: { defaultMessage: 'The folder with the name does not exists' },
   Saving: { defaultMessage: 'Saving...' }
 });
 

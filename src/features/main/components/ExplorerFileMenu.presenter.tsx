@@ -59,7 +59,7 @@ function ExplorerFileMenu(props: ExplorerFileMenuProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.copyFile,
-            payload: value
+            data: value
           })}>
           <FormattedMessage {...messages.CopyFile} />
         </MenuItem>
@@ -77,7 +77,7 @@ function ExplorerFileMenu(props: ExplorerFileMenuProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.renameFile,
-            payload: value
+            data: value
           })}>
           <FormattedMessage {...messages.RenameFile} />
         </MenuItem>
@@ -92,7 +92,7 @@ function ExplorerFileMenu(props: ExplorerFileMenuProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.deleteFile,
-            payload: value
+            data: value
           })}>
           <FormattedMessage {...messages.DeleteFile} />
         </MenuItem>

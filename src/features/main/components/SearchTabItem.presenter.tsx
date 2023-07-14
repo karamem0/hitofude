@@ -27,11 +27,11 @@ import {
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import messages from '../messages';
-import { SearchControlFormState } from '../types/Form';
+import { SearchTabItemFormState } from '../types/Form';
 
-import TreeItemControl from './TreeItemControl';
+import TreeItem from './TreeItem';
 
-interface SearchControlProps {
+interface SearchTabItemProps {
   loading?: boolean,
   searchFile?: File,
   searchResults?: File[],
@@ -40,10 +40,10 @@ interface SearchControlProps {
   onClearInput?: EventHandler,
   onOpenFileLocation?: EventHandler<File>,
   onSelectFile?: EventHandler<File>,
-  onSubmit?: EventHandler<SearchControlFormState>
+  onSubmit?: EventHandler<SearchTabItemFormState>
 }
 
-function SearchControl(props: SearchControlProps) {
+function SearchTabItem(props: SearchTabItemProps) {
 
   const {
     loading,
@@ -58,7 +58,7 @@ function SearchControl(props: SearchControlProps) {
   } = props;
 
   const intl = useIntl();
-  const form = useForm<SearchControlFormState>();
+  const form = useForm<SearchTabItemFormState>();
 
   return (
     <div
@@ -130,7 +130,7 @@ function SearchControl(props: SearchControlProps) {
         {
           searchResults && searchResults.length > 0 ? (
             searchResults.map((item) => (
-              <TreeItemControl
+              <TreeItem
                 key={item.id}
                 name={item.fullName}
                 selected={searchFile?.id === item.id}
@@ -174,4 +174,4 @@ function SearchControl(props: SearchControlProps) {
 
 }
 
-export default React.memo(SearchControl);
+export default React.memo(SearchTabItem);

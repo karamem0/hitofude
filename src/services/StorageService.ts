@@ -28,6 +28,10 @@ export class StorageService {
     return Boolean(Number(this.storage.getItem('includeUnsupportedFiles') ?? undefined));
   }
 
+  getMinimapEnabled(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('minimapEnabled') ?? undefined));
+  }
+
   getTabMode(): TabMode | undefined {
     return {
       type: Number(this.storage.getItem('tabType')) ?? TabType.explorer,
@@ -56,6 +60,14 @@ export class StorageService {
       this.storage.setItem('includeUnsupportedFiles', String(Number(value)));
     } else {
       this.storage.removeItem('includeUnsupportedFiles');
+    }
+  }
+
+  setMinimapEnabled(value?: boolean): void {
+    if (value) {
+      this.storage.setItem('minimapEnabled', String(Number(value)));
+    } else {
+      this.storage.removeItem('minimapEnabled');
     }
   }
 

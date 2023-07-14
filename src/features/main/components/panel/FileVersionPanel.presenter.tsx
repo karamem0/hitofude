@@ -98,7 +98,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
                                   `}
                                   onClick={(e) => onRestore?.(e, {
                                     type: DialogType.restoreFile,
-                                    payload: item
+                                    data: item
                                   })}>
                                   <HistoryIcon />
                                 </div>

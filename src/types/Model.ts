@@ -6,9 +6,19 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+export interface ContentMenuAction {
+  type: ContentMenuType,
+  data: unknown
+}
+
+export enum ContentMenuType {
+  openSidePanel = 'openSidePanel',
+  toggleMinimapEnabled = 'toggleMinimapEnabled'
+}
+
 export interface DialogAction {
   type: DialogType,
-  payload: unknown
+  data: unknown
 }
 
 export enum DialogType {
@@ -70,7 +80,7 @@ export enum ProgressType {
 
 export interface SidePanelAction {
   type: SidePanelType,
-  payload: unknown
+  data: unknown
 }
 
 export enum SidePanelType {

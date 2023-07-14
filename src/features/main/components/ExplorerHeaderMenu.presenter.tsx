@@ -38,7 +38,7 @@ interface ExplorerHeaderMenuProps {
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>,
   onRefreshFolder?: EventHandler<Folder>,
-  onToggleIncludeUnsupportedFiles ?: EventHandler<boolean>
+  onToggleIncludeUnsupportedFiles?: EventHandler<boolean>
 }
 
 function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
@@ -71,7 +71,7 @@ function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="IncludeUnsupportedFiles"
+          key="ToggleIncludeUnsupportedFiles"
           icon={
             includeUnsupportedFiles ? (
               <Hide3Icon
@@ -109,7 +109,7 @@ function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.createFile,
-            payload: null
+            data: null
           })}>
           <FormattedMessage {...messages.NewFile} />
         </MenuItem>
@@ -124,7 +124,7 @@ function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.createFolder,
-            payload: null
+            data: null
           })}>
           <FormattedMessage {...messages.NewFolder} />
         </MenuItem>

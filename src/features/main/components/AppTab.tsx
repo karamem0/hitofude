@@ -21,9 +21,9 @@ import {
 import { FileNotFoundError } from '../../../types/Error';
 import { TabType } from '../../../types/Model';
 
-import Presenter from './AppTabControl.presenter';
+import Presenter from './AppTab.presenter';
 
-function AppTabControl() {
+function AppTab() {
 
   const {
     dispatch,
@@ -119,4 +119,4 @@ function AppTabControl() {
 
 }
 
-export default AppTabControl;
+export default AppTab;

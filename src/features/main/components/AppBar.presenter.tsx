@@ -22,12 +22,12 @@ import { EventHandler } from '../../../types/Event';
 import { TabMode, TabType } from '../../../types/Model';
 import messages from '../messages';
 
-interface AppBarControlProps {
+interface AppBarProps {
   tabMode?: TabMode,
   onToggleTab?: EventHandler<TabType>
 }
 
-function AppBarControl(props: AppBarControlProps) {
+function AppBar(props: AppBarProps) {
 
   const {
     tabMode,
@@ -90,4 +90,4 @@ function AppBarControl(props: AppBarControlProps) {
 
 }
 
-export default React.memo(AppBarControl);
+export default React.memo(AppBar);

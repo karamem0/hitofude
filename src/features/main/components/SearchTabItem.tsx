@@ -23,11 +23,11 @@ import {
 import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { File, TabType } from '../../../types/Model';
-import { SearchControlFormState } from '../types/Form';
+import { SearchTabItemFormState } from '../types/Form';
 
-import Presenter from './SearchControl.presenter';
+import Presenter from './SearchTabItem.presenter';
 
-function SearchControl() {
+function SearchTabItem() {
 
   const {
     dispatch,
@@ -103,7 +103,7 @@ function SearchControl() {
     graph
   ]);
 
-  const handleSubmit = React.useCallback(async (_?: Event, data?: SearchControlFormState) => {
+  const handleSubmit = React.useCallback(async (_?: Event, data?: SearchTabItemFormState) => {
     try {
       if (data?.query == null) {
         throw new ArgumentNullError();
@@ -137,4 +137,4 @@ function SearchControl() {
 
 }
 
-export default SearchControl;
+export default SearchTabItem;

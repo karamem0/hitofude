@@ -13,15 +13,15 @@ import { useStore } from '../../../../providers/StoreProvider';
 import { FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
 import { getParentUrl, isAbsoluteUrl } from '../../../../utils/Url';
 
-import Presenter from './MarkdownImgRenderer.presenter';
+import Presenter from './MarkdownImageRenderer.presenter';
 
-interface MarkdownImgRendererProps {
+interface MarkdownImageRendererProps {
   alt?: string,
   className?: string,
   src?: string
 }
 
-function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
+function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
 
   const {
     alt,
@@ -75,4 +75,4 @@ function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
 
 }
 
-export default MarkdownImgRenderer;
+export default MarkdownImageRenderer;

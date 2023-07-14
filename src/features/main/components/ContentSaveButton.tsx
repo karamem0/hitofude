@@ -10,32 +10,26 @@ import React from 'react';
 
 import { EventHandler } from '../../../types/Event';
 
-import Presenter from './TreeHeaderControl.presenter';
+import Presenter from './ContentSaveButton.presenter';
 
-interface TreeHeaderControlProps {
+interface ContentSaveButtonProps {
   disabled?: boolean,
-  menu?: React.ReactNode,
-  name?: string,
-  onClick?: EventHandler
+  onClick?: EventHandler<boolean>
 }
 
-function TreeHeaderControl(props: TreeHeaderControlProps) {
+function ContentSaveButton(props: ContentSaveButtonProps) {
 
   const {
     disabled,
-    menu,
-    name,
     onClick
   } = props;
 
   return (
     <Presenter
       disabled={disabled}
-      menu={menu}
-      name={name}
       onClick={onClick} />
   );
 
 }
 
-export default TreeHeaderControl;
+export default ContentSaveButton;

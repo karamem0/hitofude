@@ -22,14 +22,14 @@ import { ChevronLeftIcon, MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
-interface TreeHeaderControlProps {
+interface TreeHeaderProps {
   disabled?: boolean,
   menu?: React.ReactNode,
   name?: string,
   onClick?: EventHandler
 }
 
-function TreeHeaderControl(props: TreeHeaderControlProps) {
+function TreeHeader(props: TreeHeaderProps) {
 
   const {
     disabled,
@@ -109,4 +109,4 @@ function TreeHeaderControl(props: TreeHeaderControlProps) {
   );
 }
 
-export default React.memo(TreeHeaderControl);
+export default React.memo(TreeHeader);

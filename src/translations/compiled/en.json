@@ -1,4 +1,10 @@
 {
+  "/+Itm/": [
+    {
+      "type": 0,
+      "value": "Show minimap"
+    }
+  ],
   "/rjLPg": [
     {
       "type": 0,
@@ -321,6 +327,12 @@
     {
       "type": 0,
       "value": "Refresh"
+    }
+  ],
+  "rkvFU3": [
+    {
+      "type": 0,
+      "value": "Hide minimap"
     }
   ],
   "sQtSD2": [

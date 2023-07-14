@@ -32,10 +32,10 @@ import messages from '../messages';
 import ExplorerFileMenu from './ExplorerFileMenu';
 import ExplorerFolderMenu from './ExplorerFolderMenu';
 import ExplorerHeaderMenu from './ExplorerHeaderMenu';
-import TreeHeaderControl from './TreeHeaderControl';
-import TreeItemControl from './TreeItemControl';
+import TreeHeader from './TreeHeader';
+import TreeItem from './TreeItem';
 
-interface ExplorerControlProps {
+interface ExplorerTabItemProps {
   exploreFile?: File,
   exploreFolder?: Folder,
   includeUnsupportedFiles?: boolean,
@@ -47,7 +47,7 @@ interface ExplorerControlProps {
   onToggleIncludeUnsupportedFiles ?: EventHandler<boolean>
 }
 
-function ExplorerControl(props: ExplorerControlProps) {
+function ExplorerTabItem(props: ExplorerTabItemProps) {
 
   const {
     exploreFile,
@@ -78,7 +78,7 @@ function ExplorerControl(props: ExplorerControlProps) {
         `}>
         <FormattedMessage {...messages.Explorer} />
       </Caption1>
-      <TreeHeaderControl
+      <TreeHeader
         disabled={!exploreFolder.parentId}
         name={exploreFolder.parentId ? exploreFolder.name : intl.formatMessage(messages.RootFolder)}
         menu={(
@@ -112,7 +112,7 @@ function ExplorerControl(props: ExplorerControlProps) {
             <React.Fragment>
               {
                 exploreFolder.folders?.map((item) => (
-                  <TreeItemControl
+                  <TreeItem
                     key={item.id}
                     name={item.name}
                     icon={(
@@ -133,7 +133,7 @@ function ExplorerControl(props: ExplorerControlProps) {
               }
               {
                 exploreFolder.files?.filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item)).map((item) => (
-                  <TreeItemControl
+                  <TreeItem
                     key={item.id}
                     menuEnabled={isSupportedFile(item)}
                     name={item.fullName}
@@ -176,7 +176,7 @@ function ExplorerControl(props: ExplorerControlProps) {
           )}
           onClick={(e) => onOpenDialog?.(e, {
             type: DialogType.createFile,
-            payload: null
+            data: null
           })}>
           <FormattedMessage {...messages.NewFile} />
         </Button>
@@ -186,4 +186,4 @@ function ExplorerControl(props: ExplorerControlProps) {
 
 }
 
-export default React.memo(ExplorerControl);
+export default React.memo(ExplorerTabItem);

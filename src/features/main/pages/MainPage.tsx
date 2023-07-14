@@ -10,7 +10,7 @@ import React from 'react';
 
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setInitialValue } from '../../../stores/Action';
+import { setInitialState } from '../../../stores/Action';
 
 import Presenter from './MainPage.presenter';
 
@@ -26,9 +26,10 @@ function MainPage() {
 
   React.useEffect(() => {
     (async () => {
-      dispatch(setInitialValue({
+      dispatch(setInitialState({
         includeUnsupportedFiles: storage.getIncludeUnsupportedFiles(),
         rootFolder: await graph.getRootFolder(),
+        minimapEnabled: storage.getMinimapEnabled(),
         tabMode: storage.getTabMode()
       }));
     })();

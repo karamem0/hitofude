@@ -8,16 +8,15 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-import { Image } from '@fluentui/react-components';
+import ImageViewer from '../../../../common/components/ImageViewer';
 
-interface MarkdownImgRendererProps {
+interface MarkdownImageRendererProps {
   alt?: string,
   className?: string,
   src?: string
 }
 
-function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
+function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
 
   const {
     alt,
@@ -26,16 +25,12 @@ function MarkdownImgRenderer(props: MarkdownImgRendererProps) {
   } = props;
 
   return (
-    <Image
+    <ImageViewer
       alt={alt}
       className={className}
-      src={src}
-      css={css`
-        max-width: 100%;
-        height: auto;
-      `} />
+      src={src} />
   );
 
 }
 
-export default React.memo(MarkdownImgRenderer);
+export default React.memo(MarkdownImageRenderer);

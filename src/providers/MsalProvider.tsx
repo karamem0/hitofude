@@ -14,7 +14,7 @@ import {
 } from '@azure/msal-browser';
 import { MsalProvider as Provider } from '@azure/msal-react';
 
-import MsalControl from '../common/components/MsalControl';
+import MsalAdapter from '../common/components/MsalAdapter';
 
 const msalConfig = {
   auth: {
@@ -34,9 +34,9 @@ function MsalProvider(props: React.PropsWithChildren<unknown>) {
 
   return (
     <Provider instance={new PublicClientApplication(msalConfig)}>
-      <MsalControl>
+      <MsalAdapter>
         {children}
-      </MsalControl>
+      </MsalAdapter>
     </Provider>
   );
 

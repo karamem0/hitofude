@@ -13,14 +13,14 @@ import { css } from '@emotion/react';
 import { themeConfig } from '../../../providers/ThemeProvider';
 import { TabMode, TabType } from '../../../types/Model';
 
-import ExplorerControl from './ExplorerControl';
-import SearchControl from './SearchControl';
+import ExplorerTabItem from './ExplorerTabItem';
+import SearchTabItem from './SearchTabItem';
 
-interface AppTabControlProps {
+interface AppTabProps {
   tabMode?: TabMode
 }
 
-function AppTabControl(props: AppTabControlProps) {
+function AppTab(props: AppTabProps) {
 
   const {
     tabMode
@@ -41,11 +41,11 @@ function AppTabControl(props: AppTabControlProps) {
           switch (tabMode?.type) {
             case TabType.explorer:
               return (
-                <ExplorerControl />
+                <ExplorerTabItem />
               );
             case TabType.search:
               return (
-                <SearchControl />
+                <SearchTabItem />
               );
             default:
               return null;
@@ -57,4 +57,4 @@ function AppTabControl(props: AppTabControlProps) {
 
 }
 
-export default React.memo(AppTabControl);
+export default React.memo(AppTab);

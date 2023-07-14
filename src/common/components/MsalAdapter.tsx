@@ -11,9 +11,9 @@ import React from 'react';
 import { InteractionStatus } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
 
-import Presenter from './MsalControl.presenter';
+import Presenter from './MsalAdapter.presenter';
 
-function MsalControl(props: React.PropsWithChildren<unknown>) {
+function MsalAdapter(props: React.PropsWithChildren<unknown>) {
 
   const { children } = props;
 
@@ -35,4 +35,4 @@ function MsalControl(props: React.PropsWithChildren<unknown>) {
 
 }
 
-export default MsalControl;
+export default MsalAdapter;

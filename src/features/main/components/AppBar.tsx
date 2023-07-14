@@ -13,9 +13,9 @@ import { setTabMode } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
 import { TabType } from '../../../types/Model';
 
-import Presenter from './AppBarControl.presenter';
+import Presenter from './AppBar.presenter';
 
-function AppBarControl() {
+function AppBar() {
 
   const {
     dispatch,
@@ -42,4 +42,4 @@ function AppBarControl() {
 
 }
 
-export default AppBarControl;
+export default AppBar;

@@ -17,100 +17,105 @@ import {
 import {
   Action,
   ActionType,
-  State
+  InitialState
 } from '../types/Store';
 
-export const appendExploreFile = (payload?: File): Action => ({
+export const appendExploreFile = (data?: File): Action => ({
   type: ActionType.appendExploreFile,
-  payload
+  data
 });
 
-export const appendExploreFolder = (payload?: Folder): Action => ({
+export const appendExploreFolder = (data?: Folder): Action => ({
   type: ActionType.appendExploreFolder,
-  payload
+  data
 });
 
-export const deleteExploreFile = (payload?: File): Action => ({
+export const deleteExploreFile = (data?: File): Action => ({
   type: ActionType.deleteExploreFile,
-  payload
+  data
 });
 
-export const deleteExploreFolder = (payload?: Folder): Action => ({
+export const deleteExploreFolder = (data?: Folder): Action => ({
   type: ActionType.deleteExploreFolder,
-  payload
+  data
 });
 
-export const setDialogAction = (payload?: DialogAction): Action => ({
+export const setDialogAction = (data?: DialogAction): Action => ({
   type: ActionType.setDialogAction,
-  payload
+  data
 });
 
-export const setError = (payload?: Error): Action => ({
+export const setError = (data?: Error): Action => ({
   type: ActionType.setError,
-  payload
+  data
 });
 
-export const setExploreFile = (payload?: File): Action => ({
+export const setExploreFile = (data?: File): Action => ({
   type: ActionType.setExploreFile,
-  payload
+  data
 });
 
-export const setExploreFolder = (payload?: Folder): Action => ({
+export const setExploreFolder = (data?: Folder): Action => ({
   type: ActionType.setExploreFolder,
-  payload
+  data
 });
 
-export const setIncludeUnsupportedFiles = (payload?: boolean): Action => ({
+export const setIncludeUnsupportedFiles = (data?: boolean): Action => ({
   type: ActionType.setIncludeUnsupportedFiles,
-  payload
+  data
 });
 
-export const setInitialValue = (payload?: Pick<State, 'includeUnsupportedFiles' | 'rootFolder' | 'tabMode'>): Action => ({
-  type: ActionType.setInitialValue,
-  payload
+export const setInitialState = (data?: InitialState): Action => ({
+  type: ActionType.setInitialState,
+  data
 });
 
-export const setLoading = (payload?: boolean): Action => ({
+export const setLoading = (data?: boolean): Action => ({
   type: ActionType.setLoading,
-  payload
+  data
 });
 
-export const setSearchFile = (payload?: File): Action => ({
+export const setMinimapEnabled = (data?: boolean): Action => ({
+  type: ActionType.setMinimapEnabled,
+  data
+});
+
+export const setSearchFile = (data?: File): Action => ({
   type: ActionType.setSearchFile,
-  payload
+  data
 });
 
-export const setSearchResults = (payload?: File[]): Action => ({
+export const setSearchResults = (data?: File[]): Action => ({
   type: ActionType.setSearchResults,
-  payload
+  data
 });
 
-export const setSearchQuery = (payload?: string): Action => ({
+export const setSearchQuery = (data?: string): Action => ({
   type: ActionType.setSearchQuery,
-  payload
+  data
 });
 
-export const setSidePanelAction = (payload?: SidePanelAction): Action => ({
+export const setSidePanelAction = (data?: SidePanelAction): Action => ({
   type: ActionType.setSidePanelAction,
-  payload
+  data
 });
 
-export const setTabMode = (payload?: TabMode): Action => ({
+export const setTabMode = (data?: TabMode): Action => ({
   type: ActionType.setTabMode,
-  payload
+  data
 });
 
-export const setWorkFile = (payload?: File & FileContent): Action => ({
+export const setWorkFile = (data?: File & FileContent): Action => ({
   type: ActionType.setWorkFile,
-  payload
+  data
 });
 
-export const updateExploreFile = (payload?: File): Action => ({
+export const updateExploreFile = (data?: File): Action => ({
   type: ActionType.updateExploreFile,
-  payload
+  data
 });
 
-export const updateExploreFolder = (payload?: Folder): Action => ({
+export const updateExploreFolder = (data?: Folder): Action => ({
   type: ActionType.updateExploreFolder,
-  payload
+  data
 });

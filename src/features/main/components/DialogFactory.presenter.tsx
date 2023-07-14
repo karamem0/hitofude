@@ -25,11 +25,11 @@ import FolderCreateDialog from './dialog/FolderCreateDialog';
 import FolderDeleteDialog from './dialog/FolderDeleteDialog';
 import FolderRenameDialog from './dialog/FolderRenameDialog';
 
-interface DialogControlProps {
+interface DialogFactoryProps {
   action?: DialogAction
 }
 
-function DialogControl(props: DialogControlProps) {
+function DialogFactory(props: DialogFactoryProps) {
 
   const {
     action
@@ -38,7 +38,7 @@ function DialogControl(props: DialogControlProps) {
   switch (action?.type) {
     case DialogType.copyFile:
       return (
-        <FileCopyDialog value={action.payload as File} />
+        <FileCopyDialog value={action.data as File} />
       );
     case DialogType.createFile:
       return (
@@ -50,23 +50,23 @@ function DialogControl(props: DialogControlProps) {
       );
     case DialogType.deleteFile:
       return (
-        <FileDeleteDialog value={action.payload as File} />
+        <FileDeleteDialog value={action.data as File} />
       );
     case DialogType.deleteFolder:
       return (
-        <FolderDeleteDialog value={action.payload as Folder} />
+        <FolderDeleteDialog value={action.data as Folder} />
       );
     case DialogType.renameFile:
       return (
-        <FileRenameDialog value={action.payload as File} />
+        <FileRenameDialog value={action.data as File} />
       );
     case DialogType.renameFolder:
       return (
-        <FolderRenameDialog value={action.payload as Folder} />
+        <FolderRenameDialog value={action.data as Folder} />
       );
     case DialogType.restoreFile:
       return (
-        <FileRestoreDialog value={action.payload as FileVersion} />
+        <FileRestoreDialog value={action.data as FileVersion} />
       );
     default:
       return null;
@@ -74,4 +74,4 @@ function DialogControl(props: DialogControlProps) {
 
 }
 
-export default React.memo(DialogControl);
+export default React.memo(DialogFactory);

@@ -16,11 +16,11 @@ import {
 
 import FileVersionPanel from './panel/FileVersionPanel';
 
-interface SidePanelControlProps {
+interface SidePanelFactoryProps {
   action?: SidePanelAction
 }
 
-function SidePanelControl(props: SidePanelControlProps) {
+function SidePanelFactory(props: SidePanelFactoryProps) {
 
   const {
     action
@@ -29,7 +29,7 @@ function SidePanelControl(props: SidePanelControlProps) {
   switch (action?.type) {
     case SidePanelType.fileVersion:
       return (
-        <FileVersionPanel value={action.payload as File} />
+        <FileVersionPanel value={action.data as File} />
       );
     default:
       return null;
@@ -37,4 +37,4 @@ function SidePanelControl(props: SidePanelControlProps) {
 
 }
 
-export default React.memo(SidePanelControl);
+export default React.memo(SidePanelFactory);
