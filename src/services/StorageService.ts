@@ -16,6 +16,14 @@ export class StorageService {
     this.storage = storage;
   }
 
+  getContentMinimap(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('contentMinimap') ?? undefined));
+  }
+
+  getExploreAllFiles(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('exploreAllFiles') ?? undefined));
+  }
+
   getExploreFileId(): string | undefined {
     return this.storage.getItem('exploreFileId') ?? undefined;
   }
@@ -24,19 +32,27 @@ export class StorageService {
     return this.storage.getItem('exploreFolderId') ?? undefined;
   }
 
-  getIncludeUnsupportedFiles(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('includeUnsupportedFiles') ?? undefined));
-  }
-
-  getMinimapEnabled(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('minimapEnabled') ?? undefined));
-  }
-
   getTabMode(): TabMode | undefined {
     return {
-      type: Number(this.storage.getItem('tabType')) ?? TabType.explorer,
+      type: Number(this.storage.getItem('tabType') ?? TabType.explorer),
       open: Boolean(Number(this.storage.getItem('tabOpen') ?? true))
     };
+  }
+
+  setContentMinimap(value?: boolean): void {
+    if (value) {
+      this.storage.setItem('contentMinimap', String(Number(value)));
+    } else {
+      this.storage.removeItem('contentMinimap');
+    }
+  }
+
+  setExploreAllFiles(value?: boolean): void {
+    if (value) {
+      this.storage.setItem('exploreAllFiles', String(Number(value)));
+    } else {
+      this.storage.removeItem('exploreAllFiles');
+    }
   }
 
   setExploreFileId(value?: string): void {
@@ -52,22 +68,6 @@ export class StorageService {
       this.storage.setItem('exploreFolderId', value);
     } else {
       this.storage.removeItem('exploreFolderId');
-    }
-  }
-
-  setIncludeUnsupportedFiles(value?: boolean): void {
-    if (value) {
-      this.storage.setItem('includeUnsupportedFiles', String(Number(value)));
-    } else {
-      this.storage.removeItem('includeUnsupportedFiles');
-    }
-  }
-
-  setMinimapEnabled(value?: boolean): void {
-    if (value) {
-      this.storage.setItem('minimapEnabled', String(Number(value)));
-    } else {
-      this.storage.removeItem('minimapEnabled');
     }
   }
 

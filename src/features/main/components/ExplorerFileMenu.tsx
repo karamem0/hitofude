@@ -15,6 +15,7 @@ import Presenter from './ExplorerFileMenu.presenter';
 
 interface ExplorerFileMenuProps {
   value: Folder,
+  onDownload?: EventHandler,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>
 }
@@ -23,6 +24,7 @@ function ExplorerFileMenu(props: ExplorerFileMenuProps) {
 
   const {
     value,
+    onDownload,
     onOpenDialog,
     onOpenUrl
   } = props;
@@ -30,6 +32,7 @@ function ExplorerFileMenu(props: ExplorerFileMenuProps) {
   return (
     <Presenter
       value={value}
+      onDownload={onDownload}
       onOpenDialog={onOpenDialog}
       onOpenUrl={onOpenUrl} />
   );

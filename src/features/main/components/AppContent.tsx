@@ -16,15 +16,12 @@ function AppContent() {
 
   const {
     state: {
-      loading,
-      workFile
+      contentProps
     }
   } = useStore();
 
   return (
-    <Presenter
-      loading={loading}
-      value={workFile} />
+    <Presenter {...contentProps} />
   );
 
 }

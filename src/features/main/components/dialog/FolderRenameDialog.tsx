@@ -34,7 +34,7 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
-  const handleSubmit = React.useCallback(async (e?: Event, data?: FolderRenameDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_?: Event, data?: FolderRenameDialogFormState) => {
     try {
       if (data?.id == null) {
         throw new ArgumentNullError();
@@ -56,8 +56,8 @@ function FolderRenameDialog(props: FolderRenameDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    dispatch,
-    graph
+    graph,
+    dispatch
   ]);
 
   return (

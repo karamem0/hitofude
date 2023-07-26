@@ -32,10 +32,10 @@ import { SearchTabItemFormState } from '../types/Form';
 import TreeItem from './TreeItem';
 
 interface SearchTabItemProps {
+  file?: File,
   loading?: boolean,
-  searchFile?: File,
-  searchResults?: File[],
-  searchQuery?: string,
+  query?: string,
+  results?: File[],
   onChangeInput?: EventHandler<string>,
   onClearInput?: EventHandler,
   onOpenFileLocation?: EventHandler<File>,
@@ -46,10 +46,10 @@ interface SearchTabItemProps {
 function SearchTabItem(props: SearchTabItemProps) {
 
   const {
+    file,
     loading,
-    searchFile,
-    searchResults,
-    searchQuery,
+    query,
+    results,
     onChangeInput,
     onClearInput,
     onOpenFileLocation,
@@ -84,7 +84,7 @@ function SearchTabItem(props: SearchTabItemProps) {
         onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
         <Controller
           control={form.control}
-          defaultValue={searchQuery ?? ''}
+          defaultValue={query ?? ''}
           name="query"
           render={({ field }) => (
             <Input
@@ -128,12 +128,12 @@ function SearchTabItem(props: SearchTabItemProps) {
           overflow-y: auto;
         `}>
         {
-          searchResults && searchResults.length > 0 ? (
-            searchResults.map((item) => (
+          results && results.length > 0 ? (
+            results.map((item) => (
               <TreeItem
                 key={item.id}
                 name={item.fullName}
-                selected={searchFile?.id === item.id}
+                selected={file?.id === item.id}
                 icon={(
                   <TextDocumentIcon
                     css={css`

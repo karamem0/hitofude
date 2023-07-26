@@ -51,8 +51,8 @@ function MeControl() {
     })();
   }, [
     graph,
-    setError,
-    msal
+    msal,
+    setError
   ]);
 
   return (

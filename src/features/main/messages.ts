@@ -17,6 +17,7 @@ const messages = defineMessages({
   DeleteFileConfirm: { defaultMessage: 'Are you sure to delete this file?' },
   DeleteFolder: { defaultMessage: 'Delete folder' },
   DeleteFolderConfirm: { defaultMessage: 'Are you sure to delete this folder?' },
+  Download: { defaultMessage: 'Download' },
   Edit: { defaultMessage: 'Edit' },
   Explorer: { defaultMessage: 'Explorer' },
   File: { defaultMessage: 'File' },

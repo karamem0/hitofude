@@ -12,11 +12,12 @@ import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import {
   appendExploreFile,
+  setContentFile,
+  setContentText,
   setDialogAction,
-  setError,
-  setWorkFile
+  setError
 } from '../../../../stores/Action';
-import { ArgumentNullError, FileNotFoundError } from '../../../../types/Error';
+import { ArgumentNullError, DependencyNullError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { File } from '../../../../types/Model';
 import { FileCopyDialogFormState } from '../../types/Form';
@@ -34,7 +35,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
   const {
     dispatch,
     state: {
-      exploreFolder
+      exploreProps
     }
   } = useStore();
   const { graph } = useService();
@@ -48,23 +49,18 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       if (data?.downloadUrl == null) {
         throw new ArgumentNullError();
       }
+      const exploreFolder = exploreProps?.folder;
       if (exploreFolder == null) {
-        throw new ArgumentNullError();
+        throw new DependencyNullError();
       }
       setLoading(true);
-      const fileContent = await graph.getFileContent(data);
+      const fileText = await graph.getFileText(data);
       const file = await Promise.resolve()
-        .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`, fileContent))
-        .then((file) => file ? graph.getFileById(file.id) : undefined);
-      if (file == null) {
-        throw new FileNotFoundError();
-      }
+        .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`, fileText))
+        .then((file) => graph.getFileById(file.id));
       dispatch(appendExploreFile(file));
-      dispatch(setWorkFile({
-        ...file,
-        content: fileContent,
-        editing: false
-      }));
+      dispatch(setContentFile(file));
+      dispatch(setContentText(await graph.getFileText(file)));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -76,9 +72,9 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    dispatch,
-    exploreFolder,
-    graph
+    exploreProps?.folder,
+    graph,
+    dispatch
   ]);
 
   return (

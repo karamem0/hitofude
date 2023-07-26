@@ -12,11 +12,11 @@ import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import {
   appendExploreFile,
+  setContentFile,
   setDialogAction,
-  setError,
-  setWorkFile
+  setError
 } from '../../../../stores/Action';
-import { ArgumentNullError, FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
+import { ArgumentNullError, DependencyNullError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { FileCreateDialogFormState } from '../../types/Form';
 
@@ -27,7 +27,7 @@ function FileCreateDialog() {
   const {
     dispatch,
     state: {
-      exploreFolder
+      exploreProps
     }
   } = useStore();
   const { graph } = useService();
@@ -38,22 +38,16 @@ function FileCreateDialog() {
       if (data?.baseName == null) {
         throw new ArgumentNullError();
       }
+      const exploreFolder = exploreProps?.folder;
       if (exploreFolder == null) {
-        throw new FolderNotFoundError();
+        throw new DependencyNullError();
       }
       setLoading(true);
       const file = await Promise.resolve()
         .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`))
-        .then((file) => file ? graph.getFileById(file.id) : undefined);
-      if (file == null) {
-        throw new FileNotFoundError();
-      }
+        .then((file) => graph.getFileById(file.id));
       dispatch(appendExploreFile(file));
-      dispatch(setWorkFile({
-        ...file,
-        content: '',
-        editing: false
-      }));
+      dispatch(setContentFile(file));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -65,9 +59,9 @@ function FileCreateDialog() {
       dispatch(setDialogAction());
     }
   }, [
-    dispatch,
-    exploreFolder,
-    graph
+    exploreProps?.folder,
+    graph,
+    dispatch
   ]);
 
   return (

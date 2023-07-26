@@ -10,25 +10,31 @@ import React from 'react';
 
 import { SerializedStyles } from '@emotion/react';
 
+import { useStore } from '../../../../providers/StoreProvider';
+
 import Presenter from './MarkdownViewer.presenter';
 
 interface MarkdownViewerProps {
   className?: string,
-  css?: SerializedStyles,
-  value?: string
+  css?: SerializedStyles
 }
 
 function MarkdownViewer(props: MarkdownViewerProps) {
 
   const {
-    className,
-    value
+    className
   } = props;
+
+  const {
+    state: {
+      contentProps
+    }
+  } = useStore();
 
   return (
     <Presenter
-      className={className}
-      value={value} />
+      {...contentProps}
+      className={className} />
   );
 
 }

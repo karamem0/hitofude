@@ -12,40 +12,50 @@ import { css } from '@emotion/react';
 
 import ScrollPanel from '../../../common/components/ScrollPanel';
 import { EventHandler } from '../../../types/Event';
+import { Position } from '../../../types/Model';
 
 import MarkdownEditor from './markdown/MarkdownEditor';
 import MarkdownViewer from './markdown/MarkdownViewer';
 
 interface MarkdownControlProps {
-  content?: string,
   editing?: boolean,
-  onChange?: EventHandler<string>
+  minimap?: boolean,
+  position?: Position,
+  text?: string,
+  onChangeText?: EventHandler<string>,
+  onChangePosition?: EventHandler<Position>,
+  onSave?: EventHandler
 }
 
 function MarkdownControl(props: MarkdownControlProps) {
 
   const {
-    content,
     editing,
-    onChange
+    minimap,
+    position,
+    text,
+    onChangeText,
+    onChangePosition,
+    onSave
   } = props;
 
   return editing ? (
     <MarkdownEditor
-      value={content}
-      onChange={onChange} />
+      minimap={minimap}
+      position={position}
+      text={text}
+      onChangePosition={onChangePosition}
+      onChangeText={onChangeText}
+      onSave={onSave} />
   ) : (
     <ScrollPanel>
       {
-        (state) => {
-          return (
-            <MarkdownViewer
-              value={content}
-              css={css`
+        (state) => (
+          <MarkdownViewer
+            css={css`
               padding: 0 ${state?.scrollBarXVisible ? '1rem' : '0'} 0 0;
             `} />
-          );
-        }
+        )
       }
     </ScrollPanel>
   );

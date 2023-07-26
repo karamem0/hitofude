@@ -11,12 +11,12 @@ import React from 'react';
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import {
+  setContentText,
   setDialogAction,
   setError,
-  setSidePanelAction,
-  setWorkFile
+  setSidePanelAction
 } from '../../../../stores/Action';
-import { FileNotFoundError } from '../../../../types/Error';
+import { DependencyNullError } from '../../../../types/Error';
 import { FileVersion } from '../../../../types/Model';
 
 import Presenter from './FileRestoreDialog.presenter';
@@ -32,7 +32,7 @@ function FileDeleteDialog(props: FileRestoreDialogProps) {
   const {
     dispatch,
     state: {
-      workFile
+      contentProps
     }
   } = useStore();
   const { graph } = useService();
@@ -41,17 +41,14 @@ function FileDeleteDialog(props: FileRestoreDialogProps) {
   const handleSubmit = React.useCallback(async () => {
     try {
       if (value == null) {
-        throw new FileNotFoundError();
+        throw new DependencyNullError();
       }
-      if (workFile == null) {
-        throw new FileNotFoundError();
+      const contentFile = contentProps?.file;
+      if (contentFile == null) {
+        throw new DependencyNullError();
       }
       await graph.restoreFile(value);
-      const content = await graph.getFileContent(workFile);
-      dispatch(setWorkFile({
-        ...workFile,
-        content
-      }));
+      dispatch(setContentText(await graph.getFileText(contentFile)));
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -64,10 +61,10 @@ function FileDeleteDialog(props: FileRestoreDialogProps) {
       dispatch(setSidePanelAction());
     }
   }, [
-    dispatch,
     graph,
+    contentProps?.file,
     value,
-    workFile
+    dispatch
   ]);
 
   return (

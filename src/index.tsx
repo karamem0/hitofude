@@ -22,7 +22,6 @@ import HomePage from './features/home/pages/HomePage';
 import MainPage from './features/main/pages/MainPage';
 import IntlProvider from './providers/IntlProvider';
 import MsalProvider from './providers/MsalProvider';
-import ProgressProvider from './providers/ProgressProvider';
 import ServiceProvider from './providers/ServiceProvider';
 import StoreProvider from './providers/StoreProvider';
 import TelemetryProvider from './providers/TelemetryProvider';
@@ -46,9 +45,7 @@ ReactDOM
                         <AuthenticatedTemplate>
                           <ServiceProvider>
                             <StoreProvider>
-                              <ProgressProvider>
-                                <MainPage />
-                              </ProgressProvider>
+                              <MainPage />
                             </StoreProvider>
                           </ServiceProvider>
                         </AuthenticatedTemplate>

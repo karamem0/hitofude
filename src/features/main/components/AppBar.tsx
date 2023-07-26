@@ -26,12 +26,12 @@ function AppBar() {
 
   const handleToggleTab = React.useCallback((_?: Event, data?: TabType) => {
     dispatch(setTabMode({
-      type: data || TabType.explorer,
+      type: data ?? TabType.explorer,
       open: data === tabMode?.type ? !tabMode?.open : true
     }));
   }, [
-    dispatch,
-    tabMode
+    tabMode,
+    dispatch
   ]);
 
   return (

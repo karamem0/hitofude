@@ -20,17 +20,17 @@ import MarkdownImageRenderer from './MarkdownImageRenderer';
 
 interface MarkdownViewerProps {
   className?: string,
-  value?: string
+  text?: string
 }
 
 function MarkdownViewer(props: MarkdownViewerProps) {
 
   const {
     className,
-    value
+    text
   } = props;
 
-  return value ? (
+  return text ? (
     <div
       className={className}
       css={css`
@@ -133,7 +133,7 @@ function MarkdownViewer(props: MarkdownViewerProps) {
           code: MarkdownCodeRenderer,
           img: MarkdownImageRenderer
         }}>
-        {value || ''}
+        {text ?? ''}
       </ReactMarkdown>
     </div>
   ) : null;

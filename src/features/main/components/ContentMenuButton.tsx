@@ -8,33 +8,31 @@
 
 import React from 'react';
 
+import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
-import {
-  ContentMenuAction,
-  File,
-  FileContent
-} from '../../../types/Model';
+import { ContentMenuAction } from '../../../types/Model';
 
 import Presenter from './ContentMenuButton.presenter';
 
 interface ContentMenuButtonProps {
-  minimapEnabled?: boolean,
-  value?: File & FileContent,
   onMenuClick?: EventHandler<ContentMenuAction>
 }
 
 function ContentMenuButton(props: ContentMenuButtonProps) {
 
   const {
-    minimapEnabled,
-    value,
     onMenuClick
   } = props;
 
+  const {
+    state: {
+      contentProps
+    }
+  } = useStore();
+
   return (
     <Presenter
-      minimapEnabled={minimapEnabled}
-      value={value}
+      {...contentProps}
       onMenuClick={onMenuClick} />
   );
 

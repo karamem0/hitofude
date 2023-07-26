@@ -33,26 +33,26 @@ import { DialogAction, DialogType, Folder } from '../../../types/Model';
 import messages from '../messages';
 
 interface ExplorerHeaderMenuProps {
-  exploreFolder?: Folder,
-  includeUnsupportedFiles?: boolean,
+  folder?: Folder,
+  allFiles?: boolean,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>,
   onRefreshFolder?: EventHandler<Folder>,
-  onToggleIncludeUnsupportedFiles?: EventHandler<boolean>
+  onToggleExploreAllFiles?: EventHandler<boolean>
 }
 
 function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
 
   const {
-    exploreFolder,
-    includeUnsupportedFiles,
+    allFiles,
+    folder,
     onOpenDialog,
     onOpenUrl,
     onRefreshFolder,
-    onToggleIncludeUnsupportedFiles
+    onToggleExploreAllFiles
   } = props;
 
-  return exploreFolder ? (
+  return folder ? (
     <MenuList>
       <MenuGroup>
         <MenuItem
@@ -64,16 +64,16 @@ function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onRefreshFolder?.(e, exploreFolder)}>
+          onClick={(e) => onRefreshFolder?.(e, folder)}>
           <FormattedMessage {...messages.Refresh} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="ToggleIncludeUnsupportedFiles"
+          key="ToggleExploreAllFiles"
           icon={
-            includeUnsupportedFiles ? (
+            allFiles ? (
               <Hide3Icon
                 css={css`
                   font-size: 1rem;
@@ -86,9 +86,9 @@ function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
                   line-height: 1rem;
                 `} />
             )}
-          onClick={(e) => onToggleIncludeUnsupportedFiles?.(e, !includeUnsupportedFiles)}>
+          onClick={(e) => onToggleExploreAllFiles?.(e, !allFiles)}>
           {
-            includeUnsupportedFiles ? (
+            allFiles ? (
               <FormattedMessage {...messages.HideUnsupportedFiles} />
             ) : (
               <FormattedMessage {...messages.ShowUnsupportedFiles} />
@@ -140,7 +140,7 @@ function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
               line-height: 1rem;
             `} />
           )}
-          onClick={(e) => onOpenUrl?.(e, exploreFolder.webUrl)}>
+          onClick={(e) => onOpenUrl?.(e, folder.webUrl)}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>
       </MenuGroup>

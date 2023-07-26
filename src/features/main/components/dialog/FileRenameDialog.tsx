@@ -11,12 +11,12 @@ import React from 'react';
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import {
+  setContentFile,
   setDialogAction,
   setError,
-  setWorkFile,
   updateExploreFile
 } from '../../../../stores/Action';
-import { ArgumentNullError, FolderNotFoundError } from '../../../../types/Error';
+import { ArgumentNullError, DependencyNullError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { File } from '../../../../types/Model';
 import { FileRenameDialogFormState } from '../../types/Form';
@@ -34,7 +34,7 @@ function FileRenameDialog(props: FileRenameDialogProps) {
   const {
     dispatch,
     state: {
-      workFile
+      contentProps
     }
   } = useStore();
   const { graph } = useService();
@@ -48,15 +48,16 @@ function FileRenameDialog(props: FileRenameDialogProps) {
       if (data?.baseName == null) {
         throw new ArgumentNullError();
       }
-      if (workFile == null) {
-        throw new FolderNotFoundError();
+      const contentFile = contentProps?.file;
+      if (contentFile == null) {
+        throw new DependencyNullError();
       }
       setLoading(true);
       const file = await graph.renameFile(data, `${data.baseName}.md`);
       dispatch(updateExploreFile(file));
-      if (data.id === workFile.id) {
-        dispatch(setWorkFile({
-          ...workFile,
+      if (data.id === contentFile.id) {
+        dispatch(setContentFile({
+          ...contentFile,
           baseName: file.baseName,
           fullName: file.fullName
         }));
@@ -72,9 +73,9 @@ function FileRenameDialog(props: FileRenameDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    dispatch,
     graph,
-    workFile
+    contentProps?.file,
+    dispatch
   ]);
 
   return (

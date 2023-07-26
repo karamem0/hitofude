@@ -15,17 +15,18 @@ import {
   setError,
   setExploreFile,
   setExploreFolder,
-  setIncludeUnsupportedFiles,
-  setWorkFile
+  setExploreAllFiles,
+  setContentFile,
+  setContentText
 } from '../../../stores/Action';
-import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
+import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import {
   DialogAction,
   File,
   Folder
 } from '../../../types/Model';
-import { isSupportedFile } from '../../../utils/File';
+import { downloadFile, isSupportedFile } from '../../../utils/File';
 
 import Presenter from './ExplorerTabItem.presenter';
 
@@ -34,12 +35,17 @@ function ExplorerTabItem() {
   const {
     dispatch,
     state: {
-      includeUnsupportedFiles,
-      exploreFile,
-      exploreFolder
+      exploreProps
     }
   } = useStore();
   const { graph } = useService();
+
+  const handleDownloadFile = React.useCallback(async (_?: Event, data?: File) => {
+    if (data?.fullName == null) {
+      throw new ArgumentNullError();
+    }
+    downloadFile(data);
+  }, []);
 
   const handleOpenDialog = React.useCallback((_?: Event, data?: DialogAction) => {
     dispatch(setDialogAction(data));
@@ -64,8 +70,8 @@ function ExplorerTabItem() {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch,
-    graph
+    graph,
+    dispatch
   ]);
 
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
@@ -73,18 +79,23 @@ function ExplorerTabItem() {
       if (data == null) {
         throw new ArgumentNullError();
       }
+      const exploreFile = exploreProps?.file;
+      if (exploreFile == null) {
+        throw new DependencyNullError();
+      }
+      if (data.id === exploreFile.id) {
+        return;
+      }
       dispatch(setExploreFile(data));
-      dispatch(setWorkFile({
-        ...data,
-        content: await graph.getFileContent(data),
-        editing: false
-      }));
+      dispatch(setContentFile(data));
+      dispatch(setContentText(await graph.getFileText(data)));
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch,
-    graph
+    exploreProps?.file,
+    graph,
+    dispatch
   ]);
 
   const handleSelectFolder = React.useCallback(async (_?: Event, data?: string) => {
@@ -92,73 +103,77 @@ function ExplorerTabItem() {
       if (data == null) {
         throw new ArgumentNullError();
       }
-      const exploreFolder = await graph.getFolderById(data);
-      dispatch(setExploreFolder(exploreFolder));
-      const exploreFile = exploreFolder.files?.filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item)).at(0);
-      if (exploreFile == null) {
-        dispatch(setExploreFile());
-        dispatch(setWorkFile());
+      const exploreAllFiles = exploreProps?.allFiles;
+      if (exploreAllFiles == null) {
+        throw new DependencyNullError();
+      }
+      const folder = await graph.getFolderById(data);
+      dispatch(setExploreFolder(folder));
+      const file = folder.files?.filter((item) => exploreAllFiles || isSupportedFile(item)).at(0);
+      if (file != null) {
+        dispatch(setExploreFile(file));
+        dispatch(setContentFile(file));
+        dispatch(setContentText(await graph.getFileText(file)));
       } else {
-        dispatch(setExploreFile(exploreFile));
-        dispatch(setWorkFile({
-          ...exploreFile,
-          content: await graph.getFileContent(exploreFile),
-          editing: false
-        }));
+        dispatch(setExploreFile());
+        dispatch(setContentFile());
       }
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch,
+    exploreProps?.allFiles,
     graph,
-    includeUnsupportedFiles
+    dispatch
   ]);
 
-  const handleToggleIncludeUnsupportedFiles = React.useCallback(async (_?: Event, data?: boolean) => {
+  const handleToggleExploreAllFiles = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
       if (data == null) {
         throw new ArgumentNullError();
       }
+      const exploreFile = exploreProps?.file;
+      if (exploreFile == null) {
+        throw new DependencyNullError();
+      }
+      const exploreFolder = exploreProps?.folder;
       if (exploreFolder == null) {
-        throw new FolderNotFoundError();
+        throw new DependencyNullError();
       }
-      dispatch(setIncludeUnsupportedFiles(data));
-      if (exploreFile != null && isSupportedFile(exploreFile)) {
-        const file = exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0);
-        if (file != null) {
-          dispatch(setExploreFile(file));
-          dispatch(setWorkFile({
-            ...file,
-            content: await graph.getFileContent(file),
-            editing: false
-          }));
-          return;
-        }
+      dispatch(setExploreAllFiles(data));
+      const file = (exploreFile != null && isSupportedFile(exploreFile)) ? (
+        exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0)
+      ) : (
+        undefined
+      );
+      if (file != null) {
+        dispatch(setExploreFile(file));
+        dispatch(setContentFile(file));
+        dispatch(setContentText(await graph.getFileText(file)));
+      } else {
+        dispatch(setExploreFile());
+        dispatch(setContentFile());
       }
-      dispatch(setExploreFile());
-      dispatch(setWorkFile());
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch,
-    exploreFile,
-    exploreFolder,
-    graph
+    exploreProps?.file,
+    exploreProps?.folder,
+    graph,
+    dispatch
   ]);
 
   return (
     <Presenter
-      exploreFile={exploreFile}
-      exploreFolder={exploreFolder}
-      includeUnsupportedFiles={includeUnsupportedFiles}
+      {...exploreProps}
+      onDownloadFile={handleDownloadFile}
       onOpenDialog={handleOpenDialog}
       onOpenUrl={handleOpenUrl}
       onRefreshFolder={handleRefreshFolder}
       onSelectFile={handleSelectFile}
       onSelectFolder={handleSelectFolder}
-      onToggleIncludeUnsupportedFiles={handleToggleIncludeUnsupportedFiles} />
+      onToggleExploreAllFiles={handleToggleExploreAllFiles} />
   );
 
 }

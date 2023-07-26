@@ -17,7 +17,7 @@ import {
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import { CopyIcon, DeleteIcon, RenameIcon } from '@fluentui/react-icons-mdl2';
+import { CopyIcon, DeleteIcon, DownloadDocumentIcon, RenameIcon } from '@fluentui/react-icons-mdl2';
 import {
   OneDriveLogoIcon
 } from '@fluentui/react-icons-mdl2-branded';
@@ -33,6 +33,7 @@ import messages from '../messages';
 
 interface ExplorerFileMenuProps {
   value?: File,
+  onDownload?: EventHandler,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>
 }
@@ -41,6 +42,7 @@ function ExplorerFileMenu(props: ExplorerFileMenuProps) {
 
   const {
     value,
+    onDownload,
     onOpenDialog,
     onOpenUrl
   } = props;
@@ -100,14 +102,29 @@ function ExplorerFileMenu(props: ExplorerFileMenuProps) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
+          key="DownloadFile"
+          icon={(
+            <DownloadDocumentIcon
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
+          onClick={(e) => onDownload?.(e)}>
+          <FormattedMessage {...messages.Download} />
+        </MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup>
+        <MenuItem
           key="OpenWithOneDrive"
           icon={(
             <OneDriveLogoIcon
               css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
-              )}
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
           onClick={(e) => onOpenUrl?.(e, value.webUrl)}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>

@@ -146,7 +146,7 @@ export class GraphService {
     }
   }
 
-  async getFileContent(file: Pick<File, 'mimeType' | 'downloadUrl'>): Promise<string> {
+  async getFileText(file: Pick<File, 'mimeType' | 'downloadUrl'>): Promise<string> {
     try {
       if (isMimeType(file, { type: 'text' })) {
         const downloadUrl = typeof (file) === 'string' ? file : file.downloadUrl;
@@ -341,7 +341,7 @@ export class GraphService {
     }
   }
 
-  async setFileContent(file: File, content: string): Promise<File | undefined> {
+  async setFileContent(file: File, content: string): Promise<File> {
     try {
       const data = await this.client
         .api(`/me/drive/items/${file.id}/content`)

@@ -24,10 +24,9 @@ import ImageViewer from '../../../common/components/ImageViewer';
 import { themeConfig } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import {
-  ContentMenuType,
+  Position,
   File,
-  FileContent,
-  SidePanelAction
+  ContentMenuAction
 } from '../../../types/Model';
 import { isMimeType } from '../../../utils/File';
 import messages from '../messages';
@@ -38,33 +37,33 @@ import MarkdownControl from './MarkdownControl';
 
 interface ContentSupportedProps {
   changed?: boolean,
-  minimapEnabled?: boolean,
-  value?: File & FileContent,
+  editing?: boolean,
+  file?: File,
   onCancel?: EventHandler,
-  onChange?: EventHandler<string>,
+  onChangePosition?: EventHandler<Position>,
+  onChangeText?: EventHandler<string>,
+  onContextMenu?: EventHandler<ContentMenuAction>,
   onEdit?: EventHandler,
-  onOpenSidePanel?: EventHandler<SidePanelAction>,
-  onSave?: EventHandler<boolean>,
-  onToggleMinimapEnabled?: EventHandler<boolean>
+  onSave?: EventHandler<boolean>
 }
 
 function ContentSupported(props: ContentSupportedProps) {
 
   const {
     changed,
-    minimapEnabled,
-    value,
+    editing,
+    file,
     onCancel,
-    onChange,
+    onChangePosition,
+    onChangeText,
+    onContextMenu,
     onEdit,
-    onOpenSidePanel,
-    onSave,
-    onToggleMinimapEnabled
+    onSave
   } = props;
 
   const intl = useIntl();
 
-  return value ? (
+  return file ? (
     <div
       css={css`
         display: grid;
@@ -96,7 +95,7 @@ function ContentSupported(props: ContentSupportedProps) {
             text-overflow: ellipsis;
             white-space: nowrap;
           `}>
-          {value.baseName}
+          {file.baseName}
         </Text>
       </div>
       <div
@@ -113,7 +112,7 @@ function ContentSupported(props: ContentSupportedProps) {
           }
         `}>
         {
-          value.editing ? (
+          editing ? (
             <div
               css={css`
                 display: flex;
@@ -137,7 +136,7 @@ function ContentSupported(props: ContentSupportedProps) {
               `}>
               <Button
                 aria-label={intl.formatMessage(messages.Edit)}
-                disabled={!isMimeType(value, { subtype: 'markdown' })}
+                disabled={!isMimeType(file, { subtype: 'markdown' })}
                 title={intl.formatMessage(messages.Edit)}
                 onClick={onEdit}>
                 <FormattedMessage {...messages.Edit} />
@@ -152,7 +151,7 @@ function ContentSupported(props: ContentSupportedProps) {
             white-space: nowrap;
           `}>
           {
-            value.createdDate ? (
+            file.createdDate ? (
               <FormattedDate
                 {...{
                   year: 'numeric',
@@ -161,21 +160,11 @@ function ContentSupported(props: ContentSupportedProps) {
                   hour: '2-digit',
                   minute: '2-digit'
                 }}
-                value={value.updatedDate} />
+                value={file.updatedDate} />
             ) : null
           }
         </Text>
-        <ContentMenuButton
-          minimapEnabled={minimapEnabled}
-          value={value}
-          onMenuClick={(e, data) => {
-            if (data?.type === ContentMenuType.openSidePanel) {
-              onOpenSidePanel?.(e, data.data as SidePanelAction);
-            }
-            if (data?.type === ContentMenuType.toggleMinimapEnabled) {
-              onToggleMinimapEnabled?.(e, data.data as boolean);
-            }
-          }} />
+        <ContentMenuButton onMenuClick={onContextMenu} />
       </div>
       <div
         css={css`
@@ -189,19 +178,19 @@ function ContentSupported(props: ContentSupportedProps) {
         `}>
         {
           (() => {
-            if (isMimeType(value, { type: 'image' })) {
+            if (isMimeType(file, { type: 'image' })) {
               return (
                 <ImageViewer
-                  alt={value.fullName}
-                  src={value.downloadUrl} />
+                  alt={file.fullName}
+                  src={file.downloadUrl} />
               );
             }
-            if (isMimeType(value, { subtype: 'markdown' })) {
+            if (isMimeType(file, { subtype: 'markdown' })) {
               return (
                 <MarkdownControl
-                  content={value.content}
-                  editing={value.editing}
-                  onChange={onChange} />
+                  onChangePosition={onChangePosition}
+                  onChangeText={onChangeText}
+                  onSave={(e) => onSave?.(e, true)} />
               );
             }
             return null;

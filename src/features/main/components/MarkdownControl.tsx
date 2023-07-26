@@ -8,29 +8,38 @@
 
 import React from 'react';
 
+import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
+import { Position } from '../../../types/Model';
 
 import Presenter from './MarkdownControl.presenter';
 
 interface MarkdownControlProps {
-  content?: string,
-  editing?: boolean,
-  onChange?: EventHandler<string>
+  onChangePosition?: EventHandler<Position>,
+  onChangeText?: EventHandler<string>,
+  onSave?: EventHandler
 }
 
 function MarkdownControl(props: MarkdownControlProps) {
 
   const {
-    content,
-    editing,
-    onChange
+    onChangePosition,
+    onChangeText,
+    onSave
   } = props;
+
+  const {
+    state: {
+      contentProps
+    }
+  } = useStore();
 
   return (
     <Presenter
-      content={content}
-      editing={editing}
-      onChange={onChange} />
+      {...contentProps}
+      onChangePosition={onChangePosition}
+      onChangeText={onChangeText}
+      onSave={onSave} />
   );
 
 }

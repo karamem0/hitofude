@@ -10,7 +10,7 @@ import React from 'react';
 
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
-import { FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
+import { DependencyNullError } from '../../../../types/Error';
 import { getParentUrl, isAbsoluteUrl } from '../../../../utils/Url';
 
 import Presenter from './MarkdownImageRenderer.presenter';
@@ -31,8 +31,8 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
 
   const {
     state: {
-      rootFolder,
-      workFile
+      contentProps,
+      exploreProps
     }
   } = useStore();
   const { graph } = useService();
@@ -41,11 +41,13 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
 
   React.useEffect(() => {
     (async () => {
-      if (rootFolder?.webUrl == null) {
-        throw new FolderNotFoundError();
+      const contentFileUrl = contentProps?.file?.webUrl;
+      if (contentFileUrl == null) {
+        throw new DependencyNullError();
       }
-      if (workFile?.webUrl == null) {
-        throw new FileNotFoundError();
+      const rootFolderUrl = exploreProps?.rootFolder?.webUrl;
+      if (rootFolderUrl == null) {
+        throw new DependencyNullError();
       }
       if (src == null) {
         return;
@@ -53,17 +55,17 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
       if (isAbsoluteUrl(src)) {
         setUrl(src);
       } else {
-        const absoluteUrl = new URL(src, `${getParentUrl(workFile.webUrl)}/`).href;
-        const relativeUrl = absoluteUrl.substring(absoluteUrl.indexOf(rootFolder.webUrl) + rootFolder.webUrl.length);
+        const absoluteUrl = new URL(src, `${getParentUrl(contentFileUrl)}/`).href;
+        const relativeUrl = absoluteUrl.substring(absoluteUrl.indexOf(rootFolderUrl) + rootFolderUrl.length);
         const file = await graph.getFileByUrl(relativeUrl);
         setUrl(file.downloadUrl);
       }
     })();
   }, [
     graph,
-    rootFolder,
-    src,
-    workFile
+    contentProps?.file,
+    exploreProps?.rootFolder,
+    src
   ]);
 
   return (

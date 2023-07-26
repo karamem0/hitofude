@@ -14,33 +14,33 @@ import { DialogAction, Folder } from '../../../types/Model';
 import Presenter from './ExplorerHeaderMenu.presenter';
 
 interface ExplorerHeaderMenuProps {
-  exploreFolder?: Folder,
-  includeUnsupportedFiles?: boolean,
+  folder?: Folder,
+  allFiles?: boolean,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>,
   onRefreshFolder?: EventHandler<Folder>,
-  onToggleIncludeUnsupportedFiles ?: EventHandler<boolean>
+  onToggleExploreAllFiles ?: EventHandler<boolean>
 }
 
 function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
 
   const {
-    exploreFolder,
-    includeUnsupportedFiles,
+    allFiles,
+    folder,
     onOpenDialog,
     onOpenUrl,
     onRefreshFolder,
-    onToggleIncludeUnsupportedFiles
+    onToggleExploreAllFiles
   } = props;
 
   return (
     <Presenter
-      exploreFolder={exploreFolder}
-      includeUnsupportedFiles={includeUnsupportedFiles}
+      allFiles={allFiles}
+      folder={folder}
       onOpenDialog={onOpenDialog}
       onOpenUrl={onOpenUrl}
       onRefreshFolder={onRefreshFolder}
-      onToggleIncludeUnsupportedFiles={onToggleIncludeUnsupportedFiles} />
+      onToggleExploreAllFiles={onToggleExploreAllFiles} />
   );
 
 }

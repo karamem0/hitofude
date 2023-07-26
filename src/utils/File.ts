@@ -6,7 +6,22 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+import { ArgumentNullError } from '../types/Error';
 import { File, MimeType } from '../types/Model';
+
+export function downloadFile(value: File): void {
+  if (value?.downloadUrl == null) {
+    throw new ArgumentNullError();
+  }
+  if (value?.fullName == null) {
+    throw new ArgumentNullError();
+  }
+  const element = window.document.createElement('a');
+  element.href = value.downloadUrl;
+  element.download = value.fullName;
+  element.click();
+  element.remove();
+}
 
 export function getBaseName(value: string | null | undefined): string | undefined {
   return value ? value.replace(/\.[^.]*$/, '') : undefined;

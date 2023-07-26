@@ -8,8 +8,8 @@
 
 import React from 'react';
 
-import ProgressDialog from '../common/components/ProgressDialog';
-import { ProgressType } from '../types/Model';
+import { ProgressType } from '../../types/Model';
+import ProgressDialog from '../components/ProgressDialog';
 
 interface ProgressContextState {
   progress: ProgressType,

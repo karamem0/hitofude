@@ -36,34 +36,36 @@ import TreeHeader from './TreeHeader';
 import TreeItem from './TreeItem';
 
 interface ExplorerTabItemProps {
-  exploreFile?: File,
-  exploreFolder?: Folder,
-  includeUnsupportedFiles?: boolean,
+  allFiles?: boolean,
+  file?: File,
+  folder?: Folder,
+  onDownloadFile?: EventHandler<File>,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>,
   onRefreshFolder?: EventHandler<Folder>,
   onSelectFile?: EventHandler<File>,
   onSelectFolder?: EventHandler<string>,
-  onToggleIncludeUnsupportedFiles ?: EventHandler<boolean>
+  onToggleExploreAllFiles ?: EventHandler<boolean>
 }
 
 function ExplorerTabItem(props: ExplorerTabItemProps) {
 
   const {
-    exploreFile,
-    exploreFolder,
-    includeUnsupportedFiles,
+    allFiles,
+    file,
+    folder,
+    onDownloadFile,
     onOpenDialog,
     onOpenUrl,
     onRefreshFolder,
     onSelectFile,
     onSelectFolder,
-    onToggleIncludeUnsupportedFiles
+    onToggleExploreAllFiles
   } = props;
 
   const intl = useIntl();
 
-  return exploreFolder ? (
+  return folder ? (
     <div
       css={css`
         display: grid;
@@ -79,18 +81,18 @@ function ExplorerTabItem(props: ExplorerTabItemProps) {
         <FormattedMessage {...messages.Explorer} />
       </Caption1>
       <TreeHeader
-        disabled={!exploreFolder.parentId}
-        name={exploreFolder.parentId ? exploreFolder.name : intl.formatMessage(messages.RootFolder)}
+        disabled={!folder.parentId}
+        name={folder.parentId ? folder.name : intl.formatMessage(messages.RootFolder)}
         menu={(
           <ExplorerHeaderMenu
-            exploreFolder={exploreFolder}
-            includeUnsupportedFiles={includeUnsupportedFiles}
+            allFiles={allFiles}
+            folder={folder}
             onOpenDialog={onOpenDialog}
             onOpenUrl={onOpenUrl}
             onRefreshFolder={onRefreshFolder}
-            onToggleIncludeUnsupportedFiles={onToggleIncludeUnsupportedFiles} />
+            onToggleExploreAllFiles={onToggleExploreAllFiles} />
         )}
-        onClick={(e) => onSelectFolder?.(e, exploreFolder?.parentId)} />
+        onClick={(e) => onSelectFolder?.(e, folder?.parentId)} />
       <div
         role="list"
         css={css`
@@ -101,7 +103,7 @@ function ExplorerTabItem(props: ExplorerTabItemProps) {
           overflow-y: auto;
         `}>
         {
-          isEmpty(exploreFolder, includeUnsupportedFiles) ? (
+          isEmpty(folder, allFiles) ? (
             <Caption1
               css={css`
                 text-align: center;
@@ -111,7 +113,7 @@ function ExplorerTabItem(props: ExplorerTabItemProps) {
           ) : (
             <React.Fragment>
               {
-                exploreFolder.folders?.map((item) => (
+                folder.folders?.map((item) => (
                   <TreeItem
                     key={item.id}
                     name={item.name}
@@ -132,12 +134,12 @@ function ExplorerTabItem(props: ExplorerTabItemProps) {
                 ))
               }
               {
-                exploreFolder.files?.filter((item) => (includeUnsupportedFiles ?? false) || isSupportedFile(item)).map((item) => (
+                folder.files?.filter((item) => (allFiles ?? false) || isSupportedFile(item)).map((item) => (
                   <TreeItem
                     key={item.id}
                     menuEnabled={isSupportedFile(item)}
                     name={item.fullName}
-                    selected={exploreFile?.id === item.id}
+                    selected={file?.id === item.id}
                     icon={(
                       <TextDocumentIcon
                         css={css`
@@ -148,6 +150,7 @@ function ExplorerTabItem(props: ExplorerTabItemProps) {
                     menu={(
                       <ExplorerFileMenu
                         value={item}
+                        onDownload={(e) => onDownloadFile?.(e, item)}
                         onOpenDialog={onOpenDialog}
                         onOpenUrl={onOpenUrl} />
                     )}

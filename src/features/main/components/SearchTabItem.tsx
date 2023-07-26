@@ -17,8 +17,9 @@ import {
   setSearchResults,
   setSearchQuery,
   setTabMode,
-  setWorkFile,
-  setSearchFile
+  setContentFile,
+  setSearchFile,
+  setContentText
 } from '../../../stores/Action';
 import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
@@ -32,9 +33,7 @@ function SearchTabItem() {
   const {
     dispatch,
     state: {
-      searchFile,
-      searchResults,
-      searchQuery
+      searchTabProps
     }
   } = useStore();
   const { graph } = useService();
@@ -49,7 +48,7 @@ function SearchTabItem() {
   const handleClearInput = React.useCallback(() => {
     dispatch(setSearchQuery());
     dispatch(setSearchResults());
-    dispatch(setWorkFile());
+    dispatch(setContentFile());
   }, [
     dispatch
   ]);
@@ -66,11 +65,8 @@ function SearchTabItem() {
       const folder = await graph.getFolderById(file.parentId);
       dispatch(setExploreFolder(folder));
       dispatch(setExploreFile(file));
-      dispatch(setWorkFile({
-        ...file,
-        content: await graph.getFileContent(file),
-        editing: false
-      }));
+      dispatch(setContentFile(file));
+      dispatch(setContentText(await graph.getFileText(file)));
       dispatch(setTabMode({
         type: TabType.explorer,
         open: true
@@ -79,8 +75,8 @@ function SearchTabItem() {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch,
-    graph
+    graph,
+    dispatch
   ]);
 
   const handleSelectFile = React.useCallback(async (_?: Event, data?: File) => {
@@ -90,17 +86,14 @@ function SearchTabItem() {
       }
       const file = await graph.getFileById(data.id);
       dispatch(setSearchFile(file));
-      dispatch(setWorkFile({
-        ...file,
-        content: await graph.getFileContent(file),
-        editing: false
-      }));
+      dispatch(setContentFile(file));
+      dispatch(setContentText(await graph.getFileText(file)));
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    dispatch,
-    graph
+    graph,
+    dispatch
   ]);
 
   const handleSubmit = React.useCallback(async (_?: Event, data?: SearchTabItemFormState) => {
@@ -114,20 +107,18 @@ function SearchTabItem() {
     } catch (e) {
       dispatch(setError(e as Error));
     } finally {
-      dispatch(setWorkFile());
+      dispatch(setContentFile());
       setLoading(false);
     }
   }, [
-    dispatch,
-    graph
+    graph,
+    dispatch
   ]);
 
   return (
     <Presenter
+      {...searchTabProps}
       loading={loading}
-      searchFile={searchFile}
-      searchQuery={searchQuery}
-      searchResults={searchResults}
       onChangeInput={handleChangeInput}
       onClearInput={handleClearInput}
       onOpenFileLocation={handleOpenFileLocation}

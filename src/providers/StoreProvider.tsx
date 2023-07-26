@@ -9,13 +9,13 @@
 import React from 'react';
 
 import { reducer } from '../stores/Reducer';
-import { Action, State } from '../types/Store';
+import { AppAction, AppState } from '../types/Store';
 
 import { useService } from './ServiceProvider';
 
 interface StoreContextState {
-  dispatch: React.Dispatch<Action>,
-  state: State
+  dispatch: React.Dispatch<AppAction>,
+  state: AppState
 }
 
 const StoreContext = React.createContext<StoreContextState | undefined>(undefined);
@@ -35,9 +35,7 @@ function StoreProvider(props: React.PropsWithChildren<unknown>) {
   const { storage } = useService();
   const [ state, dispatch ] = React.useReducer(
     reducer(storage),
-    {
-      loading: true
-    });
+    {});
 
   const value = React.useMemo(() => ({
     dispatch,

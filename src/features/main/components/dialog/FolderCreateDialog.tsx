@@ -15,7 +15,7 @@ import {
   setDialogAction,
   setError
 } from '../../../../stores/Action';
-import { ArgumentNullError, FolderNotFoundError } from '../../../../types/Error';
+import { ArgumentNullError, DependencyNullError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { FolderCreateDialogFormState } from '../../types/Form';
 
@@ -26,7 +26,7 @@ function FolderCreateDialog() {
   const {
     dispatch,
     state: {
-      exploreFolder
+      exploreProps
     }
   } = useStore();
   const { graph } = useService();
@@ -37,8 +37,9 @@ function FolderCreateDialog() {
       if (data?.name == null) {
         throw new ArgumentNullError();
       }
+      const exploreFolder = exploreProps?.folder;
       if (exploreFolder == null) {
-        throw new FolderNotFoundError();
+        throw new DependencyNullError();
       }
       setLoading(true);
       const folder = await graph.createFolder(exploreFolder, `${data.name}`);
@@ -54,9 +55,9 @@ function FolderCreateDialog() {
       dispatch(setDialogAction());
     }
   }, [
-    dispatch,
+    exploreProps?.folder,
     graph,
-    exploreFolder
+    dispatch
   ]);
 
   return (

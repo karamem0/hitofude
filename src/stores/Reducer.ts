@@ -10,183 +10,268 @@ import { StorageService } from '../services/StorageService';
 import {
   DialogAction,
   File,
-  FileContent,
   Folder,
+  Position,
   SidePanelAction,
   TabMode
 } from '../types/Model';
 import {
-  Action,
-  ActionType,
-  InitialState,
-  State
+  AppAction,
+  AppActionType,
+  InitialAppState,
+  AppState
 } from '../types/Store';
 import { compare } from '../utils/String';
 
-export const reducer = (storage: StorageService) => (state: State, action: Action): State => {
+export const reducer = (storage: StorageService) => (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
-    case ActionType.appendExploreFile: {
+    case AppActionType.appendExploreFile: {
       const data = action.data as File | undefined;
       if (data == null) {
         return state;
       }
-      if (state.exploreFolder == null) {
+      if (state.exploreProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreFile: data,
-        exploreFolder: {
-          ...state.exploreFolder,
-          files: state.exploreFolder.files ? (
-            [ ...state.exploreFolder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
-          ) : (
-            [ data ]
-          )
+        exploreProps: {
+          ...state.exploreProps,
+          file: data,
+          folder: {
+            ...state.exploreProps?.folder,
+            files: state.exploreProps?.folder?.files ? (
+              [ ...state.exploreProps.folder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
+            ) : (
+              [ data ]
+            )
+          }
         }
       };
     }
-    case ActionType.appendExploreFolder: {
+    case AppActionType.appendExploreFolder: {
       const data = action.data as Folder | undefined;
       if (data == null) {
         return state;
       }
-      if (state.exploreFolder == null) {
+      if (state.exploreProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreFolder: {
-          ...state.exploreFolder,
-          folders: state.exploreFolder.folders ? (
-            [ ...state.exploreFolder.folders, data ].sort((a, b) => compare(a.name, b.name))
-          ) : (
-            [ data ]
-          )
+        exploreProps: {
+          ...state.exploreProps,
+          folder: {
+            ...state.exploreProps?.folder,
+            folders: state.exploreProps?.folder?.folders ? (
+              [ ...state.exploreProps.folder.folders, data ].sort((a, b) => compare(a.name, b.name))
+            ) : (
+              [ data ]
+            )
+          }
         }
       };
     }
-    case ActionType.deleteExploreFile: {
+    case AppActionType.deleteExploreFile: {
       const data = action.data as File | undefined;
       if (data == null) {
         return state;
       }
-      if (state.exploreFolder == null) {
+      if (state.exploreProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreFolder: {
-          ...state.exploreFolder,
-          files: state.exploreFolder.files?.filter((item) => item.id !== data.id)
+        exploreProps: {
+          ...state.exploreProps,
+          folder: {
+            ...state.exploreProps?.folder,
+            files: state.exploreProps?.folder?.files?.filter((item) => item.id !== data.id)
+          }
         }
       };
     }
-    case ActionType.deleteExploreFolder: {
+    case AppActionType.deleteExploreFolder: {
       const data = action.data as Folder | undefined;
       if (data == null) {
         return state;
       }
-      if (state.exploreFolder == null) {
+      if (state.exploreProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreFolder: {
-          ...state.exploreFolder,
-          folders: state.exploreFolder.folders?.filter((item) => item.id !== data.id)
+        exploreProps: {
+          ...state.exploreProps,
+          folder: {
+            ...state.exploreProps?.folder,
+            folders: state.exploreProps?.folder?.folders?.filter((item) => item.id !== data.id)
+          }
         }
       };
     }
-    case ActionType.setDialogAction: {
+    case AppActionType.setContentEditing: {
+      const data = action.data as boolean | undefined;
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          editing: data ?? false
+        }
+      };
+    }
+    case AppActionType.setContentFile: {
+      const data = action.data as File | undefined;
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          editing: false,
+          file: data,
+          position: {
+            left: 1,
+            top: 1
+          },
+          text: ''
+        }
+      };
+    }
+    case AppActionType.setContentLoading: {
+      const data = action.data as boolean | undefined;
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          loading: data
+        }
+      };
+    }
+    case AppActionType.setContentMinimap: {
+      const data = action.data as boolean | undefined;
+      storage.setContentMinimap(data);
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          minimap: data
+        }
+      };
+    }
+    case AppActionType.setContentPosition: {
+      const data = action.data as Position | undefined;
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          position: data ?? {
+            left: 1,
+            top: 1
+          }
+        }
+      };
+    }
+    case AppActionType.setContentText: {
+      const data = action.data as string | undefined;
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          text: data ?? ''
+        }
+      };
+    }
+    case AppActionType.setDialogAction: {
       const data = action.data as DialogAction | undefined;
       return {
         ...state,
         dialogAction: data
       };
     }
-    case ActionType.setError: {
+    case AppActionType.setError: {
       const data = action.data as Error | undefined;
       return {
         ...state,
         error: data
       };
     }
-    case ActionType.setExploreFile: {
+    case AppActionType.setExploreFile: {
       const data = action.data as File | undefined;
       storage.setExploreFileId(data?.id);
       return {
         ...state,
-        exploreFile: data
+        exploreProps: {
+          ...state.exploreProps,
+          file: data
+        }
       };
     }
-    case ActionType.setExploreFolder: {
+    case AppActionType.setExploreFolder: {
       const data = action.data as Folder | undefined;
       storage.setExploreFolderId(data?.id);
       return {
         ...state,
-        exploreFolder: data
+        exploreProps: {
+          ...state.exploreProps,
+          folder: data
+        }
       };
     }
-    case ActionType.setIncludeUnsupportedFiles: {
+    case AppActionType.setExploreAllFiles: {
       const data = action.data as boolean | undefined;
-      storage.setIncludeUnsupportedFiles(data);
+      storage.setExploreAllFiles(data);
       return {
         ...state,
-        includeUnsupportedFiles: data
+        exploreProps: {
+          ...state.exploreProps,
+          allFiles: data
+        }
       };
     }
-    case ActionType.setInitialState: {
-      const data = action.data as InitialState | undefined;
+    case AppActionType.setInitialState: {
+      const data = action.data as InitialAppState | undefined;
       return {
         ...state,
         ...data
       };
     }
-    case ActionType.setLoading: {
-      const data = action.data as boolean | undefined;
-      return {
-        ...state,
-        loading: data
-      };
-    }
-    case ActionType.setMinimapEnabled: {
-      const data = action.data as boolean | undefined;
-      storage.setMinimapEnabled(data);
-      return {
-        ...state,
-        minimapEnabled: data
-      };
-    }
-    case ActionType.setSearchFile: {
+    case AppActionType.setSearchFile: {
       const data = action.data as File | undefined;
       return {
         ...state,
-        searchFile: data
+        searchTabProps: {
+          ...state.searchTabProps,
+          file: data
+        }
       };
     }
-    case ActionType.setSearchResults: {
+    case AppActionType.setSearchResults: {
       const data = action.data as File[] | undefined;
       return {
         ...state,
-        searchResults: data
+        searchTabProps: {
+          ...state.searchTabProps,
+          results: data
+        }
       };
     }
-    case ActionType.setSearchQuery: {
+    case AppActionType.setSearchQuery: {
       const data = action.data as string | undefined;
       return {
         ...state,
-        searchQuery: data
+        searchTabProps: {
+          ...state.searchTabProps,
+          query: data
+        }
       };
     }
-    case ActionType.setSidePanelAction: {
+    case AppActionType.setSidePanelAction: {
       const data = action.data as SidePanelAction | undefined;
       return {
         ...state,
         sidePanelAction: data
       };
     }
-    case ActionType.setTabMode: {
+    case AppActionType.setTabMode: {
       const data = action.data as TabMode | undefined;
       storage.setTabMode(data);
       return {
@@ -194,50 +279,49 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         tabMode: data
       };
     }
-    case ActionType.setWorkFile: {
-      const data = action.data as File & FileContent | undefined;
-      return {
-        ...state,
-        workFile: data
-      };
-    }
-    case ActionType.updateExploreFile: {
+    case AppActionType.updateExploreFile: {
       const data = action.data as File | undefined;
       if (data == null) {
         return state;
       }
-      if (state.exploreFolder == null) {
+      if (state.exploreProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreFolder: {
-          ...state.exploreFolder,
-          files: state.exploreFolder.files ? (
-            state.exploreFolder.files
-              .map((item) => item.id === data.id ? data : item)
-              .sort((a, b) => compare(a.baseName, b.baseName))
-          ) : []
+        exploreProps: {
+          ...state.exploreProps,
+          folder: {
+            ...state.exploreProps?.folder,
+            files: state.exploreProps?.folder?.files ? (
+              state.exploreProps?.folder?.files
+                .map((item) => item.id === data.id ? data : item)
+                .sort((a, b) => compare(a.baseName, b.baseName))
+            ) : []
+          }
         }
       };
     }
-    case ActionType.updateExploreFolder: {
+    case AppActionType.updateExploreFolder: {
       const data = action.data as Folder | undefined;
       if (data == null) {
         return state;
       }
-      if (state.exploreFolder == null) {
+      if (state.exploreProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreFolder: {
-          ...state.exploreFolder,
-          folders: state.exploreFolder.folders ? (
-            state.exploreFolder.folders
-              .map((item) => item.id === data.id ? data : item)
-              .sort((a, b) => compare(a.name, b.name))
-          ) : []
+        exploreProps: {
+          ...state.exploreProps,
+          folder: {
+            ...state.exploreProps?.folder,
+            folders: state.exploreProps?.folder?.folders ? (
+              state.exploreProps?.folder?.folders
+                .map((item) => item.id === data.id ? data : item)
+                .sort((a, b) => compare(a.name, b.name))
+            ) : []
+          }
         }
       };
     }

@@ -12,8 +12,18 @@ export interface ContentMenuAction {
 }
 
 export enum ContentMenuType {
+  downloadFile = 'downloadFile',
   openSidePanel = 'openSidePanel',
-  toggleMinimapEnabled = 'toggleMinimapEnabled'
+  toggleMinimap = 'toggleMinimap'
+}
+
+export interface ContentProps {
+  editing?: boolean,
+  file?: File,
+  loading?: boolean,
+  minimap?: boolean,
+  position?: Position,
+  text?: string
 }
 
 export interface DialogAction {
@@ -32,6 +42,13 @@ export enum DialogType {
   restoreFile = 'restoreFile'
 }
 
+export interface ExploreTabProps {
+  allFiles?: boolean,
+  file?: File,
+  folder?: Folder,
+  rootFolder?: Folder
+}
+
 export interface File {
   id: string,
   baseName?: string,
@@ -42,11 +59,6 @@ export interface File {
   webUrl?: string,
   downloadUrl?: string,
   parentId?: string
-}
-
-export interface FileContent {
-  content: string,
-  editing: boolean
 }
 
 export interface FileVersion {
@@ -68,14 +80,30 @@ export interface Folder {
   files?: File[]
 }
 
+export interface MarkdownProps {
+  position?: Position,
+  text?: string
+}
+
 export interface MimeType {
   type: string,
   subtype: string
 }
 
+export interface Position {
+  left?: number,
+  top?: number
+}
+
 export enum ProgressType {
   none = 'none',
   save = 'save',
+}
+
+export interface SearchTabProps {
+  file?: File,
+  query?: string,
+  results?: File[]
 }
 
 export interface SidePanelAction {

@@ -11,7 +11,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import Loader from '../../../common/components/Loader';
-import { File, FileContent } from '../../../types/Model';
+import { File } from '../../../types/Model';
 import { isSupportedFile } from '../../../utils/File';
 
 import ContentEmpty from './ContentEmpty';
@@ -19,15 +19,15 @@ import ContentSupported from './ContentSupported';
 import ContentUnsupported from './ContentUnsupported';
 
 interface ContentSectionProps {
-  loading?: boolean,
-  value?: File & FileContent
+  file?: File,
+  loading?: boolean
 }
 
 function AppContent(props: ContentSectionProps) {
 
   const {
-    loading,
-    value
+    file,
+    loading
   } = props;
 
   return (
@@ -38,14 +38,14 @@ function AppContent(props: ContentSectionProps) {
       <Loader loading={loading}>
         {
           (() => {
-            if (value == null) {
+            if (file == null) {
               return (
                 <ContentEmpty />
               );
             }
-            if (isSupportedFile(value)) {
+            if (isSupportedFile(file)) {
               return (
-                <ContentSupported value={value} />
+                <ContentSupported />
               );
             } else {
               return (

@@ -8,151 +8,156 @@
 
 import React from 'react';
 
-import { useProgress } from '../../../providers/ProgressProvider';
+import { useProgress } from '../../../common/providers/ProgressProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
   setError,
-  setMinimapEnabled,
-  setSidePanelAction,
-  setWorkFile
+  setContentEditing,
+  setContentFile,
+  setContentMinimap,
+  setContentPosition,
+  setContentText,
+  setSidePanelAction
 } from '../../../stores/Action';
+import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import {
+  ContentMenuAction,
+  ContentMenuType,
   File,
-  FileContent,
+  MarkdownProps,
+  Position,
   ProgressType,
   SidePanelAction
 } from '../../../types/Model';
+import { downloadFile } from '../../../utils/File';
 
 import Presenter from './ContentSupported.presenter';
 
-interface ContentSupportedProps {
-  value?: File & FileContent
-}
-
-function ContentSupported(props: ContentSupportedProps) {
-
-  const {
-    value
-  } = props;
+function ContentSupported() {
 
   const {
     dispatch,
     state: {
-      minimapEnabled
+      contentProps
     }
   } = useStore();
   const { graph } = useService();
   const { setProgress } = useProgress();
 
   const [ changed, setChanged ] = React.useState<boolean>(false);
-  const [ content, setContent ] = React.useState<string>('');
+  const [ markdownProps, setMarkdownProps ] = React.useState<MarkdownProps>({});
 
   const handleCancel = React.useCallback(() => {
     try {
-      if (value == null) {
-        throw new Error();
-      }
-      dispatch(setWorkFile({
-        ...value,
-        editing: false
-      }));
+      dispatch(setContentPosition());
+      dispatch(setContentEditing(false));
     } catch (e) {
       dispatch(setError(e as Error));
     }
-  }, [
-    dispatch,
-    value
-  ]);
-
-  const handleChange = React.useCallback((_?: Event, data?: string) => {
-    setContent(data ?? '');
-  }, []);
-
-  const handleEdit = React.useCallback(() => {
-    try {
-      if (value == null) {
-        throw new Error();
-      }
-      dispatch(setWorkFile({
-        ...value,
-        editing: true
-      }));
-    } catch (e) {
-      dispatch(setError(e as Error));
-    }
-  }, [
-    dispatch,
-    value
-  ]);
-
-  const handleOpenSidePanel = React.useCallback((_?: Event, data?: SidePanelAction) => {
-    dispatch(setSidePanelAction(data));
   }, [
     dispatch
   ]);
 
-  const handleToggleMinimapEnabled = React.useCallback((_?: Event, data?: boolean) => {
-    dispatch(setMinimapEnabled(data));
+  const handleChangePosition = React.useCallback((_?: Event, data?: Position) => {
+    setMarkdownProps((state) => ({
+      ...state,
+      position: data
+    }));
+  }, []);
+
+  const handleChangeText = React.useCallback((_?: Event, data?: string) => {
+    setMarkdownProps((state) => ({
+      ...state,
+      text: data
+    }));
+  }, []);
+
+  const handleContextMenu = React.useCallback((_?: Event, data?: ContentMenuAction) => {
+    switch (data?.type) {
+      case ContentMenuType.downloadFile: {
+        downloadFile(data.data as File);
+        break;
+      }
+      case ContentMenuType.openSidePanel: {
+        dispatch(setSidePanelAction(data?.data as SidePanelAction));
+        break;
+      }
+      case ContentMenuType.toggleMinimap: {
+        setMarkdownProps((state) => ({
+          ...state,
+          minimap: data
+        }));
+        dispatch(setContentMinimap(data?.data as boolean));
+        break;
+      }
+      default:
+        break;
+    }
+
+  }, [
+    dispatch
+  ]);
+
+  const handleEdit = React.useCallback(() => {
+    try {
+      dispatch(setContentEditing(true));
+    } catch (e) {
+      dispatch(setError(e as Error));
+    }
   }, [
     dispatch
   ]);
 
   const handleSave = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
-      if (value == null) {
-        throw new Error();
+      if (changed) {
+        const contentFile = contentProps?.file;
+        if (contentFile == null) {
+          throw new DependencyNullError();
+        }
+        setProgress(ProgressType.save);
+        const file = await Promise.resolve()
+          .then(() => graph.setFileContent(contentFile, markdownProps?.text ?? ''))
+          .then((file) => graph.getFileById(file.id));
+        dispatch(setContentFile(file));
+        dispatch(setContentText(markdownProps?.text));
+        dispatch(setContentPosition(data ? markdownProps?.position : undefined));
+        dispatch(setContentEditing(data));
       }
-      setProgress(ProgressType.save);
-      const file = await Promise.resolve()
-        .then(() => graph.setFileContent(value, content))
-        .then((file) => file ? graph.getFileById(file.id) : undefined);
-      if (file == null) {
-        throw new Error();
-      }
-      dispatch(setWorkFile({
-        ...file,
-        content,
-        editing: data ?? false
-      }));
     } catch (e) {
       dispatch(setError(e as Error));
     } finally {
       setProgress();
     }
   }, [
-    content,
-    dispatch,
+    changed,
+    contentProps?.file,
     graph,
-    setProgress,
-    value
+    markdownProps?.position,
+    markdownProps?.text,
+    dispatch,
+    setProgress
   ]);
 
   React.useEffect(() => {
-    setContent(value?.content ?? '');
+    setChanged(contentProps?.text !== markdownProps?.text);
   }, [
-    value
-  ]);
-
-  React.useEffect(() => {
-    setChanged(value?.content !== content);
-  }, [
-    value?.content,
-    content
+    contentProps?.text,
+    markdownProps?.text
   ]);
 
   return (
     <Presenter
+      {...contentProps}
       changed={changed}
-      minimapEnabled={minimapEnabled}
-      value={value}
       onCancel={handleCancel}
-      onChange={handleChange}
+      onChangePosition={handleChangePosition}
+      onChangeText={handleChangeText}
+      onContextMenu={handleContextMenu}
       onEdit={handleEdit}
-      onOpenSidePanel={handleOpenSidePanel}
-      onSave={handleSave}
-      onToggleMinimapEnabled={handleToggleMinimapEnabled} />
+      onSave={handleSave} />
   );
 
 }

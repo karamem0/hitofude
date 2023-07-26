@@ -14,6 +14,16 @@ export class ArgumentNullError extends Error {
   }
 
 }
+
+export class DependencyNullError extends Error {
+
+  constructor(message?: string) {
+    super(message);
+    this.name = 'DependencyNullError';
+  }
+
+}
+
 export class FileConflictError extends Error {
 
   constructor(message?: string) {

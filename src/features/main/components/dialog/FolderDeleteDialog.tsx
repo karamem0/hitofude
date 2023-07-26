@@ -15,7 +15,7 @@ import {
   setDialogAction,
   setError
 } from '../../../../stores/Action';
-import { FileNotFoundError, FolderNotFoundError } from '../../../../types/Error';
+import { DependencyNullError } from '../../../../types/Error';
 import { Folder } from '../../../../types/Model';
 
 import Presenter from './FolderDeleteDialog.presenter';
@@ -29,21 +29,15 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
   const { value } = props;
 
   const {
-    dispatch,
-    state: {
-      exploreFolder
-    }
+    dispatch
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async () => {
     try {
-      if (exploreFolder == null) {
-        throw new FolderNotFoundError();
-      }
       if (value == null) {
-        throw new FileNotFoundError();
+        throw new DependencyNullError();
       }
       await graph.deleteExploreFolder(value);
       dispatch(deleteExploreFolder(value));
@@ -58,10 +52,9 @@ function FileDeleteDialog(props: FolderDeleteDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    dispatch,
-    exploreFolder,
     graph,
-    value
+    value,
+    dispatch
   ]);
 
   return (

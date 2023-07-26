@@ -14,24 +14,32 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 import { useStore } from '../../../../providers/StoreProvider';
 import { EventHandler } from '../../../../types/Event';
+import { Position } from '../../../../types/Model';
 
 import Presenter from './MarkdownEditor.presenter';
 
 interface MarkdownEditorProps {
-  value?: string,
-  onChange?: EventHandler<string>
+  minimap?: boolean,
+  position?: Position,
+  text?: string,
+  onChangePosition?: EventHandler<Position>,
+  onChangeText?: EventHandler<string>,
+  onSave?: EventHandler
 }
 
 function MarkdownEditor(props: MarkdownEditorProps) {
 
   const {
-    value,
-    onChange
+    minimap,
+    position,
+    text,
+    onChangePosition,
+    onChangeText,
+    onSave
   } = props;
 
   const {
     state: {
-      minimapEnabled,
       tabMode
     }
   } = useStore();
@@ -43,8 +51,6 @@ function MarkdownEditor(props: MarkdownEditorProps) {
     monacoRef.current?.layout({} as monaco.editor.IDimension);
   }, []);
 
-  useEvent('resize', handleResize, window);
-
   React.useEffect(() => {
     if (editorRef.current == null) {
       return;
@@ -55,22 +61,82 @@ function MarkdownEditor(props: MarkdownEditorProps) {
         automaticLayout: true,
         contextmenu: false,
         fontFamily: 'Consolas, Menlo, Monaco, Meiryo, monospace',
-        language: 'markdown',
-        minimap: {
-          enabled: minimapEnabled
-        },
-        value
+        language: 'markdown'
       });
-    monacoRef.current.onDidChangeModelContent(() => {
-      onChange?.({}, monacoRef.current?.getValue());
-    });
     return () => {
       monacoRef.current?.dispose();
     };
+  }, []);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    monacoRef.current.onDidScrollChange((e) => {
+      onChangePosition?.({}, {
+        left: e.scrollLeft,
+        top: e.scrollTop
+      });
+    });
   }, [
-    minimapEnabled,
-    value,
-    onChange
+    onChangePosition
+  ]);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    monacoRef.current.onDidChangeModelContent(() => {
+      onChangeText?.({}, monacoRef.current?.getValue());
+    });
+  }, [
+    onChangeText
+  ]);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    monacoRef.current.addCommand(
+      monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS,
+      () => onSave?.({})
+    );
+  }, [
+    onSave
+  ]);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    monacoRef.current.updateOptions({
+      minimap: {
+        enabled: minimap
+      }
+    });
+  }, [
+    minimap
+  ]);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    monacoRef.current.setScrollPosition({
+      scrollLeft: position?.left ?? 1,
+      scrollTop: position?.top ?? 1
+    });
+  }, [
+    position
+  ]);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    monacoRef.current.setValue(text ?? '');
+  }, [
+    text
   ]);
 
   React.useEffect(() => {
@@ -78,9 +144,11 @@ function MarkdownEditor(props: MarkdownEditorProps) {
       handleResize();
     }
   }, [
-    handleResize,
-    tabMode?.open
+    tabMode?.open,
+    handleResize
   ]);
+
+  useEvent('resize', handleResize, window);
 
   return (
     <Presenter ref={editorRef} />

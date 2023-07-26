@@ -11,14 +11,15 @@ import React from 'react';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
+  setContentFile,
+  setContentLoading,
+  setContentText,
   setError,
-  setLoading,
   setExploreFile,
   setExploreFolder,
-  setWorkFile,
   setSearchFile
 } from '../../../stores/Action';
-import { FileNotFoundError } from '../../../types/Error';
+import { DependencyNullError, FileNotFoundError } from '../../../types/Error';
 import { TabType } from '../../../types/Model';
 
 import Presenter from './AppTab.presenter';
@@ -28,7 +29,7 @@ function AppTab() {
   const {
     dispatch,
     state: {
-      rootFolder,
+      exploreProps,
       tabMode = {
         type: TabType.explorer,
         open: true
@@ -40,6 +41,10 @@ function AppTab() {
   const [ tabType, setTabType ] = React.useState(tabMode.type);
 
   const handleExplorerOpen = React.useCallback(async () => {
+    const rootFolder = exploreProps?.rootFolder;
+    if (rootFolder == null) {
+      throw new DependencyNullError();
+    }
     const exploreFolderId = storage.getExploreFolderId();
     const exploreFileId = storage.getExploreFileId();
     const exploreFolder = await Promise.resolve()
@@ -49,25 +54,22 @@ function AppTab() {
     dispatch(setExploreFolder(exploreFolder));
     if (exploreFile != null) {
       dispatch(setExploreFile(exploreFile));
-      dispatch(setWorkFile({
-        ...exploreFile,
-        content: await graph.getFileContent(exploreFile),
-        editing: false
-      }));
+      dispatch(setContentFile(exploreFile));
+      dispatch(setContentText(await graph.getFileText(exploreFile)));
     } else {
       dispatch(setExploreFile());
-      dispatch(setWorkFile());
+      dispatch(setContentFile());
     }
   }, [
-    dispatch,
+    exploreProps?.rootFolder,
     graph,
-    rootFolder,
-    storage
+    storage,
+    dispatch
   ]);
 
   const handleSearchOpen = React.useCallback(async () => {
     dispatch(setSearchFile());
-    dispatch(setWorkFile());
+    dispatch(setContentFile());
     await Promise.resolve();
   }, [
     dispatch
@@ -76,7 +78,7 @@ function AppTab() {
   React.useEffect(() => {
     (async () => {
       try {
-        dispatch(setLoading(true));
+        dispatch(setContentLoading(true));
         switch (tabMode.type) {
           case TabType.explorer: {
             await handleExplorerOpen();
@@ -93,14 +95,14 @@ function AppTab() {
       } catch (e) {
         dispatch(setError(e as Error));
       } finally {
-        dispatch(setLoading(false));
+        dispatch(setContentLoading(false));
       }
     })();
   }, [
+    tabMode.type,
     dispatch,
     handleExplorerOpen,
-    handleSearchOpen,
-    tabMode.type
+    handleSearchOpen
   ]);
 
   React.useEffect(() => {

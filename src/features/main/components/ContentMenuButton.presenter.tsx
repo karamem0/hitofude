@@ -20,35 +20,42 @@ import {
   MenuPopover,
   MenuTrigger
 } from '@fluentui/react-components';
-import { Hide3Icon, HistoryIcon, MoreVerticalIcon, ViewIcon } from '@fluentui/react-icons-mdl2';
+import {
+  DownloadDocumentIcon,
+  Hide3Icon,
+  HistoryIcon,
+  MoreVerticalIcon,
+  ViewIcon
+} from '@fluentui/react-icons-mdl2';
 
 import { EventHandler } from '../../../types/Event';
 import {
   ContentMenuAction,
   ContentMenuType,
   File,
-  FileContent,
   SidePanelType
 } from '../../../types/Model';
 import messages from '../messages';
 
 interface ContentMenuButtonProps {
-  minimapEnabled?: boolean,
-  value?: File & FileContent,
+  editing?: boolean,
+  file?: File,
+  minimap?: boolean,
   onMenuClick?: EventHandler<ContentMenuAction>
 }
 
 function ContentMenuButton(props: ContentMenuButtonProps) {
 
   const {
-    minimapEnabled,
-    value,
+    editing,
+    file,
+    minimap,
     onMenuClick
   } = props;
 
   const intl = useIntl();
 
-  return value ? (
+  return file ? (
     <Menu>
       <MenuTrigger>
         <div
@@ -79,47 +86,64 @@ function ContentMenuButton(props: ContentMenuButtonProps) {
                 type: ContentMenuType.openSidePanel,
                 data: {
                   type: SidePanelType.fileVersion,
-                  data: value
+                  data: file
                 }
               })}>
               <FormattedMessage {...messages.VersionHistory} />
             </MenuItem>
           </MenuGroup>
+          <MenuDivider />
           {
-            value.editing && (
-              <React.Fragment>
-                <MenuDivider />
-                <MenuGroup>
-                  <MenuItem
-                    key="ToggleMinimapEnabled"
-                    icon={
-                      minimapEnabled ? (
-                        <Hide3Icon
-                          css={css`
-                            font-size: 1rem;
-                            line-height: 1rem;
-                          `} />
-                      ) : (
-                        <ViewIcon
-                          css={css`
-                            font-size: 1rem;
-                            line-height: 1rem;
-                          `} />
-                      )}
-                    onClick={(e) => onMenuClick?.(e, {
-                      type: ContentMenuType.toggleMinimapEnabled,
-                      data: !minimapEnabled
-                    })}>
-                    {
-                      minimapEnabled ? (
-                        <FormattedMessage {...messages.HideMinimap} />
-                      ) : (
-                        <FormattedMessage {...messages.ShowMinimap} />
-                      )
-                    }
-                  </MenuItem>
-                </MenuGroup>
-              </React.Fragment>
+            editing ? (
+              <MenuGroup>
+                <MenuItem
+                  key="ToggleMinimap"
+                  icon={
+                    minimap ? (
+                      <Hide3Icon
+                        css={css`
+                          font-size: 1rem;
+                          line-height: 1rem;
+                        `} />
+                    ) : (
+                      <ViewIcon
+                        css={css`
+                          font-size: 1rem;
+                          line-height: 1rem;
+                        `} />
+                    )}
+                  onClick={(e) => onMenuClick?.(e, {
+                    type: ContentMenuType.toggleMinimap,
+                    data: !minimap
+                  })}>
+                  {
+                    minimap ? (
+                      <FormattedMessage {...messages.HideMinimap} />
+                    ) : (
+                      <FormattedMessage {...messages.ShowMinimap} />
+                    )
+                  }
+                </MenuItem>
+              </MenuGroup>
+            ) : (
+              <MenuGroup>
+                <MenuItem
+                  key="DownloadFile"
+                  icon={(
+                    <DownloadDocumentIcon
+                      css={css`
+                        font-size: 1rem;
+                        line-height: 1rem;
+                      `} />
+                  )}
+                  onClick={(e) => onMenuClick?.(e, {
+                    type: ContentMenuType.downloadFile,
+                    data: file
+                  })
+                }>
+                  <FormattedMessage {...messages.Download} />
+                </MenuItem>
+              </MenuGroup>
             )
           }
         </MenuList>

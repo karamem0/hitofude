@@ -27,16 +27,27 @@ function MainPage() {
   React.useEffect(() => {
     (async () => {
       dispatch(setInitialState({
-        includeUnsupportedFiles: storage.getIncludeUnsupportedFiles(),
-        rootFolder: await graph.getRootFolder(),
-        minimapEnabled: storage.getMinimapEnabled(),
+        contentProps: {
+          editing: false,
+          loading: true,
+          minimap: storage.getContentMinimap(),
+          position: {
+            left: 1,
+            top: 1
+          },
+          text: ''
+        },
+        exploreProps: {
+          allFiles: storage.getExploreAllFiles(),
+          rootFolder: await graph.getRootFolder()
+        },
         tabMode: storage.getTabMode()
       }));
     })();
   }, [
-    dispatch,
     graph,
-    storage
+    storage,
+    dispatch
   ]);
 
   return (
