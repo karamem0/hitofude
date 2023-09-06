@@ -10,7 +10,7 @@ import React from 'react';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
-import { codeStyle } from '../../../../providers/ThemeProvider';
+import { useTheme } from '../../../../providers/ThemeProvider';
 
 interface MarkdownCodeRendererProps {
   children?: React.ReactNode,
@@ -26,6 +26,8 @@ function MarkdownCodeRenderer(props: MarkdownCodeRendererProps) {
     inline
   } = props;
 
+  const { theme } = useTheme();
+
   const match = /language-(\w+)/.exec(className ?? '');
   const lang = match?.at(1) ?? '';
 
@@ -36,8 +38,40 @@ function MarkdownCodeRenderer(props: MarkdownCodeRendererProps) {
   ) : (
     <SyntaxHighlighter
       language={lang}
-      style={codeStyle}
-      wrapLongLines={true}>
+      wrapLongLines={true}
+      style={{
+        hljs: {},
+        'hljs-addition': {
+          color: theme.colorPaletteLightGreenForeground1
+        },
+        'hljs-built_in': {
+          color: theme.colorPaletteRedForeground1
+        },
+        'hljs-comment': {
+          color: theme.colorPaletteLightGreenForeground1
+        },
+        'hljs-deletion': {
+          color: theme.colorPaletteRedForeground1
+        },
+        'hljs-keyword': {
+          color: theme.colorPaletteBlueForeground2
+        },
+        'hljs-literal': {
+          color: theme.colorPaletteRedForeground1
+        },
+        'hljs-meta': {
+          color: theme.colorPaletteLightTealForeground2
+        },
+        'hljs-number': {
+          color: theme.colorPaletteCranberryForeground2
+        },
+        'hljs-quote': {
+          color: theme.colorPaletteLightGreenForeground1
+        },
+        'hljs-string': {
+          color: theme.colorPaletteCranberryForeground2
+        }
+      }}>
       {String(children).replace(/\n$/, '')}
     </SyntaxHighlighter>
   );

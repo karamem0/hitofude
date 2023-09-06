@@ -13,8 +13,9 @@ import { useEvent } from 'react-use';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 import { useStore } from '../../../../providers/StoreProvider';
+import { useTheme } from '../../../../providers/ThemeProvider';
 import { EventHandler } from '../../../../types/Event';
-import { Position } from '../../../../types/Model';
+import { Position, ThemeName } from '../../../../types/Model';
 
 import Presenter from './MarkdownEditor.presenter';
 
@@ -22,6 +23,7 @@ interface MarkdownEditorProps {
   minimap?: boolean,
   position?: Position,
   text?: string,
+  wordWrap?: boolean,
   onChangePosition?: EventHandler<Position>,
   onChangeText?: EventHandler<string>,
   onSave?: EventHandler
@@ -33,6 +35,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
     minimap,
     position,
     text,
+    wordWrap,
     onChangePosition,
     onChangeText,
     onSave
@@ -43,6 +46,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
       tabMode
     }
   } = useStore();
+  const { themeName } = useTheme();
 
   const editorRef = React.useRef<HTMLDivElement>(null);
   const monacoRef = React.useRef<monaco.editor.IStandaloneCodeEditor>();
@@ -137,6 +141,35 @@ function MarkdownEditor(props: MarkdownEditorProps) {
     monacoRef.current.setValue(text ?? '');
   }, [
     text
+  ]);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    monacoRef.current.updateOptions({
+      wordWrap: wordWrap ? 'on' : 'off'
+    });
+  }, [
+    wordWrap
+  ]);
+
+  React.useEffect(() => {
+    if (monacoRef.current == null) {
+      return;
+    }
+    switch (themeName) {
+      case ThemeName.light:
+        monaco.editor.setTheme('vs');
+        break;
+      case ThemeName.dark:
+        monaco.editor.setTheme('vs-dark');
+        break;
+      default:
+        break;
+    }
+  }, [
+    themeName
   ]);
 
   React.useEffect(() => {

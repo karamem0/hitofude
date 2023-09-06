@@ -10,11 +10,15 @@ import React from 'react';
 
 import { useMsal } from '@azure/msal-react';
 
+import { useTheme } from '../../../providers/ThemeProvider';
+import { ThemeName } from '../../../types/Model';
+
 import Presenter from './HomePage.presenter';
 
 function HomePage() {
 
   const msal = useMsal();
+  const { changeTheme } = useTheme();
 
   const handleLinkToGitHub = React.useCallback(() => {
     window.open('https://github.com/karamem0/hitofude', '_blank', 'noreferrer');
@@ -36,6 +40,12 @@ function HomePage() {
       ]
     });
   }, [ msal ]);
+
+  React.useEffect(() => {
+    changeTheme(ThemeName.light);
+  }, [
+    changeTheme
+  ]);
 
   return (
     <Presenter

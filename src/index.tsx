@@ -40,7 +40,10 @@ ReactDOM
                 <Route
                   path="/"
                   element={(
-                    <ErrorBoundary fallbackRender={(props) => <Error500Page {...props} />}>
+                    <ErrorBoundary
+                      fallbackRender={(props) => (
+                        <Error500Page {...props} />
+                      )}>
                       <MsalProvider>
                         <AuthenticatedTemplate>
                           <ServiceProvider>
@@ -56,8 +59,10 @@ ReactDOM
                     </ErrorBoundary>
                 )} />
                 <Route
-                  element={<Error404Page />}
-                  path="*" />
+                  path="*"
+                  element={(
+                    <Error404Page />
+                  )} />
               </Routes>
             </ThemeProvider>
           </IntlProvider>

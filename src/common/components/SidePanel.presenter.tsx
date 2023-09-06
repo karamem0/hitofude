@@ -12,6 +12,7 @@ import { css } from '@emotion/react';
 import { Button, Text } from '@fluentui/react-components';
 import { CancelIcon } from '@fluentui/react-icons-mdl2';
 
+import { useTheme } from '../../providers/ThemeProvider';
 import { EventHandler } from '../../types/Event';
 
 interface SidePanelProps {
@@ -34,6 +35,8 @@ function SidePanel(props: SidePanelProps) {
     onOpenChange
   } = props;
 
+  const { theme } = useTheme();
+
   return (
     <React.Fragment>
       <div onClick={(e) => onOpenChange?.(e, true)}>
@@ -49,7 +52,7 @@ function SidePanel(props: SidePanelProps) {
               display: grid;
               grid-template-rows: auto;
               grid-template-columns: 1fr auto;
-              background-color: rgb(255 255 255 / 35%);
+              background-color: ${theme.colorNeutralBackgroundAlpha};
             `}>
             <div
               css={css`
@@ -60,7 +63,7 @@ function SidePanel(props: SidePanelProps) {
               css={css`
                 width: ${width ?? '20rem'};
                 max-width: calc(100vw - 2rem);
-                background-color: #fff;
+                background-color: ${theme.colorNeutralBackground1};
                 box-shadow: rgb(0 0 0 / 35%) 0 0 2rem 0;
               `}>
               <div

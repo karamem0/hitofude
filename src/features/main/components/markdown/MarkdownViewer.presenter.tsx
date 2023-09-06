@@ -13,7 +13,7 @@ import ReactMarkdown from 'react-markdown';
 import { css } from '@emotion/react';
 import remarkGfm from 'remark-gfm';
 
-import { themeConfig } from '../../../../providers/ThemeProvider';
+import { useTheme } from '../../../../providers/ThemeProvider';
 
 import MarkdownCodeRenderer from './MarkdownCodeRenderer';
 import MarkdownImageRenderer from './MarkdownImageRenderer';
@@ -30,58 +30,60 @@ function MarkdownViewer(props: MarkdownViewerProps) {
     text
   } = props;
 
+  const { theme } = useTheme();
+
   return text ? (
     <div
       className={className}
       css={css`
         a {
-          color: ${themeConfig.colorBrandForegroundLink};
+          color: ${theme.colorBrandForegroundLink};
         }
         a:hover {
-          color: ${themeConfig.colorBrandForegroundLinkHover};
+          color: ${theme.colorBrandForegroundLinkHover};
         }
         a:focus {
-          color: ${themeConfig.colorBrandForegroundLinkHover};
+          color: ${theme.colorBrandForegroundLinkHover};
         }
         blockquote {
           padding: 0 0 0 1rem;
           margin-block: 0.5rem;
-          border-left: ${themeConfig.colorBrandStroke2} 0.25rem solid;
+          border-left: ${theme.colorBrandStroke2} 0.25rem solid;
         }
         code {
           padding: 0.25rem;
           font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
-          background-color: ${themeConfig.colorNeutralBackground3};
+          background-color: ${theme.colorNeutralBackground3};
         }
         h1 {
           margin-block: 0.5rem;
-          font-size: ${themeConfig.fontSizeHero800};
-          line-height: calc(${themeConfig.fontSizeHero800} * 1.5);
+          font-size: ${theme.fontSizeHero800};
+          line-height: calc(${theme.fontSizeHero800} * 1.5);
         }
         h2 {
           margin-block: 0.5rem;
-          font-size: ${themeConfig.fontSizeHero700};
-          line-height: calc(${themeConfig.fontSizeHero700} * 1.5);
+          font-size: ${theme.fontSizeHero700};
+          line-height: calc(${theme.fontSizeHero700} * 1.5);
         }
         h3 {
           margin-block: 0.5rem;
-          font-size: ${themeConfig.fontSizeBase600};
-          line-height: calc(${themeConfig.fontSizeBase600} * 1.5);
+          font-size: ${theme.fontSizeBase600};
+          line-height: calc(${theme.fontSizeBase600} * 1.5);
         }
         h4 {
           margin-block: 0.5rem;
-          font-size: ${themeConfig.fontSizeBase500};
-          line-height: calc(${themeConfig.fontSizeBase500} * 1.5);
+          font-size: ${theme.fontSizeBase500};
+          line-height: calc(${theme.fontSizeBase500} * 1.5);
         }
         h5 {
           margin-block: 0.5rem;
-          font-size: ${themeConfig.fontSizeBase400};
-          line-height: calc(${themeConfig.fontSizeBase400} * 1.5);
+          font-size: ${theme.fontSizeBase400};
+          line-height: calc(${theme.fontSizeBase400} * 1.5);
         }
         h6 {
           margin-block: 0.5rem;
-          font-size: ${themeConfig.fontSizeBase300};
-          line-height: calc(${themeConfig.fontSizeBase300} * 1.5);
+          font-size: ${theme.fontSizeBase300};
+          line-height: calc(${theme.fontSizeBase300} * 1.5);
         }
         li {
           margin-block: 0.5rem;
@@ -94,7 +96,7 @@ function MarkdownViewer(props: MarkdownViewerProps) {
           padding: 0.5rem;
           margin-block: 0.5rem;
           font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
-          background-color: ${themeConfig.colorNeutralBackground3};
+          background-color: ${theme.colorNeutralBackground3};
           & code {
             padding: 0;
             overflow-wrap: break-word;
@@ -110,16 +112,16 @@ function MarkdownViewer(props: MarkdownViewerProps) {
           padding: 0.5rem;
           border-spacing: 0;
           border-collapse: collapse;
-          border: ${themeConfig.colorNeutralBackground5} 1px solid;
+          border: ${theme.colorNeutralBackground5} 1px solid;
           -webkit-border-horizontal-spacing: 0;
           -webkit-border-vertical-spacing: 0;
         }
         thead {
-          background-color: ${themeConfig.colorNeutralBackground3};
+          background-color: ${theme.colorNeutralBackground3};
         }
         tbody {
           & > tr:nth-of-type(even) {
-            background-color: ${themeConfig.colorNeutralBackground2};
+            background-color: ${theme.colorNeutralBackground2};
           }
         }
         ul {

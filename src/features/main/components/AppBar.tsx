@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
-import { setTabMode } from '../../../stores/Action';
+import { setDialogAction, setTabMode } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
-import { TabType } from '../../../types/Model';
+import { DialogAction, TabType } from '../../../types/Model';
 
 import Presenter from './AppBar.presenter';
 
@@ -23,6 +23,12 @@ function AppBar() {
       tabMode
     }
   } = useStore();
+
+  const handleOpenDialog = React.useCallback((_?: Event, data?: DialogAction) => {
+    dispatch(setDialogAction(data));
+  }, [
+    dispatch
+  ]);
 
   const handleToggleTab = React.useCallback((_?: Event, data?: TabType) => {
     dispatch(setTabMode({
@@ -37,6 +43,7 @@ function AppBar() {
   return (
     <Presenter
       tabMode={tabMode}
+      onOpenDialog={handleOpenDialog}
       onToggleTab={handleToggleTab} />
   );
 

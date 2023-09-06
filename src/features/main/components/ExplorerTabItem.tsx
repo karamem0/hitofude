@@ -80,10 +80,7 @@ function ExplorerTabItem() {
         throw new ArgumentNullError();
       }
       const exploreFile = exploreProps?.file;
-      if (exploreFile == null) {
-        throw new DependencyNullError();
-      }
-      if (data.id === exploreFile.id) {
+      if (data.id === exploreFile?.id) {
         return;
       }
       dispatch(setExploreFile(data));
@@ -133,15 +130,12 @@ function ExplorerTabItem() {
         throw new ArgumentNullError();
       }
       const exploreFile = exploreProps?.file;
-      if (exploreFile == null) {
-        throw new DependencyNullError();
-      }
       const exploreFolder = exploreProps?.folder;
       if (exploreFolder == null) {
         throw new DependencyNullError();
       }
       dispatch(setExploreAllFiles(data));
-      const file = (exploreFile != null && isSupportedFile(exploreFile)) ? (
+      const file = isSupportedFile(exploreFile) ? (
         exploreFolder.files?.filter((item) => isSupportedFile(item)).at(0)
       ) : (
         undefined

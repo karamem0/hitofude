@@ -12,7 +12,10 @@ const messages = defineMessages({
   AppName: { defaultMessage: 'Hitofude' },
   Back: { defaultMessage: 'Back' },
   Cancel: { defaultMessage: 'Cancel' },
+  Close: { defaultMessage: 'Close' },
+  ChangeTheme: { defaultMessage: 'Change theme' },
   CopyFile: { defaultMessage: 'Copy file' },
+  Dark: { defaultMessage: 'Dark' },
   DeleteFile: { defaultMessage: 'Delete file' },
   DeleteFileConfirm: { defaultMessage: 'Are you sure to delete this file?' },
   DeleteFolder: { defaultMessage: 'Delete folder' },
@@ -23,8 +26,9 @@ const messages = defineMessages({
   File: { defaultMessage: 'File' },
   FileName: { defaultMessage: 'File name' },
   FolderName: { defaultMessage: 'Folder name' },
-  HideMinimap: { defaultMessage: 'Hide minimap' },
   HideUnsupportedFiles: { defaultMessage: 'Hide other files' },
+  Light: { defaultMessage: 'Light' },
+  Minimap: { defaultMessage: 'Minimap' },
   MoreOption: { defaultMessage: 'More option' },
   NewFile: { defaultMessage: 'New file' },
   NewFolder: { defaultMessage: 'New folder' },
@@ -44,7 +48,7 @@ const messages = defineMessages({
   Save: { defaultMessage: 'Save' },
   SaveAndClose: { defaultMessage: 'Save and Close' },
   Search: { defaultMessage: 'Search' },
-  ShowMinimap: { defaultMessage: 'Show minimap' },
+  Settings: { defaultMessage: 'Settings' },
   ShowUnsupportedFiles: { defaultMessage: 'Show other files' },
   Size: { defaultMessage: 'Size' },
   SignOut: { defaultMessage: 'Sign out' },
@@ -53,6 +57,7 @@ const messages = defineMessages({
   UpdatedDate: { defaultMessage: 'Updated date' },
   Version: { defaultMessage: 'Version' },
   VersionHistory: { defaultMessage: 'Version history' },
+  WordWrap: { defaultMessage: 'Word wrap' },
   WorkFolderSelection: { defaultMessage: 'Select working directory' }
 });
 

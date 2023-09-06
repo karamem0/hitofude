@@ -20,7 +20,7 @@ import {
   Text
 } from '@fluentui/react-components';
 
-import { themeConfig } from '../../providers/ThemeProvider';
+import { useTheme } from '../../providers/ThemeProvider';
 import { ProgressType } from '../../types/Model';
 import messages from '../messages';
 
@@ -35,6 +35,7 @@ function ProgressDialog(props: ProgressDialogProps) {
   } = props;
 
   const intl = useIntl();
+  const { theme } = useTheme();
 
   return (
     <Dialog
@@ -54,8 +55,8 @@ function ProgressDialog(props: ProgressDialogProps) {
             <Spinner size="small" />
             <Text
               css={css`
-                font-size: ${themeConfig.fontSizeBase600};
-                line-height: calc(${themeConfig.fontSizeBase600} * 1.25);
+                font-size: ${theme.fontSizeBase600};
+                line-height: calc(${theme.fontSizeBase600} * 1.25);
               `}>
               {
                 (() => {

@@ -14,7 +14,7 @@ import { css } from '@emotion/react';
 import { Link } from '@fluentui/react-components';
 import { Alert } from '@fluentui/react-components/unstable';
 
-import { themeConfig } from '../../providers/ThemeProvider';
+import { useTheme } from '../../providers/ThemeProvider';
 import { EventHandler } from '../../types/Event';
 import messages from '../messages';
 
@@ -29,6 +29,8 @@ function ErrorNotification(props: ErrorNotificationProps) {
     message,
     onDismiss
   } = props;
+
+  const { theme } = useTheme();
 
   return (
     message ? (
@@ -46,7 +48,7 @@ function ErrorNotification(props: ErrorNotificationProps) {
           z-index: 900;
           width: calc(100% - 1rem);
           margin: 0.5rem;
-          background-color: ${themeConfig.colorNeutralBackground2};
+          background-color: ${theme.colorNeutralBackground2};
         `}>
         <FormattedMessage {...message} />
       </Alert>

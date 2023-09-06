@@ -10,7 +10,9 @@ import React from 'react';
 
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 import { setInitialState } from '../../../stores/Action';
+import { ThemeName } from '../../../types/Model';
 
 import Presenter from './MainPage.presenter';
 
@@ -23,9 +25,11 @@ function MainPage() {
     }
   } = useStore();
   const { graph, storage } = useService();
+  const { changeTheme } = useTheme();
 
   React.useEffect(() => {
     (async () => {
+      changeTheme(storage.getThemeName() ?? ThemeName.light);
       dispatch(setInitialState({
         contentProps: {
           editing: false,
@@ -35,7 +39,8 @@ function MainPage() {
             left: 1,
             top: 1
           },
-          text: ''
+          text: '',
+          wordWrap: storage.getContentWordWrap()
         },
         exploreProps: {
           allFiles: storage.getExploreAllFiles(),
@@ -47,6 +52,7 @@ function MainPage() {
   }, [
     graph,
     storage,
+    changeTheme,
     dispatch
   ]);
 

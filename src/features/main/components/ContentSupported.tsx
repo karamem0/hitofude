@@ -18,7 +18,8 @@ import {
   setContentMinimap,
   setContentPosition,
   setContentText,
-  setSidePanelAction
+  setSidePanelAction,
+  setContentWordWrap
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
@@ -90,6 +91,14 @@ function ContentSupported() {
           minimap: data
         }));
         dispatch(setContentMinimap(data?.data as boolean));
+        break;
+      }
+      case ContentMenuType.toggleWordWrap: {
+        setMarkdownProps((state) => ({
+          ...state,
+          wordWrap: data
+        }));
+        dispatch(setContentWordWrap(data?.data as boolean));
         break;
       }
       default:

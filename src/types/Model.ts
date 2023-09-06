@@ -14,7 +14,8 @@ export interface ContentMenuAction {
 export enum ContentMenuType {
   downloadFile = 'downloadFile',
   openSidePanel = 'openSidePanel',
-  toggleMinimap = 'toggleMinimap'
+  toggleMinimap = 'toggleMinimap',
+  toggleWordWrap = 'toggleWordWrap'
 }
 
 export interface ContentProps {
@@ -23,7 +24,8 @@ export interface ContentProps {
   loading?: boolean,
   minimap?: boolean,
   position?: Position,
-  text?: string
+  text?: string,
+  wordWrap?: boolean
 }
 
 export interface DialogAction {
@@ -32,6 +34,7 @@ export interface DialogAction {
 }
 
 export enum DialogType {
+  changeTheme = 'changeTheme',
   copyFile = 'copyFile',
   createFile = 'createFile',
   createFolder = 'createFolder',
@@ -97,7 +100,7 @@ export interface Position {
 
 export enum ProgressType {
   none = 'none',
-  save = 'save',
+  save = 'save'
 }
 
 export interface SearchTabProps {
@@ -120,7 +123,12 @@ export interface TabMode {
   open?: boolean
 }
 
+export enum ThemeName {
+  light = 0,
+  dark = 1
+}
+
 export enum TabType {
   explorer = 0,
-  search = 1,
+  search = 1
 }

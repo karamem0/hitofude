@@ -21,7 +21,7 @@ import {
 } from '@fluentui/react-components';
 
 import ImageViewer from '../../../common/components/ImageViewer';
-import { themeConfig } from '../../../providers/ThemeProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import {
   Position,
@@ -62,6 +62,7 @@ function ContentSupported(props: ContentSupportedProps) {
   } = props;
 
   const intl = useIntl();
+  const { theme } = useTheme();
 
   return file ? (
     <div
@@ -89,9 +90,9 @@ function ContentSupported(props: ContentSupportedProps) {
         <Text
           css={css`
             overflow: hidden;
-            font-size: ${themeConfig.fontSizeHero900};
+            font-size: ${theme.fontSizeHero900};
             font-weight: bold;
-            line-height: calc(${themeConfig.fontSizeHero900} * 1.25);
+            line-height: calc(${theme.fontSizeHero900} * 1.25);
             text-overflow: ellipsis;
             white-space: nowrap;
           `}>

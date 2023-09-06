@@ -8,9 +8,20 @@
 
 import React from 'react';
 
+import { useTheme } from '../../../providers/ThemeProvider';
+import { ThemeName } from '../../../types/Model';
+
 import Presenter from './Error404Page.presenter';
 
 function Error404Page() {
+
+  const { changeTheme } = useTheme();
+
+  React.useEffect(() => {
+    changeTheme(ThemeName.light);
+  }, [
+    changeTheme
+  ]);
 
   return (
     <Presenter />

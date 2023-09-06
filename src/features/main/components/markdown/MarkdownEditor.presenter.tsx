@@ -10,7 +10,7 @@ import React from 'react';
 
 import { css } from '@emotion/react';
 
-import { themeConfig } from '../../../../providers/ThemeProvider';
+import { useTheme } from '../../../../providers/ThemeProvider';
 
 interface MarkdownEditorProps {
   className?: string
@@ -22,6 +22,8 @@ function MarkdownEditor(props: MarkdownEditorProps, ref: React.Ref<HTMLDivElemen
     className
   } = props;
 
+  const { theme } = useTheme();
+
   return (
     <div
       ref={ref}
@@ -29,7 +31,7 @@ function MarkdownEditor(props: MarkdownEditorProps, ref: React.Ref<HTMLDivElemen
       css={css`
         width: inherit;
         height: inherit;
-        border: 0.05rem solid ${themeConfig.colorNeutralStrokeAlpha};
+        border: 0.05rem solid ${theme.colorNeutralStrokeAlpha};
       `} />
   );
 

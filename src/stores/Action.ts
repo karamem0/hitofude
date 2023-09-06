@@ -75,6 +75,11 @@ export const setContentPosition = (data?: Position): AppAction => ({
   data
 });
 
+export const setContentWordWrap = (data?: boolean): AppAction => ({
+  type: AppActionType.setContentWordWrap,
+  data
+});
+
 export const setError = (data?: Error): AppAction => ({
   type: AppActionType.setError,
   data

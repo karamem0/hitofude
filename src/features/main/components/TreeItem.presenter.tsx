@@ -19,7 +19,7 @@ import {
 } from '@fluentui/react-components';
 import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
 
-import { themeConfig } from '../../../providers/ThemeProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
@@ -46,6 +46,7 @@ function TreeItem(props: TreeItemProps) {
   } = props;
 
   const intl = useIntl();
+  const { theme } = useTheme();
 
   return (
     <div
@@ -65,7 +66,7 @@ function TreeItem(props: TreeItemProps) {
           display: none;
         }
         &:hover {
-          background-color: ${themeConfig.colorNeutralBackground2Hover};
+          background-color: ${theme.colorNeutralBackground2Hover};
           & > div:nth-of-type(2) {
             display: inherit;
           }
@@ -76,7 +77,7 @@ function TreeItem(props: TreeItemProps) {
           }
         }
         &[aria-selected='true'] {
-          background-color: ${themeConfig.colorNeutralBackground2Selected};
+          background-color: ${theme.colorNeutralBackground2Selected};
         }
       `}>
       <div

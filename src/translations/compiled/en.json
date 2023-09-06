@@ -1,10 +1,4 @@
 {
-  "/+Itm/": [
-    {
-      "type": 0,
-      "value": "Show minimap"
-    }
-  ],
   "/rjLPg": [
     {
       "type": 0,
@@ -23,10 +17,28 @@
       "value": "There is nothing here"
     }
   ],
+  "3cc4Ct": [
+    {
+      "type": 0,
+      "value": "Light"
+    }
+  ],
   "47FYwb": [
     {
       "type": 0,
       "value": "Cancel"
+    }
+  ],
+  "5929Xm": [
+    {
+      "type": 0,
+      "value": "Change theme"
+    }
+  ],
+  "5KHmz1": [
+    {
+      "type": 0,
+      "value": "Minimap"
     }
   ],
   "5q3qC0": [
@@ -99,6 +111,12 @@
     {
       "type": 0,
       "value": "Open with OneDrive"
+    }
+  ],
+  "D3idYv": [
+    {
+      "type": 0,
+      "value": "Settings"
     }
   ],
   "DcY8fl": [
@@ -335,16 +353,22 @@
       "value": "Refresh"
     }
   ],
-  "rkvFU3": [
+  "rbrahO": [
     {
       "type": 0,
-      "value": "Hide minimap"
+      "value": "Close"
     }
   ],
   "sQtSD2": [
     {
       "type": 0,
       "value": "Are you sure to delete this file?"
+    }
+  ],
+  "tOdNiY": [
+    {
+      "type": 0,
+      "value": "Dark"
     }
   ],
   "utNSND": [
@@ -375,6 +399,12 @@
     {
       "type": 0,
       "value": "Sign out"
+    }
+  ],
+  "xhRkpH": [
+    {
+      "type": 0,
+      "value": "Word wrap"
     }
   ],
   "xmcVZ0": [

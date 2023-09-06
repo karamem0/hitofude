@@ -10,7 +10,7 @@ import React from 'react';
 
 import { css } from '@emotion/react';
 
-import { themeConfig } from '../../../providers/ThemeProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 import { TabMode, TabType } from '../../../types/Model';
 
 import ExplorerTabItem from './ExplorerTabItem';
@@ -26,6 +26,8 @@ function AppTab(props: AppTabProps) {
     tabMode
   } = props;
 
+  const { theme } = useTheme();
+
   return (
     <section
       css={css`
@@ -34,7 +36,7 @@ function AppTab(props: AppTabProps) {
         max-width: calc(100vw - 4rem);
         padding: 1rem 0;
         visibility: ${tabMode?.open ? undefined : 'hidden'};
-        background-color: ${themeConfig.colorNeutralBackground2};
+        background-color: ${theme.colorNeutralBackground2};
       `}>
       {
         (() => {

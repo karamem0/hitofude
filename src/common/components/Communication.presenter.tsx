@@ -11,7 +11,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { Text } from '@fluentui/react-components';
 
-import { themeConfig } from '../../providers/ThemeProvider';
+import { useTheme } from '../../providers/ThemeProvider';
 
 interface CommunicationProps {
   description?: string,
@@ -26,6 +26,8 @@ function Communication(props: CommunicationProps) {
     image,
     title
   } = props;
+
+  const { theme } = useTheme();
 
   return (
     <div
@@ -49,12 +51,12 @@ function Communication(props: CommunicationProps) {
           grid-gap: 1rem;
           align-items: center;
           justify-content: center;
-          color: ${themeConfig.colorNeutralForeground4};
+          color: ${theme.colorNeutralForeground4};
         `}>
         <Text
           css={css`
-            font-size: ${themeConfig.fontSizeHero800};
-            line-height: calc(${themeConfig.fontSizeHero800} * 1.25);
+            font-size: ${theme.fontSizeHero800};
+            line-height: calc(${theme.fontSizeHero800} * 1.25);
           `}>
           {title}
         </Text>

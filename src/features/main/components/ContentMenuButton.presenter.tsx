@@ -21,11 +21,10 @@ import {
   MenuTrigger
 } from '@fluentui/react-components';
 import {
+  CheckMarkIcon,
   DownloadDocumentIcon,
-  Hide3Icon,
   HistoryIcon,
-  MoreVerticalIcon,
-  ViewIcon
+  MoreVerticalIcon
 } from '@fluentui/react-icons-mdl2';
 
 import { EventHandler } from '../../../types/Event';
@@ -41,6 +40,7 @@ interface ContentMenuButtonProps {
   editing?: boolean,
   file?: File,
   minimap?: boolean,
+  wordWrap?: boolean,
   onMenuClick?: EventHandler<ContentMenuAction>
 }
 
@@ -50,6 +50,7 @@ function ContentMenuButton(props: ContentMenuButtonProps) {
     editing,
     file,
     minimap,
+    wordWrap,
     onMenuClick
   } = props;
 
@@ -99,29 +100,37 @@ function ContentMenuButton(props: ContentMenuButtonProps) {
                 <MenuItem
                   key="ToggleMinimap"
                   icon={
-                    minimap ? (
-                      <Hide3Icon
-                        css={css`
-                          font-size: 1rem;
-                          line-height: 1rem;
-                        `} />
-                    ) : (
-                      <ViewIcon
-                        css={css`
-                          font-size: 1rem;
-                          line-height: 1rem;
-                        `} />
-                    )}
+                    <CheckMarkIcon
+                      css={css`
+                        font-size: 1rem;
+                        line-height: 1rem;
+                        color: ${minimap ? 'inherit' : 'transparent'};
+                      `} />
+                  }
                   onClick={(e) => onMenuClick?.(e, {
                     type: ContentMenuType.toggleMinimap,
                     data: !minimap
                   })}>
                   {
-                    minimap ? (
-                      <FormattedMessage {...messages.HideMinimap} />
-                    ) : (
-                      <FormattedMessage {...messages.ShowMinimap} />
-                    )
+                    <FormattedMessage {...messages.Minimap} />
+                  }
+                </MenuItem>
+                <MenuItem
+                  key="ToggleWordWrap"
+                  icon={
+                    <CheckMarkIcon
+                      css={css`
+                        font-size: 1rem;
+                        line-height: 1rem;
+                        color: ${wordWrap ? 'inherit' : 'transparent'};
+                      `} />
+                  }
+                  onClick={(e) => onMenuClick?.(e, {
+                    type: ContentMenuType.toggleWordWrap,
+                    data: !wordWrap
+                  })}>
+                  {
+                    <FormattedMessage {...messages.WordWrap} />
                   }
                 </MenuItem>
               </MenuGroup>

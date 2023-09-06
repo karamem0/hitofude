@@ -6,7 +6,7 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { TabMode, TabType } from '../types/Model';
+import { TabMode, TabType, ThemeName } from '../types/Model';
 
 export class StorageService {
 
@@ -18,6 +18,10 @@ export class StorageService {
 
   getContentMinimap(): boolean | undefined {
     return Boolean(Number(this.storage.getItem('contentMinimap') ?? undefined));
+  }
+
+  getContentWordWrap(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('contentWordWrap') ?? undefined));
   }
 
   getExploreAllFiles(): boolean | undefined {
@@ -39,11 +43,23 @@ export class StorageService {
     };
   }
 
+  getThemeName(): ThemeName | undefined {
+    return Number(this.storage.getItem('themeName') ?? ThemeName.light);
+  }
+
   setContentMinimap(value?: boolean): void {
     if (value) {
       this.storage.setItem('contentMinimap', String(Number(value)));
     } else {
       this.storage.removeItem('contentMinimap');
+    }
+  }
+
+  setContentWordWrap(value?: boolean): void {
+    if (value) {
+      this.storage.setItem('contentWordWrap', String(Number(value)));
+    } else {
+      this.storage.removeItem('contentWordWrap');
     }
   }
 
@@ -72,8 +88,17 @@ export class StorageService {
   }
 
   setTabMode(value?: TabMode): void {
-    this.storage.setItem('tabType', String(Number(value?.type)));
-    this.storage.setItem('tabOpen', String(Number(value?.open)));
+    if (value) {
+      this.storage.setItem('tabType', String(Number(value.type)));
+      this.storage.setItem('tabOpen', String(Number(value.open)));
+    } else {
+      this.storage.removeItem('tabType');
+      this.storage.removeItem('tabOpen');
+    }
+  }
+
+  setThemeName(value?: ThemeName): void {
+    this.storage.setItem('themeName', String(Number(value)));
   }
 
 }

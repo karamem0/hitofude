@@ -10,70 +10,66 @@ import React from 'react';
 
 import {
   FluentProvider as Provider,
-  createLightTheme
+  Theme
 } from '@fluentui/react-components';
 
-export const themeConfig = createLightTheme({
-  10: '#3f2e2e',
-  20: '#4a3737',
-  30: '#553f3f',
-  40: '#5d4545',
-  50: '#654b4b',
-  60: '#6b5050',
-  70: '#715454',
-  80: '#795c5c',
-  90: '#816464',
-  100: '#957a7a',
-  110: '#a98f8f',
-  120: '#bfaaaa',
-  130: '#d4c4c4',
-  140: '#ded1d1',
-  150: '#e8dede',
-  160: '#f1ebeb'
-});
+import { darkTheme, lightTheme } from '../themes/Theme';
+import { ThemeName } from '../types/Model';
 
-export const codeStyle = {
-  hljs: {},
-  'hljs-addition': {
-    color: themeConfig.colorPaletteLightGreenForeground1
-  },
-  'hljs-built_in': {
-    color: themeConfig.colorPaletteRedForeground1
-  },
-  'hljs-comment': {
-    color: themeConfig.colorPaletteLightGreenForeground1
-  },
-  'hljs-deletion': {
-    color: themeConfig.colorPaletteRedForeground1
-  },
-  'hljs-keyword': {
-    color: themeConfig.colorPaletteBlueForeground2
-  },
-  'hljs-literal': {
-    color: themeConfig.colorPaletteRedForeground1
-  },
-  'hljs-meta': {
-    color: themeConfig.colorPaletteLightTealForeground2
-  },
-  'hljs-number': {
-    color: themeConfig.colorPaletteCranberryForeground2
-  },
-  'hljs-quote': {
-    color: themeConfig.colorPaletteLightGreenForeground1
-  },
-  'hljs-string': {
-    color: themeConfig.colorPaletteCranberryForeground2
+interface ThemeContextState {
+  theme: Theme,
+  themeName: ThemeName,
+  changeTheme: (themeName: ThemeName) => void
+}
+
+const ThemeContext = React.createContext<ThemeContextState | undefined>(undefined);
+
+export const useTheme = (): ThemeContextState => {
+  const value = React.useContext(ThemeContext);
+  if (value == null) {
+    throw new Error();
   }
+  return value;
 };
 
 function ThemeProvider(props: React.PropsWithChildren<unknown>) {
 
   const { children } = props;
 
+  const [ theme, setTheme ] = React.useState<Theme>(lightTheme);
+  const [ themeName, setThemeName ] = React.useState<ThemeName>(ThemeName.light);
+
+  const handleChangeTheme = React.useCallback((value: ThemeName) => {
+    switch (value) {
+      case ThemeName.light:
+        setTheme(() => lightTheme);
+        setThemeName(() => value);
+        break;
+      case ThemeName.dark:
+        setTheme(() => darkTheme);
+        setThemeName(() => value);
+        break;
+      default:
+        break;
+    }
+  }, []);
+
+  const value = React.useMemo(() => ({
+    theme,
+    themeName,
+    changeTheme: handleChangeTheme
+  }), [
+    theme,
+    themeName,
+    handleChangeTheme
+  ]);
+
   return (
-    <Provider theme={themeConfig}>
-      {children}
-    </Provider>
+    <ThemeContext.Provider value={value}>
+      <Provider theme={value.theme}>
+        {children}
+      </Provider>
+    </ThemeContext.Provider>
   );
 
 }

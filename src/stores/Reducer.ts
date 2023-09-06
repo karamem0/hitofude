@@ -180,6 +180,17 @@ export const reducer = (storage: StorageService) => (state: AppState, action: Ap
         }
       };
     }
+    case AppActionType.setContentWordWrap: {
+      const data = action.data as boolean | undefined;
+      storage.setContentWordWrap(data);
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          wordWrap: data
+        }
+      };
+    }
     case AppActionType.setDialogAction: {
       const data = action.data as DialogAction | undefined;
       return {

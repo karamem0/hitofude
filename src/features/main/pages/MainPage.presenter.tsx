@@ -15,7 +15,7 @@ import { Spinner, Text } from '@fluentui/react-components';
 
 import ErrorNotification from '../../../common/components/ErrorNotification';
 import ProgressProvider from '../../../common/providers/ProgressProvider';
-import { themeConfig } from '../../../providers/ThemeProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 import AppBar from '../components/AppBar';
 import AppContent from '../components/AppContent';
 import AppTab from '../components/AppTab';
@@ -33,6 +33,8 @@ function MainPage(props: MainPageProps) {
   const {
     loading
   } = props;
+
+  const { theme } = useTheme();
 
   return loading ? (
     <div
@@ -72,13 +74,13 @@ function MainPage(props: MainPageProps) {
             width: 100%;
             height: 2.5rem;
             padding: 0 1rem;
-            background-color: ${themeConfig.colorBrandBackground};
+            background-color: ${theme.colorBrandBackground};
           `}>
           <Text
             css={css`
             font-size: 1rem;
             font-weight: bold;
-            color: ${themeConfig.colorBrandBackgroundInverted};
+            color: ${theme.colorBrandBackgroundInverted};
             text-align: center;
           `}>
             <FormattedMessage {...messages.AppName} />

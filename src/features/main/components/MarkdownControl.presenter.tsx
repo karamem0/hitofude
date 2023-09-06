@@ -22,6 +22,7 @@ interface MarkdownControlProps {
   minimap?: boolean,
   position?: Position,
   text?: string,
+  wordWrap?: boolean,
   onChangeText?: EventHandler<string>,
   onChangePosition?: EventHandler<Position>,
   onSave?: EventHandler
@@ -34,6 +35,7 @@ function MarkdownControl(props: MarkdownControlProps) {
     minimap,
     position,
     text,
+    wordWrap,
     onChangeText,
     onChangePosition,
     onSave
@@ -44,6 +46,7 @@ function MarkdownControl(props: MarkdownControlProps) {
       minimap={minimap}
       position={position}
       text={text}
+      wordWrap={wordWrap}
       onChangePosition={onChangePosition}
       onChangeText={onChangeText}
       onSave={onSave} />

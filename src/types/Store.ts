@@ -31,6 +31,7 @@ export enum AppActionType {
   setContentMinimap = 'setContentMinimap',
   setContentPosition = 'setContentPosition',
   setContentText = 'setContentText',
+  setContentWordWrap = 'setContentWordWrap',
   setDialogAction = 'setDialogAction',
   setError = 'setError',
   setExploreAllFiles = 'setExploreAllFiles',

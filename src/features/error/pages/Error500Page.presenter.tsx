@@ -14,12 +14,14 @@ import { css } from '@emotion/react';
 import { Text } from '@fluentui/react-components';
 
 import Communication from '../../../common/components/Communication';
-import { themeConfig } from '../../../providers/ThemeProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 import messages from '../messages';
 
 function Error500Page() {
 
   const intl = useIntl();
+
+  const { theme } = useTheme();
 
   return (
     <div
@@ -36,7 +38,7 @@ function Error500Page() {
           width: 100%;
           height: 2.5rem;
           padding: 0 1rem;
-          background-color: ${themeConfig.colorBrandBackground};
+          background-color: ${theme.colorBrandBackground};
         `}>
         <Text
           css={css`

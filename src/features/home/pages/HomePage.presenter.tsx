@@ -15,7 +15,7 @@ import { Button, Link, Text } from '@fluentui/react-components';
 import { GitHubLogoIcon } from '@fluentui/react-icons-mdl2';
 import { WindowsLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 
-import { themeConfig } from '../../../providers/ThemeProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
@@ -36,6 +36,7 @@ function HomePage(props: HomePageProps) {
   } = props;
 
   const intl = useIntl();
+  const { theme } = useTheme();
 
   return (
     <div
@@ -69,7 +70,7 @@ function HomePage(props: HomePageProps) {
           flex-flow: column;
           align-items: center;
           justify-content: center;
-          background-color: ${themeConfig.colorBrandStroke2};
+          background-color: ${theme.colorBrandStroke2};
         `}>
         <div
           css={css`
@@ -94,16 +95,16 @@ function HomePage(props: HomePageProps) {
             <Text
               as="h1"
               css={css`
-                font-size: ${themeConfig.fontSizeHero900};
+                font-size: ${theme.fontSizeHero900};
                 font-weight: bold;
-                line-height: calc(${themeConfig.fontSizeHero900} * 1.25);
-                color: ${themeConfig.colorBrandBackgroundPressed};
+                line-height: calc(${theme.fontSizeHero900} * 1.25);
+                color: ${theme.colorBrandBackgroundPressed};
               `}>
               <FormattedMessage {...messages.AppName} />
             </Text>
             <Text
               css={css`
-                color: ${themeConfig.colorBrandBackgroundPressed};
+                color: ${theme.colorBrandBackgroundPressed};
               `}>
               <FormattedMessage {...messages.AppDescription} />
             </Text>
@@ -139,9 +140,9 @@ function HomePage(props: HomePageProps) {
           as="h2"
           css={css`
           padding: 2rem 0;
-          font-size: ${themeConfig.fontSizeBase600};
+          font-size: ${theme.fontSizeBase600};
           font-weight: bold;
-          line-height: calc(${themeConfig.fontSizeBase600} * 1.25);
+          line-height: calc(${theme.fontSizeBase600} * 1.25);
         `}>
           <FormattedMessage {...messages.FeatureTitle} />
         </Text>
