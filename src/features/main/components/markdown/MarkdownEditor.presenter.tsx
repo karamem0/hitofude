@@ -37,4 +37,4 @@ function MarkdownEditor(props: MarkdownEditorProps, ref: React.Ref<HTMLDivElemen
 
 }
 
-export default React.forwardRef(MarkdownEditor);
+export default React.memo(React.forwardRef(MarkdownEditor));

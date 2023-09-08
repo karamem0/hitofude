@@ -8,28 +8,52 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+
 import ImageViewer from '../../../../common/components/ImageViewer';
+import VideoViewer from '../../../../common/components/VideoViewer';
+import { MimeType } from '../../../../types/Model';
+import { isMimeType } from '../../../../utils/File';
 
 interface MarkdownImageRendererProps {
   alt?: string,
-  className?: string,
-  src?: string
+  downloadUrl?: string,
+  mimeType?: MimeType
 }
 
 function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
 
   const {
     alt,
-    className,
-    src
+    downloadUrl,
+    mimeType
   } = props;
 
-  return (
-    <ImageViewer
-      alt={alt}
-      className={className}
-      src={src} />
-  );
+  return downloadUrl ? (
+    (() => {
+      if (isMimeType(mimeType, { type: 'image' })) {
+        return (
+          <ImageViewer
+            alt={alt}
+            src={downloadUrl}
+            css={css`
+              max-width: 100%;
+              height: auto;
+            `} />
+        );
+      }
+      if (isMimeType(mimeType, { type: 'video' })) {
+        return (
+          <VideoViewer
+            src={downloadUrl}
+            css={css`
+              max-width: 100%;
+              height: auto;
+            `} />
+        );
+      }
+    })()
+  ) : null;
 
 }
 

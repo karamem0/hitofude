@@ -9,7 +9,3 @@
 export function isAbsoluteUrl(value?: string | null | undefined): boolean {
   return !!value && /^https?:\/\//.test(value);
 }
-
-export function getParentUrl(value?: string | null | undefined): string | undefined {
-  return value ? value.substring(0, value.lastIndexOf('/') + 1) : undefined;
-}

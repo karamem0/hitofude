@@ -142,4 +142,4 @@ function MarkdownViewer(props: MarkdownViewerProps) {
 
 }
 
-export default MarkdownViewer;
+export default React.memo(MarkdownViewer);

@@ -36,4 +36,4 @@ function ScrollPanel(props: ScrollPanelProps, ref: React.Ref<HTMLDivElement>) {
 
 }
 
-export default React.forwardRef(ScrollPanel);
+export default React.memo(React.forwardRef(ScrollPanel));

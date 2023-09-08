@@ -10,17 +10,18 @@ import {
   DialogAction,
   ExploreTabProps,
   ContentProps,
+  MarkdownProps,
   SearchTabProps,
   SidePanelAction,
   TabMode
 } from './Model';
 
-export interface AppAction {
-  type: AppActionType,
+export interface Action {
+  type: ActionType,
   data: unknown
 }
 
-export enum AppActionType {
+export enum ActionType {
   appendExploreFile = 'appendExploreFile',
   appendExploreFolder = 'appendExploreFolder',
   deleteExploreFile = 'deleteExploreFile',
@@ -30,8 +31,11 @@ export enum AppActionType {
   setContentLoading = 'setContentLoading',
   setContentMinimap = 'setContentMinimap',
   setContentPosition = 'setContentPosition',
+  setContentPreview = 'setContentPreview',
   setContentText = 'setContentText',
   setContentWordWrap = 'setContentWordWrap',
+  setMarkdownPosition = 'setMarkdownPosition',
+  setMarkdownText = 'setMarkdownText',
   setDialogAction = 'setDialogAction',
   setError = 'setError',
   setExploreAllFiles = 'setExploreAllFiles',
@@ -47,14 +51,15 @@ export enum AppActionType {
   updateExploreFolder = 'updateExploreFolder'
 }
 
-export interface AppState {
+export interface State {
   contentProps?: ContentProps,
   dialogAction?: DialogAction,
   error?: Error,
   exploreProps?: ExploreTabProps,
+  markdownProps?: MarkdownProps,
   searchTabProps?: SearchTabProps,
   sidePanelAction?: SidePanelAction,
   tabMode?: TabMode
 }
 
-export type InitialAppState = Pick<AppState, 'contentProps' | 'exploreProps' | 'tabMode'>;
+export type InitialState = Pick<State, 'contentProps' | 'exploreProps' | 'markdownProps' | 'tabMode'>;

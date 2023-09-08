@@ -20,6 +20,10 @@ export class StorageService {
     return Boolean(Number(this.storage.getItem('contentMinimap') ?? undefined));
   }
 
+  getContentPreview(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('contentPreview') ?? undefined));
+  }
+
   getContentWordWrap(): boolean | undefined {
     return Boolean(Number(this.storage.getItem('contentWordWrap') ?? undefined));
   }
@@ -52,6 +56,14 @@ export class StorageService {
       this.storage.setItem('contentMinimap', String(Number(value)));
     } else {
       this.storage.removeItem('contentMinimap');
+    }
+  }
+
+  setContentPreview(value?: boolean): void {
+    if (value) {
+      this.storage.setItem('contentPreview', String(Number(value)));
+    } else {
+      this.storage.removeItem('contentPreview');
     }
   }
 

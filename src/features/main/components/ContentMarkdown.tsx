@@ -9,14 +9,15 @@
 import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
-import { EventHandler } from '../../../types/Event';
+import { Event, EventHandler } from '../../../types/Event';
 import { Position } from '../../../types/Model';
 
-import Presenter from './MarkdownControl.presenter';
+import Presenter from './ContentMarkdown.presenter';
 
 interface MarkdownControlProps {
   onChangePosition?: EventHandler<Position>,
   onChangeText?: EventHandler<string>,
+  onChangePreview?: EventHandler<boolean>,
   onSave?: EventHandler
 }
 
@@ -25,20 +26,34 @@ function MarkdownControl(props: MarkdownControlProps) {
   const {
     onChangePosition,
     onChangeText,
+    onChangePreview,
     onSave
   } = props;
 
   const {
     state: {
-      contentProps
+      contentProps,
+      tabMode
     }
   } = useStore();
+
+  const [ previewText, setPreviewText ] = React.useState<string>('');
+
+  const handleChangeText = React.useCallback((e?: Event, data?: string) => {
+    onChangeText?.(e, data);
+    setPreviewText(data ?? '');
+  }, [
+    onChangeText
+  ]);
 
   return (
     <Presenter
       {...contentProps}
+      previewText={previewText}
+      tabOpen={tabMode?.open}
       onChangePosition={onChangePosition}
-      onChangeText={onChangeText}
+      onChangePreview={onChangePreview}
+      onChangeText={handleChangeText}
       onSave={onSave} />
   );
 

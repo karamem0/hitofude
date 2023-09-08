@@ -32,4 +32,4 @@ function Loader(props: LoaderProps) {
 
 }
 
-export default Loader;
+export default React.memo(Loader);

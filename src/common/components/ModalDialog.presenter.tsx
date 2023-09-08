@@ -37,4 +37,4 @@ function ModalDialog(props: ModalDialogProps) {
 
 }
 
-export default ModalDialog;
+export default React.memo(ModalDialog);

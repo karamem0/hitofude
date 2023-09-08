@@ -24,6 +24,7 @@ export interface ContentProps {
   loading?: boolean,
   minimap?: boolean,
   position?: Position,
+  preview?: boolean,
   text?: string,
   wordWrap?: boolean
 }
@@ -84,8 +85,11 @@ export interface Folder {
 }
 
 export interface MarkdownProps {
+  minimap?: boolean,
   position?: Position,
-  text?: string
+  preview?: boolean,
+  text?: string,
+  wordWrap?: boolean
 }
 
 export interface MimeType {

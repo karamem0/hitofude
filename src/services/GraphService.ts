@@ -153,9 +153,10 @@ export class GraphService {
         if (downloadUrl == null) {
           throw new FileNotFoundError();
         }
-        const data = await fetch(downloadUrl, { method: 'GET' });
-        const value = await data.text();
-        return value;
+        const text = await Promise.resolve()
+          .then(() => fetch(downloadUrl, { method: 'GET' }))
+          .then((response) => response.text());
+        return text;
       } else {
         return '';
       }

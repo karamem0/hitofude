@@ -8,16 +8,24 @@
 
 import React from 'react';
 
+import mime from 'mime';
+
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import { DependencyNullError } from '../../../../types/Error';
-import { getParentUrl, isAbsoluteUrl } from '../../../../utils/Url';
+import { MimeType } from '../../../../types/Model';
+import { getMimeType } from '../../../../utils/File';
+import { isAbsoluteUrl } from '../../../../utils/Url';
 
 import Presenter from './MarkdownImageRenderer.presenter';
 
+interface MarkdownImageRendereState {
+  downloadUrl?: string,
+  mimeType?: MimeType
+}
+
 interface MarkdownImageRendererProps {
   alt?: string,
-  className?: string,
   src?: string
 }
 
@@ -25,7 +33,6 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
 
   const {
     alt,
-    className,
     src
   } = props;
 
@@ -37,7 +44,7 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
   } = useStore();
   const { graph } = useService();
 
-  const [ url, setUrl ] = React.useState<string>();
+  const [ state, setState ] = React.useState<MarkdownImageRendereState>();
 
   React.useEffect(() => {
     (async () => {
@@ -53,12 +60,18 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
         return;
       }
       if (isAbsoluteUrl(src)) {
-        setUrl(src);
+        setState({
+          downloadUrl: src,
+          mimeType: getMimeType(src, mime.getType(src))
+        });
       } else {
-        const absoluteUrl = new URL(src, `${getParentUrl(contentFileUrl)}/`).href;
+        const absoluteUrl = new URL(src, contentFileUrl).href;
         const relativeUrl = absoluteUrl.substring(absoluteUrl.indexOf(rootFolderUrl) + rootFolderUrl.length);
         const file = await graph.getFileByUrl(relativeUrl);
-        setUrl(file.downloadUrl);
+        setState({
+          downloadUrl: file.downloadUrl,
+          mimeType: file.mimeType
+        });
       }
     })();
   }, [
@@ -71,8 +84,8 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
   return (
     <Presenter
       alt={alt}
-      className={className}
-      src={url} />
+      downloadUrl={state?.downloadUrl}
+      mimeType={state?.mimeType} />
   );
 
 }

@@ -8,7 +8,6 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
 import { Image } from '@fluentui/react-components';
 
 interface ImageViewerProps {
@@ -29,11 +28,7 @@ function ImageViewer(props: ImageViewerProps) {
     <Image
       alt={alt}
       className={className}
-      src={src}
-      css={css`
-        max-width: 100%;
-        height: auto;
-      `} />
+      src={src} />
   );
 
 }

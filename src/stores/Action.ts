@@ -15,127 +15,142 @@ import {
   TabMode
 } from '../types/Model';
 import {
-  AppAction,
-  AppActionType,
-  InitialAppState
+  Action,
+  ActionType,
+  InitialState
 } from '../types/Store';
 
-export const appendExploreFile = (data?: File): AppAction => ({
-  type: AppActionType.appendExploreFile,
+export const appendExploreFile = (data?: File): Action => ({
+  type: ActionType.appendExploreFile,
   data
 });
 
-export const appendExploreFolder = (data?: Folder): AppAction => ({
-  type: AppActionType.appendExploreFolder,
+export const appendExploreFolder = (data?: Folder): Action => ({
+  type: ActionType.appendExploreFolder,
   data
 });
 
-export const deleteExploreFile = (data?: File): AppAction => ({
-  type: AppActionType.deleteExploreFile,
+export const deleteExploreFile = (data?: File): Action => ({
+  type: ActionType.deleteExploreFile,
   data
 });
 
-export const deleteExploreFolder = (data?: Folder): AppAction => ({
-  type: AppActionType.deleteExploreFolder,
+export const deleteExploreFolder = (data?: Folder): Action => ({
+  type: ActionType.deleteExploreFolder,
   data
 });
 
-export const setDialogAction = (data?: DialogAction): AppAction => ({
-  type: AppActionType.setDialogAction,
+export const setDialogAction = (data?: DialogAction): Action => ({
+  type: ActionType.setDialogAction,
   data
 });
 
-export const setContentText = (data?: string): AppAction => ({
-  type: AppActionType.setContentText,
+export const setContentEditing = (data?: boolean): Action => ({
+  type: ActionType.setContentEditing,
   data
 });
 
-export const setContentEditing = (data?: boolean): AppAction => ({
-  type: AppActionType.setContentEditing,
+export const setContentFile = (data?: File): Action => ({
+  type: ActionType.setContentFile,
   data
 });
 
-export const setContentFile = (data?: File): AppAction => ({
-  type: AppActionType.setContentFile,
+export const setContentLoading = (data?: boolean): Action => ({
+  type: ActionType.setContentLoading,
   data
 });
 
-export const setContentLoading = (data?: boolean): AppAction => ({
-  type: AppActionType.setContentLoading,
+export const setContentMinimap = (data?: boolean): Action => ({
+  type: ActionType.setContentMinimap,
   data
 });
 
-export const setContentMinimap = (data?: boolean): AppAction => ({
-  type: AppActionType.setContentMinimap,
+export const setContentPosition = (data?: Position): Action => ({
+  type: ActionType.setContentPosition,
   data
 });
 
-export const setContentPosition = (data?: Position): AppAction => ({
-  type: AppActionType.setContentPosition,
+export const setContentPreview = (data?: boolean): Action => ({
+  type: ActionType.setContentPreview,
   data
 });
 
-export const setContentWordWrap = (data?: boolean): AppAction => ({
-  type: AppActionType.setContentWordWrap,
+export const setContentText = (data?: string): Action => ({
+  type: ActionType.setContentText,
   data
 });
 
-export const setError = (data?: Error): AppAction => ({
-  type: AppActionType.setError,
+export const setContentWordWrap = (data?: boolean): Action => ({
+  type: ActionType.setContentWordWrap,
   data
 });
 
-export const setExploreAllFiles = (data?: boolean): AppAction => ({
-  type: AppActionType.setExploreAllFiles,
+export const setMarkdownPosition = (data?: Position): Action => ({
+  type: ActionType.setMarkdownPosition,
   data
 });
 
-export const setExploreFile = (data?: File): AppAction => ({
-  type: AppActionType.setExploreFile,
+export const setMarkdownText = (data?: string): Action => ({
+  type: ActionType.setMarkdownText,
   data
 });
 
-export const setExploreFolder = (data?: Folder): AppAction => ({
-  type: AppActionType.setExploreFolder,
+export const setError = (data?: Error): Action => ({
+  type: ActionType.setError,
   data
 });
 
-export const setInitialState = (data?: InitialAppState): AppAction => ({
-  type: AppActionType.setInitialState,
+export const setExploreAllFiles = (data?: boolean): Action => ({
+  type: ActionType.setExploreAllFiles,
   data
 });
 
-export const setSearchFile = (data?: File): AppAction => ({
-  type: AppActionType.setSearchFile,
+export const setExploreFile = (data?: File): Action => ({
+  type: ActionType.setExploreFile,
   data
 });
 
-export const setSearchResults = (data?: File[]): AppAction => ({
-  type: AppActionType.setSearchResults,
+export const setExploreFolder = (data?: Folder): Action => ({
+  type: ActionType.setExploreFolder,
   data
 });
 
-export const setSearchQuery = (data?: string): AppAction => ({
-  type: AppActionType.setSearchQuery,
+export const setInitialState = (data?: InitialState): Action => ({
+  type: ActionType.setInitialState,
   data
 });
 
-export const setSidePanelAction = (data?: SidePanelAction): AppAction => ({
-  type: AppActionType.setSidePanelAction,
+export const setSearchFile = (data?: File): Action => ({
+  type: ActionType.setSearchFile,
   data
 });
 
-export const setTabMode = (data?: TabMode): AppAction => ({
-  type: AppActionType.setTabMode,
+export const setSearchResults = (data?: File[]): Action => ({
+  type: ActionType.setSearchResults,
   data
 });
 
-export const updateExploreFile = (data?: File): AppAction => ({
-  type: AppActionType.updateExploreFile,
+export const setSearchQuery = (data?: string): Action => ({
+  type: ActionType.setSearchQuery,
   data
 });
 
-export const updateExploreFolder = (data?: Folder): AppAction => ({
-  type: AppActionType.updateExploreFolder,
+export const setSidePanelAction = (data?: SidePanelAction): Action => ({
+  type: ActionType.setSidePanelAction,
+  data
+});
+
+export const setTabMode = (data?: TabMode): Action => ({
+  type: ActionType.setTabMode,
+  data
+});
+
+export const updateExploreFile = (data?: File): Action => ({
+  type: ActionType.updateExploreFile,
+  data
+});
+
+export const updateExploreFolder = (data?: Folder): Action => ({
+  type: ActionType.updateExploreFolder,
   data
 });

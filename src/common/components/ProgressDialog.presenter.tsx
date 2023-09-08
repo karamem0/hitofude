@@ -77,4 +77,4 @@ function ProgressDialog(props: ProgressDialogProps) {
 
 }
 
-export default ProgressDialog;
+export default React.memo(ProgressDialog);

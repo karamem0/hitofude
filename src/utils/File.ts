@@ -48,19 +48,23 @@ export function getMimeType(fileName: string | null | undefined, mimeType: strin
   return undefined;
 }
 
-export function isMimeType(value?: Pick<File, 'mimeType'>, option?: { type?: string, subtype?: string }): boolean {
-  if (value?.mimeType == null) {
+export function isMimeType(value?: MimeType | Pick<File, 'mimeType'>, option?: { type?: string, subtype?: string }): boolean {
+  if (value == null) {
     return false;
   }
-  if (option && value.mimeType.type === option.type) {
+  const mimeType = Object.hasOwn(value, 'mimeType') ? (value as Pick<File, 'mimeType'>)?.mimeType : value as MimeType;
+  if (mimeType == null) {
+    return false;
+  }
+  if (option && mimeType.type === option.type) {
     return true;
   }
-  if (option && value.mimeType.subtype === option.subtype) {
+  if (option && mimeType.subtype === option.subtype) {
     return true;
   }
   return false;
 }
 
 export function isSupportedFile(value?: Pick<File, 'mimeType'>): boolean {
-  return isMimeType(value, { type: 'image' }) || isMimeType(value, { subtype: 'markdown' });
+  return isMimeType(value, { type: 'image' }) || isMimeType(value, { type: 'video' }) || isMimeType(value, { subtype: 'markdown' });
 }

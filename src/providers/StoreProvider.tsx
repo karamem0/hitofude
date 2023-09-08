@@ -9,13 +9,13 @@
 import React from 'react';
 
 import { reducer } from '../stores/Reducer';
-import { AppAction, AppState } from '../types/Store';
+import { Action, State } from '../types/Store';
 
 import { useService } from './ServiceProvider';
 
 interface StoreContextState {
-  dispatch: React.Dispatch<AppAction>,
-  state: AppState
+  dispatch: React.Dispatch<Action>,
+  state: State
 }
 
 const StoreContext = React.createContext<StoreContextState | undefined>(undefined);

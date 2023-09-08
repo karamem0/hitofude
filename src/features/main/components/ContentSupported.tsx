@@ -12,14 +12,17 @@ import { useProgress } from '../../../common/providers/ProgressProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  setError,
   setContentEditing,
   setContentFile,
   setContentMinimap,
   setContentPosition,
+  setContentPreview,
   setContentText,
-  setSidePanelAction,
-  setContentWordWrap
+  setContentWordWrap,
+  setError,
+  setMarkdownPosition,
+  setMarkdownText,
+  setSidePanelAction
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
@@ -27,7 +30,6 @@ import {
   ContentMenuAction,
   ContentMenuType,
   File,
-  MarkdownProps,
   Position,
   ProgressType,
   SidePanelAction
@@ -41,14 +43,14 @@ function ContentSupported() {
   const {
     dispatch,
     state: {
-      contentProps
+      contentProps,
+      markdownProps
     }
   } = useStore();
   const { graph } = useService();
   const { setProgress } = useProgress();
 
   const [ changed, setChanged ] = React.useState<boolean>(false);
-  const [ markdownProps, setMarkdownProps ] = React.useState<MarkdownProps>({});
 
   const handleCancel = React.useCallback(() => {
     try {
@@ -62,18 +64,22 @@ function ContentSupported() {
   ]);
 
   const handleChangePosition = React.useCallback((_?: Event, data?: Position) => {
-    setMarkdownProps((state) => ({
-      ...state,
-      position: data
-    }));
-  }, []);
+    dispatch(setMarkdownPosition(data));
+  }, [
+    dispatch
+  ]);
+
+  const handleChangePreview = React.useCallback((_?: Event, data?: boolean) => {
+    dispatch(setContentPreview(data));
+  }, [
+    dispatch
+  ]);
 
   const handleChangeText = React.useCallback((_?: Event, data?: string) => {
-    setMarkdownProps((state) => ({
-      ...state,
-      text: data
-    }));
-  }, []);
+    dispatch(setMarkdownText(data));
+  }, [
+    dispatch
+  ]);
 
   const handleContextMenu = React.useCallback((_?: Event, data?: ContentMenuAction) => {
     switch (data?.type) {
@@ -86,18 +92,10 @@ function ContentSupported() {
         break;
       }
       case ContentMenuType.toggleMinimap: {
-        setMarkdownProps((state) => ({
-          ...state,
-          minimap: data
-        }));
         dispatch(setContentMinimap(data?.data as boolean));
         break;
       }
       case ContentMenuType.toggleWordWrap: {
-        setMarkdownProps((state) => ({
-          ...state,
-          wordWrap: data
-        }));
         dispatch(setContentWordWrap(data?.data as boolean));
         break;
       }
@@ -111,6 +109,7 @@ function ContentSupported() {
 
   const handleEdit = React.useCallback(() => {
     try {
+      setChanged(false);
       dispatch(setContentEditing(true));
     } catch (e) {
       dispatch(setError(e as Error));
@@ -163,6 +162,7 @@ function ContentSupported() {
       changed={changed}
       onCancel={handleCancel}
       onChangePosition={handleChangePosition}
+      onChangePreview={handleChangePreview}
       onChangeText={handleChangeText}
       onContextMenu={handleContextMenu}
       onEdit={handleEdit}

@@ -36,15 +36,23 @@ function MainPage() {
           loading: true,
           minimap: storage.getContentMinimap(),
           position: {
-            left: 1,
-            top: 1
+            left: 0,
+            top: 0
           },
+          preview: storage.getContentPreview(),
           text: '',
           wordWrap: storage.getContentWordWrap()
         },
         exploreProps: {
           allFiles: storage.getExploreAllFiles(),
           rootFolder: await graph.getRootFolder()
+        },
+        markdownProps: {
+          position: {
+            left: 0,
+            top: 0
+          },
+          text: ''
         },
         tabMode: storage.getTabMode()
       }));
