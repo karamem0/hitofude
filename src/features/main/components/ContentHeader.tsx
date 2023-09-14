@@ -15,7 +15,6 @@ import { ContentMenuAction } from '../../../types/Model';
 import Presenter from './ContentHeader.presenter';
 
 interface ContentHeaderProps {
-  changed?: boolean,
   onCancel?: EventHandler,
   onContextMenu?: EventHandler<ContentMenuAction>,
   onEdit?: EventHandler,
@@ -25,7 +24,6 @@ interface ContentHeaderProps {
 function ContentHeader(props: ContentHeaderProps) {
 
   const {
-    changed,
     onCancel,
     onContextMenu,
     onEdit,
@@ -34,14 +32,15 @@ function ContentHeader(props: ContentHeaderProps) {
 
   const {
     state: {
-      contentProps
+      contentProps,
+      markdownProps
     }
   } = useStore();
 
   return (
     <Presenter
       {...contentProps}
-      changed={changed}
+      changed={markdownProps?.changed}
       onCancel={onCancel}
       onContextMenu={onContextMenu}
       onEdit={onEdit}

@@ -34,6 +34,7 @@ export enum ActionType {
   setContentPreview = 'setContentPreview',
   setContentText = 'setContentText',
   setContentWordWrap = 'setContentWordWrap',
+  setMarkdownChanged = 'setMarkdownChanged',
   setMarkdownPosition = 'setMarkdownPosition',
   setMarkdownText = 'setMarkdownText',
   setDialogAction = 'setDialogAction',
@@ -55,11 +56,11 @@ export interface State {
   contentProps?: ContentProps,
   dialogAction?: DialogAction,
   error?: Error,
-  exploreProps?: ExploreTabProps,
+  exploreTabProps?: ExploreTabProps,
   markdownProps?: MarkdownProps,
   searchTabProps?: SearchTabProps,
   sidePanelAction?: SidePanelAction,
   tabMode?: TabMode
 }
 
-export type InitialState = Pick<State, 'contentProps' | 'exploreProps' | 'markdownProps' | 'tabMode'>;
+export type InitialState = Pick<State, 'contentProps' | 'exploreTabProps' | 'markdownProps' | 'searchTabProps' | 'tabMode'>;

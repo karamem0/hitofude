@@ -20,6 +20,7 @@ import {
   setContentText,
   setContentWordWrap,
   setError,
+  setMarkdownChanged,
   setMarkdownPosition,
   setMarkdownText,
   setSidePanelAction
@@ -49,8 +50,6 @@ function ContentSupported() {
   } = useStore();
   const { graph } = useService();
   const { setProgress } = useProgress();
-
-  const [ changed, setChanged ] = React.useState<boolean>(false);
 
   const handleCancel = React.useCallback(() => {
     try {
@@ -109,8 +108,8 @@ function ContentSupported() {
 
   const handleEdit = React.useCallback(() => {
     try {
-      setChanged(false);
       dispatch(setContentEditing(true));
+      dispatch(setMarkdownChanged(false));
     } catch (e) {
       dispatch(setError(e as Error));
     }
@@ -120,6 +119,14 @@ function ContentSupported() {
 
   const handleSave = React.useCallback(async (_?: Event, data?: boolean) => {
     try {
+      if (markdownProps == null) {
+        throw new DependencyNullError();
+      }
+      const {
+        changed,
+        position,
+        text
+      } = markdownProps;
       if (changed) {
         const contentFile = contentProps?.file;
         if (contentFile == null) {
@@ -127,11 +134,11 @@ function ContentSupported() {
         }
         setProgress(ProgressType.save);
         const file = await Promise.resolve()
-          .then(() => graph.setFileContent(contentFile, markdownProps?.text ?? ''))
+          .then(() => graph.setFileContent(contentFile, text ?? ''))
           .then((file) => graph.getFileById(file.id));
         dispatch(setContentFile(file));
-        dispatch(setContentText(markdownProps?.text));
-        dispatch(setContentPosition(data ? markdownProps?.position : undefined));
+        dispatch(setContentText(text));
+        dispatch(setContentPosition(data ? position : undefined));
         dispatch(setContentEditing(data));
       }
     } catch (e) {
@@ -140,26 +147,25 @@ function ContentSupported() {
       setProgress();
     }
   }, [
-    changed,
     contentProps?.file,
     graph,
-    markdownProps?.position,
-    markdownProps?.text,
+    markdownProps,
     dispatch,
     setProgress
   ]);
 
   React.useEffect(() => {
-    setChanged(contentProps?.text !== markdownProps?.text);
+    dispatch(setMarkdownChanged(contentProps?.text !== markdownProps?.text));
   }, [
     contentProps?.text,
-    markdownProps?.text
+    markdownProps?.text,
+    dispatch
   ]);
 
   return (
     <Presenter
-      {...contentProps}
-      changed={changed}
+      changed={markdownProps?.changed}
+      file={contentProps?.file}
       onCancel={handleCancel}
       onChangePosition={handleChangePosition}
       onChangePreview={handleChangePreview}

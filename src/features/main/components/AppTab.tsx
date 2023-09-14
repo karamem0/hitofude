@@ -29,7 +29,7 @@ function AppTab() {
   const {
     dispatch,
     state: {
-      exploreProps,
+      exploreTabProps,
       tabMode = {
         type: TabType.explorer,
         open: true
@@ -41,7 +41,7 @@ function AppTab() {
   const [ tabType, setTabType ] = React.useState(tabMode.type);
 
   const handleExplorerOpen = React.useCallback(async () => {
-    const rootFolder = exploreProps?.rootFolder;
+    const rootFolder = exploreTabProps?.rootFolder;
     if (rootFolder == null) {
       throw new DependencyNullError();
     }
@@ -61,7 +61,7 @@ function AppTab() {
       dispatch(setContentFile());
     }
   }, [
-    exploreProps?.rootFolder,
+    exploreTabProps?.rootFolder,
     graph,
     storage,
     dispatch

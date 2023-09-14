@@ -35,7 +35,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
   const {
     dispatch,
     state: {
-      exploreProps
+      exploreTabProps
     }
   } = useStore();
   const { graph } = useService();
@@ -49,7 +49,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       if (data?.downloadUrl == null) {
         throw new ArgumentNullError();
       }
-      const exploreFolder = exploreProps?.folder;
+      const exploreFolder = exploreTabProps?.folder;
       if (exploreFolder == null) {
         throw new DependencyNullError();
       }
@@ -72,7 +72,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    exploreProps?.folder,
+    exploreTabProps?.folder,
     graph,
     dispatch
   ]);

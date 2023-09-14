@@ -35,7 +35,7 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
   const {
     dispatch,
     state: {
-      exploreProps
+      exploreTabProps
     }
   } = useStore();
   const { graph } = useService();
@@ -46,12 +46,12 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       if (value == null) {
         throw new DependencyNullError();
       }
-      const allFiles = exploreProps?.allFiles;
-      const exploreFile = exploreProps?.file;
+      const allFiles = exploreTabProps?.allFiles;
+      const exploreFile = exploreTabProps?.file;
       if (exploreFile == null) {
         throw new DependencyNullError();
       }
-      const exploreFolder = exploreProps?.folder;
+      const exploreFolder = exploreTabProps?.folder;
       if (exploreFolder == null) {
         throw new DependencyNullError();
       }
@@ -82,9 +82,9 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    exploreProps?.allFiles,
-    exploreProps?.file,
-    exploreProps?.folder,
+    exploreTabProps?.allFiles,
+    exploreTabProps?.file,
+    exploreTabProps?.folder,
     graph,
     value,
     dispatch

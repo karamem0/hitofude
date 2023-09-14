@@ -25,7 +25,6 @@ import ContentVideo from './ContentVideo';
 
 interface ContentSupportedProps {
   changed?: boolean,
-  editing?: boolean,
   file?: File,
   onCancel?: EventHandler,
   onChangePosition?: EventHandler<Position>,
@@ -39,7 +38,6 @@ interface ContentSupportedProps {
 function ContentSupported(props: ContentSupportedProps) {
 
   const {
-    changed,
     file,
     onCancel,
     onChangePosition,
@@ -60,7 +58,6 @@ function ContentSupported(props: ContentSupportedProps) {
         padding: 1rem;
       `}>
       <ContentHeader
-        changed={changed}
         onCancel={onCancel}
         onContextMenu={onContextMenu}
         onEdit={onEdit}

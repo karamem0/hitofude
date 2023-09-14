@@ -35,7 +35,7 @@ function ExplorerTabItem() {
   const {
     dispatch,
     state: {
-      exploreProps
+      exploreTabProps
     }
   } = useStore();
   const { graph } = useService();
@@ -79,7 +79,7 @@ function ExplorerTabItem() {
       if (data == null) {
         throw new ArgumentNullError();
       }
-      const exploreFile = exploreProps?.file;
+      const exploreFile = exploreTabProps?.file;
       if (data.id === exploreFile?.id) {
         return;
       }
@@ -90,7 +90,7 @@ function ExplorerTabItem() {
       dispatch(setError(e as Error));
     }
   }, [
-    exploreProps?.file,
+    exploreTabProps?.file,
     graph,
     dispatch
   ]);
@@ -100,7 +100,7 @@ function ExplorerTabItem() {
       if (data == null) {
         throw new ArgumentNullError();
       }
-      const exploreAllFiles = exploreProps?.allFiles;
+      const exploreAllFiles = exploreTabProps?.allFiles;
       if (exploreAllFiles == null) {
         throw new DependencyNullError();
       }
@@ -119,7 +119,7 @@ function ExplorerTabItem() {
       dispatch(setError(e as Error));
     }
   }, [
-    exploreProps?.allFiles,
+    exploreTabProps?.allFiles,
     graph,
     dispatch
   ]);
@@ -129,8 +129,8 @@ function ExplorerTabItem() {
       if (data == null) {
         throw new ArgumentNullError();
       }
-      const exploreFile = exploreProps?.file;
-      const exploreFolder = exploreProps?.folder;
+      const exploreFile = exploreTabProps?.file;
+      const exploreFolder = exploreTabProps?.folder;
       if (exploreFolder == null) {
         throw new DependencyNullError();
       }
@@ -152,15 +152,15 @@ function ExplorerTabItem() {
       dispatch(setError(e as Error));
     }
   }, [
-    exploreProps?.file,
-    exploreProps?.folder,
+    exploreTabProps?.file,
+    exploreTabProps?.folder,
     graph,
     dispatch
   ]);
 
   return (
     <Presenter
-      {...exploreProps}
+      {...exploreTabProps}
       onDownloadFile={handleDownloadFile}
       onOpenDialog={handleOpenDialog}
       onOpenUrl={handleOpenUrl}

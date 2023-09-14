@@ -26,7 +26,7 @@ function FolderCreateDialog() {
   const {
     dispatch,
     state: {
-      exploreProps
+      exploreTabProps
     }
   } = useStore();
   const { graph } = useService();
@@ -37,7 +37,7 @@ function FolderCreateDialog() {
       if (data?.name == null) {
         throw new ArgumentNullError();
       }
-      const exploreFolder = exploreProps?.folder;
+      const exploreFolder = exploreTabProps?.folder;
       if (exploreFolder == null) {
         throw new DependencyNullError();
       }
@@ -55,7 +55,7 @@ function FolderCreateDialog() {
       dispatch(setDialogAction());
     }
   }, [
-    exploreProps?.folder,
+    exploreTabProps?.folder,
     graph,
     dispatch
   ]);

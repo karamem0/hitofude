@@ -85,6 +85,11 @@ export const setContentWordWrap = (data?: boolean): Action => ({
   data
 });
 
+export const setMarkdownChanged = (data?: boolean): Action => ({
+  type: ActionType.setMarkdownChanged,
+  data
+});
+
 export const setMarkdownPosition = (data?: Position): Action => ({
   type: ActionType.setMarkdownPosition,
   data

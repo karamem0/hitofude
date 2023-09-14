@@ -30,18 +30,18 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreProps?.folder == null) {
+      if (state.exploreTabProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           file: data,
           folder: {
-            ...state.exploreProps?.folder,
-            files: state.exploreProps?.folder?.files ? (
-              [ ...state.exploreProps.folder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
+            ...state.exploreTabProps?.folder,
+            files: state.exploreTabProps?.folder?.files ? (
+              [ ...state.exploreTabProps.folder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
             ) : (
               [ data ]
             )
@@ -54,17 +54,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreProps?.folder == null) {
+      if (state.exploreTabProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           folder: {
-            ...state.exploreProps?.folder,
-            folders: state.exploreProps?.folder?.folders ? (
-              [ ...state.exploreProps.folder.folders, data ].sort((a, b) => compare(a.name, b.name))
+            ...state.exploreTabProps?.folder,
+            folders: state.exploreTabProps?.folder?.folders ? (
+              [ ...state.exploreTabProps.folder.folders, data ].sort((a, b) => compare(a.name, b.name))
             ) : (
               [ data ]
             )
@@ -77,16 +77,16 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreProps?.folder == null) {
+      if (state.exploreTabProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           folder: {
-            ...state.exploreProps?.folder,
-            files: state.exploreProps?.folder?.files?.filter((item) => item.id !== data.id)
+            ...state.exploreTabProps?.folder,
+            files: state.exploreTabProps?.folder?.files?.filter((item) => item.id !== data.id)
           }
         }
       };
@@ -96,16 +96,16 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreProps?.folder == null) {
+      if (state.exploreTabProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           folder: {
-            ...state.exploreProps?.folder,
-            folders: state.exploreProps?.folder?.folders?.filter((item) => item.id !== data.id)
+            ...state.exploreTabProps?.folder,
+            folders: state.exploreTabProps?.folder?.folders?.filter((item) => item.id !== data.id)
           }
         }
       };
@@ -119,6 +119,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
           editing: data ?? false
         },
         markdownProps: {
+          changed: false,
           position: {
             left: 0,
             top: 0
@@ -149,7 +150,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...state,
         contentProps: {
           ...state.contentProps,
-          loading: data
+          loading: data ?? false
         }
       };
     }
@@ -160,7 +161,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...state,
         contentProps: {
           ...state.contentProps,
-          minimap: data
+          minimap: data ?? false
         }
       };
     }
@@ -184,7 +185,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...state,
         contentProps: {
           ...state.contentProps,
-          preview: data
+          preview: data ?? false
         }
       };
     }
@@ -205,7 +206,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...state,
         contentProps: {
           ...state.contentProps,
-          wordWrap: data
+          wordWrap: data ?? false
+        }
+      };
+    }
+    case ActionType.setMarkdownChanged: {
+      const data = action.data as boolean | undefined;
+      return {
+        ...state,
+        markdownProps: {
+          ...state.markdownProps,
+          changed: data ?? false
         }
       };
     }
@@ -251,8 +262,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       storage.setExploreFileId(data?.id);
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           file: data
         }
       };
@@ -262,8 +273,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       storage.setExploreFolderId(data?.id);
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           folder: data
         }
       };
@@ -273,9 +284,9 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       storage.setExploreAllFiles(data);
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
-          allFiles: data
+        exploreTabProps: {
+          ...state.exploreTabProps,
+          allFiles: data ?? false
         }
       };
     }
@@ -312,7 +323,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...state,
         searchTabProps: {
           ...state.searchTabProps,
-          query: data
+          query: data ?? ''
         }
       };
     }
@@ -336,17 +347,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreProps?.folder == null) {
+      if (state.exploreTabProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           folder: {
-            ...state.exploreProps?.folder,
-            files: state.exploreProps?.folder?.files ? (
-              state.exploreProps?.folder?.files
+            ...state.exploreTabProps?.folder,
+            files: state.exploreTabProps?.folder?.files ? (
+              state.exploreTabProps?.folder?.files
                 .map((item) => item.id === data.id ? data : item)
                 .sort((a, b) => compare(a.baseName, b.baseName))
             ) : []
@@ -359,17 +370,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreProps?.folder == null) {
+      if (state.exploreTabProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreProps: {
-          ...state.exploreProps,
+        exploreTabProps: {
+          ...state.exploreTabProps,
           folder: {
-            ...state.exploreProps?.folder,
-            folders: state.exploreProps?.folder?.folders ? (
-              state.exploreProps?.folder?.folders
+            ...state.exploreTabProps?.folder,
+            folders: state.exploreTabProps?.folder?.folders ? (
+              state.exploreTabProps?.folder?.folders
                 .map((item) => item.id === data.id ? data : item)
                 .sort((a, b) => compare(a.name, b.name))
             ) : []

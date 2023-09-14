@@ -85,11 +85,9 @@ export interface Folder {
 }
 
 export interface MarkdownProps {
-  minimap?: boolean,
+  changed?: boolean,
   position?: Position,
-  preview?: boolean,
-  text?: string,
-  wordWrap?: boolean
+  text?: string
 }
 
 export interface MimeType {

@@ -27,7 +27,7 @@ function FileCreateDialog() {
   const {
     dispatch,
     state: {
-      exploreProps
+      exploreTabProps
     }
   } = useStore();
   const { graph } = useService();
@@ -38,7 +38,7 @@ function FileCreateDialog() {
       if (data?.baseName == null) {
         throw new ArgumentNullError();
       }
-      const exploreFolder = exploreProps?.folder;
+      const exploreFolder = exploreTabProps?.folder;
       if (exploreFolder == null) {
         throw new DependencyNullError();
       }
@@ -59,7 +59,7 @@ function FileCreateDialog() {
       dispatch(setDialogAction());
     }
   }, [
-    exploreProps?.folder,
+    exploreTabProps?.folder,
     graph,
     dispatch
   ]);

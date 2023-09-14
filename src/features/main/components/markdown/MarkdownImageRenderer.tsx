@@ -39,7 +39,7 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
   const {
     state: {
       contentProps,
-      exploreProps
+      exploreTabProps
     }
   } = useStore();
   const { graph } = useService();
@@ -52,7 +52,7 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
       if (contentFileUrl == null) {
         throw new DependencyNullError();
       }
-      const rootFolderUrl = exploreProps?.rootFolder?.webUrl;
+      const rootFolderUrl = exploreTabProps?.rootFolder?.webUrl;
       if (rootFolderUrl == null) {
         throw new DependencyNullError();
       }
@@ -77,7 +77,7 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
   }, [
     graph,
     contentProps?.file,
-    exploreProps?.rootFolder,
+    exploreTabProps?.rootFolder,
     src
   ]);
 

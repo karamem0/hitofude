@@ -43,7 +43,7 @@ function MainPage() {
           text: '',
           wordWrap: storage.getContentWordWrap()
         },
-        exploreProps: {
+        exploreTabProps: {
           allFiles: storage.getExploreAllFiles(),
           rootFolder: await graph.getRootFolder()
         },
@@ -53,6 +53,9 @@ function MainPage() {
             top: 0
           },
           text: ''
+        },
+        searchTabProps: {
+          query: ''
         },
         tabMode: storage.getTabMode()
       }));
