@@ -113,6 +113,12 @@
       "value": "OneDrive で開く"
     }
   ],
+  "CnpnLn": [
+    {
+      "type": 0,
+      "value": "スクロールの同期"
+    }
+  ],
   "D3idYv": [
     {
       "type": 0,
@@ -404,7 +410,7 @@
   "xhRkpH": [
     {
       "type": 0,
-      "value": "折り返し"
+      "value": "行の折り返し"
     }
   ],
   "xmcVZ0": [

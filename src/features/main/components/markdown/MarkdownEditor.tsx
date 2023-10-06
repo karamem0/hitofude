@@ -15,18 +15,25 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useStore } from '../../../../providers/StoreProvider';
 import { useTheme } from '../../../../providers/ThemeProvider';
 import { EventHandler } from '../../../../types/Event';
-import { Position, ThemeName } from '../../../../types/Model';
+import {
+  ScrollPosition,
+  ScrollSize,
+  ThemeName
+} from '../../../../types/Model';
 
 import Presenter from './MarkdownEditor.presenter';
 
 interface MarkdownEditorProps {
   minimap?: boolean,
-  position?: Position,
+  position?: ScrollPosition,
   text?: string,
   wordWrap?: boolean,
-  onChangePosition?: EventHandler<Position>,
   onChangeText?: EventHandler<string>,
-  onSave?: EventHandler
+  onMouseEnter?: EventHandler,
+  onMouseLeave?: EventHandler,
+  onResize?: EventHandler<ScrollSize>,
+  onSave?: EventHandler,
+  onScroll?: EventHandler<ScrollPosition>
 }
 
 function MarkdownEditor(props: MarkdownEditorProps) {
@@ -36,9 +43,12 @@ function MarkdownEditor(props: MarkdownEditorProps) {
     position,
     text,
     wordWrap,
-    onChangePosition,
     onChangeText,
-    onSave
+    onMouseEnter,
+    onMouseLeave,
+    onResize,
+    onSave,
+    onScroll
   } = props;
 
   const {
@@ -46,13 +56,17 @@ function MarkdownEditor(props: MarkdownEditorProps) {
       tabMode
     }
   } = useStore();
-  const { themeName } = useTheme();
+  const { theme, themeName } = useTheme();
 
   const editorRef = React.useRef<HTMLDivElement>(null);
   const monacoRef = React.useRef<monaco.editor.IStandaloneCodeEditor>();
 
   const handleResize = React.useCallback(() => {
-    monacoRef.current?.layout({} as monaco.editor.IDimension);
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    monacoEl.layout({} as monaco.editor.IDimension);
   }, []);
 
   React.useEffect(() => {
@@ -64,44 +78,98 @@ function MarkdownEditor(props: MarkdownEditorProps) {
       {
         automaticLayout: true,
         contextmenu: false,
-        fontFamily: 'Consolas, Menlo, Monaco, Meiryo, monospace',
+        fontFamily: 'SFMono-Regular, Consolas, Menlo, Monaco, Meiryo, monospace',
         language: 'markdown'
       });
-    return () => {
-      monacoRef.current?.dispose();
-    };
+    return () => monacoRef.current?.dispose();
   }, []);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
       return;
     }
-    monacoRef.current.onDidScrollChange((e) => {
-      onChangePosition?.({}, {
-        left: e.scrollLeft,
-        top: e.scrollTop
-      });
-    });
+    monacoEl.onDidScrollChange((e) =>
+      onScroll?.({}, {
+        scrollLeft: e.scrollLeft,
+        scrollTop: e.scrollTop
+      }));
   }, [
-    onChangePosition
+    onScroll
   ]);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
       return;
     }
-    monacoRef.current.onDidChangeModelContent(() => {
-      onChangeText?.({}, monacoRef.current?.getValue());
-    });
+    monacoEl.onDidChangeModelContent(() =>
+      onChangeText?.({}, monacoEl.getValue()));
   }, [
     onChangeText
   ]);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
+    if (onMouseEnter == null) {
       return;
     }
-    monacoRef.current.addCommand(
+    const { current: editorEl } = editorRef;
+    if (editorEl == null) {
+      return;
+    }
+    editorEl.addEventListener('mouseenter', onMouseEnter);
+    return () => editorEl.removeEventListener('mouseenter', onMouseEnter);
+  }, [
+    onMouseEnter
+  ]);
+
+  React.useEffect(() => {
+    if (onMouseLeave == null) {
+      return;
+    }
+    const { current: editorEl } = editorRef;
+    if (editorEl == null) {
+      return;
+    }
+    editorEl.addEventListener('mouseleave', onMouseLeave);
+    return () => editorEl.removeEventListener('mouseleave', onMouseLeave);
+  }, [
+    onMouseLeave
+  ]);
+
+  React.useEffect(() => {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    const { current: editorEl } = editorRef;
+    if (editorEl == null) {
+      return;
+    }
+    monacoEl.onDidContentSizeChange(() =>
+      onResize?.({}, {
+        clientHeight: editorEl.clientHeight,
+        clientWidth: editorEl.clientWidth,
+        scrollHeight: monacoEl.getScrollHeight() - editorEl.clientHeight,
+        scrollWidth: monacoEl.getScrollWidth()
+      }));
+    monacoEl.onDidLayoutChange(() =>
+      onResize?.({}, {
+        clientHeight: editorEl.clientHeight,
+        clientWidth: editorEl.clientWidth,
+        scrollHeight: monacoEl.getScrollHeight() - editorEl.clientHeight,
+        scrollWidth: monacoEl.getScrollWidth()
+      }));
+  }, [
+    onResize
+  ]);
+
+  React.useEffect(() => {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    monacoEl.addCommand(
       monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS,
       () => onSave?.({})
     );
@@ -110,10 +178,11 @@ function MarkdownEditor(props: MarkdownEditorProps) {
   ]);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
       return;
     }
-    monacoRef.current.updateOptions({
+    monacoEl.updateOptions({
       minimap: {
         enabled: minimap
       }
@@ -123,31 +192,34 @@ function MarkdownEditor(props: MarkdownEditorProps) {
   ]);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
       return;
     }
-    monacoRef.current.setScrollPosition({
-      scrollLeft: position?.left ?? 1,
-      scrollTop: position?.top ?? 1
+    monacoEl.setScrollPosition({
+      scrollLeft: position?.scrollLeft ?? 0,
+      scrollTop: position?.scrollTop ?? 0
     });
   }, [
     position
   ]);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
       return;
     }
-    monacoRef.current.setValue(text ?? '');
+    monacoEl.setValue(text ?? '');
   }, [
     text
   ]);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
       return;
     }
-    monacoRef.current.updateOptions({
+    monacoEl.updateOptions({
       wordWrap: wordWrap ? 'on' : 'off'
     });
   }, [
@@ -155,20 +227,44 @@ function MarkdownEditor(props: MarkdownEditorProps) {
   ]);
 
   React.useEffect(() => {
-    if (monacoRef.current == null) {
-      return;
-    }
     switch (themeName) {
       case ThemeName.light:
-        monaco.editor.setTheme('vs');
+        monaco.editor.defineTheme('hitofude-light', {
+          base: 'vs',
+          inherit: true,
+          rules: [],
+          colors: {
+            'editor.foreground': theme.colorNeutralForeground1,
+            'editor.background': theme.colorNeutralBackground1,
+            'editor.selectionBackground': theme.colorNeutralBackground1Selected,
+            'editor.lineHighlightBackground': theme.colorNeutralBackground1Hover,
+            'editorCursor.foreground': theme.colorNeutralForeground2,
+            'editorWhitespace.foreground': theme.colorNeutralBackground2
+          }
+        });
+        monaco.editor.setTheme('hitofude-light');
         break;
       case ThemeName.dark:
-        monaco.editor.setTheme('vs-dark');
+        monaco.editor.defineTheme('hitofude-dark', {
+          base: 'vs-dark',
+          inherit: true,
+          rules: [],
+          colors: {
+            'editor.foreground': theme.colorNeutralForeground1,
+            'editor.background': theme.colorNeutralBackground1,
+            'editor.selectionBackground': theme.colorNeutralBackground1Selected,
+            'editor.lineHighlightBackground': theme.colorNeutralBackground1Hover,
+            'editorCursor.foreground': theme.colorNeutralForeground2,
+            'editorWhitespace.foreground': theme.colorNeutralBackground2
+          }
+        });
+        monaco.editor.setTheme('hitofude-dark');
         break;
       default:
         break;
     }
   }, [
+    theme,
     themeName
   ]);
 

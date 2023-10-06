@@ -10,6 +10,9 @@ import React from 'react';
 
 import { css } from '@emotion/react';
 
+import { useTheme } from '../../providers/ThemeProvider';
+import { ThemeName } from '../../types/Model';
+
 interface ScrollPanelProps {
   children?: React.ReactNode,
   className?: string
@@ -22,13 +25,41 @@ function ScrollPanel(props: ScrollPanelProps, ref: React.Ref<HTMLDivElement>) {
     className
   } = props;
 
+  const { theme, themeName } = useTheme();
+
+  const scrollBarThumbColor = React.useMemo(() => {
+    switch (themeName) {
+      case ThemeName.light:
+        return 'rgba(100, 100, 100, 0.4)';
+      case ThemeName.dark:
+        return 'rgba(100, 100, 100, 0.7)';
+      default:
+        return undefined;
+    }
+  }, [
+    themeName
+  ]);
+
   return (
     <div
       ref={ref}
       className={className}
+      tabIndex={0}
       css={css`
+        ::-webkit-scrollbar {
+          width: 0.875rem;
+          background-color: transparent;
+          border: 1px solid ${theme.colorNeutralStencil1};
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: ${scrollBarThumbColor};
+        }
+
         overflow-x: hidden;
         overflow-y: auto;
+        &:focus {
+          outline: none;
+        }
       `}>
       {children}
     </div>

@@ -10,13 +10,11 @@ import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
-import { ContentMenuAction } from '../../../types/Model';
 
 import Presenter from './ContentHeader.presenter';
 
 interface ContentHeaderProps {
   onCancel?: EventHandler,
-  onContextMenu?: EventHandler<ContentMenuAction>,
   onEdit?: EventHandler,
   onSave?: EventHandler<boolean>
 }
@@ -25,7 +23,6 @@ function ContentHeader(props: ContentHeaderProps) {
 
   const {
     onCancel,
-    onContextMenu,
     onEdit,
     onSave
   } = props;
@@ -42,7 +39,6 @@ function ContentHeader(props: ContentHeaderProps) {
       {...contentProps}
       changed={markdownProps?.changed}
       onCancel={onCancel}
-      onContextMenu={onContextMenu}
       onEdit={onEdit}
       onSave={onSave} />
   );

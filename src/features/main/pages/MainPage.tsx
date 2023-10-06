@@ -36,10 +36,11 @@ function MainPage() {
           loading: true,
           minimap: storage.getContentMinimap(),
           position: {
-            left: 0,
-            top: 0
+            scrollLeft: 0,
+            scrollTop: 0
           },
           preview: storage.getContentPreview(),
+          scroll: storage.getContentScroll(),
           text: '',
           wordWrap: storage.getContentWordWrap()
         },
@@ -49,8 +50,8 @@ function MainPage() {
         },
         markdownProps: {
           position: {
-            left: 0,
-            top: 0
+            scrollLeft: 0,
+            scrollTop: 0
           },
           text: ''
         },

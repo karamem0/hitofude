@@ -15,10 +15,7 @@ import {
 } from 'react-intl';
 
 import { css } from '@emotion/react';
-import {
-  Button,
-  Text
-} from '@fluentui/react-components';
+import { Button, Text } from '@fluentui/react-components';
 
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
@@ -46,7 +43,6 @@ function ContentHeader(props: ContentHeaderProps) {
     editing,
     file,
     onCancel,
-    onContextMenu,
     onEdit,
     onSave
   } = props;
@@ -144,7 +140,7 @@ function ContentHeader(props: ContentHeaderProps) {
             ) : null
           }
         </Text>
-        <ContentMenuButton onMenuClick={onContextMenu} />
+        <ContentMenuButton />
       </div>
     </div>
   ) : null;

@@ -14,28 +14,16 @@ import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentEditing,
   setContentFile,
-  setContentMinimap,
   setContentPosition,
-  setContentPreview,
   setContentText,
-  setContentWordWrap,
   setError,
   setMarkdownChanged,
   setMarkdownPosition,
-  setMarkdownText,
-  setSidePanelAction
+  setMarkdownText
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
-import {
-  ContentMenuAction,
-  ContentMenuType,
-  File,
-  Position,
-  ProgressType,
-  SidePanelAction
-} from '../../../types/Model';
-import { downloadFile } from '../../../utils/File';
+import { ProgressType, ScrollPosition } from '../../../types/Model';
 
 import Presenter from './ContentSupported.presenter';
 
@@ -62,46 +50,8 @@ function ContentSupported() {
     dispatch
   ]);
 
-  const handleChangePosition = React.useCallback((_?: Event, data?: Position) => {
-    dispatch(setMarkdownPosition(data));
-  }, [
-    dispatch
-  ]);
-
-  const handleChangePreview = React.useCallback((_?: Event, data?: boolean) => {
-    dispatch(setContentPreview(data));
-  }, [
-    dispatch
-  ]);
-
   const handleChangeText = React.useCallback((_?: Event, data?: string) => {
     dispatch(setMarkdownText(data));
-  }, [
-    dispatch
-  ]);
-
-  const handleContextMenu = React.useCallback((_?: Event, data?: ContentMenuAction) => {
-    switch (data?.type) {
-      case ContentMenuType.downloadFile: {
-        downloadFile(data.data as File);
-        break;
-      }
-      case ContentMenuType.openSidePanel: {
-        dispatch(setSidePanelAction(data?.data as SidePanelAction));
-        break;
-      }
-      case ContentMenuType.toggleMinimap: {
-        dispatch(setContentMinimap(data?.data as boolean));
-        break;
-      }
-      case ContentMenuType.toggleWordWrap: {
-        dispatch(setContentWordWrap(data?.data as boolean));
-        break;
-      }
-      default:
-        break;
-    }
-
   }, [
     dispatch
   ]);
@@ -154,6 +104,12 @@ function ContentSupported() {
     setProgress
   ]);
 
+  const handleScroll = React.useCallback((_?: Event, data?: ScrollPosition) => {
+    dispatch(setMarkdownPosition(data));
+  }, [
+    dispatch
+  ]);
+
   React.useEffect(() => {
     dispatch(setMarkdownChanged(contentProps?.text !== markdownProps?.text));
   }, [
@@ -167,12 +123,10 @@ function ContentSupported() {
       changed={markdownProps?.changed}
       file={contentProps?.file}
       onCancel={handleCancel}
-      onChangePosition={handleChangePosition}
-      onChangePreview={handleChangePreview}
       onChangeText={handleChangeText}
-      onContextMenu={handleContextMenu}
       onEdit={handleEdit}
-      onSave={handleSave} />
+      onSave={handleSave}
+      onScroll={handleScroll} />
   );
 
 }

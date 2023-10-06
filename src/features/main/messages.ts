@@ -52,6 +52,7 @@ const messages = defineMessages({
   ShowUnsupportedFiles: { defaultMessage: 'Show other files' },
   Size: { defaultMessage: 'Size' },
   SignOut: { defaultMessage: 'Sign out' },
+  SyncScroll: { defaultMessage: 'Sync scroll' },
   UnsupportedFileDescription: { defaultMessage: 'Unsupported file format' },
   UnsupportedFileTitle: { defaultMessage: 'Cannot open this file' },
   UpdatedDate: { defaultMessage: 'Updated date' },

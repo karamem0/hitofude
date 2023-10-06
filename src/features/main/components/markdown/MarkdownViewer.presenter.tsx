@@ -52,7 +52,7 @@ function MarkdownViewer(props: MarkdownViewerProps) {
         }
         code {
           padding: 0.25rem;
-          font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
+          font-family: SFMono-Regular, Consolas, Menlo, Monaco, Meiryo, monospace;
           background-color: ${theme.colorNeutralBackground3};
         }
         h1 {
@@ -95,16 +95,8 @@ function MarkdownViewer(props: MarkdownViewerProps) {
         pre {
           padding: 0.5rem;
           margin-block: 0.5rem;
-          font-family: Consolas, Menlo, Monaco, Meiryo, monospace;
+          font-family: SFMono-Regular, Consolas, Menlo, Monaco, Meiryo, monospace;
           background-color: ${theme.colorNeutralBackground3};
-          & code {
-            padding: 0;
-            overflow-wrap: break-word;
-          }
-          & pre {
-            padding: 0;
-            margin-block: 0;
-          }
         }
         table,
         th,
@@ -132,7 +124,7 @@ function MarkdownViewer(props: MarkdownViewerProps) {
       <ReactMarkdown
         remarkPlugins={[ remarkGfm ]}
         components={{
-          code: MarkdownCodeRenderer,
+          pre: MarkdownCodeRenderer,
           img: MarkdownImageRenderer
         }}>
         {text ?? ''}

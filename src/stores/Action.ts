@@ -10,7 +10,7 @@ import {
   DialogAction,
   File,
   Folder,
-  Position,
+  ScrollPosition,
   SidePanelAction,
   TabMode
 } from '../types/Model';
@@ -65,13 +65,18 @@ export const setContentMinimap = (data?: boolean): Action => ({
   data
 });
 
-export const setContentPosition = (data?: Position): Action => ({
+export const setContentPosition = (data?: ScrollPosition): Action => ({
   type: ActionType.setContentPosition,
   data
 });
 
 export const setContentPreview = (data?: boolean): Action => ({
   type: ActionType.setContentPreview,
+  data
+});
+
+export const setContentScroll = (data?: boolean): Action => ({
+  type: ActionType.setContentScroll,
   data
 });
 
@@ -90,7 +95,7 @@ export const setMarkdownChanged = (data?: boolean): Action => ({
   data
 });
 
-export const setMarkdownPosition = (data?: Position): Action => ({
+export const setMarkdownPosition = (data?: ScrollPosition): Action => ({
   type: ActionType.setMarkdownPosition,
   data
 });

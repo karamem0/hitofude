@@ -10,24 +10,24 @@ import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
 import { Event, EventHandler } from '../../../types/Event';
-import { Position } from '../../../types/Model';
+import { ScrollPosition } from '../../../types/Model';
 
 import Presenter from './ContentMarkdown.presenter';
 
 interface MarkdownControlProps {
-  onChangePosition?: EventHandler<Position>,
   onChangeText?: EventHandler<string>,
   onChangePreview?: EventHandler<boolean>,
-  onSave?: EventHandler
+  onSave?: EventHandler,
+  onScroll?: EventHandler<ScrollPosition>
 }
 
 function MarkdownControl(props: MarkdownControlProps) {
 
   const {
-    onChangePosition,
     onChangeText,
     onChangePreview,
-    onSave
+    onSave,
+    onScroll
   } = props;
 
   const {
@@ -51,10 +51,10 @@ function MarkdownControl(props: MarkdownControlProps) {
       {...contentProps}
       previewText={previewText}
       tabOpen={tabMode?.open}
-      onChangePosition={onChangePosition}
       onChangePreview={onChangePreview}
       onChangeText={handleChangeText}
-      onSave={onSave} />
+      onSave={onSave}
+      onScroll={onScroll} />
   );
 
 }

@@ -24,6 +24,10 @@ export class StorageService {
     return Boolean(Number(this.storage.getItem('contentPreview') ?? undefined));
   }
 
+  getContentScroll(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('contentScroll') ?? undefined));
+  }
+
   getContentWordWrap(): boolean | undefined {
     return Boolean(Number(this.storage.getItem('contentWordWrap') ?? undefined));
   }
@@ -64,6 +68,14 @@ export class StorageService {
       this.storage.setItem('contentPreview', String(Number(value)));
     } else {
       this.storage.removeItem('contentPreview');
+    }
+  }
+
+  setContentScroll(value?: boolean): void {
+    if (value) {
+      this.storage.setItem('contentScroll', String(Number(value)));
+    } else {
+      this.storage.removeItem('contentScroll');
     }
   }
 

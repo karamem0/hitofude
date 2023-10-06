@@ -15,7 +15,8 @@ export enum ContentMenuType {
   downloadFile = 'downloadFile',
   openSidePanel = 'openSidePanel',
   toggleMinimap = 'toggleMinimap',
-  toggleWordWrap = 'toggleWordWrap'
+  toggleWordWrap = 'toggleWordWrap',
+  toggleScroll = 'toggleScroll'
 }
 
 export interface ContentProps {
@@ -23,8 +24,9 @@ export interface ContentProps {
   file?: File,
   loading?: boolean,
   minimap?: boolean,
-  position?: Position,
+  position?: ScrollPosition,
   preview?: boolean,
+  scroll?: boolean,
   text?: string,
   wordWrap?: boolean
 }
@@ -86,7 +88,7 @@ export interface Folder {
 
 export interface MarkdownProps {
   changed?: boolean,
-  position?: Position,
+  position?: ScrollPosition,
   text?: string
 }
 
@@ -95,9 +97,16 @@ export interface MimeType {
   subtype: string
 }
 
-export interface Position {
-  left?: number,
-  top?: number
+export interface ScrollPosition {
+  scrollLeft?: number,
+  scrollTop?: number
+}
+
+export interface ScrollSize {
+  clientHeight?: number,
+  clientWidth?: number,
+  scrollHeight?: number,
+  scrollWidth?: number
 }
 
 export enum ProgressType {

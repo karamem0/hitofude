@@ -29,7 +29,7 @@ function MarkdownCodeRenderer(props: MarkdownCodeRendererProps) {
   const { theme } = useTheme();
 
   const match = /language-(\w+)/.exec(className ?? '');
-  const lang = match?.at(1) ?? '';
+  const language = match?.at(1) ?? '';
 
   return inline ? (
     <code className={className}>
@@ -37,7 +37,7 @@ function MarkdownCodeRenderer(props: MarkdownCodeRendererProps) {
     </code>
   ) : (
     <SyntaxHighlighter
-      language={lang}
+      language={language}
       wrapLongLines={true}
       style={{
         hljs: {},
@@ -72,7 +72,14 @@ function MarkdownCodeRenderer(props: MarkdownCodeRendererProps) {
           color: theme.colorPaletteCranberryForeground2
         }
       }}>
-      {String(children).replace(/\n$/, '')}
+      {
+        (() => {
+          const element = children as React.ReactElement;
+          const props = element.props;
+          const value = String(props.children).replace(/\n$/, '');
+          return value;
+        })()
+      }
     </SyntaxHighlighter>
   );
 

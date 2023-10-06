@@ -29,31 +29,37 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
     mimeType
   } = props;
 
-  return downloadUrl ? (
-    (() => {
-      if (isMimeType(mimeType, { type: 'image' })) {
-        return (
-          <ImageViewer
-            alt={alt}
-            src={downloadUrl}
-            css={css`
-              max-width: 100%;
-              height: auto;
-            `} />
-        );
+  return (
+    () => {
+      if (downloadUrl) {
+        if (isMimeType(mimeType, { type: 'image' })) {
+          return (
+            <ImageViewer
+              alt={alt}
+              src={downloadUrl}
+              css={css`
+                max-width: 100%;
+                height: auto;
+              `} />
+          );
+        }
+        if (isMimeType(mimeType, { type: 'video' })) {
+          return (
+            <VideoViewer
+              src={downloadUrl}
+              css={css`
+                max-width: 100%;
+                height: auto;
+              `} />
+          );
+        }
       }
-      if (isMimeType(mimeType, { type: 'video' })) {
-        return (
-          <VideoViewer
-            src={downloadUrl}
-            css={css`
-              max-width: 100%;
-              height: auto;
-            `} />
-        );
-      }
-    })()
-  ) : null;
+      return (
+        <ImageViewer
+          alt={alt}
+          src="" />
+      );
+    })();
 
 }
 

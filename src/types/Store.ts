@@ -32,6 +32,7 @@ export enum ActionType {
   setContentMinimap = 'setContentMinimap',
   setContentPosition = 'setContentPosition',
   setContentPreview = 'setContentPreview',
+  setContentScroll = 'setContentScroll',
   setContentText = 'setContentText',
   setContentWordWrap = 'setContentWordWrap',
   setMarkdownChanged = 'setMarkdownChanged',

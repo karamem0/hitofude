@@ -11,11 +11,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
-import {
-  Position,
-  File,
-  ContentMenuAction
-} from '../../../types/Model';
+import { File, ScrollPosition } from '../../../types/Model';
 import { isMimeType } from '../../../utils/File';
 
 import ContentHeader from './ContentHeader';
@@ -27,12 +23,10 @@ interface ContentSupportedProps {
   changed?: boolean,
   file?: File,
   onCancel?: EventHandler,
-  onChangePosition?: EventHandler<Position>,
-  onChangePreview?: EventHandler<boolean>,
   onChangeText?: EventHandler<string>,
-  onContextMenu?: EventHandler<ContentMenuAction>,
   onEdit?: EventHandler,
-  onSave?: EventHandler<boolean>
+  onSave?: EventHandler<boolean>,
+  onScroll?: EventHandler<ScrollPosition>
 }
 
 function ContentSupported(props: ContentSupportedProps) {
@@ -40,10 +34,8 @@ function ContentSupported(props: ContentSupportedProps) {
   const {
     file,
     onCancel,
-    onChangePosition,
-    onChangePreview,
+    onScroll,
     onChangeText,
-    onContextMenu,
     onEdit,
     onSave
   } = props;
@@ -59,7 +51,6 @@ function ContentSupported(props: ContentSupportedProps) {
       `}>
       <ContentHeader
         onCancel={onCancel}
-        onContextMenu={onContextMenu}
         onEdit={onEdit}
         onSave={onSave} />
       <div
@@ -82,10 +73,9 @@ function ContentSupported(props: ContentSupportedProps) {
             if (isMimeType(file, { subtype: 'markdown' })) {
               return (
                 <ContentMarkdown
-                  onChangePosition={onChangePosition}
-                  onChangePreview={onChangePreview}
                   onChangeText={onChangeText}
-                  onSave={(e) => onSave?.(e, true)} />
+                  onSave={(e) => onSave?.(e, true)}
+                  onScroll={onScroll} />
               );
             }
             return null;

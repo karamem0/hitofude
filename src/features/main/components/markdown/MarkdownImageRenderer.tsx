@@ -12,7 +12,7 @@ import mime from 'mime';
 
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
-import { DependencyNullError } from '../../../../types/Error';
+import { DependencyNullError, FileNotFoundError } from '../../../../types/Error';
 import { MimeType } from '../../../../types/Model';
 import { getMimeType } from '../../../../utils/File';
 import { isAbsoluteUrl } from '../../../../utils/Url';
@@ -65,13 +65,21 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
           mimeType: getMimeType(src, mime.getType(src))
         });
       } else {
-        const absoluteUrl = new URL(src, contentFileUrl).href;
-        const relativeUrl = absoluteUrl.substring(absoluteUrl.indexOf(rootFolderUrl) + rootFolderUrl.length);
-        const file = await graph.getFileByUrl(relativeUrl);
-        setState({
-          downloadUrl: file.downloadUrl,
-          mimeType: file.mimeType
-        });
+        try {
+          const absoluteUrl = new URL(src, contentFileUrl).href;
+          const relativeUrl = absoluteUrl.substring(absoluteUrl.indexOf(rootFolderUrl) + rootFolderUrl.length);
+          const file = await graph.getFileByUrl(relativeUrl);
+          setState({
+            downloadUrl: file.downloadUrl,
+            mimeType: file.mimeType
+          });
+        } catch (e) {
+          if (e instanceof FileNotFoundError) {
+            setState(undefined);
+          } else {
+            throw e;
+          }
+        }
       }
     })();
   }, [
@@ -81,12 +89,12 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
     src
   ]);
 
-  return (
+  return state ? (
     <Presenter
       alt={alt}
-      downloadUrl={state?.downloadUrl}
-      mimeType={state?.mimeType} />
-  );
+      downloadUrl={state.downloadUrl}
+      mimeType={state.mimeType} />
+  ) : null;
 
 }
 

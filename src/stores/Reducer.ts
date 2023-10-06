@@ -11,7 +11,7 @@ import {
   DialogAction,
   File,
   Folder,
-  Position,
+  ScrollPosition,
   SidePanelAction,
   TabMode
 } from '../types/Model';
@@ -121,8 +121,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         markdownProps: {
           changed: false,
           position: {
-            left: 0,
-            top: 0
+            scrollLeft: 0,
+            scrollTop: 0
           },
           text: ''
         }
@@ -137,8 +137,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
           editing: false,
           file: data,
           position: {
-            left: 0,
-            top: 0
+            scrollLeft: 0,
+            scrollTop: 0
           },
           text: ''
         }
@@ -166,14 +166,14 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       };
     }
     case ActionType.setContentPosition: {
-      const data = action.data as Position | undefined;
+      const data = action.data as ScrollPosition | undefined;
       return {
         ...state,
         contentProps: {
           ...state.contentProps,
           position: data ?? {
-            left: 0,
-            top: 0
+            scrollLeft: 0,
+            scrollTop: 0
           }
         }
       };
@@ -186,6 +186,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         contentProps: {
           ...state.contentProps,
           preview: data ?? false
+        }
+      };
+    }
+    case ActionType.setContentScroll: {
+      const data = action.data as boolean | undefined;
+      storage.setContentScroll(data);
+      return {
+        ...state,
+        contentProps: {
+          ...state.contentProps,
+          scroll: data ?? false
         }
       };
     }
@@ -221,14 +232,14 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       };
     }
     case ActionType.setMarkdownPosition: {
-      const data = action.data as Position | undefined;
+      const data = action.data as ScrollPosition | undefined;
       return {
         ...state,
         markdownProps: {
           ...state.markdownProps,
           position: data ?? {
-            left: 0,
-            top: 0
+            scrollLeft: 0,
+            scrollTop: 0
           }
         }
       };

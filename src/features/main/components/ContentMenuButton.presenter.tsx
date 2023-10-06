@@ -40,6 +40,7 @@ interface ContentMenuButtonProps {
   editing?: boolean,
   file?: File,
   minimap?: boolean,
+  scroll?:boolean,
   wordWrap?: boolean,
   onMenuClick?: EventHandler<ContentMenuAction>
 }
@@ -50,6 +51,7 @@ function ContentMenuButton(props: ContentMenuButtonProps) {
     editing,
     file,
     minimap,
+    scroll,
     wordWrap,
     onMenuClick
   } = props;
@@ -131,6 +133,24 @@ function ContentMenuButton(props: ContentMenuButtonProps) {
                   })}>
                   {
                     <FormattedMessage {...messages.WordWrap} />
+                  }
+                </MenuItem>
+                <MenuItem
+                  key="ToggleScroll"
+                  icon={
+                    <CheckMarkIcon
+                      css={css`
+                        font-size: 1rem;
+                        line-height: 1rem;
+                        color: ${scroll ? 'inherit' : 'transparent'};
+                      `} />
+                  }
+                  onClick={(e) => onMenuClick?.(e, {
+                    type: ContentMenuType.toggleScroll,
+                    data: !scroll
+                  })}>
+                  {
+                    <FormattedMessage {...messages.SyncScroll} />
                   }
                 </MenuItem>
               </MenuGroup>
