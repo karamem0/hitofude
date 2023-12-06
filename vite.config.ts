@@ -9,15 +9,15 @@
 import fs from 'fs';
 
 import reactPlugin from '@vitejs/plugin-react';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv, Plugin } from 'vite';
 
 export default defineConfig(({ mode }) => {
 
-  const htmlPlugin = (env: ReturnType<typeof loadEnv>) => ({
+  const htmlPlugin = (env: ReturnType<typeof loadEnv>): Plugin => ({
     name: 'html-transform',
     transformIndexHtml: {
-      enforce: 'pre' as const,
-      transform: (html: string): string => html.replace(/%(.*?)%/g, (match, p1) => env[p1] ?? match)
+      order: 'pre',
+      handler: (html: string): string => html.replace(/%(.*?)%/g, (match, p1) => env[p1] ?? match)
     }
   });
 

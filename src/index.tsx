@@ -13,8 +13,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
-import { Global } from '@emotion/react';
-import ress from 'ress';
+import 'ress';
 
 import Error404Page from './features/error/pages/Error404Page';
 import Error500Page from './features/error/pages/Error500Page';
@@ -30,43 +29,40 @@ import ThemeProvider from './providers/ThemeProvider';
 ReactDOM
   .createRoot(document.getElementById('root') as Element)
   .render(
-    <React.Fragment>
-      <Global styles={ress} />
-      <BrowserRouter>
-        <TelemetryProvider>
-          <IntlProvider>
-            <ThemeProvider>
-              <Routes>
-                <Route
-                  path="/"
-                  element={(
-                    <ErrorBoundary
-                      fallbackRender={(props) => (
-                        <Error500Page {...props} />
-                      )}>
-                      <MsalProvider>
-                        <AuthenticatedTemplate>
-                          <ServiceProvider>
-                            <StoreProvider>
-                              <MainPage />
-                            </StoreProvider>
-                          </ServiceProvider>
-                        </AuthenticatedTemplate>
-                        <UnauthenticatedTemplate>
-                          <HomePage />
-                        </UnauthenticatedTemplate>
-                      </MsalProvider>
-                    </ErrorBoundary>
+    <BrowserRouter>
+      <TelemetryProvider>
+        <IntlProvider>
+          <ThemeProvider>
+            <Routes>
+              <Route
+                path="/"
+                element={(
+                  <ErrorBoundary
+                    fallbackRender={(props) => (
+                      <Error500Page {...props} />
+                    )}>
+                    <MsalProvider>
+                      <AuthenticatedTemplate>
+                        <ServiceProvider>
+                          <StoreProvider>
+                            <MainPage />
+                          </StoreProvider>
+                        </ServiceProvider>
+                      </AuthenticatedTemplate>
+                      <UnauthenticatedTemplate>
+                        <HomePage />
+                      </UnauthenticatedTemplate>
+                    </MsalProvider>
+                  </ErrorBoundary>
+              )} />
+              <Route
+                path="*"
+                element={(
+                  <Error404Page />
                 )} />
-                <Route
-                  path="*"
-                  element={(
-                    <Error404Page />
-                  )} />
-              </Routes>
-            </ThemeProvider>
-          </IntlProvider>
-        </TelemetryProvider>
-      </BrowserRouter>
-    </React.Fragment>
+            </Routes>
+          </ThemeProvider>
+        </IntlProvider>
+      </TelemetryProvider>
+    </BrowserRouter>
   );
