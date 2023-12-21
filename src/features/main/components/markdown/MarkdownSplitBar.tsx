@@ -20,7 +20,7 @@ function MarkdownSplitBar() {
     dispatch,
     state: {
       contentProps,
-      tabMode
+      tabProps
     }
   } = useStore();
 
@@ -33,7 +33,7 @@ function MarkdownSplitBar() {
   return (
     <Presenter
       preview={contentProps?.preview}
-      tabOpen={tabMode?.open}
+      tabOpen={tabProps?.open}
       onChangePreview={handleChangePreview} />
   );
 

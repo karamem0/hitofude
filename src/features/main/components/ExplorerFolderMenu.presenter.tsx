@@ -36,7 +36,7 @@ interface ExplorerFolderMenuProps {
   onOpenUrl?: EventHandler<string>
 }
 
-function ExplorerFolderMenu(props: ExplorerFolderMenuProps) {
+function ExplorerFolderMenu(props: Readonly<ExplorerFolderMenuProps>) {
 
   const {
     value,

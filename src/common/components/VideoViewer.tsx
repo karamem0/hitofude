@@ -15,14 +15,14 @@ interface VideoViewerProps {
   src?: string
 }
 
-function VideoViewer(props: VideoViewerProps) {
+function VideoViewer(props: Readonly<VideoViewerProps>) {
 
   const {
     className,
     src
   } = props;
 
-  const [ loading, setLoading ] = React.useState(true);
+  const [ loading, setLoading ] = React.useState<boolean>(true);
 
   const ref = React.useRef<HTMLVideoElement>(null);
 

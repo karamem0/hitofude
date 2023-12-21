@@ -13,26 +13,26 @@ import { EventHandler } from '../../../types/Event';
 import Presenter from './TreeHeader.presenter';
 
 interface TreeHeaderProps {
-  disabled?: boolean,
   menu?: React.ReactNode,
   name?: string,
+  root?: boolean,
   onClick?: EventHandler
 }
 
-function TreeHeader(props: TreeHeaderProps) {
+function TreeHeader(props: Readonly<TreeHeaderProps>) {
 
   const {
-    disabled,
     menu,
     name,
+    root,
     onClick
   } = props;
 
   return (
     <Presenter
-      disabled={disabled}
       menu={menu}
       name={name}
+      root={root}
       onClick={onClick} />
   );
 

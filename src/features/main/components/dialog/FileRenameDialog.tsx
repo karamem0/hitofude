@@ -27,7 +27,7 @@ interface FileRenameDialogProps {
   value?: File
 }
 
-function FileRenameDialog(props: FileRenameDialogProps) {
+function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
 
   const { value } = props;
 

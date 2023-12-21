@@ -15,7 +15,7 @@ interface LoaderProps {
   loading?: boolean
 }
 
-function Loader(props: LoaderProps) {
+function Loader(props: Readonly<LoaderProps>) {
 
   const {
     children,

@@ -316,6 +316,9 @@ export class GraphService {
 
   async searchResults(query: string): Promise<File[]> {
     try {
+      if (query == null || query.length === 0) {
+        return [];
+      }
       const data = await this.client
         .api(`/me/drive/root/search(q='${query}')`)
         .get();

@@ -11,19 +11,21 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { useTheme } from '../../../providers/ThemeProvider';
-import { TabMode, TabType } from '../../../types/Model';
+import { TabType } from '../../../types/Model';
 
 import ExplorerTabItem from './ExplorerTabItem';
 import SearchTabItem from './SearchTabItem';
 
 interface AppTabProps {
-  tabMode?: TabMode
+  tabOpen?: boolean,
+  tabType?: TabType
 }
 
-function AppTab(props: AppTabProps) {
+function AppTab(props: Readonly<AppTabProps>) {
 
   const {
-    tabMode
+    tabOpen,
+    tabType
   } = props;
 
   const { theme } = useTheme();
@@ -32,15 +34,15 @@ function AppTab(props: AppTabProps) {
     <section
       css={css`
         display: grid;
-        width: ${tabMode?.open ? '20rem' : '0'};
+        width: ${tabOpen ? '20rem' : '0'};
         max-width: calc(100vw - 4rem);
         padding: 1rem 0;
-        visibility: ${tabMode?.open ? undefined : 'hidden'};
+        visibility: ${tabOpen ? undefined : 'hidden'};
         background-color: ${theme.colorNeutralBackground2};
       `}>
       {
         (() => {
-          switch (tabMode?.type) {
+          switch (tabType) {
             case TabType.explorer:
               return (
                 <ExplorerTabItem />

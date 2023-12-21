@@ -33,7 +33,7 @@ interface TreeItemProps {
   onClick?: EventHandler
 }
 
-function TreeItem(props: TreeItemProps) {
+function TreeItem(props: Readonly<TreeItemProps>) {
 
   const {
     icon,
@@ -83,6 +83,7 @@ function TreeItem(props: TreeItemProps) {
       <div
         aria-label={name}
         role="button"
+        tabIndex={-1}
         title={name}
         css={css`
           display: grid;
@@ -111,6 +112,7 @@ function TreeItem(props: TreeItemProps) {
               <div
                 aria-label={intl.formatMessage(messages.MoreOption)}
                 role="button"
+                tabIndex={-1}
                 title={intl.formatMessage(messages.MoreOption)}
                 css={css`
                   padding: 0.5rem;

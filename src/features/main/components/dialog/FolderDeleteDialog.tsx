@@ -24,7 +24,7 @@ interface FolderDeleteDialogProps {
   value?: Folder
 }
 
-function FileDeleteDialog(props: FolderDeleteDialogProps) {
+function FileDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
 
   const { value } = props;
 

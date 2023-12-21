@@ -16,7 +16,7 @@ interface MarkdownCodeRendererProps {
   inline?: boolean
 }
 
-function MarkdownCodeRenderer(props: MarkdownCodeRendererProps) {
+function MarkdownCodeRenderer(props: Readonly<MarkdownCodeRendererProps>) {
 
   const {
     children,

@@ -26,7 +26,7 @@ interface FolderRenameDialogProps {
   value?: Folder
 }
 
-function FolderRenameDialog(props: FolderRenameDialogProps) {
+function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
 
   const { value } = props;
 

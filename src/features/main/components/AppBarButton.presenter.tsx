@@ -14,6 +14,7 @@ import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 
 interface AppBarButtonProps {
+  disabled?: boolean,
   focused?: boolean,
   icon?: React.ReactElement,
   selected?: boolean,
@@ -22,9 +23,10 @@ interface AppBarButtonProps {
   onFocusChanged?: EventHandler<boolean>
 }
 
-function AppBarButton(props: AppBarButtonProps) {
+function AppBarButton(props: Readonly<AppBarButtonProps>) {
 
   const {
+    disabled,
     focused,
     icon,
     selected,
@@ -43,16 +45,16 @@ function AppBarButton(props: AppBarButtonProps) {
         grid-template-columns: 0.25rem 2.5rem;
         grid-gap: 0.25rem;
         margin-right: 0.5rem;
-      `}
-      onMouseEnter={(e) => onFocusChanged?.(e, true)}
-      onMouseLeave={(e) => onFocusChanged?.(e, false)}>
+      `}>
       <div
         css={css`
           background-color: ${selected ? theme.colorBrandBackground : 'transparent'};
         `} />
       <div
+        aria-disabled={disabled}
         aria-label={title}
         role="button"
+        tabIndex={0}
         title={title}
         css={css`
           display: grid;
@@ -61,7 +63,10 @@ function AppBarButton(props: AppBarButtonProps) {
           width: 2.5rem;
           height: 2.5rem;
         `}
-        onClick={onClick}>
+        onClick={(e) => !disabled && onClick?.(e)}
+        onKeyDown={(e) => e.key === 'Enter' && !disabled && onClick?.(e)}
+        onMouseEnter={(e) => onFocusChanged?.(e, true)}
+        onMouseLeave={(e) => onFocusChanged?.(e, false)}>
         <span
           css={css`
             font-size: 1.5rem;

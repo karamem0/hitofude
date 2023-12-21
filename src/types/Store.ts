@@ -8,12 +8,12 @@
 
 import {
   DialogAction,
-  ExploreTabProps,
+  ExplorerProps,
   ContentProps,
   MarkdownProps,
-  SearchTabProps,
+  SearchProps,
   SidePanelAction,
-  TabMode
+  TabProps
 } from './Model';
 
 export interface Action {
@@ -48,7 +48,9 @@ export enum ActionType {
   setSearchResults = 'setSearchResults',
   setSearchQuery = 'setSearchQuery',
   setSidePanelAction = 'setSidePanelAction',
-  setTabMode = 'setTabMode',
+  setTabLoading = 'setTabLoading',
+  setTabOpen = 'setTabOpen',
+  setTabType = 'setTabType',
   updateExploreFile = 'updateExploreFile',
   updateExploreFolder = 'updateExploreFolder'
 }
@@ -57,11 +59,11 @@ export interface State {
   contentProps?: ContentProps,
   dialogAction?: DialogAction,
   error?: Error,
-  exploreTabProps?: ExploreTabProps,
+  explorerProps?: ExplorerProps,
   markdownProps?: MarkdownProps,
-  searchTabProps?: SearchTabProps,
+  searchProps?: SearchProps,
   sidePanelAction?: SidePanelAction,
-  tabMode?: TabMode
+  tabProps?: TabProps
 }
 
-export type InitialState = Pick<State, 'contentProps' | 'exploreTabProps' | 'markdownProps' | 'searchTabProps' | 'tabMode'>;
+export type InitialState = Pick<State, 'contentProps' | 'explorerProps' | 'markdownProps' | 'searchProps'>;

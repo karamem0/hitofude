@@ -8,26 +8,28 @@
 
 import React from 'react';
 
+import { useRoute } from '../../../../providers/RouteProvider';
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import {
   appendExploreFile,
-  setContentFile,
   setDialogAction,
   setError
 } from '../../../../stores/Action';
 import { ArgumentNullError, DependencyNullError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
+import { TabType } from '../../../../types/Model';
 import { FileCreateDialogFormState } from '../../types/Form';
 
 import Presenter from './FileCreateDialog.presenter';
 
 function FileCreateDialog() {
 
+  const { route } = useRoute();
   const {
     dispatch,
     state: {
-      exploreTabProps
+      explorerProps
     }
   } = useStore();
   const { graph } = useService();
@@ -38,16 +40,20 @@ function FileCreateDialog() {
       if (data?.baseName == null) {
         throw new ArgumentNullError();
       }
-      const exploreFolder = exploreTabProps?.folder;
-      if (exploreFolder == null) {
+      const folder = explorerProps?.folder;
+      if (folder == null) {
         throw new DependencyNullError();
       }
       setLoading(true);
       const file = await Promise.resolve()
-        .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`))
+        .then(() => graph.createFile(folder, `${data.baseName}.md`))
         .then((file) => graph.getFileById(file.id));
       dispatch(appendExploreFile(file));
-      dispatch(setContentFile(file));
+      route.setParams({
+        tab: TabType.explorer,
+        folder: folder.id,
+        file: file?.id
+      });
     } catch (e) {
       if (e instanceof Error) {
         dispatch(setError(e));
@@ -59,8 +65,9 @@ function FileCreateDialog() {
       dispatch(setDialogAction());
     }
   }, [
-    exploreTabProps?.folder,
+    explorerProps?.folder,
     graph,
+    route,
     dispatch
   ]);
 

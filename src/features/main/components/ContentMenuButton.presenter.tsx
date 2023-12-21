@@ -45,7 +45,7 @@ interface ContentMenuButtonProps {
   onMenuClick?: EventHandler<ContentMenuAction>
 }
 
-function ContentMenuButton(props: ContentMenuButtonProps) {
+function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
 
   const {
     editing,
@@ -64,6 +64,7 @@ function ContentMenuButton(props: ContentMenuButtonProps) {
         <div
           aria-label={intl.formatMessage(messages.MoreOption)}
           role="button"
+          tabIndex={0}
           title={intl.formatMessage(messages.MoreOption)}
           css={css`
             padding: 0.5rem;

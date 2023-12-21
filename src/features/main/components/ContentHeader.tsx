@@ -19,7 +19,7 @@ interface ContentHeaderProps {
   onSave?: EventHandler<boolean>
 }
 
-function ContentHeader(props: ContentHeaderProps) {
+function ContentHeader(props: Readonly<ContentHeaderProps>) {
 
   const {
     onCancel,

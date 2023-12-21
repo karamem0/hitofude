@@ -48,7 +48,13 @@ export enum DialogType {
   restoreFile = 'restoreFile'
 }
 
-export interface ExploreTabProps {
+export interface ExplorerParams {
+  file?: string,
+  folder?: string,
+  tab?: TabType.explorer
+}
+
+export interface ExplorerProps {
   allFiles?: boolean,
   file?: File,
   folder?: Folder,
@@ -114,7 +120,15 @@ export enum ProgressType {
   save = 'save'
 }
 
-export interface SearchTabProps {
+export type RouteParams = ExplorerParams | SearchParams;
+
+export interface SearchParams {
+  file?: string,
+  search?: string,
+  tab?: TabType.search
+}
+
+export interface SearchProps {
   file?: File,
   query?: string,
   results?: File[]
@@ -129,9 +143,10 @@ export enum SidePanelType {
   fileVersion = 'fileVersion'
 }
 
-export interface TabMode {
-  type?: TabType,
-  open?: boolean
+export interface TabProps {
+  loading?: boolean,
+  open?: boolean,
+  type?: TabType
 }
 
 export enum ThemeName {

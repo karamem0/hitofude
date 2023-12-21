@@ -28,7 +28,7 @@ interface MainPageProps {
   loading?: boolean
 }
 
-function MainPage(props: MainPageProps) {
+function MainPage(props: Readonly<MainPageProps>) {
 
   const {
     loading

@@ -33,7 +33,7 @@ interface FolderCreateDialogProps {
   onSubmit?: EventHandler<FolderCreateDialogFormState>
 }
 
-function FolderCreateDialog(props: FolderCreateDialogProps) {
+function FolderCreateDialog(props: Readonly<FolderCreateDialogProps>) {
 
   const {
     loading,

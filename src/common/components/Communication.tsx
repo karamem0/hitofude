@@ -16,7 +16,7 @@ interface CommunicationProps {
   title?: string
 }
 
-function Communication(props: CommunicationProps) {
+function Communication(props: Readonly<CommunicationProps>) {
 
   const {
     description,

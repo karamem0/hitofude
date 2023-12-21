@@ -16,7 +16,7 @@ interface ImageViewerProps {
   src?: string
 }
 
-function ImageViewer(props: ImageViewerProps) {
+function ImageViewer(props: Readonly<ImageViewerProps>) {
 
   const {
     alt,

@@ -36,7 +36,7 @@ interface MarkdownEditorProps {
   onScroll?: EventHandler<ScrollPosition>
 }
 
-function MarkdownEditor(props: MarkdownEditorProps) {
+function MarkdownEditor(props: Readonly<MarkdownEditorProps>) {
 
   const {
     minimap,
@@ -53,7 +53,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
 
   const {
     state: {
-      tabMode
+      tabProps
     }
   } = useStore();
   const { theme, themeName } = useTheme();
@@ -273,7 +273,7 @@ function MarkdownEditor(props: MarkdownEditorProps) {
       handleResize();
     }
   }, [
-    tabMode?.open,
+    tabProps?.open,
     handleResize
   ]);
 

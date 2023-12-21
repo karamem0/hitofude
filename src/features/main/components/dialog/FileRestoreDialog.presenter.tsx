@@ -31,7 +31,7 @@ interface FileRestoreDialogProps {
   onSubmit?: EventHandler
 }
 
-function FileRestoreDialog(props: FileRestoreDialogProps) {
+function FileRestoreDialog(props: Readonly<FileRestoreDialogProps>) {
 
   const {
     loading,

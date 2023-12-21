@@ -3,6 +3,9 @@ on:
     branches:
       - develop
 
+env:
+  BUILD_VERSION: 1.10.0
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,14 +18,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-      - name: Rewrite microsoft-identity-association.json
+      - name: Update package.json
+        run: npm version ${{env.BUILD_VERSION}} --no-git-tag-version
+      - name: Update microsoft-identity-association.json
         shell: pwsh
         run: |
           $path = 'public/.well-known/microsoft-identity-association.json'
           $content = Get-Content -Path $path
           $content = $content -replace "{{MSAL_CLIENT_ID}}", "${{secrets.MSAL_CLIENT_ID}}"
           Out-File -FilePath $path -InputObject $content -Encoding UTF8
-      - name: Rewrite .env
+      - name: Update .env
         shell: pwsh
         run: |
           $path = '.env'
@@ -57,13 +62,9 @@ jobs:
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
       - name: Upload to blob storage
-        uses: azure/CLI@v1
+        uses: azure/cli@v1
         with:
           inlineScript: |
             az storage blob delete-batch --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --source '$web'
             az storage blob upload-batch --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --auth-mode key --destination '$web' --source artifact
-      - name: Purge CDN endpoint
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
             az cdn endpoint purge --content-paths '/*' --profile-name ${{secrets.AZURE_CDN_PROFILE_NAME}} --name ${{secrets.AZURE_CDN_ENDPOINT_NAME}} --resource-group ${{secrets.AZURE_RESOURCE_GROUP_NAME}}

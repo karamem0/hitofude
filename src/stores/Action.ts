@@ -12,7 +12,7 @@ import {
   Folder,
   ScrollPosition,
   SidePanelAction,
-  TabMode
+  TabType
 } from '../types/Model';
 import {
   Action,
@@ -130,6 +130,11 @@ export const setInitialState = (data?: InitialState): Action => ({
   data
 });
 
+export const setTabLoading = (data?: boolean): Action => ({
+  type: ActionType.setTabLoading,
+  data
+});
+
 export const setSearchFile = (data?: File): Action => ({
   type: ActionType.setSearchFile,
   data
@@ -150,8 +155,13 @@ export const setSidePanelAction = (data?: SidePanelAction): Action => ({
   data
 });
 
-export const setTabMode = (data?: TabMode): Action => ({
-  type: ActionType.setTabMode,
+export const setTabOpen = (data?: boolean): Action => ({
+  type: ActionType.setTabOpen,
+  data
+});
+
+export const setTabType = (data?: TabType): Action => ({
+  type: ActionType.setTabType,
   data
 });
 

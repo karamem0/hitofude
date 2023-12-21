@@ -19,7 +19,7 @@ interface ModalDialogProps {
   children?: [React.JSX.Element, React.JSX.Element] | React.JSX.Element
 }
 
-function ModalDialog(props: ModalDialogProps) {
+function ModalDialog(props: Readonly<ModalDialogProps>) {
 
   const { children } = props;
 

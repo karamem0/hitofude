@@ -14,18 +14,16 @@ import { ScrollPosition } from '../../../types/Model';
 
 import Presenter from './ContentMarkdown.presenter';
 
-interface MarkdownControlProps {
+interface ContentMarkdownProps {
   onChangeText?: EventHandler<string>,
-  onChangePreview?: EventHandler<boolean>,
   onSave?: EventHandler,
   onScroll?: EventHandler<ScrollPosition>
 }
 
-function MarkdownControl(props: MarkdownControlProps) {
+function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
 
   const {
     onChangeText,
-    onChangePreview,
     onSave,
     onScroll
   } = props;
@@ -33,7 +31,7 @@ function MarkdownControl(props: MarkdownControlProps) {
   const {
     state: {
       contentProps,
-      tabMode
+      tabProps
     }
   } = useStore();
 
@@ -50,8 +48,7 @@ function MarkdownControl(props: MarkdownControlProps) {
     <Presenter
       {...contentProps}
       previewText={previewText}
-      tabOpen={tabMode?.open}
-      onChangePreview={onChangePreview}
+      tabOpen={tabProps?.open}
       onChangeText={handleChangeText}
       onSave={onSave}
       onScroll={onScroll} />
@@ -59,4 +56,4 @@ function MarkdownControl(props: MarkdownControlProps) {
 
 }
 
-export default MarkdownControl;
+export default ContentMarkdown;

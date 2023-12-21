@@ -18,7 +18,7 @@ interface MarkdownViewerProps {
   text?: string
 }
 
-function MarkdownViewer(props: MarkdownViewerProps) {
+function MarkdownViewer(props: Readonly<MarkdownViewerProps>) {
 
   const {
     className,

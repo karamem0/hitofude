@@ -131,6 +131,12 @@
       "value": "更新日時"
     }
   ],
+  "Emw6OK": [
+    {
+      "type": 0,
+      "value": "OneDrive"
+    }
+  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -255,12 +261,6 @@
     {
       "type": 0,
       "value": "指定した名前のフォルダーはすでに存在します"
-    }
-  ],
-  "bYbrKK": [
-    {
-      "type": 0,
-      "value": "ファイル"
     }
   ],
   "cyR7Kh": [

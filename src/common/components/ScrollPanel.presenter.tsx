@@ -18,7 +18,7 @@ interface ScrollPanelProps {
   className?: string
 }
 
-function ScrollPanel(props: ScrollPanelProps, ref: React.Ref<HTMLDivElement>) {
+function ScrollPanel(props: Readonly<ScrollPanelProps>, ref: React.Ref<HTMLDivElement>) {
 
   const {
     children,
@@ -55,8 +55,7 @@ function ScrollPanel(props: ScrollPanelProps, ref: React.Ref<HTMLDivElement>) {
           background-color: ${scrollBarThumbColor};
         }
 
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow: hidden auto;
         &:focus {
           outline: none;
         }

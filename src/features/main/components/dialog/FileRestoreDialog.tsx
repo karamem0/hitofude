@@ -25,7 +25,7 @@ interface FileRestoreDialogProps {
   value?: FileVersion
 }
 
-function FileDeleteDialog(props: FileRestoreDialogProps) {
+function FileDeleteDialog(props: Readonly<FileRestoreDialogProps>) {
 
   const { value } = props;
 

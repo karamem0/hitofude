@@ -24,7 +24,7 @@ interface SidePanelProps {
   onOpenChange?: EventHandler<boolean>
 }
 
-function SidePanel(props: SidePanelProps) {
+function SidePanel(props: Readonly<SidePanelProps>) {
 
   const {
     children,

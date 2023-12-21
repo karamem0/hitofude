@@ -16,7 +16,7 @@ interface VideoViewerProps {
   src?: string
 }
 
-function VideoViewer(props: VideoViewerProps, ref: React.Ref<HTMLVideoElement>) {
+function VideoViewer(props: Readonly<VideoViewerProps>, ref: React.Ref<HTMLVideoElement>) {
 
   const {
     className,

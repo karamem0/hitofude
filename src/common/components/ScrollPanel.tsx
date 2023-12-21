@@ -31,7 +31,7 @@ interface ScrollPanelProps {
   onScroll?: EventHandler<ScrollPosition>
 }
 
-function ScrollPanel(props: ScrollPanelProps) {
+function ScrollPanel(props: Readonly<ScrollPanelProps>) {
 
   const {
     children,

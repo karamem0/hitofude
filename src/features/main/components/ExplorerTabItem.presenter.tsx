@@ -48,7 +48,7 @@ interface ExplorerTabItemProps {
   onToggleExploreAllFiles ?: EventHandler<boolean>
 }
 
-function ExplorerTabItem(props: ExplorerTabItemProps) {
+function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
 
   const {
     allFiles,
@@ -81,8 +81,8 @@ function ExplorerTabItem(props: ExplorerTabItemProps) {
         <FormattedMessage {...messages.Explorer} />
       </Caption1>
       <TreeHeader
-        disabled={!folder.parentId}
         name={folder.parentId ? folder.name : intl.formatMessage(messages.RootFolder)}
+        root={folder.parentId == null}
         menu={(
           <ExplorerHeaderMenu
             allFiles={allFiles}
@@ -99,8 +99,7 @@ function ExplorerTabItem(props: ExplorerTabItemProps) {
           display: flex;
           flex-direction: column;
           grid-gap: 0.25rem;
-          overflow-x: hidden;
-          overflow-y: auto;
+          overflow: hidden auto;
         `}>
         {
           isEmpty(folder, allFiles) ? (

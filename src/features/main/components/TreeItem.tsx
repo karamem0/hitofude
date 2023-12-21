@@ -21,7 +21,7 @@ interface TreeItemProps {
   onClick?: EventHandler
 }
 
-function TreeItem(props: TreeItemProps) {
+function TreeItem(props: Readonly<TreeItemProps>) {
 
   const {
     icon,

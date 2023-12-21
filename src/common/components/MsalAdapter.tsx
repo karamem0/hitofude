@@ -13,7 +13,7 @@ import { useMsal } from '@azure/msal-react';
 
 import Presenter from './MsalAdapter.presenter';
 
-function MsalAdapter(props: React.PropsWithChildren<unknown>) {
+function MsalAdapter(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 

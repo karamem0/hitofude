@@ -8,8 +8,9 @@
 
 import React from 'react';
 
+import { useRoute } from '../../../providers/RouteProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setDialogAction, setTabMode } from '../../../stores/Action';
+import { setDialogAction, setTabOpen } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
 import { DialogAction, TabType } from '../../../types/Model';
 
@@ -17,10 +18,13 @@ import Presenter from './AppBar.presenter';
 
 function AppBar() {
 
+  const { route } = useRoute();
   const {
     dispatch,
     state: {
-      tabMode
+      explorerProps,
+      searchProps,
+      tabProps
     }
   } = useStore();
 
@@ -31,18 +35,41 @@ function AppBar() {
   ]);
 
   const handleToggleTab = React.useCallback((_?: Event, data?: TabType) => {
-    dispatch(setTabMode({
-      type: data ?? TabType.explorer,
-      open: data === tabMode?.type ? !tabMode?.open : true
-    }));
+    if (tabProps?.type === data) {
+      dispatch(setTabOpen(!tabProps?.open));
+    } else {
+      switch (data) {
+        case TabType.explorer:
+          route.setParams({
+            tab: data,
+            folder: explorerProps?.folder?.id,
+            file: explorerProps?.file?.id
+          });
+          break;
+        case TabType.search:
+          route.setParams({
+            tab: data,
+            search: searchProps?.query
+          });
+          break;
+        default:
+          break;
+      }
+    }
   }, [
-    tabMode,
+    explorerProps?.file,
+    explorerProps?.folder,
+    searchProps?.query,
+    tabProps?.open,
+    tabProps?.type,
+    route,
     dispatch
   ]);
 
   return (
     <Presenter
-      tabMode={tabMode}
+      tabLoading={tabProps?.loading}
+      tabType={tabProps?.type}
       onOpenDialog={handleOpenDialog}
       onToggleTab={handleToggleTab} />
   );

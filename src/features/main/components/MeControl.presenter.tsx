@@ -34,7 +34,7 @@ interface MeControlProps {
   onSignOut?: EventHandler
 }
 
-function MeControl(props: MeControlProps) {
+function MeControl(props: Readonly<MeControlProps>) {
 
   const {
     photo,

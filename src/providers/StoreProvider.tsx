@@ -8,10 +8,14 @@
 
 import React from 'react';
 
+import { setInitialState } from '../stores/Action';
 import { reducer } from '../stores/Reducer';
+import { InvalidOperationError } from '../types/Error';
+import { ThemeName } from '../types/Model';
 import { Action, State } from '../types/Store';
 
 import { useService } from './ServiceProvider';
+import { useTheme } from './ThemeProvider';
 
 interface StoreContextState {
   dispatch: React.Dispatch<Action>,
@@ -23,19 +27,23 @@ const StoreContext = React.createContext<StoreContextState | undefined>(undefine
 export const useStore = (): StoreContextState => {
   const value = React.useContext(StoreContext);
   if (value == null) {
-    throw new Error();
+    throw new InvalidOperationError();
   }
   return value;
 };
 
-function StoreProvider(props: React.PropsWithChildren<unknown>) {
+function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 
-  const { storage } = useService();
+  const { graph, storage } = useService();
+  const { changeTheme } = useTheme();
   const [ state, dispatch ] = React.useReducer(
     reducer(storage),
-    {});
+    {}
+  );
+
+  const [ loading, setLoading ] = React.useState<boolean>(true);
 
   const value = React.useMemo(() => ({
     dispatch,
@@ -45,9 +53,53 @@ function StoreProvider(props: React.PropsWithChildren<unknown>) {
     state
   ]);
 
+  React.useEffect(() => {
+    (async () => {
+      try {
+        changeTheme(storage.getThemeName() ?? ThemeName.light);
+        dispatch(setInitialState({
+          contentProps: {
+            editing: false,
+            loading: false,
+            minimap: storage.getContentMinimap(),
+            position: {
+              scrollLeft: 0,
+              scrollTop: 0
+            },
+            preview: storage.getContentPreview(),
+            scroll: storage.getContentScroll(),
+            text: '',
+            wordWrap: storage.getContentWordWrap()
+          },
+          explorerProps: {
+            allFiles: storage.getExploreAllFiles(),
+            rootFolder: await graph.getRootFolder()
+          },
+          markdownProps: {
+            position: {
+              scrollLeft: 0,
+              scrollTop: 0
+            },
+            text: ''
+          },
+          searchProps: {
+            query: ''
+          }
+        }));
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [
+    graph,
+    storage,
+    changeTheme,
+    dispatch
+  ]);
+
   return (
     <StoreContext.Provider value={value}>
-      {children}
+      {loading ? null : children}
     </StoreContext.Provider>
   );
 

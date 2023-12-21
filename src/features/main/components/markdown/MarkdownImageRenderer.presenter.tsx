@@ -21,7 +21,7 @@ interface MarkdownImageRendererProps {
   mimeType?: MimeType
 }
 
-function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
+function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
 
   const {
     alt,

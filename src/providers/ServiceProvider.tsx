@@ -13,6 +13,7 @@ import { Client } from '@microsoft/microsoft-graph-client';
 
 import { GraphService } from '../services/GraphService';
 import { StorageService } from '../services/StorageService';
+import { InvalidOperationError } from '../types/Error';
 
 interface ServiceContextState {
   graph: GraphService,
@@ -24,12 +25,12 @@ const ServiceContext = React.createContext<ServiceContextState | undefined>(unde
 export const useService = (): ServiceContextState => {
   const value = React.useContext(ServiceContext);
   if (value == null) {
-    throw new Error();
+    throw new InvalidOperationError();
   }
   return value;
 };
 
-function ServiceProvider(props: React.PropsWithChildren<unknown>) {
+function ServiceProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 

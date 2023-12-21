@@ -29,7 +29,7 @@ interface MarkdownImageRendererProps {
   src?: string
 }
 
-function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
+function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
 
   const {
     alt,
@@ -39,7 +39,7 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
   const {
     state: {
       contentProps,
-      exploreTabProps
+      explorerProps
     }
   } = useStore();
   const { graph } = useService();
@@ -52,7 +52,7 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
       if (contentFileUrl == null) {
         throw new DependencyNullError();
       }
-      const rootFolderUrl = exploreTabProps?.rootFolder?.webUrl;
+      const rootFolderUrl = explorerProps?.rootFolder?.webUrl;
       if (rootFolderUrl == null) {
         throw new DependencyNullError();
       }
@@ -85,7 +85,7 @@ function MarkdownImageRenderer(props: MarkdownImageRendererProps) {
   }, [
     graph,
     contentProps?.file,
-    exploreTabProps?.rootFolder,
+    explorerProps?.rootFolder,
     src
   ]);
 

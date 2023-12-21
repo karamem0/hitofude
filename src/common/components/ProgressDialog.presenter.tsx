@@ -28,7 +28,7 @@ interface ProgressDialogProps {
   value?: ProgressType
 }
 
-function ProgressDialog(props: ProgressDialogProps) {
+function ProgressDialog(props: Readonly<ProgressDialogProps>) {
 
   const {
     value

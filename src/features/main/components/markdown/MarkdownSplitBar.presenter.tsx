@@ -25,7 +25,7 @@ interface SplitBarProps {
   onChangePreview?: EventHandler<boolean>
 }
 
-function MarkdownSplitBar(props: SplitBarProps) {
+function MarkdownSplitBar(props: Readonly<SplitBarProps>) {
 
   const {
     preview,
@@ -38,12 +38,12 @@ function MarkdownSplitBar(props: SplitBarProps) {
   return preview ? (
     <div
       role="button"
+      tabIndex={-1}
       css={css`
         position: fixed;
         right: calc(${contentWidthSmall} / 2 + 1rem);
         display: grid;
-        align-items: center;
-        justify-items: center;
+        place-items: center center;
         width: 1rem;
         height: ${contentHeight};
         text-align: center;
@@ -64,12 +64,12 @@ function MarkdownSplitBar(props: SplitBarProps) {
   ) : (
     <div
       role="button"
+      tabIndex={-1}
       css={css`
         position: fixed;
         right: 1rem;
         display: grid;
-        align-items: center;
-        justify-items: center;
+        place-items: center center;
         width: 1rem;
         height: calc(100vh - 7.5rem);
         text-align: center;

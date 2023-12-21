@@ -13,15 +13,17 @@ import { Event, EventHandler } from '../../../types/Event';
 import Presenter from './AppBarButton.presenter';
 
 interface AppBarButtonProps {
+  disabled?: boolean,
   icon?: React.ReactElement,
   selected?: boolean,
   title?: string,
   onClick?: EventHandler
 }
 
-function AppBarButton(props: AppBarButtonProps) {
+function AppBarButton(props: Readonly<AppBarButtonProps>) {
 
   const {
+    disabled,
     icon,
     selected,
     title,
@@ -36,6 +38,7 @@ function AppBarButton(props: AppBarButtonProps) {
 
   return (
     <Presenter
+      disabled={disabled}
       focused={focused}
       icon={icon}
       selected={selected}

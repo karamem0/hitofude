@@ -14,6 +14,7 @@ import {
 } from '@fluentui/react-components';
 
 import { darkTheme, lightTheme } from '../themes/Theme';
+import { InvalidOperationError } from '../types/Error';
 import { ThemeName } from '../types/Model';
 
 interface ThemeContextState {
@@ -27,12 +28,12 @@ const ThemeContext = React.createContext<ThemeContextState | undefined>(undefine
 export const useTheme = (): ThemeContextState => {
   const value = React.useContext(ThemeContext);
   if (value == null) {
-    throw new Error();
+    throw new InvalidOperationError();
   }
   return value;
 };
 
-function ThemeProvider(props: React.PropsWithChildren<unknown>) {
+function ThemeProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 

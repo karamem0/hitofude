@@ -31,7 +31,7 @@ interface FileDeleteDialogProps {
   onSubmit?: EventHandler
 }
 
-function FileDeleteDialog(props: FileDeleteDialogProps) {
+function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
 
   const {
     loading,

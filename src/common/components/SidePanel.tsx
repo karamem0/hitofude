@@ -22,7 +22,7 @@ interface SidePanelProps {
   width?: string
 }
 
-function SidePanel(props: SidePanelProps) {
+function SidePanel(props: Readonly<SidePanelProps>) {
 
   const {
     children,
@@ -34,7 +34,7 @@ function SidePanel(props: SidePanelProps) {
   const { dispatch } = useStore();
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((e?: Event, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
     if (data == null) {
       throw new ArgumentNullError();
     }

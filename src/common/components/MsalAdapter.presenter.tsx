@@ -12,7 +12,7 @@ interface MsalAdapterProps {
   loading?: boolean
 }
 
-function MsalAdapter(props: React.PropsWithChildren<MsalAdapterProps>) {
+function MsalAdapter(props: Readonly<React.PropsWithChildren<MsalAdapterProps>>) {
 
   const {
     children,

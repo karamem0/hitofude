@@ -44,7 +44,7 @@ const messages = defineMessages({
   RenameFolder: { defaultMessage: 'Rename folder' },
   RestoreFile: { defaultMessage: 'Restore file' },
   RestoreFileConfirm: { defaultMessage: 'Are you sure to restore this file?' },
-  RootFolder: { defaultMessage: 'My files' },
+  RootFolder: { defaultMessage: 'OneDrive' },
   Save: { defaultMessage: 'Save' },
   SaveAndClose: { defaultMessage: 'Save and Close' },
   Search: { defaultMessage: 'Search' },

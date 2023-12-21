@@ -41,7 +41,7 @@ interface ExplorerHeaderMenuProps {
   onToggleExploreAllFiles?: EventHandler<boolean>
 }
 
-function ExplorerHeaderMenu(props: ExplorerHeaderMenuProps) {
+function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
 
   const {
     allFiles,

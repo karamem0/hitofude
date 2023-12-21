@@ -35,7 +35,7 @@ interface FileRenameDialogProps {
   onSubmit?: EventHandler<FileRenameDialogFormState>
 }
 
-function FileRenameDialog(props: FileRenameDialogProps) {
+function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
 
   const {
     loading,

@@ -8,20 +8,16 @@
 
 import React from 'react';
 
+import { useForm } from 'react-hook-form';
+
+import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { setError } from '../../../stores/Action';
 import {
-  setError,
-  setExploreFile,
-  setExploreFolder,
-  setSearchResults,
-  setSearchQuery,
-  setTabMode,
-  setContentFile,
-  setSearchFile,
-  setContentText
-} from '../../../stores/Action';
-import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
+  ArgumentNullError,
+  FolderNotFoundError
+} from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { File, TabType } from '../../../types/Model';
 import { SearchTabItemFormState } from '../types/Form';
@@ -30,26 +26,27 @@ import Presenter from './SearchTabItem.presenter';
 
 function SearchTabItem() {
 
+  const { route } = useRoute();
   const {
     dispatch,
     state: {
-      searchTabProps
+      searchProps
     }
   } = useStore();
   const { graph } = useService();
-  const [ loading, setLoading ] = React.useState(false);
-
-  const handleChangeInput = React.useCallback((_?: Event, data?: string) => {
-    dispatch(setSearchQuery(data));
-  }, [
-    dispatch
-  ]);
+  const form = useForm<SearchTabItemFormState>();
 
   const handleClearInput = React.useCallback(() => {
-    dispatch(setSearchQuery());
-    dispatch(setSearchResults());
-    dispatch(setContentFile());
+    try {
+      route.setParams({
+        tab: TabType.search,
+        search: ''
+      });
+    } catch (e) {
+      dispatch(setError(e as Error));
+    }
   }, [
+    route,
     dispatch
   ]);
 
@@ -63,19 +60,17 @@ function SearchTabItem() {
         throw new FolderNotFoundError();
       }
       const folder = await graph.getFolderById(file.parentId);
-      dispatch(setExploreFolder(folder));
-      dispatch(setExploreFile(file));
-      dispatch(setContentFile(file));
-      dispatch(setContentText(await graph.getFileText(file)));
-      dispatch(setTabMode({
-        type: TabType.explorer,
-        open: true
-      }));
+      route.setParams({
+        tab: TabType.explorer,
+        folder: folder.id,
+        file: data.id
+      });
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
     graph,
+    route,
     dispatch
   ]);
 
@@ -84,15 +79,17 @@ function SearchTabItem() {
       if (data == null) {
         throw new ArgumentNullError();
       }
-      const file = await graph.getFileById(data.id);
-      dispatch(setSearchFile(file));
-      dispatch(setContentFile(file));
-      dispatch(setContentText(await graph.getFileText(file)));
+      route.setParams({
+        tab: TabType.search,
+        search: searchProps?.query,
+        file: data.id
+      });
     } catch (e) {
       dispatch(setError(e as Error));
     }
   }, [
-    graph,
+    searchProps?.query,
+    route,
     dispatch
   ]);
 
@@ -101,25 +98,29 @@ function SearchTabItem() {
       if (data?.query == null) {
         throw new ArgumentNullError();
       }
-      setLoading(true);
-      dispatch(setSearchQuery(data.query));
-      dispatch(setSearchResults(await graph.searchResults(data.query)));
+      route.setParams({
+        tab: TabType.search,
+        search: data.query
+      });
     } catch (e) {
       dispatch(setError(e as Error));
-    } finally {
-      dispatch(setContentFile());
-      setLoading(false);
     }
   }, [
-    graph,
+    route,
     dispatch
+  ]);
+
+  React.useEffect(() => {
+    form.setValue('query', searchProps?.query);
+  }, [
+    form,
+    searchProps?.query
   ]);
 
   return (
     <Presenter
-      {...searchTabProps}
-      loading={loading}
-      onChangeInput={handleChangeInput}
+      {...searchProps}
+      form={form}
       onClearInput={handleClearInput}
       onOpenFileLocation={handleOpenFileLocation}
       onSelectFile={handleSelectFile}

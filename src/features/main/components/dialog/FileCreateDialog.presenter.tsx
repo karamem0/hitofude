@@ -33,7 +33,7 @@ interface FileCreateDialogProps {
   onSubmit?: EventHandler<FileCreateDialogFormState>
 }
 
-function FileCreateDialog(props: FileCreateDialogProps) {
+function FileCreateDialog(props: Readonly<FileCreateDialogProps>) {
 
   const {
     loading,

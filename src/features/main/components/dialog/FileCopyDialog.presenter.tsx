@@ -35,7 +35,7 @@ interface FileCopyDialogProps {
   onSubmit?: EventHandler<FileCopyDialogFormState>
 }
 
-function FileCopyDialog(props: FileCopyDialogProps) {
+function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
 
   const {
     loading,

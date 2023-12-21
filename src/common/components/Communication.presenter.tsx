@@ -19,7 +19,7 @@ interface CommunicationProps {
   title?: string
 }
 
-function Communication(props: CommunicationProps) {
+function Communication(props: Readonly<CommunicationProps>) {
 
   const {
     description,
@@ -38,6 +38,7 @@ function Communication(props: CommunicationProps) {
         grid-gap: 2rem;
       `}>
       <img
+        alt={title}
         src={image}
         css={css`
           max-width: 16rem;

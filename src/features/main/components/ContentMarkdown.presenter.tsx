@@ -36,12 +36,11 @@ interface ContentMarkdownProps {
   text?: string,
   wordWrap?: boolean,
   onChangeText?: EventHandler<string>,
-  onChangePreview?: EventHandler<boolean>,
   onSave?: EventHandler,
   onScroll?: EventHandler<ScrollPosition>
 }
 
-function ContentMarkdown(props: ContentMarkdownProps) {
+function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
 
   const {
     editing,

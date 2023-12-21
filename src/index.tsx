@@ -21,6 +21,7 @@ import HomePage from './features/home/pages/HomePage';
 import MainPage from './features/main/pages/MainPage';
 import IntlProvider from './providers/IntlProvider';
 import MsalProvider from './providers/MsalProvider';
+import RouteProvider from './providers/RouteProvider';
 import ServiceProvider from './providers/ServiceProvider';
 import StoreProvider from './providers/StoreProvider';
 import TelemetryProvider from './providers/TelemetryProvider';
@@ -43,11 +44,13 @@ ReactDOM
                     )}>
                     <MsalProvider>
                       <AuthenticatedTemplate>
-                        <ServiceProvider>
-                          <StoreProvider>
-                            <MainPage />
-                          </StoreProvider>
-                        </ServiceProvider>
+                        <RouteProvider>
+                          <ServiceProvider>
+                            <StoreProvider>
+                              <MainPage />
+                            </StoreProvider>
+                          </ServiceProvider>
+                        </RouteProvider>
                       </AuthenticatedTemplate>
                       <UnauthenticatedTemplate>
                         <HomePage />

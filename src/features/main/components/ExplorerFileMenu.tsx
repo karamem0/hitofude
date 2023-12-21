@@ -20,7 +20,7 @@ interface ExplorerFileMenuProps {
   onOpenUrl?: EventHandler<string>
 }
 
-function ExplorerFileMenu(props: ExplorerFileMenuProps) {
+function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
 
   const {
     value,

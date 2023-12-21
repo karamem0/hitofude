@@ -17,7 +17,7 @@ import { ThemeName } from '../../../types/Model';
 
 import Presenter from './Error500Page.presenter';
 
-function Error500Page(props: FallbackProps) {
+function Error500Page(props: Readonly<FallbackProps>) {
 
   const { error } = props;
 

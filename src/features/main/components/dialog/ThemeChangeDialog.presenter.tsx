@@ -35,7 +35,7 @@ interface ThemeChangeDialogProps {
   onChangeTheme: EventHandler<ThemeName>
 }
 
-function ThemeChangeDialog(props: ThemeChangeDialogProps) {
+function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
 
   const {
     themeName,

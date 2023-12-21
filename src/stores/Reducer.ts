@@ -13,7 +13,7 @@ import {
   Folder,
   ScrollPosition,
   SidePanelAction,
-  TabMode
+  TabType
 } from '../types/Model';
 import {
   Action,
@@ -30,18 +30,18 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreTabProps?.folder == null) {
+      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           file: data,
           folder: {
-            ...state.exploreTabProps?.folder,
-            files: state.exploreTabProps?.folder?.files ? (
-              [ ...state.exploreTabProps.folder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
+            ...state.explorerProps?.folder,
+            files: state.explorerProps?.folder?.files ? (
+              [ ...state.explorerProps.folder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
             ) : (
               [ data ]
             )
@@ -54,17 +54,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreTabProps?.folder == null) {
+      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           folder: {
-            ...state.exploreTabProps?.folder,
-            folders: state.exploreTabProps?.folder?.folders ? (
-              [ ...state.exploreTabProps.folder.folders, data ].sort((a, b) => compare(a.name, b.name))
+            ...state.explorerProps?.folder,
+            folders: state.explorerProps?.folder?.folders ? (
+              [ ...state.explorerProps.folder.folders, data ].sort((a, b) => compare(a.name, b.name))
             ) : (
               [ data ]
             )
@@ -77,16 +77,16 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreTabProps?.folder == null) {
+      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           folder: {
-            ...state.exploreTabProps?.folder,
-            files: state.exploreTabProps?.folder?.files?.filter((item) => item.id !== data.id)
+            ...state.explorerProps?.folder,
+            files: state.explorerProps?.folder?.files?.filter((item) => item.id !== data.id)
           }
         }
       };
@@ -96,16 +96,16 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreTabProps?.folder == null) {
+      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           folder: {
-            ...state.exploreTabProps?.folder,
-            folders: state.exploreTabProps?.folder?.folders?.filter((item) => item.id !== data.id)
+            ...state.explorerProps?.folder,
+            folders: state.explorerProps?.folder?.folders?.filter((item) => item.id !== data.id)
           }
         }
       };
@@ -273,8 +273,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       storage.setExploreFileId(data?.id);
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           file: data
         }
       };
@@ -284,8 +284,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       storage.setExploreFolderId(data?.id);
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           folder: data
         }
       };
@@ -295,8 +295,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       storage.setExploreAllFiles(data);
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           allFiles: data ?? false
         }
       };
@@ -312,8 +312,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       const data = action.data as File | undefined;
       return {
         ...state,
-        searchTabProps: {
-          ...state.searchTabProps,
+        searchProps: {
+          ...state.searchProps,
           file: data
         }
       };
@@ -322,8 +322,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       const data = action.data as File[] | undefined;
       return {
         ...state,
-        searchTabProps: {
-          ...state.searchTabProps,
+        searchProps: {
+          ...state.searchProps,
           results: data
         }
       };
@@ -332,8 +332,8 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       const data = action.data as string | undefined;
       return {
         ...state,
-        searchTabProps: {
-          ...state.searchTabProps,
+        searchProps: {
+          ...state.searchProps,
           query: data ?? ''
         }
       };
@@ -345,12 +345,36 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         sidePanelAction: data
       };
     }
-    case ActionType.setTabMode: {
-      const data = action.data as TabMode | undefined;
-      storage.setTabMode(data);
+    case ActionType.setTabLoading: {
+      const data = action.data as boolean | undefined;
       return {
         ...state,
-        tabMode: data
+        tabProps: {
+          ...state.tabProps,
+          loading: data ?? false
+        }
+      };
+    }
+    case ActionType.setTabOpen: {
+      const data = action.data as boolean | undefined;
+      storage.setTabOpen(data);
+      return {
+        ...state,
+        tabProps: {
+          ...state.tabProps,
+          open: data
+        }
+      };
+    }
+    case ActionType.setTabType: {
+      const data = action.data as TabType | undefined;
+      storage.setTabType(data);
+      return {
+        ...state,
+        tabProps: {
+          ...state.tabProps,
+          type: data
+        }
       };
     }
     case ActionType.updateExploreFile: {
@@ -358,17 +382,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreTabProps?.folder == null) {
+      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           folder: {
-            ...state.exploreTabProps?.folder,
-            files: state.exploreTabProps?.folder?.files ? (
-              state.exploreTabProps?.folder?.files
+            ...state.explorerProps?.folder,
+            files: state.explorerProps?.folder?.files ? (
+              state.explorerProps?.folder?.files
                 .map((item) => item.id === data.id ? data : item)
                 .sort((a, b) => compare(a.baseName, b.baseName))
             ) : []
@@ -381,17 +405,17 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
       if (data == null) {
         return state;
       }
-      if (state.exploreTabProps?.folder == null) {
+      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
-        exploreTabProps: {
-          ...state.exploreTabProps,
+        explorerProps: {
+          ...state.explorerProps,
           folder: {
-            ...state.exploreTabProps?.folder,
-            folders: state.exploreTabProps?.folder?.folders ? (
-              state.exploreTabProps?.folder?.folders
+            ...state.explorerProps?.folder,
+            folders: state.explorerProps?.folder?.folders ? (
+              state.explorerProps?.folder?.folders
                 .map((item) => item.id === data.id ? data : item)
                 .sort((a, b) => compare(a.name, b.name))
             ) : []

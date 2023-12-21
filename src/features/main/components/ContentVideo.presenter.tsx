@@ -17,7 +17,7 @@ interface ContentVideoProps {
   file?: File
 }
 
-function ContentVideo(props: ContentVideoProps) {
+function ContentVideo(props: Readonly<ContentVideoProps>) {
 
   const { file } = props;
 

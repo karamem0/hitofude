@@ -23,7 +23,7 @@ interface ErrorNotificationProps {
   onDismiss?: EventHandler
 }
 
-function ErrorNotification(props: ErrorNotificationProps) {
+function ErrorNotification(props: Readonly<ErrorNotificationProps>) {
 
   const {
     message,

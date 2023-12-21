@@ -6,7 +6,7 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { TabMode, TabType, ThemeName } from '../types/Model';
+import { TabType, ThemeName } from '../types/Model';
 
 export class StorageService {
 
@@ -44,11 +44,12 @@ export class StorageService {
     return this.storage.getItem('exploreFolderId') ?? undefined;
   }
 
-  getTabMode(): TabMode | undefined {
-    return {
-      type: Number(this.storage.getItem('tabType') ?? TabType.explorer),
-      open: Boolean(Number(this.storage.getItem('tabOpen') ?? true))
-    };
+  getTabOpen(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('tabOpen') ?? true));
+  }
+
+  getTabType(): TabType | undefined {
+    return Number(this.storage.getItem('tabType') ?? TabType.explorer);
   }
 
   getThemeName(): ThemeName | undefined {
@@ -56,7 +57,7 @@ export class StorageService {
   }
 
   setContentMinimap(value?: boolean): void {
-    if (value) {
+    if (value != null) {
       this.storage.setItem('contentMinimap', String(Number(value)));
     } else {
       this.storage.removeItem('contentMinimap');
@@ -64,7 +65,7 @@ export class StorageService {
   }
 
   setContentPreview(value?: boolean): void {
-    if (value) {
+    if (value != null) {
       this.storage.setItem('contentPreview', String(Number(value)));
     } else {
       this.storage.removeItem('contentPreview');
@@ -72,7 +73,7 @@ export class StorageService {
   }
 
   setContentScroll(value?: boolean): void {
-    if (value) {
+    if (value != null) {
       this.storage.setItem('contentScroll', String(Number(value)));
     } else {
       this.storage.removeItem('contentScroll');
@@ -80,7 +81,7 @@ export class StorageService {
   }
 
   setContentWordWrap(value?: boolean): void {
-    if (value) {
+    if (value != null) {
       this.storage.setItem('contentWordWrap', String(Number(value)));
     } else {
       this.storage.removeItem('contentWordWrap');
@@ -88,7 +89,7 @@ export class StorageService {
   }
 
   setExploreAllFiles(value?: boolean): void {
-    if (value) {
+    if (value != null) {
       this.storage.setItem('exploreAllFiles', String(Number(value)));
     } else {
       this.storage.removeItem('exploreAllFiles');
@@ -96,7 +97,7 @@ export class StorageService {
   }
 
   setExploreFileId(value?: string): void {
-    if (value) {
+    if (value != null) {
       this.storage.setItem('exploreFileId', value);
     } else {
       this.storage.removeItem('exploreFileId');
@@ -104,20 +105,26 @@ export class StorageService {
   }
 
   setExploreFolderId(value?: string): void {
-    if (value) {
+    if (value != null) {
       this.storage.setItem('exploreFolderId', value);
     } else {
       this.storage.removeItem('exploreFolderId');
     }
   }
 
-  setTabMode(value?: TabMode): void {
-    if (value) {
-      this.storage.setItem('tabType', String(Number(value.type)));
-      this.storage.setItem('tabOpen', String(Number(value.open)));
+  setTabOpen(value?: boolean): void {
+    if (value != null) {
+      this.storage.setItem('tabOpen', String(Number(value)));
+    } else {
+      this.storage.removeItem('tabOpen');
+    }
+  }
+
+  setTabType(value?: TabType): void {
+    if (value != null) {
+      this.storage.setItem('tabType', String(Number(value)));
     } else {
       this.storage.removeItem('tabType');
-      this.storage.removeItem('tabOpen');
     }
   }
 

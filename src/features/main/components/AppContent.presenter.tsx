@@ -18,12 +18,12 @@ import ContentEmpty from './ContentEmpty';
 import ContentSupported from './ContentSupported';
 import ContentUnsupported from './ContentUnsupported';
 
-interface ContentSectionProps {
+interface AppContentProps {
   file?: File,
   loading?: boolean
 }
 
-function AppContent(props: ContentSectionProps) {
+function AppContent(props: Readonly<AppContentProps>) {
 
   const {
     file,

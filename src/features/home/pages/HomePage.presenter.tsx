@@ -26,7 +26,7 @@ interface HomePageProps {
   onSignIn?: EventHandler
 }
 
-function HomePage(props: HomePageProps) {
+function HomePage(props: Readonly<HomePageProps>) {
 
   const {
     onLinkToGitHub,

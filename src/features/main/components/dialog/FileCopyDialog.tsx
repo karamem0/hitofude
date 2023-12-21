@@ -28,14 +28,14 @@ interface FileCopyDialogProps {
   value?: File
 }
 
-function FileCopyDialog(props: FileCopyDialogProps) {
+function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
 
   const { value } = props;
 
   const {
     dispatch,
     state: {
-      exploreTabProps
+      explorerProps
     }
   } = useStore();
   const { graph } = useService();
@@ -49,7 +49,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       if (data?.downloadUrl == null) {
         throw new ArgumentNullError();
       }
-      const exploreFolder = exploreTabProps?.folder;
+      const exploreFolder = explorerProps?.folder;
       if (exploreFolder == null) {
         throw new DependencyNullError();
       }
@@ -72,7 +72,7 @@ function FileCopyDialog(props: FileCopyDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    exploreTabProps?.folder,
+    explorerProps?.folder,
     graph,
     dispatch
   ]);

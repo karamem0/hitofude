@@ -12,7 +12,7 @@ interface ScrollSynchronizerProps {
   children?: React.ReactNode
 }
 
-function ScrollSynchronizer(props: ScrollSynchronizerProps) {
+function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
 
   const { children } = props;
 

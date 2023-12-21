@@ -17,7 +17,7 @@ interface ContentImageProps {
   file?: File
 }
 
-function ContentImage(props: ContentImageProps) {
+function ContentImage(props: Readonly<ContentImageProps>) {
 
   const { file } = props;
 

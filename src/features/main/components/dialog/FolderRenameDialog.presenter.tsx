@@ -35,7 +35,7 @@ interface FolderRenameDialogProps {
   onSubmit?: EventHandler<FolderRenameDialogFormState>
 }
 
-function FolderRenameDialog(props: FolderRenameDialogProps) {
+function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
 
   const {
     loading,

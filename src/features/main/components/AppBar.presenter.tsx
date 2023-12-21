@@ -30,7 +30,6 @@ import { EventHandler } from '../../../types/Event';
 import {
   DialogAction,
   DialogType,
-  TabMode,
   TabType
 } from '../../../types/Model';
 import messages from '../messages';
@@ -38,15 +37,17 @@ import messages from '../messages';
 import AppBarButton from './AppBarButton';
 
 interface AppBarProps {
-  tabMode?: TabMode,
+  tabLoading?: boolean,
+  tabType?: TabType,
   onOpenDialog?: EventHandler<DialogAction>,
   onToggleTab?: EventHandler<TabType>
 }
 
-function AppBar(props: AppBarProps) {
+function AppBar(props: Readonly<AppBarProps>) {
 
   const {
-    tabMode,
+    tabLoading,
+    tabType,
     onOpenDialog,
     onToggleTab
   } = props;
@@ -70,14 +71,16 @@ function AppBar(props: AppBarProps) {
           grid-gap: 0.5rem;
         `}>
         <AppBarButton
-          selected={tabMode?.type === TabType.explorer}
+          disabled={tabLoading}
+          selected={tabType === TabType.explorer}
           title={intl.formatMessage(messages.Explorer)}
           icon={(
             <TextDocumentIcon />
           )}
           onClick={(e) => onToggleTab?.(e, TabType.explorer)} />
         <AppBarButton
-          selected={tabMode?.type === TabType.search}
+          disabled={tabLoading}
+          selected={tabType === TabType.search}
           title={intl.formatMessage(messages.Search)}
           icon={(
             <SearchIcon />
@@ -92,12 +95,14 @@ function AppBar(props: AppBarProps) {
         `}>
         <Menu positioning="after">
           <MenuTrigger>
-            <div role="button">
+            <div
+              role="button"
+              tabIndex={-1}>
               <AppBarButton
                 title={intl.formatMessage(messages.Settings)}
-                icon={
+                icon={(
                   <SettingsIcon />
-                } />
+                )} />
             </div>
           </MenuTrigger>
           <MenuPopover>

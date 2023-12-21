@@ -16,7 +16,7 @@ interface MarkdownEditorProps {
   className?: string
 }
 
-function MarkdownEditor(props: MarkdownEditorProps, ref: React.Ref<HTMLDivElement>) {
+function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<HTMLDivElement>) {
 
   const {
     className

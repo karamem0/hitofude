@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
@@ -17,71 +18,133 @@ import {
   setError,
   setExploreFile,
   setExploreFolder,
-  setSearchFile
+  setTabLoading,
+  setSearchFile,
+  setSearchQuery,
+  setSearchResults
 } from '../../../stores/Action';
-import { DependencyNullError, FileNotFoundError } from '../../../types/Error';
+import { DependencyNullError, FileNotFoundError, InvalidOperationError } from '../../../types/Error';
 import { TabType } from '../../../types/Model';
 
 import Presenter from './AppTab.presenter';
 
 function AppTab() {
 
+  const { route } = useRoute();
   const {
     dispatch,
     state: {
-      exploreTabProps,
-      tabMode = {
-        type: TabType.explorer,
+      explorerProps,
+      tabProps = {
+        loading: false,
+        type: undefined,
         open: true
       }
     }
   } = useStore();
   const { graph, storage } = useService();
-  const [ tabOpen, setTabOpen ] = React.useState(tabMode.open);
-  const [ tabType, setTabType ] = React.useState(tabMode.type);
+  const [ tabOpen, setTabOpen ] = React.useState(tabProps.open);
+  const [ tabType, setTabType ] = React.useState(tabProps.type);
 
   const handleExplorerOpen = React.useCallback(async () => {
-    const rootFolder = exploreTabProps?.rootFolder;
-    if (rootFolder == null) {
-      throw new DependencyNullError();
-    }
-    const exploreFolderId = storage.getExploreFolderId();
-    const exploreFileId = storage.getExploreFileId();
-    const exploreFolder = await Promise.resolve()
-      .then(() => exploreFolderId ? graph.getFolderById(exploreFolderId) : Promise.reject(new FileNotFoundError()))
-      .catch(() => rootFolder);
-    const exploreFile = exploreFolder?.files?.filter((item) => item.id === exploreFileId)?.at(0);
-    dispatch(setExploreFolder(exploreFolder));
-    if (exploreFile != null) {
-      dispatch(setExploreFile(exploreFile));
-      dispatch(setContentFile(exploreFile));
-      dispatch(setContentText(await graph.getFileText(exploreFile)));
-    } else {
-      dispatch(setExploreFile());
-      dispatch(setContentFile());
+    try {
+      dispatch(setTabLoading(true));
+      const rootFolder = explorerProps?.rootFolder;
+      if (rootFolder == null) {
+        throw new DependencyNullError();
+      }
+      const params = route.getParams();
+      if (params.tab !== TabType.explorer) {
+        throw new InvalidOperationError();
+      }
+      const folder = await Promise.resolve()
+        .then(() => params.folder ? graph.getFolderById(params.folder) : Promise.reject(new FileNotFoundError()))
+        .catch(() => rootFolder);
+      dispatch(setExploreFolder(folder));
+      const file = folder?.files?.filter((item) => item.id === params.file)?.at(0);
+      if (file != null) {
+        try {
+          dispatch(setContentLoading(true));
+          dispatch(setExploreFile(file));
+          dispatch(setContentFile(file));
+          dispatch(setContentText(await graph.getFileText(file)));
+        } finally {
+          dispatch(setContentLoading(false));
+        }
+      } else {
+        dispatch(setExploreFile());
+        dispatch(setContentFile());
+      }
+    } catch (e) {
+      dispatch(setError(e as Error));
+    } finally {
+      dispatch(setTabLoading(false));
     }
   }, [
-    exploreTabProps?.rootFolder,
+    explorerProps?.rootFolder,
     graph,
-    storage,
+    route,
     dispatch
   ]);
 
   const handleSearchOpen = React.useCallback(async () => {
-    dispatch(setSearchFile());
-    dispatch(setContentFile());
-    await Promise.resolve();
+    try {
+      dispatch(setTabLoading(true));
+      const params = route.getParams();
+      if (params.tab !== TabType.search) {
+        throw new InvalidOperationError();
+      }
+      if (params.search != null) {
+        dispatch(setSearchQuery(params.search));
+        dispatch(setSearchResults(await graph.searchResults(params.search)));
+      } else {
+        dispatch(setSearchQuery());
+        dispatch(setSearchResults());
+      }
+      if (params.file != null) {
+        try {
+          dispatch(setContentLoading(true));
+          const file = await graph.getFileById(params.file);
+          dispatch(setSearchFile(file));
+          dispatch(setContentFile(file));
+          dispatch(setContentText(await graph.getFileText(file)));
+        } finally {
+          dispatch(setContentLoading(false));
+        }
+      } else {
+        dispatch(setSearchFile());
+        dispatch(setContentFile());
+      }
+    } catch (e) {
+      dispatch(setError(e as Error));
+    } finally {
+      dispatch(setTabLoading(false));
+    }
   }, [
+    graph,
+    route,
     dispatch
   ]);
 
   React.useEffect(() => {
     (async () => {
       try {
-        dispatch(setContentLoading(true));
-        switch (tabMode.type) {
+        const params = route.getParams();
+        switch (params.tab) {
           case TabType.explorer: {
-            await handleExplorerOpen();
+            const rootFolder = explorerProps?.rootFolder;
+            if (rootFolder == null) {
+              throw new DependencyNullError();
+            }
+            if (params.folder == null) {
+              route.setParams({
+                tab: params.tab,
+                folder: storage.getExploreFolderId() ?? rootFolder.id,
+                file: storage.getExploreFileId()
+              });
+            } else {
+              await handleExplorerOpen();
+            }
             break;
           }
           case TabType.search: {
@@ -89,34 +152,34 @@ function AppTab() {
             break;
           }
           default:
-            break;
+            route.setParams({
+              tab: TabType.explorer
+            });
         }
-        setTabType(tabMode.type);
+        setTabType(params.tab);
       } catch (e) {
         dispatch(setError(e as Error));
-      } finally {
-        dispatch(setContentLoading(false));
       }
     })();
   }, [
-    tabMode.type,
+    explorerProps?.rootFolder,
+    route,
+    storage,
     dispatch,
     handleExplorerOpen,
     handleSearchOpen
   ]);
 
   React.useEffect(() => {
-    setTabOpen(tabMode.open);
+    setTabOpen(tabProps.open);
   }, [
-    tabMode.open
+    tabProps.open
   ]);
 
   return (
     <Presenter
-      tabMode={{
-        type: tabType,
-        open: tabOpen
-      }} />
+      tabOpen={tabOpen}
+      tabType={tabType} />
   );
 
 }

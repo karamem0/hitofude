@@ -20,7 +20,7 @@ interface SidePanelFactoryProps {
   action?: SidePanelAction
 }
 
-function SidePanelFactory(props: SidePanelFactoryProps) {
+function SidePanelFactory(props: Readonly<SidePanelFactoryProps>) {
 
   const {
     action

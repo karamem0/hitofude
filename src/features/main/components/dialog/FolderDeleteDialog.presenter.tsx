@@ -31,7 +31,7 @@ interface FolderDeleteDialogProps {
   onSubmit?: EventHandler
 }
 
-function FolderDeleteDialog(props: FolderDeleteDialogProps) {
+function FolderDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
 
   const {
     loading,

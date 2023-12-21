@@ -32,7 +32,7 @@ interface ScrollSynchronizerProps {
   defaultElement2Position?: ScrollPosition
 }
 
-function ScrollSynchronizer(props: ScrollSynchronizerProps) {
+function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
 
   const {
     children,

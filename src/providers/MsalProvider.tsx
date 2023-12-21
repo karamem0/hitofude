@@ -28,7 +28,7 @@ const msalConfig = {
   }
 };
 
-function MsalProvider(props: React.PropsWithChildren<unknown>) {
+function MsalProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 

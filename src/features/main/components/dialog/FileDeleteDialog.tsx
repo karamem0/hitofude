@@ -8,18 +8,16 @@
 
 import React from 'react';
 
+import { useRoute } from '../../../../providers/RouteProvider';
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import {
   deleteExploreFile,
-  setContentFile,
-  setContentText,
   setDialogAction,
-  setError,
-  setExploreFile
+  setError
 } from '../../../../stores/Action';
 import { DependencyNullError } from '../../../../types/Error';
-import { File } from '../../../../types/Model';
+import { File, TabType } from '../../../../types/Model';
 import { isSupportedFile } from '../../../../utils/File';
 
 import Presenter from './FileDeleteDialog.presenter';
@@ -28,14 +26,15 @@ interface FileDeleteDialogProps {
   value?: File
 }
 
-function FileDeleteDialog(props: FileDeleteDialogProps) {
+function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
 
   const { value } = props;
 
+  const { route } = useRoute();
   const {
     dispatch,
     state: {
-      exploreTabProps
+      explorerProps
     }
   } = useStore();
   const { graph } = useService();
@@ -46,30 +45,27 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       if (value == null) {
         throw new DependencyNullError();
       }
-      const allFiles = exploreTabProps?.allFiles;
-      const exploreFile = exploreTabProps?.file;
-      if (exploreFile == null) {
+      const allFiles = explorerProps?.allFiles;
+      const file = explorerProps?.file;
+      if (file == null) {
         throw new DependencyNullError();
       }
-      const exploreFolder = exploreTabProps?.folder;
-      if (exploreFolder == null) {
+      const folder = explorerProps?.folder;
+      if (folder == null) {
         throw new DependencyNullError();
       }
       await graph.deleteExploreFile(value);
       dispatch(deleteExploreFile(value));
-      if (value.id === exploreFile?.id) {
-        const file = (exploreFolder.files ?? [])
+      if (value.id === file?.id) {
+        const file = (folder.files ?? [])
           .filter((item) => (allFiles ?? false) || isSupportedFile(item))
           .filter((item) => item.id !== value.id)
           .at(-1);
-        if (file != null) {
-          dispatch(setExploreFile(file));
-          dispatch(setContentFile(file));
-          dispatch(setContentText(await graph.getFileText(file)));
-        } else {
-          dispatch(setExploreFile());
-          dispatch(setContentFile());
-        }
+        route.setParams({
+          tab: TabType.explorer,
+          folder: folder.id,
+          file: file?.id
+        });
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -82,10 +78,11 @@ function FileDeleteDialog(props: FileDeleteDialogProps) {
       dispatch(setDialogAction());
     }
   }, [
-    exploreTabProps?.allFiles,
-    exploreTabProps?.file,
-    exploreTabProps?.folder,
+    explorerProps?.allFiles,
+    explorerProps?.file,
+    explorerProps?.folder,
     graph,
+    route,
     value,
     dispatch
   ]);

@@ -38,7 +38,7 @@ interface FileVersionPanelProps {
   onRestore?: EventHandler<DialogAction>
 }
 
-function FileVersionPanel(props: FileVersionPanelProps) {
+function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
 
   const {
     items,
@@ -56,8 +56,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
           <div
             css={css`
               max-height: calc(100vh - 5rem);
-              overflow-x: hidden;
-              overflow-y: auto;
+              overflow: hidden auto;
             `}>
             <Table size="small">
               <TableHeader>
@@ -91,6 +90,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
                                 <div
                                   aria-label={intl.formatMessage(messages.RestoreFile)}
                                   role="button"
+                                  tabIndex={-1}
                                   title={intl.formatMessage(messages.RestoreFile)}
                                   css={css`
                                     font-size: 1rem;

@@ -18,21 +18,22 @@ import {
   Text
 } from '@fluentui/react-components';
 import { ChevronLeftIcon, MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
+import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface TreeHeaderProps {
-  disabled?: boolean,
+  root?: boolean,
   menu?: React.ReactNode,
   name?: string,
   onClick?: EventHandler
 }
 
-function TreeHeader(props: TreeHeaderProps) {
+function TreeHeader(props: Readonly<TreeHeaderProps>) {
 
   const {
-    disabled,
+    root,
     menu,
     name,
     onClick
@@ -62,16 +63,23 @@ function TreeHeader(props: TreeHeaderProps) {
         }
       `}>
       <div
-        aria-disabled={disabled}
+        aria-disabled={root}
         aria-label={intl.formatMessage(messages.Back)}
         role="button"
+        tabIndex={-1}
         title={intl.formatMessage(messages.Back)}
         css={css`
           font-size: 1rem;
           line-height: 1rem;
         `}
-        onClick={(e) => !disabled && onClick?.(e)}>
-        <ChevronLeftIcon />
+        onClick={(e) => !root && onClick?.(e)}>
+        {
+          root ? (
+            <OneDriveLogoIcon />
+          ) : (
+            <ChevronLeftIcon />
+          )
+        }
       </div>
       <div
         css={css`
@@ -93,6 +101,7 @@ function TreeHeader(props: TreeHeaderProps) {
           <div
             aria-label={intl.formatMessage(messages.MoreOption)}
             role="button"
+            tabIndex={-1}
             title={intl.formatMessage(messages.MoreOption)}
             css={css`
               font-size: 1rem;

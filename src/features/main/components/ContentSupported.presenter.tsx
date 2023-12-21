@@ -29,7 +29,7 @@ interface ContentSupportedProps {
   onScroll?: EventHandler<ScrollPosition>
 }
 
-function ContentSupported(props: ContentSupportedProps) {
+function ContentSupported(props: Readonly<ContentSupportedProps>) {
 
   const {
     file,

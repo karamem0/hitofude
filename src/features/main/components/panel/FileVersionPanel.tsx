@@ -11,6 +11,7 @@ import React from 'react';
 import { useService } from '../../../../providers/ServiceProvider';
 import { useStore } from '../../../../providers/StoreProvider';
 import { setDialogAction } from '../../../../stores/Action';
+import { ArgumentNullError } from '../../../../types/Error';
 import { Event } from '../../../../types/Event';
 import { DialogAction, File, FileVersion } from '../../../../types/Model';
 
@@ -20,7 +21,7 @@ interface FileVersionPanelProps {
   value?: File
 }
 
-function FileVersionPanel(props: FileVersionPanelProps) {
+function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
 
   const {
     value
@@ -33,7 +34,7 @@ function FileVersionPanel(props: FileVersionPanelProps) {
 
   const handleRestore = React.useCallback((_?: Event, data?: DialogAction) => {
     if (data == null) {
-      throw new Error();
+      throw new ArgumentNullError();
     }
     dispatch(setDialogAction(data));
   }, [

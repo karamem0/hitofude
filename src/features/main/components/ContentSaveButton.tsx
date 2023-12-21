@@ -17,7 +17,7 @@ interface ContentSaveButtonProps {
   onClick?: EventHandler<boolean>
 }
 
-function ContentSaveButton(props: ContentSaveButtonProps) {
+function ContentSaveButton(props: Readonly<ContentSaveButtonProps>) {
 
   const {
     disabled,

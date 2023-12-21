@@ -18,7 +18,7 @@ interface ModalDialogProps {
   onOpenChange?: EventHandler<boolean>
 }
 
-function ModalDialog(props: ModalDialogProps) {
+function ModalDialog(props: Readonly<ModalDialogProps>) {
 
   const {
     children,

@@ -131,6 +131,12 @@
       "value": "Updated date"
     }
   ],
+  "Emw6OK": [
+    {
+      "type": 0,
+      "value": "OneDrive"
+    }
+  ],
   "HAlOn1": [
     {
       "type": 0,
@@ -255,12 +261,6 @@
     {
       "type": 0,
       "value": "The folder with the name already exists"
-    }
-  ],
-  "bYbrKK": [
-    {
-      "type": 0,
-      "value": "My files"
     }
   ],
   "cyR7Kh": [

@@ -30,7 +30,7 @@ interface DialogFactoryProps {
   action?: DialogAction
 }
 
-function DialogFactory(props: DialogFactoryProps) {
+function DialogFactory(props: Readonly<DialogFactoryProps>) {
 
   const {
     action

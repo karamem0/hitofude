@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { InvalidOperationError } from '../../types/Error';
 import { ProgressType } from '../../types/Model';
 import ProgressDialog from '../components/ProgressDialog';
 
@@ -21,12 +22,12 @@ const ProgressContext = React.createContext<ProgressContextState | undefined>(un
 export const useProgress = (): ProgressContextState => {
   const value = React.useContext(ProgressContext);
   if (value == null) {
-    throw new Error();
+    throw new InvalidOperationError();
   }
   return value;
 };
 
-function ProgressProvider(props: React.PropsWithChildren<unknown>) {
+function ProgressProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 

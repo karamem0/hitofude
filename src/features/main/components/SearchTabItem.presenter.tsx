@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, UseFormReturn } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { css } from '@emotion/react';
@@ -33,24 +33,24 @@ import TreeItem from './TreeItem';
 
 interface SearchTabItemProps {
   file?: File,
+  form?: UseFormReturn<SearchTabItemFormState>,
   loading?: boolean,
   query?: string,
   results?: File[],
-  onChangeInput?: EventHandler<string>,
   onClearInput?: EventHandler,
   onOpenFileLocation?: EventHandler<File>,
   onSelectFile?: EventHandler<File>,
   onSubmit?: EventHandler<SearchTabItemFormState>
 }
 
-function SearchTabItem(props: SearchTabItemProps) {
+function SearchTabItem(props: Readonly<SearchTabItemProps>) {
 
   const {
     file,
+    form,
     loading,
     query,
     results,
-    onChangeInput,
     onClearInput,
     onOpenFileLocation,
     onSelectFile,
@@ -58,9 +58,8 @@ function SearchTabItem(props: SearchTabItemProps) {
   } = props;
 
   const intl = useIntl();
-  const form = useForm<SearchTabItemFormState>();
 
-  return (
+  return form ? (
     <div
       css={css`
         display: grid;
@@ -97,6 +96,7 @@ function SearchTabItem(props: SearchTabItemProps) {
               contentAfter={(
                 <div
                   role="button"
+                  tabIndex={-1}
                   css={css`
                     font-size: 0.5rem;
                     line-height: 0.5rem;
@@ -104,15 +104,19 @@ function SearchTabItem(props: SearchTabItemProps) {
                   onClick={(e) => {
                     form.setValue(field.name, '');
                     onClearInput?.(e);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key !== 'Enter') {
+                      return;
+                    }
+                    form.setValue(field.name, '');
+                    onClearInput?.(e);
                   }}>
                   <ClearIcon />
                 </div>
               )}
               onBlur={field.onBlur}
-              onChange={(e, data) => {
-                field.onChange(e);
-                onChangeInput?.(e, data.value);
-              }} />
+              onChange={field.onChange} />
           )}
           rules={{
             required: true
@@ -124,8 +128,7 @@ function SearchTabItem(props: SearchTabItemProps) {
           display: flex;
           flex-direction: column;
           grid-gap: 0.25rem;
-          overflow-x: hidden;
-          overflow-y: auto;
+          overflow: hidden auto;
         `}>
         {
           results && results.length > 0 ? (
@@ -170,7 +173,7 @@ function SearchTabItem(props: SearchTabItemProps) {
         }
       </div>
     </div>
-  );
+  ) : null;
 
 }
 

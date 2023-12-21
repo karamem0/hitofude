@@ -8,68 +8,42 @@
 
 import React from 'react';
 
+import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { useTheme } from '../../../providers/ThemeProvider';
-import { setInitialState } from '../../../stores/Action';
-import { ThemeName } from '../../../types/Model';
+import { setTabOpen, setTabType } from '../../../stores/Action';
 
 import Presenter from './MainPage.presenter';
 
 function MainPage() {
 
+  const { route } = useRoute();
   const {
     dispatch,
     state: {
-      tabMode
+      tabProps
     }
   } = useStore();
-  const { graph, storage } = useService();
-  const { changeTheme } = useTheme();
+  const { storage } = useService();
 
   React.useEffect(() => {
-    (async () => {
-      changeTheme(storage.getThemeName() ?? ThemeName.light);
-      dispatch(setInitialState({
-        contentProps: {
-          editing: false,
-          loading: true,
-          minimap: storage.getContentMinimap(),
-          position: {
-            scrollLeft: 0,
-            scrollTop: 0
-          },
-          preview: storage.getContentPreview(),
-          scroll: storage.getContentScroll(),
-          text: '',
-          wordWrap: storage.getContentWordWrap()
-        },
-        exploreTabProps: {
-          allFiles: storage.getExploreAllFiles(),
-          rootFolder: await graph.getRootFolder()
-        },
-        markdownProps: {
-          position: {
-            scrollLeft: 0,
-            scrollTop: 0
-          },
-          text: ''
-        },
-        searchTabProps: {
-          query: ''
-        },
-        tabMode: storage.getTabMode()
-      }));
-    })();
+    const { tab } = route.getParams();
+    if (tab == null) {
+      route.setParams({
+        tab: storage.getTabType()
+      });
+    } else {
+      dispatch(setTabType(tab));
+      dispatch(setTabOpen(storage.getTabOpen()));
+    }
   }, [
-    graph,
+    route,
     storage,
-    changeTheme,
     dispatch
   ]);
 
   return (
-    <Presenter loading={!tabMode} />
+    <Presenter loading={tabProps?.type == null} />
   );
 
 }
