@@ -1,7 +1,6 @@
 # Hitofude
 
-[![.github/workflows/production.yml](https://github.com/karamem0/hitofude/actions/workflows/production.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/production.yml)
-[![.github/workflows/development.yml](https://github.com/karamem0/hitofude/actions/workflows/development.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/development.yml)
+[![.github/workflows/workflow.yml](https://github.com/karamem0/hitofude/actions/workflows/workflow.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/workflow.yml)
 [![License](https://img.shields.io/github/license/karamem0/hitofude.svg)](https://github.com/karamem0/hitofude/blob/main/LICENSE)
 
 Online Markdown Editor for Microsoft 365

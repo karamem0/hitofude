@@ -1,23 +1,40 @@
 on:
   push:
     branches:
+      - main
       - develop
 
 env:
-  BUILD_VERSION: 1.10.0
+  BUILD_VERSION: 1.10.1
 
 jobs:
-  build:
+  select-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Select environment from branch name
+        id: select-environment
+        shell: pwsh
+        run: |
+          if ("${{github.ref}}" -eq "refs/heads/main") {
+            Write-Output "env-name=production" >> $env:GITHUB_OUTPUT
+          }
+          if ("${{github.ref}}" -eq "refs/heads/develop") {
+            Write-Output "env-name=development" >> $env:GITHUB_OUTPUT
+          }
+    outputs:
+      env-name: ${{steps.select-environment.outputs.env-name}}
+  build-client:
+    needs: select-environment
     runs-on: ubuntu-latest
     environment:
-      name: development
+      name: ${{needs.select-environment.outputs.env-name}}
     steps:
       - name: Checkout repos
-        uses: actions/checkout@v3
-      - name: Setup Node.js 18.x
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 20.x
       - name: Update package.json
         run: npm version ${{env.BUILD_VERSION}} --no-git-tag-version
       - name: Update microsoft-identity-association.json
@@ -42,18 +59,20 @@ jobs:
           npm ci
           npm run build
       - name: Upload build files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: hitofude
           path: dist
-  deploy:
-    needs: build
+  deploy-client:
+    needs:
+      - select-environment
+      - build-client
     runs-on: ubuntu-latest
     environment:
-      name: development
+      name: ${{needs.select-environment.outputs.env-name}}
     steps:
       - name: Download build files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: hitofude
           path: artifact
