@@ -8,8 +8,9 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
 import { DoubleChevronLeftIcon, DoubleChevronRightIcon } from '@fluentui/react-icons-mdl2';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../../../providers/ThemeProvider';
 import {

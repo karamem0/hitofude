@@ -10,8 +10,9 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import { Global, css } from '@emotion/react';
 import { Spinner, Text } from '@fluentui/react-components';
+
+import { Global, css } from '@emotion/react';
 
 import ErrorNotification from '../../../common/components/ErrorNotification';
 import ProgressProvider from '../../../common/providers/ProgressProvider';

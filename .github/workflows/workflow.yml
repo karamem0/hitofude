@@ -5,7 +5,7 @@ on:
       - develop
 
 env:
-  BUILD_VERSION: 1.10.1
+  BUILD_VERSION: 1.11.0
 
 jobs:
   select-environment:
@@ -84,6 +84,6 @@ jobs:
         uses: azure/cli@v1
         with:
           inlineScript: |
-            az storage blob delete-batch --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --source '$web'
-            az storage blob upload-batch --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --auth-mode key --destination '$web' --source artifact
+            az storage blob delete-batch --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --auth-mode login --source '$web'
+            az storage blob upload-batch --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --auth-mode login --destination '$web' --source artifact
             az cdn endpoint purge --content-paths '/*' --profile-name ${{secrets.AZURE_CDN_PROFILE_NAME}} --name ${{secrets.AZURE_CDN_ENDPOINT_NAME}} --resource-group ${{secrets.AZURE_RESOURCE_GROUP_NAME}}

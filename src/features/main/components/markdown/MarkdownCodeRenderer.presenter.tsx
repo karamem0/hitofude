@@ -76,8 +76,7 @@ function MarkdownCodeRenderer(props: Readonly<MarkdownCodeRendererProps>) {
         (() => {
           const element = children as React.ReactElement;
           const props = element.props;
-          const value = String(props.children).replace(/\n$/, '');
-          return value;
+          return String(props.children).replace(/\n$/, '');
         })()
       }
     </SyntaxHighlighter>

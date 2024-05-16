@@ -9,6 +9,7 @@
 import React from 'react';
 
 import * as ReactDOM from 'react-dom/client';
+
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 

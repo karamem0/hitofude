@@ -10,10 +10,11 @@ import React from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { css } from '@emotion/react';
 import { Button, Link, Text } from '@fluentui/react-components';
 import { GitHubLogoIcon } from '@fluentui/react-icons-mdl2';
 import { WindowsLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';

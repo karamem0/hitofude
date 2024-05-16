@@ -10,7 +10,6 @@ import React from 'react';
 
 import { useIntl } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   Menu,
   MenuPopover,
@@ -18,6 +17,8 @@ import {
   Text
 } from '@fluentui/react-components';
 import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';

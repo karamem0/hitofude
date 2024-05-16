@@ -14,8 +14,9 @@ import {
   useIntl
 } from 'react-intl';
 
-import { css } from '@emotion/react';
 import { Button, Text } from '@fluentui/react-components';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';

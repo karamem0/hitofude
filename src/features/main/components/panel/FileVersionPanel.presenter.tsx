@@ -14,7 +14,6 @@ import {
   useIntl
 } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   Table,
   TableBody,
@@ -26,6 +25,8 @@ import {
   TableRow
 } from '@fluentui/react-components';
 import { HistoryIcon } from '@fluentui/react-icons-mdl2';
+
+import { css } from '@emotion/react';
 import bytes from 'bytes';
 
 import SidePanel from '../../../../common/components/SidePanel';

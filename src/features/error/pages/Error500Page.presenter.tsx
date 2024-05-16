@@ -10,8 +10,9 @@ import React from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { css } from '@emotion/react';
 import { Text } from '@fluentui/react-components';
+
+import { css } from '@emotion/react';
 
 import Communication from '../../../common/components/Communication';
 import { useTheme } from '../../../providers/ThemeProvider';

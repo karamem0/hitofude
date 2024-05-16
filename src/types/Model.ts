@@ -116,7 +116,6 @@ export interface ScrollSize {
 }
 
 export enum ProgressType {
-  none = 'none',
   save = 'save'
 }
 

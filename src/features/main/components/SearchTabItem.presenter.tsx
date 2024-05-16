@@ -11,7 +11,6 @@ import React from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   Caption1,
   Input,
@@ -23,6 +22,8 @@ import {
   OpenFolderHorizontalIcon,
   TextDocumentIcon
 } from '@fluentui/react-icons-mdl2';
+
+import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';

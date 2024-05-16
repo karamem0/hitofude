@@ -8,8 +8,9 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
 import { Text } from '@fluentui/react-components';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../providers/ThemeProvider';
 

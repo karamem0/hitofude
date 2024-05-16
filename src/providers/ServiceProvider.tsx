@@ -8,8 +8,9 @@
 
 import React from 'react';
 
-import { useMsal } from '@azure/msal-react';
 import { Client } from '@microsoft/microsoft-graph-client';
+
+import { useMsal } from '@azure/msal-react';
 
 import { GraphService } from '../services/GraphService';
 import { StorageService } from '../services/StorageService';

@@ -10,7 +10,6 @@ import React from 'react';
 
 import { useIntl } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   Dialog,
   DialogBody,
@@ -19,6 +18,8 @@ import {
   Spinner,
   Text
 } from '@fluentui/react-components';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../providers/ThemeProvider';
 import { ProgressType } from '../../types/Model';
@@ -40,7 +41,7 @@ function ProgressDialog(props: Readonly<ProgressDialogProps>) {
   return (
     <Dialog
       modalType="alert"
-      open={value !== ProgressType.none}>
+      open={!!value}>
       <DialogSurface>
         <DialogBody>
           <DialogContent

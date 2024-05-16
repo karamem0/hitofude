@@ -10,7 +10,6 @@ import React from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   Menu,
   MenuItem,
@@ -24,6 +23,8 @@ import {
   SettingsIcon,
   TextDocumentIcon
 } from '@fluentui/react-icons-mdl2';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';

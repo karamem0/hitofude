@@ -29,6 +29,5 @@ export function getScrollTop(scrollPosition?: ScrollPosition, scrollSize1?: Scro
   const clientHeight2 = scrollSize2.clientHeight;
   const scrollHeight2 = scrollSize2.scrollHeight;
   const scrollRate = (scrollPosition.scrollTop / (scrollHeight1 - clientHeight1));
-  const scrollTop = (scrollHeight2 - clientHeight2) * Math.round(scrollRate * 100) / 100;
-  return scrollTop;
+  return (scrollHeight2 - clientHeight2) * Math.round(scrollRate * 100) / 100;
 }

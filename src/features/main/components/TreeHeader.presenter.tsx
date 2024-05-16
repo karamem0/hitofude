@@ -10,7 +10,6 @@ import React from 'react';
 
 import { useIntl } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   Menu,
   MenuPopover,
@@ -19,6 +18,8 @@ import {
 } from '@fluentui/react-components';
 import { ChevronLeftIcon, MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
 import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+
+import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';

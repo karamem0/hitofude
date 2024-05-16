@@ -4,15 +4,17 @@
     "es2021": true,
     "jest": true
   },
+  "plugins": [
+    "hooks",
+    "sonarjs"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:sonarjs/recommended-legacy",
     "standard"
-  ],
-  "plugins": [
-    "hooks"
   ],
   "settings": {
     "react": {
@@ -32,6 +34,12 @@
       "always"
     ],
     "arrow-spacing": "error",
+    "dot-notation": [
+      "error",
+      {
+        "allowPattern": "^[a-z]+(_[a-z]+)+$"
+      }
+    ],
     "hooks/sort": [
       "error",
       {
@@ -56,6 +64,10 @@
         "afterColon": true
       }
     ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
     "multiline-ternary": [
       "error",
       "never"
@@ -72,7 +84,15 @@
     "no-var": "error",
     "no-unused-vars": "off",
     "no-use-before-define": "off",
+    "operator-linebreak": [
+      "error",
+      "after"
+    ],
     "padded-blocks": "off",
+    "quotes": [
+      "error",
+      "single"
+    ],
     "semi": [
       "error",
       "always"
@@ -117,13 +137,44 @@
             "position": "before"
           },
           {
-            "pattern": "{react-**,react-dom/**,}",
+            "pattern": "react-dom/**",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "react**",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@automapper/**",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "@fluentui/**",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "@microsoft/**",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "@azure/**",
             "group": "builtin",
             "position": "after"
           }
         ],
         "pathGroupsExcludedImportTypes": [
-          "builtin"
+          "react",
+          "react-dom/**",
+          "react**",
+          "@automapper/**",
+          "@fluentui/**",
+          "@microsoft/**",
+          "@azure/**"
         ],
         "alphabetize": {
           "order": "asc"
@@ -175,6 +226,10 @@
         ]
       }
     ],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "sonarjs/no-collapsible-if": "warn",
+    "sonarjs/no-duplicate-string": "off",
+    "sonarjs/no-small-switch": "warn",
+    "sonarjs/prefer-single-boolean-return": "off"
   }
 }

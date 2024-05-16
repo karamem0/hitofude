@@ -10,7 +10,6 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   MenuDivider,
   MenuGroup,
@@ -21,6 +20,8 @@ import { DeleteIcon, RenameIcon } from '@fluentui/react-icons-mdl2';
 import {
   OneDriveLogoIcon
 } from '@fluentui/react-icons-mdl2-branded';
+
+import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
 import {

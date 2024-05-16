@@ -8,9 +8,10 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
 import { Button, Text } from '@fluentui/react-components';
 import { CancelIcon } from '@fluentui/react-icons-mdl2';
+
+import { css } from '@emotion/react';
 
 import { useTheme } from '../../providers/ThemeProvider';
 import { EventHandler } from '../../types/Event';

@@ -13,7 +13,7 @@ import { ProgressType } from '../../types/Model';
 import ProgressDialog from '../components/ProgressDialog';
 
 interface ProgressContextState {
-  progress: ProgressType,
+  progress?: ProgressType,
   setProgress: (value?: ProgressType) => void
 }
 
@@ -31,11 +31,11 @@ function ProgressProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 
-  const [ progress, setProgress ] = React.useState(ProgressType.none);
+  const [ progress, setProgress ] = React.useState<ProgressType>();
 
   const value = React.useMemo(() => ({
     progress,
-    setProgress: (value?: ProgressType) => setProgress(value || ProgressType.none)
+    setProgress: (value?: ProgressType) => setProgress(value)
   }), [
     progress
   ]);

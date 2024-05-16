@@ -10,7 +10,6 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import { css } from '@emotion/react';
 import {
   Avatar,
   Menu,
@@ -23,6 +22,8 @@ import {
   Text
 } from '@fluentui/react-components';
 import { SignOutIcon } from '@fluentui/react-icons-mdl2';
+
+import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
