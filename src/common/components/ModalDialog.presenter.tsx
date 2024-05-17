@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -13,12 +13,11 @@ import { Dialog } from '@fluentui/react-components';
 import { EventHandler } from '../../types/Event';
 
 interface ModalDialogProps {
-  children?: [React.JSX.Element, React.JSX.Element] | React.JSX.Element,
   open?: boolean,
   onOpenChange?: EventHandler<boolean>
 }
 
-function ModalDialog(props: Readonly<ModalDialogProps>) {
+function ModalDialog(props: Readonly<React.PropsWithChildren<ModalDialogProps>>) {
 
   const {
     children,
@@ -31,7 +30,7 @@ function ModalDialog(props: Readonly<ModalDialogProps>) {
       modalType='modal'
       open={open}
       onOpenChange={(e, data) => onOpenChange?.(e, data.open)}>
-      {children ?? (<React.Fragment />)}
+      {children as ([React.ReactElement, React.ReactElement] | React.ReactElement)}
     </Dialog>
   );
 

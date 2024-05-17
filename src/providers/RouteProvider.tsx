@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -34,7 +34,7 @@ function RouteProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const value = React.useMemo(() => ({
+  const value = React.useMemo<RouteContextState>(() => ({
     route: new RouteService(location, navigate)
   }), [
     location,

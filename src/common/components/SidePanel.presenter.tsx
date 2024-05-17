@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -14,25 +14,25 @@ import { CancelIcon } from '@fluentui/react-icons-mdl2';
 import { css } from '@emotion/react';
 
 import { useTheme } from '../../providers/ThemeProvider';
+import { layouts } from '../../themes/Layout';
 import { EventHandler } from '../../types/Event';
 
 interface SidePanelProps {
-  children?: React.ReactNode,
+  className?: string,
   content?: React.ReactNode,
   open?: boolean,
   title?: React.ReactNode,
-  width?: string,
   onOpenChange?: EventHandler<boolean>
 }
 
-function SidePanel(props: Readonly<SidePanelProps>) {
+function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
 
   const {
     children,
+    className,
     content,
     open,
     title,
-    width,
     onOpenChange
   } = props;
 
@@ -40,7 +40,10 @@ function SidePanel(props: Readonly<SidePanelProps>) {
 
   return (
     <React.Fragment>
-      <div onClick={(e) => onOpenChange?.(e, true)}>
+      <div
+        role="button"
+        tabIndex={-1}
+        onClick={(e) => onOpenChange?.(e, true)}>
         {children}
       </div>
       {
@@ -56,14 +59,17 @@ function SidePanel(props: Readonly<SidePanelProps>) {
               background-color: ${theme.colorNeutralBackgroundAlpha};
             `}>
             <div
+              role="button"
+              tabIndex={-1}
               css={css`
                 cursor: pointer;
               `}
               onClick={(e) => onOpenChange?.(e, false)} />
             <div
+              className={className}
               css={css`
-                width: ${width ?? '20rem'};
-                max-width: calc(100vw - 2rem);
+                width: ${layouts.sidePanel.width};
+                max-width: ${layouts.sidePanel.maxWidth};
                 background-color: ${theme.colorNeutralBackground1};
                 box-shadow: rgb(0 0 0 / 35%) 0 0 2rem 0;
               `}>
@@ -74,7 +80,7 @@ function SidePanel(props: Readonly<SidePanelProps>) {
                   grid-template-columns: 1fr auto;
                   grid-gap: 0.5rem;
                   align-items: center;
-                  height: 2rem;
+                  height: ${layouts.sidePanelHeader.height};
                   margin: 1rem;
                 `}>
                 <Text
@@ -88,15 +94,15 @@ function SidePanel(props: Readonly<SidePanelProps>) {
                   icon={(
                     <CancelIcon
                       css={css`
-                        width: 1rem;
-                        height: 1rem;
+                        font-size: 1rem;
+                        line-height: 1rem;
                       `}
                       onClick={(e) => onOpenChange?.(e, false)} />
                   )} />
               </div>
               <div
                 css={css`
-                  height: calc(100vh - 5rem);
+                  height: ${layouts.sidePanelBody.height};
                   margin: 1rem;
                 `}>
                 {content}

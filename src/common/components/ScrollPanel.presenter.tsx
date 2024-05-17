@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -14,11 +14,10 @@ import { useTheme } from '../../providers/ThemeProvider';
 import { ThemeName } from '../../types/Model';
 
 interface ScrollPanelProps {
-  children?: React.ReactNode,
   className?: string
 }
 
-function ScrollPanel(props: Readonly<ScrollPanelProps>, ref: React.Ref<HTMLDivElement>) {
+function ScrollPanel(props: Readonly<React.PropsWithChildren<ScrollPanelProps>>, ref: React.Ref<HTMLDivElement>) {
 
   const {
     children,
@@ -44,7 +43,7 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>, ref: React.Ref<HTMLDivEl
     <div
       ref={ref}
       className={className}
-      tabIndex={0}
+      tabIndex={-1}
       css={css`
         ::-webkit-scrollbar {
           width: 0.875rem;

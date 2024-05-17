@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -24,11 +24,23 @@ export interface ContentProps {
   file?: File,
   loading?: boolean,
   minimap?: boolean,
-  position?: ScrollPosition,
   preview?: boolean,
   scroll?: boolean,
+  scrollPosition?: ScrollPosition,
   text?: string,
   wordWrap?: boolean
+}
+
+export interface CursorPosition {
+  cursorX?: number,
+  cursorY?: number
+}
+
+export interface CursorSelection {
+  endX?: number,
+  endY?: number,
+  startX?: number,
+  startY?: number
 }
 
 export interface DialogAction {
@@ -94,7 +106,12 @@ export interface Folder {
 
 export interface MarkdownProps {
   changed?: boolean,
-  position?: ScrollPosition,
+  cursorPosition?: CursorPosition,
+  cursorSelection?: CursorSelection,
+  defaultCursorPosition?: CursorPosition,
+  defaultCursorSelection?: CursorSelection,
+  defaultText?: string,
+  scrollPosition?: ScrollPosition,
   text?: string
 }
 
@@ -104,8 +121,8 @@ export interface MimeType {
 }
 
 export interface ScrollPosition {
-  scrollLeft?: number,
-  scrollTop?: number
+  scrollX?: number,
+  scrollY?: number
 }
 
 export interface ScrollSize {

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -54,7 +54,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
       key={key}
       aria-selected={selected}
       role="listitem"
-      tabIndex={0}
+      tabIndex={-1}
       css={css`
         display: grid;
         grid-template-rows: auto;

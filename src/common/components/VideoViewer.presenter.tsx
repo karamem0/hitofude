@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -29,11 +29,13 @@ function VideoViewer(props: Readonly<VideoViewerProps>, ref: React.Ref<HTMLVideo
       ref={ref}
       className={className}
       controls
-      preload='metadata'
+      preload="metadata"
       src={src}
       css={css`
         display: ${loading ? 'none' : 'block'};
-      `} />
+      `}>
+      <track kind="captions" />
+    </video>
   );
 
 }

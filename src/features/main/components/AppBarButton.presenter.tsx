@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -54,7 +54,7 @@ function AppBarButton(props: Readonly<AppBarButtonProps>) {
         aria-disabled={disabled}
         aria-label={title}
         role="button"
-        tabIndex={0}
+        tabIndex={-1}
         title={title}
         css={css`
           display: grid;

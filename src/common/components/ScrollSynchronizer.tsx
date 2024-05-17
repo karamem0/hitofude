@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -10,7 +10,7 @@ import React from 'react';
 
 import { Event, EventHandler } from '../../types/Event';
 import { ScrollPosition, ScrollSize } from '../../types/Model';
-import { getScrollTop } from '../../utils/Scroll';
+import { getScrollY } from '../../utils/Scroll';
 
 interface ScrollSynchronizerState {
   element1Position?: ScrollPosition,
@@ -18,27 +18,27 @@ interface ScrollSynchronizerState {
   onElement1MouseEnter?: EventHandler,
   onElement1MouseLeave?: EventHandler,
   onElement1Resize?: EventHandler<ScrollSize>,
-  onElement1Scroll?: EventHandler<ScrollPosition>,
+  onElement1ScrollChange?: EventHandler<ScrollPosition>,
   onElement2MouseEnter?: EventHandler,
   onElement2MouseLeave?: EventHandler,
   onElement2Resize?: EventHandler<ScrollSize>,
-  onElement2Scroll?: EventHandler<ScrollPosition>
+  onElement2ScrollChange?: EventHandler<ScrollPosition>
 }
 
 interface ScrollSynchronizerProps {
-  children?: (state: ScrollSynchronizerState) => React.ReactNode,
   enabled?: boolean,
   defaultElement1Position?: ScrollPosition,
-  defaultElement2Position?: ScrollPosition
+  defaultElement2Position?: ScrollPosition,
+  render?: (state: ScrollSynchronizerState) => React.ReactNode
 }
 
 function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
 
   const {
-    children,
     enabled,
     defaultElement1Position,
-    defaultElement2Position
+    defaultElement2Position,
+    render
   } = props;
 
   const [ element1Position, setElement1Position ] = React.useState<ScrollPosition | undefined>(defaultElement1Position);
@@ -61,7 +61,7 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     element1Size.current = data;
   }, []);
 
-  const handleElement1Scroll = React.useCallback((_?: Event, data?: ScrollPosition) => {
+  const handleElement1ScrollChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
     if (!element1Active.current) {
       return;
     }
@@ -70,7 +70,7 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     }
     setElement2Position((value) => ({
       ...value,
-      scrollTop: getScrollTop(data, element1Size.current, element2Size.current)
+      scrollY: getScrollY(data, element1Size.current, element2Size.current)
     }));
   }, [
     element1Active,
@@ -89,7 +89,7 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     element2Size.current = data;
   }, []);
 
-  const handleElement2Scroll = React.useCallback((_?: Event, data?: ScrollPosition) => {
+  const handleElement2ScrollChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
     if (!element2Active.current) {
       return;
     }
@@ -98,7 +98,7 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     }
     setElement1Position((value) => ({
       ...value,
-      scrollTop: getScrollTop(data, element2Size.current, element1Size.current)
+      scrollY: getScrollY(data, element2Size.current, element1Size.current)
     }));
   }, [
     element2Active,
@@ -107,18 +107,20 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
 
   return (
     <React.Fragment>
-      {children?.({
-        element1Position,
-        element2Position,
-        onElement1MouseEnter: handleElement1MouseEnter,
-        onElement1MouseLeave: handleElement1MouseLeave,
-        onElement1Resize: handleElement1Resize,
-        onElement1Scroll: handleElement1Scroll,
-        onElement2MouseEnter: handleElement2MouseEnter,
-        onElement2MouseLeave: handleElement2MouseLeave,
-        onElement2Resize: handleElement2Resize,
-        onElement2Scroll: handleElement2Scroll
-      })}
+      {
+        render?.({
+          element1Position,
+          element2Position,
+          onElement1MouseEnter: handleElement1MouseEnter,
+          onElement1MouseLeave: handleElement1MouseLeave,
+          onElement1Resize: handleElement1Resize,
+          onElement1ScrollChange: handleElement1ScrollChange,
+          onElement2MouseEnter: handleElement2MouseEnter,
+          onElement2MouseLeave: handleElement2MouseLeave,
+          onElement2Resize: handleElement2Resize,
+          onElement2ScrollChange: handleElement2ScrollChange
+        })
+      }
     </React.Fragment>
   );
 

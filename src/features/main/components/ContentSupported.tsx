@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -14,16 +14,18 @@ import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentEditing,
   setContentFile,
-  setContentPosition,
+  setContentScrollPosition,
   setContentText,
   setError,
   setMarkdownChanged,
-  setMarkdownPosition,
+  setMarkdownCursorPosition,
+  setMarkdownCursorSelection,
+  setMarkdownScrollPosition,
   setMarkdownText
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
-import { ProgressType, ScrollPosition } from '../../../types/Model';
+import { CursorPosition, CursorSelection, ProgressType, ScrollPosition } from '../../../types/Model';
 
 import Presenter from './ContentSupported.presenter';
 
@@ -41,7 +43,7 @@ function ContentSupported() {
 
   const handleCancel = React.useCallback(() => {
     try {
-      dispatch(setContentPosition());
+      dispatch(setContentScrollPosition());
       dispatch(setContentEditing(false));
     } catch (e) {
       dispatch(setError(e as Error));
@@ -50,8 +52,14 @@ function ContentSupported() {
     dispatch
   ]);
 
-  const handleChangeText = React.useCallback((_?: Event, data?: string) => {
-    dispatch(setMarkdownText(data));
+  const handleCursorPositionChange = React.useCallback((_?: Event, data?: CursorPosition) => {
+    dispatch(setMarkdownCursorPosition(data));
+  }, [
+    dispatch
+  ]);
+
+  const handleCursorSelectionChange = React.useCallback((_?: Event, data?: CursorSelection) => {
+    dispatch(setMarkdownCursorSelection(data));
   }, [
     dispatch
   ]);
@@ -74,8 +82,8 @@ function ContentSupported() {
       }
       const {
         changed,
-        position,
-        text
+        text,
+        scrollPosition
       } = markdownProps;
       if (changed) {
         const contentFile = contentProps?.file;
@@ -88,7 +96,7 @@ function ContentSupported() {
           .then((file) => graph.getFileById(file.id));
         dispatch(setContentFile(file));
         dispatch(setContentText(text));
-        dispatch(setContentPosition(data ? position : undefined));
+        dispatch(setContentScrollPosition(data ? scrollPosition : undefined));
         dispatch(setContentEditing(data));
       }
     } catch (e) {
@@ -104,8 +112,14 @@ function ContentSupported() {
     setProgress
   ]);
 
-  const handleScroll = React.useCallback((_?: Event, data?: ScrollPosition) => {
-    dispatch(setMarkdownPosition(data));
+  const handleScrollChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
+    dispatch(setMarkdownScrollPosition(data));
+  }, [
+    dispatch
+  ]);
+
+  const handleTextChange = React.useCallback((_?: Event, data?: string) => {
+    dispatch(setMarkdownText(data));
   }, [
     dispatch
   ]);
@@ -123,10 +137,12 @@ function ContentSupported() {
       changed={markdownProps?.changed}
       file={contentProps?.file}
       onCancel={handleCancel}
-      onChangeText={handleChangeText}
+      onCursorPositionChange={handleCursorPositionChange}
+      onCursorSelectionChange={handleCursorSelectionChange}
       onEdit={handleEdit}
       onSave={handleSave}
-      onScroll={handleScroll} />
+      onScrollPositonChange={handleScrollChange}
+      onTextChange={handleTextChange} />
   );
 
 }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -19,6 +19,7 @@ import { Button, Text } from '@fluentui/react-components';
 import { css } from '@emotion/react';
 
 import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
 import { ContentMenuAction, File } from '../../../types/Model';
 import { isMimeType } from '../../../utils/File';
@@ -55,10 +56,12 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
     <div
       css={css`
         display: grid;
-        grid-template-rows: auto 1fr;
-        grid-template-columns: auto;
-        @media (width >= 960px) {
-          grid-template-rows: 1fr;
+        @media all and (width <= 960px) {
+          grid-template-rows: ${layouts.contentHeader.height.small[0]} ${layouts.contentHeader.height.small[1]};
+          grid-template-columns: auto;
+        }
+        @media not all and (width <= 960px) {
+          grid-template-rows: ${layouts.contentHeader.height.large};
           grid-template-columns: 1fr auto;
         }
       `}>

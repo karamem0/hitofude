@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -30,7 +30,11 @@ import {
 import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
-import { DialogAction, DialogType, Folder } from '../../../types/Model';
+import {
+  DialogAction,
+  DialogType,
+  Folder
+} from '../../../types/Model';
 import messages from '../messages';
 
 interface ExplorerHeaderMenuProps {

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,8 +8,8 @@
 
 import { ScrollPosition, ScrollSize } from '../types/Model';
 
-export function getScrollTop(scrollPosition?: ScrollPosition, scrollSize1?: ScrollSize, scrollSize2?: ScrollSize): number {
-  if (scrollPosition?.scrollTop == null) {
+export function getScrollY(scrollPosition?: ScrollPosition, scrollSize1?: ScrollSize, scrollSize2?: ScrollSize): number {
+  if (scrollPosition?.scrollY == null) {
     return 0;
   }
   if (scrollSize1?.clientHeight == null) {
@@ -28,6 +28,6 @@ export function getScrollTop(scrollPosition?: ScrollPosition, scrollSize1?: Scro
   const scrollHeight1 = scrollSize1.scrollHeight;
   const clientHeight2 = scrollSize2.clientHeight;
   const scrollHeight2 = scrollSize2.scrollHeight;
-  const scrollRate = (scrollPosition.scrollTop / (scrollHeight1 - clientHeight1));
+  const scrollRate = (scrollPosition.scrollY / (scrollHeight1 - clientHeight1));
   return (scrollHeight2 - clientHeight2) * Math.round(scrollRate * 100) / 100;
 }

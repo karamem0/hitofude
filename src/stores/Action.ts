@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -7,6 +7,8 @@
 //
 
 import {
+  CursorPosition,
+  CursorSelection,
   DialogAction,
   File,
   Folder,
@@ -65,8 +67,8 @@ export const setContentMinimap = (data?: boolean): Action => ({
   data
 });
 
-export const setContentPosition = (data?: ScrollPosition): Action => ({
-  type: ActionType.setContentPosition,
+export const setContentScrollPosition = (data?: ScrollPosition): Action => ({
+  type: ActionType.setContentScrollPosition,
   data
 });
 
@@ -95,8 +97,33 @@ export const setMarkdownChanged = (data?: boolean): Action => ({
   data
 });
 
-export const setMarkdownPosition = (data?: ScrollPosition): Action => ({
-  type: ActionType.setMarkdownPosition,
+export const setMarkdownCursorPosition = (data?: CursorPosition): Action => ({
+  type: ActionType.setMarkdownCursorPosition,
+  data
+});
+
+export const setMarkdownCursorSelection = (data?: CursorSelection): Action => ({
+  type: ActionType.setMarkdownCursorSelection,
+  data
+});
+
+export const setMarkdownDefaultCursorPosition = (data?: CursorPosition): Action => ({
+  type: ActionType.setMarkdownCursorPosition,
+  data
+});
+
+export const setMarkdownDefaultCursorSelection = (data?: CursorSelection): Action => ({
+  type: ActionType.setMarkdownCursorSelection,
+  data
+});
+
+export const setMarkdownDefaultText = (data?: string): Action => ({
+  type: ActionType.setMarkdownDefaultText,
+  data
+});
+
+export const setMarkdownScrollPosition = (data?: ScrollPosition): Action => ({
+  type: ActionType.setMarkdownScrollPosition,
   data
 });
 

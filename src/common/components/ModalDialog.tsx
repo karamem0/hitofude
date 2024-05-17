@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -15,11 +15,7 @@ import { Event } from '../../types/Event';
 
 import Presenter from './ModalDialog.presenter';
 
-interface ModalDialogProps {
-  children?: [React.JSX.Element, React.JSX.Element] | React.JSX.Element
-}
-
-function ModalDialog(props: Readonly<ModalDialogProps>) {
+function ModalDialog(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 

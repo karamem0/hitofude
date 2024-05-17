@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -37,7 +37,7 @@ function ServiceProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const msal = useMsal();
 
-  const value = React.useMemo(() => ({
+  const value = React.useMemo<ServiceContextState>(() => ({
     graph: new GraphService(Client.initWithMiddleware({
       authProvider: {
         getAccessToken: () => msal.instance

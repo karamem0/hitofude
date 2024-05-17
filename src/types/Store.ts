@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -30,14 +30,19 @@ export enum ActionType {
   setContentFile = 'setContentFile',
   setContentLoading = 'setContentLoading',
   setContentMinimap = 'setContentMinimap',
-  setContentPosition = 'setContentPosition',
+  setContentScrollPosition = 'setContentScrollPosition',
   setContentPreview = 'setContentPreview',
   setContentScroll = 'setContentScroll',
   setContentText = 'setContentText',
   setContentWordWrap = 'setContentWordWrap',
   setMarkdownChanged = 'setMarkdownChanged',
-  setMarkdownPosition = 'setMarkdownPosition',
-  setMarkdownText = 'setMarkdownText',
+  setMarkdownCursorPosition = 'setMarkdownCursorPosition',
+  setMarkdownCursorSelection = 'setMarkdownCursorSelection',
+  setMarkdownDefaultCursorPosition = 'setMarkdownDefaultCursorPosition',
+  setMarkdownDefaultCursorSelection = 'setMarkdownDefaultCursorSelection',
+  setMarkdownDefaultText = 'setMarkdownDefaultText',
+  setMarkdownScrollPosition = 'setMarkdownScrollPosition',
+  setMarkdownText = 'setMarkdownPreviewText',
   setDialogAction = 'setDialogAction',
   setError = 'setError',
   setExploreAllFiles = 'setExploreAllFiles',

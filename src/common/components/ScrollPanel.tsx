@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -7,8 +7,6 @@
 //
 
 import React from 'react';
-
-import { SerializedStyles } from '@emotion/react';
 
 import { Event, EventHandler } from '../../types/Event';
 import { ScrollPosition, ScrollSize } from '../../types/Model';
@@ -21,26 +19,25 @@ interface ScrollPanelState {
 }
 
 interface ScrollPanelProps {
-  children?: (state: ScrollPanelState) => React.ReactNode,
   className?: string,
-  css?: SerializedStyles,
   position?: ScrollPosition,
+  render?: (state: ScrollPanelState) => React.ReactNode,
   onMouseEnter?: EventHandler,
   onMouseLeave?: EventHandler,
   onResize?: EventHandler<ScrollSize>,
-  onScroll?: EventHandler<ScrollPosition>
+  onScrollPositonChange?: EventHandler<ScrollPosition>
 }
 
 function ScrollPanel(props: Readonly<ScrollPanelProps>) {
 
   const {
-    children,
+    render,
     className,
     position,
     onMouseEnter,
     onMouseLeave,
     onResize,
-    onScroll
+    onScrollPositonChange
   } = props;
 
   const [ state, setState ] = React.useState<ScrollPanelState>({});
@@ -80,12 +77,12 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
     if (element == null) {
       return;
     }
-    onScroll?.(e, {
-      scrollLeft: element.scrollLeft,
-      scrollTop: element.scrollTop
+    onScrollPositonChange?.(e, {
+      scrollX: element.scrollLeft,
+      scrollY: element.scrollTop
     });
   }, [
-    onScroll
+    onScrollPositonChange
   ]);
 
   React.useEffect(() => {
@@ -97,8 +94,8 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
     observer.observe(element);
     return () => observer.unobserve(element);
   }, [
-    children,
-    handleResize
+    handleResize,
+    render
   ]);
 
   React.useEffect(() => {
@@ -107,8 +104,8 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
       return;
     }
     element.scrollTo({
-      left: position?.scrollLeft,
-      top: position?.scrollTop
+      left: position?.scrollX,
+      top: position?.scrollY
     });
   }, [
     position
@@ -168,7 +165,7 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
     <Presenter
       ref={ref}
       className={className}>
-      {children?.(state)}
+      {render?.(state)}
     </Presenter>
   );
 

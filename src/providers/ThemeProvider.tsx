@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -55,7 +55,7 @@ function ThemeProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
     }
   }, []);
 
-  const value = React.useMemo(() => ({
+  const value = React.useMemo<ThemeContextState>(() => ({
     theme,
     themeName,
     changeTheme: handleChangeTheme

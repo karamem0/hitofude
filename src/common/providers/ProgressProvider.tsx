@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -33,7 +33,7 @@ function ProgressProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const [ progress, setProgress ] = React.useState<ProgressType>();
 
-  const value = React.useMemo(() => ({
+  const value = React.useMemo<ProgressContextState>(() => ({
     progress,
     setProgress: (value?: ProgressType) => setProgress(value)
   }), [

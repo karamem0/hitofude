@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,49 +9,51 @@
 import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
-import { Event, EventHandler } from '../../../types/Event';
-import { ScrollPosition } from '../../../types/Model';
+import { EventHandler } from '../../../types/Event';
+import {
+  CursorPosition,
+  CursorSelection,
+  ScrollPosition
+} from '../../../types/Model';
 
 import Presenter from './ContentMarkdown.presenter';
 
 interface ContentMarkdownProps {
-  onChangeText?: EventHandler<string>,
+  onCursorPositionChange?: EventHandler<CursorPosition>,
+  onCursorSelectionChange?: EventHandler<CursorSelection>,
   onSave?: EventHandler,
-  onScroll?: EventHandler<ScrollPosition>
+  onScrollPositonChange?: EventHandler<ScrollPosition>,
+  onTextChange?: EventHandler<string>
 }
 
 function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
 
   const {
-    onChangeText,
+    onCursorPositionChange,
+    onCursorSelectionChange,
     onSave,
-    onScroll
+    onScrollPositonChange,
+    onTextChange
   } = props;
 
   const {
     state: {
       contentProps,
+      markdownProps,
       tabProps
     }
   } = useStore();
 
-  const [ previewText, setPreviewText ] = React.useState<string>('');
-
-  const handleChangeText = React.useCallback((e?: Event, data?: string) => {
-    onChangeText?.(e, data);
-    setPreviewText(data ?? '');
-  }, [
-    onChangeText
-  ]);
-
   return (
     <Presenter
       {...contentProps}
-      previewText={previewText}
+      {...markdownProps}
       tabOpen={tabProps?.open}
-      onChangeText={handleChangeText}
+      onCursorPositionChange={onCursorPositionChange}
+      onCursorSelectionChange={onCursorSelectionChange}
       onSave={onSave}
-      onScroll={onScroll} />
+      onScrollPositonChange={onScrollPositonChange}
+      onTextChange={onTextChange} />
   );
 
 }

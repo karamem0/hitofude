@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -76,11 +76,13 @@ function HomePage(props: Readonly<HomePageProps>) {
         <div
           css={css`
             display: grid;
-            grid-template-rows: auto auto;
-            grid-template-columns: auto;
-            grid-gap: 2rem;
-            padding: 2rem;
-            @media (width >= 960px) {
+            @media all and (width <= 960px) {
+              grid-template-rows: auto auto;
+              grid-template-columns: auto;
+              grid-gap: 2rem;
+              padding: 2rem;
+            }
+            @media not all and (width <= 960px) {
               grid-template-rows: auto;
               grid-template-columns: auto auto;
               grid-gap: 4rem;

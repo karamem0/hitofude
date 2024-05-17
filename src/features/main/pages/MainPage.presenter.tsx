@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -17,12 +17,13 @@ import { Global, css } from '@emotion/react';
 import ErrorNotification from '../../../common/components/ErrorNotification';
 import ProgressProvider from '../../../common/providers/ProgressProvider';
 import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
+import DialogFactory from '../../dialog/factories/DialogFactory';
+import SidePanelFactory from '../../panel/factories/SidePanelFactory';
 import AppBar from '../components/AppBar';
 import AppContent from '../components/AppContent';
 import AppTab from '../components/AppTab';
-import DialogFactory from '../components/DialogFactory';
 import MeControl from '../components/MeControl';
-import SidePanelFactory from '../components/SidePanelFactory';
 import messages from '../messages';
 
 interface MainPageProps {
@@ -73,7 +74,7 @@ function MainPage(props: Readonly<MainPageProps>) {
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            height: 2.5rem;
+            height: ${layouts.pageHeader.height};
             padding: 0 1rem;
             background-color: ${theme.colorBrandBackground};
           `}>
@@ -91,16 +92,18 @@ function MainPage(props: Readonly<MainPageProps>) {
         <div
           css={css`
             display: grid;
-            grid-template-rows: calc(100vh - 2rem);
-            grid-template-columns: auto 1fr;
             margin: 2rem 0 0;
-            & > section:nth-of-type(2) {
-              position: fixed;
-              z-index: 100;
-              margin: 0 0 0 3rem;
+            @media all and (width <= 960px) {
+              grid-template-rows: ${layouts.pageBody.height};
+              grid-template-columns: auto 1fr;
+              & > section:nth-of-type(2) {
+                position: fixed;
+                z-index: 100;
+                margin: 0 0 0 3rem;
+              }
             }
-            @media (width >= 960px) {
-              grid-template-rows: calc(100vh - 2rem);
+            @media not all and (width <= 960px) {
+              grid-template-rows: ${layouts.pageBody.height};
               grid-template-columns: auto auto 1fr;
               & > section:nth-of-type(2) {
                 position: static;

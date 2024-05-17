@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -10,8 +10,14 @@ import React from 'react';
 
 import { css } from '@emotion/react';
 
+import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
-import { File, ScrollPosition } from '../../../types/Model';
+import {
+  CursorPosition,
+  CursorSelection,
+  File,
+  ScrollPosition
+} from '../../../types/Model';
 import { isMimeType } from '../../../utils/File';
 
 import ContentHeader from './ContentHeader';
@@ -23,10 +29,12 @@ interface ContentSupportedProps {
   changed?: boolean,
   file?: File,
   onCancel?: EventHandler,
-  onChangeText?: EventHandler<string>,
+  onCursorPositionChange?: EventHandler<CursorPosition>,
+  onCursorSelectionChange?: EventHandler<CursorSelection>,
   onEdit?: EventHandler,
   onSave?: EventHandler<boolean>,
-  onScroll?: EventHandler<ScrollPosition>
+  onScrollPositonChange?: EventHandler<ScrollPosition>,
+  onTextChange?: EventHandler<string>
 }
 
 function ContentSupported(props: Readonly<ContentSupportedProps>) {
@@ -34,10 +42,12 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
   const {
     file,
     onCancel,
-    onScroll,
-    onChangeText,
+    onCursorPositionChange,
+    onCursorSelectionChange,
     onEdit,
-    onSave
+    onSave,
+    onScrollPositonChange,
+    onTextChange
   } = props;
 
   return file ? (
@@ -56,7 +66,12 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
       <div
         css={css`
           display: grid;
-          height: calc(100vh - 7.5rem);
+          @media all and (width <= 960px) {
+            height: ${layouts.contentBody.height.small};
+          }
+          @media not all and (width <= 960px) {
+            height: ${layouts.contentBody.height.large};
+          }
         `}>
         {
           (() => {
@@ -73,9 +88,11 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
             if (isMimeType(file, { subtype: 'markdown' })) {
               return (
                 <ContentMarkdown
-                  onChangeText={onChangeText}
+                  onCursorPositionChange={onCursorPositionChange}
+                  onCursorSelectionChange={onCursorSelectionChange}
                   onSave={(e) => onSave?.(e, true)}
-                  onScroll={onScroll} />
+                  onScrollPositonChange={onScrollPositonChange}
+                  onTextChange={onTextChange} />
               );
             }
             return null;

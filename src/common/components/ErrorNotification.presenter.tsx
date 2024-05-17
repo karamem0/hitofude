@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -10,8 +10,12 @@ import React from 'react';
 
 import { FormattedMessage, MessageDescriptor } from 'react-intl';
 
-import { Link } from '@fluentui/react-components';
-import { Alert } from '@fluentui/react-components/unstable';
+import {
+  Link,
+  MessageBar,
+  MessageBarActions,
+  MessageBarBody
+} from '@fluentui/react-components';
 
 import { css } from '@emotion/react';
 
@@ -35,15 +39,8 @@ function ErrorNotification(props: Readonly<ErrorNotificationProps>) {
 
   return (
     message ? (
-      <Alert
+      <MessageBar
         intent="warning"
-        action={
-          <Link
-            as="button"
-            onClick={onDismiss}>
-            <FormattedMessage {...messages.Dismiss} />
-          </Link>
-        }
         css={css`
           position: fixed;
           z-index: 900;
@@ -51,8 +48,18 @@ function ErrorNotification(props: Readonly<ErrorNotificationProps>) {
           margin: 0.5rem;
           background-color: ${theme.colorNeutralBackground2};
         `}>
-        <FormattedMessage {...message} />
-      </Alert>
+        <MessageBarBody>
+          <FormattedMessage {...message} />
+        </MessageBarBody>
+        <MessageBarActions
+          containerAction={(
+            <Link
+              as="button"
+              onClick={onDismiss}>
+              <FormattedMessage {...messages.Dismiss} />
+            </Link>
+          )} />
+      </MessageBar>
     ) : null
   );
 

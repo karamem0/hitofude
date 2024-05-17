@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -45,7 +45,7 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const [ loading, setLoading ] = React.useState<boolean>(true);
 
-  const value = React.useMemo(() => ({
+  const value = React.useMemo<StoreContextState>(() => ({
     dispatch,
     state
   }), [
@@ -62,9 +62,9 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
             editing: false,
             loading: false,
             minimap: storage.getContentMinimap(),
-            position: {
-              scrollLeft: 0,
-              scrollTop: 0
+            scrollPosition: {
+              scrollX: 0,
+              scrollY: 0
             },
             preview: storage.getContentPreview(),
             scroll: storage.getContentScroll(),
@@ -76,9 +76,20 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
             rootFolder: await graph.getRootFolder()
           },
           markdownProps: {
-            position: {
-              scrollLeft: 0,
-              scrollTop: 0
+            cursorPosition: {
+              cursorX: 1,
+              cursorY: 1
+            },
+            cursorSelection: {
+              endX: 1,
+              endY: 1,
+              startX: 1,
+              startY: 1
+            },
+            defaultText: '',
+            scrollPosition: {
+              scrollX: 0,
+              scrollY: 0
             },
             text: ''
           },

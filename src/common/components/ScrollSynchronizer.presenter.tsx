@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-interface ScrollSynchronizerProps {
-  children?: React.ReactNode
-}
-
-function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
+function ScrollSynchronizer(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 

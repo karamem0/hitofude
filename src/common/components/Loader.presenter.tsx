@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -11,11 +11,10 @@ import React from 'react';
 import { Spinner } from '@fluentui/react-components';
 
 interface LoaderProps {
-  children?: React.ReactNode,
   loading?: boolean
 }
 
-function Loader(props: Readonly<LoaderProps>) {
+function Loader(props: Readonly<React.PropsWithChildren<LoaderProps>>) {
 
   const {
     children,

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -16,19 +16,19 @@ import { Event } from '../../types/Event';
 import Presenter from './SidePanel.presenter';
 
 interface SidePanelProps {
-  children?: React.ReactNode,
+  className?: string,
   content?: React.ReactNode,
   title?: React.ReactNode,
   width?: string
 }
 
-function SidePanel(props: Readonly<SidePanelProps>) {
+function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
 
   const {
+    className,
     children,
     content,
-    title,
-    width
+    title
   } = props;
 
   const { dispatch } = useStore();
@@ -49,10 +49,10 @@ function SidePanel(props: Readonly<SidePanelProps>) {
 
   return (
     <Presenter
+      className={className}
       content={content}
       open={open}
       title={title}
-      width={width}
       onOpenChange={handleOpenChange}>
       {children}
     </Presenter>

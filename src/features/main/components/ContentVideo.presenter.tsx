@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 karamem0
+// Copyright (c) 2023-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -11,6 +11,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import VideoViewer from '../../../common/components/VideoViewer';
+import { layouts } from '../../../themes/Layout';
 import { File } from '../../../types/Model';
 
 interface ContentVideoProps {
@@ -27,8 +28,14 @@ function ContentVideo(props: Readonly<ContentVideoProps>) {
       css={css`
         max-width: 100%;
         height: auto;
-        max-height: calc(100vh - 7.5rem);
         margin: auto;
+        padding: 1rem 0 0 0;
+        @media all and (width <= 960px) {
+          max-height: ${layouts.contentBody.height.small};
+        }
+        @media not all and (width <= 960px) {
+          max-height: ${layouts.contentBody.height.large};
+        }
       `} />
   ) : null;
 
