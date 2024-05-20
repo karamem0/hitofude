@@ -16,16 +16,11 @@ import {
   setContentFile,
   setContentScrollPosition,
   setContentText,
-  setError,
-  setMarkdownChanged,
-  setMarkdownCursorPosition,
-  setMarkdownCursorSelection,
-  setMarkdownScrollPosition,
-  setMarkdownText
+  setError
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
-import { CursorPosition, CursorSelection, ProgressType, ScrollPosition } from '../../../types/Model';
+import { ProgressType } from '../../../types/Model';
 
 import Presenter from './ContentSupported.presenter';
 
@@ -52,22 +47,9 @@ function ContentSupported() {
     dispatch
   ]);
 
-  const handleCursorPositionChange = React.useCallback((_?: Event, data?: CursorPosition) => {
-    dispatch(setMarkdownCursorPosition(data));
-  }, [
-    dispatch
-  ]);
-
-  const handleCursorSelectionChange = React.useCallback((_?: Event, data?: CursorSelection) => {
-    dispatch(setMarkdownCursorSelection(data));
-  }, [
-    dispatch
-  ]);
-
   const handleEdit = React.useCallback(() => {
     try {
       dispatch(setContentEditing(true));
-      dispatch(setMarkdownChanged(false));
     } catch (e) {
       dispatch(setError(e as Error));
     }
@@ -112,37 +94,13 @@ function ContentSupported() {
     setProgress
   ]);
 
-  const handleScrollChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
-    dispatch(setMarkdownScrollPosition(data));
-  }, [
-    dispatch
-  ]);
-
-  const handleTextChange = React.useCallback((_?: Event, data?: string) => {
-    dispatch(setMarkdownText(data));
-  }, [
-    dispatch
-  ]);
-
-  React.useEffect(() => {
-    dispatch(setMarkdownChanged(contentProps?.text !== markdownProps?.text));
-  }, [
-    contentProps?.text,
-    markdownProps?.text,
-    dispatch
-  ]);
-
   return (
     <Presenter
       changed={markdownProps?.changed}
       file={contentProps?.file}
       onCancel={handleCancel}
-      onCursorPositionChange={handleCursorPositionChange}
-      onCursorSelectionChange={handleCursorSelectionChange}
       onEdit={handleEdit}
-      onSave={handleSave}
-      onScrollPositonChange={handleScrollChange}
-      onTextChange={handleTextChange} />
+      onSave={handleSave} />
   );
 
 }

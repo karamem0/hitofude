@@ -131,6 +131,12 @@
       "value": "Updated date"
     }
   ],
+  "Dkkmwm": [
+    {
+      "type": 0,
+      "value": "Bold"
+    }
+  ],
   "Emw6OK": [
     {
       "type": 0,
@@ -189,6 +195,12 @@
     {
       "type": 0,
       "value": "Only runs client JavaScript, no server code is executed."
+    }
+  ],
+  "SOtMvF": [
+    {
+      "type": 0,
+      "value": "Underline"
     }
   ],
   "TDaF6J": [
@@ -279,6 +291,12 @@
     {
       "type": 0,
       "value": "Are you sure to restore this file?"
+    }
+  ],
+  "g2V+es": [
+    {
+      "type": 0,
+      "value": "Italic"
     }
   ],
   "gfMwV+": [

@@ -11,6 +11,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { css } from '@emotion/react';
+import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
 import { useTheme } from '../../../providers/ThemeProvider';
@@ -122,10 +123,11 @@ function MarkdownViewer(props: Readonly<MarkdownViewerProps>) {
         }
       `}>
       <ReactMarkdown
+        rehypePlugins={[ rehypeRaw ]}
         remarkPlugins={[ remarkGfm ]}
         components={{
-          pre: MarkdownCodeRenderer,
-          img: MarkdownImageRenderer
+          img: MarkdownImageRenderer,
+          pre: MarkdownCodeRenderer
         }}>
         {text ?? ''}
       </ReactMarkdown>

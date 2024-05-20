@@ -9,34 +9,28 @@
 import React from 'react';
 
 import { useStore } from '../../../providers/StoreProvider';
-import { EventHandler } from '../../../types/Event';
 import {
-  CursorPosition,
-  CursorSelection,
-  ScrollPosition
-} from '../../../types/Model';
+  setMarkdownChanged,
+  setMarkdownScrollPosition,
+  setMarkdownText
+} from '../../../stores/Action';
+import { DependencyNullError } from '../../../types/Error';
+import { Event, EventHandler } from '../../../types/Event';
+import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
+import { MarkdownEditorHandle } from '../../markdown/types/Handle';
 
 import Presenter from './ContentMarkdown.presenter';
 
 interface ContentMarkdownProps {
-  onCursorPositionChange?: EventHandler<CursorPosition>,
-  onCursorSelectionChange?: EventHandler<CursorSelection>,
-  onSave?: EventHandler,
-  onScrollPositonChange?: EventHandler<ScrollPosition>,
-  onTextChange?: EventHandler<string>
+  onSave?: EventHandler
 }
 
 function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
 
-  const {
-    onCursorPositionChange,
-    onCursorSelectionChange,
-    onSave,
-    onScrollPositonChange,
-    onTextChange
-  } = props;
+  const { onSave } = props;
 
   const {
+    dispatch,
     state: {
       contentProps,
       markdownProps,
@@ -44,16 +38,49 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
     }
   } = useStore();
 
+  const editorRef = React.useRef<MarkdownEditorHandle>(null);
+
+  const handleScrollPositionChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
+    dispatch(setMarkdownScrollPosition(data));
+  }, [
+    dispatch
+  ]);
+
+  const handleTextChange = React.useCallback((_?: Event, data?: string) => {
+    dispatch(setMarkdownText(data));
+  }, [
+    dispatch
+  ]);
+
+  const handleToolbarClick = React.useCallback((_?: Event, data?: MarkdownToolbarAction) => {
+    if (data == null) {
+      throw new DependencyNullError();
+    }
+    const { current: editorEl } = editorRef;
+    if (editorEl == null) {
+      return;
+    }
+    editorEl[data]();
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(setMarkdownChanged(contentProps?.text !== markdownProps?.text));
+  }, [
+    contentProps?.text,
+    markdownProps?.text,
+    dispatch
+  ]);
+
   return (
     <Presenter
       {...contentProps}
       {...markdownProps}
+      ref={editorRef}
       tabOpen={tabProps?.open}
-      onCursorPositionChange={onCursorPositionChange}
-      onCursorSelectionChange={onCursorSelectionChange}
       onSave={onSave}
-      onScrollPositonChange={onScrollPositonChange}
-      onTextChange={onTextChange} />
+      onScrollPositonChange={handleScrollPositionChange}
+      onTextChange={handleTextChange}
+      onToolbarClick={handleToolbarClick} />
   );
 
 }

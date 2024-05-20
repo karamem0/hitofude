@@ -8,8 +8,6 @@
 
 import { StorageService } from '../services/StorageService';
 import {
-  CursorPosition,
-  CursorSelection,
   DialogAction,
   File,
   Folder,
@@ -122,26 +120,6 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         },
         markdownProps: {
           changed: false,
-          cursorPosition: {
-            cursorX: 1,
-            cursorY: 1
-          },
-          cursorSelection: {
-            endX: 1,
-            endY: 1,
-            startX: 1,
-            startY: 1
-          },
-          defaultCursorPosition: {
-            cursorX: 1,
-            cursorY: 1
-          },
-          defaultCursorSelection: {
-            endX: 1,
-            endY: 1,
-            startX: 1,
-            startY: 1
-          },
           defaultText: state.contentProps?.text,
           scrollPosition: {
             scrollX: 0,
@@ -255,62 +233,6 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         markdownProps: {
           ...state.markdownProps,
           changed: data ?? false
-        }
-      };
-    }
-    case ActionType.setMarkdownCursorPosition: {
-      const data = action.data as CursorPosition | undefined;
-      return {
-        ...state,
-        markdownProps: {
-          ...state.markdownProps,
-          cursorPosition: data ?? {
-            cursorX: 1,
-            cursorY: 1
-          }
-        }
-      };
-    }
-    case ActionType.setMarkdownCursorSelection: {
-      const data = action.data as CursorSelection | undefined;
-      return {
-        ...state,
-        markdownProps: {
-          ...state.markdownProps,
-          cursorSelection: data ?? {
-            endX: 1,
-            endY: 1,
-            startX: 1,
-            startY: 1
-          }
-        }
-      };
-    }
-    case ActionType.setMarkdownDefaultCursorPosition: {
-      const data = action.data as CursorPosition | undefined;
-      return {
-        ...state,
-        markdownProps: {
-          ...state.markdownProps,
-          defaultCursorPosition: data ?? {
-            cursorX: 1,
-            cursorY: 1
-          }
-        }
-      };
-    }
-    case ActionType.setMarkdownDefaultCursorSelection: {
-      const data = action.data as CursorSelection | undefined;
-      return {
-        ...state,
-        markdownProps: {
-          ...state.markdownProps,
-          defaultCursorSelection: data ?? {
-            endX: 1,
-            endY: 1,
-            startX: 1,
-            startY: 1
-          }
         }
       };
     }

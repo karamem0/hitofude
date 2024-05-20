@@ -5,7 +5,7 @@ on:
       - develop
 
 env:
-  BUILD_VERSION: '1.11.1'
+  BUILD_VERSION: '1.11.2'
 
 jobs:
   select-environment:
@@ -47,22 +47,39 @@ jobs:
       - name: Update .env
         shell: pwsh
         run: |
-          $path = '.env'
-          $content = Get-Content -Path $path
+          $content = Get-Content -Path ${{env.FILE_PATH}}
           $content = $content -replace "{{TELEMETRY_CONNECTION_STRING}}", "${{secrets.TELEMETRY_CONNECTION_STRING}}"
           $content = $content -replace "{{MSAL_AUTHORITY}}", "${{secrets.MSAL_AUTHORITY}}"
           $content = $content -replace "{{MSAL_CLIENT_ID}}", "${{secrets.MSAL_CLIENT_ID}}"
           $content = $content -replace "{{PUBLIC_URL}}", "${{secrets.PUBLIC_URL}}"
-          Out-File -FilePath $path -InputObject $content -Encoding UTF8
+          Out-File -FilePath ${{env.FILE_PATH}} -InputObject $content -Encoding UTF8
+        env:
+          FILE_PATH: .env
+      - name: Restore source
+        run: npm ci
+      - name: Audit source
+        run: npm audit --omit=dev
       - name: Build source
-        run: |
-          npm ci
-          npm run build
+        run: npm run build
+      - name: Test source
+        run: npm run test:ci
       - name: Upload build files
         uses: actions/upload-artifact@v4
         with:
           name: hitofude
           path: dist
+      - name: Upload test results
+        uses: enricomi/publish-unit-test-result-action/linux@v2
+        if: always()
+        with:
+          files: test/*.xml
+          check_name: test-results
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        if: always()
+        with:
+          fail_ci_if_error: true
+          token: ${{secrets.CODECOV_TOKEN}}
   deploy-client:
     needs:
       - select-environment
@@ -77,11 +94,11 @@ jobs:
           name: hitofude
           path: artifact
       - name: Connect to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
       - name: Upload to blob storage
-        uses: azure/cli@v1
+        uses: azure/cli@v2
         with:
           inlineScript: |
             az storage blob delete-batch --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --auth-mode login --source '$web'

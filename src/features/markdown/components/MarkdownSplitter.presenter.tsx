@@ -16,41 +16,32 @@ import { useTheme } from '../../../providers/ThemeProvider';
 import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
 
-interface SplitBarProps {
+interface MarkdownSplitterProps {
+  className?: string,
   preview?: boolean,
-  tabOpen?: boolean,
   onChangePreview?: EventHandler<boolean>
 }
 
-function MarkdownSplitBar(props: Readonly<SplitBarProps>) {
+function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
 
   const {
+    className,
     preview,
-    tabOpen,
     onChangePreview
   } = props;
 
   const { theme } = useTheme();
 
   return preview ? (
-    <div
-      role="button"
+    <button
+      className={className}
       tabIndex={-1}
       css={css`
-        position: fixed;
         display: grid;
         place-items: center center;
         width: 1rem;
         text-align: center;
         background-color: ${theme.colorNeutralBackground2};
-        @media all and (width <= 960px) {
-          right: calc(${layouts.contentBody.width.small} / 2 + 1rem);
-          height: ${layouts.contentBody.height.small};
-        }
-        @media not all and (width <= 960px) {
-          right: calc(${tabOpen ? layouts.contentBody.width.large : layouts.contentBody.width.small} / 2 + 1rem);
-          height: ${layouts.contentBody.height.large};
-        }
       `}
       onClick={(e) => onChangePreview?.(e, !preview)}>
       {
@@ -60,10 +51,10 @@ function MarkdownSplitBar(props: Readonly<SplitBarProps>) {
             line-height: 0.5rem;
           `} />
       }
-    </div>
+    </button>
   ) : (
-    <div
-      role="button"
+    <button
+      className={className}
       tabIndex={-1}
       css={css`
         position: fixed;
@@ -88,9 +79,9 @@ function MarkdownSplitBar(props: Readonly<SplitBarProps>) {
             line-height: 0.5rem;
           `} />
       }
-    </div>
+    </button>
   );
 
 }
 
-export default React.memo(MarkdownSplitBar);
+export default React.memo(MarkdownSplitter);

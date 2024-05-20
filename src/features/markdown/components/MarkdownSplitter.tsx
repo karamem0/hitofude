@@ -12,15 +12,20 @@ import { useStore } from '../../../providers/StoreProvider';
 import { setContentPreview } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
 
-import Presenter from './MarkdownSplitBar.presenter';
+import Presenter from './MarkdownSplitter.presenter';
 
-function MarkdownSplitBar() {
+interface MarkdownSplitterProps {
+  className?: string
+}
+
+function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
+
+  const { className } = props;
 
   const {
     dispatch,
     state: {
-      contentProps,
-      tabProps
+      contentProps
     }
   } = useStore();
 
@@ -32,11 +37,11 @@ function MarkdownSplitBar() {
 
   return (
     <Presenter
+      className={className}
       preview={contentProps?.preview}
-      tabOpen={tabProps?.open}
       onChangePreview={handleChangePreview} />
   );
 
 }
 
-export default MarkdownSplitBar;
+export default MarkdownSplitter;

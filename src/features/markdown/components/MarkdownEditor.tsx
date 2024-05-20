@@ -16,24 +16,20 @@ import { useStore } from '../../../providers/StoreProvider';
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import {
-  CursorPosition,
-  CursorSelection,
   ScrollPosition,
   ScrollSize,
   ThemeName
 } from '../../../types/Model';
+import { MarkdownEditorHandle } from '../types/Handle';
 
 import Presenter from './MarkdownEditor.presenter';
 
 interface MarkdownEditorProps {
-  cursorPosition?: CursorPosition,
-  cursorSelection?: CursorSelection,
+  className?: string,
   minimap?: boolean,
   scrollPosition?: ScrollPosition,
   text?: string,
   wordWrap?: boolean,
-  onCursorPositionChange?: EventHandler<CursorPosition>,
-  onCursorSelectionChange?: EventHandler<CursorSelection>,
   onMouseEnter?: EventHandler,
   onMouseLeave?: EventHandler,
   onResize?: EventHandler<ScrollSize>,
@@ -42,27 +38,25 @@ interface MarkdownEditorProps {
   onTextChange?: EventHandler<string>
 }
 
-function MarkdownEditor(props: Readonly<MarkdownEditorProps>) {
+function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<MarkdownEditorHandle>) {
 
   const {
-    cursorPosition,
-    cursorSelection,
+    className,
     minimap,
     scrollPosition,
     text,
     wordWrap,
-    onCursorPositionChange,
     onMouseEnter,
     onMouseLeave,
     onResize,
     onSave,
     onScrollPositonChange,
-    onCursorSelectionChange,
     onTextChange
   } = props;
 
   const {
     state: {
+      contentProps,
       tabProps
     }
   } = useStore();
@@ -70,6 +64,72 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>) {
 
   const editorRef = React.useRef<HTMLDivElement>(null);
   const monacoRef = React.useRef<monaco.editor.IStandaloneCodeEditor>();
+
+  const handleEditBold = React.useCallback(() => {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    const model = monacoEl.getModel();
+    if (model == null) {
+      return;
+    }
+    const selection = monacoEl.getSelection();
+    if (selection == null) {
+      return;
+    }
+    const text = model.getValueInRange(selection);
+    monacoEl.executeEdits('', [
+      {
+        range: selection,
+        text: `**${text}**`
+      }
+    ]);
+  }, []);
+
+  const handleEditItalic = React.useCallback(() => {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    const model = monacoEl.getModel();
+    if (model == null) {
+      return;
+    }
+    const selection = monacoEl.getSelection();
+    if (selection == null) {
+      return;
+    }
+    const text = model.getValueInRange(selection);
+    monacoEl.executeEdits('', [
+      {
+        range: selection,
+        text: `*${text}*`
+      }
+    ]);
+  }, []);
+
+  const handleEditUnderline = React.useCallback(() => {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    const model = monacoEl.getModel();
+    if (model == null) {
+      return;
+    }
+    const selection = monacoEl.getSelection();
+    if (selection == null) {
+      return;
+    }
+    const text = model.getValueInRange(selection);
+    monacoEl.executeEdits('', [
+      {
+        range: selection,
+        text: `<u>${text}</u>`
+      }
+    ]);
+  }, []);
 
   const handleResize = React.useCallback(() => {
     const { current: monacoEl } = monacoRef;
@@ -93,36 +153,6 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>) {
       });
     return () => monacoRef.current?.dispose();
   }, []);
-
-  React.useEffect(() => {
-    const { current: monacoEl } = monacoRef;
-    if (monacoEl == null) {
-      return;
-    }
-    monacoEl.onDidChangeCursorPosition((e) =>
-      onCursorPositionChange?.({}, {
-        cursorX: e.position.column,
-        cursorY: e.position.lineNumber
-      }));
-  }, [
-    onCursorPositionChange
-  ]);
-
-  React.useEffect(() => {
-    const { current: monacoEl } = monacoRef;
-    if (monacoEl == null) {
-      return;
-    }
-    monacoEl.onDidChangeCursorSelection((e) =>
-      onCursorSelectionChange?.({}, {
-        endX: e.selection.endColumn,
-        endY: e.selection.endLineNumber,
-        startX: e.selection.startColumn,
-        startY: e.selection.startLineNumber
-      }));
-  }, [
-    onCursorSelectionChange
-  ]);
 
   React.useEffect(() => {
     if (onMouseEnter == null) {
@@ -215,34 +245,6 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>) {
       onTextChange?.({}, monacoEl.getValue()));
   }, [
     onTextChange
-  ]);
-
-  React.useEffect(() => {
-    const { current: monacoEl } = monacoRef;
-    if (monacoEl == null) {
-      return;
-    }
-    monacoEl.setPosition({
-      column: cursorPosition?.cursorX ?? 1,
-      lineNumber: cursorPosition?.cursorY ?? 1
-    });
-  }, [
-    cursorPosition
-  ]);
-
-  React.useEffect(() => {
-    const { current: monacoEl } = monacoRef;
-    if (monacoEl == null) {
-      return;
-    }
-    monacoEl.setSelection({
-      endColumn: cursorSelection?.endX ?? 1,
-      endLineNumber: cursorSelection?.endY ?? 1,
-      startColumn: cursorSelection?.startX ?? 1,
-      startLineNumber: cursorSelection?.startY ?? 1
-    });
-  }, [
-    cursorSelection
   ]);
 
   React.useEffect(() => {
@@ -345,12 +347,28 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>) {
     handleResize
   ]);
 
+  React.useImperativeHandle(ref, () => {
+    return {
+      bold: handleEditBold,
+      italic: handleEditItalic,
+      underline: handleEditUnderline
+    };
+  }, [
+    handleEditBold,
+    handleEditItalic,
+    handleEditUnderline
+  ]);
+
   useEvent('resize', handleResize, window);
 
   return (
-    <Presenter ref={editorRef} />
+    <Presenter
+      ref={editorRef}
+      className={className}
+      preview={contentProps?.preview}
+      tabOpen={tabProps?.open} />
   );
 
 }
 
-export default MarkdownEditor;
+export default React.forwardRef(MarkdownEditor);

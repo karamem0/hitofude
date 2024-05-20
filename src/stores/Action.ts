@@ -7,8 +7,6 @@
 //
 
 import {
-  CursorPosition,
-  CursorSelection,
   DialogAction,
   File,
   Folder,
@@ -94,26 +92,6 @@ export const setContentWordWrap = (data?: boolean): Action => ({
 
 export const setMarkdownChanged = (data?: boolean): Action => ({
   type: ActionType.setMarkdownChanged,
-  data
-});
-
-export const setMarkdownCursorPosition = (data?: CursorPosition): Action => ({
-  type: ActionType.setMarkdownCursorPosition,
-  data
-});
-
-export const setMarkdownCursorSelection = (data?: CursorSelection): Action => ({
-  type: ActionType.setMarkdownCursorSelection,
-  data
-});
-
-export const setMarkdownDefaultCursorPosition = (data?: CursorPosition): Action => ({
-  type: ActionType.setMarkdownCursorPosition,
-  data
-});
-
-export const setMarkdownDefaultCursorSelection = (data?: CursorSelection): Action => ({
-  type: ActionType.setMarkdownCursorSelection,
   data
 });
 

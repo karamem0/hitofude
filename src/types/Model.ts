@@ -31,18 +31,6 @@ export interface ContentProps {
   wordWrap?: boolean
 }
 
-export interface CursorPosition {
-  cursorX?: number,
-  cursorY?: number
-}
-
-export interface CursorSelection {
-  endX?: number,
-  endY?: number,
-  startX?: number,
-  startY?: number
-}
-
 export interface DialogAction {
   type: DialogType,
   data: unknown
@@ -106,13 +94,15 @@ export interface Folder {
 
 export interface MarkdownProps {
   changed?: boolean,
-  cursorPosition?: CursorPosition,
-  cursorSelection?: CursorSelection,
-  defaultCursorPosition?: CursorPosition,
-  defaultCursorSelection?: CursorSelection,
   defaultText?: string,
   scrollPosition?: ScrollPosition,
   text?: string
+}
+
+export enum MarkdownToolbarAction {
+  bold = 'bold',
+  italic = 'italic',
+  underline = 'underline'
 }
 
 export interface MimeType {

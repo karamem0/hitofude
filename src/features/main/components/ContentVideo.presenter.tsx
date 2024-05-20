@@ -28,8 +28,8 @@ function ContentVideo(props: Readonly<ContentVideoProps>) {
       css={css`
         max-width: 100%;
         height: auto;
+        padding: 1rem 0 0;
         margin: auto;
-        padding: 1rem 0 0 0;
         @media all and (width <= 960px) {
           max-height: ${layouts.contentBody.height.small};
         }

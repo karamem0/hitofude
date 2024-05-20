@@ -12,12 +12,7 @@ import { css } from '@emotion/react';
 
 import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
-import {
-  CursorPosition,
-  CursorSelection,
-  File,
-  ScrollPosition
-} from '../../../types/Model';
+import { File } from '../../../types/Model';
 import { isMimeType } from '../../../utils/File';
 
 import ContentHeader from './ContentHeader';
@@ -29,12 +24,8 @@ interface ContentSupportedProps {
   changed?: boolean,
   file?: File,
   onCancel?: EventHandler,
-  onCursorPositionChange?: EventHandler<CursorPosition>,
-  onCursorSelectionChange?: EventHandler<CursorSelection>,
   onEdit?: EventHandler,
-  onSave?: EventHandler<boolean>,
-  onScrollPositonChange?: EventHandler<ScrollPosition>,
-  onTextChange?: EventHandler<string>
+  onSave?: EventHandler<boolean>
 }
 
 function ContentSupported(props: Readonly<ContentSupportedProps>) {
@@ -42,12 +33,8 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
   const {
     file,
     onCancel,
-    onCursorPositionChange,
-    onCursorSelectionChange,
     onEdit,
-    onSave,
-    onScrollPositonChange,
-    onTextChange
+    onSave
   } = props;
 
   return file ? (
@@ -87,12 +74,7 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
             }
             if (isMimeType(file, { subtype: 'markdown' })) {
               return (
-                <ContentMarkdown
-                  onCursorPositionChange={onCursorPositionChange}
-                  onCursorSelectionChange={onCursorSelectionChange}
-                  onSave={(e) => onSave?.(e, true)}
-                  onScrollPositonChange={onScrollPositonChange}
-                  onTextChange={onTextChange} />
+                <ContentMarkdown onSave={(e) => onSave?.(e, true)} />
               );
             }
             return null;

@@ -1,6 +1,7 @@
 # Hitofude
 
 [![.github/workflows/workflow.yml](https://github.com/karamem0/hitofude/actions/workflows/workflow.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/workflow.yml)
+[![codecov](https://codecov.io/gh/karamem0/hitofude/graph/badge.svg?token=T44FVSHRYS)](https://codecov.io/gh/karamem0/hitofude)
 [![License](https://img.shields.io/github/license/karamem0/hitofude.svg)](https://github.com/karamem0/hitofude/blob/main/LICENSE)
 
 Online Markdown Editor for Microsoft 365

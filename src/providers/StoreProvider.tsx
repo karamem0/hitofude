@@ -76,16 +76,6 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
             rootFolder: await graph.getRootFolder()
           },
           markdownProps: {
-            cursorPosition: {
-              cursorX: 1,
-              cursorY: 1
-            },
-            cursorSelection: {
-              endX: 1,
-              endY: 1,
-              startX: 1,
-              startY: 1
-            },
             defaultText: '',
             scrollPosition: {
               scrollX: 0,

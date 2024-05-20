@@ -8,6 +8,10 @@
 
 import { defineMessages } from 'react-intl';
 
-const messages = defineMessages({});
+const messages = defineMessages({
+  Bold: { defaultMessage: 'Bold' },
+  Italic: { defaultMessage: 'Italic' },
+  Underline: { defaultMessage: 'Underline' }
+});
 
 export default messages;

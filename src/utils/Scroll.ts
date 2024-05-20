@@ -8,7 +8,11 @@
 
 import { ScrollPosition, ScrollSize } from '../types/Model';
 
-export function getScrollY(scrollPosition?: ScrollPosition, scrollSize1?: ScrollSize, scrollSize2?: ScrollSize): number {
+export function getScrollY(
+  scrollPosition: ScrollPosition | null | undefined,
+  scrollSize1: ScrollSize | null | undefined,
+  scrollSize2: ScrollSize | null | undefined
+): number {
   if (scrollPosition?.scrollY == null) {
     return 0;
   }

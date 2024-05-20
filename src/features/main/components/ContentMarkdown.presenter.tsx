@@ -15,108 +15,108 @@ import ScrollSynchronizer from '../../../common/components/ScrollSynchronizer';
 import { useTheme } from '../../../providers/ThemeProvider';
 import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
-import {
-  CursorPosition,
-  CursorSelection,
-  ScrollPosition
-} from '../../../types/Model';
+import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
 import MarkdownEditor from '../../markdown/components/MarkdownEditor';
-import MarkdownSplitBar from '../../markdown/components/MarkdownSplitBar';
+import MarkdownSplitter from '../../markdown/components/MarkdownSplitter';
+import MarkdownToolbar from '../../markdown/components/MarkdownToolbar';
 import MarkdownViewer from '../../markdown/components/MarkdownViewer';
+import { MarkdownEditorHandle } from '../../markdown/types/Handle';
 
 interface ContentMarkdownProps {
-  defaultCursorPosition?: CursorPosition,
-  defaultCursorSelection?: CursorSelection,
   defaultText?: string,
   editing?: boolean,
   minimap?: boolean,
-  position?: ScrollPosition,
   preview?: boolean,
   scroll?: boolean,
+  scrollPosition?: ScrollPosition,
   tabOpen?: boolean,
   text?: string,
   wordWrap?: boolean,
-  onCursorPositionChange?: EventHandler<CursorPosition>,
-  onCursorSelectionChange?: EventHandler<CursorSelection>,
   onSave?: EventHandler,
   onScrollPositonChange?: EventHandler<ScrollPosition>,
-  onTextChange?: EventHandler<string>
+  onTextChange?: EventHandler<string>,
+  onToolbarClick?: EventHandler<MarkdownToolbarAction>
 }
 
-function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
+function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<MarkdownEditorHandle>) {
 
   const {
-    defaultCursorPosition,
-    defaultCursorSelection,
     defaultText,
     editing,
     minimap,
-    position,
     preview,
     scroll,
-    tabOpen,
+    scrollPosition,
     text,
     wordWrap,
-    onCursorPositionChange,
-    onCursorSelectionChange,
-    onScrollPositonChange,
     onSave,
-    onTextChange
+    onScrollPositonChange,
+    onTextChange,
+    onToolbarClick
   } = props;
 
   const { theme } = useTheme();
 
   return editing ? (
     <ScrollSynchronizer
-      defaultElement1Position={position}
+      defaultElement1Position={scrollPosition}
       enabled={scroll}
       render={
         (state) => (
-          <React.Fragment>
-            <div
+          <div
+            css={css`
+              display: grid;
+              grid-template-rows: 2.5rem 1fr;
+              grid-template-columns: auto auto auto;
+              @media all and (width <= 960px) {
+                height: ${layouts.contentBody.height.small};
+              }
+              @media not all and (width <= 960px) {
+                height: ${layouts.contentBody.height.large};
+              }
+            `}>
+            <MarkdownToolbar
               css={css`
-                position: fixed;
-                @media all and (width <= 960px) {
-                  width: calc(${layouts.contentBody.width.small} / ${preview ? 2 : 1} - 1rem);
-                  height: ${layouts.contentBody.height.small};
-                }
-                @media not all and (width <= 960px) {
-                  width: calc(${tabOpen ? layouts.contentBody.width.large : layouts.contentBody.width.small} / ${preview ? 2 : 1} - 1rem);
-                  height: ${layouts.contentBody.height.large};
-                }
-              `}>
-              <MarkdownEditor
-                cursorPosition={defaultCursorPosition}
-                cursorSelection={defaultCursorSelection}
-                minimap={minimap}
-                scrollPosition={state.element1Position}
-                text={defaultText}
-                wordWrap={wordWrap}
-                onCursorPositionChange={onCursorPositionChange}
-                onCursorSelectionChange={onCursorSelectionChange}
-                onMouseEnter={state.onElement1MouseEnter}
-                onMouseLeave={state.onElement1MouseLeave}
-                onResize={state.onElement1Resize}
-                onSave={onSave}
-                onTextChange={onTextChange}
-                onScrollPositonChange={(e, data) => {
-                  state.onElement1ScrollChange?.(e, data);
-                  onScrollPositonChange?.(e, data);
-                }} />
-            </div>
-            <MarkdownSplitBar />
+                grid-row: 1 / 2;
+                grid-column: 1 / 4;
+              `}
+              onClick={onToolbarClick} />
+            <MarkdownEditor
+              ref={ref}
+              minimap={minimap}
+              scrollPosition={state.element1Position}
+              text={defaultText}
+              wordWrap={wordWrap}
+              css={css`
+                grid-row: 2 / 3;
+                grid-column: 1 / 2;
+              `}
+              onMouseEnter={state.onElement1MouseEnter}
+              onMouseLeave={state.onElement1MouseLeave}
+              onResize={state.onElement1Resize}
+              onSave={onSave}
+              onTextChange={onTextChange}
+              onScrollPositonChange={(e, data) => {
+                state.onElement1ScrollChange?.(e, data);
+                onScrollPositonChange?.(e, data);
+              }} />
+            <MarkdownSplitter
+              css={css`
+                grid-row: 2 / 3;
+                grid-column: 2 / 3;
+              `} />
             <ScrollPanel
               position={state.element2Position}
               css={css`
                 display: ${preview ? 'block' : 'none'};
+                grid-row: 2 / 3;
+                grid-column: 3 / 4;
                 padding: 0 0 0 0.5rem;
                 @media (width < 960px) {
-                  margin: 0 0 0 calc((${layouts.contentBody.width.small}) / 2);
                   border: ${theme.colorNeutralStencil1Alpha} 1px solid;
                 }
                 @media (width >= 960px) {
                   padding: 0 0 0 0.5rem;
-                  margin: 0 0 0 calc(${tabOpen ? layouts.contentBody.width.large : layouts.contentBody.width.small} / 2);
                 }
               `}
               render={
@@ -132,7 +132,7 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
               onMouseLeave={state.onElement2MouseLeave}
               onResize={state.onElement2Resize}
               onScrollPositonChange={state.onElement2ScrollChange} />
-          </React.Fragment>
+          </div>
         )
       } />
   ) : (
@@ -150,4 +150,4 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
 
 }
 
-export default React.memo(ContentMarkdown);
+export default React.memo(React.forwardRef(ContentMarkdown));

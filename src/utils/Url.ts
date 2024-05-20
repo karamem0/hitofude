@@ -6,6 +6,6 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-export function isAbsoluteUrl(value?: string | null | undefined): boolean {
+export function isAbsoluteUrl(value: string | null | undefined): boolean {
   return !!value && /^https?:\/\//.test(value);
 }
