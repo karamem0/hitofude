@@ -13,7 +13,6 @@ import mime from 'mime';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import { DependencyNullError, FileNotFoundError } from '../../../types/Error';
-import { MimeType } from '../../../types/Model';
 import { getMimeType } from '../../../utils/File';
 import { isAbsoluteUrl } from '../../../utils/Url';
 
@@ -21,7 +20,7 @@ import Presenter from './MarkdownImageRenderer.presenter';
 
 interface MarkdownImageRendereState {
   downloadUrl?: string,
-  mimeType?: MimeType
+  mimeType?: string
 }
 
 interface MarkdownImageRendererProps {

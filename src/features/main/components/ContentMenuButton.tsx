@@ -11,6 +11,7 @@ import React from 'react';
 import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentMinimap,
+  setContentPreview,
   setContentScroll,
   setContentWordWrap,
   setSidePanelAction
@@ -49,12 +50,16 @@ function ContentMenuButton() {
         dispatch(setContentMinimap(data?.data as boolean));
         break;
       }
-      case ContentMenuType.toggleWordWrap: {
-        dispatch(setContentWordWrap(data?.data as boolean));
+      case ContentMenuType.togglePreview: {
+        dispatch(setContentPreview(data?.data as boolean));
         break;
       }
       case ContentMenuType.toggleScroll: {
         dispatch(setContentScroll(data?.data as boolean));
+        break;
+      }
+      case ContentMenuType.toggleWordWrap: {
+        dispatch(setContentWordWrap(data?.data as boolean));
         break;
       }
       default:

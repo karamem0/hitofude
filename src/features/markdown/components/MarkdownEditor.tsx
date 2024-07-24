@@ -299,36 +299,10 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
   React.useEffect(() => {
     switch (themeName) {
       case ThemeName.light:
-        monaco.editor.defineTheme('hitofude-light', {
-          base: 'vs',
-          inherit: true,
-          rules: [],
-          colors: {
-            'editor.foreground': theme.colorNeutralForeground1,
-            'editor.background': theme.colorNeutralBackground1,
-            'editor.selectionBackground': theme.colorBrandBackground2Pressed,
-            'editor.lineHighlightBackground': theme.colorBrandBackground2Hover,
-            'editorCursor.foreground': theme.colorNeutralForeground2,
-            'editorWhitespace.foreground': theme.colorNeutralBackground2
-          }
-        });
-        monaco.editor.setTheme('hitofude-light');
+        monaco.editor.setTheme('vs');
         break;
       case ThemeName.dark:
-        monaco.editor.defineTheme('hitofude-dark', {
-          base: 'vs-dark',
-          inherit: true,
-          rules: [],
-          colors: {
-            'editor.foreground': theme.colorNeutralForeground1,
-            'editor.background': theme.colorNeutralBackground1,
-            'editor.selectionBackground': theme.colorBrandBackground2Pressed,
-            'editor.lineHighlightBackground': theme.colorBrandBackground2Hover,
-            'editorCursor.foreground': theme.colorNeutralForeground2,
-            'editorWhitespace.foreground': theme.colorNeutralBackground2
-          }
-        });
-        monaco.editor.setTheme('hitofude-dark');
+        monaco.editor.setTheme('vs-dark');
         break;
       default:
         break;

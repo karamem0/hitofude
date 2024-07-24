@@ -6,12 +6,10 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { MimeType } from '../../../types/Model';
-
 export interface FileCopyDialogFormState {
   baseName?: string,
   fullName?: string,
-  mimeType?: MimeType,
+  mimeType?: string,
   downloadUrl?: string
 }
 

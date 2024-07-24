@@ -12,13 +12,12 @@ import { css } from '@emotion/react';
 
 import ImageViewer from '../../../common/components/ImageViewer';
 import VideoViewer from '../../../common/components/VideoViewer';
-import { MimeType } from '../../../types/Model';
 import { isMimeType } from '../../../utils/File';
 
 interface MarkdownImageRendererProps {
   alt?: string,
   downloadUrl?: string,
-  mimeType?: MimeType
+  mimeType?: string
 }
 
 function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
@@ -32,7 +31,7 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
   return (
     () => {
       if (downloadUrl) {
-        if (isMimeType(mimeType, { type: 'image' })) {
+        if (isMimeType(mimeType, 'image/*')) {
           return (
             <ImageViewer
               alt={alt}
@@ -43,7 +42,7 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
               `} />
           );
         }
-        if (isMimeType(mimeType, { type: 'video' })) {
+        if (isMimeType(mimeType, 'video/*')) {
           return (
             <VideoViewer
               src={downloadUrl}

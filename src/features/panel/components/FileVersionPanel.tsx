@@ -50,7 +50,7 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
       return;
     }
     (async () => {
-      setItems(await graph.getFileVersions(value.id));
+      setItems(await graph.getFileVersions(value));
     })();
   }, [
     graph,

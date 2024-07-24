@@ -116,7 +116,7 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
               `}>
               <Button
                 aria-label={intl.formatMessage(messages.Edit)}
-                disabled={!isMimeType(file, { subtype: 'markdown' })}
+                disabled={!isMimeType(file.mimeType, 'text/markdown')}
                 title={intl.formatMessage(messages.Edit)}
                 onClick={onEdit}>
                 <FormattedMessage {...messages.Edit} />

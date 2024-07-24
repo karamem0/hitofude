@@ -333,7 +333,7 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         }
       };
     }
-    case ActionType.setSearchResults: {
+    case ActionType.setsearchFiles: {
       const data = action.data as File[] | undefined;
       return {
         ...state,

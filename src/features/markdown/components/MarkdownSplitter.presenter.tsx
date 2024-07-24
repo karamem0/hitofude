@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { Button } from '@fluentui/react-components';
 import { DoubleChevronLeftIcon, DoubleChevronRightIcon } from '@fluentui/react-icons-mdl2';
 
 import { css } from '@emotion/react';
@@ -33,13 +34,15 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
   const { theme } = useTheme();
 
   return preview ? (
-    <button
+    <Button
+      appearance="subtle"
       className={className}
       tabIndex={-1}
       css={css`
         display: grid;
         place-items: center center;
-        width: 1rem;
+        min-width: 1rem;
+        padding: 0;
         text-align: center;
         background-color: ${theme.colorNeutralBackground2};
       `}
@@ -51,9 +54,10 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
             line-height: 0.5rem;
           `} />
       }
-    </button>
+    </Button>
   ) : (
-    <button
+    <Button
+      appearance="subtle"
       className={className}
       tabIndex={-1}
       css={css`
@@ -61,7 +65,8 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
         right: 1rem;
         display: grid;
         place-items: center center;
-        width: 1rem;
+        min-width: 1rem;
+        padding: 0;
         text-align: center;
         background-color: ${theme.colorNeutralBackground2};
         @media all and (width <= 960px) {
@@ -79,7 +84,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
             line-height: 0.5rem;
           `} />
       }
-    </button>
+    </Button>
   );
 
 }

@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { useDropzone } from 'react-dropzone';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Caption1 } from '@fluentui/react-components';
@@ -19,6 +20,7 @@ import {
 
 import { css } from '@emotion/react';
 
+import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import {
   DialogAction,
@@ -29,6 +31,7 @@ import {
 import { isSupportedFile } from '../../../utils/File';
 import { isEmpty } from '../../../utils/Folder';
 import messages from '../messages';
+import { DropEventData } from '../types/Event';
 
 import ExplorerFileMenu from './ExplorerFileMenu';
 import ExplorerFolderMenu from './ExplorerFolderMenu';
@@ -41,6 +44,7 @@ interface ExplorerTabItemProps {
   file?: File,
   folder?: Folder,
   onDownloadFile?: EventHandler<File>,
+  onDropFiles?: EventHandler<DropEventData>,
   onOpenDialog?: EventHandler<DialogAction>,
   onOpenUrl?: EventHandler<string>,
   onRefreshFolder?: EventHandler<Folder>,
@@ -56,6 +60,7 @@ function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
     file,
     folder,
     onDownloadFile,
+    onDropFiles,
     onOpenDialog,
     onOpenUrl,
     onRefreshFolder,
@@ -65,6 +70,19 @@ function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
   } = props;
 
   const intl = useIntl();
+  const { theme } = useTheme();
+  const {
+    isDragActive,
+    getRootProps,
+    getInputProps
+  } = useDropzone({
+    maxSize: 250 * 1024 * 1024,
+    noClick: true,
+    onDrop: (acceptedFiles, rejectedFiles, e) => onDropFiles?.(e, {
+      acceptedFiles,
+      rejectedFiles
+    })
+  });
 
   return folder ? (
     <div
@@ -95,70 +113,101 @@ function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
         )}
         onClick={(e) => onSelectFolder?.(e, folder?.parentId)} />
       <div
-        role="list"
+        {...getRootProps()}
         css={css`
-          display: flex;
-          flex-direction: column;
-          grid-gap: 0.25rem;
-          overflow: hidden auto;
+          position: relative;
         `}>
+        <input {...getInputProps()} />
+        <div
+          role="table"
+          css={css`
+            display: flex;
+            flex-direction: column;
+            grid-gap: 0.25rem;
+            overflow: hidden auto;
+          `}>
+          {
+            isEmpty(folder, allFiles) ? (
+              <Caption1
+                css={css`
+                  text-align: center;
+                `}>
+                <FormattedMessage {...messages.NoItemsFound} />
+              </Caption1>
+            ) : (
+              <React.Fragment>
+                {
+                  folder.folders?.map((item) => (
+                    <TreeItem
+                      key={item.id}
+                      name={item.name}
+                      icon={(
+                        <FolderHorizontalIcon
+                          css={css`
+                            font-size: 1rem;
+                            line-height: 1rem;
+                          `} />
+                      )}
+                      menu={(
+                        <ExplorerFolderMenu
+                          value={item}
+                          onOpenDialog={onOpenDialog}
+                          onOpenUrl={onOpenUrl} />
+                      )}
+                      onClick={(e) => onSelectFolder?.(e, item.id)} />
+                  ))
+                }
+                {
+                  folder.files?.filter((item) => (allFiles ?? false) || isSupportedFile(item)).map((item) => (
+                    <TreeItem
+                      key={item.id}
+                      menuEnabled={isSupportedFile(item)}
+                      name={item.fullName}
+                      selected={file?.id === item.id}
+                      icon={(
+                        <TextDocumentIcon
+                          css={css`
+                            font-size: 1rem;
+                            line-height: 1rem;
+                          `} />
+                      )}
+                      menu={(
+                        <ExplorerFileMenu
+                          value={item}
+                          onDownload={(e) => onDownloadFile?.(e, item)}
+                          onOpenDialog={onOpenDialog}
+                          onOpenUrl={onOpenUrl} />
+                      )}
+                      onClick={(e) => onSelectFile?.(e, item)} />
+                  ))
+                }
+              </React.Fragment>
+            )
+          }
+        </div>
         {
-          isEmpty(folder, allFiles) ? (
-            <Caption1
+          isDragActive ? (
+            <div
               css={css`
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                padding: 1rem;
                 text-align: center;
+                background-color: ${theme.colorNeutralBackgroundAlpha};
+                border: 2px dotted ${theme.colorBrandForegroundLink};
               `}>
-              <FormattedMessage {...messages.NoItemsFound} />
-            </Caption1>
-          ) : (
-            <React.Fragment>
               {
-                folder.folders?.map((item) => (
-                  <TreeItem
-                    key={item.id}
-                    name={item.name}
-                    icon={(
-                      <FolderHorizontalIcon
-                        css={css`
-                          font-size: 1rem;
-                          line-height: 1rem;
-                        `} />
-                    )}
-                    menu={(
-                      <ExplorerFolderMenu
-                        value={item}
-                        onOpenDialog={onOpenDialog}
-                        onOpenUrl={onOpenUrl} />
-                    )}
-                    onClick={(e) => onSelectFolder?.(e, item.id)} />
-                ))
+                <FormattedMessage {...messages.DragDropFile} />
               }
-              {
-                folder.files?.filter((item) => (allFiles ?? false) || isSupportedFile(item)).map((item) => (
-                  <TreeItem
-                    key={item.id}
-                    menuEnabled={isSupportedFile(item)}
-                    name={item.fullName}
-                    selected={file?.id === item.id}
-                    icon={(
-                      <TextDocumentIcon
-                        css={css`
-                          font-size: 1rem;
-                          line-height: 1rem;
-                        `} />
-                    )}
-                    menu={(
-                      <ExplorerFileMenu
-                        value={item}
-                        onDownload={(e) => onDownloadFile?.(e, item)}
-                        onOpenDialog={onOpenDialog}
-                        onOpenUrl={onOpenUrl} />
-                    )}
-                    onClick={(e) => onSelectFile?.(e, item)} />
-                ))
-              }
-            </React.Fragment>
-          )
+            </div>
+          ) : null
         }
       </div>
       <div

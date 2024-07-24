@@ -41,6 +41,7 @@ interface ContentMenuButtonProps {
   editing?: boolean,
   file?: File,
   minimap?: boolean,
+  preview?: boolean,
   scroll?:boolean,
   wordWrap?: boolean,
   onMenuClick?: EventHandler<ContentMenuAction>
@@ -52,6 +53,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
     editing,
     file,
     minimap,
+    preview,
     scroll,
     wordWrap,
     onMenuClick
@@ -79,7 +81,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
         <MenuList>
           <MenuGroup>
             <MenuItem
-              key="OpenFileVersion"
+              key={`${ContentMenuType.openSidePanel}-${SidePanelType.fileVersion}`}
               icon={(
                 <HistoryIcon
                   css={css`
@@ -102,7 +104,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
             editing ? (
               <MenuGroup>
                 <MenuItem
-                  key="ToggleMinimap"
+                  key={ContentMenuType.toggleMinimap}
                   icon={
                     <CheckMarkIcon
                       css={css`
@@ -120,7 +122,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                   }
                 </MenuItem>
                 <MenuItem
-                  key="ToggleWordWrap"
+                  key={ContentMenuType.toggleWordWrap}
                   icon={
                     <CheckMarkIcon
                       css={css`
@@ -138,7 +140,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                   }
                 </MenuItem>
                 <MenuItem
-                  key="ToggleScroll"
+                  key={ContentMenuType.toggleScroll}
                   icon={
                     <CheckMarkIcon
                       css={css`
@@ -155,11 +157,29 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                     <FormattedMessage {...messages.SyncScroll} />
                   }
                 </MenuItem>
+                <MenuItem
+                  key={ContentMenuType.togglePreview}
+                  icon={
+                    <CheckMarkIcon
+                      css={css`
+                        font-size: 1rem;
+                        line-height: 1rem;
+                        color: ${preview ? 'inherit' : 'transparent'};
+                      `} />
+                  }
+                  onClick={(e) => onMenuClick?.(e, {
+                    type: ContentMenuType.togglePreview,
+                    data: !preview
+                  })}>
+                  {
+                    <FormattedMessage {...messages.Preview} />
+                  }
+                </MenuItem>
               </MenuGroup>
             ) : (
               <MenuGroup>
                 <MenuItem
-                  key="DownloadFile"
+                  key={ContentMenuType.downloadFile}
                   icon={(
                     <DownloadDocumentIcon
                       css={css`

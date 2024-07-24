@@ -15,8 +15,9 @@ export enum ContentMenuType {
   downloadFile = 'downloadFile',
   openSidePanel = 'openSidePanel',
   toggleMinimap = 'toggleMinimap',
-  toggleWordWrap = 'toggleWordWrap',
-  toggleScroll = 'toggleScroll'
+  togglePreview = 'togglePreview',
+  toggleScroll = 'toggleScroll',
+  toggleWordWrap = 'toggleWordWrap'
 }
 
 export interface ContentProps {
@@ -65,7 +66,7 @@ export interface File {
   id: string,
   baseName?: string,
   fullName?: string,
-  mimeType?: MimeType,
+  mimeType?: string,
   createdDate?: Date,
   updatedDate?: Date,
   webUrl?: string,
@@ -105,11 +106,6 @@ export enum MarkdownToolbarAction {
   underline = 'underline'
 }
 
-export interface MimeType {
-  type: string,
-  subtype: string
-}
-
 export interface ScrollPosition {
   scrollX?: number,
   scrollY?: number
@@ -123,7 +119,8 @@ export interface ScrollSize {
 }
 
 export enum ProgressType {
-  save = 'save'
+  save = 'save',
+  upload = 'upload'
 }
 
 export type RouteParams = ExplorerParams | SearchParams;

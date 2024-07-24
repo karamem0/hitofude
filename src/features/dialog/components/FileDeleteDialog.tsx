@@ -47,9 +47,6 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
       }
       const allFiles = explorerProps?.allFiles;
       const file = explorerProps?.file;
-      if (file == null) {
-        throw new DependencyNullError();
-      }
       const folder = explorerProps?.folder;
       if (folder == null) {
         throw new DependencyNullError();

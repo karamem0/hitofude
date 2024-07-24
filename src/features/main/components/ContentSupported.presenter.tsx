@@ -62,17 +62,17 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
         `}>
         {
           (() => {
-            if (isMimeType(file, { type: 'image' })) {
+            if (isMimeType(file.mimeType, 'image/*')) {
               return (
                 <ContentImage />
               );
             }
-            if (isMimeType(file, { type: 'video' })) {
+            if (isMimeType(file.mimeType, 'video/*')) {
               return (
                 <ContentVideo />
               );
             }
-            if (isMimeType(file, { subtype: 'markdown' })) {
+            if (isMimeType(file.mimeType, 'text/markdown')) {
               return (
                 <ContentMarkdown onSave={(e) => onSave?.(e, true)} />
               );

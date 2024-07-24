@@ -44,10 +44,8 @@ export class GraphService {
       const value = data as DriveItem;
       return mapper.map(value, 'DriveItem', 'File');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 409) {
-          throw new FileConflictError(e.message);
-        }
+      if (e instanceof GraphError && [ 409 ].includes(e.statusCode)) {
+        throw new FileConflictError(e.message);
       }
       throw e;
     }
@@ -65,10 +63,8 @@ export class GraphService {
       const value = data as DriveItem;
       return mapper.map(value, 'DriveItem', 'Folder');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 409) {
-          throw new FileConflictError(e.message);
-        }
+      if (e instanceof GraphError && [ 409 ].includes(e.statusCode)) {
+        throw new FileConflictError(e.message);
       }
       throw e;
     }
@@ -80,10 +76,8 @@ export class GraphService {
         .api(`/me/drive/items/${file.id}`)
         .delete();
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
@@ -95,10 +89,8 @@ export class GraphService {
         .api(`/me/drive/items/${file.id}`)
         .delete();
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 404) {
-          throw new FolderNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 404 ].includes(e.statusCode)) {
+        throw new FolderNotFoundError(e.message);
       }
       throw e;
     }
@@ -115,20 +107,17 @@ export class GraphService {
       }
       return mapper.map(value, 'DriveItem', 'File');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
   }
 
-  async getFileByUrl(path: string): Promise<File> {
+  async getFileByUrl(url: string): Promise<File> {
     try {
       const data = await this.client
-        .api(`/me/drive/root:/${path}`)
+        .api(`/me/drive/root:/${url}`)
         .get();
       const value = data as DriveItem;
       if (value.file == null) {
@@ -136,11 +125,8 @@ export class GraphService {
       }
       return mapper.map(value, 'DriveItem', 'File');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
@@ -148,8 +134,8 @@ export class GraphService {
 
   async getFileText(file: Pick<File, 'mimeType' | 'downloadUrl'>): Promise<string> {
     try {
-      if (isMimeType(file, { type: 'text' })) {
-        const downloadUrl = typeof (file) === 'string' ? file : file.downloadUrl;
+      if (isMimeType(file.mimeType, 'text/*')) {
+        const downloadUrl = file.downloadUrl;
         if (downloadUrl == null) {
           throw new FileNotFoundError();
         }
@@ -160,33 +146,28 @@ export class GraphService {
         return '';
       }
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
   }
 
-  async getFileVersions(id: string): Promise<FileVersion[]> {
+  async getFileVersions(file: Pick<File, 'id'>): Promise<FileVersion[]> {
     try {
       const data = await this.client
-        .api(`/me/drive/items/${id}/versions`)
+        .api(`/me/drive/items/${file.id}/versions`)
         .get();
       const value = data.value as DriveItemVersion[];
       return mapper
         .mapArray<DriveItemVersion, FileVersion>(value, 'DriveItemVersion', 'FileVersion')
         .map((item) => ({
           ...item,
-          id
+          id: file.id
         }));
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
@@ -203,17 +184,14 @@ export class GraphService {
       }
       return mapper.map(value, 'DriveItem', 'Folder');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FolderNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FolderNotFoundError(e.message);
       }
       throw e;
     }
   }
 
-  async getPhoto(): Promise<string> {
+  async getMyPhoto(): Promise<string> {
     try {
       const data = await this.client
         .api('/me/photo/$value')
@@ -222,10 +200,8 @@ export class GraphService {
       const value = data as Blob;
       return URL.createObjectURL(value);
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
@@ -242,11 +218,8 @@ export class GraphService {
       }
       return mapper.map(value, 'DriveItem', 'Folder');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FolderNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FolderNotFoundError(e.message);
       }
       throw e;
     }
@@ -262,14 +235,11 @@ export class GraphService {
       const value = data as DriveItem;
       return mapper.map(value, 'DriveItem', 'File');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
-        if (e.statusCode === 409) {
-          throw new FileConflictError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
+      }
+      if (e instanceof GraphError && [ 409 ].includes(e.statusCode)) {
+        throw new FileConflictError(e.message);
       }
       throw e;
     }
@@ -285,14 +255,11 @@ export class GraphService {
       const value = data as DriveItem;
       return mapper.map(value, 'DriveItem', 'Folder');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FolderNotFoundError(e.message);
-        }
-        if (e.statusCode === 409) {
-          throw new FolderConflictError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
+      }
+      if (e instanceof GraphError && [ 409 ].includes(e.statusCode)) {
+        throw new FolderConflictError(e.message);
       }
       throw e;
     }
@@ -304,16 +271,14 @@ export class GraphService {
         .api(`/me/drive/items/${file.id}/versions/${file.version}/restoreVersion`)
         .post(null);
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
   }
 
-  async searchResults(query: string): Promise<File[]> {
+  async searchFiles(query: string): Promise<File[]> {
     try {
       if (query == null || query.length === 0) {
         return [];
@@ -334,17 +299,14 @@ export class GraphService {
           'File'
         );
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
       }
       throw e;
     }
   }
 
-  async setFileContent(file: File, content: string): Promise<File> {
+  async setFileContent(file: Pick<File, 'id'>, content: string): Promise<File> {
     try {
       const data = await this.client
         .api(`/me/drive/items/${file.id}/content`)
@@ -352,14 +314,11 @@ export class GraphService {
       const value = data as DriveItem;
       return mapper.map(value, 'DriveItem', 'File');
     } catch (e) {
-      if (e instanceof GraphError) {
-        if (e.statusCode === 400 ||
-            e.statusCode === 404) {
-          throw new FileNotFoundError(e.message);
-        }
-        if (e.statusCode === 409) {
-          throw new FileConflictError(e.message);
-        }
+      if (e instanceof GraphError && [ 400, 404 ].includes(e.statusCode)) {
+        throw new FileNotFoundError(e.message);
+      }
+      if (e instanceof GraphError && [ 409 ].includes(e.statusCode)) {
+        throw new FileConflictError(e.message);
       }
       throw e;
     }

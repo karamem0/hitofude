@@ -7,7 +7,11 @@
 //
 
 import { ArgumentNullError } from '../types/Error';
-import { File, MimeType } from '../types/Model';
+import { File } from '../types/Model';
+
+const regexBaseName = /\.[^.]*$/;
+
+const regexMimeType = /^(?<type>\*|[\w.]+)\/(?<subtype>\*|[\w.]+)/;
 
 export function downloadFile(value: File): void {
   if (value?.downloadUrl == null) {
@@ -24,10 +28,10 @@ export function downloadFile(value: File): void {
 }
 
 export function getBaseName(value: string | null | undefined): string | undefined {
-  return value ? value.replace(/\.[^.]*$/, '') : undefined;
+  return value ? value.replace(regexBaseName, '') : undefined;
 }
 
-export function getMimeType(fileName: string | null | undefined, mimeType: string | null | undefined): MimeType | undefined {
+export function getMimeType(fileName: string | null | undefined, mimeType: string | null | undefined): string | undefined {
   if (fileName == null) {
     return undefined;
   }
@@ -35,36 +39,54 @@ export function getMimeType(fileName: string | null | undefined, mimeType: strin
     return undefined;
   }
   if (fileName.endsWith('.md')) {
-    mimeType = 'text/markdown';
+    return 'text/markdown';
   }
-  const regex = /^([-\w.]+)\/([-\w.]+)/;
-  const match = regex.exec(mimeType);
-  if (match) {
-    return {
-      type: match[1],
-      subtype: match[2]
-    };
+  if (regexMimeType.test(mimeType)) {
+    return mimeType;
   }
   return undefined;
 }
 
-export function isMimeType(value?: MimeType | Pick<File, 'mimeType'>, option?: { type?: string, subtype?: string }): boolean {
+export function isMimeType(value?: string, match?: string): boolean {
   if (value == null) {
     return false;
   }
-  const mimeType = Object.hasOwn(value, 'mimeType') ? (value as Pick<File, 'mimeType'>)?.mimeType : value as MimeType;
-  if (mimeType == null) {
+  if (match == null) {
     return false;
   }
-  if (option && mimeType.type === option.type) {
-    return true;
+  const valueExec = regexMimeType.exec(value);
+  if (valueExec == null) {
+    return false;
   }
-  if (option && mimeType.subtype === option.subtype) {
-    return true;
+  const matchExec = regexMimeType.exec(match);
+  if (matchExec == null) {
+    return false;
   }
-  return false;
+  const valueType = valueExec.groups?.type;
+  const matchType = matchExec.groups?.type;
+  if (matchType !== '*' && valueType !== matchType) {
+    return false;
+  }
+  const valueSubtype = valueExec.groups?.subtype;
+  const matchSubtype = matchExec.groups?.subtype;
+  if (matchSubtype !== '*' && valueSubtype !== matchSubtype) {
+    return false;
+  }
+  return true;
 }
 
 export function isSupportedFile(value?: Pick<File, 'mimeType'>): boolean {
-  return isMimeType(value, { type: 'image' }) || isMimeType(value, { type: 'video' }) || isMimeType(value, { subtype: 'markdown' });
+  if (value == null) {
+    return false;
+  }
+  if (isMimeType(value?.mimeType, 'image/*')) {
+    return true;
+  }
+  if (isMimeType(value?.mimeType, 'video/*')) {
+    return true;
+  }
+  if (isMimeType(value?.mimeType, 'text/markdown')) {
+    return true;
+  }
+  return false;
 }

@@ -36,7 +36,7 @@ function MeControl() {
   React.useEffect(() => {
     (async () => {
       try {
-        setPhoto(await graph.getPhoto());
+        setPhoto(await graph.getMyPhoto());
       } catch (e) {
         if (e instanceof FileNotFoundError) {
           setPhoto(undefined);

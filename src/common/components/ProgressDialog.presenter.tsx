@@ -64,6 +64,8 @@ function ProgressDialog(props: Readonly<ProgressDialogProps>) {
                   switch (value) {
                     case ProgressType.save:
                       return intl.formatMessage(messages.Saving);
+                    case ProgressType.upload:
+                      return intl.formatMessage(messages.Uploading);
                     default:
                       return null;
                   }

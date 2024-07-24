@@ -53,7 +53,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
     <div
       key={key}
       aria-selected={selected}
-      role="listitem"
+      role="row"
       tabIndex={-1}
       css={css`
         display: grid;
@@ -63,17 +63,17 @@ function TreeItem(props: Readonly<TreeItemProps>) {
         justify-content: start;
         cursor: pointer;
         user-select: none;
-        & > div:nth-of-type(2) {
+        & > button {
           display: none;
         }
         &:hover {
           background-color: ${theme.colorNeutralBackground2Hover};
-          & > div:nth-of-type(2) {
+          & > button {
             display: inherit;
           }
         }
         &:focus {
-          & > div:nth-of-type(2) {
+          & > button {
             display: inherit;
           }
         }
@@ -81,38 +81,38 @@ function TreeItem(props: Readonly<TreeItemProps>) {
           background-color: ${theme.colorNeutralBackground2Selected};
         }
       `}>
-      <div
-        aria-label={name}
-        role="button"
-        tabIndex={-1}
-        title={name}
-        css={css`
-          display: grid;
-          grid-template-rows: auto;
-          grid-template-columns: auto 1fr;
-          grid-gap: 0.5rem;
-          align-items: center;
-          justify-content: start;
-          padding: 0.5rem;
-        `}
-        onClick={onClick}>
-        {icon}
-        <Text
+      <div role="cell">
+        <button
+          aria-label={name}
+          tabIndex={-1}
+          title={name}
           css={css`
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          `}>
-          {name}
-        </Text>
+            display: grid;
+            grid-template-rows: auto;
+            grid-template-columns: auto 1fr;
+            grid-gap: 0.5rem;
+            align-items: center;
+            justify-content: start;
+            padding: 0.5rem;
+          `}
+          onClick={onClick}>
+          {icon}
+          <Text
+            css={css`
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            `}>
+            {name}
+          </Text>
+        </button>
       </div>
       {
         menuEnabled ? (
           <Menu>
             <MenuTrigger>
-              <div
+              <button
                 aria-label={intl.formatMessage(messages.MoreOption)}
-                role="button"
                 tabIndex={-1}
                 title={intl.formatMessage(messages.MoreOption)}
                 css={css`
@@ -121,7 +121,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
                   line-height: 1rem;
                 `}>
                 <MoreVerticalIcon />
-              </div>
+              </button>
             </MenuTrigger>
             <MenuPopover>
               {menu}

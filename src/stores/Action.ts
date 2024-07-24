@@ -145,8 +145,8 @@ export const setSearchFile = (data?: File): Action => ({
   data
 });
 
-export const setSearchResults = (data?: File[]): Action => ({
-  type: ActionType.setSearchResults,
+export const setsearchFiles = (data?: File[]): Action => ({
+  type: ActionType.setsearchFiles,
   data
 });
 

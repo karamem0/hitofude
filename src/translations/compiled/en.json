@@ -167,6 +167,12 @@
       "value": "Version"
     }
   ],
+  "JEsxDw": [
+    {
+      "type": 0,
+      "value": "Uploading..."
+    }
+  ],
   "JqiqNj": [
     {
       "type": 0,
@@ -207,6 +213,12 @@
     {
       "type": 0,
       "value": "Dismiss"
+    }
+  ],
+  "TJo5E6": [
+    {
+      "type": 0,
+      "value": "Preview"
     }
   ],
   "TNqh3Y": [
@@ -435,6 +447,12 @@
     {
       "type": 0,
       "value": "Search"
+    }
+  ],
+  "xyET3x": [
+    {
+      "type": 0,
+      "value": "Drag and drop files here"
     }
   ]
 }

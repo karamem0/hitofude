@@ -50,7 +50,7 @@ export enum ActionType {
   setExploreFolder = 'setExploreFolder',
   setInitialState = 'setInitialState',
   setSearchFile = 'setSearchFile',
-  setSearchResults = 'setSearchResults',
+  setsearchFiles = 'setsearchFiles',
   setSearchQuery = 'setSearchQuery',
   setSidePanelAction = 'setSidePanelAction',
   setTabLoading = 'setTabLoading',

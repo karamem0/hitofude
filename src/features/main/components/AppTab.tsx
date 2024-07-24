@@ -21,7 +21,7 @@ import {
   setTabLoading,
   setSearchFile,
   setSearchQuery,
-  setSearchResults
+  setsearchFiles
 } from '../../../stores/Action';
 import { DependencyNullError, FileNotFoundError, InvalidOperationError } from '../../../types/Error';
 import { TabType } from '../../../types/Model';
@@ -96,10 +96,10 @@ function AppTab() {
       }
       if (params.search != null) {
         dispatch(setSearchQuery(params.search));
-        dispatch(setSearchResults(await graph.searchResults(params.search)));
+        dispatch(setsearchFiles(await graph.searchFiles(params.search)));
       } else {
         dispatch(setSearchQuery());
-        dispatch(setSearchResults());
+        dispatch(setsearchFiles());
       }
       if (params.file != null) {
         try {

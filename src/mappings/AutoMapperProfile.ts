@@ -17,7 +17,6 @@ import { pojos, PojosMetadataMap } from '@automapper/pojos';
 import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
 
 import {
-  MimeType,
   Folder,
   File,
   FileVersion
@@ -60,11 +59,6 @@ PojosMetadataMap.create<FileVersion>('FileVersion', {
   version: String,
   updatedDate: Date,
   size: Number
-});
-
-PojosMetadataMap.create<MimeType>('MimeType', {
-  type: String,
-  subtype: String
 });
 
 PojosMetadataMap.create<Folder>('Folder', {

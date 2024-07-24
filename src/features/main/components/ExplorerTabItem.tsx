@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { useProgress } from '../../../common/providers/ProgressProvider';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
@@ -15,7 +16,8 @@ import {
   setDialogAction,
   setError,
   setExploreFolder,
-  setExploreAllFiles
+  setExploreAllFiles,
+  appendExploreFile
 } from '../../../stores/Action';
 import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
@@ -23,9 +25,11 @@ import {
   DialogAction,
   File,
   Folder,
+  ProgressType,
   TabType
 } from '../../../types/Model';
 import { downloadFile, isSupportedFile } from '../../../utils/File';
+import { DropEventData } from '../types/Event';
 
 import Presenter from './ExplorerTabItem.presenter';
 
@@ -39,6 +43,7 @@ function ExplorerTabItem() {
     }
   } = useStore();
   const { graph } = useService();
+  const { setProgress } = useProgress();
 
   const handleDownloadFile = React.useCallback(async (_?: Event, data?: File) => {
     try {
@@ -51,6 +56,41 @@ function ExplorerTabItem() {
     }
   }, [
     dispatch
+  ]);
+
+  const handleDropFiles = React.useCallback(async (_?: Event, data?: DropEventData) => {
+    const folder = explorerProps?.folder;
+    if (data == null) {
+      throw new ArgumentNullError();
+    }
+    if (folder == null) {
+      throw new DependencyNullError();
+    }
+    setProgress(ProgressType.upload);
+    for (const acceptedFile of data.acceptedFiles) {
+      try {
+        const file = await Promise.resolve()
+          .then(() => graph.createFile(folder, acceptedFile.name))
+          .then((file) => graph.getFileById(file.id));
+        dispatch(appendExploreFile(file));
+        route.setParams({
+          tab: TabType.explorer,
+          folder: folder.id,
+          file: file?.id
+        });
+      } catch (e) {
+        if (e instanceof Error) {
+          dispatch(setError(e));
+        }
+      }
+    }
+    setProgress();
+  }, [
+    explorerProps?.folder,
+    graph,
+    route,
+    dispatch,
+    setProgress
   ]);
 
   const handleOpenDialog = React.useCallback((_?: Event, data?: DialogAction) => {
@@ -176,6 +216,7 @@ function ExplorerTabItem() {
     <Presenter
       {...explorerProps}
       onDownloadFile={handleDownloadFile}
+      onDropFiles={handleDropFiles}
       onOpenDialog={handleOpenDialog}
       onOpenUrl={handleOpenUrl}
       onRefreshFolder={handleRefreshFolder}
