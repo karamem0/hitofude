@@ -101,7 +101,7 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
                                     font-size: 1rem;
                                     line-height: 1rem;
                                   `}
-                                  onClick={(e) => onRestore?.(e, {
+                                  onClick={(event) => onRestore?.(event, {
                                     type: DialogType.restoreFile,
                                     data: item
                                   })}>

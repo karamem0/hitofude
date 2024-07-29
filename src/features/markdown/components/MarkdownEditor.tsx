@@ -227,10 +227,10 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     if (monacoEl == null) {
       return;
     }
-    monacoEl.onDidScrollChange((e) =>
+    monacoEl.onDidScrollChange((event) =>
       onScrollPositonChange?.({}, {
-        scrollX: e.scrollLeft,
-        scrollY: e.scrollTop
+        scrollX: event.scrollLeft,
+        scrollY: event.scrollTop
       }));
   }, [
     onScrollPositonChange

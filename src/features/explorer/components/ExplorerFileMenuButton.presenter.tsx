@@ -16,7 +16,12 @@ import {
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import { CopyIcon, DeleteIcon, DownloadDocumentIcon, RenameIcon } from '@fluentui/react-icons-mdl2';
+import {
+  CopyIcon,
+  DeleteIcon,
+  DownloadDocumentIcon,
+  RenameIcon
+} from '@fluentui/react-icons-mdl2';
 import {
   OneDriveLogoIcon
 } from '@fluentui/react-icons-mdl2-branded';
@@ -25,34 +30,30 @@ import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
 import {
-  DialogAction,
-  DialogType,
+  ExplorerMenuAction,
+  ExplorerMenuType,
   File
 } from '../../../types/Model';
 import { isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
 
-interface ExplorerFileMenuProps {
-  value?: File,
-  onDownload?: EventHandler,
-  onOpenDialog?: EventHandler<DialogAction>,
-  onOpenUrl?: EventHandler<string>
+interface ExplorerFileMenuButtonProps {
+  file?: File,
+  onMenuClick?: EventHandler<ExplorerMenuAction>
 }
 
-function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
+function ExplorerFileMenuButton(props: Readonly<ExplorerFileMenuButtonProps>) {
 
   const {
-    value,
-    onDownload,
-    onOpenDialog,
-    onOpenUrl
+    file,
+    onMenuClick
   } = props;
 
-  return value && isSupportedFile(value) ? (
+  return file && isSupportedFile(file) ? (
     <MenuList>
       <MenuGroup>
         <MenuItem
-          key="CopyFile"
+          key={ExplorerMenuType.copyFile}
           icon={(
             <CopyIcon
               css={css`
@@ -60,9 +61,9 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenDialog?.(e, {
-            type: DialogType.copyFile,
-            data: value
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.copyFile,
+            data: file
           })}>
           <FormattedMessage {...messages.CopyFile} />
         </MenuItem>
@@ -70,7 +71,7 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="RenameFile"
+          key={ExplorerMenuType.renameFile}
           icon={(
             <RenameIcon
               css={css`
@@ -78,14 +79,14 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenDialog?.(e, {
-            type: DialogType.renameFile,
-            data: value
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.renameFile,
+            data: file
           })}>
           <FormattedMessage {...messages.RenameFile} />
         </MenuItem>
         <MenuItem
-          key="DeleteFile"
+          key={ExplorerMenuType.deleteFile}
           icon={(
             <DeleteIcon
               css={css`
@@ -93,9 +94,9 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenDialog?.(e, {
-            type: DialogType.deleteFile,
-            data: value
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.deleteFile,
+            data: file
           })}>
           <FormattedMessage {...messages.DeleteFile} />
         </MenuItem>
@@ -103,7 +104,7 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="DownloadFile"
+          key={ExplorerMenuType.downloadFile}
           icon={(
             <DownloadDocumentIcon
               css={css`
@@ -111,14 +112,17 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onDownload?.(e)}>
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.downloadFile,
+            data: file
+          })}>
           <FormattedMessage {...messages.Download} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="OpenWithOneDrive"
+          key={ExplorerMenuType.openWithOneDrive}
           icon={(
             <OneDriveLogoIcon
               css={css`
@@ -126,7 +130,10 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenUrl?.(e, value.webUrl)}>
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.openWithOneDrive,
+            data: file
+          })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>
       </MenuGroup>
@@ -135,4 +142,4 @@ function ExplorerFileMenu(props: Readonly<ExplorerFileMenuProps>) {
 
 }
 
-export default React.memo(ExplorerFileMenu);
+export default React.memo(ExplorerFileMenuButton);

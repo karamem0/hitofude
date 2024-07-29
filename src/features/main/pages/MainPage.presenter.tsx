@@ -45,7 +45,8 @@ function MainPage(props: Readonly<MainPageProps>) {
         flex-flow: column;
         align-items: center;
         justify-content: center;
-        min-height: 100vh;
+        min-height: 100svh;
+
       `}>
       <Spinner />
     </div>

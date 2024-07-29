@@ -47,10 +47,10 @@ function ContentSaveButton(props: Readonly<ContentSaveButtonProps>) {
               disabled={disabled}
               menuButton={trigger}
               title={intl.formatMessage(messages.Save)}
-              onClick={(e: Event) => {
-                if (e.target instanceof HTMLButtonElement &&
-                    e.target.innerText === intl.formatMessage(messages.Save)) {
-                  onClick?.(e, true);
+              onClick={(event: Event) => {
+                if (event.target instanceof HTMLButtonElement &&
+                  event.target.innerText === intl.formatMessage(messages.Save)) {
+                  onClick?.(event, true);
                 }
               }}>
               <FormattedMessage {...messages.Save} />
@@ -62,7 +62,7 @@ function ContentSaveButton(props: Readonly<ContentSaveButtonProps>) {
         <MenuList>
           <MenuItem
             key="SaveAndClose"
-            onClick={(e: Event) => onClick?.(e, false)}>
+            onClick={(event) => onClick?.(event, false)}>
             <FormattedMessage {...messages.SaveAndClose} />
           </MenuItem>
         </MenuList>

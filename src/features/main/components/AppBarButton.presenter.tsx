@@ -63,10 +63,10 @@ function AppBarButton(props: Readonly<AppBarButtonProps>) {
           width: 2.5rem;
           height: 2.5rem;
         `}
-        onClick={(e) => !disabled && onClick?.(e)}
-        onKeyDown={(e) => e.key === 'Enter' && !disabled && onClick?.(e)}
-        onMouseEnter={(e) => onFocusChanged?.(e, true)}
-        onMouseLeave={(e) => onFocusChanged?.(e, false)}>
+        onClick={(event) => !disabled && onClick?.(event)}
+        onKeyDown={(event) => event.key === 'Enter' && !disabled && onClick?.(event)}
+        onMouseEnter={(event) => onFocusChanged?.(event, true)}
+        onMouseLeave={(event) => onFocusChanged?.(event, false)}>
         <span
           css={css`
             font-size: 1.5rem;

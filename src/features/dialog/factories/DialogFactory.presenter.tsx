@@ -12,12 +12,14 @@ import {
   DialogAction,
   DialogType,
   File,
+  FileConflict,
   FileVersion,
   Folder
 } from '../../../types/Model';
 import FileCopyDialog from '../components/FileCopyDialog';
 import FileCreateDialog from '../components/FileCreateDialog';
 import FileDeleteDialog from '../components/FileDeleteDialog';
+import FileOverwriteDialog from '../components/FileOverwriteDialog';
 import FileRenameDialog from '../components/FileRenameDialog';
 import FileRestoreDialog from '../components/FileRestoreDialog';
 import FolderCreateDialog from '../components/FolderCreateDialog';
@@ -59,6 +61,10 @@ function DialogFactory(props: Readonly<DialogFactoryProps>) {
     case DialogType.deleteFolder:
       return (
         <FolderDeleteDialog value={action.data as Folder} />
+      );
+    case DialogType.overwriteFile:
+      return (
+        <FileOverwriteDialog value={action.data as FileConflict} />
       );
     case DialogType.renameFile:
       return (

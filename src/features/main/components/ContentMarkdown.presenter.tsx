@@ -96,9 +96,9 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
               onResize={state.onElement1Resize}
               onSave={onSave}
               onTextChange={onTextChange}
-              onScrollPositonChange={(e, data) => {
-                state.onElement1ScrollChange?.(e, data);
-                onScrollPositonChange?.(e, data);
+              onScrollPositonChange={(event, data) => {
+                state.onElement1ScrollChange?.(event, data);
+                onScrollPositonChange?.(event, data);
               }} />
             <MarkdownSplitter
               css={css`

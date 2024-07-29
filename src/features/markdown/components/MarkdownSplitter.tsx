@@ -29,7 +29,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
     }
   } = useStore();
 
-  const handleChangePreview = React.useCallback((_?: Event, data?: boolean) => {
+  const handleChangePreview = React.useCallback((_: Event, data?: boolean) => {
     dispatch(setContentPreview(data));
   }, [
     dispatch

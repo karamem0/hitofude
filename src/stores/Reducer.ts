@@ -10,6 +10,7 @@ import { StorageService } from '../services/StorageService';
 import {
   DialogAction,
   File,
+  FileConflict,
   Folder,
   ScrollPosition,
   SidePanelAction,
@@ -25,23 +26,23 @@ import { compare } from '../utils/String';
 
 export const reducer = (storage: StorageService) => (state: State, action: Action): State => {
   switch (action.type) {
-    case ActionType.appendExploreFile: {
+    case ActionType.appendExplorerFile: {
       const data = action.data as File | undefined;
       if (data == null) {
         return state;
       }
-      if (state.explorerProps?.folder == null) {
+      if (state.explorerProps?.selectedFolder == null) {
         return state;
       }
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          file: data,
-          folder: {
-            ...state.explorerProps?.folder,
-            files: state.explorerProps?.folder?.files ? (
-              [ ...state.explorerProps.folder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
+          selectedFile: data,
+          selectedFolder: {
+            ...state.explorerProps.selectedFolder,
+            files: state.explorerProps.selectedFolder.files ? (
+              [ ...state.explorerProps.selectedFolder.files, data ].sort((a, b) => compare(a.baseName, b.baseName))
             ) : (
               [ data ]
             )
@@ -49,22 +50,39 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         }
       };
     }
-    case ActionType.appendExploreFolder: {
-      const data = action.data as Folder | undefined;
+    case ActionType.appendExplorerFileConflict: {
+      const data = action.data as FileConflict | undefined;
       if (data == null) {
-        return state;
-      }
-      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          folder: {
-            ...state.explorerProps?.folder,
-            folders: state.explorerProps?.folder?.folders ? (
-              [ ...state.explorerProps.folder.folders, data ].sort((a, b) => compare(a.name, b.name))
+          fileConflicts: state.explorerProps?.fileConflicts ? (
+            [ ...state.explorerProps.fileConflicts, data ]
+          ) : (
+            [ data ]
+          )
+        }
+      };
+    }
+    case ActionType.appendExplorerFolder: {
+      const data = action.data as Folder | undefined;
+      if (data == null) {
+        return state;
+      }
+      if (state.explorerProps?.selectedFolder == null) {
+        return state;
+      }
+      return {
+        ...state,
+        explorerProps: {
+          ...state.explorerProps,
+          selectedFolder: {
+            ...state.explorerProps.selectedFolder,
+            folders: state.explorerProps.selectedFolder.folders ? (
+              [ ...state.explorerProps.selectedFolder.folders, data ].sort((a, b) => compare(a.name, b.name))
             ) : (
               [ data ]
             )
@@ -72,40 +90,53 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         }
       };
     }
-    case ActionType.deleteExploreFile: {
+    case ActionType.removeExplorerFile: {
       const data = action.data as File | undefined;
       if (data == null) {
         return state;
       }
-      if (state.explorerProps?.folder == null) {
+      if (state.explorerProps?.selectedFolder == null) {
         return state;
       }
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          folder: {
-            ...state.explorerProps?.folder,
-            files: state.explorerProps?.folder?.files?.filter((item) => item.id !== data.id)
+          selectedFolder: {
+            ...state.explorerProps.selectedFolder,
+            files: state.explorerProps.selectedFolder.files?.filter((item) => item.id !== data.id)
           }
         }
       };
     }
-    case ActionType.deleteExploreFolder: {
-      const data = action.data as Folder | undefined;
+    case ActionType.removeExplorerFileConflict: {
+      const data = action.data as FileConflict | undefined;
       if (data == null) {
-        return state;
-      }
-      if (state.explorerProps?.folder == null) {
         return state;
       }
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          folder: {
-            ...state.explorerProps?.folder,
-            folders: state.explorerProps?.folder?.folders?.filter((item) => item.id !== data.id)
+          fileConflicts: state.explorerProps?.fileConflicts?.filter((item) => item.id !== data.id)
+        }
+      };
+    }
+    case ActionType.removeExplorerFolder: {
+      const data = action.data as Folder | undefined;
+      if (data == null) {
+        return state;
+      }
+      if (state.explorerProps?.selectedFolder == null) {
+        return state;
+      }
+      return {
+        ...state,
+        explorerProps: {
+          ...state.explorerProps,
+          selectedFolder: {
+            ...state.explorerProps.selectedFolder,
+            folders: state.explorerProps.selectedFolder.folders?.filter((item) => item.id !== data.id)
           }
         }
       };
@@ -283,31 +314,31 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         error: data
       };
     }
-    case ActionType.setExploreFile: {
+    case ActionType.setExplorerSelectedFile: {
       const data = action.data as File | undefined;
-      storage.setExploreFileId(data?.id);
+      storage.setExplorerFileId(data?.id);
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          file: data
+          selectedFile: data
         }
       };
     }
-    case ActionType.setExploreFolder: {
+    case ActionType.setExplorerSelectedFolder: {
       const data = action.data as Folder | undefined;
-      storage.setExploreFolderId(data?.id);
+      storage.setExplorerFolderId(data?.id);
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          folder: data
+          selectedFolder: data
         }
       };
     }
-    case ActionType.setExploreAllFiles: {
+    case ActionType.setExplorerAllFiles: {
       const data = action.data as boolean | undefined;
-      storage.setExploreAllFiles(data);
+      storage.setExplorerAllFiles(data);
       return {
         ...state,
         explorerProps: {
@@ -323,26 +354,6 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         ...data
       };
     }
-    case ActionType.setSearchFile: {
-      const data = action.data as File | undefined;
-      return {
-        ...state,
-        searchProps: {
-          ...state.searchProps,
-          file: data
-        }
-      };
-    }
-    case ActionType.setsearchFiles: {
-      const data = action.data as File[] | undefined;
-      return {
-        ...state,
-        searchProps: {
-          ...state.searchProps,
-          results: data
-        }
-      };
-    }
     case ActionType.setSearchQuery: {
       const data = action.data as string | undefined;
       return {
@@ -350,6 +361,26 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         searchProps: {
           ...state.searchProps,
           query: data ?? ''
+        }
+      };
+    }
+    case ActionType.setSearchResultFiles: {
+      const data = action.data as File[] | undefined;
+      return {
+        ...state,
+        searchProps: {
+          ...state.searchProps,
+          resultFiles: data
+        }
+      };
+    }
+    case ActionType.setSearchSelectedFile: {
+      const data = action.data as File | undefined;
+      return {
+        ...state,
+        searchProps: {
+          ...state.searchProps,
+          selectedFile: data
         }
       };
     }
@@ -392,22 +423,22 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         }
       };
     }
-    case ActionType.updateExploreFile: {
+    case ActionType.updateExplorerFile: {
       const data = action.data as File | undefined;
       if (data == null) {
         return state;
       }
-      if (state.explorerProps?.folder == null) {
+      if (state.explorerProps?.selectedFolder == null) {
         return state;
       }
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          folder: {
-            ...state.explorerProps?.folder,
-            files: state.explorerProps?.folder?.files ? (
-              state.explorerProps?.folder?.files
+          selectedFolder: {
+            ...state.explorerProps.selectedFolder,
+            files: state.explorerProps.selectedFolder.files ? (
+              state.explorerProps.selectedFolder.files
                 .map((item) => item.id === data.id ? data : item)
                 .sort((a, b) => compare(a.baseName, b.baseName))
             ) : []
@@ -415,22 +446,22 @@ export const reducer = (storage: StorageService) => (state: State, action: Actio
         }
       };
     }
-    case ActionType.updateExploreFolder: {
+    case ActionType.updateExplorerFolder: {
       const data = action.data as Folder | undefined;
       if (data == null) {
         return state;
       }
-      if (state.explorerProps?.folder == null) {
+      if (state.explorerProps?.selectedFolder == null) {
         return state;
       }
       return {
         ...state,
         explorerProps: {
           ...state.explorerProps,
-          folder: {
-            ...state.explorerProps?.folder,
-            folders: state.explorerProps?.folder?.folders ? (
-              state.explorerProps?.folder?.folders
+          selectedFolder: {
+            ...state.explorerProps.selectedFolder,
+            folders: state.explorerProps.selectedFolder.folders ? (
+              state.explorerProps.selectedFolder.folders
                 .map((item) => item.id === data.id ? data : item)
                 .sort((a, b) => compare(a.name, b.name))
             ) : []

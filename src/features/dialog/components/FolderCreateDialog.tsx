@@ -11,7 +11,7 @@ import React from 'react';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  appendExploreFolder,
+  appendExplorerFolder,
   setDialogAction,
   setError
 } from '../../../stores/Action';
@@ -32,30 +32,30 @@ function FolderCreateDialog() {
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
-  const handleSubmit = React.useCallback(async (_?: Event, data?: FolderCreateDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_: Event, data?: FolderCreateDialogFormState) => {
     try {
       if (data?.name == null) {
         throw new ArgumentNullError();
       }
-      const exploreFolder = explorerProps?.folder;
-      if (exploreFolder == null) {
+      const selectedFolder = explorerProps?.selectedFolder;
+      if (selectedFolder == null) {
         throw new DependencyNullError();
       }
       setLoading(true);
-      const folder = await graph.createFolder(exploreFolder, `${data.name}`);
-      dispatch(appendExploreFolder(folder));
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+      const folder = await graph.createFolder(selectedFolder, `${data.name}`);
+      dispatch(appendExplorerFolder(folder));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
     }
   }, [
-    explorerProps?.folder,
+    explorerProps?.selectedFolder,
     graph,
     dispatch
   ]);

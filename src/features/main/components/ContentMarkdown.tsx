@@ -40,19 +40,19 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
 
   const editorRef = React.useRef<MarkdownEditorHandle>(null);
 
-  const handleScrollPositionChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
+  const handleScrollPositionChange = React.useCallback((_: Event, data?: ScrollPosition) => {
     dispatch(setMarkdownScrollPosition(data));
   }, [
     dispatch
   ]);
 
-  const handleTextChange = React.useCallback((_?: Event, data?: string) => {
+  const handleTextChange = React.useCallback((_: Event, data?: string) => {
     dispatch(setMarkdownText(data));
   }, [
     dispatch
   ]);
 
-  const handleToolbarClick = React.useCallback((_?: Event, data?: MarkdownToolbarAction) => {
+  const handleToolbarClick = React.useCallback((_: Event, data?: MarkdownToolbarAction) => {
     if (data == null) {
       throw new DependencyNullError();
     }

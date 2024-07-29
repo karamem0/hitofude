@@ -12,7 +12,7 @@ import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  appendExploreFile,
+  appendExplorerFile,
   setDialogAction,
   setError
 } from '../../../stores/Action';
@@ -35,37 +35,37 @@ function FileCreateDialog() {
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
-  const handleSubmit = React.useCallback(async (_?: Event, data?: FileCreateDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_: Event, data?: FileCreateDialogFormState) => {
     try {
       if (data?.baseName == null) {
         throw new ArgumentNullError();
       }
-      const folder = explorerProps?.folder;
-      if (folder == null) {
+      const selectedFolder = explorerProps?.selectedFolder;
+      if (selectedFolder == null) {
         throw new DependencyNullError();
       }
       setLoading(true);
       const file = await Promise.resolve()
-        .then(() => graph.createFile(folder, `${data.baseName}.md`))
+        .then(() => graph.createFile(selectedFolder, `${data.baseName}.md`))
         .then((file) => graph.getFileById(file.id));
-      dispatch(appendExploreFile(file));
+      dispatch(appendExplorerFile(file));
       route.setParams({
         tab: TabType.explorer,
-        folder: folder.id,
+        folder: selectedFolder.id,
         file: file?.id
       });
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
     }
   }, [
-    explorerProps?.folder,
+    explorerProps?.selectedFolder,
     graph,
     route,
     dispatch

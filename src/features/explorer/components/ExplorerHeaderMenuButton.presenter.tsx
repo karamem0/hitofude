@@ -31,37 +31,31 @@ import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
 import {
-  DialogAction,
-  DialogType,
+  ExplorerMenuAction,
+  ExplorerMenuType,
   Folder
 } from '../../../types/Model';
 import messages from '../messages';
 
-interface ExplorerHeaderMenuProps {
-  folder?: Folder,
+interface ExplorerHeaderMenuButtonProps {
   allFiles?: boolean,
-  onOpenDialog?: EventHandler<DialogAction>,
-  onOpenUrl?: EventHandler<string>,
-  onRefreshFolder?: EventHandler<Folder>,
-  onToggleExploreAllFiles?: EventHandler<boolean>
+  selectedFolder?: Folder,
+  onMenuClick?: EventHandler<ExplorerMenuAction>
 }
 
-function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
+function ExplorerHeaderMenuButton(props: Readonly<ExplorerHeaderMenuButtonProps>) {
 
   const {
     allFiles,
-    folder,
-    onOpenDialog,
-    onOpenUrl,
-    onRefreshFolder,
-    onToggleExploreAllFiles
+    selectedFolder,
+    onMenuClick
   } = props;
 
-  return folder ? (
+  return selectedFolder ? (
     <MenuList>
       <MenuGroup>
         <MenuItem
-          key="RefreshFolder"
+          key={ExplorerMenuType.refreshFolder}
           icon={(
             <RefreshIcon
               css={css`
@@ -69,14 +63,17 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onRefreshFolder?.(e, folder)}>
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.refreshFolder,
+            data: selectedFolder
+          })}>
           <FormattedMessage {...messages.Refresh} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="ToggleExploreAllFiles"
+          key={ExplorerMenuType.toggleAllFiles}
           icon={
             allFiles ? (
               <Hide3Icon
@@ -91,7 +88,10 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
                   line-height: 1rem;
                 `} />
             )}
-          onClick={(e) => onToggleExploreAllFiles?.(e, !allFiles)}>
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.toggleAllFiles,
+            data: !allFiles
+          })}>
           {
             allFiles ? (
               <FormattedMessage {...messages.HideUnsupportedFiles} />
@@ -104,7 +104,7 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="CreateFile"
+          key={ExplorerMenuType.createFile}
           icon={(
             <PageAddIcon
               css={css`
@@ -112,14 +112,14 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenDialog?.(e, {
-            type: DialogType.createFile,
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.createFile,
             data: null
           })}>
           <FormattedMessage {...messages.NewFile} />
         </MenuItem>
         <MenuItem
-          key="CreateFolder"
+          key={ExplorerMenuType.createFolder}
           icon={(
             <FabricNewFolderIcon
               css={css`
@@ -127,8 +127,8 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenDialog?.(e, {
-            type: DialogType.createFolder,
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.createFolder,
             data: null
           })}>
           <FormattedMessage {...messages.NewFolder} />
@@ -137,7 +137,7 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="OpenWithOneDrive"
+          key={ExplorerMenuType.openWithOneDrive}
           icon={(
             <OneDriveLogoIcon
               css={css`
@@ -145,7 +145,10 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
               line-height: 1rem;
             `} />
           )}
-          onClick={(e) => onOpenUrl?.(e, folder.webUrl)}>
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.openWithOneDrive,
+            data: selectedFolder
+          })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>
       </MenuGroup>
@@ -154,4 +157,4 @@ function ExplorerHeaderMenu(props: Readonly<ExplorerHeaderMenuProps>) {
 
 }
 
-export default React.memo(ExplorerHeaderMenu);
+export default React.memo(ExplorerHeaderMenuButton);

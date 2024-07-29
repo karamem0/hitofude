@@ -44,9 +44,9 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
 
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const handleKeyDown = React.useCallback((e: KeyboardEvent) => {
-    if (e.key === ' ') {
-      e.preventDefault();
+  const handleKeyDown = React.useCallback((event: KeyboardEvent) => {
+    if (event.key === ' ') {
+      event.preventDefault();
       return false;
     } else {
       return true;
@@ -72,12 +72,12 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
     onResize
   ]);
 
-  const handleScroll = React.useCallback((e: Event) => {
+  const handleScroll = React.useCallback((event: Event) => {
     const { current: element } = ref;
     if (element == null) {
       return;
     }
-    onScrollPositonChange?.(e, {
+    onScrollPositonChange?.(event, {
       scrollX: element.scrollLeft,
       scrollY: element.scrollTop
     });

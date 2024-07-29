@@ -74,7 +74,7 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
             }
             if (isMimeType(file.mimeType, 'text/markdown')) {
               return (
-                <ContentMarkdown onSave={(e) => onSave?.(e, true)} />
+                <ContentMarkdown onSave={(event) => onSave?.(event, true)} />
               );
             }
             return null;

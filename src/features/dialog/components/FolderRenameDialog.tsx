@@ -13,7 +13,7 @@ import { useStore } from '../../../providers/StoreProvider';
 import {
   setDialogAction,
   setError,
-  updateExploreFolder
+  updateExplorerFolder
 } from '../../../stores/Action';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
@@ -34,7 +34,7 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
-  const handleSubmit = React.useCallback(async (_?: Event, data?: FolderRenameDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_: Event, data?: FolderRenameDialogFormState) => {
     try {
       if (data?.id == null) {
         throw new ArgumentNullError();
@@ -44,13 +44,13 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
       }
       setLoading(true);
       const folder = await graph.renameFolder(data, data.name);
-      dispatch(updateExploreFolder(folder));
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+      dispatch(updateExplorerFolder(folder));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

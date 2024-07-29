@@ -61,7 +61,7 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
       if (isAbsoluteUrl(src)) {
         setState({
           downloadUrl: src,
-          mimeType: getMimeType(src, mime.getType(src))
+          mimeType: getMimeType(src, mime.getType(src.split('?').at(0) ?? ''))
         });
       } else {
         try {
@@ -72,11 +72,11 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
             downloadUrl: file.downloadUrl,
             mimeType: file.mimeType
           });
-        } catch (e) {
-          if (e instanceof FileNotFoundError) {
+        } catch (error) {
+          if (error instanceof FileNotFoundError) {
             setState(undefined);
           } else {
-            throw e;
+            throw error;
           }
         }
       }

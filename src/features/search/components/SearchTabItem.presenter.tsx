@@ -11,17 +11,8 @@ import React from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import {
-  Caption1,
-  Input,
-  MenuItem,
-  MenuList
-} from '@fluentui/react-components';
-import {
-  ClearIcon,
-  OpenFolderHorizontalIcon,
-  TextDocumentIcon
-} from '@fluentui/react-icons-mdl2';
+import { Caption1, Input } from '@fluentui/react-components';
+import { ClearIcon } from '@fluentui/react-icons-mdl2';
 
 import { css } from '@emotion/react';
 
@@ -30,31 +21,25 @@ import { File } from '../../../types/Model';
 import messages from '../messages';
 import { SearchTabItemFormState } from '../types/Form';
 
-import TreeItem from './TreeItem';
+import SearchTreeItem from './SearchFileTreeItem';
 
 interface SearchTabItemProps {
-  file?: File,
   form?: UseFormReturn<SearchTabItemFormState>,
   loading?: boolean,
   query?: string,
-  results?: File[],
-  onClearInput?: EventHandler,
-  onOpenFileLocation?: EventHandler<File>,
-  onSelectFile?: EventHandler<File>,
+  resultFiles?: File[],
+  onClear?: EventHandler,
   onSubmit?: EventHandler<SearchTabItemFormState>
 }
 
 function SearchTabItem(props: Readonly<SearchTabItemProps>) {
 
   const {
-    file,
     form,
     loading,
     query,
-    results,
-    onClearInput,
-    onOpenFileLocation,
-    onSelectFile,
+    resultFiles,
+    onClear,
     onSubmit
   } = props;
 
@@ -64,7 +49,7 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
     <div
       css={css`
         display: grid;
-        grid-template-rows: 1rem 2rem calc(100vh - 8rem);
+        grid-template-rows: 1rem 2rem calc(100svh - 8rem);
         grid-template-columns: 1fr;
         grid-gap: 0.5rem;
       `}>
@@ -102,16 +87,16 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
                     font-size: 0.5rem;
                     line-height: 0.5rem;
                   `}
-                  onClick={(e) => {
+                  onClick={(event) => {
                     form.setValue(field.name, '');
-                    onClearInput?.(e);
+                    onClear?.(event);
                   }}
-                  onKeyDown={(e) => {
-                    if (e.key !== 'Enter') {
+                  onKeyDown={(event) => {
+                    if (event.key !== 'Enter') {
                       return;
                     }
                     form.setValue(field.name, '');
-                    onClearInput?.(e);
+                    onClear?.(event);
                   }}>
                   <ClearIcon />
                 </div>
@@ -124,7 +109,7 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
           }} />
       </form>
       <div
-        role="list"
+        role="table"
         css={css`
           display: flex;
           flex-direction: column;
@@ -132,37 +117,8 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
           overflow: hidden auto;
         `}>
         {
-          results && results.length > 0 ? (
-            results.map((item) => (
-              <TreeItem
-                key={item.id}
-                name={item.fullName}
-                selected={file?.id === item.id}
-                icon={(
-                  <TextDocumentIcon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
-                )}
-                menu={(
-                  <MenuList>
-                    <MenuItem
-                      key="OpenFileLocation"
-                      icon={(
-                        <OpenFolderHorizontalIcon
-                          css={css`
-                            font-size: 1rem;
-                            line-height: 1rem;
-                          `} />
-                      )}
-                      onClick={(e) => onOpenFileLocation?.(e, item)}>
-                      <FormattedMessage {...messages.OpenFileLocation} />
-                    </MenuItem>
-                  </MenuList>
-                )}
-                onClick={(e) => onSelectFile?.(e, item)} />
-            ))
+          resultFiles && resultFiles.length > 0 ? (
+            <SearchTreeItem />
           ) : (
             <Caption1
               css={css`

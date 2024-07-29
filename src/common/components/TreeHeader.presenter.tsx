@@ -21,8 +21,8 @@ import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 
 import { css } from '@emotion/react';
 
-import { EventHandler } from '../../../types/Event';
-import messages from '../messages';
+import messages from '../../features/main/messages';
+import { EventHandler } from '../../types/Event';
 
 interface TreeHeaderProps {
   root?: boolean,
@@ -73,7 +73,7 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
           font-size: 1rem;
           line-height: 1rem;
         `}
-        onClick={(e) => !root && onClick?.(e)}>
+        onClick={(event) => !root && onClick?.(event)}>
         {
           root ? (
             <OneDriveLogoIcon />

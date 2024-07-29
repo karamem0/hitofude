@@ -67,7 +67,7 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
                 floatingAction={(
                   <Checkbox
                     checked={themeName === ThemeName.light}
-                    onChange={(e, data) => data.checked && onChangeTheme?.(e, ThemeName.light)} />
+                    onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.light)} />
                 )}>
                 <CardHeader
                   header={(
@@ -80,7 +80,7 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
                 floatingAction={(
                   <Checkbox
                     checked={themeName === ThemeName.dark}
-                    onChange={(e, data) => data.checked && onChangeTheme?.(e, ThemeName.dark)} />
+                    onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.dark)} />
                 )}>
                 <CardHeader
                   header={(

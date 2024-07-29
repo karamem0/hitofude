@@ -36,13 +36,13 @@ function ContentMenuButton() {
     }
   } = useStore();
 
-  const handleMenuClick = React.useCallback((_?: Event, data?: ContentMenuAction) => {
+  const handleMenuClick = React.useCallback((_: Event, data?: ContentMenuAction) => {
     switch (data?.type) {
       case ContentMenuType.downloadFile: {
         downloadFile(data.data as File);
         break;
       }
-      case ContentMenuType.openSidePanel: {
+      case ContentMenuType.openFileVersionPanel: {
         dispatch(setSidePanelAction(data?.data as SidePanelAction));
         break;
       }

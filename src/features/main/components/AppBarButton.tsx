@@ -32,7 +32,7 @@ function AppBarButton(props: Readonly<AppBarButtonProps>) {
 
   const [ focused, setFocused ] = React.useState(false);
 
-  const handleFocusChanged = React.useCallback((_?: Event, data?: boolean) => {
+  const handleFocusChanged = React.useCallback((_: Event, data?: boolean) => {
     setFocused(data ?? false);
   }, []);
 

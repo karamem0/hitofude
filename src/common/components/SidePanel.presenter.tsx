@@ -43,7 +43,7 @@ function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
       <div
         role="button"
         tabIndex={-1}
-        onClick={(e) => onOpenChange?.(e, true)}>
+        onClick={(event) => onOpenChange?.(event, true)}>
         {children}
       </div>
       {
@@ -64,7 +64,7 @@ function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
               css={css`
                 cursor: pointer;
               `}
-              onClick={(e) => onOpenChange?.(e, false)} />
+              onClick={(event) => onOpenChange?.(event, false)} />
             <div
               className={className}
               css={css`
@@ -97,7 +97,7 @@ function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
                         font-size: 1rem;
                         line-height: 1rem;
                       `}
-                      onClick={(e) => onOpenChange?.(e, false)} />
+                      onClick={(event) => onOpenChange?.(event, false)} />
                   )} />
               </div>
               <div

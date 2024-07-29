@@ -28,13 +28,13 @@ function AppBar() {
     }
   } = useStore();
 
-  const handleOpenDialog = React.useCallback((_?: Event, data?: DialogAction) => {
+  const handleOpenDialog = React.useCallback((_: Event, data?: DialogAction) => {
     dispatch(setDialogAction(data));
   }, [
     dispatch
   ]);
 
-  const handleToggleTab = React.useCallback((_?: Event, data?: TabType) => {
+  const handleToggleTab = React.useCallback((_: Event, data?: TabType) => {
     if (tabProps?.type === data) {
       dispatch(setTabOpen(!tabProps?.open));
     } else {
@@ -42,8 +42,8 @@ function AppBar() {
         case TabType.explorer:
           route.setParams({
             tab: data,
-            folder: explorerProps?.folder?.id,
-            file: explorerProps?.file?.id
+            folder: explorerProps?.selectedFolder?.id,
+            file: explorerProps?.selectedFile?.id
           });
           break;
         case TabType.search:
@@ -57,8 +57,8 @@ function AppBar() {
       }
     }
   }, [
-    explorerProps?.file,
-    explorerProps?.folder,
+    explorerProps?.selectedFile,
+    explorerProps?.selectedFolder,
     searchProps?.query,
     tabProps?.open,
     tabProps?.type,

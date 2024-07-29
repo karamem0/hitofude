@@ -16,12 +16,12 @@ import {
   setContentLoading,
   setContentText,
   setError,
-  setExploreFile,
-  setExploreFolder,
+  setExplorerSelectedFile,
+  setExplorerSelectedFolder,
   setTabLoading,
-  setSearchFile,
+  setSearchSelectedFile,
   setSearchQuery,
-  setsearchFiles
+  setSearchResultFiles
 } from '../../../stores/Action';
 import { DependencyNullError, FileNotFoundError, InvalidOperationError } from '../../../types/Error';
 import { TabType } from '../../../types/Model';
@@ -60,23 +60,23 @@ function AppTab() {
       const folder = await Promise.resolve()
         .then(() => params.folder ? graph.getFolderById(params.folder) : Promise.reject(new FileNotFoundError()))
         .catch(() => rootFolder);
-      dispatch(setExploreFolder(folder));
-      const file = folder?.files?.filter((item) => item.id === params.file)?.at(0);
+      dispatch(setExplorerSelectedFolder(folder));
+      const file = folder?.files?.find((item) => item.id === params.file);
       if (file != null) {
         try {
           dispatch(setContentLoading(true));
-          dispatch(setExploreFile(file));
+          dispatch(setExplorerSelectedFile(file));
           dispatch(setContentFile(file));
           dispatch(setContentText(await graph.getFileText(file)));
         } finally {
           dispatch(setContentLoading(false));
         }
       } else {
-        dispatch(setExploreFile());
+        dispatch(setExplorerSelectedFile());
         dispatch(setContentFile());
       }
-    } catch (e) {
-      dispatch(setError(e as Error));
+    } catch (error) {
+      dispatch(setError(error as Error));
     } finally {
       dispatch(setTabLoading(false));
     }
@@ -96,27 +96,27 @@ function AppTab() {
       }
       if (params.search != null) {
         dispatch(setSearchQuery(params.search));
-        dispatch(setsearchFiles(await graph.searchFiles(params.search)));
+        dispatch(setSearchResultFiles(await graph.searchFiles(params.search)));
       } else {
         dispatch(setSearchQuery());
-        dispatch(setsearchFiles());
+        dispatch(setSearchResultFiles());
       }
       if (params.file != null) {
         try {
           dispatch(setContentLoading(true));
           const file = await graph.getFileById(params.file);
-          dispatch(setSearchFile(file));
+          dispatch(setSearchSelectedFile(file));
           dispatch(setContentFile(file));
           dispatch(setContentText(await graph.getFileText(file)));
         } finally {
           dispatch(setContentLoading(false));
         }
       } else {
-        dispatch(setSearchFile());
+        dispatch(setSearchSelectedFile());
         dispatch(setContentFile());
       }
-    } catch (e) {
-      dispatch(setError(e as Error));
+    } catch (error) {
+      dispatch(setError(error as Error));
     } finally {
       dispatch(setTabLoading(false));
     }
@@ -139,8 +139,8 @@ function AppTab() {
             if (params.folder == null) {
               route.setParams({
                 tab: params.tab,
-                folder: storage.getExploreFolderId() ?? rootFolder.id,
-                file: storage.getExploreFileId()
+                folder: storage.getExplorerFolderId() ?? rootFolder.id,
+                file: storage.getExplorerFileId()
               });
             } else {
               await handleExplorerOpen();
@@ -157,8 +157,8 @@ function AppTab() {
             });
         }
         setTabType(params.tab);
-      } catch (e) {
-        dispatch(setError(e as Error));
+      } catch (error) {
+        dispatch(setError(error as Error));
       }
     })();
   }, [

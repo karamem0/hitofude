@@ -46,7 +46,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
         text-align: center;
         background-color: ${theme.colorNeutralBackground2};
       `}
-      onClick={(e) => onChangePreview?.(e, !preview)}>
+      onClick={(event) => onChangePreview?.(event, !preview)}>
       {
         <DoubleChevronRightIcon
           css={css`
@@ -76,7 +76,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
           height: ${layouts.contentBody.height.large};
         }
       `}
-      onClick={(e) => onChangePreview?.(e, !preview)}>
+      onClick={(event) => onChangePreview?.(event, !preview)}>
       {
         <DoubleChevronLeftIcon
           css={css`

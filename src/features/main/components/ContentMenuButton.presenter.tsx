@@ -81,7 +81,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
         <MenuList>
           <MenuGroup>
             <MenuItem
-              key={`${ContentMenuType.openSidePanel}-${SidePanelType.fileVersion}`}
+              key={`${ContentMenuType.openFileVersionPanel}`}
               icon={(
                 <HistoryIcon
                   css={css`
@@ -89,8 +89,8 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                     line-height: 1rem;
                   `} />
               )}
-              onClick={(e) => onMenuClick?.(e, {
-                type: ContentMenuType.openSidePanel,
+              onClick={(event) => onMenuClick?.(event, {
+                type: ContentMenuType.openFileVersionPanel,
                 data: {
                   type: SidePanelType.fileVersion,
                   data: file
@@ -113,7 +113,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                         color: ${minimap ? 'inherit' : 'transparent'};
                       `} />
                   }
-                  onClick={(e) => onMenuClick?.(e, {
+                  onClick={(event) => onMenuClick?.(event, {
                     type: ContentMenuType.toggleMinimap,
                     data: !minimap
                   })}>
@@ -131,7 +131,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                         color: ${wordWrap ? 'inherit' : 'transparent'};
                       `} />
                   }
-                  onClick={(e) => onMenuClick?.(e, {
+                  onClick={(event) => onMenuClick?.(event, {
                     type: ContentMenuType.toggleWordWrap,
                     data: !wordWrap
                   })}>
@@ -149,7 +149,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                         color: ${scroll ? 'inherit' : 'transparent'};
                       `} />
                   }
-                  onClick={(e) => onMenuClick?.(e, {
+                  onClick={(event) => onMenuClick?.(event, {
                     type: ContentMenuType.toggleScroll,
                     data: !scroll
                   })}>
@@ -167,7 +167,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                         color: ${preview ? 'inherit' : 'transparent'};
                       `} />
                   }
-                  onClick={(e) => onMenuClick?.(e, {
+                  onClick={(event) => onMenuClick?.(event, {
                     type: ContentMenuType.togglePreview,
                     data: !preview
                   })}>
@@ -187,7 +187,7 @@ function ContentMenuButton(props: Readonly<ContentMenuButtonProps>) {
                         line-height: 1rem;
                       `} />
                   )}
-                  onClick={(e) => onMenuClick?.(e, {
+                  onClick={(event) => onMenuClick?.(event, {
                     type: ContentMenuType.downloadFile,
                     data: file
                   })

@@ -25,31 +25,29 @@ import { css } from '@emotion/react';
 
 import { EventHandler } from '../../../types/Event';
 import {
-  DialogAction,
-  DialogType,
+  ExplorerMenuAction,
+  ExplorerMenuType,
   Folder
 } from '../../../types/Model';
 import messages from '../messages';
 
-interface ExplorerFolderMenuProps {
-  value?: Folder,
-  onOpenDialog?: EventHandler<DialogAction>,
-  onOpenUrl?: EventHandler<string>
+interface ExplorerFolderMenuButtonProps {
+  folder?: Folder,
+  onMenuClick?: EventHandler<ExplorerMenuAction>
 }
 
-function ExplorerFolderMenu(props: Readonly<ExplorerFolderMenuProps>) {
+function ExplorerFolderMenuButton(props: Readonly<ExplorerFolderMenuButtonProps>) {
 
   const {
-    value,
-    onOpenDialog,
-    onOpenUrl
+    folder,
+    onMenuClick
   } = props;
 
-  return value ? (
+  return folder ? (
     <MenuList>
       <MenuGroup>
         <MenuItem
-          key="RenameFolder"
+          key={ExplorerMenuType.renameFolder}
           icon={(
             <RenameIcon
               css={css`
@@ -57,14 +55,14 @@ function ExplorerFolderMenu(props: Readonly<ExplorerFolderMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenDialog?.(e, {
-            type: DialogType.renameFolder,
-            data: value
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.renameFolder,
+            data: folder
           })}>
           <FormattedMessage {...messages.RenameFolder} />
         </MenuItem>
         <MenuItem
-          key="DeleteFolder"
+          key={ExplorerMenuType.deleteFolder}
           icon={(
             <DeleteIcon
               css={css`
@@ -72,9 +70,9 @@ function ExplorerFolderMenu(props: Readonly<ExplorerFolderMenuProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onOpenDialog?.(e, {
-            type: DialogType.deleteFolder,
-            data: value
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.deleteFolder,
+            data: folder
           })}>
           <FormattedMessage {...messages.DeleteFolder} />
         </MenuItem>
@@ -82,7 +80,7 @@ function ExplorerFolderMenu(props: Readonly<ExplorerFolderMenuProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key="OpenWithOneDrive"
+          key={ExplorerMenuType.openWithOneDrive}
           icon={(
             <OneDriveLogoIcon
               css={css`
@@ -90,7 +88,10 @@ function ExplorerFolderMenu(props: Readonly<ExplorerFolderMenuProps>) {
                 line-height: 1rem;
               `} />
             )}
-          onClick={(e) => onOpenUrl?.(e, value.webUrl)}>
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.openWithOneDrive,
+            data: folder
+          })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>
       </MenuGroup>
@@ -99,4 +100,4 @@ function ExplorerFolderMenu(props: Readonly<ExplorerFolderMenuProps>) {
 
 }
 
-export default React.memo(ExplorerFolderMenu);
+export default React.memo(ExplorerFolderMenuButton);

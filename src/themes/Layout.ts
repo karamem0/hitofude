@@ -13,8 +13,8 @@ export const layouts = {
   },
   contentBody: {
     height: {
-      large: 'calc(100vh - 7rem)',
-      small: 'calc(100vh - 10rem)'
+      large: 'calc(100svh - 7rem)',
+      small: 'calc(100svh - 10rem)'
     },
     width: {
       large: 'calc(100vw - 25.5rem)',
@@ -31,7 +31,7 @@ export const layouts = {
     }
   },
   pageBody: {
-    height: 'calc(100vh - 2rem)'
+    height: 'calc(100svh - 2rem)'
   },
   pageHeader: {
     height: '2.5rem'
@@ -41,7 +41,7 @@ export const layouts = {
     width: '20rem'
   },
   sidePanelBody: {
-    height: 'calc(100vh - 5rem)'
+    height: 'calc(100svh - 5rem)'
   },
   sidePanelHeader: {
     height: '2rem'

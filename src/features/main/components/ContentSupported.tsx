@@ -21,6 +21,7 @@ import {
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { ProgressType } from '../../../types/Model';
+import { fromText } from '../../../utils/Blob';
 
 import Presenter from './ContentSupported.presenter';
 
@@ -40,8 +41,8 @@ function ContentSupported() {
     try {
       dispatch(setContentScrollPosition());
       dispatch(setContentEditing(false));
-    } catch (e) {
-      dispatch(setError(e as Error));
+    } catch (error) {
+      dispatch(setError(error as Error));
     }
   }, [
     dispatch
@@ -50,14 +51,14 @@ function ContentSupported() {
   const handleEdit = React.useCallback(() => {
     try {
       dispatch(setContentEditing(true));
-    } catch (e) {
-      dispatch(setError(e as Error));
+    } catch (error) {
+      dispatch(setError(error as Error));
     }
   }, [
     dispatch
   ]);
 
-  const handleSave = React.useCallback(async (_?: Event, data?: boolean) => {
+  const handleSave = React.useCallback(async (_: Event, data?: boolean) => {
     try {
       if (markdownProps == null) {
         throw new DependencyNullError();
@@ -74,15 +75,15 @@ function ContentSupported() {
         }
         setProgress(ProgressType.save);
         const file = await Promise.resolve()
-          .then(() => graph.setFileContent(contentFile, text ?? ''))
+          .then(() => graph.setFileContent(contentFile, fromText(text ?? '')))
           .then((file) => graph.getFileById(file.id));
         dispatch(setContentFile(file));
         dispatch(setContentText(text));
         dispatch(setContentScrollPosition(data ? scrollPosition : undefined));
         dispatch(setContentEditing(data));
       }
-    } catch (e) {
-      dispatch(setError(e as Error));
+    } catch (error) {
+      dispatch(setError(error as Error));
     } finally {
       setProgress();
     }

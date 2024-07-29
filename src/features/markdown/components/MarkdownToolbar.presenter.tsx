@@ -54,7 +54,7 @@ function MarkdownToolbar(props: Readonly<MarkdownToolbarProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onClick?.(e, MarkdownToolbarAction.bold)} />
+          onClick={(event) => onClick?.(event, MarkdownToolbarAction.bold)} />
         <ToolbarButton
           aria-label={intl.formatMessage(messages.Italic)}
           title={intl.formatMessage(messages.Italic)}
@@ -65,7 +65,7 @@ function MarkdownToolbar(props: Readonly<MarkdownToolbarProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onClick?.(e, MarkdownToolbarAction.italic)} />
+          onClick={(event) => onClick?.(event, MarkdownToolbarAction.italic)} />
         <ToolbarButton
           aria-label={intl.formatMessage(messages.Underline)}
           title={intl.formatMessage(messages.Underline)}
@@ -76,7 +76,7 @@ function MarkdownToolbar(props: Readonly<MarkdownToolbarProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(e) => onClick?.(e, MarkdownToolbarAction.underline)} />
+          onClick={(event) => onClick?.(event, MarkdownToolbarAction.underline)} />
       </Toolbar>
     </div>
   );

@@ -47,10 +47,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
   const intl = useIntl();
   const form = useForm<FileCopyDialogFormState>({
     defaultValues: {
-      baseName: value?.baseName,
-      fullName: value?.fullName,
-      mimeType: value?.mimeType,
-      downloadUrl: value?.downloadUrl
+      baseName: value?.baseName
     }
   });
 
@@ -80,7 +77,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
                       ref={field.ref}
                       appearance="outline"
                       aria-label={intl.formatMessage(messages.FileName)}
-                      contentAfter=".md"
+                      contentAfter={value?.extension}
                       placeholder={intl.formatMessage(messages.FileName)}
                       value={field.value}
                       onBlur={field.onBlur}

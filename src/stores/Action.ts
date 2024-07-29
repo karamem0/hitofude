@@ -9,6 +9,7 @@
 import {
   DialogAction,
   File,
+  FileConflict,
   Folder,
   ScrollPosition,
   SidePanelAction,
@@ -20,23 +21,33 @@ import {
   InitialState
 } from '../types/Store';
 
-export const appendExploreFile = (data?: File): Action => ({
-  type: ActionType.appendExploreFile,
+export const appendExplorerFile = (data?: File): Action => ({
+  type: ActionType.appendExplorerFile,
   data
 });
 
-export const appendExploreFolder = (data?: Folder): Action => ({
-  type: ActionType.appendExploreFolder,
+export const appendExplorerFileConflict = (data?: FileConflict): Action => ({
+  type: ActionType.appendExplorerFileConflict,
   data
 });
 
-export const deleteExploreFile = (data?: File): Action => ({
-  type: ActionType.deleteExploreFile,
+export const appendExplorerFolder = (data?: Folder): Action => ({
+  type: ActionType.appendExplorerFolder,
   data
 });
 
-export const deleteExploreFolder = (data?: Folder): Action => ({
-  type: ActionType.deleteExploreFolder,
+export const removeExplorerFile = (data?: File): Action => ({
+  type: ActionType.removeExplorerFile,
+  data
+});
+
+export const removeExplorerFileConflict = (data?: FileConflict): Action => ({
+  type: ActionType.removeExplorerFileConflict,
+  data
+});
+
+export const removeExplorerFolder = (data?: Folder): Action => ({
+  type: ActionType.removeExplorerFolder,
   data
 });
 
@@ -115,18 +126,18 @@ export const setError = (data?: Error): Action => ({
   data
 });
 
-export const setExploreAllFiles = (data?: boolean): Action => ({
-  type: ActionType.setExploreAllFiles,
+export const setExplorerAllFiles = (data?: boolean): Action => ({
+  type: ActionType.setExplorerAllFiles,
   data
 });
 
-export const setExploreFile = (data?: File): Action => ({
-  type: ActionType.setExploreFile,
+export const setExplorerSelectedFile = (data?: File): Action => ({
+  type: ActionType.setExplorerSelectedFile,
   data
 });
 
-export const setExploreFolder = (data?: Folder): Action => ({
-  type: ActionType.setExploreFolder,
+export const setExplorerSelectedFolder = (data?: Folder): Action => ({
+  type: ActionType.setExplorerSelectedFolder,
   data
 });
 
@@ -140,18 +151,18 @@ export const setTabLoading = (data?: boolean): Action => ({
   data
 });
 
-export const setSearchFile = (data?: File): Action => ({
-  type: ActionType.setSearchFile,
-  data
-});
-
-export const setsearchFiles = (data?: File[]): Action => ({
-  type: ActionType.setsearchFiles,
-  data
-});
-
 export const setSearchQuery = (data?: string): Action => ({
   type: ActionType.setSearchQuery,
+  data
+});
+
+export const setSearchResultFiles = (data?: File[]): Action => ({
+  type: ActionType.setSearchResultFiles,
+  data
+});
+
+export const setSearchSelectedFile = (data?: File): Action => ({
+  type: ActionType.setSearchSelectedFile,
   data
 });
 
@@ -170,12 +181,12 @@ export const setTabType = (data?: TabType): Action => ({
   data
 });
 
-export const updateExploreFile = (data?: File): Action => ({
-  type: ActionType.updateExploreFile,
+export const updateExplorerFile = (data?: File): Action => ({
+  type: ActionType.updateExplorerFile,
   data
 });
 
-export const updateExploreFolder = (data?: Folder): Action => ({
-  type: ActionType.updateExploreFolder,
+export const updateExplorerFolder = (data?: Folder): Action => ({
+  type: ActionType.updateExplorerFolder,
   data
 });

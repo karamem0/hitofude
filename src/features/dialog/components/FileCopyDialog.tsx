@@ -11,7 +11,7 @@ import React from 'react';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  appendExploreFile,
+  appendExplorerFile,
   setContentFile,
   setContentText,
   setDialogAction,
@@ -33,47 +33,37 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
   const { value } = props;
 
   const {
-    dispatch,
-    state: {
-      explorerProps
-    }
+    dispatch
   } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
-  const handleSubmit = React.useCallback(async (_?: Event, data?: FileCopyDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_: Event, data?: FileCopyDialogFormState) => {
     try {
       if (data?.baseName == null) {
         throw new ArgumentNullError();
       }
-      if (data?.downloadUrl == null) {
-        throw new ArgumentNullError();
-      }
-      const exploreFolder = explorerProps?.folder;
-      if (exploreFolder == null) {
+      if (value == null) {
         throw new DependencyNullError();
       }
       setLoading(true);
-      const fileText = await graph.getFileText(data);
-      const file = await Promise.resolve()
-        .then(() => graph.createFile(exploreFolder, `${data.baseName}.md`, fileText))
-        .then((file) => graph.getFileById(file.id));
-      dispatch(appendExploreFile(file));
+      const file = await graph.copyFile(value, `${data.baseName}${value.extension}`);
+      dispatch(appendExplorerFile(file));
       dispatch(setContentFile(file));
       dispatch(setContentText(await graph.getFileText(file)));
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
     }
   }, [
-    explorerProps?.folder,
     graph,
+    value,
     dispatch
   ]);
 

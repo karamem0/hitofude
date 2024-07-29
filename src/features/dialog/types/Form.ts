@@ -7,10 +7,7 @@
 //
 
 export interface FileCopyDialogFormState {
-  baseName?: string,
-  fullName?: string,
-  mimeType?: string,
-  downloadUrl?: string
+  baseName?: string
 }
 
 export interface FileCreateDialogFormState {

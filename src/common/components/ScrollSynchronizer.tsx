@@ -57,11 +57,11 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     element1Active.current = false;
   }, []);
 
-  const handleElement1Resize = React.useCallback((_?: Event, data?: ScrollSize) => {
+  const handleElement1Resize = React.useCallback((_: Event, data?: ScrollSize) => {
     element1Size.current = data;
   }, []);
 
-  const handleElement1ScrollChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
+  const handleElement1ScrollChange = React.useCallback((_: Event, data?: ScrollPosition) => {
     if (!element1Active.current) {
       return;
     }
@@ -85,11 +85,11 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     element2Active.current = false;
   }, []);
 
-  const handleElement2Resize = React.useCallback((_?: Event, data?: ScrollSize) => {
+  const handleElement2Resize = React.useCallback((_: Event, data?: ScrollSize) => {
     element2Size.current = data;
   }, []);
 
-  const handleElement2ScrollChange = React.useCallback((_?: Event, data?: ScrollPosition) => {
+  const handleElement2ScrollChange = React.useCallback((_: Event, data?: ScrollPosition) => {
     if (!element2Active.current) {
       return;
     }

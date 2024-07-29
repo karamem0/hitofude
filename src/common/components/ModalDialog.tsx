@@ -22,7 +22,7 @@ function ModalDialog(props: Readonly<React.PropsWithChildren<unknown>>) {
   const { dispatch } = useStore();
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_: Event, data?: boolean) => {
     if (data == null) {
       throw new ArgumentNullError();
     }

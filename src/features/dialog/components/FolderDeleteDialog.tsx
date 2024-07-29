@@ -11,7 +11,7 @@ import React from 'react';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  deleteExploreFolder,
+  removeExplorerFolder,
   setDialogAction,
   setError
 } from '../../../stores/Action';
@@ -39,14 +39,14 @@ function FileDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
       if (value == null) {
         throw new DependencyNullError();
       }
-      await graph.deleteExploreFolder(value);
-      dispatch(deleteExploreFolder(value));
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+      await graph.deleteFolder(value);
+      dispatch(removeExplorerFolder(value));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

@@ -20,7 +20,7 @@ function ThemeChangeDialog() {
   const { storage } = useService();
   const { themeName, changeTheme } = useTheme();
 
-  const handleChangeTheme = React.useCallback((_?: Event, data?: ThemeName) => {
+  const handleChangeTheme = React.useCallback((_: Event, data?: ThemeName) => {
     changeTheme?.(data ?? ThemeName.light);
     storage?.setThemeName(data ?? ThemeName.light);
   }, [

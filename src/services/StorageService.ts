@@ -32,16 +32,16 @@ export class StorageService {
     return Boolean(Number(this.storage.getItem('contentWordWrap') ?? undefined));
   }
 
-  getExploreAllFiles(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('exploreAllFiles') ?? undefined));
+  getExplorerAllFiles(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('ExplorerAllFiles') ?? undefined));
   }
 
-  getExploreFileId(): string | undefined {
-    return this.storage.getItem('exploreFileId') ?? undefined;
+  getExplorerFileId(): string | undefined {
+    return this.storage.getItem('ExplorerFileId') ?? undefined;
   }
 
-  getExploreFolderId(): string | undefined {
-    return this.storage.getItem('exploreFolderId') ?? undefined;
+  getExplorerFolderId(): string | undefined {
+    return this.storage.getItem('ExplorerFolderId') ?? undefined;
   }
 
   getTabOpen(): boolean | undefined {
@@ -88,27 +88,27 @@ export class StorageService {
     }
   }
 
-  setExploreAllFiles(value?: boolean): void {
+  setExplorerAllFiles(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('exploreAllFiles', String(Number(value)));
+      this.storage.setItem('ExplorerAllFiles', String(Number(value)));
     } else {
-      this.storage.removeItem('exploreAllFiles');
+      this.storage.removeItem('ExplorerAllFiles');
     }
   }
 
-  setExploreFileId(value?: string): void {
+  setExplorerFileId(value?: string): void {
     if (value != null) {
-      this.storage.setItem('exploreFileId', value);
+      this.storage.setItem('ExplorerFileId', value);
     } else {
-      this.storage.removeItem('exploreFileId');
+      this.storage.removeItem('ExplorerFileId');
     }
   }
 
-  setExploreFolderId(value?: string): void {
+  setExplorerFolderId(value?: string): void {
     if (value != null) {
-      this.storage.setItem('exploreFolderId', value);
+      this.storage.setItem('ExplorerFolderId', value);
     } else {
-      this.storage.removeItem('exploreFolderId');
+      this.storage.removeItem('ExplorerFolderId');
     }
   }
 

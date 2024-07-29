@@ -1,4 +1,10 @@
 {
+  "/bAOgh": [
+    {
+      "type": 0,
+      "value": "Are you sure to overwrite file?"
+    }
+  ],
   "/rjLPg": [
     {
       "type": 0,
@@ -179,6 +185,12 @@
       "value": "Something went wrong"
     }
   ],
+  "LYCry0": [
+    {
+      "type": 0,
+      "value": "Conflict file"
+    }
+  ],
   "M0iO6Z": [
     {
       "type": 0,
@@ -275,10 +287,22 @@
       "value": "Please try refreshing your browser"
     }
   ],
+  "a5msuh": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
   "agOXPD": [
     {
       "type": 0,
       "value": "Size"
+    }
+  ],
+  "arHMOU": [
+    {
+      "type": 0,
+      "value": "Overwrite file"
     }
   ],
   "bJIPmM": [
@@ -357,6 +381,12 @@
     {
       "type": 0,
       "value": "Explorer"
+    }
+  ],
+  "oUWADl": [
+    {
+      "type": 0,
+      "value": "No"
     }
   ],
   "olfaAj": [

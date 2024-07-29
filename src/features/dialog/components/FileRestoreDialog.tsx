@@ -49,12 +49,12 @@ function FileDeleteDialog(props: Readonly<FileRestoreDialogProps>) {
       }
       await graph.restoreFile(value);
       dispatch(setContentText(await graph.getFileText(contentFile)));
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

@@ -78,7 +78,7 @@ function AppBar(props: Readonly<AppBarProps>) {
           icon={(
             <TextDocumentIcon />
           )}
-          onClick={(e) => onToggleTab?.(e, TabType.explorer)} />
+          onClick={(event) => onToggleTab?.(event, TabType.explorer)} />
         <AppBarButton
           disabled={tabLoading}
           selected={tabType === TabType.search}
@@ -86,7 +86,7 @@ function AppBar(props: Readonly<AppBarProps>) {
           icon={(
             <SearchIcon />
           )}
-          onClick={(e) => onToggleTab?.(e, TabType.search)} />
+          onClick={(event) => onToggleTab?.(event, TabType.search)} />
       </div>
       <div
         css={css`
@@ -117,9 +117,9 @@ function AppBar(props: Readonly<AppBarProps>) {
                       line-height: 1rem;
                     `} />
                 )}
-                onClick={(e) => onOpenDialog?.(e, {
+                onClick={(event) => onOpenDialog?.(event, {
                   type: DialogType.changeTheme,
-                  data: undefined
+                  data: null
                 })}>
                 <FormattedMessage {...messages.ChangeTheme} />
               </MenuItem>

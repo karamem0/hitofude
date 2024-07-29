@@ -9,11 +9,11 @@
 import { ArgumentNullError } from '../types/Error';
 import { File } from '../types/Model';
 
-const regexBaseName = /\.[^.]*$/;
+const regexFileName = /^(?<base>.+)(?<extension>\.[^.]*)$/;
 
 const regexMimeType = /^(?<type>\*|[\w.]+)\/(?<subtype>\*|[\w.]+)/;
 
-export function downloadFile(value: File): void {
+export function downloadFile(value: Pick<File, 'downloadUrl' | 'fullName'>): void {
   if (value?.downloadUrl == null) {
     throw new ArgumentNullError();
   }
@@ -28,7 +28,25 @@ export function downloadFile(value: File): void {
 }
 
 export function getBaseName(value: string | null | undefined): string | undefined {
-  return value ? value.replace(regexBaseName, '') : undefined;
+  if (value == null) {
+    return undefined;
+  }
+  const exec = regexFileName.exec(value);
+  if (exec == null) {
+    return undefined;
+  }
+  return exec.groups?.base;
+}
+
+export function getExtension(value: string | null | undefined): string | undefined {
+  if (value == null) {
+    return undefined;
+  }
+  const exec = regexFileName.exec(value);
+  if (exec == null) {
+    return undefined;
+  }
+  return exec.groups?.extension;
 }
 
 export function getMimeType(fileName: string | null | undefined, mimeType: string | null | undefined): string | undefined {

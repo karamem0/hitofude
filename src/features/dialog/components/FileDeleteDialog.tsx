@@ -12,7 +12,7 @@ import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import {
-  deleteExploreFile,
+  removeExplorerFile,
   setDialogAction,
   setError
 } from '../../../stores/Action';
@@ -46,38 +46,38 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
         throw new DependencyNullError();
       }
       const allFiles = explorerProps?.allFiles;
-      const file = explorerProps?.file;
-      const folder = explorerProps?.folder;
-      if (folder == null) {
+      const selectedFile = explorerProps?.selectedFile;
+      const selectedFolder = explorerProps?.selectedFolder;
+      if (selectedFolder == null) {
         throw new DependencyNullError();
       }
-      await graph.deleteExploreFile(value);
-      dispatch(deleteExploreFile(value));
-      if (value.id === file?.id) {
-        const file = (folder.files ?? [])
+      await graph.deleteFile(value);
+      dispatch(removeExplorerFile(value));
+      if (value.id === selectedFile?.id) {
+        const file = (selectedFolder.files ?? [])
           .filter((item) => (allFiles ?? false) || isSupportedFile(item))
           .filter((item) => item.id !== value.id)
           .at(-1);
         route.setParams({
           tab: TabType.explorer,
-          folder: folder.id,
+          folder: selectedFolder.id,
           file: file?.id
         });
       }
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
     }
   }, [
     explorerProps?.allFiles,
-    explorerProps?.file,
-    explorerProps?.folder,
+    explorerProps?.selectedFile,
+    explorerProps?.selectedFolder,
     graph,
     route,
     value,

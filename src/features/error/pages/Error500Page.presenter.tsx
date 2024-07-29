@@ -57,7 +57,7 @@ function Error500Page() {
           flex-flow: column;
           align-items: center;
           justify-content: center;
-          height: calc(100vh - 2.5rem);
+          height: calc(100svh - 2.5rem);
         `}>
         <Communication
           description={intl.formatMessage(messages.Error500Description)}

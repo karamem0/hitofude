@@ -13,9 +13,8 @@ import { css } from '@emotion/react';
 import { useTheme } from '../../../providers/ThemeProvider';
 import { layouts } from '../../../themes/Layout';
 import { TabType } from '../../../types/Model';
-
-import ExplorerTabItem from './ExplorerTabItem';
-import SearchTabItem from './SearchTabItem';
+import ExplorerTabItem from '../../explorer/components/ExplorerTabItem';
+import SearchTabItem from '../../search/components/SearchTabItem';
 interface AppTabProps {
   tabOpen?: boolean,
   tabType?: TabType

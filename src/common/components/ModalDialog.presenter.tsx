@@ -29,7 +29,7 @@ function ModalDialog(props: Readonly<React.PropsWithChildren<ModalDialogProps>>)
     <Dialog
       modalType='modal'
       open={open}
-      onOpenChange={(e, data) => onOpenChange?.(e, data.open)}>
+      onOpenChange={(event, data) => onOpenChange?.(event, data.open)}>
       {children as ([React.ReactElement, React.ReactElement] | React.ReactElement)}
     </Dialog>
   );

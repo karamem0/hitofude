@@ -14,7 +14,7 @@ import {
   setContentFile,
   setDialogAction,
   setError,
-  updateExploreFile
+  updateExplorerFile
 } from '../../../stores/Action';
 import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
@@ -40,7 +40,7 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
-  const handleSubmit = React.useCallback(async (_?: Event, data?: FileRenameDialogFormState) => {
+  const handleSubmit = React.useCallback(async (_: Event, data?: FileRenameDialogFormState) => {
     try {
       if (data?.id == null) {
         throw new ArgumentNullError();
@@ -54,7 +54,7 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
       }
       setLoading(true);
       const file = await graph.renameFile(data, `${data.baseName}.md`);
-      dispatch(updateExploreFile(file));
+      dispatch(updateExplorerFile(file));
       if (data.id === contentFile.id) {
         dispatch(setContentFile({
           ...contentFile,
@@ -62,12 +62,12 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
           fullName: file.fullName
         }));
       }
-    } catch (e) {
-      if (e instanceof Error) {
-        dispatch(setError(e));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error));
         return;
       }
-      throw e;
+      throw error;
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

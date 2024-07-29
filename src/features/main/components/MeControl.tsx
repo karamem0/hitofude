@@ -37,16 +37,16 @@ function MeControl() {
     (async () => {
       try {
         setPhoto(await graph.getMyPhoto());
-      } catch (e) {
-        if (e instanceof FileNotFoundError) {
+      } catch (error) {
+        if (error instanceof FileNotFoundError) {
           setPhoto(undefined);
           return;
         }
-        if (e instanceof Error) {
-          setError(e);
+        if (error instanceof Error) {
+          setError(error);
           return;
         }
-        throw e;
+        throw error;
       }
     })();
   }, [

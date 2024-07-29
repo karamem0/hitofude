@@ -36,7 +36,7 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
 
   const [ items, setItems ] = React.useState<FileVersion[]>();
 
-  const handleRestore = React.useCallback((_?: Event, data?: DialogAction) => {
+  const handleRestore = React.useCallback((_: Event, data?: DialogAction) => {
     if (data == null) {
       throw new ArgumentNullError();
     }

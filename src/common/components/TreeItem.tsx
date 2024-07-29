@@ -8,12 +8,13 @@
 
 import React from 'react';
 
-import { EventHandler } from '../../../types/Event';
+import { EventHandler } from '../../types/Event';
 
 import Presenter from './TreeItem.presenter';
 
 interface TreeItemProps {
   icon?: React.ReactNode,
+  info?: React.ReactNode,
   menu?: React.ReactNode,
   menuEnabled?: boolean,
   name?: string,
@@ -25,6 +26,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
 
   const {
     icon,
+    info,
     menu,
     menuEnabled = true,
     name,
@@ -35,6 +37,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
   return (
     <Presenter
       icon={icon}
+      info={info}
       menu={menu}
       menuEnabled={menuEnabled}
       name={name}

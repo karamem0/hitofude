@@ -22,10 +22,12 @@ export interface Action {
 }
 
 export enum ActionType {
-  appendExploreFile = 'appendExploreFile',
-  appendExploreFolder = 'appendExploreFolder',
-  deleteExploreFile = 'deleteExploreFile',
-  deleteExploreFolder = 'deleteExploreFolder',
+  appendExplorerFile = 'appendExplorerFile',
+  appendExplorerFileConflict = 'appendExplorerFileConflict',
+  appendExplorerFolder = 'appendExplorerFolder',
+  removeExplorerFile = 'removeExplorerFile',
+  removeExplorerFileConflict = 'removeExplorerFileConflict',
+  removeExplorerFolder = 'removeExplorerFolder',
   setContentEditing = 'setContentEditing',
   setContentFile = 'setContentFile',
   setContentLoading = 'setContentLoading',
@@ -45,19 +47,19 @@ export enum ActionType {
   setMarkdownText = 'setMarkdownPreviewText',
   setDialogAction = 'setDialogAction',
   setError = 'setError',
-  setExploreAllFiles = 'setExploreAllFiles',
-  setExploreFile = 'setExploreFile',
-  setExploreFolder = 'setExploreFolder',
+  setExplorerAllFiles = 'setExplorerAllFiles',
+  setExplorerSelectedFile = 'setExplorerSelectedFile',
+  setExplorerSelectedFolder = 'setExplorerSelectedFolder',
   setInitialState = 'setInitialState',
-  setSearchFile = 'setSearchFile',
-  setsearchFiles = 'setsearchFiles',
   setSearchQuery = 'setSearchQuery',
+  setSearchResultFiles = 'setSearchResultFiles',
+  setSearchSelectedFile = 'setSearchSelectedFile',
   setSidePanelAction = 'setSidePanelAction',
   setTabLoading = 'setTabLoading',
   setTabOpen = 'setTabOpen',
   setTabType = 'setTabType',
-  updateExploreFile = 'updateExploreFile',
-  updateExploreFolder = 'updateExploreFolder'
+  updateExplorerFile = 'updateExplorerFile',
+  updateExplorerFolder = 'updateExplorerFolder',
 }
 
 export interface State {

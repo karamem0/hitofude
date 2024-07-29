@@ -22,7 +22,7 @@ import {
   FileVersion
 } from '../types/Model';
 import { toDate } from '../utils/Date';
-import { getBaseName, getMimeType } from '../utils/File';
+import { getBaseName, getExtension, getMimeType } from '../utils/File';
 
 export const mapper = createMapper({
   strategyInitializer: pojos()
@@ -44,8 +44,9 @@ PojosMetadataMap.create<DriveItemVersion>('DriveItemVersion', {
 
 PojosMetadataMap.create<File>('File', {
   id: String,
-  baseName: String,
   fullName: String,
+  baseName: String,
+  extension: String,
   mimeType: 'MimeType',
   createdDate: Date,
   updatedDate: Date,
@@ -77,11 +78,14 @@ createMap<DriveItem, File>(
   'DriveItem',
   'File',
   forMember(
+    (target) => target.fullName,
+    mapFrom((source) => source.name)),
+  forMember(
     (target) => target.baseName,
     mapFrom((source) => getBaseName(source.name))),
   forMember(
-    (target) => target.fullName,
-    mapFrom((source) => source.name)),
+    (target) => target.extension,
+    mapFrom((source) => getExtension(source.name))),
   forMember(
     (target) => target.mimeType,
     mapFrom((source) => getMimeType(source.name, source.file?.mimeType))),

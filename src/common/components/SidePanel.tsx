@@ -34,7 +34,7 @@ function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
   const { dispatch } = useStore();
   const [ open, setOpen ] = React.useState<boolean>(true);
 
-  const handleOpenChange = React.useCallback((_?: Event, data?: boolean) => {
+  const handleOpenChange = React.useCallback((_: Event, data?: boolean) => {
     if (data == null) {
       throw new ArgumentNullError();
     }
