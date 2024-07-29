@@ -16,7 +16,7 @@ import {
   setContentWordWrap,
   setSidePanelAction
 } from '../../../stores/Action';
-import { Event } from '../../../types/Event';
+import { Event, EventHandler } from '../../../types/Event';
 import {
   File,
   ContentMenuAction,
@@ -25,25 +25,50 @@ import {
 } from '../../../types/Model';
 import { downloadFile } from '../../../utils/File';
 
-import Presenter from './ContentMenuButton.presenter';
+import Presenter from './ContentMenuList.presenter';
 
-function ContentMenuButton() {
+interface ContentMenuListProps {
+  onCancel?: EventHandler,
+  onEdit?: EventHandler,
+  onSave?: EventHandler<boolean>
+}
+
+function ContentMenuList(props: Readonly<ContentMenuListProps>) {
+
+  const {
+    onCancel,
+    onEdit,
+    onSave
+  } = props;
 
   const {
     dispatch,
     state: {
-      contentProps
+      contentProps,
+      markdownProps
     }
   } = useStore();
 
-  const handleMenuClick = React.useCallback((_: Event, data?: ContentMenuAction) => {
+  const handleMenuClick = React.useCallback((event: Event, data?: ContentMenuAction) => {
     switch (data?.type) {
+      case ContentMenuType.closeFile: {
+        onCancel?.(event);
+        break;
+      }
       case ContentMenuType.downloadFile: {
         downloadFile(data.data as File);
         break;
       }
+      case ContentMenuType.editFile: {
+        onEdit?.(event);
+        break;
+      }
       case ContentMenuType.openFileVersionPanel: {
         dispatch(setSidePanelAction(data?.data as SidePanelAction));
+        break;
+      }
+      case ContentMenuType.saveFile: {
+        onSave?.(event, data.data as boolean);
         break;
       }
       case ContentMenuType.toggleMinimap: {
@@ -66,15 +91,19 @@ function ContentMenuButton() {
         break;
     }
   }, [
-    dispatch
+    dispatch,
+    onCancel,
+    onEdit,
+    onSave
   ]);
 
   return (
     <Presenter
       {...contentProps}
+      {...markdownProps}
       onMenuClick={handleMenuClick} />
   );
 
 }
 
-export default ContentMenuButton;
+export default ContentMenuList;

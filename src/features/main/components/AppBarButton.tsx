@@ -8,14 +8,15 @@
 
 import React from 'react';
 
-import { Event, EventHandler } from '../../../types/Event';
+import { useStore } from '../../../providers/StoreProvider';
+import { EventHandler } from '../../../types/Event';
+import { TabType } from '../../../types/Model';
 
 import Presenter from './AppBarButton.presenter';
 
 interface AppBarButtonProps {
-  disabled?: boolean,
   icon?: React.ReactElement,
-  selected?: boolean,
+  type?: TabType,
   title?: string,
   onClick?: EventHandler
 }
@@ -23,28 +24,25 @@ interface AppBarButtonProps {
 function AppBarButton(props: Readonly<AppBarButtonProps>) {
 
   const {
-    disabled,
     icon,
-    selected,
+    type,
     title,
     onClick
   } = props;
 
-  const [ focused, setFocused ] = React.useState(false);
-
-  const handleFocusChanged = React.useCallback((_: Event, data?: boolean) => {
-    setFocused(data ?? false);
-  }, []);
+  const {
+    state: {
+      tabProps
+    }
+  } = useStore();
 
   return (
     <Presenter
-      disabled={disabled}
-      focused={focused}
+      disabled={tabProps?.loading}
       icon={icon}
-      selected={selected}
+      selected={tabProps?.type === type}
       title={title}
-      onClick={onClick}
-      onFocusChanged={handleFocusChanged} />
+      onClick={onClick} />
   );
 
 }

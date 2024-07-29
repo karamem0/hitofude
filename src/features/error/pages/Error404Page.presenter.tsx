@@ -51,7 +51,7 @@ function Error404Page() {
           <FormattedMessage {...messages.AppName} />
         </Text>
       </header>
-      <section
+      <div
         css={css`
           display: flex;
           flex-flow: column;
@@ -63,7 +63,7 @@ function Error404Page() {
           description={intl.formatMessage(messages.Error404Description)}
           image="/assets/NotFound.svg"
           title={intl.formatMessage(messages.Error404Title)} />
-      </section>
+      </div>
     </div>
   );
 

@@ -13,8 +13,8 @@ import { css } from '@emotion/react';
 import { useTheme } from '../../../providers/ThemeProvider';
 import { layouts } from '../../../themes/Layout';
 import { TabType } from '../../../types/Model';
-import ExplorerTabItem from '../../explorer/components/ExplorerTabItem';
-import SearchTabItem from '../../search/components/SearchTabItem';
+import ExplorerTabPanel from '../../explorer/components/ExplorerTabPanel';
+import SearchTabPanel from '../../search/components/SearchTabPanel';
 interface AppTabProps {
   tabOpen?: boolean,
   tabType?: TabType
@@ -30,8 +30,10 @@ function AppTab(props: Readonly<AppTabProps>) {
   const { theme } = useTheme();
 
   return (
-    <section
+    <div
+      role="tabpanel"
       css={css`
+        z-index: 100;
         display: grid;
         width: ${tabOpen ? layouts.appTab.width : '0'};
         max-width: ${layouts.appTab.maxWidth};
@@ -44,18 +46,18 @@ function AppTab(props: Readonly<AppTabProps>) {
           switch (tabType) {
             case TabType.explorer:
               return (
-                <ExplorerTabItem />
+                <ExplorerTabPanel />
               );
             case TabType.search:
               return (
-                <SearchTabItem />
+                <SearchTabPanel />
               );
             default:
               return null;
           }
         })()
       }
-    </section>
+    </div>
   );
 
 }

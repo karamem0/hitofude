@@ -11,11 +11,12 @@ import React from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Caption1 } from '@fluentui/react-components';
+import { Button, Text } from '@fluentui/react-components';
 import { AddIcon } from '@fluentui/react-icons-mdl2';
 
 import { css } from '@emotion/react';
 
+import Tree from '../../../common/components/Tree';
 import TreeHeader from '../../../common/components/TreeHeader';
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
@@ -31,20 +32,19 @@ import { DropEventData } from '../types/Event';
 
 import ExplorerFileTreeItem from './ExplorerFileTreeItem';
 import ExplorerFolderTreeItem from './ExplorerFolderTreeItem';
-import ExplorerHeaderMenuButton from './ExplorerHeaderMenuButton';
+import ExplorerHeaderMenuList from './ExplorerHeaderMenuList';
 
-interface ExplorerTabItemProps {
+interface ExplorerTabPanelProps {
   allFiles?: boolean,
   fileConflicts?: File[],
   selectedFolder?: Folder,
-  onDownloadFile?: EventHandler<File>,
   onDropFiles?: EventHandler<DropEventData>,
   onOpenDialog?: EventHandler<DialogAction>,
   onSelectFile?: EventHandler<string>,
   onSelectFolder?: EventHandler<string>
 }
 
-function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
+function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
 
   const {
     allFiles,
@@ -78,18 +78,21 @@ function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
         grid-template-columns: 1fr;
         grid-gap: 0.5rem;
       `}>
-      <Caption1
+      <Text
+        as="h2"
         css={css`
+          font-size: ${theme.fontSizeBase200};
+          line-height: calc(${theme.lineHeightBase200} * 1.25);
           padding: 0 0.5rem;
           text-transform: uppercase;
         `}>
         <FormattedMessage {...messages.Explorer} />
-      </Caption1>
+      </Text>
       <TreeHeader
         name={selectedFolder.parentId ? selectedFolder.name : intl.formatMessage(messages.RootFolder)}
         root={selectedFolder.parentId == null}
         menu={(
-          <ExplorerHeaderMenuButton />
+          <ExplorerHeaderMenuList />
         )}
         onClick={(event) => onSelectFolder?.(event, selectedFolder?.parentId)} />
       <div
@@ -98,30 +101,10 @@ function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
           position: relative;
         `}>
         <input {...getInputProps()} />
-        <div
-          role="table"
-          css={css`
-            display: flex;
-            flex-direction: column;
-            grid-gap: 0.25rem;
-            overflow: hidden auto;
-          `}>
-          {
-            isEmpty(selectedFolder, allFiles) ? (
-              <Caption1
-                css={css`
-                  text-align: center;
-                `}>
-                <FormattedMessage {...messages.NoItemsFound} />
-              </Caption1>
-            ) : (
-              <React.Fragment>
-                <ExplorerFolderTreeItem onClick={(event, data) => onSelectFolder?.(event, data?.id)} />
-                <ExplorerFileTreeItem onClick={(event, data) => onSelectFile?.(event, data?.id)} />
-              </React.Fragment>
-            )
-          }
-        </div>
+        <Tree disabled={isEmpty(selectedFolder, allFiles)}>
+          <ExplorerFolderTreeItem onClick={(event, data) => onSelectFolder?.(event, data?.id)} />
+          <ExplorerFileTreeItem onClick={(event, data) => onSelectFile?.(event, data?.id)} />
+        </Tree>
         {
           isDragActive ? (
             <div
@@ -175,4 +158,4 @@ function ExplorerTabItem(props: Readonly<ExplorerTabItemProps>) {
 
 }
 
-export default React.memo(ExplorerTabItem);
+export default React.memo(ExplorerTabPanel);

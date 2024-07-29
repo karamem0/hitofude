@@ -65,100 +65,102 @@ function HomePage(props: Readonly<HomePageProps>) {
           <FormattedMessage {...messages.GitHub} />
         </Button>
       </header>
-      <section
-        css={css`
+      <main>
+        <div
+          css={css`
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            background-color: ${theme.colorBrandStroke2};
+          `}>
+          <div
+            css={css`
+              display: grid;
+              @media all and (width <= 960px) {
+                grid-template-rows: auto auto;
+                grid-template-columns: auto;
+                grid-gap: 2rem;
+                padding: 2rem;
+              }
+              @media not all and (width <= 960px) {
+                grid-template-rows: auto;
+                grid-template-columns: auto auto;
+                grid-gap: 4rem;
+                padding: 2rem;
+              }
+            `}>
+            <div
+              css={css`
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+              `}>
+              <Text
+                as="h1"
+                css={css`
+                  font-size: ${theme.fontSizeHero900};
+                  font-weight: bold;
+                  line-height: calc(${theme.fontSizeHero900} * 1.25);
+                  color: ${theme.colorBrandBackgroundPressed};
+                `}>
+                <FormattedMessage {...messages.AppName} />
+              </Text>
+              <Text
+                css={css`
+                  color: ${theme.colorBrandBackgroundPressed};
+                `}>
+                <FormattedMessage {...messages.AppDescription} />
+              </Text>
+              <div
+                css={css`
+                  padding: 3rem 0;
+                `}>
+                <Button
+                  appearance="primary"
+                  aria-label={intl.formatMessage(messages.SignIn)}
+                  icon={<WindowsLogoIcon />}
+                  title={intl.formatMessage(messages.SignIn)}
+                  onClick={onSignIn}>
+                  <FormattedMessage {...messages.SignIn} />
+                </Button>
+              </div>
+            </div>
+            <img
+              src="/assets/Books.svg"
+              css={css`
+                width: 20rem;
+              `} />
+          </div>
+        </div>
+        <div
+          css={css`
           display: flex;
           flex-flow: column;
           align-items: center;
           justify-content: center;
-          background-color: ${theme.colorBrandStroke2};
         `}>
-        <div
-          css={css`
-            display: grid;
-            @media all and (width <= 960px) {
-              grid-template-rows: auto auto;
-              grid-template-columns: auto;
-              grid-gap: 2rem;
-              padding: 2rem;
-            }
-            @media not all and (width <= 960px) {
-              grid-template-rows: auto;
-              grid-template-columns: auto auto;
-              grid-gap: 4rem;
-              padding: 2rem;
-            }
+          <Text
+            as="h2"
+            css={css`
+            padding: 2rem 0;
+            font-size: ${theme.fontSizeBase600};
+            font-weight: bold;
+            line-height: calc(${theme.fontSizeBase600} * 1.25);
           `}>
-          <div
-            css={css`
-              display: flex;
-              flex-flow: column;
-              align-items: center;
-            `}>
-            <Text
-              as="h1"
-              css={css`
-                font-size: ${theme.fontSizeHero900};
-                font-weight: bold;
-                line-height: calc(${theme.fontSizeHero900} * 1.25);
-                color: ${theme.colorBrandBackgroundPressed};
-              `}>
-              <FormattedMessage {...messages.AppName} />
-            </Text>
-            <Text
-              css={css`
-                color: ${theme.colorBrandBackgroundPressed};
-              `}>
-              <FormattedMessage {...messages.AppDescription} />
-            </Text>
-            <div
-              css={css`
-                padding: 3rem 0;
-              `}>
-              <Button
-                appearance="primary"
-                aria-label={intl.formatMessage(messages.SignIn)}
-                icon={<WindowsLogoIcon />}
-                title={intl.formatMessage(messages.SignIn)}
-                onClick={onSignIn}>
-                <FormattedMessage {...messages.SignIn} />
-              </Button>
-            </div>
-          </div>
-          <img
-            src="/assets/Books.svg"
-            css={css`
-              width: 20rem;
-            `} />
+            <FormattedMessage {...messages.FeatureTitle} />
+          </Text>
+          <Text as="p">
+            <FormattedMessage {...messages.FeatureDescriprtion1} />
+          </Text>
+          <Text as="p">
+            <FormattedMessage {...messages.FeatureDescriprtion2} />
+          </Text>
+          <Text as="p">
+            <FormattedMessage {...messages.FeatureDescriprtion3} />
+          </Text>
         </div>
-      </section>
-      <section
-        css={css`
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
-      `}>
-        <Text
-          as="h2"
-          css={css`
-          padding: 2rem 0;
-          font-size: ${theme.fontSizeBase600};
-          font-weight: bold;
-          line-height: calc(${theme.fontSizeBase600} * 1.25);
-        `}>
-          <FormattedMessage {...messages.FeatureTitle} />
-        </Text>
-        <Text as="p">
-          <FormattedMessage {...messages.FeatureDescriprtion1} />
-        </Text>
-        <Text as="p">
-          <FormattedMessage {...messages.FeatureDescriprtion2} />
-        </Text>
-        <Text as="p">
-          <FormattedMessage {...messages.FeatureDescriprtion3} />
-        </Text>
-      </section>
+      </main>
       <footer
         css={css`
           display: flex;

@@ -8,12 +8,12 @@
 
 import React from 'react';
 
-import { EventHandler } from '../../types/Event';
+import { Event, EventHandler } from '../../types/Event';
 
 import Presenter from './TreeItem.presenter';
 
 interface TreeItemProps {
-  icon?: React.ReactNode,
+  icon?: React.ReactElement,
   info?: React.ReactNode,
   menu?: React.ReactNode,
   menuEnabled?: boolean,
@@ -28,21 +28,29 @@ function TreeItem(props: Readonly<TreeItemProps>) {
     icon,
     info,
     menu,
-    menuEnabled = true,
     name,
     selected,
     onClick
   } = props;
+
+  const handleKeyDown = React.useCallback((event: Event) => {
+    const { key } = event as KeyboardEvent;
+    if (key === 'Enter' || key === ' ') {
+      onClick?.(event);
+    }
+  }, [
+    onClick
+  ]);
 
   return (
     <Presenter
       icon={icon}
       info={info}
       menu={menu}
-      menuEnabled={menuEnabled}
       name={name}
       selected={selected}
-      onClick={onClick} />
+      onClick={onClick}
+      onKeyDown={handleKeyDown} />
   );
 
 }

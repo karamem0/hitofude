@@ -31,9 +31,9 @@ import { fromFile } from '../../../utils/Blob';
 import { isSupportedFile } from '../../../utils/File';
 import { DropEventData } from '../types/Event';
 
-import Presenter from './ExplorerTabItem.presenter';
+import Presenter from './ExplorerTabPanel.presenter';
 
-function ExplorerTabItem() {
+function ExplorerTabPanel() {
 
   const { route } = useRoute();
   const {
@@ -161,4 +161,4 @@ function ExplorerTabItem() {
 
 }
 
-export default ExplorerTabItem;
+export default ExplorerTabPanel;

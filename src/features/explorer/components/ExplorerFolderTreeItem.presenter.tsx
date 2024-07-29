@@ -16,7 +16,7 @@ import TreeItem from '../../../common/components/TreeItem';
 import { EventHandler } from '../../../types/Event';
 import { Folder } from '../../../types/Model';
 
-import ExplorerFolderMenu from './ExplorerFolderMenuButton';
+import ExplorerFolderMenu from './ExplorerFolderMenuList';
 
 interface ExplorerFolderTreeItemProps {
   selectedFolder?: Folder,

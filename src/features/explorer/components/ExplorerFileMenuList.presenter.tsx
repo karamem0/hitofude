@@ -17,13 +17,12 @@ import {
   MenuList
 } from '@fluentui/react-components';
 import {
-  Hide3Icon,
-  PageAddIcon,
-  RefreshIcon,
-  ViewIcon
+  CopyIcon,
+  DeleteIcon,
+  DownloadDocumentIcon,
+  RenameIcon
 } from '@fluentui/react-icons-mdl2';
 import {
-  FabricNewFolderIcon,
   OneDriveLogoIcon
 } from '@fluentui/react-icons-mdl2-branded';
 
@@ -33,105 +32,91 @@ import { EventHandler } from '../../../types/Event';
 import {
   ExplorerMenuAction,
   ExplorerMenuType,
-  Folder
+  File
 } from '../../../types/Model';
+import { isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
 
-interface ExplorerHeaderMenuButtonProps {
-  allFiles?: boolean,
-  selectedFolder?: Folder,
+interface ExplorerFileMenuListProps {
+  file?: File,
   onMenuClick?: EventHandler<ExplorerMenuAction>
 }
 
-function ExplorerHeaderMenuButton(props: Readonly<ExplorerHeaderMenuButtonProps>) {
+function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
 
   const {
-    allFiles,
-    selectedFolder,
+    file,
     onMenuClick
   } = props;
 
-  return selectedFolder ? (
+  return file && isSupportedFile(file) ? (
     <MenuList>
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.refreshFolder}
+          key={ExplorerMenuType.copyFile}
           icon={(
-            <RefreshIcon
+            <CopyIcon
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.refreshFolder,
-            data: selectedFolder
+            type: ExplorerMenuType.copyFile,
+            data: file
           })}>
-          <FormattedMessage {...messages.Refresh} />
+          <FormattedMessage {...messages.CopyFile} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.toggleAllFiles}
-          icon={
-            allFiles ? (
-              <Hide3Icon
-                css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
-            ) : (
-              <ViewIcon
-                css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
-            )}
+          key={ExplorerMenuType.renameFile}
+          icon={(
+            <RenameIcon
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.toggleAllFiles,
-            data: !allFiles
+            type: ExplorerMenuType.renameFile,
+            data: file
           })}>
-          {
-            allFiles ? (
-              <FormattedMessage {...messages.HideUnsupportedFiles} />
-            ) : (
-              <FormattedMessage {...messages.ShowUnsupportedFiles} />
-            )
-          }
+          <FormattedMessage {...messages.RenameFile} />
+        </MenuItem>
+        <MenuItem
+          key={ExplorerMenuType.deleteFile}
+          icon={(
+            <DeleteIcon
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.deleteFile,
+            data: file
+          })}>
+          <FormattedMessage {...messages.DeleteFile} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.createFile}
+          key={ExplorerMenuType.downloadFile}
           icon={(
-            <PageAddIcon
+            <DownloadDocumentIcon
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.createFile,
-            data: null
+            type: ExplorerMenuType.downloadFile,
+            data: file
           })}>
-          <FormattedMessage {...messages.NewFile} />
-        </MenuItem>
-        <MenuItem
-          key={ExplorerMenuType.createFolder}
-          icon={(
-            <FabricNewFolderIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
-          )}
-          onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.createFolder,
-            data: null
-          })}>
-          <FormattedMessage {...messages.NewFolder} />
+          <FormattedMessage {...messages.Download} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />
@@ -141,13 +126,13 @@ function ExplorerHeaderMenuButton(props: Readonly<ExplorerHeaderMenuButtonProps>
           icon={(
             <OneDriveLogoIcon
               css={css`
-              font-size: 1rem;
-              line-height: 1rem;
-            `} />
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: ExplorerMenuType.openWithOneDrive,
-            data: selectedFolder
+            data: file
           })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>
@@ -157,4 +142,4 @@ function ExplorerHeaderMenuButton(props: Readonly<ExplorerHeaderMenuButtonProps>
 
 }
 
-export default React.memo(ExplorerHeaderMenuButton);
+export default React.memo(ExplorerFileMenuList);

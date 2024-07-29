@@ -18,7 +18,7 @@ import { File, Folder } from '../../../types/Model';
 import { isSupportedFile } from '../../../utils/File';
 
 import ExplorerFileConflictButton from './ExplorerFileConflictButton';
-import ExplorerFileMenuButton from './ExplorerFileMenuButton';
+import ExplorerFileMenuList from './ExplorerFileMenuList';
 
 interface ExplorerFileTreeItemProps {
   allFiles?: boolean,
@@ -42,7 +42,6 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
         selectedFolder?.files?.filter((file) => (allFiles ?? false) || isSupportedFile(file)).map((file) => (
           <TreeItem
             key={file.id}
-            menuEnabled={isSupportedFile(file)}
             name={file.fullName}
             selected={selectedFile?.id === file.id}
             icon={(
@@ -55,9 +54,11 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
             info={(
               <ExplorerFileConflictButton file={file} />
             )}
-            menu={(
-              <ExplorerFileMenuButton file={file} />
-            )}
+            menu={
+              isSupportedFile(file) ? (
+                <ExplorerFileMenuList file={file} />
+              ) : null
+            }
             onClick={(event) => onClick?.(event, file)} />
         ))
     }

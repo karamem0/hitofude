@@ -10,13 +10,7 @@ import React from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import {
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuPopover,
-  MenuTrigger
-} from '@fluentui/react-components';
+import { MenuItem, MenuList } from '@fluentui/react-components';
 import {
   ColorIcon,
   SearchIcon,
@@ -29,27 +23,26 @@ import { css } from '@emotion/react';
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import {
-  DialogAction,
-  DialogType,
+  AppBarMenuAction,
+  AppBarMenuType,
   TabType
 } from '../../../types/Model';
 import messages from '../messages';
 
 import AppBarButton from './AppBarButton';
+import AppBarMenuButton from './AppBarMenuButton';
 
 interface AppBarProps {
-  tabLoading?: boolean,
-  tabType?: TabType,
-  onOpenDialog?: EventHandler<DialogAction>,
+  onKeyDown?: EventHandler,
+  onMenuClick?: EventHandler<AppBarMenuAction>,
   onToggleTab?: EventHandler<TabType>
 }
 
-function AppBar(props: Readonly<AppBarProps>) {
+function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
 
   const {
-    tabLoading,
-    tabType,
-    onOpenDialog,
+    onKeyDown,
+    onMenuClick,
     onToggleTab
   } = props;
 
@@ -57,59 +50,69 @@ function AppBar(props: Readonly<AppBarProps>) {
   const { theme } = useTheme();
 
   return (
-    <section
+    <div
+      ref={ref}
+      role="tablist"
+      tabIndex={-1}
       css={css`
+        z-index: 100;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         padding: 1rem 0;
         background-color: ${theme.colorNeutralBackground3};
-      `} >
+      `}
+      onKeyDown={onKeyDown}>
       <div
+        role="group"
         css={css`
           display: flex;
           flex-direction: column;
           grid-gap: 0.5rem;
         `}>
         <AppBarButton
-          disabled={tabLoading}
-          selected={tabType === TabType.explorer}
           title={intl.formatMessage(messages.Explorer)}
+          type={TabType.explorer}
           icon={(
-            <TextDocumentIcon />
+            <TextDocumentIcon
+              css={css`
+                font-size: 1.5rem;
+                line-height: 1.5rem;
+              `} />
           )}
           onClick={(event) => onToggleTab?.(event, TabType.explorer)} />
         <AppBarButton
-          disabled={tabLoading}
-          selected={tabType === TabType.search}
           title={intl.formatMessage(messages.Search)}
+          type={TabType.search}
           icon={(
-            <SearchIcon />
+            <SearchIcon
+              css={css`
+                font-size: 1.5rem;
+                line-height: 1.5rem;
+              `} />
           )}
           onClick={(event) => onToggleTab?.(event, TabType.search)} />
       </div>
       <div
+        role="group"
         css={css`
           display: flex;
           flex-direction: column;
           grid-gap: 0.5rem;
         `}>
-        <Menu positioning="after">
-          <MenuTrigger>
-            <div
-              role="button"
-              tabIndex={-1}>
-              <AppBarButton
-                title={intl.formatMessage(messages.Settings)}
-                icon={(
-                  <SettingsIcon />
-                )} />
-            </div>
-          </MenuTrigger>
-          <MenuPopover>
+        <AppBarMenuButton
+          title={intl.formatMessage(messages.Settings)}
+          icon={(
+            <SettingsIcon
+              css={css`
+                font-size: 1.5rem;
+                line-height: 1.5rem;
+              `} />
+          )}
+          menu={(
             <MenuList>
               <MenuItem
-                key="ChangeTheme"
+                key={AppBarMenuType.changeTheme}
                 icon={(
                   <ColorIcon
                     css={css`
@@ -117,19 +120,21 @@ function AppBar(props: Readonly<AppBarProps>) {
                       line-height: 1rem;
                     `} />
                 )}
-                onClick={(event) => onOpenDialog?.(event, {
-                  type: DialogType.changeTheme,
-                  data: null
+                onClick={(event) => onMenuClick?.(event, {
+                  type: AppBarMenuType.changeTheme,
+                  data: undefined
                 })}>
                 <FormattedMessage {...messages.ChangeTheme} />
               </MenuItem>
             </MenuList>
-          </MenuPopover>
-        </Menu>
+          )}
+          menuProps={{
+            positioning: 'after'
+          }} />
       </div>
-    </section>
+    </div>
   );
 
 }
 
-export default React.memo(AppBar);
+export default React.memo(React.forwardRef(AppBar));

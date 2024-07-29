@@ -67,7 +67,7 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
             css={css`
               display: grid;
               grid-template-rows: 2.5rem 1fr;
-              grid-template-columns: auto auto auto;
+              grid-template-columns: 1fr auto 1fr;
               @media all and (width <= 960px) {
                 height: ${layouts.contentBody.height.small};
               }

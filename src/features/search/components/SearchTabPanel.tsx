@@ -16,11 +16,11 @@ import { setError } from '../../../stores/Action';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { TabType } from '../../../types/Model';
-import { SearchTabItemFormState } from '../types/Form';
+import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
 
-import Presenter from './SearchTabItem.presenter';
+import Presenter from './SearchTabPanel.presenter';
 
-function SearchTabItem() {
+function SearchTabPanel() {
 
   const { route } = useRoute();
   const {
@@ -29,10 +29,14 @@ function SearchTabItem() {
       searchProps
     }
   } = useStore();
-  const form = useForm<SearchTabItemFormState>();
+  const form = useForm<SearchTabPanelFormState>();
 
-  const handleClear = React.useCallback(() => {
+  const handleClear = React.useCallback((_: Event, data?: SearchTabPanelFormField) => {
     try {
+      if (data == null) {
+        throw new ArgumentNullError();
+      }
+      form.setValue(data, '');
       route.setParams({
         tab: TabType.search,
         search: ''
@@ -40,12 +44,14 @@ function SearchTabItem() {
     } catch (error) {
       dispatch(setError(error as Error));
     }
-  }, [
+  },
+  [
+    form,
     route,
     dispatch
   ]);
 
-  const handleSubmit = React.useCallback(async (_: Event, data?: SearchTabItemFormState) => {
+  const handleSubmit = React.useCallback(async (_: Event, data?: SearchTabPanelFormState) => {
     try {
       if (data?.query == null) {
         throw new ArgumentNullError();
@@ -79,4 +85,4 @@ function SearchTabItem() {
 
 }
 
-export default SearchTabItem;
+export default SearchTabPanel;

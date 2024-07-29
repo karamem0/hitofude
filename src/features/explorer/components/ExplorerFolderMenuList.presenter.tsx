@@ -31,12 +31,12 @@ import {
 } from '../../../types/Model';
 import messages from '../messages';
 
-interface ExplorerFolderMenuButtonProps {
+interface ExplorerFolderMenuListProps {
   folder?: Folder,
   onMenuClick?: EventHandler<ExplorerMenuAction>
 }
 
-function ExplorerFolderMenuButton(props: Readonly<ExplorerFolderMenuButtonProps>) {
+function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
 
   const {
     folder,
@@ -100,4 +100,4 @@ function ExplorerFolderMenuButton(props: Readonly<ExplorerFolderMenuButtonProps>
 
 }
 
-export default React.memo(ExplorerFolderMenuButton);
+export default React.memo(ExplorerFolderMenuList);

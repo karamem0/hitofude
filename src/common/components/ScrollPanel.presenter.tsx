@@ -53,7 +53,6 @@ function ScrollPanel(props: Readonly<React.PropsWithChildren<ScrollPanelProps>>,
         ::-webkit-scrollbar-thumb {
           background-color: ${scrollBarThumbColor};
         }
-
         overflow: hidden auto;
         &:focus {
           outline: none;

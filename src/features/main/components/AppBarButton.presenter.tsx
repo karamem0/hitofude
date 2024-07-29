@@ -8,6 +8,8 @@
 
 import React from 'react';
 
+import { Button } from '@fluentui/react-components';
+
 import { css } from '@emotion/react';
 
 import { useTheme } from '../../../providers/ThemeProvider';
@@ -17,22 +19,22 @@ interface AppBarButtonProps {
   disabled?: boolean,
   focused?: boolean,
   icon?: React.ReactElement,
+  id?: string,
+  name?: string,
   selected?: boolean,
   title?: string,
-  onClick?: EventHandler,
-  onFocusChanged?: EventHandler<boolean>
+  onClick?: EventHandler
 }
 
 function AppBarButton(props: Readonly<AppBarButtonProps>) {
 
   const {
     disabled,
-    focused,
     icon,
+    name,
     selected,
     title,
-    onClick,
-    onFocusChanged
+    onClick
   } = props;
 
   const { theme } = useTheme();
@@ -50,31 +52,25 @@ function AppBarButton(props: Readonly<AppBarButtonProps>) {
         css={css`
           background-color: ${selected ? theme.colorBrandBackground : 'transparent'};
         `} />
-      <div
+      <Button
+        appearance="transparent"
+        aria-controls={name}
         aria-disabled={disabled}
         aria-label={title}
-        role="button"
-        tabIndex={-1}
+        aria-selected={selected}
+        icon={icon}
+        role="tab"
+        tabIndex={0}
         title={title}
         css={css`
-          display: grid;
-          align-items: center;
-          justify-content: center;
-          width: 2.5rem;
+          max-width: 2.5rem;
           height: 2.5rem;
+          color: ${theme.colorNeutralForegroundDisabled};
+          &[aria-selected='true'] {
+            color: ${theme.colorNeutralForeground1};
+          }
         `}
-        onClick={(event) => !disabled && onClick?.(event)}
-        onKeyDown={(event) => event.key === 'Enter' && !disabled && onClick?.(event)}
-        onMouseEnter={(event) => onFocusChanged?.(event, true)}
-        onMouseLeave={(event) => onFocusChanged?.(event, false)}>
-        <span
-          css={css`
-            font-size: 1.5rem;
-            color: ${focused || selected ? theme.colorNeutralForeground1 : theme.colorNeutralForegroundDisabled};
-          `}>
-          {icon}
-        </span>
-      </div>
+        onClick={(event) => !disabled && onClick?.(event)} />
     </div>
   );
 

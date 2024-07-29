@@ -16,8 +16,6 @@ import { Event } from '../../types/Event';
 import Presenter from './SidePanel.presenter';
 
 interface SidePanelProps {
-  className?: string,
-  content?: React.ReactNode,
   title?: React.ReactNode,
   width?: string
 }
@@ -25,9 +23,7 @@ interface SidePanelProps {
 function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
 
   const {
-    className,
     children,
-    content,
     title
   } = props;
 
@@ -49,8 +45,6 @@ function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
 
   return (
     <Presenter
-      className={className}
-      content={content}
       open={open}
       title={title}
       onOpenChange={handleOpenChange}>

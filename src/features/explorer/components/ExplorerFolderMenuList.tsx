@@ -16,17 +16,16 @@ import {
   DialogType,
   ExplorerMenuAction,
   ExplorerMenuType,
-  File
+  Folder
 } from '../../../types/Model';
-import { downloadFile } from '../../../utils/File';
 
-import Presenter from './ExplorerFileMenuButton.presenter';
+import Presenter from './ExplorerFolderMenuList.presenter';
 
-interface ExplorerFileMenuButtonProps {
-  file?: File
+interface ExplorerFolderMenuListProps {
+  folder?: Folder
 }
 
-function ExplorerFileMenuButton(props: Readonly<ExplorerFileMenuButtonProps>) {
+function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
 
   const {
     dispatch
@@ -34,54 +33,32 @@ function ExplorerFileMenuButton(props: Readonly<ExplorerFileMenuButtonProps>) {
 
   const handleMenuClick = React.useCallback((_: Event, data?: ExplorerMenuAction) => {
     switch (data?.type) {
-      case ExplorerMenuType.copyFile: {
-        const value = data?.data as File | undefined;
+      case ExplorerMenuType.deleteFolder: {
+        const value = data?.data as Folder | undefined;
         if (value == null) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: DialogType.copyFile,
+          type: DialogType.deleteFolder,
           data: value
         }));
-        break;
-      }
-      case ExplorerMenuType.deleteFile: {
-        const value = data?.data as File | undefined;
-        if (value == null) {
-          throw new ArgumentNullError();
-        }
-        dispatch(setDialogAction({
-          type: DialogType.deleteFile,
-          data: value
-        }));
-        break;
-      }
-      case ExplorerMenuType.downloadFile: {
-        const value = data?.data as File | undefined;
-        if (value?.downloadUrl == null) {
-          throw new ArgumentNullError();
-        }
-        if (value?.fullName == null) {
-          throw new ArgumentNullError();
-        }
-        downloadFile(value);
         break;
       }
       case ExplorerMenuType.openWithOneDrive: {
-        const value = data?.data as File | undefined;
+        const value = data?.data as Folder | undefined;
         if (value?.webUrl == null) {
           throw new ArgumentNullError();
         }
         window.open(value.webUrl, '_blank', 'noreferrer');
         break;
       }
-      case ExplorerMenuType.renameFile: {
-        const value = data?.data as File | undefined;
+      case ExplorerMenuType.renameFolder: {
+        const value = data?.data as Folder | undefined;
         if (value == null) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: DialogType.renameFile,
+          type: DialogType.renameFolder,
           data: value
         }));
         break;
@@ -101,4 +78,4 @@ function ExplorerFileMenuButton(props: Readonly<ExplorerFileMenuButtonProps>) {
 
 }
 
-export default ExplorerFileMenuButton;
+export default ExplorerFolderMenuList;

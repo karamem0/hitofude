@@ -6,6 +6,8 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-export interface SearchTabItemFormState {
+export interface SearchTabPanelFormState {
   query?: string
 }
+
+export type SearchTabPanelFormField = keyof SearchTabPanelFormState;

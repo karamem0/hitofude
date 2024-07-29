@@ -14,7 +14,14 @@ import {
   useIntl
 } from 'react-intl';
 
-import { Button, Text } from '@fluentui/react-components';
+import {
+  Button,
+  Menu,
+  MenuPopover,
+  MenuTrigger,
+  Text
+} from '@fluentui/react-components';
+import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
 
 import { css } from '@emotion/react';
 
@@ -25,7 +32,7 @@ import { ContentMenuAction, File } from '../../../types/Model';
 import { isMimeType } from '../../../utils/File';
 import messages from '../messages';
 
-import ContentMenuButton from './ContentMenuButton';
+import ContentMenuList from './ContentMenuList';
 import ContentSaveButton from './ContentSaveButton';
 
 interface ContentHeaderProps {
@@ -56,14 +63,8 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
     <div
       css={css`
         display: grid;
-        @media all and (width <= 960px) {
-          grid-template-rows: ${layouts.contentHeader.height.small[0]} ${layouts.contentHeader.height.small[1]};
-          grid-template-columns: auto;
-        }
-        @media not all and (width <= 960px) {
-          grid-template-rows: ${layouts.contentHeader.height.large};
-          grid-template-columns: 1fr auto;
-        }
+        grid-template-rows: ${layouts.contentHeader.height};
+        grid-template-columns: 1fr auto;
       `}>
       <div
         css={css`
@@ -72,6 +73,9 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
           justify-content: left;
         `}>
         <Text
+          aria-label={file.baseName}
+          as="h4"
+          title={file.baseName}
           css={css`
             overflow: hidden;
             font-size: ${theme.fontSizeHero900};
@@ -90,6 +94,9 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
           grid-gap: 0.5rem;
           align-items: center;
           justify-content: right;
+          @media all and (width <= 960px) {
+            display: none;
+          }
         `}>
         {
           editing ? (
@@ -144,7 +151,60 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
             ) : null
           }
         </Text>
-        <ContentMenuButton />
+        {
+          file ? (
+            <Menu>
+              <MenuTrigger>
+                <Button
+                  appearance="transparent"
+                  aria-label={intl.formatMessage(messages.MoreOption)}
+                  title={intl.formatMessage(messages.MoreOption)}
+                  icon={(
+                    <MoreVerticalIcon
+                      css={css`
+                      font-size: 1rem;
+                      line-height: 1rem;
+                    `} />
+                  )} />
+              </MenuTrigger>
+              <MenuPopover>
+                <ContentMenuList />
+              </MenuPopover>
+            </Menu>
+          ) : null
+        }
+      </div>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: right;
+          @media not all and (width <= 960px) {
+            display: none;
+          }
+        `}>
+        <Menu>
+          <MenuTrigger>
+            <Button
+              appearance="transparent"
+              aria-label={intl.formatMessage(messages.MoreOption)}
+              title={intl.formatMessage(messages.MoreOption)}
+              icon={(
+                <MoreVerticalIcon
+                  css={css`
+                  font-size: 1rem;
+                  line-height: 1rem;
+                `} />
+              )} />
+          </MenuTrigger>
+          <MenuPopover>
+            <ContentMenuList
+              onCancel={onCancel}
+              onEdit={onEdit}
+              onSave={onSave} />
+          </MenuPopover>
+        </Menu>
       </div>
     </div>
   ) : null;

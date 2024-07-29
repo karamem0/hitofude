@@ -37,7 +37,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
     <Button
       appearance="subtle"
       className={className}
-      tabIndex={-1}
+      role="separator"
       css={css`
         display: grid;
         place-items: center center;
@@ -59,7 +59,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
     <Button
       appearance="subtle"
       className={className}
-      tabIndex={-1}
+      role="separator"
       css={css`
         position: fixed;
         right: 1rem;

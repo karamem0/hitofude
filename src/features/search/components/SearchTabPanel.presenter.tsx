@@ -11,28 +11,34 @@ import React from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Caption1, Input } from '@fluentui/react-components';
+import {
+  Button,
+  Input,
+  Text
+} from '@fluentui/react-components';
 import { ClearIcon } from '@fluentui/react-icons-mdl2';
 
 import { css } from '@emotion/react';
 
+import Tree from '../../../common/components/Tree';
+import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import messages from '../messages';
-import { SearchTabItemFormState } from '../types/Form';
+import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
 
 import SearchTreeItem from './SearchFileTreeItem';
 
-interface SearchTabItemProps {
-  form?: UseFormReturn<SearchTabItemFormState>,
+interface SearchTabPanelProps {
+  form?: UseFormReturn<SearchTabPanelFormState>,
   loading?: boolean,
   query?: string,
   resultFiles?: File[],
-  onClear?: EventHandler,
-  onSubmit?: EventHandler<SearchTabItemFormState>
+  onClear?: EventHandler<SearchTabPanelFormField>,
+  onSubmit?: EventHandler<SearchTabPanelFormState>
 }
 
-function SearchTabItem(props: Readonly<SearchTabItemProps>) {
+function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
 
   const {
     form,
@@ -44,6 +50,7 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
   } = props;
 
   const intl = useIntl();
+  const { theme } = useTheme();
 
   return form ? (
     <div
@@ -53,13 +60,16 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
         grid-template-columns: 1fr;
         grid-gap: 0.5rem;
       `}>
-      <Caption1
+      <Text
+        as="h2"
         css={css`
+          font-size: ${theme.fontSizeBase200};
+          line-height: calc(${theme.lineHeightBase200} * 1.25);
           padding: 0 0.5rem;
           text-transform: uppercase;
         `}>
         <FormattedMessage {...messages.Search} />
-      </Caption1>
+      </Text>
       <form
         css={css`
           display: flex;
@@ -80,26 +90,18 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
               placeholder={intl.formatMessage(messages.Search)}
               value={field.value}
               contentAfter={(
-                <div
-                  role="button"
-                  tabIndex={-1}
-                  css={css`
-                    font-size: 0.5rem;
-                    line-height: 0.5rem;
-                  `}
-                  onClick={(event) => {
-                    form.setValue(field.name, '');
-                    onClear?.(event);
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key !== 'Enter') {
-                      return;
-                    }
-                    form.setValue(field.name, '');
-                    onClear?.(event);
-                  }}>
-                  <ClearIcon />
-                </div>
+                <Button
+                  appearance="transparent"
+                  size="small"
+                  tabIndex={0}
+                  icon={(
+                    <ClearIcon
+                      css={css`
+                        font-size: 0.5rem;
+                        line-height: 0.5rem;
+                      `} />
+                  )}
+                  onClick={(event) => onClear?.(event, field.name)} />
               )}
               onBlur={field.onBlur}
               onChange={field.onChange} />
@@ -108,30 +110,12 @@ function SearchTabItem(props: Readonly<SearchTabItemProps>) {
             required: true
           }} />
       </form>
-      <div
-        role="table"
-        css={css`
-          display: flex;
-          flex-direction: column;
-          grid-gap: 0.25rem;
-          overflow: hidden auto;
-        `}>
-        {
-          resultFiles && resultFiles.length > 0 ? (
-            <SearchTreeItem />
-          ) : (
-            <Caption1
-              css={css`
-                text-align: center;
-              `}>
-              <FormattedMessage {...messages.NoItemsFound} />
-            </Caption1>
-          )
-        }
-      </div>
+      <Tree disabled={resultFiles?.length === 0}>
+        <SearchTreeItem />
+      </Tree>
     </div>
   ) : null;
 
 }
 
-export default React.memo(SearchTabItem);
+export default React.memo(SearchTabPanel);

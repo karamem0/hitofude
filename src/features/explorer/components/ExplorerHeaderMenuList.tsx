@@ -28,9 +28,9 @@ import {
 } from '../../../types/Model';
 import { isSupportedFile } from '../../../utils/File';
 
-import Presenter from './ExplorerHeaderMenuButton.presenter';
+import Presenter from './ExplorerHeaderMenuList.presenter';
 
-function ExplorerHeaderMenuButton() {
+function ExplorerHeaderMenuList() {
 
   const { route } = useRoute();
   const {
@@ -115,4 +115,4 @@ function ExplorerHeaderMenuButton() {
 
 }
 
-export default ExplorerHeaderMenuButton;
+export default ExplorerHeaderMenuList;

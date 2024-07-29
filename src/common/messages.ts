@@ -14,6 +14,7 @@ const messages = defineMessages({
   FileDoesNotExists: { defaultMessage: 'The file with the name does not exists' },
   FolderAlreadyExists: { defaultMessage: 'The folder with the name already exists' },
   FolderDoesNotExists: { defaultMessage: 'The folder with the name does not exists' },
+  NoItemsFound: { defaultMessage: 'No items found' },
   Saving: { defaultMessage: 'Saving...' },
   Uploading: { defaultMessage: 'Uploading...' }
 });

@@ -80,35 +80,35 @@ function MainPage(props: Readonly<MainPageProps>) {
             background-color: ${theme.colorBrandBackground};
           `}>
           <Text
+            as="h1"
             css={css`
-            font-size: 1rem;
-            font-weight: bold;
-            color: ${theme.colorBrandBackgroundInverted};
-            text-align: center;
-          `}>
+              font-size: 1rem;
+              font-weight: bold;
+              color: ${theme.colorBrandBackgroundInverted};
+              text-align: center;
+            `}>
             <FormattedMessage {...messages.AppName} />
           </Text>
           <MeControl />
         </header>
-        <div
+        <main
           css={css`
             display: grid;
             margin: 2rem 0 0;
             @media all and (width <= 960px) {
               grid-template-rows: ${layouts.pageBody.height};
               grid-template-columns: auto 1fr;
-              & > section:nth-of-type(2) {
+              & > div:last-of-type {
                 position: fixed;
-                z-index: 100;
+                width: calc(100vw - 3rem);
                 margin: 0 0 0 3rem;
               }
             }
             @media not all and (width <= 960px) {
               grid-template-rows: ${layouts.pageBody.height};
               grid-template-columns: auto auto 1fr;
-              & > section:nth-of-type(2) {
+              & > div:last-of-type {
                 position: static;
-                z-index: auto;
                 margin: 0;
               }
             }
@@ -116,7 +116,7 @@ function MainPage(props: Readonly<MainPageProps>) {
           <AppBar />
           <AppTab />
           <AppContent />
-        </div>
+        </main>
       </div>
     </ProgressProvider>
   );

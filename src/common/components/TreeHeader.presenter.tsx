@@ -11,6 +11,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
+  Button,
   Menu,
   MenuPopover,
   MenuTrigger,
@@ -48,40 +49,59 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
         display: grid;
         grid-template-rows: auto;
         grid-template-columns: auto 1fr auto;
-        grid-gap: 0.5rem;
+        grid-gap: 0.25rem;
         align-items: center;
         justify-content: start;
         padding: 0 0.5rem;
+        margin: 1px;
         font-weight: bold;
         user-select: none;
-        & > div:nth-of-type(3) {
+        border: 1px solid transparent;
+        & > button:last-of-type {
           display: none;
         }
         &:hover {
-          & > div:nth-of-type(3) {
+          & > button:last-of-type {
             display: inherit;
           }
         }
       `}>
-      <div
-        aria-disabled={root}
-        aria-label={intl.formatMessage(messages.Back)}
-        role="button"
-        tabIndex={-1}
-        title={intl.formatMessage(messages.Back)}
-        css={css`
-          font-size: 1rem;
-          line-height: 1rem;
-        `}
-        onClick={(event) => !root && onClick?.(event)}>
-        {
-          root ? (
-            <OneDriveLogoIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )
-        }
-      </div>
+      {
+        root ? (
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 2rem;
+              height: 2rem;
+            `}>
+            <OneDriveLogoIcon
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          </div>
+        ) : (
+          <Button
+            appearance="transparent"
+            aria-label={intl.formatMessage(messages.Back)}
+            tabIndex={0}
+            title={intl.formatMessage(messages.Back)}
+            css={css`
+              max-width: 2rem;
+              height: 2rem;
+            `}
+            icon={(
+              <ChevronLeftIcon
+                css={css`
+                  font-size: 1rem;
+                  line-height: 1rem;
+                `} />
+            )}
+            onClick={(event) => !root && onClick?.(event)} />
+        )
+      }
       <div
         css={css`
           overflow: hidden;
@@ -90,6 +110,7 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
         `}>
         <Text
           aria-label={name}
+          as="h3"
           title={name}
           css={css`
             font-weight: bold;
@@ -99,17 +120,23 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
       </div>
       <Menu>
         <MenuTrigger>
-          <div
+          <Button
+            appearance="transparent"
             aria-label={intl.formatMessage(messages.MoreOption)}
             role="button"
-            tabIndex={-1}
+            tabIndex={0}
             title={intl.formatMessage(messages.MoreOption)}
             css={css`
-              font-size: 1rem;
-              line-height: 1rem;
-            `}>
-            <MoreVerticalIcon />
-          </div>
+              max-width: 2rem;
+              height: 2rem;
+            `}
+            icon={(
+              <MoreVerticalIcon
+                css={css`
+                  font-size: 1rem;
+                  line-height: 1rem;
+                `} />
+            )} />
         </MenuTrigger>
         <MenuPopover>
           {menu}

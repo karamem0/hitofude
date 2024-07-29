@@ -19,7 +19,6 @@ const messages = defineMessages({
   HideUnsupportedFiles: { defaultMessage: 'Hide other files' },
   NewFile: { defaultMessage: 'New file' },
   NewFolder: { defaultMessage: 'New folder' },
-  NoItemsFound: { defaultMessage: 'No items found' },
   OpenWithOneDrive: { defaultMessage: 'Open with OneDrive' },
   Refresh: { defaultMessage: 'Refresh' },
   RenameFile: { defaultMessage: 'Rename file' },

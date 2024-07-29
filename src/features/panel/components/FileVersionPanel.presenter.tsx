@@ -30,7 +30,6 @@ import { css } from '@emotion/react';
 import bytes from 'bytes';
 
 import SidePanel from '../../../common/components/SidePanel';
-import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
 import {
   DialogAction,
@@ -54,15 +53,10 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
   const intl = useIntl();
 
   return (
-    <SidePanel
-      title={intl.formatMessage(messages.VersionHistory)}
-      content={
+    <SidePanel title={intl.formatMessage(messages.VersionHistory)}>
+      {
         items ? (
-          <div
-            css={css`
-              max-height: ${layouts.sidePanelBody.height};
-              overflow: hidden auto;
-            `}>
+          <div>
             <Table size="small">
               <TableHeader>
                 <TableRow>
@@ -95,7 +89,7 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
                                 <div
                                   aria-label={intl.formatMessage(messages.RestoreFile)}
                                   role="button"
-                                  tabIndex={-1}
+                                  tabIndex={0}
                                   title={intl.formatMessage(messages.RestoreFile)}
                                   css={css`
                                     font-size: 1rem;
@@ -138,9 +132,7 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
           </div>
         ) : null
       }
-      css={css`
-        width: 30rem;
-      `} />
+    </SidePanel>
   );
 
 }

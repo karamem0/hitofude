@@ -65,7 +65,7 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
         });
       } else {
         try {
-          const absoluteUrl = new URL(src, contentFileUrl).href;
+          const absoluteUrl = new URL(src.replace(/^\/?(.+)$/, '$1'), contentFileUrl).href;
           const relativeUrl = absoluteUrl.substring(absoluteUrl.indexOf(rootFolderUrl) + rootFolderUrl.length);
           const file = await graph.getFileByUrl(relativeUrl);
           setState({

@@ -12,7 +12,12 @@ import { useRoute } from '../../../providers/RouteProvider';
 import { useStore } from '../../../providers/StoreProvider';
 import { setDialogAction, setTabOpen } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
-import { DialogAction, TabType } from '../../../types/Model';
+import {
+  AppBarMenuAction,
+  AppBarMenuType,
+  DialogType,
+  TabType
+} from '../../../types/Model';
 
 import Presenter from './AppBar.presenter';
 
@@ -28,8 +33,20 @@ function AppBar() {
     }
   } = useStore();
 
-  const handleOpenDialog = React.useCallback((_: Event, data?: DialogAction) => {
-    dispatch(setDialogAction(data));
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const handleMenuClick = React.useCallback((_: Event, data?: AppBarMenuAction) => {
+    switch (data?.type) {
+      case AppBarMenuType.changeTheme: {
+        dispatch(setDialogAction({
+          type: DialogType.changeTheme,
+          data: undefined
+        }));
+        break;
+      }
+      default:
+        break;
+    }
   }, [
     dispatch
   ]);
@@ -66,11 +83,47 @@ function AppBar() {
     dispatch
   ]);
 
+  const handleKeyDown = React.useCallback((event: Event) => {
+    const { key } = event as KeyboardEvent;
+    switch (key) {
+      case 'ArrowDown': {
+        const { current: element } = ref;
+        const items = element?.querySelectorAll('button');
+        if (items == null) {
+          break;
+        }
+        for (let i = 0; i < items?.length - 1; i++) {
+          if (items[i] === document.activeElement) {
+            items[i + 1].focus();
+            break;
+          }
+        }
+        break;
+      }
+      case 'ArrowUp': {
+        const { current: element } = ref;
+        const items = element?.querySelectorAll('button');
+        if (items == null) {
+          break;
+        }
+        for (let i = 1; i < items?.length; i++) {
+          if (items[i] === document.activeElement) {
+            items[i - 1].focus();
+            break;
+          }
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  }, []);
+
   return (
     <Presenter
-      tabLoading={tabProps?.loading}
-      tabType={tabProps?.type}
-      onOpenDialog={handleOpenDialog}
+      ref={ref}
+      onKeyDown={handleKeyDown}
+      onMenuClick={handleMenuClick}
       onToggleTab={handleToggleTab} />
   );
 

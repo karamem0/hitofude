@@ -51,7 +51,7 @@ function Error500Page() {
           <FormattedMessage {...messages.AppName} />
         </Text>
       </header>
-      <section
+      <div
         css={css`
           display: flex;
           flex-flow: column;
@@ -63,7 +63,7 @@ function Error500Page() {
           description={intl.formatMessage(messages.Error500Description)}
           image="/assets/Warning.svg"
           title={intl.formatMessage(messages.Error500Title)} />
-      </section>
+      </div>
     </div>
   );
 

@@ -9,7 +9,6 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  NoItemsFound: { defaultMessage: 'No items found' },
   OpenFileLocation: { defaultMessage: 'Open file location' },
   Search: { defaultMessage: 'Search' }
 });

@@ -6,14 +6,26 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+export interface AppBarMenuAction {
+  type: AppBarMenuType,
+  data: unknown
+}
+
+export enum AppBarMenuType {
+  changeTheme = 'changeTheme'
+}
+
 export interface ContentMenuAction {
   type: ContentMenuType,
   data: unknown
 }
 
 export enum ContentMenuType {
+  closeFile = 'closeFile',
   downloadFile = 'downloadFile',
+  editFile = 'editFile',
   openFileVersionPanel = 'openFileVersionPanel',
+  saveFile = 'saveFile',
   toggleMinimap = 'toggleMinimap',
   togglePreview = 'togglePreview',
   toggleScroll = 'toggleScroll',

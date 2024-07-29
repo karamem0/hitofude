@@ -38,7 +38,7 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
     <div
       aria-label={intl.formatMessage(messages.ConflictFile)}
       role="button"
-      tabIndex={-1}
+      tabIndex={0}
       title={intl.formatMessage(messages.ConflictFile)}
       css={css`
         font-size: 1rem;

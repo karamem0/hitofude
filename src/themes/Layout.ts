@@ -22,28 +22,12 @@ export const layouts = {
     }
   },
   contentHeader: {
-    height: {
-      large: '2.5rem',
-      small: [
-        '3.5rem',
-        '2rem'
-      ]
-    }
+    height: '2.5rem'
   },
   pageBody: {
     height: 'calc(100svh - 2rem)'
   },
   pageHeader: {
     height: '2.5rem'
-  },
-  sidePanel: {
-    maxWidth: 'calc(100vw - 2rem)',
-    width: '20rem'
-  },
-  sidePanelBody: {
-    height: 'calc(100svh - 5rem)'
-  },
-  sidePanelHeader: {
-    height: '2rem'
   }
 };

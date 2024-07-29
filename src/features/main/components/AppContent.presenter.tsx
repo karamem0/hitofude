@@ -31,7 +31,7 @@ function AppContent(props: Readonly<AppContentProps>) {
   } = props;
 
   return (
-    <section
+    <div
       css={css`
         display: grid;
       `}>
@@ -55,7 +55,7 @@ function AppContent(props: Readonly<AppContentProps>) {
           })()
         }
       </Loader>
-    </section>
+    </div>
   );
 
 }
