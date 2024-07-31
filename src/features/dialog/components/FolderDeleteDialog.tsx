@@ -28,9 +28,7 @@ function FileDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
 
   const { value } = props;
 
-  const {
-    dispatch
-  } = useStore();
+  const { dispatch } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
@@ -42,11 +40,7 @@ function FileDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
       await graph.deleteFolder(value);
       dispatch(removeExplorerFolder(value));
     } catch (error) {
-      if (error instanceof Error) {
-        dispatch(setError(error));
-        return;
-      }
-      throw error;
+      dispatch(setError(error as Error));
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

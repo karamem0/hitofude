@@ -20,6 +20,7 @@ import {
   CopyIcon,
   DeleteIcon,
   DownloadDocumentIcon,
+  LinkIcon,
   RenameIcon
 } from '@fluentui/react-icons-mdl2';
 import {
@@ -66,6 +67,21 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
             data: file
           })}>
           <FormattedMessage {...messages.CopyFile} />
+        </MenuItem>
+        <MenuItem
+          key={ExplorerMenuType.copyLink}
+          icon={(
+            <LinkIcon
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.copyLink,
+            data: file
+          })}>
+          <FormattedMessage {...messages.CopyLink} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />

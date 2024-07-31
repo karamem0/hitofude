@@ -11,10 +11,16 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  MenuDivider,
+  MenuGroup,
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import { OpenFolderHorizontalIcon, TextDocumentIcon } from '@fluentui/react-icons-mdl2';
+import {
+  LinkIcon,
+  OpenFolderHorizontalIcon,
+  TextDocumentIcon
+} from '@fluentui/react-icons-mdl2';
 
 import { css } from '@emotion/react';
 
@@ -60,21 +66,41 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
             )}
             menu={(
               <MenuList>
-                <MenuItem
-                  key={SearchMenuType.openFileLocation}
-                  icon={(
-                    <OpenFolderHorizontalIcon
-                      css={css`
+                <MenuGroup>
+                  <MenuItem
+                    key={SearchMenuType.copyLink}
+                    icon={(
+                      <LinkIcon
+                        css={css`
+                          font-size: 1rem;
+                          line-height: 1rem;
+                        `} />
+                    )}
+                    onClick={(event) => onMenuClick?.(event, {
+                      type: SearchMenuType.copyLink,
+                      data: item
+                    })}>
+                    <FormattedMessage {...messages.CopyLink} />
+                  </MenuItem>
+                </MenuGroup>
+                <MenuDivider />
+                <MenuGroup>
+                  <MenuItem
+                    key={SearchMenuType.openFileLocation}
+                    icon={(
+                      <OpenFolderHorizontalIcon
+                        css={css`
                         font-size: 1rem;
                         line-height: 1rem;
                       `} />
                   )}
-                  onClick={(event) => onMenuClick?.(event, {
-                    type: SearchMenuType.openFileLocation,
-                    data: item.id
-                  })}>
-                  <FormattedMessage {...messages.OpenFileLocation} />
-                </MenuItem>
+                    onClick={(event) => onMenuClick?.(event, {
+                      type: SearchMenuType.openFileLocation,
+                      data: item
+                    })}>
+                    <FormattedMessage {...messages.OpenFileLocation} />
+                  </MenuItem>
+                </MenuGroup>
               </MenuList>
             )}
             onClick={(event) => onClick?.(event, item)} />

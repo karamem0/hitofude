@@ -23,7 +23,10 @@ function MeControl() {
   const msal = useMsal();
   const { graph } = useService();
   const [ photo, setPhoto ] = React.useState<string>();
-  const account = msal.instance.getActiveAccount();
+
+  const account = React.useMemo(() => msal.instance.getActiveAccount(), [
+    msal
+  ]);
 
   const handleSignOut = React.useCallback(async () => {
     await msal.instance.logoutRedirect({

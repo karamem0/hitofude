@@ -9,6 +9,7 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
+  CopyLink: { defaultMessage: 'Copy link' },
   OpenFileLocation: { defaultMessage: 'Open file location' },
   Search: { defaultMessage: 'Search' }
 });

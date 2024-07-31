@@ -25,6 +25,7 @@ import FileRestoreDialog from '../components/FileRestoreDialog';
 import FolderCreateDialog from '../components/FolderCreateDialog';
 import FolderDeleteDialog from '../components/FolderDeleteDialog';
 import FolderRenameDialog from '../components/FolderRenameDialog';
+import LinkCopyDialog from '../components/LinkCopyDialog';
 import ThemeChangeDialog from '../components/ThemeChangeDialog';
 
 interface DialogFactoryProps {
@@ -45,6 +46,10 @@ function DialogFactory(props: Readonly<DialogFactoryProps>) {
     case DialogType.copyFile:
       return (
         <FileCopyDialog value={action.data as File} />
+      );
+    case DialogType.copyLink:
+      return (
+        <LinkCopyDialog value={action.data as string} />
       );
     case DialogType.createFile:
       return (

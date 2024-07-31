@@ -5,7 +5,7 @@ on:
       - develop
 
 env:
-  BUILD_VERSION: '1.13.1'
+  BUILD_VERSION: '1.13.2'
 
 jobs:
   select-environment:

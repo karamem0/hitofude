@@ -38,22 +38,14 @@ function ContentSupported() {
   const { setProgress } = useProgress();
 
   const handleCancel = React.useCallback(() => {
-    try {
-      dispatch(setContentScrollPosition());
-      dispatch(setContentEditing(false));
-    } catch (error) {
-      dispatch(setError(error as Error));
-    }
+    dispatch(setContentScrollPosition());
+    dispatch(setContentEditing(false));
   }, [
     dispatch
   ]);
 
   const handleEdit = React.useCallback(() => {
-    try {
-      dispatch(setContentEditing(true));
-    } catch (error) {
-      dispatch(setError(error as Error));
-    }
+    dispatch(setContentEditing(true));
   }, [
     dispatch
   ]);

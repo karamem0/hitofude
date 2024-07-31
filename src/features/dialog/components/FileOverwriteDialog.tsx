@@ -31,9 +31,7 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
 
   const { value } = props;
 
-  const {
-    dispatch
-  } = useStore();
+  const { dispatch } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
@@ -52,10 +50,7 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
       }
       dispatch(removeExplorerFileConflict(value));
     } catch (error) {
-      if (error instanceof Error) {
-        dispatch(setError(error));
-        return;
-      }
+      dispatch(setError(error as Error));
       throw error;
     } finally {
       setLoading(false);

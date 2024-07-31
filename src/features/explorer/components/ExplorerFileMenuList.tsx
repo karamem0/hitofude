@@ -28,9 +28,7 @@ interface ExplorerFileMenuListProps {
 
 function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
 
-  const {
-    dispatch
-  } = useStore();
+  const { dispatch } = useStore();
 
   const handleMenuClick = React.useCallback((_: Event, data?: ExplorerMenuAction) => {
     switch (data?.type) {
@@ -42,6 +40,17 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         dispatch(setDialogAction({
           type: DialogType.copyFile,
           data: value
+        }));
+        break;
+      }
+      case ExplorerMenuType.copyLink: {
+        const value = data?.data as File | undefined;
+        if (value?.webUrl == null) {
+          throw new ArgumentNullError();
+        }
+        dispatch(setDialogAction({
+          type: DialogType.copyLink,
+          data: value.webUrl
         }));
         break;
       }

@@ -37,6 +37,7 @@ function Communication(props: Readonly<CommunicationProps>) {
         grid-template-rows: auto auto;
         grid-template-columns: auto;
         grid-gap: 2rem;
+        padding: 1rem;
       `}>
       <img
         alt={title}
@@ -56,6 +57,7 @@ function Communication(props: Readonly<CommunicationProps>) {
           color: ${theme.colorNeutralForeground4};
         `}>
         <Text
+          as="h4"
           css={css`
             font-size: ${theme.fontSizeHero800};
             line-height: calc(${theme.fontSizeHero800} * 1.25);

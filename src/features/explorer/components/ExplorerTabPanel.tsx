@@ -17,7 +17,8 @@ import {
   setExplorerSelectedFolder,
   appendExplorerFile,
   appendExplorerFileConflict,
-  setExplorerSelectedFile
+  setExplorerSelectedFile,
+  setDialogAction
 } from '../../../stores/Action';
 import {
   ArgumentNullError,
@@ -26,7 +27,7 @@ import {
   FileNotFoundError
 } from '../../../types/Error';
 import { Event } from '../../../types/Event';
-import { ProgressType, TabType } from '../../../types/Model';
+import { DialogType, ProgressType, TabType } from '../../../types/Model';
 import { fromFile } from '../../../utils/Blob';
 import { isSupportedFile } from '../../../utils/File';
 import { DropEventData } from '../types/Event';
@@ -38,7 +39,6 @@ function ExplorerTabPanel() {
   const { route } = useRoute();
   const {
     dispatch,
-    onOpenDialog,
     state: {
       explorerProps
     }
@@ -47,51 +47,63 @@ function ExplorerTabPanel() {
   const { setProgress } = useProgress();
 
   const handleDropFiles = React.useCallback(async (_: Event, data?: DropEventData) => {
-    const folder = explorerProps?.selectedFolder;
-    if (data == null) {
-      throw new ArgumentNullError();
-    }
-    if (folder == null) {
-      throw new DependencyNullError();
-    }
-    setProgress(ProgressType.upload);
-    for (const acceptedFile of data.acceptedFiles) {
-      const fileName = acceptedFile.name;
-      const fileBlob = fromFile(acceptedFile);
-      try {
-        const file = await Promise.resolve()
-          .then(() => graph.createFile(folder, fileName, fileBlob))
-          .then((file) => graph.getFileById(file.id));
-        dispatch(appendExplorerFile(file));
-        route.setParams({
-          tab: TabType.explorer,
-          folder: folder.id,
-          file: file?.id
-        });
-      } catch (error) {
-        if (error instanceof FileConflictError) {
-          const file = folder.files?.find((item) => item.fullName === fileName);
-          if (file == null) {
-            throw new FileNotFoundError();
-          }
-          dispatch(appendExplorerFileConflict({
-            id: file.id,
-            name: fileName,
-            data: fileBlob
-          }));
-          continue;
-        }
-        dispatch(setError(error as Error));
-        return;
+    try {
+      const folder = explorerProps?.selectedFolder;
+      if (data == null) {
+        throw new ArgumentNullError();
       }
+      if (folder == null) {
+        throw new DependencyNullError();
+      }
+      setProgress(ProgressType.upload);
+      for (const acceptedFile of data.acceptedFiles) {
+        const fileName = acceptedFile.name;
+        const fileBlob = fromFile(acceptedFile);
+        try {
+          const file = await Promise.resolve()
+            .then(() => graph.createFile(folder, fileName, fileBlob))
+            .then((file) => graph.getFileById(file.id));
+          dispatch(appendExplorerFile(file));
+          route.setParams({
+            tab: TabType.explorer,
+            folder: folder.id,
+            file: file?.id
+          });
+        } catch (error) {
+          if (error instanceof FileConflictError) {
+            const file = folder.files?.find((item) => item.fullName === fileName);
+            if (file == null) {
+              throw new FileNotFoundError();
+            }
+            dispatch(appendExplorerFileConflict({
+              id: file.id,
+              name: fileName,
+              data: fileBlob
+            }));
+          } else {
+            throw error;
+          }
+        }
+      }
+      setProgress();
+    } catch (error) {
+      dispatch(setError(error as Error));
     }
-    setProgress();
   }, [
     explorerProps?.selectedFolder,
     graph,
     route,
     dispatch,
     setProgress
+  ]);
+
+  const handleCreateFile = React.useCallback(() => {
+    dispatch(setDialogAction({
+      type: DialogType.createFile,
+      data: undefined
+    }));
+  }, [
+    dispatch
   ]);
 
   const handleSelectFile = React.useCallback(async (_: Event, data?: string) => {
@@ -153,8 +165,8 @@ function ExplorerTabPanel() {
   return (
     <Presenter
       {...explorerProps}
+      onCreateFile={handleCreateFile}
       onDropFiles={handleDropFiles}
-      onOpenDialog={onOpenDialog}
       onSelectFile={handleSelectFile}
       onSelectFolder={handleSelectFolder} />
   );

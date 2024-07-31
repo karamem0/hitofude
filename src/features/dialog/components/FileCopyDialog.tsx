@@ -32,9 +32,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
 
   const { value } = props;
 
-  const {
-    dispatch
-  } = useStore();
+  const { dispatch } = useStore();
   const { graph } = useService();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
@@ -52,11 +50,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
       dispatch(setContentFile(file));
       dispatch(setContentText(await graph.getFileText(file)));
     } catch (error) {
-      if (error instanceof Error) {
-        dispatch(setError(error));
-        return;
-      }
-      throw error;
+      dispatch(setError(error as Error));
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

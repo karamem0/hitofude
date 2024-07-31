@@ -41,7 +41,6 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
   } = props;
 
   const [ state, setState ] = React.useState<ScrollPanelState>({});
-
   const ref = React.useRef<HTMLDivElement>(null);
 
   const handleKeyDown = React.useCallback((event: KeyboardEvent) => {

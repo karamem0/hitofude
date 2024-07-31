@@ -47,6 +47,7 @@
           "useContext",
           "useError",
           "useMsal",
+          "useRoute",
           "useStore",
           "useService",
           "useReducer",

@@ -52,6 +52,7 @@ export interface DialogAction {
 export enum DialogType {
   changeTheme = 'changeTheme',
   copyFile = 'copyFile',
+  copyLink = 'copyLink',
   createFile = 'createFile',
   createFolder = 'createFolder',
   deleteFile = 'deleteFile',
@@ -69,6 +70,7 @@ export interface ExplorerMenuAction {
 
 export enum ExplorerMenuType {
   copyFile = 'copyFile',
+  copyLink = 'copyLink',
   createFile = 'createFile',
   createFolder = 'createFolder',
   deleteFile = 'deleteFile',
@@ -159,6 +161,7 @@ export interface SearchMenuAction {
 }
 
 export enum SearchMenuType {
+  copyLink = 'copyLink',
   openFileLocation = 'openFileLocation'
 }
 

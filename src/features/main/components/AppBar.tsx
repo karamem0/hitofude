@@ -18,6 +18,7 @@ import {
   DialogType,
   TabType
 } from '../../../types/Model';
+import { moveNext, movePrevious } from '../../../utils/Keyboard';
 
 import Presenter from './AppBar.presenter';
 
@@ -32,7 +33,6 @@ function AppBar() {
       tabProps
     }
   } = useStore();
-
   const ref = React.useRef<HTMLDivElement>(null);
 
   const handleMenuClick = React.useCallback((_: Event, data?: AppBarMenuAction) => {
@@ -87,31 +87,11 @@ function AppBar() {
     const { key } = event as KeyboardEvent;
     switch (key) {
       case 'ArrowDown': {
-        const { current: element } = ref;
-        const items = element?.querySelectorAll('button');
-        if (items == null) {
-          break;
-        }
-        for (let i = 0; i < items?.length - 1; i++) {
-          if (items[i] === document.activeElement) {
-            items[i + 1].focus();
-            break;
-          }
-        }
+        moveNext(ref.current, 'button');
         break;
       }
       case 'ArrowUp': {
-        const { current: element } = ref;
-        const items = element?.querySelectorAll('button');
-        if (items == null) {
-          break;
-        }
-        for (let i = 1; i < items?.length; i++) {
-          if (items[i] === document.activeElement) {
-            items[i - 1].focus();
-            break;
-          }
-        }
+        movePrevious(ref.current, 'button');
         break;
       }
       default:

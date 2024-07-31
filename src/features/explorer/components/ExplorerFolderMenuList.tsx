@@ -27,12 +27,21 @@ interface ExplorerFolderMenuListProps {
 
 function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
 
-  const {
-    dispatch
-  } = useStore();
+  const { dispatch } = useStore();
 
   const handleMenuClick = React.useCallback((_: Event, data?: ExplorerMenuAction) => {
     switch (data?.type) {
+      case ExplorerMenuType.copyLink: {
+        const value = data?.data as Folder | undefined;
+        if (value?.webUrl == null) {
+          throw new ArgumentNullError();
+        }
+        dispatch(setDialogAction({
+          type: DialogType.copyLink,
+          data: value.webUrl
+        }));
+        break;
+      }
       case ExplorerMenuType.deleteFolder: {
         const value = data?.data as Folder | undefined;
         if (value == null) {

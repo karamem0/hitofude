@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form';
 
 import { useRoute } from '../../../providers/RouteProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setError } from '../../../stores/Action';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { TabType } from '../../../types/Model';
@@ -24,7 +23,6 @@ function SearchTabPanel() {
 
   const { route } = useRoute();
   const {
-    dispatch,
     state: {
       searchProps
     }
@@ -32,40 +30,30 @@ function SearchTabPanel() {
   const form = useForm<SearchTabPanelFormState>();
 
   const handleClear = React.useCallback((_: Event, data?: SearchTabPanelFormField) => {
-    try {
-      if (data == null) {
-        throw new ArgumentNullError();
-      }
-      form.setValue(data, '');
-      route.setParams({
-        tab: TabType.search,
-        search: ''
-      });
-    } catch (error) {
-      dispatch(setError(error as Error));
+    if (data == null) {
+      throw new ArgumentNullError();
     }
+    form.setValue(data, '');
+    route.setParams({
+      tab: TabType.search,
+      search: ''
+    });
   },
   [
     form,
-    route,
-    dispatch
+    route
   ]);
 
   const handleSubmit = React.useCallback(async (_: Event, data?: SearchTabPanelFormState) => {
-    try {
-      if (data?.query == null) {
-        throw new ArgumentNullError();
-      }
-      route.setParams({
-        tab: TabType.search,
-        search: data.query
-      });
-    } catch (error) {
-      dispatch(setError(error as Error));
+    if (data?.query == null) {
+      throw new ArgumentNullError();
     }
+    route.setParams({
+      tab: TabType.search,
+      search: data.query
+    });
   }, [
-    route,
-    dispatch
+    route
   ]);
 
   React.useEffect(() => {

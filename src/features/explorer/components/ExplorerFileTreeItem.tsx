@@ -20,9 +20,7 @@ interface ExplorerFileTreeItemProps {
 
 function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
 
-  const {
-    onClick
-  } = props;
+  const { onClick } = props;
 
   const {
     state: {

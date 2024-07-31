@@ -23,7 +23,6 @@ function VideoViewer(props: Readonly<VideoViewerProps>) {
   } = props;
 
   const [ loading, setLoading ] = React.useState<boolean>(true);
-
   const ref = React.useRef<HTMLVideoElement>(null);
 
   React.useEffect(() => {

@@ -8,11 +8,10 @@
 
 import React from 'react';
 
-import { setDialogAction, setError, setInitialState } from '../stores/Action';
+import { setInitialState } from '../stores/Action';
 import { reducer } from '../stores/Reducer';
-import { ArgumentNullError, InvalidOperationError } from '../types/Error';
-import { Event, EventHandler } from '../types/Event';
-import { DialogAction, ThemeName } from '../types/Model';
+import { InvalidOperationError } from '../types/Error';
+import { ThemeName } from '../types/Model';
 import { Action, State } from '../types/Store';
 
 import { useService } from './ServiceProvider';
@@ -20,9 +19,7 @@ import { useTheme } from './ThemeProvider';
 
 interface StoreContextState {
   dispatch: React.Dispatch<Action>,
-  state: State,
-  onOpenDialog: EventHandler<DialogAction>,
-  onOpenUrl?: EventHandler<string>
+  state: State
 }
 
 const StoreContext = React.createContext<StoreContextState | undefined>(undefined);
@@ -48,39 +45,12 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const [ loading, setLoading ] = React.useState<boolean>(true);
 
-  const handleOpenDialog = React.useCallback((_: Event, data?: DialogAction) => {
-    try {
-      dispatch(setDialogAction(data));
-    } catch (error) {
-      dispatch(setError(error as Error));
-    }
-  }, [
-    dispatch
-  ]);
-
-  const handleOpenUrl = React.useCallback((_: Event, data?: string) => {
-    try {
-      if (data == null) {
-        throw new ArgumentNullError();
-      }
-      window.open(data, '_blank', 'noreferrer');
-    } catch (error) {
-      dispatch(setError(error as Error));
-    }
-  }, [
-    dispatch
-  ]);
-
   const value = React.useMemo<StoreContextState>(() => ({
     dispatch,
-    state,
-    onOpenDialog: handleOpenDialog,
-    onOpenUrl: handleOpenUrl
+    state
   }), [
     state,
-    dispatch,
-    handleOpenDialog,
-    handleOpenUrl
+    dispatch
   ]);
 
   React.useEffect(() => {

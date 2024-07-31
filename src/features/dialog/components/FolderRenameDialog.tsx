@@ -46,11 +46,7 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
       const folder = await graph.renameFolder(data, data.name);
       dispatch(updateExplorerFolder(folder));
     } catch (error) {
-      if (error instanceof Error) {
-        dispatch(setError(error));
-        return;
-      }
-      throw error;
+      dispatch(setError(error as Error));
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

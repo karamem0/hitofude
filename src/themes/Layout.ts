@@ -7,6 +7,9 @@
 //
 
 export const layouts = {
+  appBar: {
+    width: '3.5rem'
+  },
   appTab: {
     maxWidth: 'calc(100vw - 4rem)',
     width: '20rem'

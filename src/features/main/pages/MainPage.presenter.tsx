@@ -94,18 +94,20 @@ function MainPage(props: Readonly<MainPageProps>) {
         <main
           css={css`
             display: grid;
+            height: ${layouts.pageBody.height};
             margin: 2rem 0 0;
             @media all and (width <= 960px) {
-              grid-template-rows: ${layouts.pageBody.height};
+              grid-template-rows: auto;
               grid-template-columns: auto 1fr;
               & > div:last-of-type {
                 position: fixed;
-                width: calc(100vw - 3rem);
-                margin: 0 0 0 3rem;
+                width: calc(100vw - ${layouts.appBar.width});
+                height: ${layouts.pageBody.height};
+                margin: 0 0 0 ${layouts.appBar.width};
               }
             }
             @media not all and (width <= 960px) {
-              grid-template-rows: ${layouts.pageBody.height};
+              grid-template-rows: auto;
               grid-template-columns: auto auto 1fr;
               & > div:last-of-type {
                 position: static;

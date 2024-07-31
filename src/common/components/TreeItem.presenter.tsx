@@ -71,7 +71,8 @@ function TreeItem(props: Readonly<TreeItemProps>) {
           background-color: ${theme.colorNeutralBackground2Hover};
         }
       `}
-      onKeyDown={onKeyDown}>
+      onKeyDown={onKeyDown}
+      onTouchStart={onClick}>
       <div
         css={css`
           display: grid;

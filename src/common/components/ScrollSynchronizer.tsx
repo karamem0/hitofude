@@ -43,7 +43,6 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
 
   const [ element1Position, setElement1Position ] = React.useState<ScrollPosition | undefined>(defaultElement1Position);
   const [ element2Position, setElement2Position ] = React.useState<ScrollPosition | undefined>(defaultElement2Position);
-
   const element1Active = React.useRef<boolean>();
   const element1Size = React.useRef<ScrollSize>();
   const element2Active = React.useRef<boolean>();

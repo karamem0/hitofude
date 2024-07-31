@@ -55,11 +55,7 @@ function FileCreateDialog() {
         file: file?.id
       });
     } catch (error) {
-      if (error instanceof Error) {
-        dispatch(setError(error));
-        return;
-      }
-      throw error;
+      dispatch(setError(error as Error));
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

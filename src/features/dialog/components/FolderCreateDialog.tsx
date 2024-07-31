@@ -45,11 +45,7 @@ function FolderCreateDialog() {
       const folder = await graph.createFolder(selectedFolder, `${data.name}`);
       dispatch(appendExplorerFolder(folder));
     } catch (error) {
-      if (error instanceof Error) {
-        dispatch(setError(error));
-        return;
-      }
-      throw error;
+      dispatch(setError(error as Error));
     } finally {
       setLoading(false);
       dispatch(setDialogAction());

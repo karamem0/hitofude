@@ -16,7 +16,11 @@ import {
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import { DeleteIcon, RenameIcon } from '@fluentui/react-icons-mdl2';
+import {
+  DeleteIcon,
+  LinkIcon,
+  RenameIcon
+} from '@fluentui/react-icons-mdl2';
 import {
   OneDriveLogoIcon
 } from '@fluentui/react-icons-mdl2-branded';
@@ -45,6 +49,24 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
 
   return folder ? (
     <MenuList>
+      <MenuGroup>
+        <MenuItem
+          key={ExplorerMenuType.copyLink}
+          icon={(
+            <LinkIcon
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.copyLink,
+            data: folder
+          })}>
+          <FormattedMessage {...messages.CopyLink} />
+        </MenuItem>
+      </MenuGroup>
+      <MenuDivider />
       <MenuGroup>
         <MenuItem
           key={ExplorerMenuType.renameFolder}

@@ -18,6 +18,7 @@ import {
 } from '@fluentui/react-components';
 import {
   Hide3Icon,
+  LinkIcon,
   PageAddIcon,
   RefreshIcon,
   ViewIcon
@@ -99,6 +100,24 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
               <FormattedMessage {...messages.ShowUnsupportedFiles} />
             )
           }
+        </MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup>
+        <MenuItem
+          key={ExplorerMenuType.copyLink}
+          icon={(
+            <LinkIcon
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            type: ExplorerMenuType.copyLink,
+            data: selectedFolder
+          })}>
+          <FormattedMessage {...messages.CopyLink} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />

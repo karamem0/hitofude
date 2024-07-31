@@ -11,6 +11,7 @@ import { defineMessages } from 'react-intl';
 const messages = defineMessages({
   ConflictFile: { defaultMessage: 'Conflict file' },
   CopyFile: { defaultMessage: 'Copy file' },
+  CopyLink: { defaultMessage: 'Copy link' },
   DeleteFile: { defaultMessage: 'Delete file' },
   DeleteFolder: { defaultMessage: 'Delete folder' },
   Download: { defaultMessage: 'Download' },

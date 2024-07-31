@@ -43,7 +43,7 @@ function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
       position="end"
       size="medium"
       css={css`
-        height: 100vh;
+        height: 100svh;
       `}
       onOpenChange={(event, data) => onOpenChange?.(event, data.open)}>
       <DrawerHeader>

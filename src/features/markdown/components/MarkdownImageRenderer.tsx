@@ -42,7 +42,6 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
     }
   } = useStore();
   const { graph } = useService();
-
   const [ state, setState ] = React.useState<MarkdownImageRendereState>();
 
   React.useEffect(() => {

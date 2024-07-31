@@ -35,6 +35,12 @@
       "value": "Cancel"
     }
   ],
+  "4l6vz1": [
+    {
+      "type": 0,
+      "value": "Copy"
+    }
+  ],
   "5929Xm": [
     {
       "type": 0,
@@ -171,6 +177,12 @@
     {
       "type": 0,
       "value": "Version"
+    }
+  ],
+  "JBWS0c": [
+    {
+      "type": 0,
+      "value": "Link"
     }
   ],
   "JEsxDw": [
@@ -377,6 +389,12 @@
       "value": "Folder name"
     }
   ],
+  "lbr3Lq": [
+    {
+      "type": 0,
+      "value": "Copy link"
+    }
+  ],
   "mJN/zn": [
     {
       "type": 0,
@@ -483,6 +501,12 @@
     {
       "type": 0,
       "value": "Drag and drop files here"
+    }
+  ],
+  "zU/q1N": [
+    {
+      "type": 0,
+      "value": "Link copied"
     }
   ]
 }

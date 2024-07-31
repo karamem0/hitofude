@@ -20,12 +20,7 @@ import Tree from '../../../common/components/Tree';
 import TreeHeader from '../../../common/components/TreeHeader';
 import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
-import {
-  DialogAction,
-  DialogType,
-  File,
-  Folder
-} from '../../../types/Model';
+import { File, Folder } from '../../../types/Model';
 import { isEmpty } from '../../../utils/Folder';
 import messages from '../messages';
 import { DropEventData } from '../types/Event';
@@ -38,8 +33,8 @@ interface ExplorerTabPanelProps {
   allFiles?: boolean,
   fileConflicts?: File[],
   selectedFolder?: Folder,
+  onCreateFile?: EventHandler,
   onDropFiles?: EventHandler<DropEventData>,
-  onOpenDialog?: EventHandler<DialogAction>,
   onSelectFile?: EventHandler<string>,
   onSelectFolder?: EventHandler<string>
 }
@@ -49,8 +44,8 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
   const {
     allFiles,
     selectedFolder,
+    onCreateFile,
     onDropFiles,
-    onOpenDialog,
     onSelectFile,
     onSelectFolder
   } = props;
@@ -81,9 +76,9 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
       <Text
         as="h2"
         css={css`
+          padding: 0 0.5rem;
           font-size: ${theme.fontSizeBase200};
           line-height: calc(${theme.lineHeightBase200} * 1.25);
-          padding: 0 0.5rem;
           text-transform: uppercase;
         `}>
         <FormattedMessage {...messages.Explorer} />
@@ -146,10 +141,7 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
                 line-height: 1rem;
               `} />
           )}
-          onClick={(event) => onOpenDialog?.(event, {
-            type: DialogType.createFile,
-            data: null
-          })}>
+          onClick={onCreateFile}>
           <FormattedMessage {...messages.NewFile} />
         </Button>
       </div>

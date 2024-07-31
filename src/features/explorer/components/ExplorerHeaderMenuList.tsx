@@ -43,6 +43,17 @@ function ExplorerHeaderMenuList() {
 
   const handleMenuClick = React.useCallback(async (_: Event, data?: ExplorerMenuAction) => {
     switch (data?.type) {
+      case ExplorerMenuType.copyLink: {
+        const value = data?.data as Folder | undefined;
+        if (value?.webUrl == null) {
+          throw new ArgumentNullError();
+        }
+        dispatch(setDialogAction({
+          type: DialogType.copyLink,
+          data: value.webUrl
+        }));
+        break;
+      }
       case ExplorerMenuType.createFile: {
         dispatch(setDialogAction({
           type: DialogType.createFile,
@@ -66,12 +77,16 @@ function ExplorerHeaderMenuList() {
         break;
       }
       case ExplorerMenuType.refreshFolder: {
-        const value = data?.data as Folder | undefined;
-        if (value == null) {
-          throw new ArgumentNullError();
+        try {
+          const value = data?.data as Folder | undefined;
+          if (value == null) {
+            throw new ArgumentNullError();
+          }
+          const folder = await graph.getFolderById(value.id);
+          dispatch(setExplorerSelectedFolder(folder));
+        } catch (error) {
+          dispatch(setError(error as Error));
         }
-        const folder = await graph.getFolderById(value.id);
-        dispatch(setExplorerSelectedFolder(folder));
         break;
       }
       case ExplorerMenuType.toggleAllFiles: {

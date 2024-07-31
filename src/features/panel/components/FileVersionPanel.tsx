@@ -33,7 +33,6 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
 
   const { dispatch } = useStore();
   const { graph } = useService();
-
   const [ items, setItems ] = React.useState<FileVersion[]>();
 
   const handleRestore = React.useCallback((_: Event, data?: DialogAction) => {

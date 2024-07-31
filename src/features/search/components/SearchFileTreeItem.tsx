@@ -11,10 +11,11 @@ import React from 'react';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setError } from '../../../stores/Action';
+import { setDialogAction, setError } from '../../../stores/Action';
 import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import {
+  DialogType,
   File,
   SearchMenuAction,
   SearchMenuType,
@@ -36,13 +37,29 @@ function SearchFileTreeItem() {
 
   const handleMenuClick = React.useCallback(async (_: Event, data?: SearchMenuAction) => {
     switch (data?.type) {
-      case SearchMenuType.openFileLocation: {
+      case SearchMenuType.copyLink: {
         try {
-          const value = data?.data as string;
-          if (value == null) {
+          const value = data?.data as File | undefined;
+          if (value?.id == null) {
             throw new ArgumentNullError();
           }
-          const file = await graph.getFileById(value);
+          const file = await graph.getFileById(value?.id);
+          dispatch(setDialogAction({
+            type: DialogType.copyLink,
+            data: file.webUrl
+          }));
+        } catch (error) {
+          dispatch(setError(error as Error));
+        }
+        break;
+      }
+      case SearchMenuType.openFileLocation: {
+        try {
+          const value = data?.data as File | undefined;
+          if (value?.id == null) {
+            throw new ArgumentNullError();
+          }
+          const file = await graph.getFileById(value.id);
           if (file.parentId == null) {
             throw new FolderNotFoundError();
           }
@@ -50,7 +67,7 @@ function SearchFileTreeItem() {
           route.setParams({
             tab: TabType.explorer,
             folder: folder.id,
-            file: value
+            file: value.id
           });
         } catch (error) {
           dispatch(setError(error as Error));
@@ -67,22 +84,17 @@ function SearchFileTreeItem() {
   ]);
 
   const handleClick = React.useCallback(async (_: Event, data?: File) => {
-    try {
-      if (data == null) {
-        throw new ArgumentNullError();
-      }
-      route.setParams({
-        tab: TabType.search,
-        search: searchProps?.query,
-        file: data.id
-      });
-    } catch (error) {
-      dispatch(setError(error as Error));
+    if (data == null) {
+      throw new ArgumentNullError();
     }
+    route.setParams({
+      tab: TabType.search,
+      search: searchProps?.query,
+      file: data.id
+    });
   }, [
-    searchProps?.query,
     route,
-    dispatch
+    searchProps?.query
   ]);
 
   return (

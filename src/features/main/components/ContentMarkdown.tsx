@@ -37,7 +37,6 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>) {
       tabProps
     }
   } = useStore();
-
   const editorRef = React.useRef<MarkdownEditorHandle>(null);
 
   const handleScrollPositionChange = React.useCallback((_: Event, data?: ScrollPosition) => {

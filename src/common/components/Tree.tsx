@@ -9,6 +9,7 @@
 import React from 'react';
 
 import { Event } from '../../types/Event';
+import { moveNext, movePrevious } from '../../utils/Keyboard';
 
 import Presenter from './Tree.presenter';
 
@@ -29,31 +30,11 @@ function Tree(props: Readonly<React.PropsWithChildren<TreeProps>>) {
     const { key } = event as KeyboardEvent;
     switch (key) {
       case 'ArrowDown': {
-        const { current: element } = ref;
-        const items = element?.querySelectorAll<HTMLDivElement>('div[role="menuitem"]');
-        if (items == null) {
-          break;
-        }
-        for (let i = 0; i < items?.length - 1; i++) {
-          if (items[i] === document.activeElement) {
-            items[i + 1].focus();
-            break;
-          }
-        }
+        moveNext(ref.current, 'div[role="menuitem"]');
         break;
       }
       case 'ArrowUp': {
-        const { current: element } = ref;
-        const items = element?.querySelectorAll<HTMLDivElement>('div[role="menuitem"]');
-        if (items == null) {
-          break;
-        }
-        for (let i = 1; i < items?.length; i++) {
-          if (items[i] === document.activeElement) {
-            items[i - 1].focus();
-            break;
-          }
-        }
+        movePrevious(ref.current, 'div[role="menuitem"]');
         break;
       }
       default:

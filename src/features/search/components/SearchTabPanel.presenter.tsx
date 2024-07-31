@@ -16,7 +16,7 @@ import {
   Input,
   Text
 } from '@fluentui/react-components';
-import { ClearIcon } from '@fluentui/react-icons-mdl2';
+import { CancelIcon } from '@fluentui/react-icons-mdl2';
 
 import { css } from '@emotion/react';
 
@@ -63,9 +63,9 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
       <Text
         as="h2"
         css={css`
+          padding: 0 0.5rem;
           font-size: ${theme.fontSizeBase200};
           line-height: calc(${theme.lineHeightBase200} * 1.25);
-          padding: 0 0.5rem;
           text-transform: uppercase;
         `}>
         <FormattedMessage {...messages.Search} />
@@ -95,10 +95,10 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
                   size="small"
                   tabIndex={0}
                   icon={(
-                    <ClearIcon
+                    <CancelIcon
                       css={css`
-                        font-size: 0.5rem;
-                        line-height: 0.5rem;
+                        font-size: 1rem;
+                        line-height: 1rem;
                       `} />
                   )}
                   onClick={(event) => onClear?.(event, field.name)} />

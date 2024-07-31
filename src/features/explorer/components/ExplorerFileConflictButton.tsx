@@ -25,9 +25,7 @@ interface ExplorerFileConflictButtonProps {
 
 function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonProps>) {
 
-  const {
-    file
-  } = props;
+  const { file } = props;
 
   const {
     dispatch,
