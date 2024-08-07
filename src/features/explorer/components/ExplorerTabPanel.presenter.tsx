@@ -94,6 +94,7 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
         {...getRootProps()}
         css={css`
           position: relative;
+          display: grid;
         `}>
         <input {...getInputProps()} />
         <Tree disabled={isEmpty(selectedFolder, allFiles)}>

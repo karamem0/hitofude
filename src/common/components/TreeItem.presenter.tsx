@@ -81,7 +81,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
           align-items: center;
           justify-content: start;
           & > button:last-of-type {
-            visibility: hidden;
+            visibility: ${menu ? 'hidden' : 'inherit'};
           }
           &:hover {
             & > button:last-of-type {
