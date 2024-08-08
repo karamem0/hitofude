@@ -127,7 +127,7 @@ function HomePage(props: Readonly<HomePageProps>) {
               </div>
             </div>
             <img
-              src="/assets/Books.svg"
+              src="/assets/svg/Books.svg"
               css={css`
                 width: 20rem;
               `} />

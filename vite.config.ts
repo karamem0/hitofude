@@ -9,7 +9,11 @@
 import fs from 'fs';
 
 import reactPlugin from '@vitejs/plugin-react';
-import { defineConfig, loadEnv, Plugin } from 'vite';
+import {
+  defineConfig,
+  loadEnv,
+  Plugin
+} from 'vite';
 
 export default defineConfig(({ mode }) => {
 
@@ -30,8 +34,8 @@ export default defineConfig(({ mode }) => {
             [
               'formatjs',
               {
-                idInterpolationPattern: '[sha512:contenthash:base64:6]',
-                ast: true
+                ast: true,
+                idInterpolationPattern: '[sha512:contenthash:base64:6]'
               }
             ]
           ]

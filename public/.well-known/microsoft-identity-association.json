@@ -1,7 +1,7 @@
 {
   "associatedApplications": [
     {
-      "applicationId": "{{MSAL_CLIENT_ID}}"
+      "applicationId": "{{APP_CLIENT_ID}}"
     }
   ]
 }

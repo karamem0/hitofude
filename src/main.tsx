@@ -11,7 +11,11 @@ import React from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import { ErrorBoundary } from 'react-error-boundary';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes
+} from 'react-router-dom';
 
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
 
@@ -62,7 +66,7 @@ ReactDOM
                         </UnauthenticatedTemplate>
                       </MsalProvider>
                     </ErrorBoundary>
-                )} />
+                  )} />
                 <Route
                   path="*"
                   element={(

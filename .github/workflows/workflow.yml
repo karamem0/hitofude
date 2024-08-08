@@ -5,7 +5,7 @@ on:
       - develop
 
 env:
-  BUILD_VERSION: '1.13.4'
+  BUILD_VERSION: '1.13.5'
 
 jobs:
   select-environment:
@@ -40,18 +40,19 @@ jobs:
       - name: Update microsoft-identity-association.json
         shell: pwsh
         run: |
-          $path = 'public/.well-known/microsoft-identity-association.json'
-          $content = Get-Content -Path $path
-          $content = $content -replace "{{MSAL_CLIENT_ID}}", "${{secrets.MSAL_CLIENT_ID}}"
-          Out-File -FilePath $path -InputObject $content -Encoding UTF8
+          $content = Get-Content -Path ${{env.FILE_PATH}}
+          $content = $content -replace "{{APP_CLIENT_ID}}", "${{secrets.APP_CLIENT_ID}}"
+          Out-File -FilePath ${{env.FILE_PATH}} -InputObject $content -Encoding UTF8
+        env:
+          FILE_PATH: public/.well-known/microsoft-identity-association.json
       - name: Update .env
         shell: pwsh
         run: |
           $content = Get-Content -Path ${{env.FILE_PATH}}
           $content = $content -replace "{{TELEMETRY_CONNECTION_STRING}}", "${{secrets.TELEMETRY_CONNECTION_STRING}}"
-          $content = $content -replace "{{MSAL_AUTHORITY}}", "${{secrets.MSAL_AUTHORITY}}"
-          $content = $content -replace "{{MSAL_CLIENT_ID}}", "${{secrets.MSAL_CLIENT_ID}}"
-          $content = $content -replace "{{PUBLIC_URL}}", "${{secrets.PUBLIC_URL}}"
+          $content = $content -replace "{{APP_TENANT_ID}}", "${{secrets.APP_TENANT_ID}}"
+          $content = $content -replace "{{APP_CLIENT_ID}}", "${{secrets.APP_CLIENT_ID}}"
+          $content = $content -replace "{{APP_DOMAIN_NAME}}", "${{secrets.APP_DOMAIN_NAME}}"
           Out-File -FilePath ${{env.FILE_PATH}} -InputObject $content -Encoding UTF8
         env:
           FILE_PATH: .env
@@ -80,6 +81,7 @@ jobs:
         with:
           fail_ci_if_error: true
           token: ${{secrets.CODECOV_TOKEN}}
+          slug: karamem0/hitofude
   deploy-client:
     needs:
       - select-environment
