@@ -24,7 +24,7 @@ function ScrollPanel(props: Readonly<React.PropsWithChildren<ScrollPanelProps>>,
     className
   } = props;
 
-  const { theme, themeName } = useTheme();
+  const { theme: { theme, themeName } } = useTheme();
 
   const scrollBarThumbColor = React.useMemo(() => {
     switch (themeName) {

@@ -36,7 +36,7 @@ function AppBarMenuButton(props: Readonly<AppBarMenuButtonProps>) {
     title
   } = props;
 
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return (
     <div

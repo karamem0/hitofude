@@ -31,7 +31,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
     onChangePreview
   } = props;
 
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return preview ? (
     <Button

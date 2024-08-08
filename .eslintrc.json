@@ -14,6 +14,7 @@
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:sonarjs/recommended-legacy",
+    "plugin:testing-library/react",
     "standard"
   ],
   "settings": {
@@ -45,15 +46,10 @@
       {
         "groups": [
           "useContext",
-          "useError",
-          "useMsal",
-          "useRoute",
-          "useStore",
-          "useService",
           "useReducer",
           "useState",
+          "useMemo",
           "useRef",
-          "useDispatch",
           "useCallback",
           "useEffect"
         ]
@@ -82,9 +78,9 @@
         ]
       }
     ],
-    "no-var": "error",
     "no-unused-vars": "off",
     "no-use-before-define": "off",
+    "no-var": "error",
     "operator-linebreak": [
       "error",
       "after"
@@ -148,6 +144,11 @@
             "position": "before"
           },
           {
+            "pattern": "@testing-library/**",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
             "pattern": "@automapper/**",
             "group": "builtin",
             "position": "after"
@@ -172,6 +173,7 @@
           "react",
           "react-dom/**",
           "react**",
+          "@testing-library/**",
           "@automapper/**",
           "@fluentui/**",
           "@microsoft/**",

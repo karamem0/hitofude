@@ -50,7 +50,7 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
   } = props;
 
   const intl = useIntl();
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return form ? (
     <div

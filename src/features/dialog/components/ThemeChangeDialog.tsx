@@ -18,7 +18,7 @@ import Presenter from './ThemeChangeDialog.presenter';
 function ThemeChangeDialog() {
 
   const { storage } = useService();
-  const { themeName, changeTheme } = useTheme();
+  const { theme: { themeName }, changeTheme } = useTheme();
 
   const handleChangeTheme = React.useCallback((_: Event, data?: ThemeName) => {
     changeTheme?.(data ?? ThemeName.light);

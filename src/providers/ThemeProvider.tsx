@@ -17,9 +17,13 @@ import { darkTheme, lightTheme } from '../themes/Theme';
 import { InvalidOperationError } from '../types/Error';
 import { ThemeName } from '../types/Model';
 
-interface ThemeContextState {
+interface ThemeState {
   theme: Theme,
-  themeName: ThemeName,
+  themeName: ThemeName
+}
+
+interface ThemeContextState {
+  theme: ThemeState,
   changeTheme: (themeName: ThemeName) => void
 }
 
@@ -37,18 +41,24 @@ function ThemeProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 
-  const [ theme, setTheme ] = React.useState<Theme>(lightTheme);
-  const [ themeName, setThemeName ] = React.useState<ThemeName>(ThemeName.light);
+  const [ theme, setTheme ] = React.useState<ThemeState>({
+    theme: lightTheme,
+    themeName: ThemeName.light
+  });
 
-  const handleChangeTheme = React.useCallback((value: ThemeName) => {
+  const handleChangeTheme = React.useMemo(() => (value: ThemeName) => {
     switch (value) {
       case ThemeName.light:
-        setTheme(() => lightTheme);
-        setThemeName(() => value);
+        setTheme(() => ({
+          theme: lightTheme,
+          themeName: value
+        }));
         break;
       case ThemeName.dark:
-        setTheme(() => darkTheme);
-        setThemeName(() => value);
+        setTheme(() => ({
+          theme: darkTheme,
+          themeName: value
+        }));
         break;
       default:
         break;
@@ -57,17 +67,15 @@ function ThemeProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const value = React.useMemo<ThemeContextState>(() => ({
     theme,
-    themeName,
     changeTheme: handleChangeTheme
   }), [
     theme,
-    themeName,
     handleChangeTheme
   ]);
 
   return (
     <ThemeContext.Provider value={value}>
-      <Provider theme={value.theme}>
+      <Provider theme={value.theme.theme}>
         {children}
       </Provider>
     </ThemeContext.Provider>

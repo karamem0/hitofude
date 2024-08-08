@@ -55,7 +55,7 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
     onToolbarClick
   } = props;
 
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return editing ? (
     <ScrollSynchronizer

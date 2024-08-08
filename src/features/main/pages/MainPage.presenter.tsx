@@ -36,7 +36,7 @@ function MainPage(props: Readonly<MainPageProps>) {
     loading
   } = props;
 
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return loading ? (
     <div

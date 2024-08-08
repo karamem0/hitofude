@@ -35,7 +35,7 @@ function ErrorNotification(props: Readonly<ErrorNotificationProps>) {
     onDismiss
   } = props;
 
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return (
     message ? (

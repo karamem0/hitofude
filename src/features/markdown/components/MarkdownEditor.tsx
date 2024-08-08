@@ -60,7 +60,7 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
       tabProps
     }
   } = useStore();
-  const { theme, themeName } = useTheme();
+  const { theme: { theme, themeName } } = useTheme();
   const editorRef = React.useRef<HTMLDivElement>(null);
   const monacoRef = React.useRef<monaco.editor.IStandaloneCodeEditor>();
 

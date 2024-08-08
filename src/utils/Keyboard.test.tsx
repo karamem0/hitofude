@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
 import { moveNext, movePrevious } from './Keyboard';
@@ -17,7 +17,7 @@ describe('moveNext', () => {
 
   it('should change focus to the next node', async () => {
     const user = userEvent.setup();
-    const { getByTestId } = render(
+    render(
       <div data-testid="root">
         <button data-testid="foo">foo</button>
         <button data-testid="bar">bar</button>
@@ -26,13 +26,13 @@ describe('moveNext', () => {
     );
     await user.tab();
     await user.tab();
-    moveNext(getByTestId('root'), 'button');
-    expect(document.activeElement).toBe(getByTestId('baz'));
+    moveNext(screen.getByTestId('root'), 'button');
+    expect(screen.getByTestId('baz').matches(':focus')).toBe(true);
   });
 
   it('should not change focus if it is the last node', async () => {
     const user = userEvent.setup();
-    const { getByTestId } = render(
+    render(
       <div data-testid="root">
         <button data-testid="foo">foo</button>
         <button data-testid="bar">bar</button>
@@ -42,8 +42,8 @@ describe('moveNext', () => {
     await user.tab();
     await user.tab();
     await user.tab();
-    moveNext(getByTestId('root'), 'button');
-    expect(document.activeElement).toBe(getByTestId('baz'));
+    moveNext(screen.getByTestId('root'), 'button');
+    expect(screen.getByTestId('baz').matches(':focus')).toBe(true);
   });
 
 });
@@ -52,7 +52,7 @@ describe('movePrevious', () => {
 
   it('should change focus to the previous node', async () => {
     const user = userEvent.setup();
-    const { getByTestId } = render(
+    render(
       <div data-testid="root">
         <button data-testid="foo">foo</button>
         <button data-testid="bar">bar</button>
@@ -61,13 +61,13 @@ describe('movePrevious', () => {
     );
     await user.tab();
     await user.tab();
-    movePrevious(getByTestId('root'), 'button');
-    expect(document.activeElement).toBe(getByTestId('foo'));
+    movePrevious(screen.getByTestId('root'), 'button');
+    expect(screen.getByTestId('foo').matches(':focus')).toBe(true);
   });
 
   it('should not change focus if it is the first node', async () => {
     const user = userEvent.setup();
-    const { getByTestId } = render(
+    render(
       <div data-testid="root">
         <button data-testid="foo">foo</button>
         <button data-testid="bar">bar</button>
@@ -75,8 +75,8 @@ describe('movePrevious', () => {
       </div>
     );
     await user.tab();
-    movePrevious(getByTestId('root'), 'button');
-    expect(document.activeElement).toBe(getByTestId('foo'));
+    movePrevious(screen.getByTestId('root'), 'button');
+    expect(screen.getByTestId('foo').matches(':focus')).toBe(true);
   });
 
 });

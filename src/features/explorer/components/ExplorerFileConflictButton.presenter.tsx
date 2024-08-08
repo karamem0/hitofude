@@ -32,7 +32,7 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
   } = props;
 
   const intl = useIntl();
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return fileConflict ? (
     <div

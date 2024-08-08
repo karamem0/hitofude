@@ -27,7 +27,7 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<HTM
     tabOpen
   } = props;
 
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   return (
     <div

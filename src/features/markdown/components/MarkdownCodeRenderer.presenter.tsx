@@ -25,7 +25,7 @@ function MarkdownCodeRenderer(props: Readonly<React.PropsWithChildren<MarkdownCo
     inline
   } = props;
 
-  const { theme } = useTheme();
+  const { theme: { theme } } = useTheme();
 
   const match = /language-(\w+)/.exec(className ?? '');
   const language = match?.at(1) ?? '';
