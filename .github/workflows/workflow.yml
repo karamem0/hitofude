@@ -5,7 +5,7 @@ on:
       - develop
 
 env:
-  BUILD_VERSION: '1.13.5'
+  BUILD_VERSION: '1.13.6'
 
 jobs:
   select-environment:
@@ -15,15 +15,10 @@ jobs:
         id: select-environment
         shell: pwsh
         run: |
-          if ("${{github.ref}}" -eq "refs/heads/main") {
-            Write-Output "env-name=production" >> $env:GITHUB_OUTPUT
-          }
-          if ("${{github.ref}}" -eq "refs/heads/develop") {
-            Write-Output "env-name=development" >> $env:GITHUB_OUTPUT
-          }
+          Write-Output "env-name=$(@{'main'='production';'develop'='development'}['${{github.ref_name}}'])" >> $env:GITHUB_OUTPUT
     outputs:
       env-name: ${{steps.select-environment.outputs.env-name}}
-  build-client:
+  build-source:
     needs: select-environment
     runs-on: ubuntu-latest
     environment:
@@ -82,10 +77,10 @@ jobs:
           fail_ci_if_error: true
           token: ${{secrets.CODECOV_TOKEN}}
           slug: karamem0/hitofude
-  deploy-client:
+  deploy-source:
     needs:
       - select-environment
-      - build-client
+      - build-source
     runs-on: ubuntu-latest
     environment:
       name: ${{needs.select-environment.outputs.env-name}}

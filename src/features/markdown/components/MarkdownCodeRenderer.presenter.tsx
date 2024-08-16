@@ -39,7 +39,7 @@ function MarkdownCodeRenderer(props: Readonly<React.PropsWithChildren<MarkdownCo
       language={language}
       wrapLongLines={true}
       style={{
-        hljs: {},
+        'hljs': {},
         'hljs-addition': {
           color: theme.colorPaletteLightGreenForeground1
         },

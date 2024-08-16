@@ -87,7 +87,7 @@ export class GraphService {
         .api(`/me/drive/items/${folder.id}/children`)
         .post({
           name,
-          folder: {},
+          'folder': {},
           '@microsoft.graph.conflictBehavior': 'fail'
         });
       const value = data as DriveItem;
