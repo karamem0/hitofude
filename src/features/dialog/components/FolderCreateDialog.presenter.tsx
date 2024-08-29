@@ -8,9 +8,6 @@
 
 import React from 'react';
 
-import { Controller, useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
-
 import {
   Button,
   DialogActions,
@@ -21,13 +18,13 @@ import {
   DialogTrigger,
   Input
 } from '@fluentui/react-components';
-
-import { css } from '@emotion/react';
-
-import ModalDialog from '../../../common/components/ModalDialog';
+import { Controller, useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { EventHandler } from '../../../types/Event';
-import messages from '../messages';
 import { FolderCreateDialogFormState } from '../types/Form';
+import ModalDialog from '../../../common/components/ModalDialog';
+import { css } from '@emotion/react';
+import messages from '../messages';
 
 interface FolderCreateDialogProps {
   loading?: boolean,

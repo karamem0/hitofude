@@ -8,8 +8,7 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import {
   appendExplorerFile,
   setContentFile,
@@ -17,12 +16,12 @@ import {
   setDialogAction,
   setError
 } from '../../../stores/Action';
-import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import { FileCopyDialogFormState } from '../types/Form';
-
 import Presenter from './FileCopyDialog.presenter';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FileCopyDialogProps {
   value?: File

@@ -12,7 +12,6 @@ import {
   FluentProvider as Provider,
   Theme
 } from '@fluentui/react-components';
-
 import { darkTheme, lightTheme } from '../themes/Theme';
 import { InvalidOperationError } from '../types/Error';
 import { ThemeName } from '../types/Model';

@@ -8,15 +8,13 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
-import Loader from '../../../common/components/Loader';
-import { File } from '../../../types/Model';
-import { isSupportedFile } from '../../../utils/File';
-
 import ContentEmpty from './ContentEmpty';
 import ContentSupported from './ContentSupported';
 import ContentUnsupported from './ContentUnsupported';
+import { File } from '../../../types/Model';
+import Loader from '../../../common/components/Loader';
+import { css } from '@emotion/react';
+import { isSupportedFile } from '../../../utils/File';
 
 interface AppContentProps {
   file?: File,

@@ -9,31 +9,27 @@
 import React from 'react';
 
 import {
-  FormattedDate,
-  FormattedMessage,
-  useIntl
-} from 'react-intl';
-
-import {
   Button,
   Menu,
   MenuPopover,
   MenuTrigger,
   Text
 } from '@fluentui/react-components';
-import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
-import { layouts } from '../../../themes/Layout';
-import { EventHandler } from '../../../types/Event';
 import { ContentMenuAction, File } from '../../../types/Model';
-import { isMimeType } from '../../../utils/File';
-import messages from '../messages';
-
+import {
+  FormattedDate,
+  FormattedMessage,
+  useIntl
+} from 'react-intl';
 import ContentMenuList from './ContentMenuList';
 import ContentSaveButton from './ContentSaveButton';
+import { EventHandler } from '../../../types/Event';
+import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
+import { css } from '@emotion/react';
+import { isMimeType } from '../../../utils/File';
+import { layouts } from '../../../themes/Layout';
+import messages from '../messages';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface ContentHeaderProps {
   changed?: boolean,

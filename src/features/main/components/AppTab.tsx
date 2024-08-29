@@ -8,9 +8,11 @@
 
 import React from 'react';
 
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import {
+  DependencyNullError,
+  FileNotFoundError,
+  InvalidOperationError
+} from '../../../types/Error';
 import {
   setContentFile,
   setContentLoading,
@@ -18,13 +20,15 @@ import {
   setError,
   setExplorerSelectedFile,
   setExplorerSelectedFolder,
-  setTabLoading,
-  setSearchSelectedFile,
   setSearchQuery,
-  setSearchResultFiles
+  setSearchResultFiles,
+  setSearchSelectedFile,
+  setTabLoading
 } from '../../../stores/Action';
-import { DependencyNullError, FileNotFoundError, InvalidOperationError } from '../../../types/Error';
 import { TabType } from '../../../types/Model';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './AppTab.presenter';
 

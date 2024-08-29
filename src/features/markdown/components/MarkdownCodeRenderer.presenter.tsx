@@ -9,7 +9,6 @@
 import React from 'react';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
-
 import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownCodeRendererProps {
@@ -25,7 +24,11 @@ function MarkdownCodeRenderer(props: Readonly<React.PropsWithChildren<MarkdownCo
     inline
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   const match = /language-(\w+)/.exec(className ?? '');
   const language = match?.at(1) ?? '';

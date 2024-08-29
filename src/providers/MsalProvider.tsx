@@ -12,9 +12,8 @@ import {
   BrowserCacheLocation,
   PublicClientApplication
 } from '@azure/msal-browser';
-import { MsalProvider as Provider } from '@azure/msal-react';
-
 import MsalAdapter from '../common/components/MsalAdapter';
+import { MsalProvider as Provider } from '@azure/msal-react';
 
 const msalConfig = {
   auth: {

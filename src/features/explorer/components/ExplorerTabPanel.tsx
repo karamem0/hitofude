@@ -8,31 +8,34 @@
 
 import React from 'react';
 
-import { useProgress } from '../../../common/providers/ProgressProvider';
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
-import {
-  setError,
-  setExplorerSelectedFolder,
-  appendExplorerFile,
-  appendExplorerFileConflict,
-  setExplorerSelectedFile,
-  setDialogAction
-} from '../../../stores/Action';
 import {
   ArgumentNullError,
   DependencyNullError,
   FileConflictError,
   FileNotFoundError
 } from '../../../types/Error';
+import {
+  DialogType,
+  ProgressType,
+  TabType
+} from '../../../types/Model';
+import {
+  appendExplorerFile,
+  appendExplorerFileConflict,
+  setDialogAction,
+  setError,
+  setExplorerSelectedFile,
+  setExplorerSelectedFolder
+} from '../../../stores/Action';
+import { DropEventData } from '../types/Event';
 import { Event } from '../../../types/Event';
-import { DialogType, ProgressType, TabType } from '../../../types/Model';
+import Presenter from './ExplorerTabPanel.presenter';
 import { fromFile } from '../../../utils/Blob';
 import { isSupportedFile } from '../../../utils/File';
-import { DropEventData } from '../types/Event';
-
-import Presenter from './ExplorerTabPanel.presenter';
+import { useProgress } from '../../../common/providers/ProgressProvider';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 function ExplorerTabPanel() {
 

@@ -8,12 +8,11 @@
 
 import React from 'react';
 
-import { setInitialState } from '../stores/Action';
-import { reducer } from '../stores/Reducer';
+import { Action, State } from '../types/Store';
 import { InvalidOperationError } from '../types/Error';
 import { ThemeName } from '../types/Model';
-import { Action, State } from '../types/Store';
-
+import { reducer } from '../stores/Reducer';
+import { setInitialState } from '../stores/Action';
 import { useService } from './ServiceProvider';
 import { useTheme } from './ThemeProvider';
 

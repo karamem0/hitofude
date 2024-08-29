@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 import {
   setDialogAction,
   setError,
@@ -19,8 +17,9 @@ import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { Folder } from '../../../types/Model';
 import { FolderRenameDialogFormState } from '../types/Form';
-
 import Presenter from './FolderRenameDialog.presenter';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FolderRenameDialogProps {
   value?: Folder

@@ -8,12 +8,11 @@
 
 import React from 'react';
 
+import { setTabOpen, setTabType } from '../../../stores/Action';
+import Presenter from './MainPage.presenter';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
-import { setTabOpen, setTabType } from '../../../stores/Action';
-
-import Presenter from './MainPage.presenter';
 
 function MainPage() {
 

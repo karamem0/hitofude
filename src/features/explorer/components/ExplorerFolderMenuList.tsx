@@ -8,18 +8,17 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
-import { setDialogAction } from '../../../stores/Action';
-import { ArgumentNullError } from '../../../types/Error';
-import { Event } from '../../../types/Event';
 import {
   DialogType,
   ExplorerMenuAction,
   ExplorerMenuType,
   Folder
 } from '../../../types/Model';
-
+import { ArgumentNullError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
 import Presenter from './ExplorerFolderMenuList.presenter';
+import { setDialogAction } from '../../../stores/Action';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ExplorerFolderMenuListProps {
   folder?: Folder

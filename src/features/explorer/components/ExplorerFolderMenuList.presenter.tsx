@@ -11,28 +11,24 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList
-} from '@fluentui/react-components';
-import {
   DeleteIcon,
   LinkIcon,
   RenameIcon
 } from '@fluentui/react-icons-mdl2';
 import {
-  OneDriveLogoIcon
-} from '@fluentui/react-icons-mdl2-branded';
-
-import { css } from '@emotion/react';
-
-import { EventHandler } from '../../../types/Event';
-import {
   ExplorerMenuAction,
   ExplorerMenuType,
   Folder
 } from '../../../types/Model';
+import {
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList
+} from '@fluentui/react-components';
+import { EventHandler } from '../../../types/Event';
+import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface ExplorerFolderMenuListProps {
@@ -109,7 +105,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
                 font-size: 1rem;
                 line-height: 1rem;
               `} />
-            )}
+          )}
           onClick={(event) => onMenuClick?.(event, {
             type: ExplorerMenuType.openWithOneDrive,
             data: folder

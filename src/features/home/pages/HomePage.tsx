@@ -8,12 +8,10 @@
 
 import React from 'react';
 
-import { useMsal } from '@azure/msal-react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
-import { ThemeName } from '../../../types/Model';
-
 import Presenter from './HomePage.presenter';
+import { ThemeName } from '../../../types/Model';
+import { useMsal } from '@azure/msal-react';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 function HomePage() {
 

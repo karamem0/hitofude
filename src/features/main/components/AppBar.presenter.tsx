@@ -8,29 +8,25 @@
 
 import React from 'react';
 
-import { FormattedMessage, useIntl } from 'react-intl';
-
-import { MenuItem, MenuList } from '@fluentui/react-components';
+import {
+  AppBarMenuAction,
+  AppBarMenuType,
+  TabType
+} from '../../../types/Model';
 import {
   ColorIcon,
   SearchIcon,
   SettingsIcon,
   TextDocumentIcon
 } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
-import { EventHandler } from '../../../types/Event';
-import {
-  AppBarMenuAction,
-  AppBarMenuType,
-  TabType
-} from '../../../types/Model';
-import messages from '../messages';
-
+import { FormattedMessage, useIntl } from 'react-intl';
+import { MenuItem, MenuList } from '@fluentui/react-components';
 import AppBarButton from './AppBarButton';
 import AppBarMenuButton from './AppBarMenuButton';
+import { EventHandler } from '../../../types/Event';
+import { css } from '@emotion/react';
+import messages from '../messages';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface AppBarProps {
   onKeyDown?: EventHandler,

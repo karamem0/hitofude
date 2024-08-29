@@ -9,13 +9,10 @@
 import React from 'react';
 
 import { FallbackProps } from 'react-error-boundary';
-
-import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js';
-
-import { useTheme } from '../../../providers/ThemeProvider';
-import { ThemeName } from '../../../types/Model';
-
 import Presenter from './Error500Page.presenter';
+import { ThemeName } from '../../../types/Model';
+import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 function Error500Page(props: Readonly<FallbackProps>) {
 

@@ -8,11 +8,10 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
 import { Folder } from '../../../types/Model';
-
 import Presenter from './ExplorerFolderTreeItem.presenter';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ExplorerFolderTreeItemProps {
   onClick?: EventHandler<Folder>

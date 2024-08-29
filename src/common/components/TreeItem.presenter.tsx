@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useIntl } from 'react-intl';
-
 import {
   Button,
   Menu,
@@ -17,13 +15,12 @@ import {
   MenuTrigger,
   Text
 } from '@fluentui/react-components';
-import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import messages from '../../features/main/messages';
-import { useTheme } from '../../providers/ThemeProvider';
 import { EventHandler } from '../../types/Event';
+import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
+import { css } from '@emotion/react';
+import messages from '../../features/main/messages';
+import { useIntl } from 'react-intl';
+import { useTheme } from '../../providers/ThemeProvider';
 
 interface TreeItemProps {
   icon?: React.ReactElement,
@@ -50,7 +47,11 @@ function TreeItem(props: Readonly<TreeItemProps>) {
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div

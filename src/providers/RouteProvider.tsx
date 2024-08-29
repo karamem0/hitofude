@@ -9,9 +9,8 @@
 import React from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import { RouteService } from '../services/RouteService';
 import { InvalidOperationError } from '../types/Error';
+import { RouteService } from '../services/RouteService';
 
 interface RouteContextState {
   route: RouteService

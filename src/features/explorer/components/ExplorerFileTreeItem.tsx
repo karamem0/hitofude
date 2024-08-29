@@ -8,11 +8,10 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
-
 import Presenter from './ExplorerFileTreeItem.presenter';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ExplorerFileTreeItemProps {
   onClick?: EventHandler<File>

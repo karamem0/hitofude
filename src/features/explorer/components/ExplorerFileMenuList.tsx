@@ -8,19 +8,18 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
-import { setDialogAction } from '../../../stores/Action';
-import { ArgumentNullError } from '../../../types/Error';
-import { Event } from '../../../types/Event';
 import {
   DialogType,
   ExplorerMenuAction,
   ExplorerMenuType,
   File
 } from '../../../types/Model';
-import { downloadFile } from '../../../utils/File';
-
+import { ArgumentNullError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
 import Presenter from './ExplorerFileMenuList.presenter';
+import { downloadFile } from '../../../utils/File';
+import { setDialogAction } from '../../../stores/Action';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ExplorerFileMenuListProps {
   file?: File

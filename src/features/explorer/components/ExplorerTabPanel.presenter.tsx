@@ -8,26 +8,22 @@
 
 import React from 'react';
 
-import { useDropzone } from 'react-dropzone';
-import { FormattedMessage, useIntl } from 'react-intl';
-
 import { Button, Text } from '@fluentui/react-components';
-import { AddIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import Tree from '../../../common/components/Tree';
-import TreeHeader from '../../../common/components/TreeHeader';
-import { useTheme } from '../../../providers/ThemeProvider';
-import { EventHandler } from '../../../types/Event';
 import { File, Folder } from '../../../types/Model';
-import { isEmpty } from '../../../utils/Folder';
-import messages from '../messages';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { AddIcon } from '@fluentui/react-icons-mdl2';
 import { DropEventData } from '../types/Event';
-
+import { EventHandler } from '../../../types/Event';
 import ExplorerFileTreeItem from './ExplorerFileTreeItem';
 import ExplorerFolderTreeItem from './ExplorerFolderTreeItem';
 import ExplorerHeaderMenuList from './ExplorerHeaderMenuList';
+import Tree from '../../../common/components/Tree';
+import TreeHeader from '../../../common/components/TreeHeader';
+import { css } from '@emotion/react';
+import { isEmpty } from '../../../utils/Folder';
+import messages from '../messages';
+import { useDropzone } from 'react-dropzone';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface ExplorerTabPanelProps {
   allFiles?: boolean,
@@ -119,9 +115,7 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
                 background-color: ${theme.colorNeutralBackgroundAlpha};
                 border: 2px dotted ${theme.colorBrandForegroundLink};
               `}>
-              {
-                <FormattedMessage {...messages.DragDropFile} />
-              }
+              <FormattedMessage {...messages.DragDropFile} />
             </div>
           ) : null
         }

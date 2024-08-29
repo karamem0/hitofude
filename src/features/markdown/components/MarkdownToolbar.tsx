@@ -10,7 +10,6 @@ import React from 'react';
 
 import { EventHandler } from '../../../types/Event';
 import { MarkdownToolbarAction } from '../../../types/Model';
-
 import Presenter from './MarkdownToolbar.presenter';
 
 interface MarkdownToolbarProps {

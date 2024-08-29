@@ -13,20 +13,19 @@ import {
   ResponseType
 } from '@microsoft/microsoft-graph-client';
 import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
-
-import { mapper } from '../mappings/AutoMapperProfile';
+import {
+  File,
+  FileVersion,
+  Folder
+} from '../types/Model';
 import {
   FileConflictError,
   FileNotFoundError,
   FolderConflictError,
   FolderNotFoundError
 } from '../types/Error';
-import {
-  File,
-  FileVersion,
-  Folder
-} from '../types/Model';
 import { isMimeType } from '../utils/File';
+import { mapper } from '../mappings/AutoMapperProfile';
 
 export class GraphService {
 

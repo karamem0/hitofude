@@ -7,7 +7,6 @@
 //
 
 import { Folder } from '../types/Model';
-
 import { isSupportedFile } from './File';
 
 export function isEmpty(value: Folder, allFiles: boolean = false): boolean {

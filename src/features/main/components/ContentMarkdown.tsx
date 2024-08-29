@@ -8,18 +8,17 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
+import { Event, EventHandler } from '../../../types/Event';
+import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
 import {
   setMarkdownChanged,
   setMarkdownScrollPosition,
   setMarkdownText
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
-import { Event, EventHandler } from '../../../types/Event';
-import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
 import { MarkdownEditorHandle } from '../../markdown/types/Handle';
-
 import Presenter from './ContentMarkdown.presenter';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ContentMarkdownProps {
   onSave?: EventHandler

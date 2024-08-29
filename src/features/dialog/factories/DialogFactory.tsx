@@ -8,9 +8,8 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
-
 import Presenter from './DialogFactory.presenter';
+import { useStore } from '../../../providers/StoreProvider';
 
 function DialogFactory() {
 

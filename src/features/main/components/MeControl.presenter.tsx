@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
-
 import {
   Avatar,
   Menu,
@@ -21,11 +19,10 @@ import {
   MenuTrigger,
   Text
 } from '@fluentui/react-components';
-import { SignOutIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
 import { EventHandler } from '../../../types/Event';
+import { FormattedMessage } from 'react-intl';
+import { SignOutIcon } from '@fluentui/react-icons-mdl2';
+import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface MeControlProps {
@@ -48,12 +45,14 @@ function MeControl(props: Readonly<MeControlProps>) {
     <Menu>
       <MenuTrigger>
         <Avatar
-          image={{ src: photo }}
           name={userName}
           title={userName}
           css={css`
             cursor: pointer;
-          `} />
+          `}
+          image={{
+            src: photo
+          }} />
       </MenuTrigger>
       <MenuPopover>
         <MenuList>

@@ -8,12 +8,10 @@
 
 import React from 'react';
 
-import { useIntl } from 'react-intl';
-
-import { css } from '@emotion/react';
-
 import Communication from '../../../common/components/Communication';
+import { css } from '@emotion/react';
 import messages from '../messages';
+import { useIntl } from 'react-intl';
 
 function ContentUnsupported() {
 

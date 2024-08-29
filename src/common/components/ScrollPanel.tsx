@@ -10,7 +10,6 @@ import React from 'react';
 
 import { Event, EventHandler } from '../../types/Event';
 import { ScrollPosition, ScrollSize } from '../../types/Model';
-
 import Presenter from './ScrollPanel.presenter';
 
 interface ScrollPanelState {

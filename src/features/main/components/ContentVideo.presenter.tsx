@@ -8,11 +8,10 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
-import VideoViewer from '../../../common/components/VideoViewer';
-import { layouts } from '../../../themes/Layout';
 import { File } from '../../../types/Model';
+import VideoViewer from '../../../common/components/VideoViewer';
+import { css } from '@emotion/react';
+import { layouts } from '../../../themes/Layout';
 
 interface ContentVideoProps {
   file?: File

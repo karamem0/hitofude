@@ -8,9 +8,6 @@
 
 import React from 'react';
 
-import { useProgress } from '../../../common/providers/ProgressProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentEditing,
   setContentFile,
@@ -20,10 +17,12 @@ import {
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
+import Presenter from './ContentSupported.presenter';
 import { ProgressType } from '../../../types/Model';
 import { fromText } from '../../../utils/Blob';
-
-import Presenter from './ContentSupported.presenter';
+import { useProgress } from '../../../common/providers/ProgressProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 function ContentSupported() {
 

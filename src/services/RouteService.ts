@@ -7,7 +7,6 @@
 //
 
 import { Location, NavigateFunction } from 'react-router-dom';
-
 import { RouteParams, TabType } from '../types/Model';
 
 export class RouteService {

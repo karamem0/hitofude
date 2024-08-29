@@ -9,7 +9,6 @@
 import React from 'react';
 
 import { MenuProps } from '@fluentui/react-components';
-
 import Presenter from './AppBarMenuButton.presenter';
 
 interface AppBarMenuButtonProps {

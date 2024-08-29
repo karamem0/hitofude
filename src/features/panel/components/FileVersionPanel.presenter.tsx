@@ -9,11 +9,15 @@
 import React from 'react';
 
 import {
+  DialogAction,
+  DialogType,
+  FileVersion
+} from '../../../types/Model';
+import {
   FormattedDate,
   FormattedMessage,
   useIntl
 } from 'react-intl';
-
 import {
   Table,
   TableBody,
@@ -24,18 +28,11 @@ import {
   TableHeaderCell,
   TableRow
 } from '@fluentui/react-components';
-import { HistoryIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-import bytes from 'bytes';
-
-import SidePanel from '../../../common/components/SidePanel';
 import { EventHandler } from '../../../types/Event';
-import {
-  DialogAction,
-  DialogType,
-  FileVersion
-} from '../../../types/Model';
+import { HistoryIcon } from '@fluentui/react-icons-mdl2';
+import SidePanel from '../../../common/components/SidePanel';
+import bytes from 'bytes';
+import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface FileVersionPanelProps {

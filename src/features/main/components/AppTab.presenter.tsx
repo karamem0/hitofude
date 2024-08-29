@@ -8,13 +8,13 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
-import { layouts } from '../../../themes/Layout';
-import { TabType } from '../../../types/Model';
 import ExplorerTabPanel from '../../explorer/components/ExplorerTabPanel';
 import SearchTabPanel from '../../search/components/SearchTabPanel';
+import { TabType } from '../../../types/Model';
+import { css } from '@emotion/react';
+import { layouts } from '../../../themes/Layout';
+import { useTheme } from '../../../providers/ThemeProvider';
+
 interface AppTabProps {
   tabOpen?: boolean,
   tabType?: TabType
@@ -27,7 +27,11 @@ function AppTab(props: Readonly<AppTabProps>) {
     tabType
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div

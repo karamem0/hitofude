@@ -8,19 +8,18 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
-import ScrollPanel from '../../../common/components/ScrollPanel';
-import ScrollSynchronizer from '../../../common/components/ScrollSynchronizer';
-import { useTheme } from '../../../providers/ThemeProvider';
-import { layouts } from '../../../themes/Layout';
-import { EventHandler } from '../../../types/Event';
 import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
+import { EventHandler } from '../../../types/Event';
 import MarkdownEditor from '../../markdown/components/MarkdownEditor';
+import { MarkdownEditorHandle } from '../../markdown/types/Handle';
 import MarkdownSplitter from '../../markdown/components/MarkdownSplitter';
 import MarkdownToolbar from '../../markdown/components/MarkdownToolbar';
 import MarkdownViewer from '../../markdown/components/MarkdownViewer';
-import { MarkdownEditorHandle } from '../../markdown/types/Handle';
+import ScrollPanel from '../../../common/components/ScrollPanel';
+import ScrollSynchronizer from '../../../common/components/ScrollSynchronizer';
+import { css } from '@emotion/react';
+import { layouts } from '../../../themes/Layout';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface ContentMarkdownProps {
   defaultText?: string,

@@ -8,9 +8,9 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
-import { setContentPreview } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
+import { setContentPreview } from '../../../stores/Action';
+import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './MarkdownSplitter.presenter';
 

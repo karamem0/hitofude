@@ -15,9 +15,7 @@ import {
   MenuProps,
   MenuTrigger
 } from '@fluentui/react-components';
-
 import { css } from '@emotion/react';
-
 import { useTheme } from '../../../providers/ThemeProvider';
 
 interface AppBarMenuButtonProps {
@@ -36,7 +34,11 @@ function AppBarMenuButton(props: Readonly<AppBarMenuButtonProps>) {
     title
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div

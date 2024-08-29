@@ -8,17 +8,7 @@
 
 import React from 'react';
 
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
-import {
-  setDialogAction,
-  setError,
-  setExplorerAllFiles,
-  setExplorerSelectedFolder
-} from '../../../stores/Action';
 import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
-import { Event } from '../../../types/Event';
 import {
   DialogType,
   ExplorerMenuAction,
@@ -26,9 +16,18 @@ import {
   Folder,
   TabType
 } from '../../../types/Model';
-import { isSupportedFile } from '../../../utils/File';
-
+import {
+  setDialogAction,
+  setError,
+  setExplorerAllFiles,
+  setExplorerSelectedFolder
+} from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 import Presenter from './ExplorerHeaderMenuList.presenter';
+import { isSupportedFile } from '../../../utils/File';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 function ExplorerHeaderMenuList() {
 

@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { FormattedMessage, useIntl } from 'react-intl';
-
 import {
   Button,
   DialogActions,
@@ -20,11 +18,10 @@ import {
   DialogTrigger,
   Text
 } from '@fluentui/react-components';
-
-import { css } from '@emotion/react';
-
-import ModalDialog from '../../../common/components/ModalDialog';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { EventHandler } from '../../../types/Event';
+import ModalDialog from '../../../common/components/ModalDialog';
+import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface FileDeleteDialogProps {

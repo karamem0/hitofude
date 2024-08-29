@@ -8,14 +8,11 @@
 
 import React from 'react';
 
-import { useError } from 'react-use';
-
-import { useMsal } from '@azure/msal-react';
-
-import { useService } from '../../../providers/ServiceProvider';
 import { FileNotFoundError } from '../../../types/Error';
-
 import Presenter from './MeControl.presenter';
+import { useError } from 'react-use';
+import { useMsal } from '@azure/msal-react';
+import { useService } from '../../../providers/ServiceProvider';
 
 function MeControl() {
 

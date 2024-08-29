@@ -8,10 +8,10 @@
 
 import React from 'react';
 
-import { useStore } from '../../providers/StoreProvider';
-import { setSidePanelAction } from '../../stores/Action';
 import { ArgumentNullError } from '../../types/Error';
 import { Event } from '../../types/Event';
+import { setSidePanelAction } from '../../stores/Action';
+import { useStore } from '../../providers/StoreProvider';
 
 import Presenter from './SidePanel.presenter';
 

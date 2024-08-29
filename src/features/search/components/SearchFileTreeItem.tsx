@@ -8,12 +8,7 @@
 
 import React from 'react';
 
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
-import { setDialogAction, setError } from '../../../stores/Action';
 import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
-import { Event } from '../../../types/Event';
 import {
   DialogType,
   File,
@@ -21,6 +16,11 @@ import {
   SearchMenuType,
   TabType
 } from '../../../types/Model';
+import { setDialogAction, setError } from '../../../stores/Action';
+import { Event } from '../../../types/Event';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './SearchFileTreeItem.presenter';
 

@@ -7,9 +7,9 @@
 //
 
 import {
+  ContentProps,
   DialogAction,
   ExplorerProps,
-  ContentProps,
   MarkdownProps,
   SearchProps,
   SidePanelAction,
@@ -59,7 +59,7 @@ export enum ActionType {
   setTabOpen = 'setTabOpen',
   setTabType = 'setTabType',
   updateExplorerFile = 'updateExplorerFile',
-  updateExplorerFolder = 'updateExplorerFolder',
+  updateExplorerFolder = 'updateExplorerFolder'
 }
 
 export interface State {

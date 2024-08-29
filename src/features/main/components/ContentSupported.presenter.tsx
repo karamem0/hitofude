@@ -8,17 +8,15 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
-import { layouts } from '../../../themes/Layout';
-import { EventHandler } from '../../../types/Event';
-import { File } from '../../../types/Model';
-import { isMimeType } from '../../../utils/File';
-
 import ContentHeader from './ContentHeader';
 import ContentImage from './ContentImage';
 import ContentMarkdown from './ContentMarkdown';
 import ContentVideo from './ContentVideo';
+import { EventHandler } from '../../../types/Event';
+import { File } from '../../../types/Model';
+import { css } from '@emotion/react';
+import { isMimeType } from '../../../utils/File';
+import { layouts } from '../../../themes/Layout';
 
 interface ContentSupportedProps {
   changed?: boolean,

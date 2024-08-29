@@ -9,7 +9,6 @@
 import React from 'react';
 
 import { IntlProvider as Provider, createIntl } from 'react-intl';
-
 import en from '../translations/en.json';
 import ja from '../translations/ja.json';
 

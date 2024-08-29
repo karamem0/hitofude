@@ -8,15 +8,13 @@
 
 import React from 'react';
 
-import mime from 'mime';
-
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 import { DependencyNullError, FileNotFoundError } from '../../../types/Error';
+import Presenter from './MarkdownImageRenderer.presenter';
 import { getMimeType } from '../../../utils/File';
 import { isAbsoluteUrl } from '../../../utils/Url';
-
-import Presenter from './MarkdownImageRenderer.presenter';
+import mime from 'mime';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface MarkdownImageRendereState {
   downloadUrl?: string,

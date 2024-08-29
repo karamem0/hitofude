@@ -8,29 +8,26 @@
 
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
-
+import {
+  File,
+  SearchMenuAction,
+  SearchMenuType
+} from '../../../types/Model';
+import {
+  LinkIcon,
+  OpenFolderHorizontalIcon,
+  TextDocumentIcon
+} from '@fluentui/react-icons-mdl2';
 import {
   MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import {
-  LinkIcon,
-  OpenFolderHorizontalIcon,
-  TextDocumentIcon
-} from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import TreeItem from '../../../common/components/TreeItem';
 import { EventHandler } from '../../../types/Event';
-import {
-  File,
-  SearchMenuAction,
-  SearchMenuType
-} from '../../../types/Model';
+import { FormattedMessage } from 'react-intl';
+import TreeItem from '../../../common/components/TreeItem';
+import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface SearchFileTreeItemProps {
@@ -93,7 +90,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
                         font-size: 1rem;
                         line-height: 1rem;
                       `} />
-                  )}
+                    )}
                     onClick={(event) => onMenuClick?.(event, {
                       type: SearchMenuType.openFileLocation,
                       data: item

@@ -14,12 +14,10 @@ import {
   DrawerHeader,
   DrawerHeaderTitle
 } from '@fluentui/react-components';
-import { DrawerOverlay } from '@fluentui/react-components/unstable';
 import { CancelIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
+import { DrawerOverlay } from '@fluentui/react-components/unstable';
 import { EventHandler } from '../../types/Event';
+import { css } from '@emotion/react';
 
 interface SidePanelProps {
   open?: boolean,

@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useIntl } from 'react-intl';
-
 import {
   Button,
   Menu,
@@ -18,12 +16,11 @@ import {
   Text
 } from '@fluentui/react-components';
 import { ChevronLeftIcon, MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
-import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
-
-import { css } from '@emotion/react';
-
-import messages from '../../features/main/messages';
 import { EventHandler } from '../../types/Event';
+import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+import { css } from '@emotion/react';
+import messages from '../../features/main/messages';
+import { useIntl } from 'react-intl';
 
 interface TreeHeaderProps {
   root?: boolean,

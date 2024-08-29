@@ -8,16 +8,13 @@
 
 import React from 'react';
 
-import { useIntl } from 'react-intl';
-
-import { WarningIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import { FileConflict } from '../../../types/Model';
+import { WarningIcon } from '@fluentui/react-icons-mdl2';
+import { css } from '@emotion/react';
 import messages from '../messages';
+import { useIntl } from 'react-intl';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface ExplorerFileConflictButtonProps {
   fileConflict?: FileConflict,

@@ -8,12 +8,11 @@
 
 import React from 'react';
 
-import { useStore } from '../../providers/StoreProvider';
-import { setDialogAction } from '../../stores/Action';
 import { ArgumentNullError } from '../../types/Error';
 import { Event } from '../../types/Event';
-
 import Presenter from './ModalDialog.presenter';
+import { setDialogAction } from '../../stores/Action';
+import { useStore } from '../../providers/StoreProvider';
 
 function ModalDialog(props: Readonly<React.PropsWithChildren<unknown>>) {
 

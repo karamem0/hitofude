@@ -8,9 +8,8 @@
 
 import React from 'react';
 
-import { useProgress } from '../providers/ProgressProvider';
-
 import Presenter from './ProgressDialog.presenter';
+import { useProgress } from '../providers/ProgressProvider';
 
 function ProgressDialog() {
 

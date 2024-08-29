@@ -8,10 +8,9 @@
 
 import React from 'react';
 
+import { moveNext, movePrevious } from './Keyboard';
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-
-import { moveNext, movePrevious } from './Keyboard';
 
 describe('moveNext', () => {
 

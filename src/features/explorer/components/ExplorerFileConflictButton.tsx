@@ -8,16 +8,15 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
-import { setDialogAction } from '../../../stores/Action';
-import { Event } from '../../../types/Event';
 import {
   DialogType,
   File,
   FileConflict
 } from '../../../types/Model';
-
+import { Event } from '../../../types/Event';
 import Presenter from './ExplorerFileConflictButton.presenter';
+import { setDialogAction } from '../../../stores/Action';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ExplorerFileConflictButtonProps {
   file?: File

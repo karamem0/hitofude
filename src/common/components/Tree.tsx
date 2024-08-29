@@ -8,9 +8,8 @@
 
 import React from 'react';
 
-import { Event } from '../../types/Event';
 import { moveNext, movePrevious } from '../../utils/Keyboard';
-
+import { Event } from '../../types/Event';
 import Presenter from './Tree.presenter';
 
 interface TreeProps {

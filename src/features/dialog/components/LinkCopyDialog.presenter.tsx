@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { FormattedMessage, useIntl } from 'react-intl';
-
 import {
   Button,
   DialogActions,
@@ -22,12 +20,11 @@ import {
   MessageBar,
   MessageBarTitle
 } from '@fluentui/react-components';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { CopyIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import ModalDialog from '../../../common/components/ModalDialog';
 import { EventHandler } from '../../../types/Event';
+import ModalDialog from '../../../common/components/ModalDialog';
+import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface LinkCopyDialogProps {

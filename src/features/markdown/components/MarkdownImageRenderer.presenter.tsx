@@ -8,10 +8,9 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
 import ImageViewer from '../../../common/components/ImageViewer';
 import VideoViewer from '../../../common/components/VideoViewer';
+import { css } from '@emotion/react';
 import { isMimeType } from '../../../utils/File';
 
 interface MarkdownImageRendererProps {

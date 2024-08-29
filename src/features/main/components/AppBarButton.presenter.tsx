@@ -9,11 +9,9 @@
 import React from 'react';
 
 import { Button } from '@fluentui/react-components';
-
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
+import { css } from '@emotion/react';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface AppBarButtonProps {
   disabled?: boolean,

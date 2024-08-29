@@ -8,10 +8,9 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../providers/ThemeProvider';
 import { ThemeName } from '../../types/Model';
+import { css } from '@emotion/react';
+import { useTheme } from '../../providers/ThemeProvider';
 
 interface ScrollPanelProps {
   className?: string
@@ -24,7 +23,12 @@ function ScrollPanel(props: Readonly<React.PropsWithChildren<ScrollPanelProps>>,
     className
   } = props;
 
-  const { theme: { theme, themeName } } = useTheme();
+  const {
+    theme: {
+      theme,
+      themeName
+    }
+  } = useTheme();
 
   const scrollBarThumbColor = React.useMemo(() => {
     switch (themeName) {

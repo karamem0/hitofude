@@ -8,14 +8,15 @@
 
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
-
 import {
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList
-} from '@fluentui/react-components';
+  ExplorerMenuAction,
+  ExplorerMenuType,
+  Folder
+} from '../../../types/Model';
+import {
+  FabricNewFolderIcon,
+  OneDriveLogoIcon
+} from '@fluentui/react-icons-mdl2-branded';
 import {
   Hide3Icon,
   LinkIcon,
@@ -24,18 +25,14 @@ import {
   ViewIcon
 } from '@fluentui/react-icons-mdl2';
 import {
-  FabricNewFolderIcon,
-  OneDriveLogoIcon
-} from '@fluentui/react-icons-mdl2-branded';
-
-import { css } from '@emotion/react';
-
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList
+} from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
-import {
-  ExplorerMenuAction,
-  ExplorerMenuType,
-  Folder
-} from '../../../types/Model';
+import { FormattedMessage } from 'react-intl';
+import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface ExplorerHeaderMenuListProps {
@@ -88,7 +85,8 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
                   font-size: 1rem;
                   line-height: 1rem;
                 `} />
-            )}
+            )
+          }
           onClick={(event) => onMenuClick?.(event, {
             type: ExplorerMenuType.toggleAllFiles,
             data: !allFiles

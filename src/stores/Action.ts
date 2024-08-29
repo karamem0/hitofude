@@ -7,6 +7,11 @@
 //
 
 import {
+  Action,
+  ActionType,
+  InitialState
+} from '../types/Store';
+import {
   DialogAction,
   File,
   FileConflict,
@@ -15,11 +20,6 @@ import {
   SidePanelAction,
   TabType
 } from '../types/Model';
-import {
-  Action,
-  ActionType,
-  InitialState
-} from '../types/Store';
 
 export const appendExplorerFile = (data?: File): Action => ({
   type: ActionType.appendExplorerFile,

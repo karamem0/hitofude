@@ -8,10 +8,9 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
-
 import Presenter from './ContentHeader.presenter';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ContentHeaderProps {
   onCancel?: EventHandler,

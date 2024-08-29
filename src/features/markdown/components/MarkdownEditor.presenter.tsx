@@ -9,9 +9,8 @@
 import React from 'react';
 
 import { css } from '@emotion/react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
 import { layouts } from '../../../themes/Layout';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownEditorProps {
   className?: string,
@@ -27,7 +26,11 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<HTM
     tabOpen
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div

@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 import {
   removeExplorerFileConflict,
   setContentFile,
@@ -20,8 +18,9 @@ import {
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { FileConflict } from '../../../types/Model';
-
 import Presenter from './FileOverwriteDialog.presenter';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FileOverwriteDialogProps {
   value?: FileConflict

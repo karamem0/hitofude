@@ -9,12 +9,10 @@
 import React from 'react';
 
 import { Client } from '@microsoft/microsoft-graph-client';
-
-import { useMsal } from '@azure/msal-react';
-
 import { GraphService } from '../services/GraphService';
-import { StorageService } from '../services/StorageService';
 import { InvalidOperationError } from '../types/Error';
+import { StorageService } from '../services/StorageService';
+import { useMsal } from '@azure/msal-react';
 
 interface ServiceContextState {
   graph: GraphService,

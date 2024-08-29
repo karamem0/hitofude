@@ -8,16 +8,14 @@
 
 import React from 'react';
 
-import { useForm } from 'react-hook-form';
-
-import { useRoute } from '../../../providers/RouteProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
-import { TabType } from '../../../types/Model';
-import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
-
 import Presenter from './SearchTabPanel.presenter';
+import { TabType } from '../../../types/Model';
+import { useForm } from 'react-hook-form';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 function SearchTabPanel() {
 

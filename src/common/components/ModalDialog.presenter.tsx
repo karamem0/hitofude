@@ -9,7 +9,6 @@
 import React from 'react';
 
 import { Dialog } from '@fluentui/react-components';
-
 import { EventHandler } from '../../types/Event';
 
 interface ModalDialogProps {
@@ -27,7 +26,7 @@ function ModalDialog(props: Readonly<React.PropsWithChildren<ModalDialogProps>>)
 
   return (
     <Dialog
-      modalType='modal'
+      modalType="modal"
       open={open}
       onOpenChange={(event, data) => onOpenChange?.(event, data.open)}>
       {children as ([React.ReactElement, React.ReactElement] | React.ReactElement)}

@@ -9,9 +9,7 @@
 import React from 'react';
 
 import { Text } from '@fluentui/react-components';
-
 import { css } from '@emotion/react';
-
 import { useTheme } from '../../providers/ThemeProvider';
 
 interface CommunicationProps {

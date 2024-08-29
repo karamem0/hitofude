@@ -8,23 +8,20 @@
 
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
-
-import { Spinner, Text } from '@fluentui/react-components';
-
 import { Global, css } from '@emotion/react';
-
-import ErrorNotification from '../../../common/components/ErrorNotification';
-import ProgressProvider from '../../../common/providers/ProgressProvider';
-import { useTheme } from '../../../providers/ThemeProvider';
-import { layouts } from '../../../themes/Layout';
-import DialogFactory from '../../dialog/factories/DialogFactory';
-import SidePanelFactory from '../../panel/factories/SidePanelFactory';
+import { Spinner, Text } from '@fluentui/react-components';
 import AppBar from '../components/AppBar';
 import AppContent from '../components/AppContent';
 import AppTab from '../components/AppTab';
+import DialogFactory from '../../dialog/factories/DialogFactory';
+import ErrorNotification from '../../../common/components/ErrorNotification';
+import { FormattedMessage } from 'react-intl';
 import MeControl from '../components/MeControl';
+import ProgressProvider from '../../../common/providers/ProgressProvider';
+import SidePanelFactory from '../../panel/factories/SidePanelFactory';
+import { layouts } from '../../../themes/Layout';
 import messages from '../messages';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MainPageProps {
   loading?: boolean
@@ -36,7 +33,11 @@ function MainPage(props: Readonly<MainPageProps>) {
     loading
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return loading ? (
     <div

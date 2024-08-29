@@ -8,8 +8,8 @@
 
 import React from 'react';
 
+import { Event, EventHandler } from '../../../types/Event';
 import { FormattedMessage, useIntl } from 'react-intl';
-
 import {
   Menu,
   MenuItem,
@@ -18,8 +18,6 @@ import {
   MenuTrigger,
   SplitButton
 } from '@fluentui/react-components';
-
-import { Event, EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface ContentSaveButtonProps {
@@ -49,7 +47,7 @@ function ContentSaveButton(props: Readonly<ContentSaveButtonProps>) {
               title={intl.formatMessage(messages.Save)}
               onClick={(event: Event) => {
                 if (event.target instanceof HTMLButtonElement &&
-                  event.target.innerText === intl.formatMessage(messages.Save)) {
+                    event.target.innerText === intl.formatMessage(messages.Save)) {
                   onClick?.(event, true);
                 }
               }}>

@@ -8,15 +8,12 @@
 
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
-
-import { Text } from '@fluentui/react-components';
-
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../providers/ThemeProvider';
 import { EventHandler } from '../../types/Event';
+import { FormattedMessage } from 'react-intl';
+import { Text } from '@fluentui/react-components';
+import { css } from '@emotion/react';
 import messages from '../messages';
+import { useTheme } from '../../providers/ThemeProvider';
 
 interface TreeProps {
   disabled?: boolean,

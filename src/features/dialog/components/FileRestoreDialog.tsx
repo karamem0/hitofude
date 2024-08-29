@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentText,
   setDialogAction,
@@ -18,8 +16,9 @@ import {
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { FileVersion } from '../../../types/Model';
-
 import Presenter from './FileRestoreDialog.presenter';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FileRestoreDialogProps {
   value?: FileVersion

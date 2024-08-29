@@ -9,19 +9,16 @@
 import React from 'react';
 
 import { FormattedMessage, MessageDescriptor } from 'react-intl';
-
 import {
   Link,
   MessageBar,
   MessageBarActions,
   MessageBarBody
 } from '@fluentui/react-components';
-
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../providers/ThemeProvider';
 import { EventHandler } from '../../types/Event';
+import { css } from '@emotion/react';
 import messages from '../messages';
+import { useTheme } from '../../providers/ThemeProvider';
 
 interface ErrorNotificationProps {
   message?: MessageDescriptor,

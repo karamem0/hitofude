@@ -8,17 +8,14 @@
 
 import React from 'react';
 
-import { TextDocumentIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import TreeItem from '../../../common/components/TreeItem';
-import { EventHandler } from '../../../types/Event';
 import { File, Folder } from '../../../types/Model';
-import { isSupportedFile } from '../../../utils/File';
-
+import { EventHandler } from '../../../types/Event';
 import ExplorerFileConflictButton from './ExplorerFileConflictButton';
 import ExplorerFileMenuList from './ExplorerFileMenuList';
+import { TextDocumentIcon } from '@fluentui/react-icons-mdl2';
+import TreeItem from '../../../common/components/TreeItem';
+import { css } from '@emotion/react';
+import { isSupportedFile } from '../../../utils/File';
 
 interface ExplorerFileTreeItemProps {
   allFiles?: boolean,
@@ -61,7 +58,7 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
             }
             onClick={(event) => onClick?.(event, file)} />
         ))
-    }
+      }
     </React.Fragment>
   );
 

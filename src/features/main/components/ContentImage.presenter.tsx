@@ -8,11 +8,10 @@
 
 import React from 'react';
 
-import { css } from '@emotion/react';
-
-import ImageViewer from '../../../common/components/ImageViewer';
-import { layouts } from '../../../themes/Layout';
 import { File } from '../../../types/Model';
+import ImageViewer from '../../../common/components/ImageViewer';
+import { css } from '@emotion/react';
+import { layouts } from '../../../themes/Layout';
 
 interface ContentImageProps {
   file?: File

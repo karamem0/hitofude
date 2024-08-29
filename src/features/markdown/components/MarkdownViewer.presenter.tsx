@@ -8,16 +8,13 @@
 
 import React from 'react';
 
+import MarkdownCodeRenderer from './MarkdownCodeRenderer';
+import MarkdownImageRenderer from './MarkdownImageRenderer';
 import ReactMarkdown from 'react-markdown';
-
 import { css } from '@emotion/react';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-
 import { useTheme } from '../../../providers/ThemeProvider';
-
-import MarkdownCodeRenderer from './MarkdownCodeRenderer';
-import MarkdownImageRenderer from './MarkdownImageRenderer';
 
 interface MarkdownViewerProps {
   className?: string,

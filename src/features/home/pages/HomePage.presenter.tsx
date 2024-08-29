@@ -8,17 +8,17 @@
 
 import React from 'react';
 
+import {
+  Button,
+  Link,
+  Text } from '@fluentui/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
-
-import { Button, Link, Text } from '@fluentui/react-components';
+import { EventHandler } from '../../../types/Event';
 import { GitHubLogoIcon } from '@fluentui/react-icons-mdl2';
 import { WindowsLogoIcon } from '@fluentui/react-icons-mdl2-branded';
-
 import { css } from '@emotion/react';
-
-import { useTheme } from '../../../providers/ThemeProvider';
-import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface HomePageProps {
   onLinkToGitHub?: EventHandler,

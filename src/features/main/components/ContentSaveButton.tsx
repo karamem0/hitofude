@@ -9,7 +9,6 @@
 import React from 'react';
 
 import { EventHandler } from '../../../types/Event';
-
 import Presenter from './ContentSaveButton.presenter';
 
 interface ContentSaveButtonProps {

@@ -6,7 +6,12 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { StorageService } from '../services/StorageService';
+import {
+  Action,
+  ActionType,
+  InitialState,
+  State
+} from '../types/Store';
 import {
   DialogAction,
   File,
@@ -16,12 +21,7 @@ import {
   SidePanelAction,
   TabType
 } from '../types/Model';
-import {
-  Action,
-  ActionType,
-  InitialState,
-  State
-} from '../types/Store';
+import { StorageService } from '../services/StorageService';
 import { compare } from '../utils/String';
 
 export const reducer = (storage: StorageService) => (state: State, action: Action): State => {

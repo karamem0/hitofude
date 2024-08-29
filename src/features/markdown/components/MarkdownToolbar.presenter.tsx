@@ -8,20 +8,17 @@
 
 import React from 'react';
 
-import { useIntl } from 'react-intl';
-
-import { Toolbar, ToolbarButton } from '@fluentui/react-components';
 import {
   BoldIcon,
   ItalicIcon,
   UnderlineIcon
 } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
+import { Toolbar, ToolbarButton } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { MarkdownToolbarAction } from '../../../types/Model';
+import { css } from '@emotion/react';
 import messages from '../messages';
+import { useIntl } from 'react-intl';
 
 interface MarkdownToolbarProps {
   className?: string,

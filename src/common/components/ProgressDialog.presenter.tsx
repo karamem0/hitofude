@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useIntl } from 'react-intl';
-
 import {
   Dialog,
   DialogBody,
@@ -18,12 +16,11 @@ import {
   Spinner,
   Text
 } from '@fluentui/react-components';
-
-import { css } from '@emotion/react';
-
-import { useTheme } from '../../providers/ThemeProvider';
 import { ProgressType } from '../../types/Model';
+import { css } from '@emotion/react';
 import messages from '../messages';
+import { useIntl } from 'react-intl';
+import { useTheme } from '../../providers/ThemeProvider';
 
 interface ProgressDialogProps {
   value?: ProgressType
@@ -36,7 +33,11 @@ function ProgressDialog(props: Readonly<ProgressDialogProps>) {
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <Dialog

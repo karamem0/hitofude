@@ -6,23 +6,25 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
+import {
+  File,
+  FileVersion,
+  Folder
+} from '../types/Model';
+import { PojosMetadataMap, pojos } from '@automapper/pojos';
 import {
   createMap,
   createMapper,
   forMember,
   mapFrom
 } from '@automapper/core';
-import { pojos, PojosMetadataMap } from '@automapper/pojos';
-
-import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
-
 import {
-  Folder,
-  File,
-  FileVersion
-} from '../types/Model';
+  getBaseName,
+  getExtension,
+  getMimeType
+} from '../utils/File';
 import { toDate } from '../utils/Date';
-import { getBaseName, getExtension, getMimeType } from '../utils/File';
 
 export const mapper = createMapper({
   strategyInitializer: pojos()

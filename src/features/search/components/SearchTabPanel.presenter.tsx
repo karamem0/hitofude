@@ -8,26 +8,22 @@
 
 import React from 'react';
 
-import { Controller, UseFormReturn } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
-
 import {
   Button,
   Input,
   Text
 } from '@fluentui/react-components';
+import { Controller, UseFormReturn } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
 import { CancelIcon } from '@fluentui/react-icons-mdl2';
-
-import { css } from '@emotion/react';
-
-import Tree from '../../../common/components/Tree';
-import { useTheme } from '../../../providers/ThemeProvider';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
-import messages from '../messages';
-import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
-
 import SearchTreeItem from './SearchFileTreeItem';
+import Tree from '../../../common/components/Tree';
+import { css } from '@emotion/react';
+import messages from '../messages';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface SearchTabPanelProps {
   form?: UseFormReturn<SearchTabPanelFormState>,
@@ -50,7 +46,11 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return form ? (
     <div

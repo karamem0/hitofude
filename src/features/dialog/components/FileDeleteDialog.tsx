@@ -8,19 +8,18 @@
 
 import React from 'react';
 
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { File, TabType } from '../../../types/Model';
 import {
   removeExplorerFile,
   setDialogAction,
   setError
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
-import { File, TabType } from '../../../types/Model';
-import { isSupportedFile } from '../../../utils/File';
-
 import Presenter from './FileDeleteDialog.presenter';
+import { isSupportedFile } from '../../../utils/File';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FileDeleteDialogProps {
   value?: File

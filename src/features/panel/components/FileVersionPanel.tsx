@@ -8,18 +8,17 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
-import { setDialogAction } from '../../../stores/Action';
-import { ArgumentNullError } from '../../../types/Error';
-import { Event } from '../../../types/Event';
 import {
   DialogAction,
   File,
   FileVersion
 } from '../../../types/Model';
-
+import { ArgumentNullError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
 import Presenter from './FileVersionPanel.presenter';
+import { setDialogAction } from '../../../stores/Action';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FileVersionPanelProps {
   value?: File

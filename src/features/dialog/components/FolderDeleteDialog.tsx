@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 import {
   removeExplorerFolder,
   setDialogAction,
@@ -17,8 +15,9 @@ import {
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Folder } from '../../../types/Model';
-
 import Presenter from './FolderDeleteDialog.presenter';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FolderDeleteDialogProps {
   value?: Folder

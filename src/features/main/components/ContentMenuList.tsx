@@ -8,7 +8,13 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
+import {
+  ContentMenuAction,
+  ContentMenuType,
+  File,
+  SidePanelAction
+} from '../../../types/Model';
+import { Event, EventHandler } from '../../../types/Event';
 import {
   setContentMinimap,
   setContentPreview,
@@ -16,16 +22,9 @@ import {
   setContentWordWrap,
   setSidePanelAction
 } from '../../../stores/Action';
-import { Event, EventHandler } from '../../../types/Event';
-import {
-  File,
-  ContentMenuAction,
-  ContentMenuType,
-  SidePanelAction
-} from '../../../types/Model';
-import { downloadFile } from '../../../utils/File';
-
 import Presenter from './ContentMenuList.presenter';
+import { downloadFile } from '../../../utils/File';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface ContentMenuListProps {
   onCancel?: EventHandler,

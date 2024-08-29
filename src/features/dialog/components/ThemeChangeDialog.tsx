@@ -8,12 +8,11 @@
 
 import React from 'react';
 
+import { Event } from '../../../types/Event';
+import Presenter from './ThemeChangeDialog.presenter';
+import { ThemeName } from '../../../types/Model';
 import { useService } from '../../../providers/ServiceProvider';
 import { useTheme } from '../../../providers/ThemeProvider';
-import { Event } from '../../../types/Event';
-import { ThemeName } from '../../../types/Model';
-
-import Presenter from './ThemeChangeDialog.presenter';
 
 function ThemeChangeDialog() {
 

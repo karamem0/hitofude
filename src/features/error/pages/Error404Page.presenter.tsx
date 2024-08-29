@@ -9,20 +9,21 @@
 import React from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
-
-import { Text } from '@fluentui/react-components';
-
-import { css } from '@emotion/react';
-
 import Communication from '../../../common/components/Communication';
-import { useTheme } from '../../../providers/ThemeProvider';
+import { Text } from '@fluentui/react-components';
+import { css } from '@emotion/react';
 import messages from '../messages';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 function Error404Page() {
 
   const intl = useIntl();
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div

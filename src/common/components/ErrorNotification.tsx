@@ -8,20 +8,18 @@
 
 import React from 'react';
 
-import { MessageDescriptor } from 'react-intl';
-import { useError } from 'react-use';
-
-import { useStore } from '../../providers/StoreProvider';
-import { setError } from '../../stores/Action';
 import {
   FileConflictError,
   FileNotFoundError,
   FolderConflictError,
   FolderNotFoundError
 } from '../../types/Error';
-import messages from '../messages';
-
+import { MessageDescriptor } from 'react-intl';
 import Presenter from './ErrorNotification.presenter';
+import messages from '../messages';
+import { setError } from '../../stores/Action';
+import { useError } from 'react-use';
+import { useStore } from '../../providers/StoreProvider';
 
 function ErrorNotification() {
 

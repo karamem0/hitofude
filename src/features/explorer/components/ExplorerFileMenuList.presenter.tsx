@@ -8,14 +8,6 @@
 
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
-
-import {
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList
-} from '@fluentui/react-components';
 import {
   CopyIcon,
   DeleteIcon,
@@ -24,17 +16,20 @@ import {
   RenameIcon
 } from '@fluentui/react-icons-mdl2';
 import {
-  OneDriveLogoIcon
-} from '@fluentui/react-icons-mdl2-branded';
-
-import { css } from '@emotion/react';
-
-import { EventHandler } from '../../../types/Event';
-import {
   ExplorerMenuAction,
   ExplorerMenuType,
   File
 } from '../../../types/Model';
+import {
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList
+} from '@fluentui/react-components';
+import { EventHandler } from '../../../types/Event';
+import { FormattedMessage } from 'react-intl';
+import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+import { css } from '@emotion/react';
 import { isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
 

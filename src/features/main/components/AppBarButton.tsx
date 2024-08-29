@@ -8,11 +8,10 @@
 
 import React from 'react';
 
-import { useStore } from '../../../providers/StoreProvider';
 import { EventHandler } from '../../../types/Event';
-import { TabType } from '../../../types/Model';
-
 import Presenter from './AppBarButton.presenter';
+import { TabType } from '../../../types/Model';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface AppBarButtonProps {
   icon?: React.ReactElement,

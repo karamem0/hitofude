@@ -8,10 +8,6 @@
 
 import React from 'react';
 
-import { useRoute } from '../../../providers/RouteProvider';
-import { useStore } from '../../../providers/StoreProvider';
-import { setDialogAction, setTabOpen } from '../../../stores/Action';
-import { Event } from '../../../types/Event';
 import {
   AppBarMenuAction,
   AppBarMenuType,
@@ -19,8 +15,11 @@ import {
   TabType
 } from '../../../types/Model';
 import { moveNext, movePrevious } from '../../../utils/Keyboard';
-
+import { setDialogAction, setTabOpen } from '../../../stores/Action';
+import { Event } from '../../../types/Event';
 import Presenter from './AppBar.presenter';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 function AppBar() {
 

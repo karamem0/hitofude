@@ -6,7 +6,7 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-export function moveNext(value: HTMLElement | null | undefined, query: string) : HTMLElement | undefined {
+export function moveNext(value: HTMLElement | null | undefined, query: string): HTMLElement | undefined {
   const items = value?.querySelectorAll<HTMLElement>(query);
   if (items == null) {
     return;
@@ -19,7 +19,7 @@ export function moveNext(value: HTMLElement | null | undefined, query: string) :
   }
 }
 
-export function movePrevious(value: HTMLElement | null | undefined, query: string) : HTMLElement | undefined {
+export function movePrevious(value: HTMLElement | null | undefined, query: string): HTMLElement | undefined {
   const items = value?.querySelectorAll<HTMLElement>(query);
   if (items == null) {
     return;

@@ -9,8 +9,8 @@
 import React from 'react';
 
 import { InvalidOperationError } from '../../types/Error';
-import { ProgressType } from '../../types/Model';
 import ProgressDialog from '../components/ProgressDialog';
+import { ProgressType } from '../../types/Model';
 
 interface ProgressContextState {
   progress?: ProgressType,

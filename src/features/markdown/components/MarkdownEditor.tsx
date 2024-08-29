@@ -8,21 +8,18 @@
 
 import React from 'react';
 
-import { useEvent } from 'react-use';
-
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-
-import { useStore } from '../../../providers/StoreProvider';
-import { useTheme } from '../../../providers/ThemeProvider';
-import { EventHandler } from '../../../types/Event';
 import {
   ScrollPosition,
   ScrollSize,
   ThemeName
 } from '../../../types/Model';
+import { EventHandler } from '../../../types/Event';
 import { MarkdownEditorHandle } from '../types/Handle';
-
 import Presenter from './MarkdownEditor.presenter';
+import { useEvent } from 'react-use';
+import { useStore } from '../../../providers/StoreProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownEditorProps {
   className?: string,

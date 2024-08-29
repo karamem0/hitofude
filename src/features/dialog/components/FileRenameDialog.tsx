@@ -8,20 +8,19 @@
 
 import React from 'react';
 
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import {
   setContentFile,
   setDialogAction,
   setError,
   updateExplorerFile
 } from '../../../stores/Action';
-import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import { FileRenameDialogFormState } from '../types/Form';
-
 import Presenter from './FileRenameDialog.presenter';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 
 interface FileRenameDialogProps {
   value?: File
