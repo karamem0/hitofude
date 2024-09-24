@@ -16,8 +16,11 @@ const messages = defineMessages({
   FeatureDescriprtion2: { defaultMessage: 'Only runs client JavaScript, no server code is executed.' },
   FeatureDescriprtion3: { defaultMessage: 'It\'s easy to get started. Just sign in.' },
   GitHub: { defaultMessage: 'GitHub' },
+  GitHubLink: { defaultMessage: 'https://github.com/karamem0/hitofude' },
   PrivacyPolicy: { defaultMessage: 'Privacy Policy' },
-  TermsAndConditions: { defaultMessage: 'Terms and Conditions' },
+  PrivacyPolicyLink: { defaultMessage: 'https://github.com/karamem0/hitofude/blob/main/PRIVACY_POLICY.md' },
+  TermsOfUse: { defaultMessage: 'Terms of Use' },
+  TermsOfUseLink: { defaultMessage: 'https://github.com/karamem0/hitofude/blob/main/TERMS_OF_USE.md' },
   SignIn: { defaultMessage: 'Sign in with Microsoft account' }
 });
 

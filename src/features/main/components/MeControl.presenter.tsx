@@ -11,6 +11,7 @@ import React from 'react';
 import {
   Avatar,
   Menu,
+  MenuDivider,
   MenuGroup,
   MenuGroupHeader,
   MenuItem,
@@ -29,6 +30,8 @@ interface MeControlProps {
   photo?: string,
   userId?: string,
   userName?: string,
+  onLinkToPrivacyPolicy?: EventHandler,
+  onLinkToTermsOfUse?: EventHandler,
   onSignOut?: EventHandler
 }
 
@@ -38,6 +41,8 @@ function MeControl(props: Readonly<MeControlProps>) {
     photo,
     userId,
     userName,
+    onLinkToPrivacyPolicy,
+    onLinkToTermsOfUse,
     onSignOut
   } = props;
 
@@ -74,6 +79,18 @@ function MeControl(props: Readonly<MeControlProps>) {
                 {userId}
               </Text>
             </MenuGroupHeader>
+          </MenuGroup>
+          <MenuDivider />
+          <MenuGroup>
+            <MenuItem onClick={onLinkToTermsOfUse}>
+              <FormattedMessage {...messages.TermsOfUse} />
+            </MenuItem>
+            <MenuItem onClick={onLinkToPrivacyPolicy}>
+              <FormattedMessage {...messages.PrivacyPolicy} />
+            </MenuItem>
+          </MenuGroup>
+          <MenuDivider />
+          <MenuGroup>
             <MenuItem
               icon={(
                 <SignOutIcon

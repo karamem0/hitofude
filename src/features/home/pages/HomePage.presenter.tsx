@@ -23,7 +23,7 @@ import { useTheme } from '../../../providers/ThemeProvider';
 interface HomePageProps {
   onLinkToGitHub?: EventHandler,
   onLinkToPrivacyPolicy?: EventHandler,
-  onLinkToTermsAndConditions?: EventHandler,
+  onLinkToTermsOfUse?: EventHandler,
   onSignIn?: EventHandler
 }
 
@@ -32,7 +32,7 @@ function HomePage(props: Readonly<HomePageProps>) {
   const {
     onLinkToGitHub,
     onLinkToPrivacyPolicy,
-    onLinkToTermsAndConditions,
+    onLinkToTermsOfUse,
     onSignIn
   } = props;
 
@@ -171,8 +171,8 @@ function HomePage(props: Readonly<HomePageProps>) {
         `}>
         <Link
           as="button"
-          onClick={onLinkToTermsAndConditions}>
-          <FormattedMessage {...messages.TermsAndConditions} />
+          onClick={onLinkToTermsOfUse}>
+          <FormattedMessage {...messages.TermsOfUse} />
         </Link>
         <Text
           css={css`
