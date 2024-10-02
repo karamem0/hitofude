@@ -27,28 +27,22 @@ function ExplorerFolderTreeItem(props: Readonly<ExplorerFolderTreeItemProps>) {
     onClick
   } = props;
 
-  return (
-    <React.Fragment>
-      {
-        selectedFolder?.folders?.map((folder) => (
-          <TreeItem
-            key={folder.id}
-            name={folder.name}
-            icon={(
-              <FolderHorizontalIcon
-                css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
-            )}
-            menu={(
-              <ExplorerFolderMenu folder={folder} />
-            )}
-            onClick={(event) => onClick?.(event, folder)} />
-        ))
-      }
-    </React.Fragment>
-  );
+  return selectedFolder?.folders?.map((folder) => (
+    <TreeItem
+      key={folder.id}
+      name={folder.name}
+      icon={(
+        <FolderHorizontalIcon
+          css={css`
+          font-size: 1rem;
+          line-height: 1rem;
+        `} />
+      )}
+      menu={(
+        <ExplorerFolderMenu folder={folder} />
+      )}
+      onClick={(event) => onClick?.(event, folder)} />
+  ));
 
 }
 

@@ -24,7 +24,8 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
   const {
     alt,
     downloadUrl,
-    mimeType
+    mimeType,
+    ...extraProps
   } = props;
 
   return (
@@ -55,7 +56,8 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
       return (
         <ImageViewer
           alt={alt}
-          src="" />
+          src=""
+          {...extraProps} />
       );
     })();
 

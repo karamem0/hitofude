@@ -9,7 +9,7 @@
 import React from 'react';
 
 import {
-  DialogAction,
+  DialogType,
   File,
   FileVersion
 } from '../../../types/Model';
@@ -34,13 +34,25 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
   const { graph } = useService();
   const [ items, setItems ] = React.useState<FileVersion[]>();
 
-  const handleRestore = React.useCallback((_: Event, data?: DialogAction) => {
+  const handleClick = React.useCallback((_: Event, data?: FileVersion) => {
     if (data == null) {
       throw new ArgumentNullError();
     }
-    dispatch(setDialogAction(data));
+    dispatch(setDialogAction({
+      type: DialogType.restoreFile,
+      data
+    }));
   }, [
     dispatch
+  ]);
+
+  const handleKeyDown = React.useCallback((event: Event, data?: FileVersion) => {
+    const { key } = event as KeyboardEvent;
+    if (key === 'Enter' || key === ' ') {
+      handleClick?.(event, data);
+    }
+  }, [
+    handleClick
   ]);
 
   React.useEffect(() => {
@@ -58,7 +70,8 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
   return (
     <Presenter
       items={items}
-      onRestore={handleRestore} />
+      onClick={handleClick}
+      onKeyDown={handleKeyDown} />
   );
 
 }

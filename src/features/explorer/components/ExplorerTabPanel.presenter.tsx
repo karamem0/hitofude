@@ -47,7 +47,11 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
   const {
     isDragActive,
     getRootProps,

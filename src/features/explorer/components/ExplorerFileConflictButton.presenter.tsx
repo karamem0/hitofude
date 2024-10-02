@@ -9,7 +9,6 @@
 import React from 'react';
 
 import { EventHandler } from '../../../types/Event';
-import { FileConflict } from '../../../types/Model';
 import { WarningIcon } from '@fluentui/react-icons-mdl2';
 import { css } from '@emotion/react';
 import messages from '../messages';
@@ -17,21 +16,27 @@ import { useIntl } from 'react-intl';
 import { useTheme } from '../../../providers/ThemeProvider';
 
 interface ExplorerFileConflictButtonProps {
-  fileConflict?: FileConflict,
-  onClick?: EventHandler<FileConflict>
+  disabled: boolean,
+  onClick?: EventHandler,
+  onKeyDown?: EventHandler
 }
 
 function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonProps>) {
 
   const {
-    fileConflict,
-    onClick
+    disabled,
+    onClick,
+    onKeyDown
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
-  return fileConflict ? (
+  return disabled ? null : (
     <div
       aria-label={intl.formatMessage(messages.ConflictFile)}
       role="button"
@@ -42,10 +47,11 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
         line-height: 1rem;
         color: ${theme.colorPaletteYellowForeground1};
       `}
-      onClick={(event) => onClick?.(event, fileConflict)}>
+      onClick={onClick}
+      onKeyDown={onKeyDown}>
       <WarningIcon />
     </div>
-  ) : null;
+  );
 
 }
 

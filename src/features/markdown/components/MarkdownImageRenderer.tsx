@@ -23,6 +23,7 @@ interface MarkdownImageRendereState {
 
 interface MarkdownImageRendererProps {
   alt?: string,
+  node?: unknown,
   src?: string
 }
 
@@ -30,7 +31,9 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
 
   const {
     alt,
-    src
+    node: _,
+    src,
+    ...extraProps
   } = props;
 
   const {
@@ -88,8 +91,8 @@ function MarkdownImageRenderer(props: Readonly<MarkdownImageRendererProps>) {
   return state ? (
     <Presenter
       alt={alt}
-      downloadUrl={state.downloadUrl}
-      mimeType={state.mimeType} />
+      {...state}
+      {...extraProps} />
   ) : null;
 
 }

@@ -37,7 +37,11 @@ function HomePage(props: Readonly<HomePageProps>) {
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div
@@ -127,6 +131,7 @@ function HomePage(props: Readonly<HomePageProps>) {
               </div>
             </div>
             <img
+              alt={intl.formatMessage(messages.AppName)}
               src="/assets/svg/Books.svg"
               css={css`
                 width: 20rem;

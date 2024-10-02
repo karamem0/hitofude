@@ -46,65 +46,59 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
     onMenuClick
   } = props;
 
-  return (
-    <React.Fragment>
-      {
-        resultFiles?.map((item) => (
-          <TreeItem
-            key={item.id}
-            name={item.fullName}
-            selected={selectedFile?.id === item.id}
-            icon={(
-              <TextDocumentIcon
-                css={css`
+  return resultFiles?.map((item) => (
+    <TreeItem
+      key={item.id}
+      name={item.fullName}
+      selected={selectedFile?.id === item.id}
+      icon={(
+        <TextDocumentIcon
+          css={css`
+            font-size: 1rem;
+            line-height: 1rem;
+          `} />
+      )}
+      menu={(
+        <MenuList>
+          <MenuGroup>
+            <MenuItem
+              key={SearchMenuType.copyLink}
+              icon={(
+                <LinkIcon
+                  css={css`
+                    font-size: 1rem;
+                    line-height: 1rem;
+                  `} />
+              )}
+              onClick={(event) => onMenuClick?.(event, {
+                type: SearchMenuType.copyLink,
+                data: item
+              })}>
+              <FormattedMessage {...messages.CopyLink} />
+            </MenuItem>
+          </MenuGroup>
+          <MenuDivider />
+          <MenuGroup>
+            <MenuItem
+              key={SearchMenuType.openFileLocation}
+              icon={(
+                <OpenFolderHorizontalIcon
+                  css={css`
                   font-size: 1rem;
                   line-height: 1rem;
                 `} />
-            )}
-            menu={(
-              <MenuList>
-                <MenuGroup>
-                  <MenuItem
-                    key={SearchMenuType.copyLink}
-                    icon={(
-                      <LinkIcon
-                        css={css`
-                          font-size: 1rem;
-                          line-height: 1rem;
-                        `} />
-                    )}
-                    onClick={(event) => onMenuClick?.(event, {
-                      type: SearchMenuType.copyLink,
-                      data: item
-                    })}>
-                    <FormattedMessage {...messages.CopyLink} />
-                  </MenuItem>
-                </MenuGroup>
-                <MenuDivider />
-                <MenuGroup>
-                  <MenuItem
-                    key={SearchMenuType.openFileLocation}
-                    icon={(
-                      <OpenFolderHorizontalIcon
-                        css={css`
-                        font-size: 1rem;
-                        line-height: 1rem;
-                      `} />
-                    )}
-                    onClick={(event) => onMenuClick?.(event, {
-                      type: SearchMenuType.openFileLocation,
-                      data: item
-                    })}>
-                    <FormattedMessage {...messages.OpenFileLocation} />
-                  </MenuItem>
-                </MenuGroup>
-              </MenuList>
-            )}
-            onClick={(event) => onClick?.(event, item)} />
-        ))
-      }
-    </React.Fragment>
-  );
+              )}
+              onClick={(event) => onMenuClick?.(event, {
+                type: SearchMenuType.openFileLocation,
+                data: item
+              })}>
+              <FormattedMessage {...messages.OpenFileLocation} />
+            </MenuItem>
+          </MenuGroup>
+        </MenuList>
+      )}
+      onClick={(event) => onClick?.(event, item)} />
+  ));
 
 }
 

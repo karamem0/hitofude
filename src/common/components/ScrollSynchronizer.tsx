@@ -104,24 +104,18 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     enabled
   ]);
 
-  return (
-    <React.Fragment>
-      {
-        render?.({
-          element1Position,
-          element2Position,
-          onElement1MouseEnter: handleElement1MouseEnter,
-          onElement1MouseLeave: handleElement1MouseLeave,
-          onElement1Resize: handleElement1Resize,
-          onElement1ScrollChange: handleElement1ScrollChange,
-          onElement2MouseEnter: handleElement2MouseEnter,
-          onElement2MouseLeave: handleElement2MouseLeave,
-          onElement2Resize: handleElement2Resize,
-          onElement2ScrollChange: handleElement2ScrollChange
-        })
-      }
-    </React.Fragment>
-  );
+  return render?.({
+    element1Position,
+    element2Position,
+    onElement1MouseEnter: handleElement1MouseEnter,
+    onElement1MouseLeave: handleElement1MouseLeave,
+    onElement1Resize: handleElement1Resize,
+    onElement1ScrollChange: handleElement1ScrollChange,
+    onElement2MouseEnter: handleElement2MouseEnter,
+    onElement2MouseLeave: handleElement2MouseLeave,
+    onElement2Resize: handleElement2Resize,
+    onElement2ScrollChange: handleElement2ScrollChange
+  });
 
 }
 

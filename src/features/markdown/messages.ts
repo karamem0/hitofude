@@ -10,6 +10,7 @@ import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   Bold: { defaultMessage: 'Bold' },
+  Footnotes: { defaultMessage: 'Footnotes' },
   Italic: { defaultMessage: 'Italic' },
   Underline: { defaultMessage: 'Underline' }
 });

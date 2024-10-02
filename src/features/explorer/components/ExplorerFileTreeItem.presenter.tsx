@@ -33,35 +33,29 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
     onClick
   } = props;
 
-  return (
-    <React.Fragment>
-      {
-        selectedFolder?.files?.filter((file) => (allFiles ?? false) || isSupportedFile(file)).map((file) => (
-          <TreeItem
-            key={file.id}
-            name={file.fullName}
-            selected={selectedFile?.id === file.id}
-            icon={(
-              <TextDocumentIcon
-                css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
-            )}
-            info={(
-              <ExplorerFileConflictButton file={file} />
-            )}
-            menu={
-              isSupportedFile(file) ? (
-                <ExplorerFileMenuList file={file} />
-              ) : null
-            }
-            onClick={(event) => onClick?.(event, file)} />
-        ))
+  return selectedFolder?.files?.filter((file) => (allFiles ?? false) || isSupportedFile(file)).map((file) => (
+    <TreeItem
+      key={file.id}
+      name={file.fullName}
+      selected={selectedFile?.id === file.id}
+      icon={(
+        <TextDocumentIcon
+          css={css`
+            font-size: 1rem;
+            line-height: 1rem;
+          `} />
+      )}
+      info={(
+        <ExplorerFileConflictButton file={file} />
+      )}
+      menu={
+        isSupportedFile(file) ? (
+          <ExplorerFileMenuList file={file} />
+        ) : null
       }
-    </React.Fragment>
-  );
+      onClick={(event) => onClick?.(event, file)} />
+  ));
 
-}
+};
 
 export default React.memo(ExplorerFileTreeItem);

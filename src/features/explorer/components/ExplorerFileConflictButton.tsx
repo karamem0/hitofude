@@ -33,20 +33,40 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
     }
   } = useStore();
 
-  const handleClick = React.useCallback((event: Event, data?: FileConflict) => {
+  const [ conflictedFile, setConflictedFile ] = React.useState<FileConflict>();
+
+  const handleClick = React.useCallback((event: Event) => {
     event.stopPropagation();
     dispatch(setDialogAction({
       type: DialogType.overwriteFile,
-      data
+      data: conflictedFile
     }));
   }, [
+    conflictedFile,
     dispatch
+  ]);
+
+  const handleKeyDown = React.useCallback((event: Event) => {
+    const { key } = event as KeyboardEvent;
+    if (key === 'Enter' || key === ' ') {
+      handleClick?.(event);
+    }
+  }, [
+    handleClick
+  ]);
+
+  React.useEffect(() => {
+    setConflictedFile(explorerProps?.fileConflicts?.find((item) => item.id === file?.id));
+  }, [
+    explorerProps?.fileConflicts,
+    file?.id
   ]);
 
   return (
     <Presenter
-      fileConflict={explorerProps?.fileConflicts?.find((item) => item.id === file?.id)}
-      onClick={handleClick} />
+      disabled={conflictedFile == null}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown} />
   );
 
 }

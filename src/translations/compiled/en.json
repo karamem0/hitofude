@@ -59,12 +59,6 @@
       "value": "Download"
     }
   ],
-  "6qF/vN": [
-    {
-      "type": 0,
-      "value": "Terms and Conditions"
-    }
-  ],
   "6tm4ZV": [
     {
       "type": 0,
@@ -221,6 +215,12 @@
       "value": "Page not found"
     }
   ],
+  "QdINaw": [
+    {
+      "type": 0,
+      "value": "https://github.com/karamem0/hitofude"
+    }
+  ],
   "RolcOL": [
     {
       "type": 0,
@@ -263,6 +263,12 @@
       "value": "Version history"
     }
   ],
+  "UhkSyx": [
+    {
+      "type": 0,
+      "value": "Terms of Use"
+    }
+  ],
   "VCHJad": [
     {
       "type": 0,
@@ -291,6 +297,12 @@
     {
       "type": 0,
       "value": "No items found"
+    }
+  ],
+  "WjC3Vn": [
+    {
+      "type": 0,
+      "value": "https://github.com/karamem0/hitofude/blob/main/TERMS_OF_USE.md"
     }
   ],
   "Z5spcL": [
@@ -443,10 +455,22 @@
       "value": "Close"
     }
   ],
+  "rvyU8S": [
+    {
+      "type": 0,
+      "value": "https://github.com/karamem0/hitofude/blob/main/PRIVACY_POLICY.md"
+    }
+  ],
   "sQtSD2": [
     {
       "type": 0,
       "value": "Are you sure to delete this file?"
+    }
+  ],
+  "t1Ql7Y": [
+    {
+      "type": 0,
+      "value": "Footnotes"
     }
   ],
   "tOdNiY": [

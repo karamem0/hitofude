@@ -53,7 +53,11 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return file ? (
     <div

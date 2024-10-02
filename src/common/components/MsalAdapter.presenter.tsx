@@ -19,11 +19,7 @@ function MsalAdapter(props: Readonly<React.PropsWithChildren<MsalAdapterProps>>)
     loading
   } = props;
 
-  return loading ? null : (
-    <React.Fragment>
-      {children}
-    </React.Fragment>
-  );
+  return loading ? null : children;
 
 }
 

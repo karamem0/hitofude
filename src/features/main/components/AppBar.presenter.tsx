@@ -43,7 +43,11 @@ function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
   } = props;
 
   const intl = useIntl();
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div

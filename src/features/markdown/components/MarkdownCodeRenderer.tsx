@@ -10,25 +10,46 @@ import React from 'react';
 
 import Presenter from './MarkdownCodeRenderer.presenter';
 
+interface MarkdownCodeRendererState {
+  language?: string,
+  text?: string
+}
+
 interface MarkdownCodeRendererProps {
-  className?: string,
-  inline?: boolean
+  node?: unknown
 }
 
 function MarkdownCodeRenderer(props: Readonly<React.PropsWithChildren<MarkdownCodeRendererProps>>) {
 
   const {
     children,
-    className,
-    inline
+    node: _,
+    ...extraProps
   } = props;
+
+  const [ state, setState ] = React.useState<MarkdownCodeRendererState>({});
+
+  React.useEffect(() => {
+    if (children == null) {
+      return;
+    }
+    const element = children as React.ReactElement;
+    const className = element.props.className as string;
+    const match = /language-(\w+)/.exec(className ?? '');
+    const language = match?.at(1) ?? '';
+    const text = element.props.children as string;
+    setState({
+      language,
+      text
+    });
+  }, [
+    children
+  ]);
 
   return (
     <Presenter
-      className={className}
-      inline={inline}>
-      {children}
-    </Presenter>
+      {...state}
+      {...extraProps} />
   );
 
 }

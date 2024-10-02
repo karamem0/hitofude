@@ -23,11 +23,7 @@ function Loader(props: Readonly<React.PropsWithChildren<LoaderProps>>) {
 
   return loading ? (
     <Spinner />
-  ) : (
-    <React.Fragment>
-      {children}
-    </React.Fragment>
-  );
+  ) : children;
 
 }
 

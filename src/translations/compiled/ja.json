@@ -59,12 +59,6 @@
       "value": "ダウンロード"
     }
   ],
-  "6qF/vN": [
-    {
-      "type": 0,
-      "value": "利用規約"
-    }
-  ],
   "6tm4ZV": [
     {
       "type": 0,
@@ -221,6 +215,12 @@
       "value": "ページが見つかりません"
     }
   ],
+  "QdINaw": [
+    {
+      "type": 0,
+      "value": "https://github.com/karamem0/hitofude"
+    }
+  ],
   "RolcOL": [
     {
       "type": 0,
@@ -263,6 +263,12 @@
       "value": "バージョン履歴"
     }
   ],
+  "UhkSyx": [
+    {
+      "type": 0,
+      "value": "利用規約"
+    }
+  ],
   "VCHJad": [
     {
       "type": 0,
@@ -291,6 +297,12 @@
     {
       "type": 0,
       "value": "アイテムが見つかりません"
+    }
+  ],
+  "WjC3Vn": [
+    {
+      "type": 0,
+      "value": "https://github.com/karamem0/hitofude/blob/main/TERMS_OF_USE.ja-jp.md"
     }
   ],
   "Z5spcL": [
@@ -443,10 +455,22 @@
       "value": "閉じる"
     }
   ],
+  "rvyU8S": [
+    {
+      "type": 0,
+      "value": "https://github.com/karamem0/hitofude/blob/main/PRIVACY_POLICY.ja-jp.md"
+    }
+  ],
   "sQtSD2": [
     {
       "type": 0,
       "value": "ファイルを削除します。よろしいですか？"
+    }
+  ],
+  "t1Ql7Y": [
+    {
+      "type": 0,
+      "value": "脚注"
     }
   ],
   "tOdNiY": [

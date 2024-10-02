@@ -29,7 +29,11 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
     onChangePreview
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return preview ? (
     <Button

@@ -35,7 +35,11 @@ function AppBarButton(props: Readonly<AppBarButtonProps>) {
     onClick
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return (
     <div

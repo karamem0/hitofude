@@ -9,11 +9,6 @@
 import React from 'react';
 
 import {
-  DialogAction,
-  DialogType,
-  FileVersion
-} from '../../../types/Model';
-import {
   FormattedDate,
   FormattedMessage,
   useIntl
@@ -29,6 +24,7 @@ import {
   TableRow
 } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
+import { FileVersion } from '../../../types/Model';
 import { HistoryIcon } from '@fluentui/react-icons-mdl2';
 import SidePanel from '../../../common/components/SidePanel';
 import bytes from 'bytes';
@@ -37,14 +33,16 @@ import messages from '../messages';
 
 interface FileVersionPanelProps {
   items?: FileVersion[],
-  onRestore?: EventHandler<DialogAction>
+  onClick?: EventHandler<FileVersion>,
+  onKeyDown?: EventHandler<FileVersion>
 }
 
 function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
 
   const {
     items,
-    onRestore
+    onClick,
+    onKeyDown
   } = props;
 
   const intl = useIntl();
@@ -92,10 +90,8 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
                                     font-size: 1rem;
                                     line-height: 1rem;
                                   `}
-                                  onClick={(event) => onRestore?.(event, {
-                                    type: DialogType.restoreFile,
-                                    data: item
-                                  })}>
+                                  onClick={(event) => onClick?.(event, item)}
+                                  onKeyDown={(event) => onKeyDown?.(event, item)}>
                                   <HistoryIcon />
                                 </div>
                               </div>

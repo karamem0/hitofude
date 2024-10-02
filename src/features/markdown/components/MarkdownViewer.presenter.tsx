@@ -10,10 +10,13 @@ import React from 'react';
 
 import MarkdownCodeRenderer from './MarkdownCodeRenderer';
 import MarkdownImageRenderer from './MarkdownImageRenderer';
+import MarkdownLinkRenderer from './MarkdownLinkRenderer';
 import ReactMarkdown from 'react-markdown';
 import { css } from '@emotion/react';
+import messages from '../messages';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
+import { useIntl } from 'react-intl';
 import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownViewerProps {
@@ -28,7 +31,12 @@ function MarkdownViewer(props: Readonly<MarkdownViewerProps>) {
     text
   } = props;
 
-  const { theme: { theme } } = useTheme();
+  const intl = useIntl();
+  const {
+    theme: {
+      theme
+    }
+  } = useTheme();
 
   return text ? (
     <div
@@ -90,11 +98,31 @@ function MarkdownViewer(props: Readonly<MarkdownViewerProps>) {
           margin-inline: 2rem 0;
           list-style-type: decimal;
         }
+        p {
+          margin-block: 0.25rem;
+        }
         pre {
           padding: 0.5rem;
           margin-block: 0.5rem;
           font-family: SFMono-Regular, Consolas, Menlo, Monaco, Meiryo, monospace;
           background-color: ${theme.colorNeutralBackground3};
+          code {
+            padding: 0;
+          }
+        }
+        section #footnote-label {
+          margin-block: 2rem 0;
+          font-size: 0;
+          line-height: 0;
+          &::after {
+            display: block;
+            font-size: 1rem;
+            line-height: calc(1rem * 1.25);
+            content: '${intl.formatMessage(messages.Footnotes)}';
+          }
+        }
+        table {
+          margin: 0.5rem 0;
         }
         table,
         th,
@@ -121,8 +149,9 @@ function MarkdownViewer(props: Readonly<MarkdownViewerProps>) {
       `}>
       <ReactMarkdown
         rehypePlugins={[ rehypeRaw ]}
-        remarkPlugins={[ remarkGfm ]}
+        remarkPlugins={[[ remarkGfm, { label: '' } ]]}
         components={{
+          a: MarkdownLinkRenderer,
           img: MarkdownImageRenderer,
           pre: MarkdownCodeRenderer
         }}>
