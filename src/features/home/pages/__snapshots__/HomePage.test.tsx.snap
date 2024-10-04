@@ -248,7 +248,7 @@ exports[`should create shapshot 1`] = `
             <img
               alt="Hitofude"
               class="emotion-8"
-              src="/assets/svg/Books.svg"
+              src="/assets/images/Books.svg"
             />
           </div>
         </div>

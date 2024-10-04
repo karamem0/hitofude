@@ -62,7 +62,7 @@ function Error500Page() {
         `}>
         <Communication
           description={intl.formatMessage(messages.Error500Description)}
-          image="/assets/svg/Warning.svg"
+          image="/assets/images/Warning.svg"
           title={intl.formatMessage(messages.Error500Title)} />
       </div>
     </div>

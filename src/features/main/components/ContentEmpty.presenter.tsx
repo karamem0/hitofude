@@ -27,7 +27,7 @@ function ContentEmpty() {
       `}>
       <Communication
         description={intl.formatMessage(messages.NoDataDescription)}
-        image="/assets/svg/BlankCanvas.svg"
+        image="/assets/images/BlankCanvas.svg"
         title={intl.formatMessage(messages.NoDataTitle)} />
     </div>
   );

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create shapshot if loading is "false" 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="Children"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create shapshot if loading is "true" 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="fui-Spinner r82apo5"
+      role="progressbar"
+    >
+      <span
+        class="fui-Spinner__spinner rvgcg50 ___1xxu43e_eahmz60 f1d2rq10 f1szoe96 fb52u90"
+      >
+        <span
+          class="fui-Spinner__spinnerTail rxov3xa"
+        />
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create shapshot 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto;
+  grid-gap: 2rem;
+  padding: 1rem;
+}
+
+.emotion-1 {
+  max-width: 16rem;
+  max-height: 12rem;
+  margin: auto;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-gap: 1rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  color: #707070;
+}
+
+.emotion-3 {
+  font-size: 32px;
+  line-height: calc(32px * 1.25);
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+    >
+      <img
+        alt="500 Internal Server Error"
+        class="emotion-1"
+        src="https://example.com/image.png"
+      />
+      <div
+        class="emotion-2"
+      >
+        <h4
+          class="fui-Text emotion-3 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+        >
+          500 Internal Server Error
+        </h4>
+        <span
+          class="fui-Text ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+        >
+          Something went wrong
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

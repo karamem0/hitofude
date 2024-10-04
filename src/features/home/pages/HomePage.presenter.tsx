@@ -132,7 +132,7 @@ function HomePage(props: Readonly<HomePageProps>) {
             </div>
             <img
               alt={intl.formatMessage(messages.AppName)}
-              src="/assets/svg/Books.svg"
+              src="/assets/images/Books.svg"
               css={css`
                 width: 20rem;
               `} />

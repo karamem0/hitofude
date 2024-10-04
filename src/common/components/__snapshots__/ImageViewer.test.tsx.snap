@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create shapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <img
+      alt="image"
+      class="fui-Image image ___1erkwlp_1hna692 fj3muxo f1akhkt f1aperda f1lxtadh f1fabniw f1ewtqcl f14t3ns0"
+      src="https://example.com/image.png"
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -8,7 +8,9 @@
 
 ## Screenshots
 
-![screenshot](/assets/screenshot.png)
+![screenshot1](/assets/screenshots/001.png)
+
+![screenshot2](/assets/screenshots/002.png)
 
 ## Features
 

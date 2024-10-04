@@ -18,6 +18,9 @@ export default {
       }
     ]
   ],
+  'setupFiles': [
+    './jest.setup.mjs'
+  ],
   'snapshotSerializers': [
     '@emotion/jest/serializer'
   ],

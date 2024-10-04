@@ -27,7 +27,7 @@ function ContentUnsupported() {
       `}>
       <Communication
         description={intl.formatMessage(messages.UnsupportedFileDescription)}
-        image="/assets/svg/Cancel.svg"
+        image="/assets/images/Cancel.svg"
         title={intl.formatMessage(messages.UnsupportedFileTitle)} />
     </div>
   );

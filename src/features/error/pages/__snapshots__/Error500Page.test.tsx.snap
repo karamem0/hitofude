@@ -126,7 +126,7 @@ exports[`should create shapshot 1`] = `
           <img
             alt="Something went wrong"
             class="emotion-5"
-            src="/assets/svg/Warning.svg"
+            src="/assets/images/Warning.svg"
           />
           <div
             class="emotion-6"

@@ -62,7 +62,7 @@ function Error404Page() {
         `}>
         <Communication
           description={intl.formatMessage(messages.Error404Description)}
-          image="/assets/svg/NotFound.svg"
+          image="/assets/images/NotFound.svg"
           title={intl.formatMessage(messages.Error404Title)} />
       </div>
     </div>
