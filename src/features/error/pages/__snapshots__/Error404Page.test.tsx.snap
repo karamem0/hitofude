@@ -124,7 +124,7 @@ exports[`should create shapshot 1`] = `
           class="emotion-4"
         >
           <img
-            alt="We can't find the page you're looking for"
+            alt="Page not found"
             class="emotion-5"
             src="/assets/images/NotFound.svg"
           />
@@ -134,12 +134,12 @@ exports[`should create shapshot 1`] = `
             <h4
               class="fui-Text emotion-7 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
             >
-              We can't find the page you're looking for
+              Page not found
             </h4>
             <span
               class="fui-Text ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
             >
-              Page not found
+              We can't find the page you're looking for
             </span>
           </div>
         </div>
