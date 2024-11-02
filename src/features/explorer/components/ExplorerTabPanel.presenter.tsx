@@ -92,6 +92,7 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
         onClick={(event) => onSelectFolder?.(event, selectedFolder?.parentId)} />
       <div
         {...getRootProps()}
+        tabIndex={-1}
         css={css`
           position: relative;
           display: grid;

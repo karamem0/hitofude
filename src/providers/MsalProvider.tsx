@@ -14,11 +14,12 @@ import {
 } from '@azure/msal-browser';
 import MsalAdapter from '../common/components/MsalAdapter';
 import { MsalProvider as Provider } from '@azure/msal-react';
+import env from '../env';
 
 const msalConfig = {
   auth: {
-    authority: import.meta.env.VITE_MSAL_AUTHORITY,
-    clientId: import.meta.env.VITE_MSAL_CLIENT_ID,
+    authority: env.VITE_MSAL_AUTHORITY,
+    clientId: env.VITE_MSAL_CLIENT_ID,
     redirectUri: `${window.location.origin}`
   },
   cache: {

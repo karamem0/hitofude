@@ -8,7 +8,7 @@ exports[`should create shapshot 1`] = `
   >
     <pre>
       <div
-        data-testid="Children"
+        data-testid="children"
       />
     </pre>
   </div>

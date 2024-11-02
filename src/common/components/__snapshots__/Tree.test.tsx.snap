@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create shapshot if disabled is "false" 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-gap: 0.25rem;
+  overflow: hidden auto;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr1 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+      role="menu"
+      tabindex="0"
+    >
+      <div
+        data-testid="children"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create shapshot if disabled is "true" 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-gap: 0.25rem;
+  overflow: hidden auto;
+}
+
+.emotion-1 {
+  font-size: 12px;
+  line-height: calc(16px * 1.25);
+  text-align: center;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+      role="menu"
+      tabindex="0"
+    >
+      <span
+        class="fui-Text emotion-1 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+      >
+        No items found
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;

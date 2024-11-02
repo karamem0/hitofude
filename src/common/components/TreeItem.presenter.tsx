@@ -25,7 +25,6 @@ import { useTheme } from '../../providers/ThemeProvider';
 interface TreeItemProps {
   icon?: React.ReactElement,
   info?: React.ReactNode,
-  key?: React.Key,
   menu?: React.ReactNode,
   name?: string,
   selected?: boolean,
@@ -38,7 +37,6 @@ function TreeItem(props: Readonly<TreeItemProps>) {
   const {
     icon,
     info,
-    key,
     menu,
     name,
     selected,
@@ -55,7 +53,6 @@ function TreeItem(props: Readonly<TreeItemProps>) {
 
   return (
     <div
-      key={key}
       aria-current={selected}
       role="menuitem"
       tabIndex={0}

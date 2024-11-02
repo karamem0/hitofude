@@ -22,28 +22,38 @@ const compat = new FlatCompat({
 });
 
 export default [
-  ...fixupConfigRules(compat.extends(
-    'plugin:@stylistic/recommended-extends',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:sonarjs/recommended-legacy'
-  )),
   {
-    'plugins': {
-      'hooks': pluginHooks
-    },
     'languageOptions': {
       'globals': {
         ...globals.browser,
         ...globals.jest
       }
     },
+    'plugins': {
+      'hooks': pluginHooks
+    },
     'settings': {
       'react': {
         'version': 'detect'
       }
-    },
+    }
+  },
+  ...fixupConfigRules(compat.extends(
+    'plugin:@stylistic/recommended-extends',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:sonarjs/recommended-legacy'
+  )),
+  {
+    'files': [
+      '**/*.test.{ts,tsx}'
+    ],
+    ...pluginTestingLibrary.configs['flat/dom'],
+    ...pluginTestingLibrary.configs['flat/react']
+  },
+  {
     'rules': {
       'dot-notation': [
         'error',
@@ -225,13 +235,5 @@ export default [
       'sonarjs/prefer-single-boolean-return': 'off',
       'sonarjs/sonar-no-unused-vars': 'off'
     }
-  },
-  {
-    'files': [
-      '**/*.test.ts',
-      '**/*.test.tsx'
-    ],
-    ...pluginTestingLibrary.configs['flat/dom'],
-    ...pluginTestingLibrary.configs['flat/react']
   }
 ];

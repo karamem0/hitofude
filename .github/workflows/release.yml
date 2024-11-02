@@ -1,16 +1,11 @@
-on:
-  workflow_call:
-    inputs:
-      environment:
-        required: true
-        type: string
+on: workflow_call
 
 jobs:
-  create-release:
-    environment: ${{inputs.environment}}
+  run:
+    name: Run
     runs-on: ubuntu-latest
     steps:
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

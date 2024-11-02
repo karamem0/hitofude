@@ -1,0 +1,275 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create shapshot if root is "false" 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: 0.25rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: start;
+  justify-content: start;
+  padding: 0 0.5rem;
+  margin: 1px;
+  font-weight: bold;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.emotion-0>button:last-of-type {
+  display: none;
+}
+
+.emotion-0:hover>button:last-of-type {
+  display: inherit;
+}
+
+.emotion-1 {
+  max-width: 2rem;
+  height: 2rem;
+}
+
+.emotion-2 {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.emotion-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emotion-4 {
+  font-weight: bold;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+    >
+      <button
+        aria-label="Back"
+        class="fui-Button r1alrhcs emotion-1 ___cpe5h10_1yhfyj7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3 f18ktai2 fwbmr0d f44c6la"
+        tabindex="0"
+        title="Back"
+        type="button"
+      >
+        <span
+          class="fui-Button__icon rywnvv2"
+        >
+          <span
+            aria-hidden="true"
+            class="root_dd790ee3 emotion-2"
+          >
+            <svg
+              class="svg_dd790ee3"
+              focusable="false"
+              viewBox="0 0 2048 2048"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1443 2045L421 1024 1443 3l90 90-930 931 930 931-90 90z"
+              />
+            </svg>
+          </span>
+        </span>
+      </button>
+      <div
+        class="emotion-3"
+      >
+        <h3
+          aria-label="Explorer"
+          class="fui-Text emotion-4 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+          title="Explorer"
+        >
+          Explorer
+        </h3>
+      </div>
+      <button
+        aria-haspopup="menu"
+        aria-label="More option"
+        class="fui-Button r1alrhcs emotion-1 ___cpe5h10_1yhfyj7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3 f18ktai2 fwbmr0d f44c6la"
+        id="menur3"
+        role="button"
+        tabindex="0"
+        title="More option"
+        type="button"
+      >
+        <span
+          class="fui-Button__icon rywnvv2"
+        >
+          <span
+            aria-hidden="true"
+            class="root_dd790ee3 emotion-2"
+          >
+            <svg
+              class="svg_dd790ee3"
+              focusable="false"
+              viewBox="0 0 2048 2048"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1024 1664q27 0 50 10t40 27 28 41 10 50q0 27-10 50t-27 40-41 28-50 10q-27 0-50-10t-40-27-28-41-10-50q0-27 10-50t27-40 41-28 50-10zm0-768q27 0 50 10t40 27 28 41 10 50q0 27-10 50t-27 40-41 28-50 10q-27 0-50-10t-40-27-28-41-10-50q0-27 10-50t27-40 41-28 50-10zm0-512q-27 0-50-10t-40-27-28-41-10-50q0-27 10-50t27-40 41-28 50-10q27 0 50 10t40 27 28 41 10 50q0 27-10 50t-27 40-41 28-50 10z"
+              />
+            </svg>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create shapshot if root is "true" 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: 0.25rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: start;
+  justify-content: start;
+  padding: 0 0.5rem;
+  margin: 1px;
+  font-weight: bold;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.emotion-0>button:last-of-type {
+  display: none;
+}
+
+.emotion-0:hover>button:last-of-type {
+  display: inherit;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.emotion-2 {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.emotion-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emotion-4 {
+  font-weight: bold;
+}
+
+.emotion-5 {
+  max-width: 2rem;
+  height: 2rem;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+    >
+      <div
+        class="emotion-1"
+      >
+        <span
+          aria-hidden="true"
+          class="root_dd790ee3 emotion-2"
+        >
+          <svg
+            class="svg_dd790ee3"
+            viewBox="0 0 2048 2048"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1660 833q82 5 152 40t123 91 83 129 30 155q0 86-33 161t-89 132-132 90-162 33H512q-106 0-199-40t-162-110-110-163-41-199q0-84 26-161t74-141 113-113 146-74q37-11 72-16t74-7h1q44-67 103-120t128-91 145-57 158-20q109 0 209 35t183 99 142 152 86 195zm-620-353q-113 0-215 46T651 660q38 10 72 25t68 36l408 244 233-98q23-10 46-17t50-13q-25-80-73-145t-112-113-142-73-161-26zm-834 903l846-357-327-196q-50-30-105-46t-113-16q-78 0-147 31t-120 83-82 123-30 147q0 60 20 121t58 110zm1426 153q48 0 92-15t82-44l-617-369-879 370q45 28 96 43t106 15h1120zm257-158q31-62 31-130 0-66-25-120t-67-91-100-58-120-21q-36 0-71 8t-70 22-67 28-65 30l554 332z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="emotion-3"
+      >
+        <h3
+          aria-label="Explorer"
+          class="fui-Text emotion-4 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+          title="Explorer"
+        >
+          Explorer
+        </h3>
+      </div>
+      <button
+        aria-haspopup="menu"
+        aria-label="More option"
+        class="fui-Button r1alrhcs emotion-5 ___cpe5h10_1yhfyj7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3 f18ktai2 fwbmr0d f44c6la"
+        id="menur1"
+        role="button"
+        tabindex="0"
+        title="More option"
+        type="button"
+      >
+        <span
+          class="fui-Button__icon rywnvv2"
+        >
+          <span
+            aria-hidden="true"
+            class="root_dd790ee3 emotion-2"
+          >
+            <svg
+              class="svg_dd790ee3"
+              focusable="false"
+              viewBox="0 0 2048 2048"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1024 1664q27 0 50 10t40 27 28 41 10 50q0 27-10 50t-27 40-41 28-50 10q-27 0-50-10t-40-27-28-41-10-50q0-27 10-50t27-40 41-28 50-10zm0-768q27 0 50 10t40 27 28 41 10 50q0 27-10 50t-27 40-41 28-50 10q-27 0-50-10t-40-27-28-41-10-50q0-27 10-50t27-40 41-28 50-10zm0-512q-27 0-50-10t-40-27-28-41-10-50q0-27 10-50t27-40 41-28 50-10q27 0 50 10t40 27 28 41 10 50q0 27-10 50t-27 40-41 28-50 10z"
+              />
+            </svg>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

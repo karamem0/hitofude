@@ -38,6 +38,7 @@ function Tree(props: Readonly<React.PropsWithChildren<TreeProps>>, ref: React.Re
     <div
       ref={ref}
       role="menu"
+      tabIndex={0}
       css={css`
         display: flex;
         flex-direction: column;

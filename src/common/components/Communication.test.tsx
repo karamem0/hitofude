@@ -8,8 +8,8 @@
 
 import React from 'react';
 
-import Communication from './Communication.presenter';
 import IntlProvider from '../../providers/IntlProvider';
+import Presenter from './Communication.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
@@ -22,7 +22,7 @@ it('should create shapshot', async () => {
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
-        <Communication {...params} />
+        <Presenter {...params} />
       </ThemeProvider>
     </IntlProvider>
   );

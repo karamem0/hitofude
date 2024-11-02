@@ -7,7 +7,7 @@ exports[`should create shapshot if loading is "false" 1`] = `
     dir="ltr"
   >
     <div
-      data-testid="Children"
+      data-testid="children"
     />
   </div>
 </DocumentFragment>

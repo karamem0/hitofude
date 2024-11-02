@@ -9,16 +9,21 @@
 import React from 'react';
 
 import IntlProvider from '../../providers/IntlProvider';
-import Presenter from './Loader.presenter';
+import Presenter from './TreeItem.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot if loading is "true"', async () => {
+it('should create shapshot if selected is "true"', async () => {
   const params = {
-    children: (
-      <div data-testid="children" />
+    icon: (
+      <div data-testid="icon" />
     ),
-    loading: true
+    info: (
+      <div data-testid="info" />
+    ),
+    key: '1',
+    name: 'Markdown.md',
+    selected: true
   };
   const { asFragment } = render(
     <IntlProvider>
@@ -30,12 +35,17 @@ it('should create shapshot if loading is "true"', async () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create shapshot if loading is "false"', async () => {
+it('should create shapshot if root is "false"', async () => {
   const params = {
-    children: (
-      <div data-testid="children" />
+    icon: (
+      <div data-testid="icon" />
     ),
-    loading: false
+    info: (
+      <div data-testid="info" />
+    ),
+    key: '1',
+    name: 'Markdown.md',
+    selected: false
   };
   const { asFragment } = render(
     <IntlProvider>
