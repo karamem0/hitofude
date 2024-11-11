@@ -13,7 +13,7 @@ import Presenter from './Communication.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot', async () => {
+it('should create a shapshot', () => {
   const params = {
     description: 'Something went wrong',
     image: 'https://example.com/image.png',

@@ -11,26 +11,24 @@ export interface AppBarMenuAction {
   data: unknown
 }
 
-export enum AppBarMenuType {
-  changeTheme = 'changeTheme'
-}
+export type AppBarMenuType =
+  | 'changeTheme';
 
 export interface ContentMenuAction {
   type: ContentMenuType,
   data: unknown
 }
 
-export enum ContentMenuType {
-  closeFile = 'closeFile',
-  downloadFile = 'downloadFile',
-  editFile = 'editFile',
-  openFileVersionPanel = 'openFileVersionPanel',
-  saveFile = 'saveFile',
-  toggleMinimap = 'toggleMinimap',
-  togglePreview = 'togglePreview',
-  toggleScroll = 'toggleScroll',
-  toggleWordWrap = 'toggleWordWrap'
-}
+export type ContentMenuType =
+  | 'closeFile'
+  | 'downloadFile'
+  | 'editFile'
+  | 'openFileVersionPanel'
+  | 'saveFile'
+  | 'toggleMinimap'
+  | 'togglePreview'
+  | 'toggleScroll'
+  | 'toggleWordWrap';
 
 export interface ContentProps {
   editing?: boolean,
@@ -49,39 +47,37 @@ export interface DialogAction {
   data: unknown
 }
 
-export enum DialogType {
-  changeTheme = 'changeTheme',
-  copyFile = 'copyFile',
-  copyLink = 'copyLink',
-  createFile = 'createFile',
-  createFolder = 'createFolder',
-  deleteFile = 'deleteFile',
-  deleteFolder = 'deleteFolder',
-  overwriteFile = 'overwriteFile',
-  renameFile = 'renameFile',
-  renameFolder = 'renameFolder',
-  restoreFile = 'restoreFile'
-}
+export type DialogType =
+  | 'changeTheme'
+  | 'copyFile'
+  | 'copyLink'
+  | 'createFile'
+  | 'createFolder'
+  | 'deleteFile'
+  | 'deleteFolder'
+  | 'overwriteFile'
+  | 'renameFile'
+  | 'renameFolder'
+  | 'restoreFile';
 
 export interface ExplorerMenuAction {
   type: ExplorerMenuType,
   data: unknown
 }
 
-export enum ExplorerMenuType {
-  copyFile = 'copyFile',
-  copyLink = 'copyLink',
-  createFile = 'createFile',
-  createFolder = 'createFolder',
-  deleteFile = 'deleteFile',
-  deleteFolder = 'deleteFolder',
-  downloadFile = 'downloadFile',
-  openWithOneDrive = 'openWithOneDrive',
-  refreshFolder = 'refreshFolder',
-  renameFile = 'renameFile',
-  renameFolder = 'renameFolder',
-  toggleAllFiles = 'toggleAllFiles'
-}
+export type ExplorerMenuType =
+  | 'copyFile'
+  | 'copyLink'
+  | 'createFile'
+  | 'createFolder'
+  | 'deleteFile'
+  | 'deleteFolder'
+  | 'downloadFile'
+  | 'openWithOneDrive'
+  | 'refreshFolder'
+  | 'renameFile'
+  | 'renameFolder'
+  | 'toggleAllFiles';
 
 export interface ExplorerParams {
   file?: string,
@@ -142,16 +138,14 @@ export interface MarkdownProps {
   text?: string
 }
 
-export enum MarkdownToolbarAction {
-  bold = 'bold',
-  italic = 'italic',
-  underline = 'underline'
-}
+export type MarkdownToolbarAction =
+  | 'bold'
+  | 'italic'
+  | 'underline';
 
-export enum ProgressType {
-  save = 'save',
-  upload = 'upload'
-}
+export type ProgressType =
+  | 'save'
+  | 'upload';
 
 export type RouteParams = ExplorerParams | SearchParams;
 
@@ -160,10 +154,9 @@ export interface SearchMenuAction {
   data: unknown
 }
 
-export enum SearchMenuType {
-  copyLink = 'copyLink',
-  openFileLocation = 'openFileLocation'
-}
+export type SearchMenuType =
+  | 'copyLink'
+  | 'openFileLocation';
 
 export interface SearchParams {
   file?: string,
@@ -194,9 +187,8 @@ export interface SidePanelAction {
   data: unknown
 }
 
-export enum SidePanelType {
-  fileVersion = 'fileVersion'
-}
+export type SidePanelType =
+  | 'fileVersion';
 
 export interface TabProps {
   loading?: boolean,

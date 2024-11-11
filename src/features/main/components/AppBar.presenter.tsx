@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-import {
-  AppBarMenuAction,
-  AppBarMenuType,
-  TabType
-} from '../../../types/Model';
+import { AppBarMenuAction, TabType } from '../../../types/Model';
 import {
   ColorIcon,
   SearchIcon,
@@ -112,7 +108,7 @@ function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
           menu={(
             <MenuList>
               <MenuItem
-                key={AppBarMenuType.changeTheme}
+                key="changeTheme"
                 icon={(
                   <ColorIcon
                     css={css`
@@ -121,7 +117,7 @@ function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
                     `} />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
-                  type: AppBarMenuType.changeTheme,
+                  type: 'changeTheme',
                   data: undefined
                 })}>
                 <FormattedMessage {...messages.ChangeTheme} />

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should create shapshot 1`] = `
+exports[`should create a shapshot when the message parameter is not undedined 1`] = `
 <DocumentFragment>
   .emotion-0 {
   position: fixed;
@@ -16,6 +16,66 @@ exports[`should create shapshot 1`] = `
   >
     <div
       aria-labelledby="fui-r1"
+      class="fui-MessageBar r2oyxsj emotion-0 ___hd2t6r0_1l4k1ej f13ftzij frd1ypx f1gyjrma fqyqtrt f18qd5xz"
+      role="group"
+    >
+      <div
+        class="fui-MessageBar__icon r1df1z33 ___gwngeu0_j951p00 f14a4cve"
+      >
+        <svg
+          aria-hidden="true"
+          class="___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0"
+          fill="currentColor"
+          height="1em"
+          viewBox="0 0 20 20"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.68 2.79a1.5 1.5 0 0 1 2.64 0l6.5 12A1.5 1.5 0 0 1 16.5 17h-13a1.5 1.5 0 0 1-1.32-2.21l6.5-12ZM10.5 7.5a.5.5 0 0 0-1 0v4a.5.5 0 0 0 1 0v-4Zm.25 6.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <div
+        class="fui-MessageBarBody rtatq2b"
+      >
+        Something went wrong
+      </div>
+      <div
+        class="fui-MessageBarActions r1t4x98y ___12vb27g_aqou110 fjseox"
+      />
+      <div
+        class="fui-MessageBarActions__containerAction rgzw8nq"
+      >
+        <button
+          class="fui-Link ___52mpgl0_k1g75g0 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao f1mk8lai fnbmjn9 f1o700av f1iuv45f f1cmlufx f9n3di6 f1ids18y f1tx3yz7 f1deo86v f1eh06m1 f1iescvh fhgqx19 f1olyrje f1p93eir f1nev41a f1ern45e f1n71otn f1h8hb77 f1deefiw"
+          type="button"
+        >
+          Dismiss
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the message parameter is undedined 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: fixed;
+  z-index: 900;
+  width: calc(100% - 1rem);
+  margin: 0.5rem;
+  background-color: #fafafa;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      aria-labelledby="fui-r3"
       class="fui-MessageBar r2oyxsj emotion-0 ___hd2t6r0_1l4k1ej f13ftzij frd1ypx f1gyjrma fqyqtrt f18qd5xz"
       role="group"
     >

@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-import {
-  DialogType,
-  File,
-  FileConflict
-} from '../../../types/Model';
+import { File, FileConflict } from '../../../types/Model';
 import { Event } from '../../../types/Event';
 import Presenter from './ExplorerFileConflictButton.presenter';
 import { setDialogAction } from '../../../stores/Action';
@@ -38,7 +34,7 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
   const handleClick = React.useCallback((event: Event) => {
     event.stopPropagation();
     dispatch(setDialogAction({
-      type: DialogType.overwriteFile,
+      type: 'overwriteFile',
       data: conflictedFile
     }));
   }, [

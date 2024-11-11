@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-import {
-  File,
-  SidePanelAction,
-  SidePanelType
-} from '../../../types/Model';
+import { File, SidePanelAction } from '../../../types/Model';
 import FileVersionPanel from '../components/FileVersionPanel';
 
 interface SidePanelFactoryProps {
@@ -26,7 +22,7 @@ function SidePanelFactory(props: Readonly<SidePanelFactoryProps>) {
   } = props;
 
   switch (action?.type) {
-    case SidePanelType.fileVersion:
+    case 'fileVersion':
       return (
         <FileVersionPanel value={action.data as File} />
       );

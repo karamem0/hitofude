@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  overflow: hidden auto;
+}
+
+.emotion-0::-webkit-scrollbar {
+  width: 0.875rem;
+  background-color: transparent;
+  border: 1px solid #e6e6e6;
+}
+
+.emotion-0::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+      tabindex="-1"
+    >
+      <div
+        data-testid="test-Children"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -18,7 +18,6 @@ import {
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import Presenter from './ContentSupported.presenter';
-import { ProgressType } from '../../../types/Model';
 import { fromText } from '../../../utils/Blob';
 import { useProgress } from '../../../common/providers/ProgressProvider';
 import { useService } from '../../../providers/ServiceProvider';
@@ -64,7 +63,7 @@ function ContentSupported() {
         if (contentFile == null) {
           throw new DependencyNullError();
         }
-        setProgress(ProgressType.save);
+        setProgress('save');
         const file = await Promise.resolve()
           .then(() => graph.setFileContent(contentFile, fromText(text ?? '')))
           .then((file) => graph.getFileById(file.id));

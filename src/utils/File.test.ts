@@ -7,14 +7,134 @@
 //
 
 import {
+  getBaseName,
+  getExtension,
   getMimeType,
   isMimeType,
   isSupportedFile
 } from './File';
 
+describe('getBaseName', () => {
+
+  it('should retrieve the base name when the file name contains an extension', () => {
+    const param = {
+      value: 'foo.txt'
+    };
+    const expected = {
+      value: 'foo'
+    };
+    const actual = getBaseName(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve the base name when the file name contains multiple extensions', () => {
+    const param = {
+      value: 'foo.txt.bak'
+    };
+    const expected = {
+      value: 'foo.txt'
+    };
+    const actual = getBaseName(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve the base name when the file name does not contain an extension', () => {
+    const param = {
+      value: 'foo'
+    };
+    const expected = {
+      value: 'foo'
+    };
+    const actual = getBaseName(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve undefined when the file name is null', () => {
+    const param = {
+      value: null
+    };
+    const expected = {
+      value: undefined
+    };
+    const actual = getBaseName(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve undefined when the file name is undefined', () => {
+    const param = {
+      value: undefined
+    };
+    const expected = {
+      value: undefined
+    };
+    const actual = getBaseName(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+});
+
+describe('getExtension', () => {
+
+  it('should retrieve the extension when the file name contains an extension', () => {
+    const param = {
+      value: 'foo.txt'
+    };
+    const expected = {
+      value: '.txt'
+    };
+    const actual = getExtension(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve the extension when the file name contains multiple extensions', () => {
+    const param = {
+      value: 'foo.txt.bak'
+    };
+    const expected = {
+      value: '.bak'
+    };
+    const actual = getExtension(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve undefined when the file name does not contain an extension', () => {
+    const param = {
+      value: 'foo'
+    };
+    const expected = {
+      value: undefined
+    };
+    const actual = getExtension(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve undefined when the file name is null', () => {
+    const param = {
+      value: null
+    };
+    const expected = {
+      value: undefined
+    };
+    const actual = getExtension(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should retrieve undefined when the file name is undefined', () => {
+    const param = {
+      value: undefined
+    };
+    const expected = {
+      value: undefined
+    };
+    const actual = getBaseName(param.value);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+});
+
 describe('getMimeType', () => {
 
-  it('should return "text/plain" if the file is plain text', () => {
+  it('should retrieve text/plain when the file is a plain text', () => {
     const param = {
       fileName: 'foo.txt',
       mimeType: 'text/plain'
@@ -26,7 +146,7 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return "text/markdown" if the file is markdown text', () => {
+  it('should retrieve text/markdown when the file is a markdown text', () => {
     const param = {
       fileName: 'foo.md',
       mimeType: ''
@@ -38,7 +158,7 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return the "undefined" if the file name is "undefined"', () => {
+  it('should retrieve undefined when the file name is undefined', () => {
     const param = {
       fileName: undefined,
       mimeType: 'text/plain'
@@ -50,7 +170,7 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return the "undefined" if the MIME type is "undefined"', () => {
+  it('should retrieve undefined when the MIME type is undefined', () => {
     const param = {
       fileName: 'foo.txt',
       mimeType: undefined
@@ -62,7 +182,7 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return the "undefined" if the MIME type is invalid format', () => {
+  it('should retrieve undefined when the MIME type is an invalid format', () => {
     const param = {
       fileName: 'foo.txt',
       mimeType: 'unknown'
@@ -78,7 +198,7 @@ describe('getMimeType', () => {
 
 describe('isMimeType', () => {
 
-  it('should return true if the value matches the type', () => {
+  it('should retrieve true when the value matches the type', () => {
     const param = {
       value: 'text/plain',
       match: 'text/*'
@@ -90,7 +210,7 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return true if the value matches the subtype', () => {
+  it('should retrieve true when the value matches the subtype', () => {
     const param = {
       value: 'text/plain',
       match: '*/plain'
@@ -102,7 +222,7 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return true if the value matches the type and subtype', () => {
+  it('should retrieve true when the value matches the type and subtype', () => {
     const param = {
       value: 'text/plain',
       match: 'text/plain'
@@ -114,7 +234,7 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return false if the value does not match the type', () => {
+  it('should retrieve false when the value does not match the type', () => {
     const param = {
       value: 'text/plain',
       match: 'image/*'
@@ -126,7 +246,7 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return false if the value does not match the subtype', () => {
+  it('should retrieve false when the value does not match the subtype', () => {
     const param = {
       value: 'text/plain',
       match: '*/markdown'
@@ -142,7 +262,7 @@ describe('isMimeType', () => {
 
 describe('isSupportedFile', () => {
 
-  it('should return true if the file is image', () => {
+  it('should retrieve true when the file is an image', () => {
     const param = {
       value: {
         mimeType: 'image/png'
@@ -155,7 +275,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return true if the file is video', () => {
+  it('should retrieve true when the file is a video', () => {
     const param = {
       value: {
         mimeType: 'video/mp4'
@@ -168,7 +288,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return true if the file is markdown text', () => {
+  it('should retrieve true when the file is a markdown text', () => {
     const param = {
       value: {
         mimeType: 'text/markdown'
@@ -181,7 +301,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return false if the file is other format', () => {
+  it('should retrieve false when the file is an other format', () => {
     const param = {
       value: {
         mimeType: 'text/plain'
@@ -194,7 +314,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return false if the file is "undefined"', () => {
+  it('should retrieve false when the file is undefined', () => {
     const param = {
       value: undefined
     };

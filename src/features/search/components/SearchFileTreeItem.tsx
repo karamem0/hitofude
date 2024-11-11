@@ -10,10 +10,8 @@ import React from 'react';
 
 import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
 import {
-  DialogType,
   File,
   SearchMenuAction,
-  SearchMenuType,
   TabType
 } from '../../../types/Model';
 import { setDialogAction, setError } from '../../../stores/Action';
@@ -37,7 +35,7 @@ function SearchFileTreeItem() {
 
   const handleMenuClick = React.useCallback(async (_: Event, data?: SearchMenuAction) => {
     switch (data?.type) {
-      case SearchMenuType.copyLink: {
+      case 'copyLink': {
         try {
           const value = data?.data as File | undefined;
           if (value?.id == null) {
@@ -45,7 +43,7 @@ function SearchFileTreeItem() {
           }
           const file = await graph.getFileById(value?.id);
           dispatch(setDialogAction({
-            type: DialogType.copyLink,
+            type: 'copyLink',
             data: file.webUrl
           }));
         } catch (error) {
@@ -53,7 +51,7 @@ function SearchFileTreeItem() {
         }
         break;
       }
-      case SearchMenuType.openFileLocation: {
+      case 'openFileLocation': {
         try {
           const value = data?.data as File | undefined;
           if (value?.id == null) {

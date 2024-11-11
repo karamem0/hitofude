@@ -13,10 +13,10 @@ import Presenter from './Mermaid.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot', async () => {
+it('should create a shapshot', () => {
   const params = {
     children: (
-      <div data-testid="children" />
+      <div data-testid="test-Children" />
     )
   };
   const { asFragment } = render(

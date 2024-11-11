@@ -10,7 +10,6 @@ import React from 'react';
 
 import {
   DialogAction,
-  DialogType,
   File,
   FileConflict,
   FileVersion,
@@ -39,47 +38,47 @@ function DialogFactory(props: Readonly<DialogFactoryProps>) {
   } = props;
 
   switch (action?.type) {
-    case DialogType.changeTheme:
+    case 'changeTheme':
       return (
         <ThemeChangeDialog />
       );
-    case DialogType.copyFile:
+    case 'copyFile':
       return (
         <FileCopyDialog value={action.data as File} />
       );
-    case DialogType.copyLink:
+    case 'copyLink':
       return (
         <LinkCopyDialog value={action.data as string} />
       );
-    case DialogType.createFile:
+    case 'createFile':
       return (
         <FileCreateDialog />
       );
-    case DialogType.createFolder:
+    case 'createFolder':
       return (
         <FolderCreateDialog />
       );
-    case DialogType.deleteFile:
+    case 'deleteFile':
       return (
         <FileDeleteDialog value={action.data as File} />
       );
-    case DialogType.deleteFolder:
+    case 'deleteFolder':
       return (
         <FolderDeleteDialog value={action.data as Folder} />
       );
-    case DialogType.overwriteFile:
+    case 'overwriteFile':
       return (
         <FileOverwriteDialog value={action.data as FileConflict} />
       );
-    case DialogType.renameFile:
+    case 'renameFile':
       return (
         <FileRenameDialog value={action.data as File} />
       );
-    case DialogType.renameFolder:
+    case 'renameFolder':
       return (
         <FolderRenameDialog value={action.data as Folder} />
       );
-    case DialogType.restoreFile:
+    case 'restoreFile':
       return (
         <FileRestoreDialog value={action.data as FileVersion} />
       );

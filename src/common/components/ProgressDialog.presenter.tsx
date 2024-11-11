@@ -23,13 +23,15 @@ import { useIntl } from 'react-intl';
 import { useTheme } from '../../providers/ThemeProvider';
 
 interface ProgressDialogProps {
-  value?: ProgressType
+  mountNode?: HTMLElement,
+  type?: ProgressType
 }
 
 function ProgressDialog(props: Readonly<ProgressDialogProps>) {
 
   const {
-    value
+    mountNode,
+    type
   } = props;
 
   const intl = useIntl();
@@ -41,9 +43,9 @@ function ProgressDialog(props: Readonly<ProgressDialogProps>) {
 
   return (
     <Dialog
-      modalType="alert"
-      open={!!value}>
-      <DialogSurface>
+      modalType="modal"
+      open={type != null}>
+      <DialogSurface mountNode={mountNode}>
         <DialogBody>
           <DialogContent
             css={css`
@@ -62,10 +64,10 @@ function ProgressDialog(props: Readonly<ProgressDialogProps>) {
               `}>
               {
                 (() => {
-                  switch (value) {
-                    case ProgressType.save:
+                  switch (type) {
+                    case 'save':
                       return intl.formatMessage(messages.Saving);
-                    case ProgressType.upload:
+                    case 'upload':
                       return intl.formatMessage(messages.Uploading);
                     default:
                       return null;

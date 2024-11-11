@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot when the type parameter is save 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="fui-DialogSurface__backdrop rsptlh5"
+  />
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row;
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+  grid-gap: 0.5rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.emotion-1 {
+  font-size: 24px;
+  line-height: calc(24px * 1.25);
+}
+
+<div
+    aria-labelledby="dialog-title-r2"
+    aria-modal="true"
+    class="fui-DialogSurface r1svjbtt"
+    data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r1","isOthersAccessible":false,"isTrapped":true}}"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="fui-DialogBody r1h3qql9"
+    >
+      <div
+        class="fui-DialogContent r1v5zwsm emotion-0"
+      >
+        <div
+          class="fui-Spinner r82apo5"
+          role="progressbar"
+        >
+          <span
+            class="fui-Spinner__spinner rvgcg50 ___1wbe01p_3bwnur0 fxldao9 f1w9dchk f1v3ph3m"
+          >
+            <span
+              class="fui-Spinner__spinnerTail rxov3xa"
+            />
+          </span>
+        </div>
+        <span
+          class="fui-Text emotion-1 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+        >
+          Saving...
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <span
+      hidden=""
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is undefined 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr8 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  />
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is upload 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="fui-DialogSurface__backdrop rsptlh5"
+  />
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row;
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+  grid-gap: 0.5rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.emotion-1 {
+  font-size: 24px;
+  line-height: calc(24px * 1.25);
+}
+
+<div
+    aria-labelledby="dialog-title-r6"
+    aria-modal="true"
+    class="fui-DialogSurface r1svjbtt"
+    data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r5","isOthersAccessible":false,"isTrapped":true}}"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="fui-DialogBody r1h3qql9"
+    >
+      <div
+        class="fui-DialogContent r1v5zwsm emotion-0"
+      >
+        <div
+          class="fui-Spinner r82apo5"
+          role="progressbar"
+        >
+          <span
+            class="fui-Spinner__spinner rvgcg50 ___1wbe01p_3bwnur0 fxldao9 f1w9dchk f1v3ph3m"
+          >
+            <span
+              class="fui-Spinner__spinnerTail rxov3xa"
+            />
+          </span>
+        </div>
+        <span
+          class="fui-Text emotion-1 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+        >
+          Uploading...
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr4 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <span
+      hidden=""
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-import {
-  File,
-  SearchMenuAction,
-  SearchMenuType
-} from '../../../types/Model';
+import { File, SearchMenuAction } from '../../../types/Model';
 import {
   LinkIcon,
   OpenFolderHorizontalIcon,
@@ -62,7 +58,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
         <MenuList>
           <MenuGroup>
             <MenuItem
-              key={SearchMenuType.copyLink}
+              key="copyLink"
               icon={(
                 <LinkIcon
                   css={css`
@@ -71,7 +67,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: SearchMenuType.copyLink,
+                type: 'copyLink',
                 data: item
               })}>
               <FormattedMessage {...messages.CopyLink} />
@@ -80,7 +76,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
           <MenuDivider />
           <MenuGroup>
             <MenuItem
-              key={SearchMenuType.openFileLocation}
+              key="openFileLocation"
               icon={(
                 <OpenFolderHorizontalIcon
                   css={css`
@@ -89,7 +85,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
                 `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: SearchMenuType.openFileLocation,
+                type: 'openFileLocation',
                 data: item
               })}>
               <FormattedMessage {...messages.OpenFileLocation} />

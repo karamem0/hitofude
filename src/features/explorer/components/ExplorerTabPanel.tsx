@@ -15,11 +15,6 @@ import {
   FileNotFoundError
 } from '../../../types/Error';
 import {
-  DialogType,
-  ProgressType,
-  TabType
-} from '../../../types/Model';
-import {
   appendExplorerFile,
   appendExplorerFileConflict,
   setDialogAction,
@@ -30,6 +25,7 @@ import {
 import { DropEventData } from '../types/Event';
 import { Event } from '../../../types/Event';
 import Presenter from './ExplorerTabPanel.presenter';
+import { TabType } from '../../../types/Model';
 import { fromFile } from '../../../utils/Blob';
 import { isSupportedFile } from '../../../utils/File';
 import { useProgress } from '../../../common/providers/ProgressProvider';
@@ -58,7 +54,7 @@ function ExplorerTabPanel() {
       if (folder == null) {
         throw new DependencyNullError();
       }
-      setProgress(ProgressType.upload);
+      setProgress('upload');
       for (const acceptedFile of data.acceptedFiles) {
         const fileName = acceptedFile.name;
         const fileBlob = fromFile(acceptedFile);
@@ -102,7 +98,7 @@ function ExplorerTabPanel() {
 
   const handleCreateFile = React.useCallback(() => {
     dispatch(setDialogAction({
-      type: DialogType.createFile,
+      type: 'createFile',
       data: undefined
     }));
   }, [

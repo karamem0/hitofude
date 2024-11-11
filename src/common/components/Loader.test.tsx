@@ -8,15 +8,16 @@
 
 import React from 'react';
 
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './Loader.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
-import { render } from '@testing-library/react';
 
-it('should create shapshot if loading is "true"', async () => {
+it('should create a shapshot when the loading parameter is true', () => {
   const params = {
     children: (
-      <div data-testid="children" />
+      <div data-testid="test-Children" />
     ),
     loading: true
   };
@@ -28,12 +29,13 @@ it('should create shapshot if loading is "true"', async () => {
     </IntlProvider>
   );
   expect(asFragment()).toMatchSnapshot();
+  expect(screen.queryByTestId('test-Children')).not.toBeInTheDocument();
 });
 
-it('should create shapshot if loading is "false"', async () => {
+it('should create a shapshot when the loading parameter is false', () => {
   const params = {
     children: (
-      <div data-testid="children" />
+      <div data-testid="test-Children" />
     ),
     loading: false
   };
@@ -45,4 +47,5 @@ it('should create shapshot if loading is "false"', async () => {
     </IntlProvider>
   );
   expect(asFragment()).toMatchSnapshot();
+  expect(screen.getByTestId('test-Children')).toBeInTheDocument();
 });

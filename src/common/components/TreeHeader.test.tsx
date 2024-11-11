@@ -13,11 +13,11 @@ import Presenter from './TreeHeader.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot if root is "true"', async () => {
+it('should create a shapshot when the root parameter is true', () => {
   const params = {
     name: 'Explorer',
     menu: (
-      <div data-testid="menu" />
+      <div data-testid="test-Menu" />
     ),
     root: true
   };
@@ -31,11 +31,11 @@ it('should create shapshot if root is "true"', async () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create shapshot if root is "false"', async () => {
+it('should create a shapshot when the root parameter is false', () => {
   const params = {
     name: 'Explorer',
     menu: (
-      <div data-testid="menu" />
+      <div data-testid="test-Menu" />
     ),
     root: false
   };

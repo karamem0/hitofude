@@ -10,9 +10,7 @@ import React from 'react';
 
 import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import {
-  DialogType,
   ExplorerMenuAction,
-  ExplorerMenuType,
   Folder,
   TabType
 } from '../../../types/Model';
@@ -42,32 +40,32 @@ function ExplorerHeaderMenuList() {
 
   const handleMenuClick = React.useCallback(async (_: Event, data?: ExplorerMenuAction) => {
     switch (data?.type) {
-      case ExplorerMenuType.copyLink: {
+      case 'copyLink': {
         const value = data?.data as Folder | undefined;
         if (value?.webUrl == null) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: DialogType.copyLink,
+          type: 'copyLink',
           data: value.webUrl
         }));
         break;
       }
-      case ExplorerMenuType.createFile: {
+      case 'createFile': {
         dispatch(setDialogAction({
-          type: DialogType.createFile,
+          type: 'createFile',
           data: null
         }));
         break;
       }
-      case ExplorerMenuType.createFolder: {
+      case 'createFolder': {
         dispatch(setDialogAction({
-          type: DialogType.createFolder,
+          type: 'createFolder',
           data: null
         }));
         break;
       }
-      case ExplorerMenuType.openWithOneDrive: {
+      case 'openWithOneDrive': {
         const value = data?.data as Folder | undefined;
         if (value?.webUrl == null) {
           throw new ArgumentNullError();
@@ -75,7 +73,7 @@ function ExplorerHeaderMenuList() {
         window.open(value.webUrl, '_blank', 'noreferrer');
         break;
       }
-      case ExplorerMenuType.refreshFolder: {
+      case 'refreshFolder': {
         try {
           const value = data?.data as Folder | undefined;
           if (value == null) {
@@ -88,7 +86,7 @@ function ExplorerHeaderMenuList() {
         }
         break;
       }
-      case ExplorerMenuType.toggleAllFiles: {
+      case 'toggleAllFiles': {
         try {
           const value = data?.data as boolean | undefined;
           if (value == null) {

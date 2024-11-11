@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should create shapshot if root is "false" 1`] = `
+exports[`should create a shapshot when the root parameter is false 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: grid;
@@ -133,7 +133,7 @@ exports[`should create shapshot if root is "false" 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create shapshot if root is "true" 1`] = `
+exports[`should create a shapshot when the root parameter is true 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: grid;

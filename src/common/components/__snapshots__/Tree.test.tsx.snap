@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should create shapshot if disabled is "false" 1`] = `
+exports[`should create a shapshot when the disabled parameter is false 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: -webkit-box;
@@ -24,14 +24,14 @@ exports[`should create shapshot if disabled is "false" 1`] = `
       tabindex="0"
     >
       <div
-        data-testid="children"
+        data-testid="test-Children"
       />
     </div>
   </div>
 </DocumentFragment>
 `;
 
-exports[`should create shapshot if disabled is "true" 1`] = `
+exports[`should create a shapshot when the disabled parameter is true 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: -webkit-box;

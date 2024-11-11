@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot when the open parameter is false 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr3 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  />
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the open parameter is true 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="rmnljus fui-OverlayDrawer__backdrop ___mgf8q40_1ccxybz f1euv43f"
+  />
+  .emotion-0 {
+  height: 100svh;
+}
+
+.emotion-1 {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.emotion-2 {
+  margin-bottom: 1rem;
+}
+
+<aside
+    aria-labelledby="dialog-title-r2"
+    aria-modal="true"
+    class="fui-OverlayDrawer r7dfyj8 emotion-0 ___xtj47k0_1v5b7dm fsqykmd f1e31b4d frppm18 fqofjzu f1euv43f"
+    data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r1","isOthersAccessible":false,"isTrapped":true}}"
+    role="dialog"
+    tabindex="-1"
+  >
+    <header
+      class="fui-DrawerHeader r3ovn4i"
+      role="none"
+    >
+      <div
+        class="fui-DrawerHeaderTitle ___1g6dz7n_17w6zju f22iagw f1869bpl f122n59 fsnqrgy"
+      >
+        <h2
+          class="fui-DrawerHeaderTitle__heading fui-DialogTitle rxjm636"
+          id="dialog-title-r2"
+        >
+          Side Panel
+        </h2>
+        <div
+          class="fui-DrawerHeaderTitle__action fui-DialogTitle__action r13kcrze ___zdrx2v0_7c5v900 faqnl2i"
+        >
+          <button
+            aria-label="Close"
+            class="fui-Button r1alrhcs ___w3o4yv0_df8ghi0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fecsdlb fnwyq0v ft1hn21 fuxngvv fy5bs14 fsv2rcd f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1omzyqd f1dfjoow f1j98vj9 fj8yq94 f4xjyn1 f1et0tmh f9ddjv3 f1wi8ngl f18ktai2 fwbmr0d f44c6la"
+            type="button"
+          >
+            <span
+              class="fui-Button__icon rywnvv2"
+            >
+              <span
+                aria-hidden="true"
+                class="root_dd790ee3 emotion-1"
+              >
+                <svg
+                  class="svg_dd790ee3"
+                  focusable="false"
+                  viewBox="0 0 2048 2048"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1115 1024l690 691-90 90-691-690-691 690-90-90 690-691-690-691 90-90 691 690 691-690 90 90-690 691z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <div
+      class="fui-DrawerBody ri6rvx7 emotion-2"
+      role="group"
+      tabindex="0"
+    >
+      <div
+        data-testid="test-Children"
+      />
+    </div>
+  </aside>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <span
+      hidden=""
+    />
+  </div>
+</DocumentFragment>
+`;

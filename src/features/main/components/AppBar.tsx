@@ -8,12 +8,7 @@
 
 import React from 'react';
 
-import {
-  AppBarMenuAction,
-  AppBarMenuType,
-  DialogType,
-  TabType
-} from '../../../types/Model';
+import { AppBarMenuAction, TabType } from '../../../types/Model';
 import { moveNext, movePrevious } from '../../../utils/Keyboard';
 import { setDialogAction, setTabOpen } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
@@ -36,9 +31,9 @@ function AppBar() {
 
   const handleMenuClick = React.useCallback((_: Event, data?: AppBarMenuAction) => {
     switch (data?.type) {
-      case AppBarMenuType.changeTheme: {
+      case 'changeTheme': {
         dispatch(setDialogAction({
-          type: DialogType.changeTheme,
+          type: 'changeTheme',
           data: undefined
         }));
         break;

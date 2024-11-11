@@ -13,13 +13,13 @@ import Presenter from './TreeItem.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot if selected is "true"', async () => {
+it('should create a shapshot when the selected parameter is true', () => {
   const params = {
     icon: (
-      <div data-testid="icon" />
+      <div data-testid="test-Icon" />
     ),
     info: (
-      <div data-testid="info" />
+      <div data-testid="test-Info" />
     ),
     key: '1',
     name: 'Markdown.md',
@@ -35,13 +35,13 @@ it('should create shapshot if selected is "true"', async () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create shapshot if root is "false"', async () => {
+it('should create a shapshot when the selected parameter is false', () => {
   const params = {
     icon: (
-      <div data-testid="icon" />
+      <div data-testid="test-Icon" />
     ),
     info: (
-      <div data-testid="info" />
+      <div data-testid="test-Info" />
     ),
     key: '1',
     name: 'Markdown.md',

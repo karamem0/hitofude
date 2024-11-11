@@ -33,7 +33,7 @@ export function getBaseName(value: string | null | undefined): string | undefine
   }
   const exec = regexFileName.exec(value);
   if (exec == null) {
-    return undefined;
+    return value;
   }
   return exec.groups?.base;
 }

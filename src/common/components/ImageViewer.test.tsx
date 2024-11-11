@@ -8,12 +8,12 @@
 
 import React from 'react';
 
-import ImageViewer from './ImageViewer.presenter';
 import IntlProvider from '../../providers/IntlProvider';
+import Presenter from './ImageViewer.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot', async () => {
+it('should create a shapshot', () => {
   const params = {
     alt: 'image',
     className: 'image',
@@ -22,7 +22,7 @@ it('should create shapshot', async () => {
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
-        <ImageViewer {...params} />
+        <Presenter {...params} />
       </ThemeProvider>
     </IntlProvider>
   );

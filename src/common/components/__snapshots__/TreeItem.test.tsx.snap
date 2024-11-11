@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should create shapshot if root is "false" 1`] = `
+exports[`should create a shapshot when the selected parameter is false 1`] = `
 <DocumentFragment>
   .emotion-0 {
   padding: 0 0.5rem;
@@ -123,7 +123,7 @@ exports[`should create shapshot if root is "false" 1`] = `
               class="emotion-4"
             >
               <div
-                data-testid="icon"
+                data-testid="test-Icon"
               />
             </div>
             <span
@@ -134,7 +134,7 @@ exports[`should create shapshot if root is "false" 1`] = `
           </div>
         </button>
         <div
-          data-testid="info"
+          data-testid="test-Info"
         />
       </div>
     </div>
@@ -142,7 +142,7 @@ exports[`should create shapshot if root is "false" 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create shapshot if selected is "true" 1`] = `
+exports[`should create a shapshot when the selected parameter is true 1`] = `
 <DocumentFragment>
   .emotion-0 {
   padding: 0 0.5rem;
@@ -265,7 +265,7 @@ exports[`should create shapshot if selected is "true" 1`] = `
               class="emotion-4"
             >
               <div
-                data-testid="icon"
+                data-testid="test-Icon"
               />
             </div>
             <span
@@ -276,7 +276,7 @@ exports[`should create shapshot if selected is "true" 1`] = `
           </div>
         </button>
         <div
-          data-testid="info"
+          data-testid="test-Info"
         />
       </div>
     </div>

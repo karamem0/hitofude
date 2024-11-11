@@ -16,7 +16,7 @@ function ProgressDialog() {
   const { progress } = useProgress();
 
   return (
-    <Presenter value={progress} />
+    <Presenter type={progress} />
   );
 
 }

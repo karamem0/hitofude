@@ -15,11 +15,7 @@ import {
   LinkIcon,
   RenameIcon
 } from '@fluentui/react-icons-mdl2';
-import {
-  ExplorerMenuAction,
-  ExplorerMenuType,
-  Folder
-} from '../../../types/Model';
+import { ExplorerMenuAction, Folder } from '../../../types/Model';
 import {
   MenuDivider,
   MenuGroup,
@@ -47,7 +43,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
     <MenuList>
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.copyLink}
+          key="copyLink"
           icon={(
             <LinkIcon
               css={css`
@@ -56,7 +52,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.copyLink,
+            type: 'copyLink',
             data: folder
           })}>
           <FormattedMessage {...messages.CopyLink} />
@@ -65,7 +61,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.renameFolder}
+          key="renameFolder"
           icon={(
             <RenameIcon
               css={css`
@@ -74,13 +70,13 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.renameFolder,
+            type: 'renameFolder',
             data: folder
           })}>
           <FormattedMessage {...messages.RenameFolder} />
         </MenuItem>
         <MenuItem
-          key={ExplorerMenuType.deleteFolder}
+          key="deleteFolder"
           icon={(
             <DeleteIcon
               css={css`
@@ -89,7 +85,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.deleteFolder,
+            type: 'deleteFolder',
             data: folder
           })}>
           <FormattedMessage {...messages.DeleteFolder} />
@@ -98,7 +94,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.openWithOneDrive}
+          key="openWithOneDrive"
           icon={(
             <OneDriveLogoIcon
               css={css`
@@ -107,7 +103,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.openWithOneDrive,
+            type: 'openWithOneDrive',
             data: folder
           })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />

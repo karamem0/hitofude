@@ -16,12 +16,7 @@ import {
   HistoryIcon,
   SaveIcon
 } from '@fluentui/react-icons-mdl2';
-import {
-  ContentMenuAction,
-  ContentMenuType,
-  File,
-  SidePanelType
-} from '../../../types/Model';
+import { ContentMenuAction, File } from '../../../types/Model';
 import {
   MenuDivider,
   MenuGroup,
@@ -72,7 +67,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
           editing ? (
             <React.Fragment>
               <MenuItem
-                key={`${ContentMenuType.saveFile}-1`}
+                key="saveFile"
                 disabled={!changed}
                 icon={(
                   <SaveIcon
@@ -82,13 +77,13 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
-                  type: ContentMenuType.saveFile,
+                  type: 'saveFile',
                   data: true
                 })}>
                 <FormattedMessage {...messages.Save} />
               </MenuItem>
               <MenuItem
-                key={`${ContentMenuType.saveFile}-0`}
+                key="saveAndCloseFile"
                 disabled={!changed}
                 icon={(
                   <div
@@ -99,13 +94,13 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
-                  type: ContentMenuType.saveFile,
+                  type: 'saveFile',
                   data: false
                 })}>
                 <FormattedMessage {...messages.SaveAndClose} />
               </MenuItem>
               <MenuItem
-                key={ContentMenuType.closeFile}
+                key="closeFile"
                 icon={(
                   <CancelIcon
                     css={css`
@@ -114,7 +109,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
-                  type: ContentMenuType.closeFile,
+                  type: 'closeFile',
                   data: undefined
                 })}>
                 <FormattedMessage {...messages.Cancel} />
@@ -122,7 +117,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             </React.Fragment>
           ) : (
             <MenuItem
-              key={ContentMenuType.editFile}
+              key="editFile"
               icon={(
                 <EditIcon
                   css={css`
@@ -131,7 +126,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
               `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: ContentMenuType.editFile,
+                type: 'editFile',
                 data: undefined
               })}>
               <FormattedMessage {...messages.Edit} />
@@ -142,7 +137,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ContentMenuType.openFileVersionPanel}
+          key="openFileVersionPanel"
           icon={(
             <HistoryIcon
               css={css`
@@ -151,9 +146,9 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ContentMenuType.openFileVersionPanel,
+            type: 'openFileVersionPanel',
             data: {
-              type: SidePanelType.fileVersion,
+              type: 'fileVersion',
               data: file
             }
           })}>
@@ -165,7 +160,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
         editing ? (
           <MenuGroup>
             <MenuItem
-              key={ContentMenuType.toggleMinimap}
+              key="toggleMinimap"
               icon={(
                 <CheckMarkIcon
                   css={css`
@@ -175,13 +170,13 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: ContentMenuType.toggleMinimap,
+                type: 'toggleMinimap',
                 data: !minimap
               })}>
               <FormattedMessage {...messages.Minimap} />
             </MenuItem>
             <MenuItem
-              key={ContentMenuType.toggleWordWrap}
+              key="toggleWordWrap"
               icon={(
                 <CheckMarkIcon
                   css={css`
@@ -191,13 +186,13 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: ContentMenuType.toggleWordWrap,
+                type: 'toggleWordWrap',
                 data: !wordWrap
               })}>
               <FormattedMessage {...messages.WordWrap} />
             </MenuItem>
             <MenuItem
-              key={ContentMenuType.toggleScroll}
+              key="toggleScroll"
               icon={(
                 <CheckMarkIcon
                   css={css`
@@ -207,13 +202,13 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: ContentMenuType.toggleScroll,
+                type: 'toggleScroll',
                 data: !scroll
               })}>
               <FormattedMessage {...messages.SyncScroll} />
             </MenuItem>
             <MenuItem
-              key={ContentMenuType.togglePreview}
+              key="togglePreview"
               icon={(
                 <CheckMarkIcon
                   css={css`
@@ -223,7 +218,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: ContentMenuType.togglePreview,
+                type: 'togglePreview',
                 data: !preview
               })}>
               <FormattedMessage {...messages.Preview} />
@@ -232,7 +227,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
         ) : (
           <MenuGroup>
             <MenuItem
-              key={ContentMenuType.downloadFile}
+              key="downloadFile"
               icon={(
                 <DownloadDocumentIcon
                   css={css`
@@ -241,7 +236,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: ContentMenuType.downloadFile,
+                type: 'downloadFile',
                 data: file
               })}>
               <FormattedMessage {...messages.Download} />

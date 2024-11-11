@@ -10,7 +10,6 @@ import React from 'react';
 
 import {
   ContentMenuAction,
-  ContentMenuType,
   File,
   SidePanelAction
 } from '../../../types/Model';
@@ -50,39 +49,39 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
 
   const handleMenuClick = React.useCallback((event: Event, data?: ContentMenuAction) => {
     switch (data?.type) {
-      case ContentMenuType.closeFile: {
+      case 'closeFile': {
         onCancel?.(event);
         break;
       }
-      case ContentMenuType.downloadFile: {
+      case 'downloadFile': {
         downloadFile(data.data as File);
         break;
       }
-      case ContentMenuType.editFile: {
+      case 'editFile': {
         onEdit?.(event);
         break;
       }
-      case ContentMenuType.openFileVersionPanel: {
+      case 'openFileVersionPanel': {
         dispatch(setSidePanelAction(data?.data as SidePanelAction));
         break;
       }
-      case ContentMenuType.saveFile: {
+      case 'saveFile': {
         onSave?.(event, data.data as boolean);
         break;
       }
-      case ContentMenuType.toggleMinimap: {
+      case 'toggleMinimap': {
         dispatch(setContentMinimap(data?.data as boolean));
         break;
       }
-      case ContentMenuType.togglePreview: {
+      case 'togglePreview': {
         dispatch(setContentPreview(data?.data as boolean));
         break;
       }
-      case ContentMenuType.toggleScroll: {
+      case 'toggleScroll': {
         dispatch(setContentScroll(data?.data as boolean));
         break;
       }
-      case ContentMenuType.toggleWordWrap: {
+      case 'toggleWordWrap': {
         dispatch(setContentWordWrap(data?.data as boolean));
         break;
       }

@@ -8,17 +8,17 @@
 
 import React from 'react';
 
-import Error500Page from './Error500Page.presenter';
 import IntlProvider from '../../../providers/IntlProvider';
+import Presenter from './Error500Page.presenter';
 import ThemeProvider from '../../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot', async () => {
+it('should create a shapshot', () => {
   const params = {};
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
-        <Error500Page {...params} />
+        <Presenter {...params} />
       </ThemeProvider>
     </IntlProvider>
   );

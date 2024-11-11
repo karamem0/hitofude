@@ -13,7 +13,24 @@ import Presenter from './ErrorNotification.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create shapshot', async () => {
+it('should create a shapshot when the message parameter is not undedined', () => {
+  const params = {
+    message: {
+      id: 'ErrorMessage',
+      defaultMessage: 'Something went wrong'
+    }
+  };
+  const { asFragment } = render(
+    <IntlProvider>
+      <ThemeProvider>
+        <Presenter {...params} />
+      </ThemeProvider>
+    </IntlProvider>
+  );
+  expect(asFragment()).toMatchSnapshot();
+});
+
+it('should create a shapshot when the message parameter is undedined', () => {
   const params = {
     message: {
       id: 'ErrorMessage',

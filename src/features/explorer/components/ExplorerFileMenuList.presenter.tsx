@@ -15,11 +15,7 @@ import {
   LinkIcon,
   RenameIcon
 } from '@fluentui/react-icons-mdl2';
-import {
-  ExplorerMenuAction,
-  ExplorerMenuType,
-  File
-} from '../../../types/Model';
+import { ExplorerMenuAction, File } from '../../../types/Model';
 import {
   MenuDivider,
   MenuGroup,
@@ -49,7 +45,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
     <MenuList>
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.copyFile}
+          key="copyFile"
           icon={(
             <CopyIcon
               css={css`
@@ -58,13 +54,13 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.copyFile,
+            type: 'copyFile',
             data: file
           })}>
           <FormattedMessage {...messages.CopyFile} />
         </MenuItem>
         <MenuItem
-          key={ExplorerMenuType.copyLink}
+          key="copyLink"
           icon={(
             <LinkIcon
               css={css`
@@ -73,7 +69,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.copyLink,
+            type: 'copyLink',
             data: file
           })}>
           <FormattedMessage {...messages.CopyLink} />
@@ -82,7 +78,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.renameFile}
+          key="renameFile"
           icon={(
             <RenameIcon
               css={css`
@@ -91,13 +87,13 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.renameFile,
+            type: 'renameFile',
             data: file
           })}>
           <FormattedMessage {...messages.RenameFile} />
         </MenuItem>
         <MenuItem
-          key={ExplorerMenuType.deleteFile}
+          key="deleteFile"
           icon={(
             <DeleteIcon
               css={css`
@@ -106,7 +102,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.deleteFile,
+            type: 'deleteFile',
             data: file
           })}>
           <FormattedMessage {...messages.DeleteFile} />
@@ -115,7 +111,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.downloadFile}
+          key="downloadFile"
           icon={(
             <DownloadDocumentIcon
               css={css`
@@ -124,7 +120,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.downloadFile,
+            type: 'downloadFile',
             data: file
           })}>
           <FormattedMessage {...messages.Download} />
@@ -133,7 +129,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.openWithOneDrive}
+          key="openWithOneDrive"
           icon={(
             <OneDriveLogoIcon
               css={css`
@@ -142,7 +138,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.openWithOneDrive,
+            type: 'openWithOneDrive',
             data: file
           })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />

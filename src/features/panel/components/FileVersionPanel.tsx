@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-import {
-  DialogType,
-  File,
-  FileVersion
-} from '../../../types/Model';
+import { File, FileVersion } from '../../../types/Model';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import Presenter from './FileVersionPanel.presenter';
@@ -39,7 +35,7 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
       throw new ArgumentNullError();
     }
     dispatch(setDialogAction({
-      type: DialogType.restoreFile,
+      type: 'restoreFile',
       data
     }));
   }, [

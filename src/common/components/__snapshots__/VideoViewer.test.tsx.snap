@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: block;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <video
+      class="video emotion-0"
+      controls=""
+      preload="metadata"
+      src="https://example.com/video.wav"
+    >
+      <track
+        kind="captions"
+      />
+    </video>
+  </div>
+</DocumentFragment>
+`;

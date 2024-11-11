@@ -21,7 +21,7 @@ describe('toDate', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return "undefined" if the value is "null"', () => {
+  it('should retrieve undefined when the date string is null', () => {
     const param = {
       value: null
     };
@@ -32,9 +32,9 @@ describe('toDate', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should return "undefined" if the value is "undefined"', () => {
+  it('should retrieve undefined when the date string is undefined', () => {
     const param = {
-      value: null
+      value: undefined
     };
     const expected = {
       value: undefined

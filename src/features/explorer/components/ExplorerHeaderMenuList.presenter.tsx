@@ -8,15 +8,8 @@
 
 import React from 'react';
 
-import {
-  ExplorerMenuAction,
-  ExplorerMenuType,
-  Folder
-} from '../../../types/Model';
-import {
-  FabricNewFolderIcon,
-  OneDriveLogoIcon
-} from '@fluentui/react-icons-mdl2-branded';
+import { ExplorerMenuAction, Folder } from '../../../types/Model';
+import { FabricNewFolderIcon, OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 import {
   Hide3Icon,
   LinkIcon,
@@ -53,7 +46,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
     <MenuList>
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.refreshFolder}
+          key="refreshFolder"
           icon={(
             <RefreshIcon
               css={css`
@@ -62,7 +55,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.refreshFolder,
+            type: 'refreshFolder',
             data: selectedFolder
           })}>
           <FormattedMessage {...messages.Refresh} />
@@ -71,7 +64,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.toggleAllFiles}
+          key="toggleAllFiles"
           icon={
             allFiles ? (
               <Hide3Icon
@@ -88,7 +81,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
             )
           }
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.toggleAllFiles,
+            type: 'toggleAllFiles',
             data: !allFiles
           })}>
           {
@@ -103,7 +96,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.copyLink}
+          key="copyLink"
           icon={(
             <LinkIcon
               css={css`
@@ -112,7 +105,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.copyLink,
+            type: 'copyLink',
             data: selectedFolder
           })}>
           <FormattedMessage {...messages.CopyLink} />
@@ -121,7 +114,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.createFile}
+          key="createFile"
           icon={(
             <PageAddIcon
               css={css`
@@ -130,13 +123,13 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.createFile,
+            type: 'createFile',
             data: null
           })}>
           <FormattedMessage {...messages.NewFile} />
         </MenuItem>
         <MenuItem
-          key={ExplorerMenuType.createFolder}
+          key="createFolder"
           icon={(
             <FabricNewFolderIcon
               css={css`
@@ -145,7 +138,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.createFolder,
+            type: 'createFolder',
             data: null
           })}>
           <FormattedMessage {...messages.NewFolder} />
@@ -154,7 +147,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
       <MenuDivider />
       <MenuGroup>
         <MenuItem
-          key={ExplorerMenuType.openWithOneDrive}
+          key="openWithOneDrive"
           icon={(
             <OneDriveLogoIcon
               css={css`
@@ -163,7 +156,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
             `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: ExplorerMenuType.openWithOneDrive,
+            type: 'openWithOneDrive',
             data: selectedFolder
           })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />

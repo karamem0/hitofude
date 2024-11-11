@@ -8,12 +8,7 @@
 
 import React from 'react';
 
-import {
-  DialogType,
-  ExplorerMenuAction,
-  ExplorerMenuType,
-  Folder
-} from '../../../types/Model';
+import { ExplorerMenuAction, Folder } from '../../../types/Model';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import Presenter from './ExplorerFolderMenuList.presenter';
@@ -30,29 +25,29 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
 
   const handleMenuClick = React.useCallback((_: Event, data?: ExplorerMenuAction) => {
     switch (data?.type) {
-      case ExplorerMenuType.copyLink: {
+      case 'copyLink': {
         const value = data?.data as Folder | undefined;
         if (value?.webUrl == null) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: DialogType.copyLink,
+          type: 'copyLink',
           data: value.webUrl
         }));
         break;
       }
-      case ExplorerMenuType.deleteFolder: {
+      case 'deleteFolder': {
         const value = data?.data as Folder | undefined;
         if (value == null) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: DialogType.deleteFolder,
+          type: 'deleteFolder',
           data: value
         }));
         break;
       }
-      case ExplorerMenuType.openWithOneDrive: {
+      case 'openWithOneDrive': {
         const value = data?.data as Folder | undefined;
         if (value?.webUrl == null) {
           throw new ArgumentNullError();
@@ -60,13 +55,13 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
         window.open(value.webUrl, '_blank', 'noreferrer');
         break;
       }
-      case ExplorerMenuType.renameFolder: {
+      case 'renameFolder': {
         const value = data?.data as Folder | undefined;
         if (value == null) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: DialogType.renameFolder,
+          type: 'renameFolder',
           data: value
         }));
         break;

@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot when the type parameter is changeTheme 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-ThemeChangeDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is copyFile 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr1 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FileCopyDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is copyLink 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-LinkCopyDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is createFile 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr3 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FileCreateDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is createFolder 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr4 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FolderCreateDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is deleteFile 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr5 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FileDeleteDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is deleteFolder 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr6 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FolderDeleteDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is overwriteFile 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr7 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FileOverwriteDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is renameFile 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr8 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FileRenameDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is renameFolder 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderra ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FolderRenameDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is restoreFile 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr9 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-FileRestoreDialog"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the type parameter is undefined 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderrb ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  />
+</DocumentFragment>
+`;

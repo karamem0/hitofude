@@ -46,8 +46,9 @@ function ContentSaveButton(props: Readonly<ContentSaveButtonProps>) {
               menuButton={trigger}
               title={intl.formatMessage(messages.Save)}
               onClick={(event: Event) => {
-                if (event.target instanceof HTMLButtonElement &&
-                    event.target.innerText === intl.formatMessage(messages.Save)) {
+                const { target } = event;
+                const text = intl.formatMessage(messages.Save);
+                if (target instanceof HTMLButtonElement && target.innerText === text) {
                   onClick?.(event, true);
                 }
               }}>

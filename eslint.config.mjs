@@ -123,7 +123,7 @@ export default [
       ],
       '@stylistic/indent-binary-ops': [
         'error',
-        4
+        2
       ],
       '@stylistic/jsx-closing-bracket-location': [
         'error',
