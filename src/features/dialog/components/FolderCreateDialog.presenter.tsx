@@ -28,6 +28,7 @@ import messages from '../messages';
 
 interface FolderCreateDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   onSubmit?: EventHandler<FolderCreateDialogFormState>
 }
 
@@ -35,6 +36,7 @@ function FolderCreateDialog(props: Readonly<FolderCreateDialogProps>) {
 
   const {
     loading,
+    mountNode,
     onSubmit
   } = props;
 
@@ -43,7 +45,7 @@ function FolderCreateDialog(props: Readonly<FolderCreateDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>

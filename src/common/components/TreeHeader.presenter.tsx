@@ -15,9 +15,9 @@ import {
   MenuTrigger,
   Text
 } from '@fluentui/react-components';
-import { ChevronLeftIcon, MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
+import { ChevronLeft16Regular, MoreVertical16Regular } from '@fluentui/react-icons';
 import { EventHandler } from '../../types/Event';
-import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+import { SiMicrosoftonedrive } from 'react-icons/si';
 import { css } from '@emotion/react';
 import messages from '../../features/main/messages';
 import { useIntl } from 'react-intl';
@@ -73,11 +73,7 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
               width: 2rem;
               height: 2rem;
             `}>
-            <OneDriveLogoIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <SiMicrosoftonedrive />
           </div>
         ) : (
           <Button
@@ -90,11 +86,7 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
               height: 2rem;
             `}
             icon={(
-              <ChevronLeftIcon
-                css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
+              <ChevronLeft16Regular />
             )}
             onClick={(event) => !root && onClick?.(event)} />
         )
@@ -128,11 +120,7 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
               height: 2rem;
             `}
             icon={(
-              <MoreVerticalIcon
-                css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
+              <MoreVertical16Regular />
             )} />
         </MenuTrigger>
         <MenuPopover>

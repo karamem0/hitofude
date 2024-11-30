@@ -12,6 +12,7 @@ import { Client } from '@microsoft/microsoft-graph-client';
 import { GraphService } from '../services/GraphService';
 import { InvalidOperationError } from '../types/Error';
 import { StorageService } from '../services/StorageService';
+import { loginParams } from '../config/MsalConfig';
 import { useMsal } from '@azure/msal-react';
 
 interface ServiceContextState {
@@ -40,11 +41,8 @@ function ServiceProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
       authProvider: {
         getAccessToken: () => msal.instance
           .acquireTokenSilent({
-            account: msal.accounts[0],
-            scopes: [
-              'User.Read',
-              'Files.ReadWrite'
-            ]
+            ...loginParams,
+            account: msal.accounts[0]
           })
           .then((result) => result.accessToken)
       }

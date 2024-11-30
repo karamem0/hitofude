@@ -11,7 +11,7 @@ import React from 'react';
 import { EventHandler } from '../../../types/Event';
 import ExplorerFolderMenu from './ExplorerFolderMenuList';
 import { Folder } from '../../../types/Model';
-import { FolderHorizontalIcon } from '@fluentui/react-icons-mdl2';
+import { Folder16Regular } from '@fluentui/react-icons';
 import TreeItem from '../../../common/components/TreeItem';
 import { css } from '@emotion/react';
 
@@ -32,7 +32,7 @@ function ExplorerFolderTreeItem(props: Readonly<ExplorerFolderTreeItemProps>) {
       key={folder.id}
       name={folder.name}
       icon={(
-        <FolderHorizontalIcon
+        <Folder16Regular
           css={css`
           font-size: 1rem;
           line-height: 1rem;

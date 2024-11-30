@@ -26,11 +26,7 @@ function Communication(props: Readonly<CommunicationProps>) {
     title
   } = props;
 
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div

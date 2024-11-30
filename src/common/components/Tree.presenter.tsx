@@ -28,11 +28,7 @@ function Tree(props: Readonly<React.PropsWithChildren<TreeProps>>, ref: React.Re
     onKeyDown
   } = props;
 
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div

@@ -35,7 +35,7 @@ exports[`should create a shapshot when the type parameter is save 1`] = `
 <div
     aria-labelledby="dialog-title-r2"
     aria-modal="true"
-    class="fui-DialogSurface r1svjbtt"
+    class="fui-DialogSurface rsmdyd3"
     data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r1","isOthersAccessible":false,"isTrapped":true}}"
     role="dialog"
     tabindex="-1"
@@ -121,7 +121,7 @@ exports[`should create a shapshot when the type parameter is upload 1`] = `
 <div
     aria-labelledby="dialog-title-r6"
     aria-modal="true"
-    class="fui-DialogSurface r1svjbtt"
+    class="fui-DialogSurface rsmdyd3"
     data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r5","isOthersAccessible":false,"isTrapped":true}}"
     role="dialog"
     tabindex="-1"

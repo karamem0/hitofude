@@ -10,6 +10,7 @@ import React from 'react';
 
 import Presenter from './HomePage.presenter';
 import { ThemeName } from '../../../types/Model';
+import { loginParams } from '../../../config/MsalConfig';
 import messages from '../messages';
 import { useIntl } from 'react-intl';
 import { useMsal } from '@azure/msal-react';
@@ -40,13 +41,10 @@ function HomePage() {
   ]);
 
   const handleSignIn = React.useCallback(async () => {
-    await msal.instance.loginRedirect({
-      scopes: [
-        'User.Read',
-        'Files.ReadWrite'
-      ]
-    });
-  }, [ msal ]);
+    await msal.instance.loginRedirect(loginParams);
+  }, [
+    msal
+  ]);
 
   React.useEffect(() => {
     changeTheme(ThemeName.light);

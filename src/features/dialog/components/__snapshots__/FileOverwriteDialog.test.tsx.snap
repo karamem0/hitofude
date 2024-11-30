@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot when the loading parameter is false 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="fui-DialogSurface__backdrop rsptlh5"
+  />
+  .emotion-0 {
+  overflow: hidden;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+<div
+    aria-modal="true"
+    class="fui-DialogSurface rsmdyd3"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="fui-DialogBody r1h3qql9"
+    >
+      <h2
+        class="fui-DialogTitle rxjm636 ___mh25s00_kwrsjh0 fsyjsko"
+      >
+        Overwrite file
+      </h2>
+      <div
+        class="fui-DialogContent r1v5zwsm emotion-0"
+      >
+        <div
+          class="emotion-1"
+        >
+          <span
+            class="fui-Text ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+          >
+            Are you sure to overwrite file?
+          </span>
+        </div>
+      </div>
+      <div
+        class="fui-DialogActions rhfpeu0 ___pj8zjl0_1y84z0u f1a7i8kp fd46tj4 fsyjsko f1f41i0t f1jaqex3 f2ao6jk"
+      >
+        <button
+          aria-label="Yes"
+          class="fui-Button r1alrhcs ___1akj6hk_ih97uj0 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl fecsdlb f1rq72xc fnp9lpt f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1d6v5y2 f1rirnrt f1uu00uk fkvaka8 f1ux7til f9a0qzu f1lkg8j3 fkc42ay fq7113v ff1wgvm fiob0tu f1j6scgf f1x4h75k f4xjyn1 fbgcvur f1ks1yx8 f1o6qegi fcnxywj fmxjhhp f9ddjv3 f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv f12k37oa fr96u23"
+          title="Yes"
+          type="button"
+        >
+          Yes
+        </button>
+        <button
+          aria-label="No"
+          class="fui-Button r1alrhcs"
+          title="No"
+          type="button"
+        >
+          No
+        </button>
+        <button
+          aria-label="Cancel"
+          class="fui-Button r1alrhcs"
+          data-tabster="{"restorer":{"type":1}}"
+          title="Cancel"
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-ModalDialog"
+    >
+      <span
+        hidden=""
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the loading parameter is true 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="fui-DialogSurface__backdrop rsptlh5"
+  />
+  .emotion-0 {
+  overflow: hidden;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+<div
+    aria-modal="true"
+    class="fui-DialogSurface rsmdyd3"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="fui-DialogBody r1h3qql9"
+    >
+      <h2
+        class="fui-DialogTitle rxjm636 ___mh25s00_kwrsjh0 fsyjsko"
+      >
+        Overwrite file
+      </h2>
+      <div
+        class="fui-DialogContent r1v5zwsm emotion-0"
+      >
+        <div
+          class="emotion-1"
+        >
+          <span
+            class="fui-Text ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+          >
+            Are you sure to overwrite file?
+          </span>
+        </div>
+      </div>
+      <div
+        class="fui-DialogActions rhfpeu0 ___pj8zjl0_1y84z0u f1a7i8kp fd46tj4 fsyjsko f1f41i0t f1jaqex3 f2ao6jk"
+      >
+        <button
+          aria-label="Yes"
+          class="fui-Button r1alrhcs ___1b744ob_186160c f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1t6o4dc f1h0usnq fs4ktlq f16h9ulv fx2bmrt fcvwxyo f4lkoma fg455y9 f1rvyvqg f1cwzwz f14g86mu f1dcs8yz fkc42ay f1vmkb5g f53ppgq f1663y11 f18v5270 f80fkiy f1kc2mi9 f1y0svfh fihuait fnxhupq fx507ft fyd6l6x fb3rf2x fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq f8w4c43 f1ol4fw6 f1q1lw4e f1dwjv2g fjwq6ea f1lr3nhc fn5gmvv f1mbxvi6 f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv f12k37oa fr96u23"
+          disabled=""
+          title="Yes"
+          type="button"
+        >
+          Yes
+        </button>
+        <button
+          aria-label="No"
+          class="fui-Button r1alrhcs ___jk648r0_1y93nk3 f1bg9a2p f1jj8ep1 f15xbau f4ikngz fy0fskl f1s2aq7o fdrzuqr f15x8b5r f1falr9n f12mpcsy f1gwvigk f1jnshp0 f18rmfxp fvgxktp fphbwmw f19vpps7 fv5swzo f1al02dq f1t6o4dc f10ztigi f1ft5sdu f12zbtn2 f1gzf82w fcvwxyo f8w4c43 f1ol4fw6 f1q1lw4e f1dwjv2g f4lkoma fg455y9 f1rvyvqg f1cwzwz f14g86mu f1dcs8yz fjwq6ea f1lr3nhc fn5gmvv f1mbxvi6 f1vmkb5g f53ppgq f1663y11 f18v5270 f80fkiy f1kc2mi9 f1y0svfh fihuait fnxhupq fx507ft fyd6l6x fb3rf2x"
+          disabled=""
+          title="No"
+          type="button"
+        >
+          No
+        </button>
+        <button
+          aria-label="Cancel"
+          class="fui-Button r1alrhcs"
+          data-tabster="{"restorer":{"type":1}}"
+          title="Cancel"
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-ModalDialog"
+    >
+      <span
+        hidden=""
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

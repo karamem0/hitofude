@@ -18,12 +18,7 @@ import { useTheme } from '../../../providers/ThemeProvider';
 function Error500Page() {
 
   const intl = useIntl();
-
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div

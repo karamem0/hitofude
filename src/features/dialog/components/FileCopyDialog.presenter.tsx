@@ -29,6 +29,7 @@ import messages from '../messages';
 
 interface FileCopyDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   value?: File,
   onSubmit?: EventHandler<FileCopyDialogFormState>
 }
@@ -37,6 +38,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
 
   const {
     loading,
+    mountNode,
     value,
     onSubmit
   } = props;
@@ -50,7 +52,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>
@@ -82,7 +84,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
                   )}
                   rules={{
                     required: true,
-                    validate: (item) => item !== value?.baseName
+                    validate: (text) => text !== value?.baseName
                   }} />
               </div>
             </DialogContent>

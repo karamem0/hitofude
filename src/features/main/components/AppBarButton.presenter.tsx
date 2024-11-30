@@ -35,11 +35,7 @@ function AppBarButton(props: Readonly<AppBarButtonProps>) {
     onClick
   } = props;
 
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div
@@ -70,6 +66,10 @@ function AppBarButton(props: Readonly<AppBarButtonProps>) {
           color: ${theme.colorNeutralForegroundDisabled};
           &[aria-selected='true'] {
             color: ${theme.colorNeutralForeground1};
+          }
+          &>span {
+            width: 1.5rem;
+            height: 1.5rem;
           }
         `}
         onClick={(event) => !disabled && onClick?.(event)} />

@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="fui-DialogSurface__backdrop rsptlh5"
+  />
+  .emotion-0 {
+  overflow: hidden;
+}
+
+.emotion-1 {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+<div
+    aria-modal="true"
+    class="fui-DialogSurface rsmdyd3"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="fui-DialogBody r1h3qql9"
+    >
+      <h2
+        class="fui-DialogTitle rxjm636 ___mh25s00_kwrsjh0 fsyjsko"
+      >
+        Change theme
+      </h2>
+      <div
+        class="fui-DialogContent r1v5zwsm emotion-0"
+      >
+        <div
+          class="emotion-1"
+        >
+          <div
+            class="fui-Card rfxo2k2 ___1x1hcrp_1926re5 f1vx9l62 f14k419y f1fgo9fz fvqmfsm f3am6yf f1r5wgso frsmuga fuldkky fxugw4r f1whvlc6 f16gxe2i fpgykix f1osi826 fzybk4o ftqa4ok f2hkw1w f8hki3x f1d2448m f1bjia2o ffh67wi f226i61 f13kzufm flujwa2 fsx75g8 f15bsgw9 f14e48fq f18yb2kv fd6o370 fpqizxz fnd8nzh f15fr7a0 fwsq40z f34ld9f fy0y4wt"
+            role="group"
+          >
+            <div
+              class="fui-Card__floatingAction fui-Card__floatingAction ___18baxhl_1oayy2k f1euv43f fqclxi7 fiv86kb f19g0ac"
+            >
+              <span
+                class="fui-Checkbox r1q22k1j ___13877ya_6gg83z0 f19n0e5 f35ds98 f12mnkne fei9a8h fix56y3 f1bcv2js f7dr4go f1r5cpua"
+              >
+                <input
+                  checked=""
+                  class="fui-Checkbox__input ruo9svu ___qlal8r0_1xrlghj f1vgc2s3"
+                  id="checkbox-r1"
+                  name="light"
+                  title="Light"
+                  type="checkbox"
+                />
+                <div
+                  aria-hidden="true"
+                  class="fui-Checkbox__indicator rl7ci6d"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0"
+                    fill="currentColor"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    width="12"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.76 3.2c.3.29.32.76.04 1.06l-4.25 4.5a.75.75 0 0 1-1.08.02L2.22 6.53a.75.75 0 0 1 1.06-1.06l1.7 1.7L8.7 3.24a.75.75 0 0 1 1.06-.04Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </span>
+            </div>
+            <div
+              class="fui-CardHeader ___yse5eg0_1s60s2s fkufhic f122n59 f22iagw"
+            >
+              <div
+                class="fui-CardHeader__header ___1gg77wv_3jjtru0 f22iagw fqerorx"
+                id="fui-CardHeader__headerr2"
+              >
+                <span
+                  class="fui-Text ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+                >
+                  Light
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="fui-Card rfxo2k2 ___1x1hcrp_1926re5 f1vx9l62 f14k419y f1fgo9fz fvqmfsm f3am6yf f1r5wgso frsmuga fuldkky fxugw4r f1whvlc6 f16gxe2i fpgykix f1osi826 fzybk4o ftqa4ok f2hkw1w f8hki3x f1d2448m f1bjia2o ffh67wi f226i61 f13kzufm flujwa2 fsx75g8 f15bsgw9 f14e48fq f18yb2kv fd6o370 fpqizxz fnd8nzh f15fr7a0 fwsq40z f34ld9f fy0y4wt"
+            role="group"
+          >
+            <div
+              class="fui-Card__floatingAction fui-Card__floatingAction ___18baxhl_1oayy2k f1euv43f fqclxi7 fiv86kb f19g0ac"
+            >
+              <span
+                class="fui-Checkbox r1q22k1j ___1v6wcsu_941lme0 f3p8bqa fium13f f1r2dosr f1729es6"
+              >
+                <input
+                  class="fui-Checkbox__input ruo9svu ___qlal8r0_1xrlghj f1vgc2s3"
+                  id="checkbox-r3"
+                  name="dark"
+                  title="Dark"
+                  type="checkbox"
+                />
+                <div
+                  aria-hidden="true"
+                  class="fui-Checkbox__indicator rl7ci6d"
+                />
+              </span>
+            </div>
+            <div
+              class="fui-CardHeader ___yse5eg0_1s60s2s fkufhic f122n59 f22iagw"
+            >
+              <div
+                class="fui-CardHeader__header ___1gg77wv_3jjtru0 f22iagw fqerorx"
+                id="fui-CardHeader__headerr4"
+              >
+                <span
+                  class="fui-Text ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+                >
+                  Dark
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="fui-DialogActions rhfpeu0 ___pj8zjl0_1y84z0u f1a7i8kp fd46tj4 fsyjsko f1f41i0t f1jaqex3 f2ao6jk"
+      >
+        <button
+          aria-label="Close"
+          class="fui-Button r1alrhcs"
+          data-tabster="{"restorer":{"type":1}}"
+          title="Close"
+          type="button"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-ModalDialog"
+    >
+      <span
+        hidden=""
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

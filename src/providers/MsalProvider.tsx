@@ -8,25 +8,10 @@
 
 import React from 'react';
 
-import {
-  BrowserCacheLocation,
-  PublicClientApplication
-} from '@azure/msal-browser';
 import MsalAdapter from '../common/components/MsalAdapter';
 import { MsalProvider as Provider } from '@azure/msal-react';
-import env from '../env';
-
-const msalConfig = {
-  auth: {
-    authority: env.VITE_MSAL_AUTHORITY,
-    clientId: env.VITE_MSAL_CLIENT_ID,
-    redirectUri: `${window.location.origin}`
-  },
-  cache: {
-    cacheLocation: BrowserCacheLocation.SessionStorage,
-    storeAuthStateInCookie: false
-  }
-};
+import { PublicClientApplication } from '@azure/msal-browser';
+import { msalConfig } from '../config/MsalConfig';
 
 function MsalProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 

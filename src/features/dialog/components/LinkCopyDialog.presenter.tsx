@@ -21,7 +21,7 @@ import {
   MessageBarTitle
 } from '@fluentui/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { CopyIcon } from '@fluentui/react-icons-mdl2';
+import { Copy16Regular } from '@fluentui/react-icons';
 import { EventHandler } from '../../../types/Event';
 import ModalDialog from '../../../common/components/ModalDialog';
 import { css } from '@emotion/react';
@@ -81,11 +81,7 @@ function LinkCopyDialog(props: Readonly<LinkCopyDialogProps>) {
                         aria-label={intl.formatMessage(messages.Copy)}
                         title={intl.formatMessage(messages.Copy)}
                         icon={(
-                          <CopyIcon
-                            css={css`
-                              font-size: 1rem;
-                              line-height: 1rem;
-                            `} />
+                          <Copy16Regular />
                         )}
                         onClick={onCopy} />
                     )} />

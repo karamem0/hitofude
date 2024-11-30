@@ -32,10 +32,7 @@ it('should create a shapshot when the message parameter is not undedined', () =>
 
 it('should create a shapshot when the message parameter is undedined', () => {
   const params = {
-    message: {
-      id: 'ErrorMessage',
-      defaultMessage: 'Something went wrong'
-    }
+    message: undefined
   };
   const { asFragment } = render(
     <IntlProvider>

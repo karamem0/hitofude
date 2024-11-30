@@ -28,6 +28,7 @@ import messages from '../messages';
 
 interface FileCreateDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   onSubmit?: EventHandler<FileCreateDialogFormState>
 }
 
@@ -35,6 +36,7 @@ function FileCreateDialog(props: Readonly<FileCreateDialogProps>) {
 
   const {
     loading,
+    mountNode,
     onSubmit
   } = props;
 
@@ -43,7 +45,7 @@ function FileCreateDialog(props: Readonly<FileCreateDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>

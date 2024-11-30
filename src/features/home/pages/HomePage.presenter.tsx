@@ -13,9 +13,8 @@ import {
   Link,
   Text } from '@fluentui/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { SiGithub, SiWindows } from 'react-icons/si';
 import { EventHandler } from '../../../types/Event';
-import { GitHubLogoIcon } from '@fluentui/react-icons-mdl2';
-import { WindowsLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 import { css } from '@emotion/react';
 import messages from '../messages';
 import { useTheme } from '../../../providers/ThemeProvider';
@@ -37,23 +36,20 @@ function HomePage(props: Readonly<HomePageProps>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div
       css={css`
         display: flex;
         flex-flow: column;
+        min-width: 100%;
+        min-height: 100svh;
       `}>
       <header
         css={css`
-          display: grid;
-          grid-template-rows: auto;
-          grid-template-columns: auto;
+          display: flex;
+          flex-flow: row;
           align-items: center;
           justify-content: end;
           width: 100%;
@@ -63,20 +59,32 @@ function HomePage(props: Readonly<HomePageProps>) {
         <Button
           appearance="transparent"
           aria-label={intl.formatMessage(messages.GitHub)}
-          icon={<GitHubLogoIcon />}
+          as="a"
           title={intl.formatMessage(messages.GitHub)}
+          icon={(
+            <SiGithub
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
           onClick={onLinkToGitHub}>
           <FormattedMessage {...messages.GitHub} />
         </Button>
       </header>
-      <main>
+      <main
+        css={css`
+          display: flex;
+          flex-flow: column;
+          min-height: calc(100svh - 5rem);
+        `}>
         <div
           css={css`
             display: flex;
             flex-flow: column;
             align-items: center;
             justify-content: center;
-            background-color: ${theme.colorBrandStroke2};
+            background: linear-gradient(${theme.colorBrandBackground2Hover}, ${theme.colorBrandBackground2});
           `}>
           <div
             css={css`
@@ -106,13 +114,13 @@ function HomePage(props: Readonly<HomePageProps>) {
                   font-size: ${theme.fontSizeHero900};
                   font-weight: bold;
                   line-height: calc(${theme.fontSizeHero900} * 1.25);
-                  color: ${theme.colorBrandBackgroundPressed};
+                  color: ${theme.colorNeutralForeground2};
                 `}>
                 <FormattedMessage {...messages.AppName} />
               </Text>
               <Text
                 css={css`
-                  color: ${theme.colorBrandBackgroundPressed};
+                  color: ${theme.colorNeutralForeground2};
                 `}>
                 <FormattedMessage {...messages.AppDescription} />
               </Text>
@@ -123,8 +131,14 @@ function HomePage(props: Readonly<HomePageProps>) {
                 <Button
                   appearance="primary"
                   aria-label={intl.formatMessage(messages.SignIn)}
-                  icon={<WindowsLogoIcon />}
                   title={intl.formatMessage(messages.SignIn)}
+                  icon={(
+                    <SiWindows
+                      css={css`
+                        font-size: 1rem;
+                        line-height: 1rem;
+                      `} />
+                  )}
                   onClick={onSignIn}>
                   <FormattedMessage {...messages.SignIn} />
                 </Button>
@@ -172,7 +186,8 @@ function HomePage(props: Readonly<HomePageProps>) {
           flex-flow: row;
           align-items: center;
           justify-content: center;
-          padding: 2rem 0;
+          min-height: 2.5rem;
+          padding: 0 1rem;
         `}>
         <Link
           as="button"

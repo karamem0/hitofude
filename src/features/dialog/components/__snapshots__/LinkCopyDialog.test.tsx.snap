@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a shapshot when the loading copied is false 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr3 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-ModalDialog"
+    >
+      <span
+        hidden=""
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should create a shapshot when the loading copied is true 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      data-testid="test-ModalDialog"
+    >
+      <span
+        hidden=""
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

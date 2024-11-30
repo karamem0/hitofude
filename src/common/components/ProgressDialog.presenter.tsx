@@ -35,11 +35,7 @@ function ProgressDialog(props: Readonly<ProgressDialogProps>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Dialog

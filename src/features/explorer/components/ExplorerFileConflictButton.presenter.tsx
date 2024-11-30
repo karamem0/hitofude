@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { EventHandler } from '../../../types/Event';
-import { WarningIcon } from '@fluentui/react-icons-mdl2';
+import { Warning16Regular } from '@fluentui/react-icons';
 import { css } from '@emotion/react';
 import messages from '../messages';
 import { useIntl } from 'react-intl';
@@ -30,11 +30,7 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return disabled ? null : (
     <div
@@ -49,7 +45,7 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
       `}
       onClick={onClick}
       onKeyDown={onKeyDown}>
-      <WarningIcon />
+      <Warning16Regular />
     </div>
   );
 

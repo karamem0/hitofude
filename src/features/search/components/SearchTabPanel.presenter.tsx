@@ -16,7 +16,7 @@ import {
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
-import { CancelIcon } from '@fluentui/react-icons-mdl2';
+import { Dismiss16Regular } from '@fluentui/react-icons';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import SearchTreeItem from './SearchFileTreeItem';
@@ -46,11 +46,7 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return form ? (
     <div
@@ -95,11 +91,7 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
                   size="small"
                   tabIndex={0}
                   icon={(
-                    <CancelIcon
-                      css={css`
-                        font-size: 1rem;
-                        line-height: 1rem;
-                      `} />
+                    <Dismiss16Regular />
                   )}
                   onClick={(event) => onClear?.(event, field.name)} />
               )}

@@ -29,6 +29,7 @@ import messages from '../messages';
 
 interface FolderRenameDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   value?: Folder,
   onSubmit?: EventHandler<FolderRenameDialogFormState>
 }
@@ -37,6 +38,7 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
 
   const {
     loading,
+    mountNode,
     value,
     onSubmit
   } = props;
@@ -51,7 +53,7 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>
@@ -81,7 +83,8 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
                       onChange={field.onChange} />
                   )}
                   rules={{
-                    required: true
+                    required: true,
+                    validate: (text) => text !== value?.name
                   }} />
               </div>
             </DialogContent>

@@ -6,7 +6,12 @@
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { createDarkTheme, createLightTheme } from '@fluentui/react-components';
+import {
+  Theme,
+  createDarkTheme,
+  createLightTheme
+} from '@fluentui/react-components';
+import { ThemeName } from '../types/Model';
 
 const themePalette = {
   10: '#3f2e2e',
@@ -27,6 +32,7 @@ const themePalette = {
   160: '#f1ebeb'
 };
 
-export const darkTheme = createDarkTheme(themePalette);
-
-export const lightTheme = createLightTheme(themePalette);
+export const themes: Record<ThemeName, Theme> = {
+  0: createLightTheme(themePalette),
+  1: createDarkTheme(themePalette)
+};

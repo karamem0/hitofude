@@ -27,6 +27,7 @@ import messages from '../messages';
 
 interface FileRestoreDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   onSubmit?: EventHandler
 }
 
@@ -34,6 +35,7 @@ function FileRestoreDialog(props: Readonly<FileRestoreDialogProps>) {
 
   const {
     loading,
+    mountNode,
     onSubmit
   } = props;
 
@@ -41,7 +43,7 @@ function FileRestoreDialog(props: Readonly<FileRestoreDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <DialogBody>
           <DialogTitle>
             <FormattedMessage {...messages.RestoreFile} />

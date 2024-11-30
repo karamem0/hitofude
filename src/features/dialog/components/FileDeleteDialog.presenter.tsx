@@ -26,6 +26,7 @@ import messages from '../messages';
 
 interface FileDeleteDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   onSubmit?: EventHandler
 }
 
@@ -33,6 +34,7 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
 
   const {
     loading,
+    mountNode,
     onSubmit
   } = props;
 
@@ -40,7 +42,7 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <DialogBody>
           <DialogTitle>
             <FormattedMessage {...messages.DeleteFile} />

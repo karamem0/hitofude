@@ -26,6 +26,7 @@ import messages from '../messages';
 
 interface FileOverwriteDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   onSubmit?: EventHandler<boolean>
 }
 
@@ -33,6 +34,7 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
 
   const {
     loading,
+    mountNode,
     onSubmit
   } = props;
 
@@ -40,7 +42,7 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <DialogBody>
           <DialogTitle>
             <FormattedMessage {...messages.OverwriteFile} />

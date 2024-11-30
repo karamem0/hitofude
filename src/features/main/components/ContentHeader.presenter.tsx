@@ -24,7 +24,7 @@ import {
 import ContentMenuList from './ContentMenuList';
 import ContentSaveButton from './ContentSaveButton';
 import { EventHandler } from '../../../types/Event';
-import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
+import { MoreVertical16Regular } from '@fluentui/react-icons';
 import { css } from '@emotion/react';
 import { isMimeType } from '../../../utils/File';
 import { layouts } from '../../../themes/Layout';
@@ -53,11 +53,7 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return file ? (
     <div
@@ -160,11 +156,7 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
                   aria-label={intl.formatMessage(messages.MoreOption)}
                   title={intl.formatMessage(messages.MoreOption)}
                   icon={(
-                    <MoreVerticalIcon
-                      css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
+                    <MoreVertical16Regular />
                   )} />
               </MenuTrigger>
               <MenuPopover>
@@ -191,11 +183,7 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
               aria-label={intl.formatMessage(messages.MoreOption)}
               title={intl.formatMessage(messages.MoreOption)}
               icon={(
-                <MoreVerticalIcon
-                  css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
+                <MoreVertical16Regular />
               )} />
           </MenuTrigger>
           <MenuPopover>

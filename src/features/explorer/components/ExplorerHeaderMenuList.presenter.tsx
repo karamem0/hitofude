@@ -8,15 +8,15 @@
 
 import React from 'react';
 
-import { ExplorerMenuAction, Folder } from '../../../types/Model';
-import { FabricNewFolderIcon, OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
 import {
-  Hide3Icon,
-  LinkIcon,
-  PageAddIcon,
-  RefreshIcon,
-  ViewIcon
-} from '@fluentui/react-icons-mdl2';
+  ArrowClockwise16Regular,
+  DocumentAdd16Regular,
+  Eye16Regular,
+  EyeOff16Regular,
+  FolderAdd16Regular,
+  Link16Regular
+} from '@fluentui/react-icons';
+import { ExplorerMenuAction, Folder } from '../../../types/Model';
 import {
   MenuDivider,
   MenuGroup,
@@ -25,6 +25,7 @@ import {
 } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { FormattedMessage } from 'react-intl';
+import { SiMicrosoftonedrive } from 'react-icons/si';
 import { css } from '@emotion/react';
 import messages from '../messages';
 
@@ -48,11 +49,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
         <MenuItem
           key="refreshFolder"
           icon={(
-            <RefreshIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <ArrowClockwise16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'refreshFolder',
@@ -67,17 +64,9 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
           key="toggleAllFiles"
           icon={
             allFiles ? (
-              <Hide3Icon
-                css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
+              <EyeOff16Regular />
             ) : (
-              <ViewIcon
-                css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
+              <Eye16Regular />
             )
           }
           onClick={(event) => onMenuClick?.(event, {
@@ -98,7 +87,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
         <MenuItem
           key="copyLink"
           icon={(
-            <LinkIcon
+            <Link16Regular
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;
@@ -116,11 +105,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
         <MenuItem
           key="createFile"
           icon={(
-            <PageAddIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <DocumentAdd16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'createFile',
@@ -131,11 +116,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
         <MenuItem
           key="createFolder"
           icon={(
-            <FabricNewFolderIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <FolderAdd16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'createFolder',
@@ -149,7 +130,7 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
         <MenuItem
           key="openWithOneDrive"
           icon={(
-            <OneDriveLogoIcon
+            <SiMicrosoftonedrive
               css={css`
               font-size: 1rem;
               line-height: 1rem;

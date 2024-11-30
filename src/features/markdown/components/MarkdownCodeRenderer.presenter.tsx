@@ -25,11 +25,7 @@ function MarkdownCodeRenderer(props: Readonly<MarkdownCodeRendererProps>) {
     ...extraProps
   } = props;
 
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return language ? (() => {
     if (language === 'mermaid') {

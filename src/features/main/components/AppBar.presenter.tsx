@@ -10,11 +10,11 @@ import React from 'react';
 
 import { AppBarMenuAction, TabType } from '../../../types/Model';
 import {
-  ColorIcon,
-  SearchIcon,
-  SettingsIcon,
-  TextDocumentIcon
-} from '@fluentui/react-icons-mdl2';
+  Color16Regular,
+  Document24Regular,
+  Search24Regular,
+  Settings24Regular
+} from '@fluentui/react-icons';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { MenuItem, MenuList } from '@fluentui/react-components';
 import AppBarButton from './AppBarButton';
@@ -39,11 +39,7 @@ function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div
@@ -70,22 +66,14 @@ function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
           title={intl.formatMessage(messages.Explorer)}
           type={TabType.explorer}
           icon={(
-            <TextDocumentIcon
-              css={css`
-                font-size: 1.5rem;
-                line-height: 1.5rem;
-              `} />
+            <Document24Regular />
           )}
           onClick={(event) => onToggleTab?.(event, TabType.explorer)} />
         <AppBarButton
           title={intl.formatMessage(messages.Search)}
           type={TabType.search}
           icon={(
-            <SearchIcon
-              css={css`
-                font-size: 1.5rem;
-                line-height: 1.5rem;
-              `} />
+            <Search24Regular />
           )}
           onClick={(event) => onToggleTab?.(event, TabType.search)} />
       </div>
@@ -99,22 +87,14 @@ function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
         <AppBarMenuButton
           title={intl.formatMessage(messages.Settings)}
           icon={(
-            <SettingsIcon
-              css={css`
-                font-size: 1.5rem;
-                line-height: 1.5rem;
-              `} />
+            <Settings24Regular />
           )}
           menu={(
             <MenuList>
               <MenuItem
                 key="changeTheme"
                 icon={(
-                  <ColorIcon
-                    css={css`
-                      font-size: 1rem;
-                      line-height: 1rem;
-                    `} />
+                  <Color16Regular />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
                   type: 'changeTheme',

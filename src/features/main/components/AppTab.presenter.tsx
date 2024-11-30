@@ -27,11 +27,7 @@ function AppTab(props: Readonly<AppTabProps>) {
     tabType
   } = props;
 
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div

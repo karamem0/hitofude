@@ -11,7 +11,7 @@ import React from 'react';
 import { Button, Text } from '@fluentui/react-components';
 import { File, Folder } from '../../../types/Model';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AddIcon } from '@fluentui/react-icons-mdl2';
+import { Add16Regular } from '@fluentui/react-icons';
 import { DropEventData } from '../types/Event';
 import { EventHandler } from '../../../types/Event';
 import ExplorerFileTreeItem from './ExplorerFileTreeItem';
@@ -47,11 +47,7 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
   const {
     isDragActive,
     getRootProps,
@@ -135,11 +131,7 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
           aria-label={intl.formatMessage(messages.NewFile)}
           title={intl.formatMessage(messages.NewFile)}
           icon={(
-            <AddIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <Add16Regular />
           )}
           onClick={onCreateFile}>
           <FormattedMessage {...messages.NewFile} />

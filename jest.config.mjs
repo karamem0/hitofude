@@ -30,7 +30,34 @@ export default {
     '**/*.test.tsx'
   ],
   'transform': {
-    '^.+\\.(?:js|mjs|ts|jsx|tsx)$': 'babel-jest'
+    '^.+\\.(?:js|mjs|ts|jsx|tsx)$': [
+      'babel-jest',
+      {
+        'plugins': [
+          '@emotion/babel-plugin',
+          [
+            'formatjs',
+            {
+              'ast': true,
+              'idInterpolationPattern': '[sha512:contenthash:base64:6]'
+            }
+          ]
+        ],
+        'presets': [
+          [
+            '@babel/preset-env',
+            {
+              'targets': {
+                'node': 'current'
+              }
+            }
+          ],
+          '@babel/preset-react',
+          '@babel/preset-typescript',
+          '@emotion/babel-preset-css-prop'
+        ]
+      }
+    ]
   },
   'transformIgnorePatterns': [
     '/node_modules/(?!@fluentui)'

@@ -34,11 +34,7 @@ function AppBarMenuButton(props: Readonly<AppBarMenuButtonProps>) {
     title
   } = props;
 
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div
@@ -63,6 +59,10 @@ function AppBarMenuButton(props: Readonly<AppBarMenuButtonProps>) {
               color: ${theme.colorNeutralForegroundDisabled};
               &[aria-selected='true'] {
                 color: ${theme.colorNeutralForeground1};
+              }
+              &>span {
+                width: 1.5rem;
+                height: 1.5rem;
               }
             `} />
         </MenuTrigger>

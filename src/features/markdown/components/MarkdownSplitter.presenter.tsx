@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import { DoubleChevronLeftIcon, DoubleChevronRightIcon } from '@fluentui/react-icons-mdl2';
+import { ChevronDoubleLeft16Regular, ChevronDoubleRight16Regular } from '@fluentui/react-icons';
 import { Button } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { css } from '@emotion/react';
@@ -29,11 +29,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
     onChangePreview
   } = props;
 
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return preview ? (
     <Button
@@ -49,11 +45,11 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
         background-color: ${theme.colorNeutralBackground2};
       `}
       onClick={(event) => onChangePreview?.(event, !preview)}>
-      <DoubleChevronRightIcon
+      <ChevronDoubleRight16Regular
         css={css`
-            font-size: 0.5rem;
-            line-height: 0.5rem;
-          `} />
+          font-size: 0.5rem;
+          line-height: 0.5rem;
+        `} />
     </Button>
   ) : (
     <Button
@@ -77,11 +73,11 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
         }
       `}
       onClick={(event) => onChangePreview?.(event, !preview)}>
-      <DoubleChevronLeftIcon
+      <ChevronDoubleLeft16Regular
         css={css`
-            font-size: 0.5rem;
-            line-height: 0.5rem;
-          `} />
+          font-size: 0.5rem;
+          line-height: 0.5rem;
+        `} />
     </Button>
   );
 

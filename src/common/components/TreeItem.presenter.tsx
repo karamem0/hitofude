@@ -16,7 +16,7 @@ import {
   Text
 } from '@fluentui/react-components';
 import { EventHandler } from '../../types/Event';
-import { MoreVerticalIcon } from '@fluentui/react-icons-mdl2';
+import { MoreVertical16Regular } from '@fluentui/react-icons';
 import { css } from '@emotion/react';
 import messages from '../../features/main/messages';
 import { useIntl } from 'react-intl';
@@ -45,11 +45,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div
@@ -138,11 +134,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
                   tabIndex={0}
                   title={intl.formatMessage(messages.MoreOption)}
                   icon={(
-                    <MoreVerticalIcon
-                      css={css`
-                        font-size: 1rem;
-                        line-height: 1rem;
-                      `} />
+                    <MoreVertical16Regular />
                   )} />
               </MenuTrigger>
               <MenuPopover>

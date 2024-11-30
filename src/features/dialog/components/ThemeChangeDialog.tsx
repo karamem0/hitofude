@@ -17,7 +17,10 @@ import { useTheme } from '../../../providers/ThemeProvider';
 function ThemeChangeDialog() {
 
   const { storage } = useService();
-  const { theme: { themeName }, changeTheme } = useTheme();
+  const {
+    themeName,
+    changeTheme
+  } = useTheme();
 
   const handleChangeTheme = React.useCallback((_: Event, data?: ThemeName) => {
     changeTheme?.(data ?? ThemeName.light);

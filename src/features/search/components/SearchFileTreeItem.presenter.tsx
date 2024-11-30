@@ -8,12 +8,12 @@
 
 import React from 'react';
 
-import { File, SearchMenuAction } from '../../../types/Model';
 import {
-  LinkIcon,
-  OpenFolderHorizontalIcon,
-  TextDocumentIcon
-} from '@fluentui/react-icons-mdl2';
+  Document16Regular,
+  FolderOpen16Regular,
+  Link16Regular
+} from '@fluentui/react-icons';
+import { File, SearchMenuAction } from '../../../types/Model';
 import {
   MenuDivider,
   MenuGroup,
@@ -23,7 +23,6 @@ import {
 import { EventHandler } from '../../../types/Event';
 import { FormattedMessage } from 'react-intl';
 import TreeItem from '../../../common/components/TreeItem';
-import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface SearchFileTreeItemProps {
@@ -48,11 +47,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
       name={item.fullName}
       selected={selectedFile?.id === item.id}
       icon={(
-        <TextDocumentIcon
-          css={css`
-            font-size: 1rem;
-            line-height: 1rem;
-          `} />
+        <Document16Regular />
       )}
       menu={(
         <MenuList>
@@ -60,11 +55,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
             <MenuItem
               key="copyLink"
               icon={(
-                <LinkIcon
-                  css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
+                <Link16Regular />
               )}
               onClick={(event) => onMenuClick?.(event, {
                 type: 'copyLink',
@@ -78,11 +69,7 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
             <MenuItem
               key="openFileLocation"
               icon={(
-                <OpenFolderHorizontalIcon
-                  css={css`
-                  font-size: 1rem;
-                  line-height: 1rem;
-                `} />
+                <FolderOpen16Regular />
               )}
               onClick={(event) => onMenuClick?.(event, {
                 type: 'openFileLocation',

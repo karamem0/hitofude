@@ -9,10 +9,10 @@
 import React from 'react';
 
 import {
-  BoldIcon,
-  ItalicIcon,
-  UnderlineIcon
-} from '@fluentui/react-icons-mdl2';
+  TextBold16Regular,
+  TextItalic16Regular,
+  TextUnderline16Regular
+} from '@fluentui/react-icons';
 import { Toolbar, ToolbarButton } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { MarkdownToolbarAction } from '../../../types/Model';
@@ -45,33 +45,21 @@ function MarkdownToolbar(props: Readonly<MarkdownToolbarProps>) {
           aria-label={intl.formatMessage(messages.Bold)}
           title={intl.formatMessage(messages.Bold)}
           icon={(
-            <BoldIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <TextBold16Regular />
           )}
           onClick={(event) => onClick?.(event, 'bold')} />
         <ToolbarButton
           aria-label={intl.formatMessage(messages.Italic)}
           title={intl.formatMessage(messages.Italic)}
           icon={(
-            <ItalicIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <TextItalic16Regular />
           )}
           onClick={(event) => onClick?.(event, 'italic')} />
         <ToolbarButton
           aria-label={intl.formatMessage(messages.Underline)}
           title={intl.formatMessage(messages.Underline)}
           icon={(
-            <UnderlineIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <TextUnderline16Regular />
           )}
           onClick={(event) => onClick?.(event, 'underline')} />
       </Toolbar>

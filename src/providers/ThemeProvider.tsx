@@ -8,21 +8,14 @@
 
 import React from 'react';
 
-import {
-  FluentProvider as Provider,
-  Theme
-} from '@fluentui/react-components';
-import { darkTheme, lightTheme } from '../themes/Theme';
+import { FluentProvider as Provider, Theme } from '@fluentui/react-components';
 import { InvalidOperationError } from '../types/Error';
 import { ThemeName } from '../types/Model';
-
-interface ThemeState {
-  theme: Theme,
-  themeName: ThemeName
-}
+import { themes } from '../themes/Theme';
 
 interface ThemeContextState {
-  theme: ThemeState,
+  theme: Theme,
+  themeName: ThemeName,
   changeTheme: (themeName: ThemeName) => void
 }
 
@@ -40,41 +33,24 @@ function ThemeProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
 
   const { children } = props;
 
-  const [ theme, setTheme ] = React.useState<ThemeState>({
-    theme: lightTheme,
-    themeName: ThemeName.light
-  });
+  const [ themeName, setThemeName ] = React.useState<ThemeName>(ThemeName.light);
 
   const handleChangeTheme = React.useMemo(() => (value: ThemeName) => {
-    switch (value) {
-      case ThemeName.light:
-        setTheme(() => ({
-          theme: lightTheme,
-          themeName: value
-        }));
-        break;
-      case ThemeName.dark:
-        setTheme(() => ({
-          theme: darkTheme,
-          themeName: value
-        }));
-        break;
-      default:
-        break;
-    }
+    setThemeName(value);
   }, []);
 
   const value = React.useMemo<ThemeContextState>(() => ({
-    theme,
+    theme: themes[themeName],
+    themeName,
     changeTheme: handleChangeTheme
   }), [
-    theme,
+    themeName,
     handleChangeTheme
   ]);
 
   return (
     <ThemeContext.Provider value={value}>
-      <Provider theme={value.theme.theme}>
+      <Provider theme={value.theme}>
         {children}
       </Provider>
     </ThemeContext.Provider>

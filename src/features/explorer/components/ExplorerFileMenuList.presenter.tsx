@@ -9,12 +9,12 @@
 import React from 'react';
 
 import {
-  CopyIcon,
-  DeleteIcon,
-  DownloadDocumentIcon,
-  LinkIcon,
-  RenameIcon
-} from '@fluentui/react-icons-mdl2';
+  ArrowDownload16Regular,
+  Copy16Regular,
+  Delete16Regular,
+  Link16Regular,
+  Rename16Regular
+} from '@fluentui/react-icons';
 import { ExplorerMenuAction, File } from '../../../types/Model';
 import {
   MenuDivider,
@@ -24,7 +24,7 @@ import {
 } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { FormattedMessage } from 'react-intl';
-import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+import { SiMicrosoftonedrive } from 'react-icons/si';
 import { css } from '@emotion/react';
 import { isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
@@ -47,11 +47,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         <MenuItem
           key="copyFile"
           icon={(
-            <CopyIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <Copy16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'copyFile',
@@ -62,11 +58,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         <MenuItem
           key="copyLink"
           icon={(
-            <LinkIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <Link16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'copyLink',
@@ -80,7 +72,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         <MenuItem
           key="renameFile"
           icon={(
-            <RenameIcon
+            <Rename16Regular
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;
@@ -95,11 +87,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         <MenuItem
           key="deleteFile"
           icon={(
-            <DeleteIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <Delete16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'deleteFile',
@@ -113,11 +101,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         <MenuItem
           key="downloadFile"
           icon={(
-            <DownloadDocumentIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <ArrowDownload16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'downloadFile',
@@ -131,7 +115,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         <MenuItem
           key="openWithOneDrive"
           icon={(
-            <OneDriveLogoIcon
+            <SiMicrosoftonedrive
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;

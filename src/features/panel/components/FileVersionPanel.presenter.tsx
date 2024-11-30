@@ -25,7 +25,7 @@ import {
 } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { FileVersion } from '../../../types/Model';
-import { HistoryIcon } from '@fluentui/react-icons-mdl2';
+import { History16Regular } from '@fluentui/react-icons';
 import SidePanel from '../../../common/components/SidePanel';
 import bytes from 'bytes';
 import { css } from '@emotion/react';
@@ -92,7 +92,7 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
                                   `}
                                   onClick={(event) => onClick?.(event, item)}
                                   onKeyDown={(event) => onKeyDown?.(event, item)}>
-                                  <HistoryIcon />
+                                  <History16Regular />
                                 </div>
                               </div>
                             )

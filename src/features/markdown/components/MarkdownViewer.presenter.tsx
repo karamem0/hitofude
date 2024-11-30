@@ -32,11 +32,7 @@ function MarkdownViewer(props: Readonly<MarkdownViewerProps>) {
   } = props;
 
   const intl = useIntl();
-  const {
-    theme: {
-      theme
-    }
-  } = useTheme();
+  const { theme } = useTheme();
 
   return text ? (
     <div

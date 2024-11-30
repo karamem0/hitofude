@@ -29,13 +29,15 @@ import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface ThemeChangeDialogProps {
+  mountNode?: HTMLElement,
   themeName: ThemeName,
-  onChangeTheme: EventHandler<ThemeName>
+  onChangeTheme?: EventHandler<ThemeName>
 }
 
 function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
 
   const {
+    mountNode,
     themeName,
     onChangeTheme
   } = props;
@@ -44,7 +46,7 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <DialogBody>
           <DialogTitle>
             <FormattedMessage {...messages.ChangeTheme} />
@@ -64,6 +66,8 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
                 floatingAction={(
                   <Checkbox
                     checked={themeName === ThemeName.light}
+                    name="light"
+                    title={intl.formatMessage(messages.Light)}
                     onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.light)} />
                 )}>
                 <CardHeader
@@ -77,6 +81,8 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
                 floatingAction={(
                   <Checkbox
                     checked={themeName === ThemeName.dark}
+                    name="dark"
+                    title={intl.formatMessage(messages.Dark)}
                     onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.dark)} />
                 )}>
                 <CardHeader

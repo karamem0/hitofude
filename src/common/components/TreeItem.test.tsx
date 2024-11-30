@@ -21,7 +21,9 @@ it('should create a shapshot when the selected parameter is true', () => {
     info: (
       <div data-testid="test-Info" />
     ),
-    key: '1',
+    menu: (
+      <div data-testid="test-Menu" />
+    ),
     name: 'Markdown.md',
     selected: true
   };
@@ -43,7 +45,31 @@ it('should create a shapshot when the selected parameter is false', () => {
     info: (
       <div data-testid="test-Info" />
     ),
-    key: '1',
+    menu: (
+      <div data-testid="test-Menu" />
+    ),
+    name: 'Markdown.md',
+    selected: false
+  };
+  const { asFragment } = render(
+    <IntlProvider>
+      <ThemeProvider>
+        <Presenter {...params} />
+      </ThemeProvider>
+    </IntlProvider>
+  );
+  expect(asFragment()).toMatchSnapshot();
+});
+
+it('should create a shapshot when the menu parameter is undefined', () => {
+  const params = {
+    icon: (
+      <div data-testid="test-Icon" />
+    ),
+    info: (
+      <div data-testid="test-Info" />
+    ),
+    menu: undefined,
     name: 'Markdown.md',
     selected: false
   };

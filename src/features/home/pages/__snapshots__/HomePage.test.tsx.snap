@@ -11,12 +11,19 @@ exports[`should create a shapshot 1`] = `
   -webkit-flex-flow: column;
   -ms-flex-flow: column;
   flex-flow: column;
+  min-width: 100%;
+  min-height: 100svh;
 }
 
 .emotion-1 {
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: row;
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -31,6 +38,11 @@ exports[`should create a shapshot 1`] = `
 }
 
 .emotion-2 {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -39,37 +51,7 @@ exports[`should create a shapshot 1`] = `
   -webkit-flex-flow: column;
   -ms-flex-flow: column;
   flex-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background-color: #ded1d1;
-}
-
-.emotion-3 {
-  display: grid;
-}
-
-@media all and (width <= 960px) {
-  .emotion-3 {
-    grid-template-rows: auto auto;
-    grid-template-columns: auto;
-    grid-gap: 2rem;
-    padding: 2rem;
-  }
-}
-
-@media not all and (width <= 960px) {
-  .emotion-3 {
-    grid-template-rows: auto;
-    grid-template-columns: auto auto;
-    grid-gap: 4rem;
-    padding: 2rem;
-  }
+  min-height: calc(100svh - 5rem);
 }
 
 .emotion-4 {
@@ -85,28 +67,70 @@ exports[`should create a shapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: linear-gradient(#e8dede, #f1ebeb);
 }
 
 .emotion-5 {
-  font-size: 40px;
-  font-weight: bold;
-  line-height: calc(40px * 1.25);
-  color: #5d4545;
+  display: grid;
+}
+
+@media all and (width <= 960px) {
+  .emotion-5 {
+    grid-template-rows: auto auto;
+    grid-template-columns: auto;
+    grid-gap: 2rem;
+    padding: 2rem;
+  }
+}
+
+@media not all and (width <= 960px) {
+  .emotion-5 {
+    grid-template-rows: auto;
+    grid-template-columns: auto auto;
+    grid-gap: 4rem;
+    padding: 2rem;
+  }
 }
 
 .emotion-6 {
-  color: #5d4545;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-flow: column;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-7 {
-  padding: 3rem 0;
+  font-size: 40px;
+  font-weight: bold;
+  line-height: calc(40px * 1.25);
+  color: #424242;
 }
 
 .emotion-8 {
-  width: 20rem;
+  color: #424242;
 }
 
 .emotion-9 {
+  padding: 3rem 0;
+}
+
+.emotion-11 {
+  width: 20rem;
+}
+
+.emotion-12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -125,14 +149,14 @@ exports[`should create a shapshot 1`] = `
   justify-content: center;
 }
 
-.emotion-10 {
+.emotion-13 {
   padding: 2rem 0;
   font-size: 24px;
   font-weight: bold;
   line-height: calc(24px * 1.25);
 }
 
-.emotion-11 {
+.emotion-14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -149,10 +173,11 @@ exports[`should create a shapshot 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  padding: 2rem 0;
+  min-height: 2.5rem;
+  padding: 0 1rem;
 }
 
-.emotion-12 {
+.emotion-15 {
   padding: 0 0.25rem;
 }
 
@@ -166,56 +191,59 @@ exports[`should create a shapshot 1`] = `
       <header
         class="emotion-1"
       >
-        <button
+        <a
           aria-label="GitHub"
           class="fui-Button r1alrhcs ___eduuxo0_1tclg4b f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3"
+          role="button"
+          tabindex="0"
           title="GitHub"
-          type="button"
         >
           <span
             class="fui-Button__icon rywnvv2 ___963sj20_1qpm2bl f1nizpg2"
           >
-            <span
-              aria-hidden="true"
-              class="root_dd790ee3"
+            <svg
+              class="emotion-2"
+              fill="currentColor"
+              height="1em"
+              role="img"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                class="svg_dd790ee3"
-                focusable="false"
-                viewBox="0 0 2048 2048"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1024 25q141 0 272 36t244 104 207 160 161 207 103 245 37 272q0 165-50 318t-143 281-221 224-286 149q-3 1-9 1t-9 1q-24 0-38-14t-14-37v-140q0-69 1-141 0-51-15-103t-54-87q116-13 203-47t146-96 88-150 30-212q0-78-26-147t-79-128q11-28 16-58t5-60q0-39-8-77t-23-76q-5-2-11-2t-11 0q-32 0-67 10t-69 26-67 35-57 36q-125-35-256-35t-256 35q-25-17-57-36t-66-34-70-26-67-11h-11q-6 0-11 2-14 37-22 75t-9 78q0 30 5 60t16 58q-53 58-79 127t-26 148q0 122 29 211t88 150 146 97 203 48q-29 26-44 62t-21 75q-27 13-57 20t-60 7q-64 0-106-30t-75-82q-12-19-29-38t-37-34-43-24-48-10h-12q-8 0-15 3t-14 6-6 10q0 12 14 23t23 18l3 2q22 17 38 32t30 33 23 38 23 47q34 78 95 113t147 36q26 0 52-3t52-9v174q0 24-14 38t-39 14h-8q-5 0-9-2-157-51-286-147t-221-225-142-282-51-318q0-141 36-272t104-244 160-207 207-161T752 62t272-37z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              />
+            </svg>
           </span>
           GitHub
-        </button>
+        </a>
       </header>
-      <main>
+      <main
+        class="emotion-3"
+      >
         <div
-          class="emotion-2"
+          class="emotion-4"
         >
           <div
-            class="emotion-3"
+            class="emotion-5"
           >
             <div
-              class="emotion-4"
+              class="emotion-6"
             >
               <h1
-                class="fui-Text emotion-5 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+                class="fui-Text emotion-7 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
               >
                 Hitofude
               </h1>
               <span
-                class="fui-Text emotion-6 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+                class="fui-Text emotion-8 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
               >
                 Online Markdown Editor for Microsoft 365
               </span>
               <div
-                class="emotion-7"
+                class="emotion-9"
               >
                 <button
                   aria-label="Sign in with Microsoft account"
@@ -226,20 +254,21 @@ exports[`should create a shapshot 1`] = `
                   <span
                     class="fui-Button__icon rywnvv2 ___963sj20_1qpm2bl f1nizpg2"
                   >
-                    <span
-                      aria-hidden="true"
-                      class="root_dd790ee3"
+                    <svg
+                      class="emotion-2"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <svg
-                        class="svg_dd790ee3"
-                        viewBox="0 0 2048 2048"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0 268l768-107v735H0V268zM1920 0v896H896V143L1920 0zM896 1024h1024v896L896 1777v-753zm-896 0h768v735L0 1652v-628z"
-                        />
-                      </svg>
-                    </span>
+                      <path
+                        d="M0,0H11.377V11.372H0ZM12.623,0H24V11.372H12.623ZM0,12.623H11.377V24H0Zm12.623,0H24V24H12.623"
+                      />
+                    </svg>
                   </span>
                   Sign in with Microsoft account
                 </button>
@@ -247,16 +276,16 @@ exports[`should create a shapshot 1`] = `
             </div>
             <img
               alt="Hitofude"
-              class="emotion-8"
+              class="emotion-11"
               src="/assets/images/Books.svg"
             />
           </div>
         </div>
         <div
-          class="emotion-9"
+          class="emotion-12"
         >
           <h2
-            class="fui-Text emotion-10 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+            class="fui-Text emotion-13 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
           >
             What is Hitofude?
           </h2>
@@ -278,7 +307,7 @@ exports[`should create a shapshot 1`] = `
         </div>
       </main>
       <footer
-        class="emotion-11"
+        class="emotion-14"
       >
         <button
           class="fui-Link ___52mpgl0_k1g75g0 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao f1mk8lai fnbmjn9 f1o700av f1iuv45f f1cmlufx f9n3di6 f1ids18y f1tx3yz7 f1deo86v f1eh06m1 f1iescvh fhgqx19 f1olyrje f1p93eir f1nev41a f1ern45e f1n71otn f1h8hb77 f1deefiw"
@@ -287,7 +316,7 @@ exports[`should create a shapshot 1`] = `
           Terms of Use
         </button>
         <span
-          class="fui-Text emotion-12 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
+          class="fui-Text emotion-15 ___c56hd20_1xy0w11 fk6fouc fkhj508 f1i3iumi figsok6 fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649"
         >
           |
         </span>

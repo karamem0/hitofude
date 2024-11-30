@@ -9,13 +9,13 @@
 import React from 'react';
 
 import {
-  CancelIcon,
-  CheckMarkIcon,
-  DownloadDocumentIcon,
-  EditIcon,
-  HistoryIcon,
-  SaveIcon
-} from '@fluentui/react-icons-mdl2';
+  ArrowDownload16Regular,
+  Checkmark16Regular,
+  Dismiss16Regular,
+  Edit16Regular,
+  History16Regular,
+  Save16Regular
+} from '@fluentui/react-icons';
 import { ContentMenuAction, File } from '../../../types/Model';
 import {
   MenuDivider,
@@ -70,11 +70,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
                 key="saveFile"
                 disabled={!changed}
                 icon={(
-                  <SaveIcon
-                    css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
+                  <Save16Regular />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
                   type: 'saveFile',
@@ -102,11 +98,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
               <MenuItem
                 key="closeFile"
                 icon={(
-                  <CancelIcon
-                    css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
+                  <Dismiss16Regular />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
                   type: 'closeFile',
@@ -119,11 +111,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             <MenuItem
               key="editFile"
               icon={(
-                <EditIcon
-                  css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+                <Edit16Regular />
               )}
               onClick={(event) => onMenuClick?.(event, {
                 type: 'editFile',
@@ -139,11 +127,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
         <MenuItem
           key="openFileVersionPanel"
           icon={(
-            <HistoryIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <History16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'openFileVersionPanel',
@@ -162,10 +146,8 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             <MenuItem
               key="toggleMinimap"
               icon={(
-                <CheckMarkIcon
+                <Checkmark16Regular
                   css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
                     color: ${minimap ? 'inherit' : 'transparent'};
                   `} />
               )}
@@ -178,10 +160,8 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             <MenuItem
               key="toggleWordWrap"
               icon={(
-                <CheckMarkIcon
+                <Checkmark16Regular
                   css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
                     color: ${wordWrap ? 'inherit' : 'transparent'};
                   `} />
               )}
@@ -194,10 +174,8 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             <MenuItem
               key="toggleScroll"
               icon={(
-                <CheckMarkIcon
+                <Checkmark16Regular
                   css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
                     color: ${scroll ? 'inherit' : 'transparent'};
                   `} />
               )}
@@ -210,10 +188,8 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             <MenuItem
               key="togglePreview"
               icon={(
-                <CheckMarkIcon
+                <Checkmark16Regular
                   css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
                     color: ${preview ? 'inherit' : 'transparent'};
                   `} />
               )}
@@ -229,11 +205,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             <MenuItem
               key="downloadFile"
               icon={(
-                <DownloadDocumentIcon
-                  css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
+                <ArrowDownload16Regular />
               )}
               onClick={(event) => onMenuClick?.(event, {
                 type: 'downloadFile',

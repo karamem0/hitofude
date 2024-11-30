@@ -29,6 +29,7 @@ import messages from '../messages';
 
 interface FileRenameDialogProps {
   loading?: boolean,
+  mountNode?: HTMLElement,
   value?: File,
   onSubmit?: EventHandler<FileRenameDialogFormState>
 }
@@ -37,6 +38,7 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
 
   const {
     loading,
+    mountNode,
     value,
     onSubmit
   } = props;
@@ -51,7 +53,7 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <form onSubmit={form.handleSubmit((formState) => onSubmit?.({}, formState))}>
           <DialogBody>
             <DialogTitle>
@@ -82,7 +84,8 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
                       onChange={field.onChange} />
                   )}
                   rules={{
-                    required: true
+                    required: true,
+                    validate: (text) => text !== value?.baseName
                   }} />
               </div>
             </DialogContent>

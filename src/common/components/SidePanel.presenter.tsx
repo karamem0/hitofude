@@ -14,7 +14,7 @@ import {
   DrawerHeader,
   DrawerHeaderTitle
 } from '@fluentui/react-components';
-import { CancelIcon } from '@fluentui/react-icons-mdl2';
+import { Dismiss16Regular } from '@fluentui/react-icons';
 import { DrawerOverlay } from '@fluentui/react-components/unstable';
 import { EventHandler } from '../../types/Event';
 import { css } from '@emotion/react';
@@ -54,11 +54,7 @@ function SidePanel(props: Readonly<React.PropsWithChildren<SidePanelProps>>) {
               appearance="subtle"
               aria-label="Close"
               icon={(
-                <CancelIcon
-                  css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
+                <Dismiss16Regular />
               )}
               onClick={(event) => onOpenChange?.(event, false)} />
           )}>

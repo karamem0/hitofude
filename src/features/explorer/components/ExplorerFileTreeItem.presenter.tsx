@@ -9,12 +9,11 @@
 import React from 'react';
 
 import { File, Folder } from '../../../types/Model';
+import { DocumentOnePage16Regular } from '@fluentui/react-icons';
 import { EventHandler } from '../../../types/Event';
 import ExplorerFileConflictButton from './ExplorerFileConflictButton';
 import ExplorerFileMenuList from './ExplorerFileMenuList';
-import { TextDocumentIcon } from '@fluentui/react-icons-mdl2';
 import TreeItem from '../../../common/components/TreeItem';
-import { css } from '@emotion/react';
 import { isSupportedFile } from '../../../utils/File';
 
 interface ExplorerFileTreeItemProps {
@@ -39,11 +38,7 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
       name={file.fullName}
       selected={selectedFile?.id === file.id}
       icon={(
-        <TextDocumentIcon
-          css={css`
-            font-size: 1rem;
-            line-height: 1rem;
-          `} />
+        <DocumentOnePage16Regular />
       )}
       info={(
         <ExplorerFileConflictButton file={file} />

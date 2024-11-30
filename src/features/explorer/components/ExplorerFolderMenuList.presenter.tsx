@@ -11,10 +11,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
-  DeleteIcon,
-  LinkIcon,
-  RenameIcon
-} from '@fluentui/react-icons-mdl2';
+  Delete16Regular,
+  Link16Regular,
+  Rename16Regular
+} from '@fluentui/react-icons';
 import { ExplorerMenuAction, Folder } from '../../../types/Model';
 import {
   MenuDivider,
@@ -23,7 +23,7 @@ import {
   MenuList
 } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
-import { OneDriveLogoIcon } from '@fluentui/react-icons-mdl2-branded';
+import { SiMicrosoftonedrive } from 'react-icons/si';
 import { css } from '@emotion/react';
 import messages from '../messages';
 
@@ -45,11 +45,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
         <MenuItem
           key="copyLink"
           icon={(
-            <LinkIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <Link16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'copyLink',
@@ -63,11 +59,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
         <MenuItem
           key="renameFolder"
           icon={(
-            <RenameIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <Rename16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'renameFolder',
@@ -78,11 +70,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
         <MenuItem
           key="deleteFolder"
           icon={(
-            <DeleteIcon
-              css={css`
-                font-size: 1rem;
-                line-height: 1rem;
-              `} />
+            <Delete16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
             type: 'deleteFolder',
@@ -96,7 +84,7 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
         <MenuItem
           key="openWithOneDrive"
           icon={(
-            <OneDriveLogoIcon
+            <SiMicrosoftonedrive
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;

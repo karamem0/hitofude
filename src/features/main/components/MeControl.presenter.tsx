@@ -22,7 +22,6 @@ import {
 } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { FormattedMessage } from 'react-intl';
-import { SignOutIcon } from '@fluentui/react-icons-mdl2';
 import { css } from '@emotion/react';
 import messages from '../messages';
 
@@ -91,15 +90,7 @@ function MeControl(props: Readonly<MeControlProps>) {
           </MenuGroup>
           <MenuDivider />
           <MenuGroup>
-            <MenuItem
-              icon={(
-                <SignOutIcon
-                  css={css`
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
-              )}
-              onClick={onSignOut}>
+            <MenuItem onClick={onSignOut}>
               <FormattedMessage {...messages.SignOut} />
             </MenuItem>
           </MenuGroup>
