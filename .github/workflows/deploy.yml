@@ -20,10 +20,8 @@ jobs:
         uses: azure/login@v2
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
-      - name: Upload to blob storage
-        uses: azure/cli@v2
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
         with:
-          inlineScript: |
-            az storage blob delete-batch --account-name ${{vars.AZURE_STORAGE_ACCOUNT_NAME}} --auth-mode login --source '$web'
-            az storage blob upload-batch --account-name ${{vars.AZURE_STORAGE_ACCOUNT_NAME}} --auth-mode login --destination '$web' --source build
-            az cdn endpoint purge --content-paths '/*' --profile-name ${{vars.AZURE_CDN_PROFILE_NAME}} --name ${{vars.AZURE_CDN_ENDPOINT_NAME}} --resource-group ${{vars.AZURE_RESOURCE_GROUP_NAME}}
+          app-name: ${{vars.AZURE_APP_SERVICE_NAME}}
+          package: build

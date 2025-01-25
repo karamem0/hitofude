@@ -24,7 +24,7 @@ import {
 } from '@fluentui/react-components';
 import { EventHandler } from '../../../types/Event';
 import { FormattedMessage } from 'react-intl';
-import { SiMicrosoftonedrive } from 'react-icons/si';
+import { GrOnedrive } from 'react-icons/gr';
 import { css } from '@emotion/react';
 import { isSupportedFile } from '../../../utils/File';
 import messages from '../messages';
@@ -115,7 +115,7 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
         <MenuItem
           key="openWithOneDrive"
           icon={(
-            <SiMicrosoftonedrive
+            <GrOnedrive
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;

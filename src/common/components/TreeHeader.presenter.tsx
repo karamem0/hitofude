@@ -17,7 +17,7 @@ import {
 } from '@fluentui/react-components';
 import { ChevronLeft16Regular, MoreVertical16Regular } from '@fluentui/react-icons';
 import { EventHandler } from '../../types/Event';
-import { SiMicrosoftonedrive } from 'react-icons/si';
+import { GrOnedrive } from 'react-icons/gr';
 import { css } from '@emotion/react';
 import messages from '../../features/main/messages';
 import { useIntl } from 'react-intl';
@@ -73,7 +73,7 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
               width: 2rem;
               height: 2rem;
             `}>
-            <SiMicrosoftonedrive />
+            <GrOnedrive />
           </div>
         ) : (
           <Button

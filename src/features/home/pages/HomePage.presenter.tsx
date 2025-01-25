@@ -13,7 +13,7 @@ import {
   Link,
   Text } from '@fluentui/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { SiGithub, SiWindows } from 'react-icons/si';
+import { GrGithub, GrWindows } from 'react-icons/gr';
 import { EventHandler } from '../../../types/Event';
 import { css } from '@emotion/react';
 import messages from '../messages';
@@ -62,7 +62,7 @@ function HomePage(props: Readonly<HomePageProps>) {
           as="a"
           title={intl.formatMessage(messages.GitHub)}
           icon={(
-            <SiGithub
+            <GrGithub
               css={css`
                 font-size: 1rem;
                 line-height: 1rem;
@@ -133,7 +133,7 @@ function HomePage(props: Readonly<HomePageProps>) {
                   aria-label={intl.formatMessage(messages.SignIn)}
                   title={intl.formatMessage(messages.SignIn)}
                   icon={(
-                    <SiWindows
+                    <GrWindows
                       css={css`
                         font-size: 1rem;
                         line-height: 1rem;
