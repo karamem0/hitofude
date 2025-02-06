@@ -3,6 +3,8 @@ on:
     branches:
       - develop
 
+permissions: {}
+
 jobs:
   build:
     name: Build

@@ -1,5 +1,8 @@
 on: workflow_call
 
+permissions:
+  contents: write
+
 jobs:
   run:
     name: Run

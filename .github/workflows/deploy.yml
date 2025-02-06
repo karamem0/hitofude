@@ -5,6 +5,8 @@ on:
         required: true
         type: string
 
+permissions: {}
+
 jobs:
   run:
     name: Run
