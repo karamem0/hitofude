@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 karamem0
+// Copyright (c) 2023-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -22,6 +22,17 @@ const htmlPlugin = (env) => ({
 });
 
 export default defineConfig(({ mode }) => ({
+  'build': {
+    'outDir': 'build',
+    'sourcemap': true
+  },
+  'optimizeDeps': {
+    'esbuildOptions': {
+      'define': {
+        'global': 'globalThis'
+      }
+    }
+  },
   'plugins': [
     reactPlugin({
       'babel': {
@@ -45,5 +56,19 @@ export default defineConfig(({ mode }) => ({
       'cert': fs.readFileSync('./cert/localhost.crt'),
       'key': fs.readFileSync('./cert/localhost.key')
     }
+  },
+  'test': {
+    'coverage': {
+      'reporter': [
+        'json'
+      ],
+      'reportsDirectory': './coverage'
+    },
+    'environment': 'jsdom',
+    'globals': true,
+    'outputFile': './test/junit.xml',
+    'setupFiles': [
+      './vitest.setup.mjs'
+    ]
   }
 }));

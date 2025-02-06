@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 karamem0
+// Copyright (c) 2023-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,7 +8,6 @@
 
 import React from 'react';
 
-import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './ScrollPanel.presenter';

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 karamem0
+// Copyright (c) 2023-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,7 +8,6 @@
 
 import React from 'react';
 
-import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import IntlProvider from '../../../providers/IntlProvider';
 import Presenter from './ThemeChangeDialog.presenter';
@@ -16,15 +15,13 @@ import { ThemeName } from '../../../types/Model';
 import ThemeProvider from '../../../providers/ThemeProvider';
 import userEvent from '@testing-library/user-event';
 
-jest.mock('../../../common/components/ModalDialog', () =>
-  function ModalDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-ModalDialog">
-        {children}
-      </div>
-    );
-  }
-);
+vi.mock('../../../common/components/ModalDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-ModalDialog">
+      {children}
+    </div>
+  )
+}));
 
 it('should create a shapshot', () => {
   const container = document.body.appendChild(document.createElement('div'));
@@ -48,7 +45,7 @@ it('should create a shapshot', () => {
 it('should raise onChangeTheme event when click a light checkbox', async () => {
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
-  const mock = jest.fn();
+  const mock = vi.fn();
   const params = {
     mountNode: container,
     themeName: ThemeName.dark,
@@ -71,7 +68,7 @@ it('should raise onChangeTheme event when click a light checkbox', async () => {
 it('should raise onChangeTheme event when click a dark checkbox', async () => {
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
-  const mock = jest.fn();
+  const mock = vi.fn();
   const params = {
     mountNode: container,
     themeName: ThemeName.light,

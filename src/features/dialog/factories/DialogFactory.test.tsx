@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 karamem0
+// Copyright (c) 2023-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,111 +8,99 @@
 
 import React from 'react';
 
-import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { DialogType } from '../../../types/Model';
 import IntlProvider from '../../../providers/IntlProvider';
 import Presenter from './DialogFactory.presenter';
 import ThemeProvider from '../../../providers/ThemeProvider';
 
-jest.mock('../components/FileCopyDialog', () =>
-  function FileCopyDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FileCopyDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FileCopyDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FileCopyDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FileCreateDialog', () =>
-  function FileCreateDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FileCreateDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FileCreateDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FileCreateDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FileDeleteDialog', () =>
-  function FileDeleteDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FileDeleteDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FileDeleteDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FileDeleteDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FileOverwriteDialog', () =>
-  function FileOverwriteDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FileOverwriteDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FileOverwriteDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FileOverwriteDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FileRenameDialog', () =>
-  function FileRenameDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FileRenameDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FileRenameDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FileRenameDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FileRestoreDialog', () =>
-  function FileRestoreDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FileRestoreDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FileRestoreDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FileRestoreDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FolderCreateDialog', () =>
-  function FolderCreateDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FolderCreateDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FolderCreateDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FolderCreateDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FolderDeleteDialog', () =>
-  function FolderDeleteDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FolderDeleteDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FolderDeleteDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FolderDeleteDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/FolderRenameDialog', () =>
-  function FolderRenameDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-FolderRenameDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/FolderRenameDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-FolderRenameDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/LinkCopyDialog', () =>
-  function LinkCopyDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-LinkCopyDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/LinkCopyDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-LinkCopyDialog">
+      {children}
+    </div>
+  )
+}));
 
-jest.mock('../components/ThemeChangeDialog', () =>
-  function ThemeChangeDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-ThemeChangeDialog">
-        {children}
-      </div>
-    );
-  });
+vi.mock('../components/ThemeChangeDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-ThemeChangeDialog">
+      {children}
+    </div>
+  )
+}));
 
 it('should create a shapshot when the type parameter is changeTheme', () => {
   const params = {

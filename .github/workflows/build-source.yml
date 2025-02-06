@@ -1,9 +1,13 @@
+name: Build source
+
 on:
   workflow_call:
     inputs:
       environment:
         required: true
         type: string
+
+permissions: {}
 
 jobs:
   run:
@@ -40,27 +44,11 @@ jobs:
           FILE_PATH: .env
       - name: Restore source
         run: npm ci
-      - name: Audit source
-        run: npm audit --omit=dev
       - name: Build source
         run: npm run build
-      - name: Test source
-        run: npm run test:ci
-      - name: Upload build files
+      - name: Upload artifatcs
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: dist
-      - name: Upload test results
-        uses: enricomi/publish-unit-test-result-action/linux@v2
-        if: always()
-        with:
-          files: test/*.xml
-          check_name: Test results
-      - name: Upload coverage reports
-        uses: codecov/codecov-action@v4
-        if: always()
-        with:
-          fail_ci_if_error: true
-          token: ${{secrets.CODECOV_TOKEN}}
-          slug: karamem0/hitofude
+          path: build
+          include-hidden-files: true

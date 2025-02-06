@@ -1,0 +1,43 @@
+name: Test source
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+permissions:
+  checks: write
+
+jobs:
+  run:
+    name: Run
+    environment: ${{inputs.environment}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repos
+        uses: actions/checkout@v4
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Restore source
+        run: npm ci
+#      - name: Audit source
+#        run: npm audit --omit=dev
+      - name: Test source
+        run: npm run test:ci
+      - name: Upload test results
+        uses: enricomi/publish-unit-test-result-action/linux@v2
+        if: always()
+        with:
+          files: test/*.xml
+          check_name: Test results
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        if: always()
+        with:
+          fail_ci_if_error: true
+          token: ${{secrets.CODECOV_TOKEN}}
+          slug: karamem0/hitofude

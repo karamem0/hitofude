@@ -1,0 +1,15 @@
+name: Trigger on tags
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-to-github-release:
+    name: Deploy to GitHub Release
+    uses: ./.github/workflows/deploy-to-github-release.yml
+    secrets: inherit

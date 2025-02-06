@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 karamem0
+// Copyright (c) 2023-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,21 +8,18 @@
 
 import React from 'react';
 
-import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import IntlProvider from '../../../providers/IntlProvider';
 import Presenter from './FileDeleteDialog.presenter';
 import ThemeProvider from '../../../providers/ThemeProvider';
 
-jest.mock('../../../common/components/ModalDialog', () =>
-  function ModalDialog({ children }: React.PropsWithChildren<unknown>) {
-    return (
-      <div data-testid="test-ModalDialog">
-        {children}
-      </div>
-    );
-  }
-);
+vi.mock('../../../common/components/ModalDialog', () => ({
+  default: ({ children }: React.PropsWithChildren<unknown>) => (
+    <div data-testid="test-ModalDialog">
+      {children}
+    </div>
+  )
+}));
 
 it('should create a shapshot when the loading parameter is true', () => {
   const container = document.body.appendChild(document.createElement('div'));

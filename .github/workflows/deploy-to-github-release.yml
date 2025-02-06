@@ -1,4 +1,10 @@
-on: workflow_call
+name: Deploy to GitHub Release
+
+on:
+  workflow_call: {}
+
+permissions:
+  contents: write
 
 jobs:
   run:

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`should create a shapshot when the loading parameter is false 1`] = `
 <DocumentFragment>
@@ -154,7 +154,7 @@ exports[`should create a shapshot when the loading parameter is true 1`] = `
         >
           <button
             aria-label="Save"
-            class="fui-Button r1alrhcs ___1b744ob_186160c f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1t6o4dc f1h0usnq fs4ktlq f16h9ulv fx2bmrt fcvwxyo f4lkoma fg455y9 f1rvyvqg f1cwzwz f14g86mu f1dcs8yz fkc42ay f1vmkb5g f53ppgq f1663y11 f18v5270 f80fkiy f1kc2mi9 f1y0svfh fihuait fnxhupq fx507ft fyd6l6x fb3rf2x fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq f8w4c43 f1ol4fw6 f1q1lw4e f1dwjv2g fjwq6ea f1lr3nhc fn5gmvv f1mbxvi6 f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv f12k37oa fr96u23"
+            class="fui-Button r1alrhcs ___lwxuac0_1ursfbr f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1t6o4dc f1h0usnq fs4ktlq f16h9ulv fx2bmrt fcvwxyo f4lkoma fg455y9 f1rvyvqg f1cwzwz f14g86mu f1dcs8yz fkc42ay f1vmkb5g f53ppgq f1663y11 f18v5270 f80fkiy f1kc2mi9 f1y0svfh fihuait fnxhupq fx507ft fyd6l6x fb3rf2x fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq f8w4c43 f1ol4fw6 f1q1lw4e f1dwjv2g fuigjrg fjwq6ea f1lr3nhc fn5gmvv f1mbxvi6 f4dhi0o fequ9m0 f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv f12k37oa fr96u23"
             disabled=""
             title="Save"
             type="submit"
