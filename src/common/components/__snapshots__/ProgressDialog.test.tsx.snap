@@ -4,7 +4,7 @@ exports[`should create a shapshot when the type parameter is save 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    class="fui-DialogSurface__backdrop rsptlh5"
+    class="fui-DialogSurface__backdrop r1e18s3l"
   />
   .emotion-0 {
   display: -webkit-box;
@@ -90,7 +90,7 @@ exports[`should create a shapshot when the type parameter is upload 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    class="fui-DialogSurface__backdrop rsptlh5"
+    class="fui-DialogSurface__backdrop r1e18s3l"
   />
   .emotion-0 {
   display: -webkit-box;

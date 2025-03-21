@@ -24,8 +24,8 @@ jobs:
           node-version: 20.x
       - name: Restore source
         run: npm ci
-#      - name: Audit source
-#        run: npm audit --omit=dev
+      - name: Audit source
+        run: npm audit --omit=dev
       - name: Test source
         run: npm run test:ci
       - name: Upload test results
