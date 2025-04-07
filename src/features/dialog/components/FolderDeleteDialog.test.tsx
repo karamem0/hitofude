@@ -21,7 +21,7 @@ vi.mock('../../../common/components/ModalDialog', () => ({
   )
 }));
 
-it('should create a shapshot when the loading parameter is true', () => {
+it('should match the snapshot when the loading is true', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     loading: true,
@@ -41,7 +41,7 @@ it('should create a shapshot when the loading parameter is true', () => {
   expect(screen.getByTitle('OK')).toBeDisabled();
 });
 
-it('should create a shapshot when the loading parameter is false', () => {
+it('should match the snapshot when the loading is false', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     loading: false,

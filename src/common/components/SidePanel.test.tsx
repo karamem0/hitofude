@@ -13,7 +13,7 @@ import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './SidePanel.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 
-it('should create a shapshot when the open parameter is true', () => {
+it('should match the snapshot when the open is true', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     children: (
@@ -37,7 +37,7 @@ it('should create a shapshot when the open parameter is true', () => {
   expect(screen.getByTestId('test-Children')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the open parameter is false', () => {
+it('should match the snapshot when the open is false', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     children: (

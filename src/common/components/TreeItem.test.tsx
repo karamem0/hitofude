@@ -13,7 +13,7 @@ import Presenter from './TreeItem.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create a shapshot when the selected parameter is true', () => {
+it('should match the snapshot when the selected is true', () => {
   const params = {
     icon: (
       <div data-testid="test-Icon" />
@@ -37,7 +37,7 @@ it('should create a shapshot when the selected parameter is true', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create a shapshot when the selected parameter is false', () => {
+it('should match the snapshot when the selected is false', () => {
   const params = {
     icon: (
       <div data-testid="test-Icon" />
@@ -61,7 +61,7 @@ it('should create a shapshot when the selected parameter is false', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create a shapshot when the menu parameter is undefined', () => {
+it('should match the snapshot when the menu is undefined', () => {
   const params = {
     icon: (
       <div data-testid="test-Icon" />

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should create a shapshot when the root parameter is false 1`] = `
+exports[`should match the snapshot when the root is false 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: grid;
@@ -126,7 +126,7 @@ exports[`should create a shapshot when the root parameter is false 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the root parameter is true 1`] = `
+exports[`should match the snapshot when the root is true 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: grid;

@@ -1,6 +1,6 @@
 # Hitofude
 
-[![.github/workflows/develop.yml](https://github.com/karamem0/hitofude/actions/workflows/develop.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/develop.yml)
+[![.github/workflows/trigger-on-develop.yml](https://github.com/karamem0/hitofude/actions/workflows/trigger-on-develop.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/trigger-on-develop.yml)
 [![codecov](https://codecov.io/gh/karamem0/hitofude/graph/badge.svg?token=T44FVSHRYS)](https://codecov.io/gh/karamem0/hitofude)
 [![License](https://img.shields.io/github/license/karamem0/hitofude.svg)](https://github.com/karamem0/hitofude/blob/main/LICENSE)
 

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should create a shapshot when the message parameter is not undedined 1`] = `
+exports[`should match the snapshot when the message is not undedined 1`] = `
 <DocumentFragment>
   .emotion-0 {
   position: fixed;
@@ -60,7 +60,7 @@ exports[`should create a shapshot when the message parameter is not undedined 1`
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the message parameter is undedined 1`] = `
+exports[`should match the snapshot when the message is undedined 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"

@@ -102,7 +102,7 @@ vi.mock('../components/ThemeChangeDialog', () => ({
   )
 }));
 
-it('should create a shapshot when the type parameter is changeTheme', () => {
+it('should match the snapshot when the type is changeTheme', () => {
   const params = {
     action: {
       type: 'changeTheme' as DialogType,
@@ -120,7 +120,7 @@ it('should create a shapshot when the type parameter is changeTheme', () => {
   expect(screen.getByTestId('test-ThemeChangeDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is copyFile', () => {
+it('should match the snapshot when the type is copyFile', () => {
   const params = {
     action: {
       type: 'copyFile' as DialogType,
@@ -138,7 +138,7 @@ it('should create a shapshot when the type parameter is copyFile', () => {
   expect(screen.getByTestId('test-FileCopyDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is copyLink', () => {
+it('should match the snapshot when the type is copyLink', () => {
   const params = {
     action: {
       type: 'copyLink' as DialogType,
@@ -156,7 +156,7 @@ it('should create a shapshot when the type parameter is copyLink', () => {
   expect(screen.getByTestId('test-LinkCopyDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is createFile', () => {
+it('should match the snapshot when the type is createFile', () => {
   const params = {
     action: {
       type: 'createFile' as DialogType,
@@ -174,7 +174,7 @@ it('should create a shapshot when the type parameter is createFile', () => {
   expect(screen.getByTestId('test-FileCreateDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is createFolder', () => {
+it('should match the snapshot when the type is createFolder', () => {
   const params = {
     action: {
       type: 'createFolder' as DialogType,
@@ -192,7 +192,7 @@ it('should create a shapshot when the type parameter is createFolder', () => {
   expect(screen.getByTestId('test-FolderCreateDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is deleteFile', () => {
+it('should match the snapshot when the type is deleteFile', () => {
   const params = {
     action: {
       type: 'deleteFile' as DialogType,
@@ -210,7 +210,7 @@ it('should create a shapshot when the type parameter is deleteFile', () => {
   expect(screen.getByTestId('test-FileDeleteDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is deleteFolder', () => {
+it('should match the snapshot when the type is deleteFolder', () => {
   const params = {
     action: {
       type: 'deleteFolder' as DialogType,
@@ -228,7 +228,7 @@ it('should create a shapshot when the type parameter is deleteFolder', () => {
   expect(screen.getByTestId('test-FolderDeleteDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is overwriteFile', () => {
+it('should match the snapshot when the type is overwriteFile', () => {
   const params = {
     action: {
       type: 'overwriteFile' as DialogType,
@@ -246,7 +246,7 @@ it('should create a shapshot when the type parameter is overwriteFile', () => {
   expect(screen.getByTestId('test-FileOverwriteDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is renameFile', () => {
+it('should match the snapshot when the type is renameFile', () => {
   const params = {
     action: {
       type: 'renameFile' as DialogType,
@@ -264,7 +264,7 @@ it('should create a shapshot when the type parameter is renameFile', () => {
   expect(screen.getByTestId('test-FileRenameDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is restoreFile', () => {
+it('should match the snapshot when the type is restoreFile', () => {
   const params = {
     action: {
       type: 'restoreFile' as DialogType,
@@ -282,7 +282,7 @@ it('should create a shapshot when the type parameter is restoreFile', () => {
   expect(screen.getByTestId('test-FileRestoreDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is renameFolder', () => {
+it('should match the snapshot when the type is renameFolder', () => {
   const params = {
     action: {
       type: 'renameFolder' as DialogType,
@@ -300,7 +300,7 @@ it('should create a shapshot when the type parameter is renameFolder', () => {
   expect(screen.getByTestId('test-FolderRenameDialog')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is undefined', () => {
+it('should match the snapshot when the type is undefined', () => {
   const params = {
     action: undefined
   };

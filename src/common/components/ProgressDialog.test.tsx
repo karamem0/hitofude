@@ -14,7 +14,7 @@ import Presenter from './ProgressDialog.presenter';
 import { ProgressType } from '../../types/Model';
 import ThemeProvider from '../../providers/ThemeProvider';
 
-it('should create a shapshot when the type parameter is save', () => {
+it('should match the snapshot when the type is save', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,
@@ -34,7 +34,7 @@ it('should create a shapshot when the type parameter is save', () => {
   expect(screen.getByText('Saving...')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is upload', () => {
+it('should match the snapshot when the type is upload', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,
@@ -54,7 +54,7 @@ it('should create a shapshot when the type parameter is upload', () => {
   expect(screen.getByText('Uploading...')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the type parameter is undefined', () => {
+it('should match the snapshot when the type is undefined', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,

@@ -13,7 +13,7 @@ import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './ScrollPanel.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 
-it('should create a shapshot', () => {
+it('should match the snapshot', () => {
   const params = {
     children: (
       <div data-testid="test-Children" />

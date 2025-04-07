@@ -10,7 +10,7 @@ import { toDate } from './Date';
 
 describe('toDate', () => {
 
-  it('should convert a date string to the date object', () => {
+  it('should get a convert date string to a date object', () => {
     const param = {
       value: '2000-01-01T09:00:00'
     };
@@ -21,7 +21,7 @@ describe('toDate', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the date string is null', () => {
+  it('should get undefined when the date string is null', () => {
     const param = {
       value: null
     };
@@ -32,7 +32,7 @@ describe('toDate', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the date string is undefined', () => {
+  it('should get undefined when the date string is undefined', () => {
     const param = {
       value: undefined
     };

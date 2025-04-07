@@ -33,15 +33,15 @@ export class StorageService {
   }
 
   getExplorerAllFiles(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('ExplorerAllFiles') ?? undefined));
+    return Boolean(Number(this.storage.getItem('explorerAllFiles') ?? undefined));
   }
 
   getExplorerFileId(): string | undefined {
-    return this.storage.getItem('ExplorerFileId') ?? undefined;
+    return this.storage.getItem('explorerFileId') ?? undefined;
   }
 
   getExplorerFolderId(): string | undefined {
-    return this.storage.getItem('ExplorerFolderId') ?? undefined;
+    return this.storage.getItem('explorerFolderId') ?? undefined;
   }
 
   getTabOpen(): boolean | undefined {
@@ -90,25 +90,25 @@ export class StorageService {
 
   setExplorerAllFiles(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('ExplorerAllFiles', String(Number(value)));
+      this.storage.setItem('explorerAllFiles', String(Number(value)));
     } else {
-      this.storage.removeItem('ExplorerAllFiles');
+      this.storage.removeItem('explorerAllFiles');
     }
   }
 
   setExplorerFileId(value?: string): void {
     if (value != null) {
-      this.storage.setItem('ExplorerFileId', value);
+      this.storage.setItem('explorerFileId', value);
     } else {
-      this.storage.removeItem('ExplorerFileId');
+      this.storage.removeItem('explorerFileId');
     }
   }
 
   setExplorerFolderId(value?: string): void {
     if (value != null) {
-      this.storage.setItem('ExplorerFolderId', value);
+      this.storage.setItem('explorerFolderId', value);
     } else {
-      this.storage.removeItem('ExplorerFolderId');
+      this.storage.removeItem('explorerFolderId');
     }
   }
 
@@ -129,7 +129,11 @@ export class StorageService {
   }
 
   setThemeName(value?: ThemeName): void {
-    this.storage.setItem('themeName', String(Number(value)));
+    if (value != null) {
+      this.storage.setItem('themeName', String(Number(value)));
+    } else {
+      this.storage.removeItem('themeName');
+    }
   }
 
 }

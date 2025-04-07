@@ -13,7 +13,7 @@ import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './Loader.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 
-it('should create a shapshot when the loading parameter is true', () => {
+it('should match the snapshot when the loading is true', () => {
   const params = {
     children: (
       <div data-testid="test-Children" />
@@ -31,7 +31,7 @@ it('should create a shapshot when the loading parameter is true', () => {
   expect(screen.queryByTestId('test-Children')).not.toBeInTheDocument();
 });
 
-it('should create a shapshot when the loading parameter is false', () => {
+it('should match the snapshot when the loading is false', () => {
   const params = {
     children: (
       <div data-testid="test-Children" />

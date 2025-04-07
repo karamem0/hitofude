@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should create a shapshot when the type parameter is changeTheme 1`] = `
+exports[`should match the snapshot when the type is changeTheme 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -13,7 +13,7 @@ exports[`should create a shapshot when the type parameter is changeTheme 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is copyFile 1`] = `
+exports[`should match the snapshot when the type is copyFile 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr1 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -26,7 +26,7 @@ exports[`should create a shapshot when the type parameter is copyFile 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is copyLink 1`] = `
+exports[`should match the snapshot when the type is copyLink 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -39,7 +39,7 @@ exports[`should create a shapshot when the type parameter is copyLink 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is createFile 1`] = `
+exports[`should match the snapshot when the type is createFile 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr3 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -52,7 +52,7 @@ exports[`should create a shapshot when the type parameter is createFile 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is createFolder 1`] = `
+exports[`should match the snapshot when the type is createFolder 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr4 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -65,7 +65,7 @@ exports[`should create a shapshot when the type parameter is createFolder 1`] = 
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is deleteFile 1`] = `
+exports[`should match the snapshot when the type is deleteFile 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr5 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -78,7 +78,7 @@ exports[`should create a shapshot when the type parameter is deleteFile 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is deleteFolder 1`] = `
+exports[`should match the snapshot when the type is deleteFolder 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr6 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -91,7 +91,7 @@ exports[`should create a shapshot when the type parameter is deleteFolder 1`] = 
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is overwriteFile 1`] = `
+exports[`should match the snapshot when the type is overwriteFile 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr7 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -104,7 +104,7 @@ exports[`should create a shapshot when the type parameter is overwriteFile 1`] =
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is renameFile 1`] = `
+exports[`should match the snapshot when the type is renameFile 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr8 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -117,7 +117,7 @@ exports[`should create a shapshot when the type parameter is renameFile 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is renameFolder 1`] = `
+exports[`should match the snapshot when the type is renameFolder 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderra ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -130,7 +130,7 @@ exports[`should create a shapshot when the type parameter is renameFolder 1`] = 
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is restoreFile 1`] = `
+exports[`should match the snapshot when the type is restoreFile 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr9 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -143,7 +143,7 @@ exports[`should create a shapshot when the type parameter is restoreFile 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is undefined 1`] = `
+exports[`should match the snapshot when the type is undefined 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderrb ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"

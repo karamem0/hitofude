@@ -10,7 +10,7 @@ import { isEmpty } from './Folder';
 
 describe('isEmpty', () => {
 
-  it('should retrieve true when the folder is empty', () => {
+  it('should get true when the folder is empty', () => {
     const param = {
       folder: {
         id: 'foo',
@@ -26,7 +26,7 @@ describe('isEmpty', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve true when the folder contains unsupported files', () => {
+  it('should get true when the folder contains unsupported files', () => {
     const param = {
       folder: {
         id: 'foo',
@@ -49,7 +49,7 @@ describe('isEmpty', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the folder contains folders', () => {
+  it('should get false when the folder contains subfolders', () => {
     const param = {
       folder: {
         id: 'foo',
@@ -71,7 +71,7 @@ describe('isEmpty', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the folder contains supported files', () => {
+  it('should get false when the folder contains supported files', () => {
     const param = {
       folder: {
         id: 'foo',
@@ -94,7 +94,7 @@ describe('isEmpty', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the folder contains unsupported files but is specified to show all files', () => {
+  it('should get false when the folder contains unsupported files but is configured to show all files', () => {
     const param = {
       folder: {
         id: 'foo',

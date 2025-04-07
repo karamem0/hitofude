@@ -99,7 +99,12 @@ createMap<DriveItem, File>(
     mapFrom((source) => toDate(source.lastModifiedDateTime))),
   forMember(
     (target) => target.webUrl,
-    mapFrom((source) => source.webUrl + '?web=1')),
+    mapFrom((source) => {
+      if (source.webUrl == null) {
+        return undefined;
+      }
+      return source.webUrl + (source.webUrl.indexOf('?') < 0 ? '?web=1' : '&web=1');
+    })),
   forMember(
     (target) => target.downloadUrl,
     mapFrom((source) => (source as Record<string, string>)['@microsoft.graph.downloadUrl'])

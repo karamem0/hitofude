@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should create a shapshot when the type parameter is save 1`] = `
+exports[`should match the snapshot when the type is save 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
@@ -77,7 +77,7 @@ exports[`should create a shapshot when the type parameter is save 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is undefined 1`] = `
+exports[`should match the snapshot when the type is undefined 1`] = `
 <DocumentFragment>
   <div
     class="fui-FluentProvider fui-FluentProviderr8 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
@@ -86,7 +86,7 @@ exports[`should create a shapshot when the type parameter is undefined 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the type parameter is upload 1`] = `
+exports[`should match the snapshot when the type is upload 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"

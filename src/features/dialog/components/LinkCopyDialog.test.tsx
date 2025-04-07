@@ -22,7 +22,7 @@ vi.mock('../../../common/components/ModalDialog', () => ({
   )
 }));
 
-it('should create a shapshot when the loading copied is true', () => {
+it('should match the snapshot when the loading copied is true', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     copied: true,
@@ -42,7 +42,7 @@ it('should create a shapshot when the loading copied is true', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create a shapshot when the loading copied is false', () => {
+it('should match the snapshot when the loading copied is false', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     copied: false,
@@ -62,7 +62,7 @@ it('should create a shapshot when the loading copied is false', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should raise onCopy event when click a button', async () => {
+it('should raise onCopy event when the click a button', async () => {
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const mock = vi.fn();

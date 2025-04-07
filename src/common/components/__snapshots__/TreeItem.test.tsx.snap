@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should create a shapshot when the menu parameter is undefined 1`] = `
+exports[`should match the snapshot when the menu is undefined 1`] = `
 <DocumentFragment>
   .emotion-0 {
   padding: 0 0.5rem;
@@ -142,7 +142,7 @@ exports[`should create a shapshot when the menu parameter is undefined 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the selected parameter is false 1`] = `
+exports[`should match the snapshot when the selected is false 1`] = `
 <DocumentFragment>
   .emotion-0 {
   padding: 0 0.5rem;
@@ -313,7 +313,7 @@ exports[`should create a shapshot when the selected parameter is false 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the selected parameter is true 1`] = `
+exports[`should match the snapshot when the selected is true 1`] = `
 <DocumentFragment>
   .emotion-0 {
   padding: 0 0.5rem;

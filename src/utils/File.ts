@@ -65,7 +65,7 @@ export function getMimeType(fileName: string | null | undefined, mimeType: strin
   return undefined;
 }
 
-export function isMimeType(value?: string, match?: string): boolean {
+export function isMimeType(value: string | null | undefined, match: string | null | undefined): boolean {
   if (value == null) {
     return false;
   }

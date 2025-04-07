@@ -13,7 +13,7 @@ import Presenter from './ImageViewer.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create a shapshot', () => {
+it('should match the snapshot', () => {
   const params = {
     alt: 'image',
     className: 'image',

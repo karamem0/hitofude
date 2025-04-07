@@ -21,7 +21,7 @@ export class RouteService {
 
   getParams(): RouteParams {
     const params = new URLSearchParams(this.location.hash.slice(1));
-    if (params == null) {
+    if (params.size === 0) {
       return {};
     }
     return {

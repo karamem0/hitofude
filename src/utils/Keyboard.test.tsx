@@ -29,7 +29,7 @@ describe('moveNext', () => {
     expect(screen.getByTestId('test-Baz').matches(':focus')).toBe(true);
   });
 
-  it('should not change focus when it is the last node', async () => {
+  it('should not change focus when the last node is focused', async () => {
     const user = userEvent.setup();
     render(
       <div data-testid="test-Root">
@@ -43,6 +43,19 @@ describe('moveNext', () => {
     await user.tab();
     moveNext(screen.getByTestId('test-Root'), 'button');
     expect(screen.getByTestId('test-Baz').matches(':focus')).toBe(true);
+  });
+
+  it('should not change focus when the node list is empty', async () => {
+    const user = userEvent.setup();
+    render(
+      <React.Fragment>
+        <button data-testid="test-Foo">foo</button>
+        <div data-testid="test-Root" />
+      </React.Fragment>
+    );
+    await user.tab();
+    moveNext(screen.getByTestId('test-Root'), 'button');
+    expect(screen.getByTestId('test-Foo').matches(':focus')).toBe(true);
   });
 
 });
@@ -64,7 +77,7 @@ describe('movePrevious', () => {
     expect(screen.getByTestId('test-Foo').matches(':focus')).toBe(true);
   });
 
-  it('should not change focus when it is the first node', async () => {
+  it('should not change focus when the first node is focused', async () => {
     const user = userEvent.setup();
     render(
       <div data-testid="test-Root">
@@ -72,6 +85,19 @@ describe('movePrevious', () => {
         <button data-testid="test-Bar">bar</button>
         <button data-testid="test-Baz">baz</button>
       </div>
+    );
+    await user.tab();
+    movePrevious(screen.getByTestId('test-Root'), 'button');
+    expect(screen.getByTestId('test-Foo').matches(':focus')).toBe(true);
+  });
+
+  it('should not change focus when the node list is empty', async () => {
+    const user = userEvent.setup();
+    render(
+      <React.Fragment>
+        <button data-testid="test-Foo">foo</button>
+        <div data-testid="test-Root" />
+      </React.Fragment>
     );
     await user.tab();
     movePrevious(screen.getByTestId('test-Root'), 'button');

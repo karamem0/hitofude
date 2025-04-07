@@ -13,7 +13,7 @@ import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './ModalDialog.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 
-it('should create a shapshot when the open parameter is true', () => {
+it('should match the snapshot when the open is true', () => {
   const params = {
     children: (
       <div data-testid="test-Children" />
@@ -31,7 +31,7 @@ it('should create a shapshot when the open parameter is true', () => {
   expect(screen.getByTestId('test-Children')).toBeInTheDocument();
 });
 
-it('should create a shapshot when the open parameter is false', () => {
+it('should match the snapshot when the open is false', () => {
   const params = {
     children: (
       <div data-testid="test-Children" />

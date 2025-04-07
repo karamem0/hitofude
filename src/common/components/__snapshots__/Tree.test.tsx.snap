@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should create a shapshot when the disabled parameter is false 1`] = `
+exports[`should match the snapshot when the disabled is false 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: -webkit-box;
@@ -31,7 +31,7 @@ exports[`should create a shapshot when the disabled parameter is false 1`] = `
 </DocumentFragment>
 `;
 
-exports[`should create a shapshot when the disabled parameter is true 1`] = `
+exports[`should match the snapshot when the disabled is true 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: -webkit-box;

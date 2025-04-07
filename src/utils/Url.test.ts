@@ -10,7 +10,7 @@ import { isAbsoluteUrl } from './Url';
 
 describe('isAbsoluteUrl', () => {
 
-  it('should retrieve true when the URL is an absolute URL', () => {
+  it('should get true when the URL is absolute', () => {
     const param = {
       value: 'https://www.example.com/path/to/file'
     };
@@ -21,7 +21,7 @@ describe('isAbsoluteUrl', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the URL is a relative URL', () => {
+  it('should get false when the URL is relative', () => {
     const param = {
       value: '/path/to/file'
     };
@@ -32,7 +32,7 @@ describe('isAbsoluteUrl', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the URL is null', () => {
+  it('should get false when the URL is null', () => {
     const param = {
       value: null
     };
@@ -43,7 +43,7 @@ describe('isAbsoluteUrl', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the URL is undefined', () => {
+  it('should get false when the URL is undefined', () => {
     const param = {
       value: undefined
     };

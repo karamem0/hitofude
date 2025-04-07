@@ -13,7 +13,7 @@ import Presenter from './Tree.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create a shapshot when the disabled parameter is true', () => {
+it('should match the snapshot when the disabled is true', () => {
   const params = {
     children: (
       <div data-testid="test-Children" />
@@ -30,7 +30,7 @@ it('should create a shapshot when the disabled parameter is true', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create a shapshot when the disabled parameter is false', () => {
+it('should match the snapshot when the disabled is false', () => {
   const params = {
     children: (
       <div data-testid="test-Children" />

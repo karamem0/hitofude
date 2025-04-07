@@ -7,6 +7,7 @@
 //
 
 import {
+  downloadFile,
   getBaseName,
   getExtension,
   getMimeType,
@@ -14,9 +15,56 @@ import {
   isSupportedFile
 } from './File';
 
+describe('downloadFile', () => {
+
+  it('should download a file when the downloadUrl and fullName are provided', () => {
+    const param = {
+      value: {
+        downloadUrl: 'https://www.example.com/foo.txt',
+        fullName: 'foo.txt'
+      }
+    };
+    const mockClick = vi.fn();
+    const mockRemove = vi.fn();
+    vi.spyOn(window.document, 'createElement')
+      .mockImplementation(() => ({
+        click: mockClick,
+        remove: mockRemove
+      } as unknown as HTMLAnchorElement));
+    downloadFile(param.value);
+    expect(mockClick).toHaveBeenCalled();
+    expect(mockRemove).toHaveBeenCalled();
+  });
+
+  it('should throw an error when downloadUrl is undefined', () => {
+    const param = {
+      value: {
+        downloadUrl: undefined,
+        fullName: 'foo.txt'
+      }
+    };
+    const mock = vi.spyOn(window.document, 'createElement');
+    expect(() => downloadFile(param.value)).toThrowError();
+    expect(mock).not.toHaveBeenCalled();
+  });
+
+  it('should throw an error when fullName is undefined', () => {
+    const param = {
+      value: {
+        downloadUrl: 'https://www.example.com/foo.txt',
+        fullName: undefined
+      }
+    };
+    const mock = vi.spyOn(window.document, 'createElement');
+    expect(() => downloadFile(param.value)).toThrowError();
+    expect(mock).not.toHaveBeenCalled();
+  });
+
+});
+
 describe('getBaseName', () => {
 
-  it('should retrieve the base name when the file name contains an extension', () => {
+  it('should get the base name when the file name has an extension', () => {
     const param = {
       value: 'foo.txt'
     };
@@ -27,7 +75,7 @@ describe('getBaseName', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve the base name when the file name contains multiple extensions', () => {
+  it('should get the base name when the file name has multiple extensions', () => {
     const param = {
       value: 'foo.txt.bak'
     };
@@ -38,7 +86,7 @@ describe('getBaseName', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve the base name when the file name does not contain an extension', () => {
+  it('should get the file name when it has no extension', () => {
     const param = {
       value: 'foo'
     };
@@ -49,7 +97,7 @@ describe('getBaseName', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the file name is null', () => {
+  it('should get undefined when the file name is null', () => {
     const param = {
       value: null
     };
@@ -60,7 +108,7 @@ describe('getBaseName', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the file name is undefined', () => {
+  it('should get undefined when the file name is undefined', () => {
     const param = {
       value: undefined
     };
@@ -75,7 +123,7 @@ describe('getBaseName', () => {
 
 describe('getExtension', () => {
 
-  it('should retrieve the extension when the file name contains an extension', () => {
+  it('should get the extension when the file name has an extension', () => {
     const param = {
       value: 'foo.txt'
     };
@@ -86,7 +134,7 @@ describe('getExtension', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve the extension when the file name contains multiple extensions', () => {
+  it('should get the last extension when the file name has multiple extensions', () => {
     const param = {
       value: 'foo.txt.bak'
     };
@@ -97,7 +145,7 @@ describe('getExtension', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the file name does not contain an extension', () => {
+  it('should get undefined when the file name has no extension', () => {
     const param = {
       value: 'foo'
     };
@@ -108,7 +156,7 @@ describe('getExtension', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the file name is null', () => {
+  it('should get undefined when the file name is null', () => {
     const param = {
       value: null
     };
@@ -119,7 +167,7 @@ describe('getExtension', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the file name is undefined', () => {
+  it('should get undefined when the file name is undefined', () => {
     const param = {
       value: undefined
     };
@@ -134,7 +182,7 @@ describe('getExtension', () => {
 
 describe('getMimeType', () => {
 
-  it('should retrieve text/plain when the file is a plain text', () => {
+  it('should get text/plain for a plain text file', () => {
     const param = {
       fileName: 'foo.txt',
       mimeType: 'text/plain'
@@ -146,7 +194,7 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve text/markdown when the file is a markdown text', () => {
+  it('should get text/markdown for a markdown file', () => {
     const param = {
       fileName: 'foo.md',
       mimeType: ''
@@ -158,7 +206,19 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the file name is undefined', () => {
+  it('should get undefined when the file name is null', () => {
+    const param = {
+      fileName: null,
+      mimeType: 'text/plain'
+    };
+    const expected = {
+      value: undefined
+    };
+    const actual = getMimeType(param.fileName, param.mimeType);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get undefined when the file name is undefined', () => {
     const param = {
       fileName: undefined,
       mimeType: 'text/plain'
@@ -170,7 +230,7 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the MIME type is undefined', () => {
+  it('should get undefined when the MIME type is undefined', () => {
     const param = {
       fileName: 'foo.txt',
       mimeType: undefined
@@ -182,7 +242,7 @@ describe('getMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve undefined when the MIME type is an invalid format', () => {
+  it('should get undefined when the MIME type is invalid', () => {
     const param = {
       fileName: 'foo.txt',
       mimeType: 'unknown'
@@ -198,7 +258,7 @@ describe('getMimeType', () => {
 
 describe('isMimeType', () => {
 
-  it('should retrieve true when the value matches the type', () => {
+  it('should get true when the value matches the type pattern', () => {
     const param = {
       value: 'text/plain',
       match: 'text/*'
@@ -210,7 +270,7 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve true when the value matches the subtype', () => {
+  it('should get true when the value matches the subtype pattern', () => {
     const param = {
       value: 'text/plain',
       match: '*/plain'
@@ -222,7 +282,7 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve true when the value matches the type and subtype', () => {
+  it('should get true when the value matches both type and subtype', () => {
     const param = {
       value: 'text/plain',
       match: 'text/plain'
@@ -234,7 +294,7 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the value does not match the type', () => {
+  it('should get false when the value does not match the type pattern', () => {
     const param = {
       value: 'text/plain',
       match: 'image/*'
@@ -246,10 +306,94 @@ describe('isMimeType', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the value does not match the subtype', () => {
+  it('should get false when the value does not match the subtype pattern', () => {
     const param = {
       value: 'text/plain',
       match: '*/markdown'
+    };
+    const expected = {
+      value: false
+    };
+    const actual = isMimeType(param.value, param.match);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get false when the value is null', () => {
+    const param = {
+      value: undefined,
+      match: 'text/plain'
+    };
+    const expected = {
+      value: false
+    };
+    const actual = isMimeType(param.value, param.match);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get false when the value is null', () => {
+    const param = {
+      value: null,
+      match: 'text/plain'
+    };
+    const expected = {
+      value: false
+    };
+    const actual = isMimeType(param.value, param.match);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get false when the value is undefined', () => {
+    const param = {
+      value: undefined,
+      match: 'text/plain'
+    };
+    const expected = {
+      value: false
+    };
+    const actual = isMimeType(param.value, param.match);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get false when the value is invalid', () => {
+    const param = {
+      value: 'unknown',
+      match: 'text/plain'
+    };
+    const expected = {
+      value: false
+    };
+    const actual = isMimeType(param.value, param.match);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get false when the match pattern is null', () => {
+    const param = {
+      value: 'text/plain',
+      match: null
+    };
+    const expected = {
+      value: false
+    };
+    const actual = isMimeType(param.value, param.match);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get false when the match pattern is undefined', () => {
+    const param = {
+      value: 'text/plain',
+      match: undefined
+    };
+    const expected = {
+      value: false
+    };
+    const actual = isMimeType(param.value, param.match);
+    expect(actual).toStrictEqual(expected.value);
+  });
+
+  it('should get false when the match pattern is invalid', () => {
+    const param = {
+      value: 'text/plain',
+      match: 'unknown'
     };
     const expected = {
       value: false
@@ -262,7 +406,7 @@ describe('isMimeType', () => {
 
 describe('isSupportedFile', () => {
 
-  it('should retrieve true when the file is an image', () => {
+  it('should get true for an image file', () => {
     const param = {
       value: {
         mimeType: 'image/png'
@@ -275,7 +419,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve true when the file is a video', () => {
+  it('should get true for a video file', () => {
     const param = {
       value: {
         mimeType: 'video/mp4'
@@ -288,7 +432,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve true when the file is a markdown text', () => {
+  it('should get true for a markdown text file', () => {
     const param = {
       value: {
         mimeType: 'text/markdown'
@@ -301,7 +445,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the file is an other format', () => {
+  it('should get false when the file format is unsupported', () => {
     const param = {
       value: {
         mimeType: 'text/plain'
@@ -314,7 +458,7 @@ describe('isSupportedFile', () => {
     expect(actual).toStrictEqual(expected.value);
   });
 
-  it('should retrieve false when the file is undefined', () => {
+  it('should get false when the file is undefined', () => {
     const param = {
       value: undefined
     };

@@ -13,7 +13,7 @@ import Presenter from './ErrorNotification.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
-it('should create a shapshot when the message parameter is not undedined', () => {
+it('should match the snapshot when the message is not undedined', () => {
   const params = {
     message: {
       id: 'ErrorMessage',
@@ -30,7 +30,7 @@ it('should create a shapshot when the message parameter is not undedined', () =>
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should create a shapshot when the message parameter is undedined', () => {
+it('should match the snapshot when the message is undedined', () => {
   const params = {
     message: undefined
   };

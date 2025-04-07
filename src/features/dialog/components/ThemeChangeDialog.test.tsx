@@ -23,7 +23,7 @@ vi.mock('../../../common/components/ModalDialog', () => ({
   )
 }));
 
-it('should create a shapshot', () => {
+it('should match the snapshot', () => {
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,
@@ -42,7 +42,7 @@ it('should create a shapshot', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should raise onChangeTheme event when click a light checkbox', async () => {
+it('should raise onChangeTheme event when the click a light checkbox', async () => {
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const mock = vi.fn();
@@ -65,7 +65,7 @@ it('should raise onChangeTheme event when click a light checkbox', async () => {
   expect(mock).toHaveBeenCalledWith(expect.anything(), ThemeName.light);
 });
 
-it('should raise onChangeTheme event when click a dark checkbox', async () => {
+it('should raise onChangeTheme event when the click a dark checkbox', async () => {
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const mock = vi.fn();
