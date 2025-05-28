@@ -19,15 +19,13 @@ import {
   appendExplorerFileConflict,
   setDialogAction,
   setError,
-  setExplorerSelectedFile,
-  setExplorerSelectedFolder
+  setExplorerSelectedFile
 } from '../../../stores/Action';
 import { DropEventData } from '../types/Event';
 import { Event } from '../../../types/Event';
 import Presenter from './ExplorerTabPanel.presenter';
 import { TabType } from '../../../types/Model';
 import { fromFile } from '../../../utils/Blob';
-import { isSupportedFile } from '../../../utils/File';
 import { useProgress } from '../../../common/providers/ProgressProvider';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
@@ -110,19 +108,20 @@ function ExplorerTabPanel() {
       if (data == null) {
         throw new ArgumentNullError();
       }
-      const folder = explorerProps?.selectedFolder;
-      if (folder == null) {
+      const selectedFolder = explorerProps?.selectedFolder;
+      if (selectedFolder == null) {
         throw new DependencyNullError();
       }
-      const file = explorerProps?.selectedFile;
-      if (data === file?.id) {
+      const selectedFile = explorerProps?.selectedFile;
+      if (data === selectedFile?.id) {
         return;
       }
+      const file = selectedFolder.files?.find((item) => item.id === data);
       dispatch(setExplorerSelectedFile(file));
       route.setParams({
         tab: TabType.explorer,
-        folder: folder.id,
-        file: data
+        folder: selectedFolder.id,
+        file: file?.id
       });
     } catch (error) {
       dispatch(setError(error as Error));
@@ -139,24 +138,14 @@ function ExplorerTabPanel() {
       if (data == null) {
         throw new ArgumentNullError();
       }
-      const allFiles = explorerProps?.allFiles;
-      if (allFiles == null) {
-        throw new DependencyNullError();
-      }
-      const folder = await graph.getFolderById(data);
-      const file = folder.files?.find((item) => allFiles || isSupportedFile(item));
-      dispatch(setExplorerSelectedFolder(folder));
       route.setParams({
         tab: TabType.explorer,
-        folder: folder.id,
-        file: file?.id
+        folder: data
       });
     } catch (error) {
       dispatch(setError(error as Error));
     }
   }, [
-    explorerProps?.allFiles,
-    graph,
     route,
     dispatch
   ]);

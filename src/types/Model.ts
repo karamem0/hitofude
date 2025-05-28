@@ -7,16 +7,16 @@
 //
 
 export interface AppBarMenuAction {
-  type: AppBarMenuType,
-  data: unknown
+  data: unknown,
+  type: AppBarMenuType
 }
 
 export type AppBarMenuType =
   | 'changeTheme';
 
 export interface ContentMenuAction {
-  type: ContentMenuType,
-  data: unknown
+  data: unknown,
+  type: ContentMenuType
 }
 
 export type ContentMenuType =
@@ -43,8 +43,8 @@ export interface ContentProps {
 }
 
 export interface DialogAction {
-  type: DialogType,
-  data: unknown
+  data: unknown,
+  type: DialogType
 }
 
 export type DialogType =
@@ -61,8 +61,8 @@ export type DialogType =
   | 'restoreFile';
 
 export interface ExplorerMenuAction {
-  type: ExplorerMenuType,
-  data: unknown
+  data: unknown,
+  type: ExplorerMenuType
 }
 
 export type ExplorerMenuType =
@@ -88,47 +88,47 @@ export interface ExplorerParams {
 export interface ExplorerProps {
   allFiles?: boolean,
   fileConflicts?: FileConflict[],
+  rootFolder?: Folder,
   selectedFile?: File,
-  selectedFolder?: Folder,
-  rootFolder?: Folder
+  selectedFolder?: Folder
 }
 
 export interface File {
-  id: string,
-  fullName?: string,
   baseName?: string,
-  extension?: string,
-  mimeType?: string,
   createdDate?: Date,
-  updatedDate?: Date,
-  webUrl?: string,
   downloadUrl?: string,
-  parentId?: string
+  extension?: string,
+  fullName?: string,
+  id: string,
+  mimeType?: string,
+  parentId?: string,
+  updatedDate?: Date,
+  webUrl?: string
 }
 
 export interface FileConflict {
+  data?: Blob,
   id: string,
-  name?: string,
-  data?: Blob
+  name?: string
 }
 
 export interface FileVersion {
   id: string,
-  version: string,
+  size?: number,
   updatedDate?: Date,
-  size?: number
+  version: string
 }
 
 export interface Folder {
+  createdDate?: Date,
+  files?: File[],
+  folders?: Folder[],
   id: string,
   name?: string,
-  createdDate?: Date,
-  updatedDate?: Date,
-  root?: boolean,
-  webUrl?: string,
   parentId?: string,
-  folders?: Folder[],
-  files?: File[]
+  root?: boolean,
+  updatedDate?: Date,
+  webUrl?: string
 }
 
 export interface MarkdownProps {
@@ -150,8 +150,8 @@ export type ProgressType =
 export type RouteParams = ExplorerParams | SearchParams;
 
 export interface SearchMenuAction {
-  type: SearchMenuType,
-  data: unknown
+  data: unknown,
+  type: SearchMenuType
 }
 
 export type SearchMenuType =
@@ -183,8 +183,8 @@ export interface ScrollSize {
 }
 
 export interface SidePanelAction {
-  type: SidePanelType,
-  data: unknown
+  data: unknown,
+  type: SidePanelType
 }
 
 export type SidePanelType =
