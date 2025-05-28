@@ -52,9 +52,15 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
     dispatch
   ]);
 
+  const executionLock = React.useRef<boolean>(false);
+
   React.useEffect(() => {
     (async () => {
+      if (executionLock.current) {
+        return;
+      }
       try {
+        executionLock.current = true;
         changeTheme(storage.getThemeName() ?? ThemeName.light);
         dispatch(setInitialState({
           contentProps: {
@@ -87,6 +93,7 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
           }
         }));
       } finally {
+        executionLock.current = false;
         setLoading(false);
       }
     })();

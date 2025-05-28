@@ -129,6 +129,7 @@ export class GraphService {
     try {
       const data = await this.client
         .api(`/me/drive/items/${id}`)
+        .select('createdDateTime,file,id,lastModifiedDateTime,name,parentReference,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.file == null) {
@@ -147,6 +148,7 @@ export class GraphService {
     try {
       const data = await this.client
         .api(`/me/drive/root:/${url}`)
+        .select('createdDateTime,file,id,lastModifiedDateTime,name,parentReference,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.file == null) {
@@ -205,7 +207,9 @@ export class GraphService {
   async getFolderById(id: string): Promise<Folder> {
     try {
       const data = await this.client
-        .api(`/me/drive/items/${id}?$expand=children`)
+        .api(`/me/drive/items/${id}`)
+        .expand('children($select=content.downloadUrl,createdDateTime,file,folder,id,lastModifiedDateTime,name,parentReference,webUrl)')
+        .select('createdDateTime,folder,id,lastModifiedDateTime,name,parentReference,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.folder == null) {
@@ -239,7 +243,9 @@ export class GraphService {
   async getRootFolder(): Promise<Folder> {
     try {
       const data = await this.client
-        .api('/me/drive/items/root:/?$expand=children')
+        .api('/me/drive/items/root:/')
+        .expand('children($select=content.downloadUrl,createdDateTime,file,folder,id,lastModifiedDateTime,name,parentReference,webUrl)')
+        .select('createdDateTime,folder,id,lastModifiedDateTime,name,parentReference,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.folder == null) {

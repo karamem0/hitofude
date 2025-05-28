@@ -31,6 +31,7 @@ import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './AppTab.presenter';
+import { isSupportedFile } from '../../../utils/File';
 
 function AppTab() {
 
@@ -50,22 +51,29 @@ function AppTab() {
   const [ tabOpen, setTabOpen ] = React.useState(tabProps.open);
   const [ tabType, setTabType ] = React.useState(tabProps.type);
 
+  const executionLock = React.useRef<boolean>(false);
+
   const handleExplorerOpen = React.useCallback(async () => {
     try {
       dispatch(setTabLoading(true));
-      const rootFolder = explorerProps?.rootFolder;
-      if (rootFolder == null) {
+      if (explorerProps == null) {
         throw new DependencyNullError();
       }
+      const {
+        allFiles,
+        rootFolder,
+        selectedFolder
+      } = explorerProps;
       const params = route.getParams();
       if (params.tab !== TabType.explorer) {
         throw new InvalidOperationError();
       }
-      const folder = await Promise.resolve()
+      const folder = selectedFolder?.id === params.folder ? selectedFolder : await Promise.resolve()
         .then(() => params.folder ? graph.getFolderById(params.folder) : Promise.reject(new FileNotFoundError()))
         .catch(() => rootFolder);
       dispatch(setExplorerSelectedFolder(folder));
-      const file = folder?.files?.find((item) => item.id === params.file);
+      const files = folder?.files ?? [];
+      const file = params.file ? files.find((item) => item.id === params.file) : files.find((item) => allFiles || isSupportedFile(item));
       if (file != null) {
         try {
           dispatch(setContentLoading(true));
@@ -85,7 +93,7 @@ function AppTab() {
       dispatch(setTabLoading(false));
     }
   }, [
-    explorerProps?.rootFolder,
+    explorerProps,
     graph,
     route,
     dispatch
@@ -132,7 +140,11 @@ function AppTab() {
 
   React.useEffect(() => {
     (async () => {
+      if (executionLock.current) {
+        return;
+      }
       try {
+        executionLock.current = true;
         const params = route.getParams();
         switch (params.tab) {
           case TabType.explorer: {
@@ -163,6 +175,8 @@ function AppTab() {
         setTabType(params.tab);
       } catch (error) {
         dispatch(setError(error as Error));
+      } finally {
+        executionLock.current = false;
       }
     })();
   }, [
