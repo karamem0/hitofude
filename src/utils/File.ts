@@ -65,6 +65,10 @@ export function getMimeType(fileName: string | null | undefined, mimeType: strin
   return undefined;
 }
 
+export function isMarkdown(value?: Pick<File, 'mimeType'>): boolean {
+  return isMimeType(value?.mimeType, 'text/markdown');
+}
+
 export function isMimeType(value: string | null | undefined, match: string | null | undefined): boolean {
   if (value == null) {
     return false;
@@ -91,20 +95,4 @@ export function isMimeType(value: string | null | undefined, match: string | nul
     return false;
   }
   return true;
-}
-
-export function isSupportedFile(value?: Pick<File, 'mimeType'>): boolean {
-  if (value == null) {
-    return false;
-  }
-  if (isMimeType(value?.mimeType, 'image/*')) {
-    return true;
-  }
-  if (isMimeType(value?.mimeType, 'video/*')) {
-    return true;
-  }
-  if (isMimeType(value?.mimeType, 'text/markdown')) {
-    return true;
-  }
-  return false;
 }

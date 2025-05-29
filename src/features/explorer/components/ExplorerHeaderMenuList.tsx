@@ -22,7 +22,7 @@ import {
 } from '../../../stores/Action';
 import { Event } from '../../../types/Event';
 import Presenter from './ExplorerHeaderMenuList.presenter';
-import { isSupportedFile } from '../../../utils/File';
+import { isMarkdown } from '../../../utils/File';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
@@ -97,7 +97,7 @@ function ExplorerHeaderMenuList() {
           if (folder == null) {
             throw new DependencyNullError();
           }
-          const file = folder?.files?.find((item) => isSupportedFile(explorerProps?.selectedFile) && isSupportedFile(item));
+          const file = folder?.files?.find((item) => isMarkdown(explorerProps?.selectedFile) && isMarkdown(item));
           route.setParams({
             tab: TabType.explorer,
             folder: folder.id,

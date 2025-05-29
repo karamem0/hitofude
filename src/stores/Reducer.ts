@@ -184,14 +184,13 @@ const actions = (storage: StorageService) => ({
       }
     };
   },
-  setContentMinimap: (state: State, payload: unknown) => {
-    const data = payload as boolean | undefined;
-    storage.setContentMinimap(data);
+  setContentPreviewUrl: (state: State, payload: unknown) => {
+    const data = payload as string | undefined;
     return {
       ...state,
       contentProps: {
         ...state.contentProps,
-        minimap: data ?? false
+        previewUrl: data
       }
     };
   },
@@ -208,25 +207,36 @@ const actions = (storage: StorageService) => ({
       }
     };
   },
-  setContentPreview: (state: State, payload: unknown) => {
+  setContentShowMinimap: (state: State, payload: unknown) => {
     const data = payload as boolean | undefined;
-    storage.setContentPreview(data);
+    storage.setContentShowMinimap(data);
     return {
       ...state,
       contentProps: {
         ...state.contentProps,
-        preview: data ?? false
+        showMinimap: data ?? false
       }
     };
   },
-  setContentScroll: (state: State, payload: unknown) => {
+  setContentShowPreview: (state: State, payload: unknown) => {
     const data = payload as boolean | undefined;
-    storage.setContentScroll(data);
+    storage.setContentShowPreview(data);
     return {
       ...state,
       contentProps: {
         ...state.contentProps,
-        scroll: data ?? false
+        showPreview: data ?? false
+      }
+    };
+  },
+  setContentSyncScroll: (state: State, payload: unknown) => {
+    const data = payload as boolean | undefined;
+    storage.setContentSyncScroll(data);
+    return {
+      ...state,
+      contentProps: {
+        ...state.contentProps,
+        syncScroll: data ?? false
       }
     };
   },

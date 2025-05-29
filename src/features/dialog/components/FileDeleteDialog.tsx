@@ -16,7 +16,7 @@ import {
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import Presenter from './FileDeleteDialog.presenter';
-import { isSupportedFile } from '../../../utils/File';
+import { isMarkdown } from '../../../utils/File';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
@@ -54,7 +54,7 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
       dispatch(removeExplorerFile(value));
       if (value.id === selectedFile?.id) {
         const file = (selectedFolder.files ?? [])
-          .filter((item) => (allFiles ?? false) || isSupportedFile(item))
+          .filter((item) => (allFiles ?? false) || isMarkdown(item))
           .filter((item) => item.id !== value.id)
           .at(-1);
         route.setParams({

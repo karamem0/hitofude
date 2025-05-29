@@ -32,9 +32,9 @@ interface ContentMenuListProps {
   changed?: boolean,
   editing?: boolean,
   file?: File,
-  minimap?: boolean,
-  preview?: boolean,
-  scroll?: boolean,
+  showMinimap?: boolean,
+  showPreview?: boolean,
+  syncScroll?: boolean,
   wordWrap?: boolean,
   onMenuClick?: EventHandler<ContentMenuAction>
 }
@@ -45,9 +45,9 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
     changed,
     editing,
     file,
-    minimap,
-    preview,
-    scroll,
+    showMinimap,
+    showPreview,
+    syncScroll,
     wordWrap,
     onMenuClick
   } = props;
@@ -144,16 +144,16 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
         editing ? (
           <MenuGroup>
             <MenuItem
-              key="toggleMinimap"
+              key="toggleShowMinimap"
               icon={(
                 <Checkmark16Regular
                   css={css`
-                    color: ${minimap ? 'inherit' : 'transparent'};
+                    color: ${showMinimap ? 'inherit' : 'transparent'};
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: 'toggleMinimap',
-                data: !minimap
+                type: 'toggleShowMinimap',
+                data: !showMinimap
               })}>
               <FormattedMessage {...messages.Minimap} />
             </MenuItem>
@@ -172,30 +172,30 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
               <FormattedMessage {...messages.WordWrap} />
             </MenuItem>
             <MenuItem
-              key="toggleScroll"
+              key="toggleSyncScroll"
               icon={(
                 <Checkmark16Regular
                   css={css`
-                    color: ${scroll ? 'inherit' : 'transparent'};
+                    color: ${syncScroll ? 'inherit' : 'transparent'};
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: 'toggleScroll',
+                type: 'toggleSyncScroll',
                 data: !scroll
               })}>
               <FormattedMessage {...messages.SyncScroll} />
             </MenuItem>
             <MenuItem
-              key="togglePreview"
+              key="toggleShowPreview"
               icon={(
                 <Checkmark16Regular
                   css={css`
-                    color: ${preview ? 'inherit' : 'transparent'};
+                    color: ${showPreview ? 'inherit' : 'transparent'};
                   `} />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: 'togglePreview',
-                data: !preview
+                type: 'toggleShowPreview',
+                data: !showPreview
               })}>
               <FormattedMessage {...messages.Preview} />
             </MenuItem>

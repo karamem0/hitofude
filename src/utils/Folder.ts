@@ -7,13 +7,13 @@
 //
 
 import { Folder } from '../types/Model';
-import { isSupportedFile } from './File';
+import { isMarkdown } from './File';
 
 export function isEmpty(value: Folder, allFiles: boolean = false): boolean {
   if (value.folders && value.folders.length > 0) {
     return false;
   }
-  if (value.files && value.files.filter((item) => allFiles || isSupportedFile(item)).length > 0) {
+  if (value.files && value.files.filter((item) => allFiles || isMarkdown(item)).length > 0) {
     return false;
   }
   return true;

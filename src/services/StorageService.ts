@@ -16,16 +16,16 @@ export class StorageService {
     this.storage = storage;
   }
 
-  getContentMinimap(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('contentMinimap') ?? undefined));
+  getContentShowMinimap(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('contentShowMinimap') ?? undefined));
   }
 
-  getContentPreview(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('contentPreview') ?? undefined));
+  getContentShowPreview(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('contentShowPreview') ?? undefined));
   }
 
-  getContentScroll(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('contentScroll') ?? undefined));
+  getContentSyncScroll(): boolean | undefined {
+    return Boolean(Number(this.storage.getItem('contentSyncScroll') ?? undefined));
   }
 
   getContentWordWrap(): boolean | undefined {
@@ -56,27 +56,27 @@ export class StorageService {
     return Number(this.storage.getItem('themeName') ?? ThemeName.light);
   }
 
-  setContentMinimap(value?: boolean): void {
+  setContentShowMinimap(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('contentMinimap', String(Number(value)));
+      this.storage.setItem('contentShowMinimap', String(Number(value)));
     } else {
-      this.storage.removeItem('contentMinimap');
+      this.storage.removeItem('contentShowMinimap');
     }
   }
 
-  setContentPreview(value?: boolean): void {
+  setContentShowPreview(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('contentPreview', String(Number(value)));
+      this.storage.setItem('contentShowPreview', String(Number(value)));
     } else {
-      this.storage.removeItem('contentPreview');
+      this.storage.removeItem('contentShowPreview');
     }
   }
 
-  setContentScroll(value?: boolean): void {
+  setContentSyncScroll(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('contentScroll', String(Number(value)));
+      this.storage.setItem('contentSyncScroll', String(Number(value)));
     } else {
-      this.storage.removeItem('contentScroll');
+      this.storage.removeItem('contentSyncScroll');
     }
   }
 

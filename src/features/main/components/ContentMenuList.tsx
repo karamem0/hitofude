@@ -15,9 +15,9 @@ import {
 } from '../../../types/Model';
 import { Event, EventHandler } from '../../../types/Event';
 import {
-  setContentMinimap,
-  setContentPreview,
-  setContentScroll,
+  setContentShowMinimap,
+  setContentShowPreview,
+  setContentSyncScroll,
   setContentWordWrap,
   setSidePanelAction
 } from '../../../stores/Action';
@@ -69,16 +69,16 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
         onSave?.(event, data.data as boolean);
         break;
       }
-      case 'toggleMinimap': {
-        dispatch(setContentMinimap(data?.data as boolean));
+      case 'toggleShowMinimap': {
+        dispatch(setContentShowMinimap(data?.data as boolean));
         break;
       }
-      case 'togglePreview': {
-        dispatch(setContentPreview(data?.data as boolean));
+      case 'toggleShowPreview': {
+        dispatch(setContentShowPreview(data?.data as boolean));
         break;
       }
-      case 'toggleScroll': {
-        dispatch(setContentScroll(data?.data as boolean));
+      case 'toggleSyncScroll': {
+        dispatch(setContentSyncScroll(data?.data as boolean));
         break;
       }
       case 'toggleWordWrap': {

@@ -11,8 +11,8 @@ import {
   getBaseName,
   getExtension,
   getMimeType,
-  isMimeType,
-  isSupportedFile
+  isMarkdown,
+  isMimeType
 } from './File';
 
 describe('downloadFile', () => {
@@ -404,33 +404,7 @@ describe('isMimeType', () => {
 
 });
 
-describe('isSupportedFile', () => {
-
-  it('should get true for an image file', () => {
-    const param = {
-      value: {
-        mimeType: 'image/png'
-      }
-    };
-    const expected = {
-      value: true
-    };
-    const actual = isSupportedFile(param.value);
-    expect(actual).toStrictEqual(expected.value);
-  });
-
-  it('should get true for a video file', () => {
-    const param = {
-      value: {
-        mimeType: 'video/mp4'
-      }
-    };
-    const expected = {
-      value: true
-    };
-    const actual = isSupportedFile(param.value);
-    expect(actual).toStrictEqual(expected.value);
-  });
+describe('isMarkdown', () => {
 
   it('should get true for a markdown text file', () => {
     const param = {
@@ -441,7 +415,7 @@ describe('isSupportedFile', () => {
     const expected = {
       value: true
     };
-    const actual = isSupportedFile(param.value);
+    const actual = isMarkdown(param.value);
     expect(actual).toStrictEqual(expected.value);
   });
 
@@ -454,7 +428,7 @@ describe('isSupportedFile', () => {
     const expected = {
       value: false
     };
-    const actual = isSupportedFile(param.value);
+    const actual = isMarkdown(param.value);
     expect(actual).toStrictEqual(expected.value);
   });
 
@@ -465,7 +439,7 @@ describe('isSupportedFile', () => {
     const expected = {
       value: false
     };
-    const actual = isSupportedFile(param.value);
+    const actual = isMarkdown(param.value);
     expect(actual).toStrictEqual(expected.value);
   });
 

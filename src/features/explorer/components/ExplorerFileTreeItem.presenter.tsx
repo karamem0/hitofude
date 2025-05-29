@@ -14,7 +14,7 @@ import { EventHandler } from '../../../types/Event';
 import ExplorerFileConflictButton from './ExplorerFileConflictButton';
 import ExplorerFileMenuList from './ExplorerFileMenuList';
 import TreeItem from '../../../common/components/TreeItem';
-import { isSupportedFile } from '../../../utils/File';
+import { isMarkdown } from '../../../utils/File';
 
 interface ExplorerFileTreeItemProps {
   allFiles?: boolean,
@@ -32,7 +32,7 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
     onClick
   } = props;
 
-  return selectedFolder?.files?.filter((file) => (allFiles ?? false) || isSupportedFile(file)).map((file) => (
+  return selectedFolder?.files?.filter((file) => (allFiles ?? false) || isMarkdown(file)).map((file) => (
     <TreeItem
       key={file.id}
       name={file.fullName}
@@ -43,11 +43,9 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
       info={(
         <ExplorerFileConflictButton file={file} />
       )}
-      menu={
-        isSupportedFile(file) ? (
-          <ExplorerFileMenuList file={file} />
-        ) : null
-      }
+      menu={(
+        <ExplorerFileMenuList file={file} />
+      )}
       onClick={(event) => onClick?.(event, file)} />
   ));
 

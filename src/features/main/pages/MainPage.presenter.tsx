@@ -43,7 +43,6 @@ function MainPage(props: Readonly<MainPageProps>) {
         align-items: center;
         justify-content: center;
         min-height: 100svh;
-
       `}>
       <Spinner />
     </div>
@@ -79,8 +78,7 @@ function MainPage(props: Readonly<MainPageProps>) {
           <Text
             as="h1"
             css={css`
-              font-size: 1rem;
-              font-weight: bold;
+              font-size: ${theme.fontSizeBase600};
               color: ${theme.colorBrandBackgroundInverted};
               text-align: center;
             `}>
@@ -92,7 +90,7 @@ function MainPage(props: Readonly<MainPageProps>) {
           css={css`
             display: grid;
             height: ${layouts.pageBody.height};
-            margin: 2rem 0 0;
+            margin: 2.5rem 0 0;
             @media all and (width <= 960px) {
               grid-template-rows: auto;
               grid-template-columns: auto 1fr;

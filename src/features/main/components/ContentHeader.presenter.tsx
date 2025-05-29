@@ -26,7 +26,7 @@ import ContentSaveButton from './ContentSaveButton';
 import { EventHandler } from '../../../types/Event';
 import { MoreVertical16Regular } from '@fluentui/react-icons';
 import { css } from '@emotion/react';
-import { isMimeType } from '../../../utils/File';
+import { isMarkdown } from '../../../utils/File';
 import { layouts } from '../../../themes/Layout';
 import messages from '../messages';
 import { useTheme } from '../../../providers/ThemeProvider';
@@ -74,9 +74,8 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
           title={file.baseName}
           css={css`
             overflow: hidden;
-            font-size: ${theme.fontSizeHero900};
-            font-weight: bold;
-            line-height: calc(${theme.fontSizeHero900} * 1.25);
+            font-size: ${theme.fontSizeBase600};
+            line-height: calc(${theme.fontSizeBase600} * 1.25);
             text-overflow: ellipsis;
             white-space: nowrap;
           `}>
@@ -119,7 +118,7 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
               `}>
               <Button
                 aria-label={intl.formatMessage(messages.Edit)}
-                disabled={!isMimeType(file.mimeType, 'text/markdown')}
+                disabled={!isMarkdown(file)}
                 title={intl.formatMessage(messages.Edit)}
                 onClick={onEdit}>
                 <FormattedMessage {...messages.Edit} />

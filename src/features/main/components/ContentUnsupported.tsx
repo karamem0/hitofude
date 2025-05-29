@@ -9,11 +9,18 @@
 import React from 'react';
 
 import Presenter from './ContentUnsupported.presenter';
+import { useStore } from '../../../providers/StoreProvider';
 
 function ContentUnsupported() {
 
+  const {
+    state: {
+      contentProps
+    }
+  } = useStore();
+
   return (
-    <Presenter />
+    <Presenter src={contentProps?.previewUrl} />
   );
 
 }

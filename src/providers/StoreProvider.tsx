@@ -66,13 +66,13 @@ function StoreProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
           contentProps: {
             editing: false,
             loading: false,
-            minimap: storage.getContentMinimap(),
             scrollPosition: {
               scrollX: 0,
               scrollY: 0
             },
-            preview: storage.getContentPreview(),
-            scroll: storage.getContentScroll(),
+            showMinimap: storage.getContentShowMinimap(),
+            showPreview: storage.getContentShowPreview(),
+            syncScroll: storage.getContentSyncScroll(),
             text: '',
             wordWrap: storage.getContentWordWrap()
           },

@@ -16,6 +16,7 @@ import {
 import {
   setContentFile,
   setContentLoading,
+  setContentPreviewUrl,
   setContentText,
   setError,
   setExplorerSelectedFile,
@@ -31,7 +32,7 @@ import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './AppTab.presenter';
-import { isSupportedFile } from '../../../utils/File';
+import { isMarkdown } from '../../../utils/File';
 
 function AppTab() {
 
@@ -65,13 +66,19 @@ function AppTab() {
         .catch(() => explorerProps?.rootFolder);
       dispatch(setExplorerSelectedFolder(folder));
       const files = folder?.files ?? [];
-      const file = params.file? files.find((item) => item.id === params.file): files.find((item) => explorerProps?.allFiles || isSupportedFile(item));
+      const file = params.file? files.find((item) => item.id === params.file): files.find((item) => explorerProps?.allFiles || isMarkdown(item));
       if (file != null) {
         try {
           dispatch(setContentLoading(true));
           dispatch(setExplorerSelectedFile(file));
           dispatch(setContentFile(file));
-          dispatch(setContentText(await graph.getFileText(file)));
+          if (isMarkdown(file)) {
+            dispatch(setContentText(await graph.getFileText(file)));
+            dispatch(setContentPreviewUrl());
+          } else {
+            dispatch(setContentText());
+            dispatch(setContentPreviewUrl(await graph.getFilePreviewUrl(file)));
+          }
         } finally {
           dispatch(setContentLoading(false));
         }

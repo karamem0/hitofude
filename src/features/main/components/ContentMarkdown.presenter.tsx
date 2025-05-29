@@ -24,10 +24,10 @@ import { useTheme } from '../../../providers/ThemeProvider';
 interface ContentMarkdownProps {
   defaultText?: string,
   editing?: boolean,
-  minimap?: boolean,
-  preview?: boolean,
-  scroll?: boolean,
   scrollPosition?: ScrollPosition,
+  showMinimap?: boolean,
+  showPreview?: boolean,
+  syncScroll?: boolean,
   tabOpen?: boolean,
   text?: string,
   wordWrap?: boolean,
@@ -42,10 +42,10 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
   const {
     defaultText,
     editing,
-    minimap,
-    preview,
-    scroll,
     scrollPosition,
+    showMinimap,
+    showPreview,
+    syncScroll,
     text,
     wordWrap,
     onSave,
@@ -59,7 +59,7 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
   return editing ? (
     <ScrollSynchronizer
       defaultElement1Position={scrollPosition}
-      enabled={scroll}
+      enabled={syncScroll}
       render={
         (state) => (
           <div
@@ -82,8 +82,9 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
               onClick={onToolbarClick} />
             <MarkdownEditor
               ref={ref}
-              minimap={minimap}
               scrollPosition={state.element1Position}
+              showMinimap={showMinimap}
+              showPreview={showPreview}
               text={defaultText}
               wordWrap={wordWrap}
               css={css`
@@ -107,7 +108,7 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
             <ScrollPanel
               position={state.element2Position}
               css={css`
-                display: ${preview ? 'block' : 'none'};
+                display: ${showPreview ? 'block' : 'none'};
                 grid-row: 2 / 3;
                 grid-column: 3 / 4;
                 padding: 0 0 0 0.5rem;

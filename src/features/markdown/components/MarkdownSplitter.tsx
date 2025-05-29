@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { Event } from '../../../types/Event';
-import { setContentPreview } from '../../../stores/Action';
+import { setContentShowPreview } from '../../../stores/Action';
 import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './MarkdownSplitter.presenter';
@@ -29,8 +29,8 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
     }
   } = useStore();
 
-  const handleChangePreview = React.useCallback((_: Event, data?: boolean) => {
-    dispatch(setContentPreview(data));
+  const handleChangeShowPreview = React.useCallback((_: Event, data?: boolean) => {
+    dispatch(setContentShowPreview(data));
   }, [
     dispatch
   ]);
@@ -38,8 +38,8 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
   return (
     <Presenter
       className={className}
-      preview={contentProps?.preview}
-      onChangePreview={handleChangePreview} />
+      showPreview={contentProps?.showPreview}
+      onChangeShowPreview={handleChangeShowPreview} />
   );
 
 }

@@ -9,16 +9,16 @@
 import { TabType, ThemeName } from '../types/Model';
 import { StorageService } from './StorageService';
 
-describe('getContentMinimap', () => {
+describe('getContentShowMinimap', () => {
 
   it('should get false when the stored value is 0', () => {
     const storage = {
       getItem: vi.fn(() => '0')
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentMinimap();
+    const actual = target.getContentShowMinimap();
     expect(actual).toBe(false);
-    expect(storage.getItem).toHaveBeenCalledWith('contentMinimap');
+    expect(storage.getItem).toHaveBeenCalledWith('contentShowMinimap');
   });
 
   it('should get true when the stored value is 1', () => {
@@ -26,9 +26,9 @@ describe('getContentMinimap', () => {
       getItem: vi.fn(() => '1')
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentMinimap();
+    const actual = target.getContentShowMinimap();
     expect(actual).toBe(true);
-    expect(storage.getItem).toHaveBeenCalledWith('contentMinimap');
+    expect(storage.getItem).toHaveBeenCalledWith('contentShowMinimap');
   });
 
   it('should get false when the stored value does not exist', () => {
@@ -36,23 +36,23 @@ describe('getContentMinimap', () => {
       getItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentMinimap();
+    const actual = target.getContentShowMinimap();
     expect(actual).toBe(false);
-    expect(storage.getItem).toHaveBeenCalledWith('contentMinimap');
+    expect(storage.getItem).toHaveBeenCalledWith('contentShowMinimap');
   });
 
 });
 
-describe('getContentPreview', () => {
+describe('getContentShowPreview', () => {
 
   it('should get false when the stored value is 0', () => {
     const storage = {
       getItem: vi.fn(() => '0')
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentPreview();
+    const actual = target.getContentShowPreview();
     expect(actual).toBe(false);
-    expect(storage.getItem).toHaveBeenCalledWith('contentPreview');
+    expect(storage.getItem).toHaveBeenCalledWith('contentShowPreview');
   });
 
   it('should get true when the stored value is 1', () => {
@@ -60,9 +60,9 @@ describe('getContentPreview', () => {
       getItem: vi.fn(() => '1')
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentPreview();
+    const actual = target.getContentShowPreview();
     expect(actual).toBe(true);
-    expect(storage.getItem).toHaveBeenCalledWith('contentPreview');
+    expect(storage.getItem).toHaveBeenCalledWith('contentShowPreview');
   });
 
   it('should get false when the stored value does not exist', () => {
@@ -70,23 +70,23 @@ describe('getContentPreview', () => {
       getItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentPreview();
+    const actual = target.getContentShowPreview();
     expect(actual).toBe(false);
-    expect(storage.getItem).toHaveBeenCalledWith('contentPreview');
+    expect(storage.getItem).toHaveBeenCalledWith('contentShowPreview');
   });
 
 });
 
-describe('getContentScroll', () => {
+describe('getContentSyncScroll', () => {
 
   it('should get false when the stored value is 0', () => {
     const storage = {
       getItem: vi.fn(() => '0')
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentScroll();
+    const actual = target.getContentSyncScroll();
     expect(actual).toBe(false);
-    expect(storage.getItem).toHaveBeenCalledWith('contentScroll');
+    expect(storage.getItem).toHaveBeenCalledWith('contentSyncScroll');
   });
 
   it('should get true when the stored value is 1', () => {
@@ -94,9 +94,9 @@ describe('getContentScroll', () => {
       getItem: vi.fn(() => '1')
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentScroll();
+    const actual = target.getContentSyncScroll();
     expect(actual).toBe(true);
-    expect(storage.getItem).toHaveBeenCalledWith('contentScroll');
+    expect(storage.getItem).toHaveBeenCalledWith('contentSyncScroll');
   });
 
   it('should get false when the stored value does not exist', () => {
@@ -104,9 +104,9 @@ describe('getContentScroll', () => {
       getItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    const actual = target.getContentScroll();
+    const actual = target.getContentSyncScroll();
     expect(actual).toBe(false);
-    expect(storage.getItem).toHaveBeenCalledWith('contentScroll');
+    expect(storage.getItem).toHaveBeenCalledWith('contentSyncScroll');
   });
 
 });
@@ -329,15 +329,15 @@ describe('getThemeName', () => {
 
 });
 
-describe('setContentMinimap', () => {
+describe('setContentShowMinimap', () => {
 
   it('should set the value to 0 when the false is passed', () => {
     const storage = {
       setItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentMinimap(false);
-    expect(storage.setItem).toHaveBeenCalledWith('contentMinimap', '0');
+    target.setContentShowMinimap(false);
+    expect(storage.setItem).toHaveBeenCalledWith('contentShowMinimap', '0');
   });
 
   it('should set the value to 1 when the true is passed', () => {
@@ -345,8 +345,8 @@ describe('setContentMinimap', () => {
       setItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentMinimap(true);
-    expect(storage.setItem).toHaveBeenCalledWith('contentMinimap', '1');
+    target.setContentShowMinimap(true);
+    expect(storage.setItem).toHaveBeenCalledWith('contentShowMinimap', '1');
   });
 
   it('should remove the value when the undefined is passed', () => {
@@ -354,21 +354,21 @@ describe('setContentMinimap', () => {
       removeItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentMinimap(undefined);
-    expect(storage.removeItem).toHaveBeenCalledWith('contentMinimap');
+    target.setContentShowMinimap(undefined);
+    expect(storage.removeItem).toHaveBeenCalledWith('contentShowMinimap');
   });
 
 });
 
-describe('setContentPreview', () => {
+describe('setContentShowPreview', () => {
 
   it('should set the value to 0 when the false is passed', () => {
     const storage = {
       setItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentPreview(false);
-    expect(storage.setItem).toHaveBeenCalledWith('contentPreview', '0');
+    target.setContentShowPreview(false);
+    expect(storage.setItem).toHaveBeenCalledWith('contentShowPreview', '0');
   });
 
   it('should set the value to 1 when the true is passed', () => {
@@ -376,8 +376,8 @@ describe('setContentPreview', () => {
       setItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentPreview(true);
-    expect(storage.setItem).toHaveBeenCalledWith('contentPreview', '1');
+    target.setContentShowPreview(true);
+    expect(storage.setItem).toHaveBeenCalledWith('contentShowPreview', '1');
   });
 
   it('should remove the value when the undefined is passed', () => {
@@ -385,21 +385,21 @@ describe('setContentPreview', () => {
       removeItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentPreview(undefined);
-    expect(storage.removeItem).toHaveBeenCalledWith('contentPreview');
+    target.setContentShowPreview(undefined);
+    expect(storage.removeItem).toHaveBeenCalledWith('contentShowPreview');
   });
 
 });
 
-describe('setContentScroll', () => {
+describe('setContentSyncScroll', () => {
 
   it('should set the value to 0 when the false is passed', () => {
     const storage = {
       setItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentScroll(false);
-    expect(storage.setItem).toHaveBeenCalledWith('contentScroll', '0');
+    target.setContentSyncScroll(false);
+    expect(storage.setItem).toHaveBeenCalledWith('contentSyncScroll', '0');
   });
 
   it('should set the value to 1 when the true is passed', () => {
@@ -407,8 +407,8 @@ describe('setContentScroll', () => {
       setItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentScroll(true);
-    expect(storage.setItem).toHaveBeenCalledWith('contentScroll', '1');
+    target.setContentSyncScroll(true);
+    expect(storage.setItem).toHaveBeenCalledWith('contentSyncScroll', '1');
   });
 
   it('should remove the value when the undefined is passed', () => {
@@ -416,8 +416,8 @@ describe('setContentScroll', () => {
       removeItem: vi.fn()
     } as unknown as Storage;
     const target = new StorageService(storage);
-    target.setContentScroll(undefined);
-    expect(storage.removeItem).toHaveBeenCalledWith('contentScroll');
+    target.setContentSyncScroll(undefined);
+    expect(storage.removeItem).toHaveBeenCalledWith('contentSyncScroll');
   });
 
 });

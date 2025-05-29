@@ -21,6 +21,7 @@ import Tree from '../../../common/components/Tree';
 import TreeHeader from '../../../common/components/TreeHeader';
 import { css } from '@emotion/react';
 import { isEmpty } from '../../../utils/Folder';
+import { layouts } from '../../../themes/Layout';
 import messages from '../messages';
 import { useDropzone } from 'react-dropzone';
 import { useTheme } from '../../../providers/ThemeProvider';
@@ -68,7 +69,7 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
     <div
       css={css`
         display: grid;
-        grid-template-rows: 1rem 2rem calc(100svh - 10.5rem) 2rem;
+        grid-template-rows: 1rem 2rem calc(${layouts.appTab.height} - 5.5rem) 2rem;
         grid-template-columns: 1fr;
         grid-gap: 0.5rem;
       `}>

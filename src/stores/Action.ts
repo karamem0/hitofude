@@ -66,13 +66,13 @@ export const setContentFile = (data?: File): Action => ({
   data
 });
 
-export const setContentLoading = (data?: boolean): Action => ({
-  type: ActionType.setContentLoading,
+export const setContentPreviewUrl = (data?: string): Action => ({
+  type: ActionType.setContentPreviewUrl,
   data
 });
 
-export const setContentMinimap = (data?: boolean): Action => ({
-  type: ActionType.setContentMinimap,
+export const setContentLoading = (data?: boolean): Action => ({
+  type: ActionType.setContentLoading,
   data
 });
 
@@ -81,13 +81,18 @@ export const setContentScrollPosition = (data?: ScrollPosition): Action => ({
   data
 });
 
-export const setContentPreview = (data?: boolean): Action => ({
-  type: ActionType.setContentPreview,
+export const setContentShowMinimap = (data?: boolean): Action => ({
+  type: ActionType.setContentShowMinimap,
   data
 });
 
-export const setContentScroll = (data?: boolean): Action => ({
-  type: ActionType.setContentScroll,
+export const setContentShowPreview = (data?: boolean): Action => ({
+  type: ActionType.setContentShowPreview,
+  data
+});
+
+export const setContentSyncScroll = (data?: boolean): Action => ({
+  type: ActionType.setContentSyncScroll,
   data
 });
 

@@ -23,8 +23,9 @@ import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownEditorProps {
   className?: string,
-  minimap?: boolean,
   scrollPosition?: ScrollPosition,
+  showMinimap?: boolean,
+  showPreview?: boolean,
   text?: string,
   wordWrap?: boolean,
   onMouseEnter?: EventHandler,
@@ -39,8 +40,9 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
 
   const {
     className,
-    minimap,
     scrollPosition,
+    showMinimap,
+    showPreview,
     text,
     wordWrap,
     onMouseEnter,
@@ -53,7 +55,6 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
 
   const {
     state: {
-      contentProps,
       tabProps
     }
   } = useStore();
@@ -253,11 +254,11 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     }
     monacoEl.updateOptions({
       minimap: {
-        enabled: minimap
+        enabled: showMinimap
       }
     });
   }, [
-    minimap
+    showMinimap
   ]);
 
   React.useEffect(() => {
@@ -338,7 +339,7 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     <Presenter
       ref={editorRef}
       className={className}
-      preview={contentProps?.preview}
+      preview={showPreview}
       tabOpen={tabProps?.open} />
   );
 

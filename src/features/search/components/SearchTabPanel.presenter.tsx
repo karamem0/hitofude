@@ -22,6 +22,7 @@ import { File } from '../../../types/Model';
 import SearchTreeItem from './SearchFileTreeItem';
 import Tree from '../../../common/components/Tree';
 import { css } from '@emotion/react';
+import { layouts } from '../../../themes/Layout';
 import messages from '../messages';
 import { useTheme } from '../../../providers/ThemeProvider';
 
@@ -52,7 +53,7 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
     <div
       css={css`
         display: grid;
-        grid-template-rows: 1rem 2rem calc(100svh - 8rem);
+        grid-template-rows: 1rem 2rem calc(${layouts.appTab.height} - 3rem);
         grid-template-columns: 1fr;
         grid-gap: 0.5rem;
       `}>

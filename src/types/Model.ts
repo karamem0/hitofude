@@ -25,19 +25,20 @@ export type ContentMenuType =
   | 'editFile'
   | 'openFileVersionPanel'
   | 'saveFile'
-  | 'toggleMinimap'
-  | 'togglePreview'
-  | 'toggleScroll'
+  | 'toggleShowMinimap'
+  | 'toggleShowPreview'
+  | 'toggleSyncScroll'
   | 'toggleWordWrap';
 
 export interface ContentProps {
   editing?: boolean,
   file?: File,
   loading?: boolean,
-  minimap?: boolean,
-  preview?: boolean,
-  scroll?: boolean,
+  previewUrl?: string,
   scrollPosition?: ScrollPosition,
+  showMinimap?: boolean,
+  showPreview?: boolean,
+  syncScroll?: boolean,
   text?: string,
   wordWrap?: boolean
 }

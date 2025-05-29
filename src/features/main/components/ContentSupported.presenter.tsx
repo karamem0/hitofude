@@ -9,13 +9,10 @@
 import React from 'react';
 
 import ContentHeader from './ContentHeader';
-import ContentImage from './ContentImage';
 import ContentMarkdown from './ContentMarkdown';
-import ContentVideo from './ContentVideo';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import { css } from '@emotion/react';
-import { isMimeType } from '../../../utils/File';
 import { layouts } from '../../../themes/Layout';
 
 interface ContentSupportedProps {
@@ -58,26 +55,7 @@ function ContentSupported(props: Readonly<ContentSupportedProps>) {
             height: ${layouts.contentBody.height.large};
           }
         `}>
-        {
-          (() => {
-            if (isMimeType(file.mimeType, 'image/*')) {
-              return (
-                <ContentImage />
-              );
-            }
-            if (isMimeType(file.mimeType, 'video/*')) {
-              return (
-                <ContentVideo />
-              );
-            }
-            if (isMimeType(file.mimeType, 'text/markdown')) {
-              return (
-                <ContentMarkdown onSave={(event) => onSave?.(event, true)} />
-              );
-            }
-            return null;
-          })()
-        }
+        <ContentMarkdown onSave={(event) => onSave?.(event, true)} />
       </div>
     </div>
   ) : null;

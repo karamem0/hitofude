@@ -12,7 +12,7 @@ import {
   PageIterator,
   ResponseType
 } from '@microsoft/microsoft-graph-client';
-import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
+import { DriveItem, DriveItemVersion, ItemPreviewInfo } from '@microsoft/microsoft-graph-types';
 import {
   File,
   FileVersion,
@@ -24,7 +24,6 @@ import {
   FolderConflictError,
   FolderNotFoundError
 } from '../types/Error';
-import { isMimeType } from '../utils/File';
 import { mapper } from '../mappings/AutoMapperProfile';
 
 export class GraphService {
@@ -163,19 +162,34 @@ export class GraphService {
     }
   }
 
+  async getFilePreviewUrl(file: Pick<File, 'id'>): Promise<string> {
+    try {
+      const data = await this.client
+        .api(`/me/drive/items/${file.id}/preview`)
+        .post({});
+      const value = data as ItemPreviewInfo;
+      const previewUrl = value.getUrl;
+      if (previewUrl == null) {
+        throw new FileNotFoundError();
+      }
+      return previewUrl;
+    } catch (error) {
+      if (error instanceof GraphError && [ 400, 404 ].includes(error.statusCode)) {
+        throw new FileNotFoundError(error.message);
+      }
+      throw error;
+    }
+  }
+
   async getFileText(file: Pick<File, 'mimeType' | 'downloadUrl'>): Promise<string> {
     try {
-      if (isMimeType(file.mimeType, 'text/*')) {
-        const downloadUrl = file.downloadUrl;
-        if (downloadUrl == null) {
-          throw new FileNotFoundError();
-        }
-        return await Promise.resolve()
-          .then(() => fetch(downloadUrl, { method: 'GET' }))
-          .then((response) => response.text());
-      } else {
-        return '';
+      const downloadUrl = file.downloadUrl;
+      if (downloadUrl == null) {
+        throw new FileNotFoundError();
       }
+      return await Promise.resolve()
+        .then(() => fetch(downloadUrl, { method: 'GET' }))
+        .then((response) => response.text());
     } catch (error) {
       if (error instanceof GraphError && [ 404 ].includes(error.statusCode)) {
         throw new FileNotFoundError(error.message);

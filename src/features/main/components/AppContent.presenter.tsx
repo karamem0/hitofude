@@ -14,7 +14,7 @@ import ContentUnsupported from './ContentUnsupported';
 import { File } from '../../../types/Model';
 import Loader from '../../../common/components/Loader';
 import { css } from '@emotion/react';
-import { isSupportedFile } from '../../../utils/File';
+import { isMarkdown } from '../../../utils/File';
 
 interface AppContentProps {
   file?: File,
@@ -41,7 +41,7 @@ function AppContent(props: Readonly<AppContentProps>) {
                 <ContentEmpty />
               );
             }
-            if (isSupportedFile(file)) {
+            if (isMarkdown(file)) {
               return (
                 <ContentSupported />
               );

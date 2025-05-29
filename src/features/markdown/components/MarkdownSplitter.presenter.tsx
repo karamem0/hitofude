@@ -17,21 +17,21 @@ import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownSplitterProps {
   className?: string,
-  preview?: boolean,
-  onChangePreview?: EventHandler<boolean>
+  showPreview?: boolean,
+  onChangeShowPreview?: EventHandler<boolean>
 }
 
 function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
 
   const {
     className,
-    preview,
-    onChangePreview
+    showPreview,
+    onChangeShowPreview
   } = props;
 
   const { theme } = useTheme();
 
-  return preview ? (
+  return showPreview ? (
     <Button
       appearance="subtle"
       className={className}
@@ -44,7 +44,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
         text-align: center;
         background-color: ${theme.colorNeutralBackground2};
       `}
-      onClick={(event) => onChangePreview?.(event, !preview)}>
+      onClick={(event) => onChangeShowPreview?.(event, !showPreview)}>
       <ChevronDoubleRight16Regular
         css={css`
           font-size: 0.5rem;
@@ -72,7 +72,7 @@ function MarkdownSplitter(props: Readonly<MarkdownSplitterProps>) {
           height: ${layouts.contentBody.height.large};
         }
       `}
-      onClick={(event) => onChangePreview?.(event, !preview)}>
+      onClick={(event) => onChangeShowPreview?.(event, !showPreview)}>
       <ChevronDoubleLeft16Regular
         css={css`
           font-size: 0.5rem;

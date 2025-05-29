@@ -8,29 +8,48 @@
 
 import React from 'react';
 
-import Communication from '../../../common/components/Communication';
+import ContentHeader from './ContentHeader';
 import { css } from '@emotion/react';
-import messages from '../messages';
-import { useIntl } from 'react-intl';
+import { layouts } from '../../../themes/Layout';
 
-function ContentUnsupported() {
+interface ContentUnsupportedProps {
+  src?: string
+}
 
-  const intl = useIntl();
+function ContentUnsupported(props: Readonly<ContentUnsupportedProps>) {
 
-  return (
+  const { src } = props;
+
+  return src ? (
     <div
       css={css`
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: auto;
+        grid-gap: 0.5rem;
+        padding: 1rem;
       `}>
-      <Communication
-        description={intl.formatMessage(messages.UnsupportedFileDescription)}
-        image="/assets/images/Cancel.svg"
-        title={intl.formatMessage(messages.UnsupportedFileTitle)} />
+      <ContentHeader />
+      <div
+        css={css`
+          display: grid;
+          @media all and (width <= 960px) {
+            height: ${layouts.contentBody.height.small};
+          }
+          @media not all and (width <= 960px) {
+            height: ${layouts.contentBody.height.large};
+          }
+        `}>
+        <iframe
+          src={src}
+          css={css`
+            width: 100%;
+            height: 100%;
+            border: none;
+          `} />
+      </div>
     </div>
-  );
+  ) : null;
 
 }
 
