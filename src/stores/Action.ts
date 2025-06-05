@@ -51,11 +51,6 @@ export const removeExplorerFolder = (data?: Folder): Action => ({
   data
 });
 
-export const setDialogAction = (data?: DialogAction): Action => ({
-  type: ActionType.setDialogAction,
-  data
-});
-
 export const setContentEditing = (data?: boolean): Action => ({
   type: ActionType.setContentEditing,
   data
@@ -66,13 +61,13 @@ export const setContentFile = (data?: File): Action => ({
   data
 });
 
-export const setContentPreviewUrl = (data?: string): Action => ({
-  type: ActionType.setContentPreviewUrl,
+export const setContentLoading = (data?: boolean): Action => ({
+  type: ActionType.setContentLoading,
   data
 });
 
-export const setContentLoading = (data?: boolean): Action => ({
-  type: ActionType.setContentLoading,
+export const setContentPreviewUrl = (data?: string): Action => ({
+  type: ActionType.setContentPreviewUrl,
   data
 });
 
@@ -106,23 +101,8 @@ export const setContentWordWrap = (data?: boolean): Action => ({
   data
 });
 
-export const setMarkdownChanged = (data?: boolean): Action => ({
-  type: ActionType.setMarkdownChanged,
-  data
-});
-
-export const setMarkdownDefaultText = (data?: string): Action => ({
-  type: ActionType.setMarkdownDefaultText,
-  data
-});
-
-export const setMarkdownScrollPosition = (data?: ScrollPosition): Action => ({
-  type: ActionType.setMarkdownScrollPosition,
-  data
-});
-
-export const setMarkdownText = (data?: string): Action => ({
-  type: ActionType.setMarkdownText,
+export const setDialogAction = (data?: DialogAction): Action => ({
+  type: ActionType.setDialogAction,
   data
 });
 
@@ -151,8 +131,23 @@ export const setInitialState = (data?: InitialState): Action => ({
   data
 });
 
-export const setTabLoading = (data?: boolean): Action => ({
-  type: ActionType.setTabLoading,
+export const setMarkdownChanged = (data?: boolean): Action => ({
+  type: ActionType.setMarkdownChanged,
+  data
+});
+
+export const setMarkdownDefaultText = (data?: string): Action => ({
+  type: ActionType.setMarkdownDefaultText,
+  data
+});
+
+export const setMarkdownScrollPosition = (data?: ScrollPosition): Action => ({
+  type: ActionType.setMarkdownScrollPosition,
+  data
+});
+
+export const setMarkdownText = (data?: string): Action => ({
+  type: ActionType.setMarkdownText,
   data
 });
 
@@ -173,6 +168,11 @@ export const setSearchSelectedFile = (data?: File): Action => ({
 
 export const setSidePanelAction = (data?: SidePanelAction): Action => ({
   type: ActionType.setSidePanelAction,
+  data
+});
+
+export const setTabLoading = (data?: boolean): Action => ({
+  type: ActionType.setTabLoading,
   data
 });
 

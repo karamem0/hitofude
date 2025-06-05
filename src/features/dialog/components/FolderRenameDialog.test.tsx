@@ -29,8 +29,8 @@ it('should match the snapshot when the loading is true', () => {
     loading: true,
     mountNode: container,
     value: {
-      id: '01f02f1e-fcfa-4629-aab1-c9fad7efe536',
-      name: 'My files'
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+      name: 'Attachments'
     } as Folder
   };
   const { asFragment } = render(
@@ -54,8 +54,8 @@ it('should match the snapshot when the loading is false', async () => {
     loading: false,
     mountNode: container,
     value: {
-      id: '01f02f1e-fcfa-4629-aab1-c9fad7efe536',
-      name: 'My files'
+      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
+      name: 'Attachments'
     } as Folder
   };
   const { asFragment } = render(

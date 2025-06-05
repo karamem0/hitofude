@@ -50,7 +50,7 @@ exports[`should match the snapshot when the loading is false 1`] = `
                 class="fui-Input__input r12stul0"
                 placeholder="Folder name"
                 type="text"
-                value="My files1"
+                value="Attachments1"
               />
             </span>
           </div>
@@ -144,7 +144,7 @@ exports[`should match the snapshot when the loading is true 1`] = `
                 class="fui-Input__input r12stul0"
                 placeholder="Folder name"
                 type="text"
-                value="My files"
+                value="Attachments"
               />
             </span>
           </div>

@@ -23,18 +23,20 @@ import messages from '../../features/main/messages';
 import { useIntl } from 'react-intl';
 
 interface TreeHeaderProps {
-  root?: boolean,
   menu?: React.ReactNode,
+  mountNode?: HTMLElement,
   name?: string,
+  root?: boolean,
   onClick?: EventHandler
 }
 
 function TreeHeader(props: Readonly<TreeHeaderProps>) {
 
   const {
-    root,
     menu,
+    mountNode,
     name,
+    root,
     onClick
   } = props;
 
@@ -107,7 +109,7 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
           {name}
         </Text>
       </div>
-      <Menu>
+      <Menu mountNode={mountNode}>
         <MenuTrigger>
           <Button
             appearance="transparent"

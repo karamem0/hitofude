@@ -28,9 +28,9 @@ it('should match the snapshot when the loading is true', () => {
     loading: true,
     mountNode: container,
     value: {
-      id: '01f02f1e-fcfa-4629-aab1-c9fad7efe536',
-      baseName: 'README',
-      extension: 'md'
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+      baseName: 'Annual Financial Report (DRAFT)',
+      extension: '.docx'
     } as File
   };
   const { asFragment } = render(
@@ -53,9 +53,9 @@ it('should match the snapshot when the loading is false', () => {
     loading: false,
     mountNode: container,
     value: {
-      id: '01f02f1e-fcfa-4629-aab1-c9fad7efe536',
-      baseName: 'README',
-      extension: 'md'
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+      baseName: 'Annual Financial Report (DRAFT)',
+      extension: '.docx'
     } as File
   };
   const { asFragment } = render(

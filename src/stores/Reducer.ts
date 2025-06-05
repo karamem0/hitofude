@@ -279,6 +279,17 @@ const actions = (storage: StorageService) => ({
       error: data
     };
   },
+  setExplorerAllFiles: (state: State, payload: unknown) => {
+    const data = payload as boolean | undefined;
+    storage.setExplorerAllFiles(data);
+    return {
+      ...state,
+      explorerProps: {
+        ...state.explorerProps,
+        allFiles: data ?? false
+      }
+    };
+  },
   setExplorerSelectedFile: (state: State, payload: unknown) => {
     const data = payload as File | undefined;
     storage.setExplorerFileId(data?.id);
@@ -298,17 +309,6 @@ const actions = (storage: StorageService) => ({
       explorerProps: {
         ...state.explorerProps,
         selectedFolder: data
-      }
-    };
-  },
-  setExplorerAllFiles: (state: State, payload: unknown) => {
-    const data = payload as boolean | undefined;
-    storage.setExplorerAllFiles(data);
-    return {
-      ...state,
-      explorerProps: {
-        ...state.explorerProps,
-        allFiles: data ?? false
       }
     };
   },

@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should match the snapshot when the disabled is false 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #817400;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProviderr1 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      aria-label="Conflict file"
+      class="emotion-0"
+      role="button"
+      tabindex="0"
+      title="Conflict file"
+    >
+      <svg
+        aria-hidden="true"
+        class="___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0"
+        fill="currentColor"
+        height="16"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.75 10.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 8a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-1 0V8Zm-.6-5.36c.49-.86 1.71-.86 2.2 0l4.74 8.5c.47.83-.14 1.86-1.09 1.86h-9.5a1.25 1.25 0 0 1-1.1-1.86l4.76-8.5Zm1.32.49a.25.25 0 0 0-.44 0l-4.75 8.5c-.1.16.03.37.22.37h9.5c.2 0 .31-.2.22-.37l-4.75-8.5Z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should match the snapshot when the disabled is true 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  />
+</DocumentFragment>
+`;
