@@ -29,3 +29,4 @@ jobs:
     secrets: inherit
     with:
       environment: dev
+      slot-name: dev
