@@ -7,13 +7,17 @@
 //
 
 import { defineMessages } from 'react-intl';
+import parentMessages from '../messages';
 
-const messages = defineMessages({
-  RestoreFile: { defaultMessage: 'Restore file' },
-  Size: { defaultMessage: 'Size' },
-  UpdatedDate: { defaultMessage: 'Updated date' },
-  Version: { defaultMessage: 'Version' },
-  VersionHistory: { defaultMessage: 'Version history' }
-});
+const messages = {
+  ...parentMessages,
+  ...defineMessages({
+    RestoreFile: { defaultMessage: 'Restore file' },
+    Size: { defaultMessage: 'Size' },
+    UpdatedDate: { defaultMessage: 'Updated date' },
+    Version: { defaultMessage: 'Version' },
+    VersionHistory: { defaultMessage: 'Version history' }
+  })
+};
 
 export default messages;

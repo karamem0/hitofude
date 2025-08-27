@@ -57,7 +57,7 @@ exports[`should match the snapshot when the open is true 1`] = `
             >
               <svg
                 aria-hidden="true"
-                class="___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0"
+                class="___12fm75w_1fmvgpr f1w7gpdv fez10in fg4l7m0"
                 fill="currentColor"
                 height="16"
                 viewBox="0 0 16 16"
@@ -84,6 +84,9 @@ exports[`should match the snapshot when the open is true 1`] = `
       />
     </div>
   </aside>
+  <span
+    hidden=""
+  />
   <div
     class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
