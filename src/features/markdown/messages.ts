@@ -7,12 +7,16 @@
 //
 
 import { defineMessages } from 'react-intl';
+import parentMessages from '../messages';
 
-const messages = defineMessages({
-  Bold: { defaultMessage: 'Bold' },
-  Footnotes: { defaultMessage: 'Footnotes' },
-  Italic: { defaultMessage: 'Italic' },
-  Underline: { defaultMessage: 'Underline' }
-});
+const messages = {
+  ...parentMessages,
+  ...defineMessages({
+    Bold: { defaultMessage: 'Bold' },
+    Footnotes: { defaultMessage: 'Footnotes' },
+    Italic: { defaultMessage: 'Italic' },
+    Underline: { defaultMessage: 'Underline' }
+  })
+};
 
 export default messages;

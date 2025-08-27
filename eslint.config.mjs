@@ -24,7 +24,6 @@ export default ts.config(
     'languageOptions': {
       'globals': {
         ...globals.browser,
-        ...globals.jest,
         ...globals.node
       }
     },
@@ -174,7 +173,13 @@ export default ts.config(
       ],
       '@stylistic/operator-linebreak': [
         'error',
-        'after'
+        'after',
+        {
+          'overrides': {
+            '&': 'before',
+            '|': 'before'
+          }
+        }
       ],
       '@stylistic/padded-blocks': 'off',
       '@stylistic/quotes': [
@@ -224,8 +229,8 @@ export default ts.config(
         }
       ],
       'sonarjs/no-empty-function': 'off',
-      'sonarjs/no-unknown-property': 'off',
       'sonarjs/no-small-switch': 'off',
+      'sonarjs/no-unknown-property': 'off',
       'sonarjs/no-unused-expressions': 'off',
       'sonarjs/no-unused-vars': 'off',
       'sonarjs/prefer-single-boolean-return': 'off'

@@ -1,21 +1,12 @@
 name: Deploy to Azure
 
-on:
-  workflow_call:
-    inputs:
-      environment:
-        required: true
-        type: string
-      slot-name:
-        required: false
-        type: string
+on: workflow_call
 
 permissions: {}
 
 jobs:
   run:
     name: Run
-    environment: ${{inputs.environment}}
     runs-on: ubuntu-latest
     steps:
       - name: Download build files
@@ -31,5 +22,4 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{vars.AZURE_WEB_APP_NAME}}
-          slot-name: ${{inputs.slot-name}}
           package: build

@@ -35,13 +35,13 @@ exports[`should match the snapshot when the type is save 1`] = `
 <div
     aria-labelledby="dialog-title-r2"
     aria-modal="true"
-    class="fui-DialogSurface rsmdyd3"
+    class="fui-DialogSurface r1u3t6p6"
     data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r1","isOthersAccessible":false,"isTrapped":true}}"
     role="dialog"
     tabindex="-1"
   >
     <div
-      class="fui-DialogBody r1h3qql9"
+      class="fui-DialogBody rhwx3p8"
     >
       <div
         class="fui-DialogContent r1v5zwsm emotion-0"
@@ -66,6 +66,9 @@ exports[`should match the snapshot when the type is save 1`] = `
       </div>
     </div>
   </div>
+  <span
+    hidden=""
+  />
   <div
     class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
@@ -121,13 +124,13 @@ exports[`should match the snapshot when the type is upload 1`] = `
 <div
     aria-labelledby="dialog-title-r6"
     aria-modal="true"
-    class="fui-DialogSurface rsmdyd3"
+    class="fui-DialogSurface r1u3t6p6"
     data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r5","isOthersAccessible":false,"isTrapped":true}}"
     role="dialog"
     tabindex="-1"
   >
     <div
-      class="fui-DialogBody r1h3qql9"
+      class="fui-DialogBody rhwx3p8"
     >
       <div
         class="fui-DialogContent r1v5zwsm emotion-0"
@@ -152,6 +155,9 @@ exports[`should match the snapshot when the type is upload 1`] = `
       </div>
     </div>
   </div>
+  <span
+    hidden=""
+  />
   <div
     class="fui-FluentProvider fui-FluentProviderr4 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"

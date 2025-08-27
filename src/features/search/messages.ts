@@ -7,11 +7,15 @@
 //
 
 import { defineMessages } from 'react-intl';
+import parentMessages from '../messages';
 
-const messages = defineMessages({
-  CopyLink: { defaultMessage: 'Copy link' },
-  OpenFileLocation: { defaultMessage: 'Open file location' },
-  Search: { defaultMessage: 'Search' }
-});
+const messages = {
+  ...parentMessages,
+  ...defineMessages({
+    CopyLink: { defaultMessage: 'Copy link' },
+    OpenFileLocation: { defaultMessage: 'Open file location' },
+    Search: { defaultMessage: 'Search' }
+  })
+};
 
 export default messages;

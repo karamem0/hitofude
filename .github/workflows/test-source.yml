@@ -1,11 +1,6 @@
 name: Test source
 
-on:
-  workflow_call:
-    inputs:
-      environment:
-        required: true
-        type: string
+on: workflow_call
 
 permissions:
   checks: write
@@ -13,7 +8,6 @@ permissions:
 jobs:
   run:
     name: Run
-    environment: ${{inputs.environment}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repos

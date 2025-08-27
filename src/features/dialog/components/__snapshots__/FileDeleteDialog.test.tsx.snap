@@ -23,12 +23,12 @@ exports[`should match the snapshot when the loading is false 1`] = `
 
 <div
     aria-modal="true"
-    class="fui-DialogSurface rsmdyd3"
+    class="fui-DialogSurface r1u3t6p6"
     role="dialog"
     tabindex="-1"
   >
     <div
-      class="fui-DialogBody r1h3qql9"
+      class="fui-DialogBody rhwx3p8"
     >
       <h2
         class="fui-DialogTitle rxjm636 ___mh25s00_kwrsjh0 fsyjsko"
@@ -71,6 +71,9 @@ exports[`should match the snapshot when the loading is false 1`] = `
       </div>
     </div>
   </div>
+  <span
+    hidden=""
+  />
   <div
     class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
@@ -109,12 +112,12 @@ exports[`should match the snapshot when the loading is true 1`] = `
 
 <div
     aria-modal="true"
-    class="fui-DialogSurface rsmdyd3"
+    class="fui-DialogSurface r1u3t6p6"
     role="dialog"
     tabindex="-1"
   >
     <div
-      class="fui-DialogBody r1h3qql9"
+      class="fui-DialogBody rhwx3p8"
     >
       <h2
         class="fui-DialogTitle rxjm636 ___mh25s00_kwrsjh0 fsyjsko"
@@ -158,6 +161,9 @@ exports[`should match the snapshot when the loading is true 1`] = `
       </div>
     </div>
   </div>
+  <span
+    hidden=""
+  />
   <div
     class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"

@@ -35,10 +35,10 @@ function AppTab(props: Readonly<AppTabProps>) {
       css={css`
         z-index: 100;
         display: grid;
+        visibility: ${tabOpen ? undefined : 'hidden'};
         width: ${tabOpen ? layouts.appTab.width : '0'};
         max-width: ${layouts.appTab.maxWidth};
         padding: 1rem 0;
-        visibility: ${tabOpen ? undefined : 'hidden'};
         background-color: ${theme.colorNeutralBackground2};
       `}>
       {

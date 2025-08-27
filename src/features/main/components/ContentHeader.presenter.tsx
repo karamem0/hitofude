@@ -74,9 +74,9 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
           title={file.baseName}
           css={css`
             overflow: hidden;
+            text-overflow: ellipsis;
             font-size: ${theme.fontSizeBase600};
             line-height: calc(${theme.fontSizeBase600} * 1.25);
-            text-overflow: ellipsis;
             white-space: nowrap;
           `}>
           {file.baseName}
