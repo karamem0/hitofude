@@ -47,7 +47,7 @@ exports[`should match the snapshot when the type is save 1`] = `
         class="fui-DialogContent r1v5zwsm emotion-0"
       >
         <div
-          class="fui-Spinner r82apo5"
+          class="fui-Spinner rpp59a7"
           role="progressbar"
         >
           <span
@@ -136,7 +136,7 @@ exports[`should match the snapshot when the type is upload 1`] = `
         class="fui-DialogContent r1v5zwsm emotion-0"
       >
         <div
-          class="fui-Spinner r82apo5"
+          class="fui-Spinner rpp59a7"
           role="progressbar"
         >
           <span

@@ -42,7 +42,7 @@ exports[`should match the snapshot 1`] = `
             role="group"
           >
             <div
-              class="fui-Card__floatingAction fui-Card__floatingAction ___18baxhl_1oayy2k f1euv43f fqclxi7 fiv86kb f19g0ac"
+              class="fui-Card__floatingAction fui-Card__floatingAction ___1q9m48l_1b7qc9c f1euv43f fqclxi7 fiv86kb fom9my7"
             >
               <span
                 class="fui-Checkbox r1q22k1j ___13877ya_6gg83z0 f19n0e5 f35ds98 f12mnkne fei9a8h fix56y3 f1bcv2js f7dr4go f1r5cpua"
@@ -96,7 +96,7 @@ exports[`should match the snapshot 1`] = `
             role="group"
           >
             <div
-              class="fui-Card__floatingAction fui-Card__floatingAction ___18baxhl_1oayy2k f1euv43f fqclxi7 fiv86kb f19g0ac"
+              class="fui-Card__floatingAction fui-Card__floatingAction ___1q9m48l_1b7qc9c f1euv43f fqclxi7 fiv86kb fom9my7"
             >
               <span
                 class="fui-Checkbox r1q22k1j ___1v6wcsu_941lme0 f3p8bqa fium13f f1r2dosr f1729es6"
