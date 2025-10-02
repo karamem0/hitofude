@@ -11,5 +11,9 @@ permissions:
 jobs:
   deploy-to-github-release:
     name: Deploy to GitHub Release
-    uses: ./.github/workflows/deploy-to-github-release.yml
-    secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repos
+        uses: actions/checkout@v4
+      - name: Deploy to GitHub Release
+        uses: ./.github/actions/deploy-to-github-release

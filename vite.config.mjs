@@ -41,8 +41,8 @@ export default defineConfig(({ mode }) => ({
           [
             'formatjs',
             {
-              ast: true,
-              idInterpolationPattern: '[sha512:contenthash:base64:6]'
+              'ast': true,
+              'idInterpolationPattern': '[sha512:contenthash:base64:6]'
             }
           ]
         ]

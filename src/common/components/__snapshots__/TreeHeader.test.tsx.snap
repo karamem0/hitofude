@@ -117,7 +117,7 @@ exports[`should match the snapshot when the menu is opened 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="___12fm75w_1fmvgpr f1w7gpdv fez10in fg4l7m0"
+            class="___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
             fill="currentColor"
             height="16"
             viewBox="0 0 16 16"
@@ -139,7 +139,7 @@ exports[`should match the snapshot when the menu is opened 1`] = `
   <div
     class="fui-MenuPopover ___152dg9n_2cbp180 ft85np5 fxugw4r f19n0e5 f1ewtqcl fl8fusi f1kaai3v f1p9o1ba f1ahpp82 f1hg901r fd3pd8h f9ggezi fk6fouc fkhj508 figsok6 f1i3iumi f18k4bn6 fo1kyvf fetxo7e f8x1vz1 f8g0anz fezwn9i fz5efge f1ydixl4 f8dgqj5 fnyfnr8 fgw77r4 f1noc5he fi19xcv f1mxk9aa ffzg62k"
     data-popper-escaped=""
-    data-popper-placement="bottom-end"
+    data-popper-placement="bottom-start"
     data-popper-reference-hidden=""
     data-tabster="{"restorer":{"type":0}}"
     role="presentation"
@@ -222,7 +222,7 @@ exports[`should match the snapshot when the root is false 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="___12fm75w_1fmvgpr f1w7gpdv fez10in fg4l7m0"
+            class="___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
             fill="currentColor"
             height="16"
             viewBox="0 0 16 16"
@@ -262,7 +262,7 @@ exports[`should match the snapshot when the root is false 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="___12fm75w_1fmvgpr f1w7gpdv fez10in fg4l7m0"
+            class="___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
             fill="currentColor"
             height="16"
             viewBox="0 0 16 16"
@@ -397,7 +397,7 @@ exports[`should match the snapshot when the root is true 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="___12fm75w_1fmvgpr f1w7gpdv fez10in fg4l7m0"
+            class="___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
             fill="currentColor"
             height="16"
             viewBox="0 0 16 16"

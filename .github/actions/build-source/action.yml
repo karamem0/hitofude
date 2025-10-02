@@ -1,0 +1,44 @@
+name: Build source
+
+description: This GitHub Action builds sources and uploads its artifacts.
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js 22.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+    - name: Update package.json
+      shell: pwsh
+      run: npm version ${{env.BUILD_VERSION}} --no-git-tag-version
+    - name: Update microsoft-identity-association.json
+      shell: pwsh
+      run: |
+        $content = Get-Content -Path ${{env.FILE_PATH}}
+        $content = $content -replace "{{MICROSOFT_APP_ID}}", "${{env.MICROSOFT_APP_ID}}"
+        Out-File -FilePath ${{env.FILE_PATH}} -InputObject $content -Encoding UTF8
+      env:
+        FILE_PATH: public/.well-known/microsoft-identity-association.json
+    - name: Update .env
+      shell: pwsh
+      run: |
+        $content = Get-Content -Path ${{env.FILE_PATH}}
+        $content = $content -Replace "{{TELEMETRY_CONNECTION_STRING}}", "${{env.TELEMETRY_CONNECTION_STRING}}"
+        $content = $content -Replace "{{MICROSOFT_TENANT_ID}}", "${{env.MICROSOFT_TENANT_ID}}"
+        $content = $content -Replace "{{MICROSOFT_APP_ID}}", "${{env.MICROSOFT_APP_ID}}"
+        Out-File -FilePath ${{env.FILE_PATH}} -InputObject $content -Encoding UTF8
+      env:
+        FILE_PATH: .env
+    - name: Restore source
+      shell: pwsh
+      run: npm ci
+    - name: Build source
+      shell: pwsh
+      run: npm run build
+    - name: Upload artifatcs
+      uses: actions/upload-artifact@v4
+      with:
+        name: build
+        path: build
+        include-hidden-files: true
