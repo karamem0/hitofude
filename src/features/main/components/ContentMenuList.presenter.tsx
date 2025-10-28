@@ -181,7 +181,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
               )}
               onClick={(event) => onMenuClick?.(event, {
                 type: 'toggleSyncScroll',
-                data: !scroll
+                data: !syncScroll
               })}>
               <FormattedMessage {...messages.SyncScroll} />
             </MenuItem>

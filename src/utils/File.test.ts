@@ -26,7 +26,7 @@ describe('downloadFile', () => {
     };
     const mockClick = vi.fn();
     const mockRemove = vi.fn();
-    vi.spyOn(window.document, 'createElement')
+    const mockCreateElement = vi.spyOn(window.document, 'createElement')
       .mockImplementation(() => ({
         click: mockClick,
         remove: mockRemove
@@ -34,6 +34,7 @@ describe('downloadFile', () => {
     downloadFile(param.value);
     expect(mockClick).toHaveBeenCalled();
     expect(mockRemove).toHaveBeenCalled();
+    mockCreateElement.mockClear();
   });
 
   it('should throw an error when downloadUrl is undefined', () => {
@@ -43,9 +44,10 @@ describe('downloadFile', () => {
         fullName: 'foo.txt'
       }
     };
-    const mock = vi.spyOn(window.document, 'createElement');
+    const mockCreateElement = vi.spyOn(window.document, 'createElement');
     expect(() => downloadFile(param.value)).toThrowError();
-    expect(mock).not.toHaveBeenCalled();
+    expect(mockCreateElement).not.toHaveBeenCalled();
+    mockCreateElement.mockClear();
   });
 
   it('should throw an error when fullName is undefined', () => {
@@ -55,9 +57,10 @@ describe('downloadFile', () => {
         fullName: undefined
       }
     };
-    const mock = vi.spyOn(window.document, 'createElement');
+    const mockCreateElement = vi.spyOn(window.document, 'createElement');
     expect(() => downloadFile(param.value)).toThrowError();
-    expect(mock).not.toHaveBeenCalled();
+    expect(mockCreateElement).not.toHaveBeenCalled();
+    mockCreateElement.mockClear();
   });
 
 });
