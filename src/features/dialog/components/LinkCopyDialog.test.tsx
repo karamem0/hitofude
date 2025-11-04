@@ -22,13 +22,20 @@ vi.mock('../../../common/components/ModalDialog', () => ({
   )
 }));
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the loading copied is true', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     copied: true,
     mountNode: container,
     value: 'https://example.com'
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -39,16 +46,19 @@ it('should match the snapshot when the loading copied is true', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the loading copied is false', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     copied: false,
     mountNode: container,
     value: 'https://example.com'
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -59,10 +69,12 @@ it('should match the snapshot when the loading copied is false', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should raise onCopy event when the click a button', async () => {
+  // Setup
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const mock = vi.fn();
@@ -72,6 +84,7 @@ it('should raise onCopy event when the click a button', async () => {
     value: 'https://example.com',
     onCopy: mock
   };
+  // Execute
   render(
     <IntlProvider>
       <ThemeProvider>
@@ -83,5 +96,6 @@ it('should raise onCopy event when the click a button', async () => {
     }
   );
   await user.click(screen.getByTitle('Copy'));
+  // Assert
   expect(mock).toHaveBeenCalled();
 });

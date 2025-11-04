@@ -48,7 +48,7 @@ function MainPage(props: Readonly<MainPageProps>) {
             content={intl.formatMessage(messages.AppDescription)}
             name="description" />
           <title>
-            {intl.formatMessage(messages.AppTitle)}
+            {`${intl.formatMessage(messages.AppTitle)} - ${intl.formatMessage(messages.AppDescription)}`}
           </title>
         </Helmet>
       </HelmetProvider>

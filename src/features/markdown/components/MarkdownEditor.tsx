@@ -79,10 +79,11 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
       return;
     }
     const text = model.getValueInRange(selection);
+    const match = /^\*\*(.*)\*\*$/.exec(text);
     monacoEl.executeEdits('', [
       {
         range: selection,
-        text: `**${text}**`
+        text: match ? match[1] : `**${text}**`
       }
     ]);
   }, []);
@@ -101,10 +102,34 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
       return;
     }
     const text = model.getValueInRange(selection);
+    const match = /^\*(.*)\*$/.exec(text);
     monacoEl.executeEdits('', [
       {
         range: selection,
-        text: `*${text}*`
+        text: match ? match[1] : `*${text}*`
+      }
+    ]);
+  }, []);
+
+  const handleEditStrike = React.useCallback(() => {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    const model = monacoEl.getModel();
+    if (model == null) {
+      return;
+    }
+    const selection = monacoEl.getSelection();
+    if (selection == null) {
+      return;
+    }
+    const text = model.getValueInRange(selection);
+    const match = /^~(.*)~$/.exec(text);
+    monacoEl.executeEdits('', [
+      {
+        range: selection,
+        text: match ? match[1] : `~${text}~`
       }
     ]);
   }, []);
@@ -123,10 +148,11 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
       return;
     }
     const text = model.getValueInRange(selection);
+    const match = /^<u>(.*)<\/u>$/.exec(text);
     monacoEl.executeEdits('', [
       {
         range: selection,
-        text: `<u>${text}</u>`
+        text: match ? match[1] : `<u>${text}</u>`
       }
     ]);
   }, []);
@@ -325,11 +351,13 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     return {
       bold: handleEditBold,
       italic: handleEditItalic,
+      strike: handleEditStrike,
       underline: handleEditUnderline
     };
   }, [
     handleEditBold,
     handleEditItalic,
+    handleEditStrike,
     handleEditUnderline
   ]);
 

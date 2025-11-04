@@ -66,9 +66,7 @@ function HomePage(props: Readonly<HomePageProps>) {
             content={intl.formatMessage(messages.AppDescription)}
             property="og:description" />
           <title>
-            {intl.formatMessage(messages.AppTitle)}
-            -
-            {intl.formatMessage(messages.AppDescription)}
+            {`${intl.formatMessage(messages.AppTitle)} - ${intl.formatMessage(messages.AppDescription)}`}
           </title>
         </Helmet>
       </HelmetProvider>

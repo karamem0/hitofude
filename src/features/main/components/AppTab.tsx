@@ -10,7 +10,7 @@ import React from 'react';
 
 import {
   DependencyNullError,
-  FileNotFoundError,
+  FolderNotFoundError,
   InvalidOperationError
 } from '../../../types/Error';
 import {
@@ -48,7 +48,10 @@ function AppTab() {
       }
     }
   } = useStore();
-  const { graph, storage } = useService();
+  const {
+    graph,
+    storage
+  } = useService();
   const [ tabOpen, setTabOpen ] = React.useState(tabProps.open);
   const [ tabType, setTabType ] = React.useState(tabProps.type);
 
@@ -62,7 +65,7 @@ function AppTab() {
         throw new InvalidOperationError();
       }
       const folder = explorerProps?.selectedFolder?.id === params.folder ? explorerProps?.selectedFolder : await Promise.resolve()
-        .then(() => params.folder ? graph.getFolderById(params.folder) : Promise.reject(new FileNotFoundError()))
+        .then(() => params.folder ? graph.getFolderById(params.folder) : Promise.reject(new FolderNotFoundError()))
         .catch(() => explorerProps?.rootFolder);
       dispatch(setExplorerSelectedFolder(folder));
       const files = folder?.files ?? [];

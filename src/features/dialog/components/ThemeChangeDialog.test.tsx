@@ -23,12 +23,19 @@ vi.mock('../../../common/components/ModalDialog', () => ({
   )
 }));
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,
     themeName: ThemeName.light
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -39,10 +46,12 @@ it('should match the snapshot', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should raise onChangeTheme event when the click a light checkbox', async () => {
+  // Setup
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const mock = vi.fn();
@@ -51,6 +60,7 @@ it('should raise onChangeTheme event when the click a light checkbox', async () 
     themeName: ThemeName.dark,
     onChangeTheme: mock
   };
+  // Execute
   render(
     <IntlProvider>
       <ThemeProvider>
@@ -62,10 +72,12 @@ it('should raise onChangeTheme event when the click a light checkbox', async () 
     }
   );
   await user.click(screen.getByTitle('Light'));
+  // Assert
   expect(mock).toHaveBeenCalledWith(expect.anything(), ThemeName.light);
 });
 
 it('should raise onChangeTheme event when the click a dark checkbox', async () => {
+  // Setup
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const mock = vi.fn();
@@ -74,6 +86,7 @@ it('should raise onChangeTheme event when the click a dark checkbox', async () =
     themeName: ThemeName.light,
     onChangeTheme: mock
   };
+  // Execute
   render(
     <IntlProvider>
       <ThemeProvider>
@@ -85,5 +98,6 @@ it('should raise onChangeTheme event when the click a dark checkbox', async () =
     }
   );
   await user.click(screen.getByTitle('Dark'));
+  // Assert
   expect(mock).toHaveBeenCalledWith(expect.anything(), ThemeName.dark);
 });

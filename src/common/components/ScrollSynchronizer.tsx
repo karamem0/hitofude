@@ -43,25 +43,25 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
 
   const [ element1Position, setElement1Position ] = React.useState<ScrollPosition | undefined>(defaultElement1Position);
   const [ element2Position, setElement2Position ] = React.useState<ScrollPosition | undefined>(defaultElement2Position);
-  const element1Active = React.useRef<boolean>();
-  const element1Size = React.useRef<ScrollSize>();
-  const element2Active = React.useRef<boolean>();
-  const element2Size = React.useRef<ScrollSize>();
+  const [ element1Active, setElement1Active ] = React.useState<boolean>(false);
+  const [ element1Size, setElement1Size ] = React.useState<ScrollSize | undefined>();
+  const [ element2Active, setElement2Active ] = React.useState<boolean>(false);
+  const [ element2Size, setElement2Size ] = React.useState<ScrollSize | undefined>();
 
   const handleElement1MouseEnter = React.useCallback(() => {
-    element1Active.current = true;
+    setElement1Active(true);
   }, []);
 
   const handleElement1MouseLeave = React.useCallback(() => {
-    element1Active.current = false;
+    setElement1Active(false);
   }, []);
 
   const handleElement1Resize = React.useCallback((_: Event, data?: ScrollSize) => {
-    element1Size.current = data;
+    setElement1Size(data);
   }, []);
 
   const handleElement1ScrollChange = React.useCallback((_: Event, data?: ScrollPosition) => {
-    if (!element1Active.current) {
+    if (!element1Active) {
       return;
     }
     if (!enabled) {
@@ -69,27 +69,29 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     }
     setElement2Position((value) => ({
       ...value,
-      scrollY: getScrollY(data, element1Size.current, element2Size.current)
+      scrollY: getScrollY(data, element1Size, element2Size)
     }));
   }, [
+    enabled,
     element1Active,
-    enabled
+    element1Size,
+    element2Size
   ]);
 
   const handleElement2MouseEnter = React.useCallback(() => {
-    element2Active.current = true;
+    setElement2Active(true);
   }, []);
 
   const handleElement2MouseLeave = React.useCallback(() => {
-    element2Active.current = false;
+    setElement2Active(false);
   }, []);
 
   const handleElement2Resize = React.useCallback((_: Event, data?: ScrollSize) => {
-    element2Size.current = data;
+    setElement2Size(data);
   }, []);
 
   const handleElement2ScrollChange = React.useCallback((_: Event, data?: ScrollPosition) => {
-    if (!element2Active.current) {
+    if (!element2Active) {
       return;
     }
     if (!enabled) {
@@ -97,11 +99,13 @@ function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
     }
     setElement1Position((value) => ({
       ...value,
-      scrollY: getScrollY(data, element2Size.current, element1Size.current)
+      scrollY: getScrollY(data, element2Size, element1Size)
     }));
   }, [
+    enabled,
     element2Active,
-    enabled
+    element2Size,
+    element1Size
   ]);
 
   return render?.({

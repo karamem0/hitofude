@@ -10,12 +10,12 @@
     "test:ci": "vitest run --reporter=default --reporter=junit --coverage",
     "eslint": "eslint",
     "eslint:fix": "eslint --fix",
-    "stylelint": "stylelint 'src/**/*.{css,scss,jsx,tsx}'",
-    "stylelint:fix": "stylelint 'src/**/*.{css,scss,jsx,tsx}' --fix",
-    "formatjs:extract": "formatjs extract 'src/**/messages.ts' --out-file 'src/translations/en.json' --id-interpolation-pattern '[sha512:contenthash:base64:6]' --format simple",
+    "stylelint": "stylelint src/**/*.{css,scss,jsx,tsx}",
+    "stylelint:fix": "stylelint src/**/*.{css,scss,jsx,tsx} --fix",
+    "formatjs:extract": "formatjs extract src/**/messages.ts --out-file src/translations/en.json --id-interpolation-pattern [sha512:contenthash:base64:6] --format simple",
     "formatjs:compile": "npm run formatjs:compile-en && npm run formatjs:compile-ja",
-    "formatjs:compile-en": "formatjs compile 'src/translations/en.json' --out-file 'src/translations/compiled/en.json' --ast --format simple",
-    "formatjs:compile-ja": "formatjs compile 'src/translations/ja.json' --out-file 'src/translations/compiled/ja.json' --ast --format simple"
+    "formatjs:compile-en": "formatjs compile src/translations/en.json --out-file src/translations/compiled/en.json --ast --format simple",
+    "formatjs:compile-ja": "formatjs compile src/translations/ja.json --out-file src/translations/compiled/ja.json --ast --format simple"
   },
   "dependencies": {
     "@automapper/core": "^8.8.1",
@@ -28,6 +28,7 @@
     "@microsoft/applicationinsights-web": "^3.3.10",
     "@microsoft/microsoft-graph-client": "^3.0.7",
     "bytes": "^3.1.2",
+    "dexie": "^4.2.1",
     "mermaid": "^11.12.1",
     "mime": "^4.1.0",
     "monaco-editor": "^0.54.0",

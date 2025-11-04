@@ -69,8 +69,15 @@ vi.mock('../../../common/components/ErrorNotification', () => ({
   )
 }));
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot', () => {
+  // Setup
   const params = {};
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -78,5 +85,6 @@ it('should match the snapshot', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

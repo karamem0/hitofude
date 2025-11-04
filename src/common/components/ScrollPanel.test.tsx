@@ -13,12 +13,19 @@ import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './ScrollPanel.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot', () => {
+  // Setup
   const params = {
     children: (
       <div data-testid="test-Children" />
     )
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -26,6 +33,7 @@ it('should match the snapshot', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTestId('test-Children')).toBeInTheDocument();
 });

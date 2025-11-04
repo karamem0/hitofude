@@ -14,12 +14,19 @@ import Presenter from './ProgressDialog.presenter';
 import { ProgressType } from '../../types/Model';
 import ThemeProvider from '../../providers/ThemeProvider';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the type is save', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,
     type: 'save' as ProgressType
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -30,16 +37,19 @@ it('should match the snapshot when the type is save', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByText('Saving...')).toBeInTheDocument();
 });
 
 it('should match the snapshot when the type is upload', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,
     type: 'upload' as ProgressType
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -50,16 +60,19 @@ it('should match the snapshot when the type is upload', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByText('Uploading...')).toBeInTheDocument();
 });
 
 it('should match the snapshot when the type is undefined', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     mountNode: container,
     type: undefined
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -70,5 +83,6 @@ it('should match the snapshot when the type is undefined', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

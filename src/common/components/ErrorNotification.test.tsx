@@ -13,13 +13,20 @@ import Presenter from './ErrorNotification.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the message is not undedined', () => {
+  // Setup
   const params = {
     message: {
       id: 'ErrorMessage',
       defaultMessage: 'Something went wrong'
     }
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -27,13 +34,16 @@ it('should match the snapshot when the message is not undedined', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the message is undedined', () => {
+  // Setup
   const params = {
     message: undefined
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -41,5 +51,6 @@ it('should match the snapshot when the message is undedined', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

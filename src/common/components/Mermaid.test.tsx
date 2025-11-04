@@ -13,12 +13,19 @@ import Presenter from './Mermaid.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot', () => {
+  // Setup
   const params = {
     children: (
       <div data-testid="test-Children" />
     )
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -26,5 +33,6 @@ it('should match the snapshot', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

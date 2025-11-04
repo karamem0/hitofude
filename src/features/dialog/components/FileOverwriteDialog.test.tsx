@@ -21,12 +21,19 @@ vi.mock('../../../common/components/ModalDialog', () => ({
   )
 }));
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the loading is true', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     loading: true,
     mountNode: container
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -37,17 +44,20 @@ it('should match the snapshot when the loading is true', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTitle('Yes')).toBeDisabled();
   expect(screen.getByTitle('No')).toBeDisabled();
 });
 
 it('should match the snapshot when the loading is false', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     loading: false,
     mountNode: container
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -58,6 +68,7 @@ it('should match the snapshot when the loading is false', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTitle('Yes')).not.toBeDisabled();
   expect(screen.getByTitle('No')).not.toBeDisabled();

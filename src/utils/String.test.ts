@@ -8,9 +8,15 @@
 
 import { compare } from './String';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 describe('compare', () => {
 
   it('should get 0 when the values are equal', () => {
+    // Setup
     const param = {
       a: 'foo',
       b: 'foo'
@@ -18,11 +24,14 @@ describe('compare', () => {
     const expected = {
       value: 0
     };
+    // Execute
     const actual = compare(param.a, param.b);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get a positive value when the first value is greater than the second', () => {
+    // Setup
     const param = {
       a: 'foo',
       b: 'bar'
@@ -30,11 +39,14 @@ describe('compare', () => {
     const expected = {
       value: 1
     };
+    // Execute
     const actual = compare(param.a, param.b);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get a positive value when the first value is null', () => {
+    // Setup
     const param = {
       a: null,
       b: 'bar'
@@ -42,11 +54,14 @@ describe('compare', () => {
     const expected = {
       value: 1
     };
+    // Execute
     const actual = compare(param.a, param.b);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get a positive value when the first value is undefined', () => {
+    // Setup
     const param = {
       a: undefined,
       b: 'bar'
@@ -54,11 +69,14 @@ describe('compare', () => {
     const expected = {
       value: 1
     };
+    // Execute
     const actual = compare(param.a, param.b);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get a negative value when the first value is less than the second', () => {
+    // Setup
     const param = {
       a: 'bar',
       b: 'foo'
@@ -66,11 +84,14 @@ describe('compare', () => {
     const expected = {
       value: -1
     };
+    // Execute
     const actual = compare(param.a, param.b);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get a negative value when the second value is null', () => {
+    // Setup
     const param = {
       a: 'bar',
       b: null
@@ -78,11 +99,14 @@ describe('compare', () => {
     const expected = {
       value: -1
     };
+    // Execute
     const actual = compare(param.a, param.b);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get a negative value when the second value is undefined', () => {
+    // Setup
     const param = {
       a: 'bar',
       b: undefined
@@ -90,7 +114,9 @@ describe('compare', () => {
     const expected = {
       value: -1
     };
+    // Execute
     const actual = compare(param.a, param.b);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 

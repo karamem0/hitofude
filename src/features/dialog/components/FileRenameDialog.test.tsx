@@ -23,7 +23,13 @@ vi.mock('../../../common/components/ModalDialog', () => ({
   )
 }));
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the loading is true', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     loading: true,
@@ -34,6 +40,7 @@ it('should match the snapshot when the loading is true', () => {
       extension: '.docx'
     } as File
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -44,11 +51,13 @@ it('should match the snapshot when the loading is true', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTitle('Save')).toBeDisabled();
 });
 
 it('should match the snapshot when the loading is false', async () => {
+  // Setup
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
@@ -60,6 +69,7 @@ it('should match the snapshot when the loading is false', async () => {
       extension: '.docx'
     } as File
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -72,6 +82,7 @@ it('should match the snapshot when the loading is false', async () => {
   );
   await user.click(screen.getByPlaceholderText('File name'));
   await user.keyboard('1');
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTitle('Save')).not.toBeDisabled();
 });

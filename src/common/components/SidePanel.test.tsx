@@ -13,7 +13,13 @@ import IntlProvider from '../../providers/IntlProvider';
 import Presenter from './SidePanel.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the open is true', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     children: (
@@ -23,6 +29,7 @@ it('should match the snapshot when the open is true', () => {
     open: true,
     title: 'Side Panel'
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -33,11 +40,13 @@ it('should match the snapshot when the open is true', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTestId('test-Children')).toBeInTheDocument();
 });
 
 it('should match the snapshot when the open is false', () => {
+  // Setup
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
     children: (
@@ -47,6 +56,7 @@ it('should match the snapshot when the open is false', () => {
     open: false,
     title: 'Side Panel'
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -57,6 +67,7 @@ it('should match the snapshot when the open is false', () => {
       container
     }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.queryByTestId('test-Children')).not.toBeInTheDocument();
 });
