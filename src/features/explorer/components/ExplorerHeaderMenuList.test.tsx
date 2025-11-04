@@ -9,11 +9,18 @@
 import React from 'react';
 
 import IntlProvider from '../../../providers/IntlProvider';
-import Presenter from './ExplorerHeaderMenuList.presenter';
 import ThemeProvider from '../../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
+import Presenter from './ExplorerHeaderMenuList.presenter';
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the folder is not undefined', () => {
+  // Setup
   const params = {
     allFiles: true,
     selectedFolder: {
@@ -30,6 +37,7 @@ it('should match the snapshot when the folder is not undefined', () => {
       ]
     }
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -37,14 +45,17 @@ it('should match the snapshot when the folder is not undefined', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the folder is undefined', () => {
+  // Setup
   const params = {
     allFiles: true,
     selectedFolder: undefined
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -52,5 +63,6 @@ it('should match the snapshot when the folder is undefined', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

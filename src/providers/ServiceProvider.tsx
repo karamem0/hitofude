@@ -8,10 +8,13 @@
 
 import React from 'react';
 
+import { CacheRepository } from '../repositories/CacheRepository';
 import { Client } from '@microsoft/microsoft-graph-client';
+import { GraphRepository } from '../repositories/GraphRepository';
 import { GraphService } from '../services/GraphService';
 import { InvalidOperationError } from '../types/Error';
 import { StorageService } from '../services/StorageService';
+import { database } from '../config/DatabaseConfig';
 import { loginParams } from '../config/MsalConfig';
 import { useMsal } from '@azure/msal-react';
 
@@ -37,17 +40,23 @@ function ServiceProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
   const msal = useMsal();
 
   const value = React.useMemo<ServiceContextState>(() => ({
-    graph: new GraphService(Client.initWithMiddleware({
-      authProvider: {
-        getAccessToken: () => msal.instance
-          .acquireTokenSilent({
-            ...loginParams,
-            account: msal.accounts[0]
-          })
-          .then((result) => result.accessToken)
-      }
-    })),
-    storage: new StorageService(localStorage)
+    graph: new GraphService(
+      new CacheRepository(database),
+      new GraphRepository(Client.initWithMiddleware({
+        authProvider: {
+          getAccessToken: () => msal.instance
+            .acquireTokenSilent({
+              ...loginParams,
+              account: msal.accounts[0]
+            })
+            .then((result) => result.accessToken)
+        }
+      }))),
+    storage: new StorageService(
+      localStorage,
+      msal.accounts[0].localAccountId,
+      msal.accounts[0].tenantId
+    )
   }), [
     msal
   ]);

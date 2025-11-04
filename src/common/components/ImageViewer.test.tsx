@@ -9,16 +9,24 @@
 import React from 'react';
 
 import IntlProvider from '../../providers/IntlProvider';
-import Presenter from './ImageViewer.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
+import Presenter from './ImageViewer.presenter';
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot', () => {
+  // Setup
   const params = {
     alt: 'image',
     className: 'image',
     src: 'https://example.com/image.png'
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -26,5 +34,6 @@ it('should match the snapshot', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

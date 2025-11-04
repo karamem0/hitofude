@@ -8,9 +8,15 @@
 
 import { isEmpty } from './Folder';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 describe('isEmpty', () => {
 
   it('should get true when the folder is empty', () => {
+    // Setup
     const param = {
       folder: {
         id: 'foo',
@@ -22,11 +28,14 @@ describe('isEmpty', () => {
     const expected = {
       value: true
     };
+    // Execute
     const actual = isEmpty(param.folder, param.allFiles);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get true when the folder contains unsupported files', () => {
+    // Setup
     const param = {
       folder: {
         id: 'foo',
@@ -45,11 +54,14 @@ describe('isEmpty', () => {
     const expected = {
       value: true
     };
+    // Execute
     const actual = isEmpty(param.folder, param.allFiles);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get false when the folder contains subfolders', () => {
+    // Setup
     const param = {
       folder: {
         id: 'foo',
@@ -67,11 +79,14 @@ describe('isEmpty', () => {
     const expected = {
       value: false
     };
+    // Execute
     const actual = isEmpty(param.folder, param.allFiles);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get false when the folder contains supported files', () => {
+    // Setup
     const param = {
       folder: {
         id: 'foo',
@@ -90,11 +105,14 @@ describe('isEmpty', () => {
     const expected = {
       value: false
     };
+    // Execute
     const actual = isEmpty(param.folder, param.allFiles);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 
   it('should get false when the folder contains unsupported files but is configured to show all files', () => {
+    // Setup
     const param = {
       folder: {
         id: 'foo',
@@ -113,7 +131,9 @@ describe('isEmpty', () => {
     const expected = {
       value: false
     };
+    // Execute
     const actual = isEmpty(param.folder, param.allFiles);
+    // Assert
     expect(actual).toStrictEqual(expected.value);
   });
 

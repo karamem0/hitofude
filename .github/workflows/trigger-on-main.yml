@@ -1,4 +1,4 @@
-name: Trigger on develop
+name: Trigger on main
 
 on:
   push:

@@ -9,9 +9,10 @@
 import React from 'react';
 
 import IntlProvider from '../../../providers/IntlProvider';
-import Presenter from './ExplorerTabPanel.presenter';
 import ThemeProvider from '../../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
+
+import Presenter from './ExplorerTabPanel.presenter';
 
 vi.mock('./ExplorerFileTreeItem', () => ({
   default: ({ children }: React.PropsWithChildren<unknown>) => (
@@ -37,7 +38,13 @@ vi.mock('../../../common/components/TreeHeader', () => ({
   )
 }));
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the folder is not undedined', () => {
+  // Setup
   const params = {
     allFiles: true,
     fileConflicts: [],
@@ -55,6 +62,7 @@ it('should match the snapshot when the folder is not undedined', () => {
       ]
     }
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -62,15 +70,18 @@ it('should match the snapshot when the folder is not undedined', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the folder is undedined', () => {
+  // Setup
   const params = {
     allFiles: true,
     fileConflicts: [],
     selectedFolder: undefined
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -78,5 +89,6 @@ it('should match the snapshot when the folder is undedined', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

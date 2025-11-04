@@ -34,10 +34,11 @@ function MarkdownCodeRenderer(props: Readonly<React.PropsWithChildren<MarkdownCo
       return;
     }
     const element = children as React.ReactElement;
-    const className = element.props.className as string;
+    const props = element.props as Record<string, unknown>;
+    const className = props.className as string;
     const match = /language-(\w+)/.exec(className ?? '');
     const language = match?.at(1) ?? '';
-    const text = element.props.children as string;
+    const text = props.children as string;
     setState({
       language,
       text

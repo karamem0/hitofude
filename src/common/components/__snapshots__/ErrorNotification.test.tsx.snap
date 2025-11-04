@@ -11,11 +11,11 @@ exports[`should match the snapshot when the message is not undedined 1`] = `
 }
 
 <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
-      aria-labelledby="fui-r1"
+      aria-labelledby="fui-_r_1_"
       class="fui-MessageBar r2oyxsj emotion-0 ___hd2t6r0_1l4k1ej f13ftzij frd1ypx f1gyjrma fqyqtrt f18qd5xz"
       role="group"
     >
@@ -63,7 +63,7 @@ exports[`should match the snapshot when the message is not undedined 1`] = `
 exports[`should match the snapshot when the message is undedined 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_2_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   />
 </DocumentFragment>

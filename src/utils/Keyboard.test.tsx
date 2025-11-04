@@ -12,9 +12,15 @@ import { moveNext, movePrevious } from './Keyboard';
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 describe('moveNext', () => {
 
   it('should change focus to the next node', async () => {
+    // Setup
     const user = userEvent.setup();
     render(
       <div data-testid="test-Root">
@@ -25,11 +31,14 @@ describe('moveNext', () => {
     );
     await user.tab();
     await user.tab();
+    // Execute
     moveNext(screen.getByTestId('test-Root'), 'button');
+    // Assert
     expect(screen.getByTestId('test-Baz').matches(':focus')).toBe(true);
   });
 
   it('should not change focus when the last node is focused', async () => {
+    // Setup
     const user = userEvent.setup();
     render(
       <div data-testid="test-Root">
@@ -41,11 +50,14 @@ describe('moveNext', () => {
     await user.tab();
     await user.tab();
     await user.tab();
+    // Execute
     moveNext(screen.getByTestId('test-Root'), 'button');
+    // Assert
     expect(screen.getByTestId('test-Baz').matches(':focus')).toBe(true);
   });
 
   it('should not change focus when the node list is empty', async () => {
+    // Setup
     const user = userEvent.setup();
     render(
       <React.Fragment>
@@ -54,7 +66,9 @@ describe('moveNext', () => {
       </React.Fragment>
     );
     await user.tab();
+    // Execute
     moveNext(screen.getByTestId('test-Root'), 'button');
+    // Assert
     expect(screen.getByTestId('test-Foo').matches(':focus')).toBe(true);
   });
 
@@ -63,6 +77,7 @@ describe('moveNext', () => {
 describe('movePrevious', () => {
 
   it('should change focus to the previous node', async () => {
+    // Setup
     const user = userEvent.setup();
     render(
       <div data-testid="test-Root">
@@ -73,11 +88,14 @@ describe('movePrevious', () => {
     );
     await user.tab();
     await user.tab();
+    // Execute
     movePrevious(screen.getByTestId('test-Root'), 'button');
+    // Assert
     expect(screen.getByTestId('test-Foo').matches(':focus')).toBe(true);
   });
 
   it('should not change focus when the first node is focused', async () => {
+    // Setup
     const user = userEvent.setup();
     render(
       <div data-testid="test-Root">
@@ -87,11 +105,14 @@ describe('movePrevious', () => {
       </div>
     );
     await user.tab();
+    // Execute
     movePrevious(screen.getByTestId('test-Root'), 'button');
+    // Assert
     expect(screen.getByTestId('test-Foo').matches(':focus')).toBe(true);
   });
 
   it('should not change focus when the node list is empty', async () => {
+    // Setup
     const user = userEvent.setup();
     render(
       <React.Fragment>
@@ -100,7 +121,9 @@ describe('movePrevious', () => {
       </React.Fragment>
     );
     await user.tab();
+    // Execute
     movePrevious(screen.getByTestId('test-Root'), 'button');
+    // Assert
     expect(screen.getByTestId('test-Foo').matches(':focus')).toBe(true);
   });
 

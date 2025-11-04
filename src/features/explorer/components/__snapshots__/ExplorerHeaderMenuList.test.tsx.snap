@@ -8,7 +8,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
 }
 
 <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -18,7 +18,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
       role="menu"
     >
       <div
-        aria-labelledby="menu-groupr1"
+        aria-labelledby="menu-group_r_1_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -58,7 +58,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr2"
+        aria-labelledby="menu-group_r_2_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -98,7 +98,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr3"
+        aria-labelledby="menu-group_r_3_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -138,7 +138,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr4"
+        aria-labelledby="menu-group_r_4_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -207,7 +207,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr5"
+        aria-labelledby="menu-group_r_5_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -250,7 +250,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
 exports[`should match the snapshot when the folder is undefined 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr6 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_6_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   />
 </DocumentFragment>

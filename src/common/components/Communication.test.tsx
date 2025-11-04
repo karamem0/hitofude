@@ -9,16 +9,24 @@
 import React from 'react';
 
 import IntlProvider from '../../providers/IntlProvider';
-import Presenter from './Communication.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
+import Presenter from './Communication.presenter';
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot', () => {
+  // Setup
   const params = {
     description: 'Something went wrong',
     image: 'https://example.com/image.png',
     title: '500 Internal Server Error'
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -26,5 +34,6 @@ it('should match the snapshot', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
