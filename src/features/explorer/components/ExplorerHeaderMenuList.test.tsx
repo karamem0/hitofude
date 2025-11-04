@@ -8,12 +8,21 @@
 
 import React from 'react';
 
+import { Menu, MenuPopover } from '@fluentui/react-components';
 import IntlProvider from '../../../providers/IntlProvider';
-import Presenter from './ExplorerHeaderMenuList.presenter';
 import ThemeProvider from '../../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
+import Presenter from './ExplorerHeaderMenuList.presenter';
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the folder is not undefined', () => {
+  // Setup
+  const container = document.createElement('div');
   const params = {
     allFiles: true,
     selectedFolder: {
@@ -30,27 +39,51 @@ it('should match the snapshot when the folder is not undefined', () => {
       ]
     }
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
-        <Presenter {...params} />
+        <Menu
+          mountNode={container}
+          open>
+          <MenuPopover>
+            <Presenter {...params} />
+          </MenuPopover>
+        </Menu>
       </ThemeProvider>
-    </IntlProvider>
+    </IntlProvider>,
+    {
+      container
+    }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the folder is undefined', () => {
+  // Setup
+  const container = document.createElement('div');
   const params = {
     allFiles: true,
     selectedFolder: undefined
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
-        <Presenter {...params} />
+        <Menu
+          mountNode={container}
+          open>
+          <MenuPopover>
+            <Presenter {...params} />
+          </MenuPopover>
+        </Menu>
       </ThemeProvider>
-    </IntlProvider>
+    </IntlProvider>,
+    {
+      container
+    }
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

@@ -3,7 +3,7 @@
 exports[`should match the snapshot when the open is false 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr3 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_3_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   />
 </DocumentFragment>
@@ -24,10 +24,10 @@ exports[`should match the snapshot when the open is true 1`] = `
 }
 
 <aside
-    aria-labelledby="dialog-title-r2"
+    aria-labelledby="dialog-title-_r_1_"
     aria-modal="true"
     class="fui-OverlayDrawer r7dfyj8 emotion-0 ___xtj47k0_1v5b7dm fsqykmd f1e31b4d frppm18 fqofjzu f1euv43f"
-    data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r1","isOthersAccessible":false,"isTrapped":true}}"
+    data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-_r_2_","isOthersAccessible":false,"isTrapped":true}}"
     role="dialog"
     tabindex="-1"
   >
@@ -40,7 +40,7 @@ exports[`should match the snapshot when the open is true 1`] = `
       >
         <h2
           class="fui-DrawerHeaderTitle__heading fui-DialogTitle rxjm636"
-          id="dialog-title-r2"
+          id="dialog-title-_r_1_"
         >
           Side Panel
         </h2>
@@ -49,7 +49,7 @@ exports[`should match the snapshot when the open is true 1`] = `
         >
           <button
             aria-label="Close"
-            class="fui-Button r1alrhcs ___w3o4yv0_df8ghi0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fecsdlb fnwyq0v ft1hn21 fuxngvv fy5bs14 fsv2rcd f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1omzyqd f1dfjoow f1j98vj9 fj8yq94 f4xjyn1 f1et0tmh f9ddjv3 f1wi8ngl f18ktai2 fwbmr0d f44c6la"
+            class="fui-Button r1alrhcs ___1n7gl7d_1jsvaz6 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fecsdlb fnwyq0v ft1hn21 fuxngvv fy5bs14 fsv2rcd f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1omzyqd f1dfjoow f1j98vj9 fj8yq94 f1v3eptx fivsta0 fqfbdvs f1wfsnb3 f18ktai2 fwbmr0d f44c6la"
             type="button"
           >
             <span
@@ -88,7 +88,7 @@ exports[`should match the snapshot when the open is true 1`] = `
     hidden=""
   />
   <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <span

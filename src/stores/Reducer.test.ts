@@ -12,10 +12,19 @@ import { State } from '../types/Store';
 import { StorageService } from '../services/StorageService';
 import { reducer } from './Reducer';
 
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 describe('appendExplorerFile', () => {
 
   it('should update the state', () => {
+    // Setup
     const param = {
+      storage: {} as unknown as Storage,
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
       state: {
         explorerProps: {
           selectedFile: {
@@ -61,13 +70,19 @@ describe('appendExplorerFile', () => {
         }
       }
     } as State;
-    const target = reducer(new StorageService({} as unknown as Storage));
+    // Execute
+    const target = reducer(new StorageService(param.storage, param.accountId, param.tenantId));
     const actual = target(param.state, appendExplorerFile(param.data));
+    // Assert
     expect(actual).toStrictEqual(expected);
   });
 
   it('should not update the state when the payload is undefined', () => {
+    // Setup
     const param = {
+      storage: {} as unknown as Storage,
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
       state: {
         explorerProps: {
           selectedFile: {
@@ -106,8 +121,10 @@ describe('appendExplorerFile', () => {
         }
       }
     } as State;
-    const target = reducer(new StorageService({} as unknown as Storage));
+    // Execute
+    const target = reducer(new StorageService(param.storage, param.accountId, param.tenantId));
     const actual = target(param.state, appendExplorerFile(param.data));
+    // Assert
     expect(actual).toStrictEqual(expected);
   });
 
@@ -116,7 +133,11 @@ describe('appendExplorerFile', () => {
 describe('appendExplorerFolder', () => {
 
   it('should update the state', () => {
+    // Setup
     const param = {
+      storage: {} as unknown as Storage,
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
       state: {
         explorerProps: {
           selectedFile: {
@@ -162,13 +183,19 @@ describe('appendExplorerFolder', () => {
         }
       }
     } as State;
-    const target = reducer(new StorageService({} as unknown as Storage));
+    // Execute
+    const target = reducer(new StorageService(param.storage, param.accountId, param.tenantId));
     const actual = target(param.state, appendExplorerFolder(param.data));
+    // Assert
     expect(actual).toStrictEqual(expected);
   });
 
   it('should not update the state when the payload is undefined', () => {
+    // Setup
     const param = {
+      storage: {} as unknown as Storage,
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
       state: {
         explorerProps: {
           selectedFile: {
@@ -207,8 +234,10 @@ describe('appendExplorerFolder', () => {
         }
       }
     } as State;
-    const target = reducer(new StorageService({} as unknown as Storage));
+    // Execute
+    const target = reducer(new StorageService(param.storage, param.accountId, param.tenantId));
     const actual = target(param.state, appendExplorerFolder(param.data));
+    // Assert
     expect(actual).toStrictEqual(expected);
   });
 

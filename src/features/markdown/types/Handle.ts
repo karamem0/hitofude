@@ -11,5 +11,6 @@ export type MarkdownEditorCommand = () => void;
 export interface MarkdownEditorHandle {
   bold: MarkdownEditorCommand,
   italic: MarkdownEditorCommand,
+  strike: MarkdownEditorCommand,
   underline: MarkdownEditorCommand
 }

@@ -15,6 +15,7 @@ const messages = {
     Bold: { defaultMessage: 'Bold' },
     Footnotes: { defaultMessage: 'Footnotes' },
     Italic: { defaultMessage: 'Italic' },
+    Strikethrough: { defaultMessage: 'Strikethrough' },
     Underline: { defaultMessage: 'Underline' }
   })
 };

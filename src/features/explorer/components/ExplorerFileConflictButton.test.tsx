@@ -9,14 +9,22 @@
 import React from 'react';
 
 import IntlProvider from '../../../providers/IntlProvider';
-import Presenter from './ExplorerFileConflictButton.presenter';
 import ThemeProvider from '../../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
 
+import Presenter from './ExplorerFileConflictButton.presenter';
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the disabled is true', () => {
+  // Setup
   const params = {
     disabled: true
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -24,13 +32,16 @@ it('should match the snapshot when the disabled is true', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the disabled is false', () => {
+  // Setup
   const params = {
     disabled: false
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -38,5 +49,6 @@ it('should match the snapshot when the disabled is false', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });

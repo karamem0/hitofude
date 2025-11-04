@@ -3,7 +3,7 @@
 exports[`should match the snapshot when the open is false 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr3 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_3_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   />
 </DocumentFragment>
@@ -16,10 +16,10 @@ exports[`should match the snapshot when the open is true 1`] = `
     class="fui-DialogSurface__backdrop r1e18s3l"
   />
   <div
-    aria-labelledby="dialog-title-r2"
+    aria-labelledby="dialog-title-_r_1_"
     aria-modal="true"
     class="fui-DialogSurface r1u3t6p6"
-    data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-r1","isOthersAccessible":false,"isTrapped":true}}"
+    data-tabster="{"restorer":{"type":0},"modalizer":{"id":"modal-_r_2_","isOthersAccessible":false,"isTrapped":true}}"
     role="dialog"
     tabindex="-1"
   >
@@ -39,7 +39,7 @@ exports[`should match the snapshot when the open is true 1`] = `
     hidden=""
   />
   <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <span

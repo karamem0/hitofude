@@ -79,7 +79,7 @@ function ExplorerHeaderMenuList() {
           if (value == null) {
             throw new ArgumentNullError();
           }
-          const folder = await graph.getFolderById(value.id);
+          const folder = await graph.getFolderById(value.id, true);
           dispatch(setExplorerSelectedFolder(folder));
         } catch (error) {
           dispatch(setError(error as Error));

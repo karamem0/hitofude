@@ -142,6 +142,7 @@ export interface MarkdownProps {
 export type MarkdownToolbarAction =
   | 'bold'
   | 'italic'
+  | 'strike'
   | 'underline';
 
 export type ProgressType =

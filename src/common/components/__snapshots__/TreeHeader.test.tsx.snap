@@ -66,7 +66,7 @@ exports[`should match the snapshot when the menu is opened 1`] = `
 }
 
 <div
-    class="fui-FluentProvider fui-FluentProviderr4 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_4_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -105,8 +105,8 @@ exports[`should match the snapshot when the menu is opened 1`] = `
         aria-expanded="true"
         aria-haspopup="menu"
         aria-label="More option"
-        class="fui-Button r1alrhcs emotion-4 ___cpe5h10_1yhfyj7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3 f18ktai2 fwbmr0d f44c6la"
-        id="menur5"
+        class="fui-Button r1alrhcs emotion-4 ___y6j8zu0_4tg1lt0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 fxoo9op f1v3eptx f11slz88 fqfbdvs f18ktai2 fwbmr0d f44c6la"
+        id="menu_r_5_"
         role="button"
         tabindex="0"
         title="More option"
@@ -137,7 +137,7 @@ exports[`should match the snapshot when the menu is opened 1`] = `
     </div>
   </div>
   <div
-    class="fui-MenuPopover ___152dg9n_2cbp180 ft85np5 fxugw4r f19n0e5 f1ewtqcl fl8fusi f1kaai3v f1p9o1ba f1ahpp82 f1hg901r fd3pd8h f9ggezi fk6fouc fkhj508 figsok6 f1i3iumi f18k4bn6 fo1kyvf fetxo7e f8x1vz1 f8g0anz fezwn9i fz5efge f1ydixl4 f8dgqj5 fnyfnr8 fgw77r4 f1noc5he fi19xcv f1mxk9aa ffzg62k"
+    class="fui-MenuPopover ___1gc0quk_1jdftlb ft85np5 fxugw4r f19n0e5 f1ewtqcl fl8fusi f1kaai3v f1p9o1ba f1ahpp82 f1hg901r fd3pd8h f9ggezi fk6fouc fkhj508 figsok6 f1i3iumi f18k4bn6 fo1kyvf fetxo7e f8x1vz1 f8g0anz fezwn9i fz5efge f1ydixl4 f8dgqj5 fnyfnr8 fgw77r4 f1noc5he f1k46bua f1lhuzxm f1f9qikc"
     data-popper-escaped=""
     data-popper-placement="bottom-start"
     data-popper-reference-hidden=""
@@ -204,7 +204,7 @@ exports[`should match the snapshot when the root is false 1`] = `
 }
 
 <div
-    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_2_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -212,7 +212,7 @@ exports[`should match the snapshot when the root is false 1`] = `
     >
       <button
         aria-label="Back"
-        class="fui-Button r1alrhcs emotion-1 ___cpe5h10_1yhfyj7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3 f18ktai2 fwbmr0d f44c6la"
+        class="fui-Button r1alrhcs emotion-1 ___y6j8zu0_4tg1lt0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 fxoo9op f1v3eptx f11slz88 fqfbdvs f18ktai2 fwbmr0d f44c6la"
         tabindex="0"
         title="Back"
         type="button"
@@ -250,8 +250,8 @@ exports[`should match the snapshot when the root is false 1`] = `
       <button
         aria-haspopup="menu"
         aria-label="More option"
-        class="fui-Button r1alrhcs emotion-1 ___cpe5h10_1yhfyj7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3 f18ktai2 fwbmr0d f44c6la"
-        id="menur3"
+        class="fui-Button r1alrhcs emotion-1 ___y6j8zu0_4tg1lt0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 fxoo9op f1v3eptx f11slz88 fqfbdvs f18ktai2 fwbmr0d f44c6la"
+        id="menu_r_3_"
         role="button"
         tabindex="0"
         title="More option"
@@ -347,7 +347,7 @@ exports[`should match the snapshot when the root is true 1`] = `
 }
 
 <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -385,8 +385,8 @@ exports[`should match the snapshot when the root is true 1`] = `
       <button
         aria-haspopup="menu"
         aria-label="More option"
-        class="fui-Button r1alrhcs emotion-4 ___cpe5h10_1yhfyj7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 f1tme0vf f4xjyn1 f18onu3q f9ddjv3 f18ktai2 fwbmr0d f44c6la"
-        id="menur1"
+        class="fui-Button r1alrhcs emotion-4 ___y6j8zu0_4tg1lt0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fwiml72 f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1fg1p5m f1dfjoow f1j98vj9 fxoo9op f1v3eptx f11slz88 fqfbdvs f18ktai2 fwbmr0d f44c6la"
+        id="menu_r_1_"
         role="button"
         tabindex="0"
         title="More option"

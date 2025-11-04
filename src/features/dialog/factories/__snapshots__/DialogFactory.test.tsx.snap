@@ -3,7 +3,7 @@
 exports[`should match the snapshot when the type is changeTheme 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -16,7 +16,7 @@ exports[`should match the snapshot when the type is changeTheme 1`] = `
 exports[`should match the snapshot when the type is copyFile 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr1 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_1_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -29,7 +29,7 @@ exports[`should match the snapshot when the type is copyFile 1`] = `
 exports[`should match the snapshot when the type is copyLink 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_2_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -42,7 +42,7 @@ exports[`should match the snapshot when the type is copyLink 1`] = `
 exports[`should match the snapshot when the type is createFile 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr3 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_3_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -55,7 +55,7 @@ exports[`should match the snapshot when the type is createFile 1`] = `
 exports[`should match the snapshot when the type is createFolder 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr4 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_4_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -68,7 +68,7 @@ exports[`should match the snapshot when the type is createFolder 1`] = `
 exports[`should match the snapshot when the type is deleteFile 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr5 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_5_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -81,7 +81,7 @@ exports[`should match the snapshot when the type is deleteFile 1`] = `
 exports[`should match the snapshot when the type is deleteFolder 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr6 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_6_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -94,7 +94,7 @@ exports[`should match the snapshot when the type is deleteFolder 1`] = `
 exports[`should match the snapshot when the type is overwriteFile 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr7 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_7_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -107,7 +107,7 @@ exports[`should match the snapshot when the type is overwriteFile 1`] = `
 exports[`should match the snapshot when the type is renameFile 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr8 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_8_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -120,7 +120,7 @@ exports[`should match the snapshot when the type is renameFile 1`] = `
 exports[`should match the snapshot when the type is renameFolder 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderra ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_a_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -133,7 +133,7 @@ exports[`should match the snapshot when the type is renameFolder 1`] = `
 exports[`should match the snapshot when the type is restoreFile 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr9 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_9_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -146,7 +146,7 @@ exports[`should match the snapshot when the type is restoreFile 1`] = `
 exports[`should match the snapshot when the type is undefined 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderrb ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_b_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   />
 </DocumentFragment>

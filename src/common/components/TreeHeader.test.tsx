@@ -10,11 +10,18 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 import IntlProvider from '../../providers/IntlProvider';
-import Presenter from './TreeHeader.presenter';
 import ThemeProvider from '../../providers/ThemeProvider';
 import userEvent from '@testing-library/user-event';
 
+import Presenter from './TreeHeader.presenter';
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+});
+
 it('should match the snapshot when the root is true', () => {
+  // Setup
   const params = {
     name: 'Explorer',
     menu: (
@@ -22,6 +29,7 @@ it('should match the snapshot when the root is true', () => {
     ),
     root: true
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -29,10 +37,12 @@ it('should match the snapshot when the root is true', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the root is false', () => {
+  // Setup
   const params = {
     name: 'Explorer',
     menu: (
@@ -40,6 +50,7 @@ it('should match the snapshot when the root is false', () => {
     ),
     root: false
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -47,10 +58,12 @@ it('should match the snapshot when the root is false', () => {
       </ThemeProvider>
     </IntlProvider>
   );
+  // Assert
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should match the snapshot when the menu is opened', async () => {
+  // Setup
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
@@ -61,6 +74,7 @@ it('should match the snapshot when the menu is opened', async () => {
     mountNode: container,
     root: true
   };
+  // Execute
   const { asFragment } = render(
     <IntlProvider>
       <ThemeProvider>
@@ -72,6 +86,7 @@ it('should match the snapshot when the menu is opened', async () => {
     }
   );
   await user.click(screen.getByTitle('More option'));
+  // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTestId('test-Menu')).toBeInTheDocument();
 });

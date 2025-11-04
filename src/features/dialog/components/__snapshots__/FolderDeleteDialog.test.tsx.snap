@@ -49,11 +49,11 @@ exports[`should match the snapshot when the loading is false 1`] = `
         </div>
       </div>
       <div
-        class="fui-DialogActions rhfpeu0 ___pj8zjl0_1y84z0u f1a7i8kp fd46tj4 fsyjsko f1f41i0t f1jaqex3 f2ao6jk"
+        class="fui-DialogActions rhfpeu0 ___1w6yguj_o4tqhn0 f1a7i8kp fd46tj4 fsyjsko f1n00o3b f1mvsp37 flbz1vp"
       >
         <button
           aria-label="OK"
-          class="fui-Button r1alrhcs ___1akj6hk_ih97uj0 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl fecsdlb f1rq72xc fnp9lpt f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1d6v5y2 f1rirnrt f1uu00uk fkvaka8 f1ux7til f9a0qzu f1lkg8j3 fkc42ay fq7113v ff1wgvm fiob0tu f1j6scgf f1x4h75k f4xjyn1 fbgcvur f1ks1yx8 f1o6qegi fcnxywj fmxjhhp f9ddjv3 f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv f12k37oa fr96u23"
+          class="fui-Button r1alrhcs ___lkb4hm0_1iawwqv ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl fecsdlb f1rq72xc fnp9lpt f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1d6v5y2 f1nz3ub2 fag2qd2 fmvhcg7 f1o3dhpw f14bpyus fqc85l4 f1h3a8gf fkiggi6 f8gmj8i f1ap8nzx f1igan7k fjag8bx f1v3eptx fpelvsg f1r9enuy fdvt4n0 f1l34yyb f1grx941 fqfbdvs f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5"
           title="OK"
           type="button"
         >
@@ -75,7 +75,7 @@ exports[`should match the snapshot when the loading is false 1`] = `
     hidden=""
   />
   <div
-    class="fui-FluentProvider fui-FluentProviderr2 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_2_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -138,11 +138,11 @@ exports[`should match the snapshot when the loading is true 1`] = `
         </div>
       </div>
       <div
-        class="fui-DialogActions rhfpeu0 ___pj8zjl0_1y84z0u f1a7i8kp fd46tj4 fsyjsko f1f41i0t f1jaqex3 f2ao6jk"
+        class="fui-DialogActions rhfpeu0 ___1w6yguj_o4tqhn0 f1a7i8kp fd46tj4 fsyjsko f1n00o3b f1mvsp37 flbz1vp"
       >
         <button
           aria-label="OK"
-          class="fui-Button r1alrhcs ___lwxuac0_1ursfbr f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1t6o4dc f1h0usnq fs4ktlq f16h9ulv fx2bmrt fcvwxyo f4lkoma fg455y9 f1rvyvqg f1cwzwz f14g86mu f1dcs8yz fkc42ay f1vmkb5g f53ppgq f1663y11 f18v5270 f80fkiy f1kc2mi9 f1y0svfh fihuait fnxhupq fx507ft fyd6l6x fb3rf2x fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq f8w4c43 f1ol4fw6 f1q1lw4e f1dwjv2g fuigjrg fjwq6ea f1lr3nhc fn5gmvv f1mbxvi6 f4dhi0o fequ9m0 f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv f12k37oa fr96u23"
+          class="fui-Button r1alrhcs ___jiv9070_dxr8m30 f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1t6o4dc f1h0usnq fs4ktlq f16h9ulv fx2bmrt fcvwxyo f14ptb23 f9dbb4x f3qs60o fwd1oij f5u9ap2 f1cyfu5x f1h3a8gf fj8k9ua fifrq0d f196mwp7 f1l6uprw fnekfq fa9u7a5 f1xxg0vq f16oldlo f17g64ui fjvf891 fqbrke7 f1efp33f fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq f8w4c43 f1ol4fw6 f1q1lw4e f1dwjv2g f127ot8j f19etb0b f4f984j f3d22hf fw441p0 f1m71e0y f1gue8i f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5"
           disabled=""
           title="OK"
           type="button"
@@ -165,7 +165,7 @@ exports[`should match the snapshot when the loading is true 1`] = `
     hidden=""
   />
   <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div

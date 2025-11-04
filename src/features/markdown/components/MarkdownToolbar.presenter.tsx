@@ -11,6 +11,7 @@ import React from 'react';
 import {
   TextBold16Regular,
   TextItalic16Regular,
+  TextStrikethrough16Regular,
   TextUnderline16Regular
 } from '@fluentui/react-icons';
 import { Toolbar, ToolbarButton } from '@fluentui/react-components';
@@ -62,6 +63,13 @@ function MarkdownToolbar(props: Readonly<MarkdownToolbarProps>) {
             <TextUnderline16Regular />
           )}
           onClick={(event) => onClick?.(event, 'underline')} />
+        <ToolbarButton
+          aria-label={intl.formatMessage(messages.Strikethrough)}
+          title={intl.formatMessage(messages.Strikethrough)}
+          icon={(
+            <TextStrikethrough16Regular />
+          )}
+          onClick={(event) => onClick?.(event, 'strike')} />
       </Toolbar>
     </div>
   );

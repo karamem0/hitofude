@@ -8,17 +8,18 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
 }
 
 <div
-    class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
-    dir="ltr"
+    class="fui-MenuPopover ___1gc0quk_1jdftlb ft85np5 fxugw4r f19n0e5 f1ewtqcl fl8fusi f1kaai3v f1p9o1ba f1ahpp82 f1hg901r fd3pd8h f9ggezi fk6fouc fkhj508 figsok6 f1i3iumi f18k4bn6 fo1kyvf fetxo7e f8x1vz1 f8g0anz fezwn9i fz5efge f1ydixl4 f8dgqj5 fnyfnr8 fgw77r4 f1noc5he f1k46bua f1lhuzxm f1f9qikc"
+    data-tabster="{"restorer":{"type":0}}"
+    role="presentation"
   >
     <div
-      aria-labelledby=""
-      class="fui-MenuList ___1rlijet_kivkug0 f22iagw f1vx9l62 f1t6b6ee"
+      aria-labelledby="menu_r_1_"
+      class="fui-MenuList ___1cyqkw0_k0y38j0 f22iagw f1vx9l62 f1t6b6ee f1l02sjl"
       data-tabster="{"mover":{"cyclic":true,"direction":1,"memorizeCurrent":true}}"
       role="menu"
     >
       <div
-        aria-labelledby="menu-groupr1"
+        aria-labelledby="menu-group_r_2_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -58,7 +59,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr2"
+        aria-labelledby="menu-group_r_3_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -98,7 +99,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr3"
+        aria-labelledby="menu-group_r_4_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -138,7 +139,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr4"
+        aria-labelledby="menu-group_r_5_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -207,7 +208,7 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
         role="presentation"
       />
       <div
-        aria-labelledby="menu-groupr5"
+        aria-labelledby="menu-group_r_6_"
         class="fui-MenuGroup"
         role="group"
       >
@@ -244,14 +245,37 @@ exports[`should match the snapshot when the folder is not undefined 1`] = `
       </div>
     </div>
   </div>
+  <span
+    hidden=""
+  />
+  <div
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <span
+      hidden=""
+    />
+  </div>
 </DocumentFragment>
 `;
 
 exports[`should match the snapshot when the folder is undefined 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProviderr6 ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
-    dir="ltr"
+    class="fui-MenuPopover ___1gc0quk_1jdftlb ft85np5 fxugw4r f19n0e5 f1ewtqcl fl8fusi f1kaai3v f1p9o1ba f1ahpp82 f1hg901r fd3pd8h f9ggezi fk6fouc fkhj508 figsok6 f1i3iumi f18k4bn6 fo1kyvf fetxo7e f8x1vz1 f8g0anz fezwn9i fz5efge f1ydixl4 f8dgqj5 fnyfnr8 fgw77r4 f1noc5he f1k46bua f1lhuzxm f1f9qikc"
+    data-tabster="{"restorer":{"type":0}}"
+    role="presentation"
   />
+  <span
+    hidden=""
+  />
+  <div
+    class="fui-FluentProvider fui-FluentProvider_r_7_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <span
+      hidden=""
+    />
+  </div>
 </DocumentFragment>
 `;

@@ -63,7 +63,7 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     themeName
   } = useTheme();
   const editorRef = React.useRef<HTMLDivElement>(null);
-  const monacoRef = React.useRef<monaco.editor.IStandaloneCodeEditor>();
+  const monacoRef = React.useRef<monaco.editor.IStandaloneCodeEditor>(null);
 
   const handleEditBold = React.useCallback(() => {
     const { current: monacoEl } = monacoRef;
@@ -78,11 +78,20 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     if (selection == null) {
       return;
     }
+    const eol = model.getEOL();
     const text = model.getValueInRange(selection);
+    const lines = text.split(eol);
+    for (let index = 0; index < lines.length; index++) {
+      const line = lines[index];
+      if (line.length > 0) {
+        const match = /^\*\*(.*)\*\*$/.exec(line);
+        lines[index] = match ? match[1] : `**${line}**`;
+      }
+    }
     monacoEl.executeEdits('', [
       {
         range: selection,
-        text: `**${text}**`
+        text: lines.join(eol)
       }
     ]);
   }, []);
@@ -100,11 +109,51 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     if (selection == null) {
       return;
     }
+    const eol = model.getEOL();
     const text = model.getValueInRange(selection);
+    const lines = text.split(eol);
+    for (let index = 0; index < lines.length; index++) {
+      const line = lines[index];
+      if (line.length > 0) {
+        const match = /^\*(.*)\*$/.exec(line);
+        lines[index] = match ? match[1] : `*${line}*`;
+      }
+    }
     monacoEl.executeEdits('', [
       {
         range: selection,
-        text: `*${text}*`
+        text: lines.join(eol)
+      }
+    ]);
+  }, []);
+
+  const handleEditStrike = React.useCallback(() => {
+    const { current: monacoEl } = monacoRef;
+    if (monacoEl == null) {
+      return;
+    }
+    const model = monacoEl.getModel();
+    if (model == null) {
+      return;
+    }
+    const selection = monacoEl.getSelection();
+    if (selection == null) {
+      return;
+    }
+    const eol = model.getEOL();
+    const text = model.getValueInRange(selection);
+    const lines = text.split(eol);
+    for (let index = 0; index < lines.length; index++) {
+      const line = lines[index];
+      if (line.length > 0) {
+        const match = /^~(.*)~$/.exec(line);
+        lines[index] = match ? match[1] : `~${line}~`;
+      }
+    }
+    monacoEl.executeEdits('', [
+      {
+        range: selection,
+        text: lines.join(eol)
       }
     ]);
   }, []);
@@ -122,11 +171,20 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     if (selection == null) {
       return;
     }
+    const eol = model.getEOL();
     const text = model.getValueInRange(selection);
+    const lines = text.split(eol);
+    for (let index = 0; index < lines.length; index++) {
+      const line = lines[index];
+      if (line.length > 0) {
+        const match = /^<u>(.*)<\/u>$/.exec(line);
+        lines[index] = match ? match[1] : `<u>${line}</u>`;
+      }
+    }
     monacoEl.executeEdits('', [
       {
         range: selection,
-        text: `<u>${text}</u>`
+        text: lines.join(eol)
       }
     ]);
   }, []);
@@ -325,11 +383,13 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
     return {
       bold: handleEditBold,
       italic: handleEditItalic,
+      strike: handleEditStrike,
       underline: handleEditUnderline
     };
   }, [
     handleEditBold,
     handleEditItalic,
+    handleEditStrike,
     handleEditUnderline
   ]);
 

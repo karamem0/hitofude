@@ -9,7 +9,6 @@
 import React from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Communication from '../../../common/components/Communication';
 import { Text } from '@fluentui/react-components';
 import { css } from '@emotion/react';
@@ -23,19 +22,15 @@ function Error500Page() {
 
   return (
     <React.Fragment>
-      <HelmetProvider>
-        <Helmet>
-          <meta
-            content={intl.formatMessage(messages.AppCreator)}
-            name="author" />
-          <meta
-            content={intl.formatMessage(messages.AppDescription)}
-            name="description" />
-          <title>
-            {`${intl.formatMessage(messages.Error404Title)} - ${intl.formatMessage(messages.AppTitle)}`}
-          </title>
-        </Helmet>
-      </HelmetProvider>
+      <meta
+        content={intl.formatMessage(messages.AppCreator)}
+        name="author" />
+      <meta
+        content={intl.formatMessage(messages.AppDescription)}
+        name="description" />
+      <title>
+        {`${intl.formatMessage(messages.Error404Title)} - ${intl.formatMessage(messages.AppTitle)}`}
+      </title>
       <div
         css={css`
           display: flex;

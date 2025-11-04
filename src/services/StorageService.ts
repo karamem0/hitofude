@@ -12,127 +12,133 @@ export class StorageService {
 
   private readonly storage: Storage;
 
-  constructor(storage: Storage = localStorage) {
+  private readonly accountId: string;
+
+  private readonly tenantId: string;
+
+  constructor(storage: Storage = localStorage, accountId: string, tenantId: string) {
     this.storage = storage;
+    this.accountId = accountId;
+    this.tenantId = tenantId;
   }
 
   getContentShowMinimap(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('contentShowMinimap') ?? undefined));
+    return Boolean(Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.contentShowMinimap`) ?? undefined));
   }
 
   getContentShowPreview(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('contentShowPreview') ?? undefined));
+    return Boolean(Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.contentShowPreview`) ?? undefined));
   }
 
   getContentSyncScroll(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('contentSyncScroll') ?? undefined));
+    return Boolean(Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.contentSyncScroll`) ?? undefined));
   }
 
   getContentWordWrap(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('contentWordWrap') ?? undefined));
+    return Boolean(Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.contentWordWrap`) ?? undefined));
   }
 
   getExplorerAllFiles(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('explorerAllFiles') ?? undefined));
+    return Boolean(Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.explorerAllFiles`) ?? undefined));
   }
 
   getExplorerFileId(): string | undefined {
-    return this.storage.getItem('explorerFileId') ?? undefined;
+    return this.storage.getItem(`${this.accountId}.${this.tenantId}.explorerFileId`) ?? undefined;
   }
 
   getExplorerFolderId(): string | undefined {
-    return this.storage.getItem('explorerFolderId') ?? undefined;
+    return this.storage.getItem(`${this.accountId}.${this.tenantId}.explorerFolderId`) ?? undefined;
   }
 
   getTabOpen(): boolean | undefined {
-    return Boolean(Number(this.storage.getItem('tabOpen') ?? true));
+    return Boolean(Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.tabOpen`) ?? true));
   }
 
   getTabType(): TabType | undefined {
-    return Number(this.storage.getItem('tabType') ?? TabType.explorer);
+    return Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.tabType`) ?? TabType.explorer);
   }
 
   getThemeName(): ThemeName | undefined {
-    return Number(this.storage.getItem('themeName') ?? ThemeName.light);
+    return Number(this.storage.getItem(`${this.accountId}.${this.tenantId}.themeName`) ?? ThemeName.light);
   }
 
   setContentShowMinimap(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('contentShowMinimap', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.contentShowMinimap`, String(Number(value)));
     } else {
-      this.storage.removeItem('contentShowMinimap');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.contentShowMinimap`);
     }
   }
 
   setContentShowPreview(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('contentShowPreview', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.contentShowPreview`, String(Number(value)));
     } else {
-      this.storage.removeItem('contentShowPreview');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.contentShowPreview`);
     }
   }
 
   setContentSyncScroll(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('contentSyncScroll', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.contentSyncScroll`, String(Number(value)));
     } else {
-      this.storage.removeItem('contentSyncScroll');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.contentSyncScroll`);
     }
   }
 
   setContentWordWrap(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('contentWordWrap', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.contentWordWrap`, String(Number(value)));
     } else {
-      this.storage.removeItem('contentWordWrap');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.contentWordWrap`);
     }
   }
 
   setExplorerAllFiles(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('explorerAllFiles', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.explorerAllFiles`, String(Number(value)));
     } else {
-      this.storage.removeItem('explorerAllFiles');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.explorerAllFiles`);
     }
   }
 
   setExplorerFileId(value?: string): void {
     if (value != null) {
-      this.storage.setItem('explorerFileId', value);
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.explorerFileId`, value);
     } else {
-      this.storage.removeItem('explorerFileId');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.explorerFileId`);
     }
   }
 
   setExplorerFolderId(value?: string): void {
     if (value != null) {
-      this.storage.setItem('explorerFolderId', value);
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.explorerFolderId`, value);
     } else {
-      this.storage.removeItem('explorerFolderId');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.explorerFolderId`);
     }
   }
 
   setTabOpen(value?: boolean): void {
     if (value != null) {
-      this.storage.setItem('tabOpen', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.tabOpen`, String(Number(value)));
     } else {
-      this.storage.removeItem('tabOpen');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.tabOpen`);
     }
   }
 
   setTabType(value?: TabType): void {
     if (value != null) {
-      this.storage.setItem('tabType', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.tabType`, String(Number(value)));
     } else {
-      this.storage.removeItem('tabType');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.tabType`);
     }
   }
 
   setThemeName(value?: ThemeName): void {
     if (value != null) {
-      this.storage.setItem('themeName', String(Number(value)));
+      this.storage.setItem(`${this.accountId}.${this.tenantId}.themeName`, String(Number(value)));
     } else {
-      this.storage.removeItem('themeName');
+      this.storage.removeItem(`${this.accountId}.${this.tenantId}.themeName`);
     }
   }
 
