@@ -1,23 +1,27 @@
 {
-	"name": "Ubuntu",
-	"image": "mcr.microsoft.com/devcontainers/base:noble",
+  "name": "Ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/base:noble",
   "features": {
     "ghcr.io/devcontainers/features/git-lfs:1": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "22.21.1"
     }
   },
-  "postCreateCommand": "npm install -g npm-check-updates",
+  "postCreateCommand": {
+    "npm-check-updates": "npm install -g npm-check-updates"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
-        "dbaeumer.vscode-eslint",
         "editorconfig.editorconfig",
         "github.vscode-github-actions",
-        "ms-azuretools.vscode-azureappservice",
         "redhat.vscode-yaml",
         "redhat.vscode-xml",
         "styled-components.vscode-styled-components"
-      ]
+      ],
+      "settings": {
+        "redhat.telemetry.enabled": false
+      }
     }
-  }}
+  }
+}
