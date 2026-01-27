@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,18 +8,16 @@
 
 import React from 'react';
 
-import { File, TabType } from '../../../types/Model';
-import {
-  removeExplorerFile,
-  setDialogAction,
-  setError
-} from '../../../stores/Action';
-import { DependencyNullError } from '../../../types/Error';
-import Presenter from './FileDeleteDialog.presenter';
-import { isMarkdown } from '../../../utils/File';
+import { useToast } from '../../../common/providers/ToastProvider';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { removeExplorerFile, setDialogAction } from '../../../stores/Action';
+import { DependencyNullError } from '../../../types/Error';
+import { File, TabType } from '../../../types/Model';
+import { isMarkdown } from '../../../utils/File';
+
+import Presenter from './FileDeleteDialog.presenter';
 
 interface FileDeleteDialogProps {
   value?: File
@@ -37,6 +35,7 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async () => {
@@ -58,13 +57,17 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
           .filter((item) => item.id !== value.id)
           .at(-1);
         route.setParams({
-          tab: TabType.explorer,
+          file: file?.id,
           folder: selectedFolder.id,
-          file: file?.id
+          tab: TabType.explorer
         });
       }
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
@@ -76,7 +79,8 @@ function FileDeleteDialog(props: Readonly<FileDeleteDialogProps>) {
     graph,
     route,
     value,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

@@ -1,16 +1,12 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import {
-  Action,
-  InitialState,
-  State
-} from '../types/Store';
+import { StorageService } from '../services/StorageService';
 import {
   DialogAction,
   File,
@@ -20,7 +16,11 @@ import {
   SidePanelAction,
   TabType
 } from '../types/Model';
-import { StorageService } from '../services/StorageService';
+import {
+  Action,
+  InitialState,
+  State
+} from '../types/Store';
 import { compare } from '../utils/String';
 
 const actions = (storage: StorageService) => ({
@@ -270,13 +270,6 @@ const actions = (storage: StorageService) => ({
     return {
       ...state,
       dialogAction: data
-    };
-  },
-  setError: (state: State, payload: unknown) => {
-    const data = payload as Error | undefined;
-    return {
-      ...state,
-      error: data
     };
   },
   setExplorerAllFiles: (state: State, payload: unknown) => {

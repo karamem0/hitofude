@@ -1,19 +1,19 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+import { CacheRepository } from '../repositories/CacheRepository';
+import { GraphRepository } from '../repositories/GraphRepository';
+import { FolderNotFoundError } from '../types/Error';
 import {
   File,
   FileVersion,
   Folder
 } from '../types/Model';
-import { CacheRepository } from '../repositories/CacheRepository';
-import { FolderNotFoundError } from '../types/Error';
-import { GraphRepository } from '../repositories/GraphRepository';
 
 export class GraphService {
 

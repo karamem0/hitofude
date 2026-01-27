@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,6 +8,13 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+import {
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList
+} from '@fluentui/react-components';
 import {
   ArrowDownload16Regular,
   Copy16Regular,
@@ -15,17 +22,10 @@ import {
   Link16Regular,
   Rename16Regular
 } from '@fluentui/react-icons';
-import { ExplorerMenuAction, File } from '../../../types/Model';
-import {
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList
-} from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
-import { FormattedMessage } from 'react-intl';
 import { GrOnedrive } from 'react-icons/gr';
-import { css } from '@emotion/react';
+import { FormattedMessage } from 'react-intl';
+import { EventHandler } from '../../../types/Event';
+import { ExplorerMenuAction, File } from '../../../types/Model';
 import { isMarkdown } from '../../../utils/File';
 import messages from '../messages';
 
@@ -54,8 +54,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               <Copy16Regular />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'copyFile',
-              data: file
+              data: file,
+              type: 'copyFile'
             })}>
             <FormattedMessage {...messages.CopyFile} />
           </MenuItem>
@@ -65,8 +65,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               <Link16Regular />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'copyLink',
-              data: file
+              data: file,
+              type: 'copyLink'
             })}>
             <FormattedMessage {...messages.CopyLink} />
           </MenuItem>
@@ -83,8 +83,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'renameFile',
-              data: file
+              data: file,
+              type: 'renameFile'
             })}>
             <FormattedMessage {...messages.RenameFile} />
           </MenuItem>
@@ -94,8 +94,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               <Delete16Regular />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'deleteFile',
-              data: file
+              data: file,
+              type: 'deleteFile'
             })}>
             <FormattedMessage {...messages.DeleteFile} />
           </MenuItem>
@@ -108,8 +108,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               <ArrowDownload16Regular />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'downloadFile',
-              data: file
+              data: file,
+              type: 'downloadFile'
             })}>
             <FormattedMessage {...messages.Download} />
           </MenuItem>
@@ -126,8 +126,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'openWithOneDrive',
-              data: file
+              data: file,
+              type: 'openWithOneDrive'
             })}>
             <FormattedMessage {...messages.OpenWithOneDrive} />
           </MenuItem>
@@ -142,8 +142,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               <Link16Regular />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'copyLink',
-              data: file
+              data: file,
+              type: 'copyLink'
             })}>
             <FormattedMessage {...messages.CopyLink} />
           </MenuItem>
@@ -156,8 +156,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               <ArrowDownload16Regular />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'downloadFile',
-              data: file
+              data: file,
+              type: 'downloadFile'
             })}>
             <FormattedMessage {...messages.Download} />
           </MenuItem>
@@ -174,8 +174,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
               `} />
             )}
             onClick={(event) => onMenuClick?.(event, {
-              type: 'openWithOneDrive',
-              data: file
+              data: file,
+              type: 'openWithOneDrive'
             })}>
             <FormattedMessage {...messages.OpenWithOneDrive} />
           </MenuItem>

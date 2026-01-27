@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -28,12 +28,12 @@ const messages = {
     Light: { defaultMessage: 'Light' },
     Link: { defaultMessage: 'Link' },
     LinkCopied: { defaultMessage: 'Link copied' },
+    NewFile: { defaultMessage: 'New file' },
+    NewFolder: { defaultMessage: 'New folder' },
     No: { defaultMessage: 'No' },
     OK: { defaultMessage: 'OK' },
     OverwriteFile: { defaultMessage: 'Overwrite file' },
     OverwriteFileConfirm: { defaultMessage: 'Are you sure to overwrite file?' },
-    NewFile: { defaultMessage: 'New file' },
-    NewFolder: { defaultMessage: 'New folder' },
     RenameFile: { defaultMessage: 'Rename file' },
     RenameFolder: { defaultMessage: 'Rename folder' },
     RestoreFile: { defaultMessage: 'Restore file' },

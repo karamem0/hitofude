@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,19 +8,20 @@
 
 import React from 'react';
 
-import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentFile,
   setDialogAction,
-  setError,
   updateExplorerFile
 } from '../../../stores/Action';
+import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import { FileRenameDialogFormState } from '../types/Form';
+
 import Presenter from './FileRenameDialog.presenter';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 
 interface FileRenameDialogProps {
   value?: File
@@ -37,6 +38,7 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async (_: Event, data?: FileRenameDialogFormState) => {
@@ -62,7 +64,11 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
         }));
       }
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
@@ -70,7 +76,8 @@ function FileRenameDialog(props: Readonly<FileRenameDialogProps>) {
   }, [
     contentProps?.file,
     graph,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

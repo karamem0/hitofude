@@ -1,40 +1,41 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
-import {
-  File,
-  FileVersion,
-  Folder
-} from '../types/Model';
-import { PojosMetadataMap, pojos } from '@automapper/pojos';
 import {
   createMap,
   createMapper,
   forMember,
   mapFrom
 } from '@automapper/core';
+import { PojosMetadataMap, pojos } from '@automapper/pojos';
+import { DriveItem, DriveItemVersion } from '@microsoft/microsoft-graph-types';
+import {
+  File,
+  FileVersion,
+  Folder
+} from '../types/Model';
+import { toDate } from '../utils/Date';
 import {
   getBaseName,
   getExtension,
   getMimeType
 } from '../utils/File';
-import { toDate } from '../utils/Date';
 
 export const mapper = createMapper({
   strategyInitializer: pojos()
 });
 
 PojosMetadataMap.create<DriveItem>('DriveItem', {
-  id: String,
-  name: String,
   createdDateTime: String,
+  id: String,
   lastModifiedDateTime: String,
+  name: String,
+  size: Number,
   webUrl: String
 });
 
@@ -45,34 +46,35 @@ PojosMetadataMap.create<DriveItemVersion>('DriveItemVersion', {
 });
 
 PojosMetadataMap.create<File>('File', {
-  id: String,
-  fullName: String,
   baseName: String,
-  extension: String,
-  mimeType: 'MimeType',
   createdDate: Date,
-  updatedDate: Date,
-  webUrl: String,
   downloadUrl: String,
-  parentId: String
+  extension: String,
+  fullName: String,
+  id: String,
+  mimeType: 'MimeType',
+  parentId: String,
+  size: Number,
+  updatedDate: Date,
+  webUrl: String
 });
 
 PojosMetadataMap.create<FileVersion>('FileVersion', {
   id: String,
-  version: String,
+  size: Number,
   updatedDate: Date,
-  size: Number
+  version: String
 });
 
 PojosMetadataMap.create<Folder>('Folder', {
+  createdDate: Date,
+  files: [ 'File' ],
+  folders: [ 'Folder' ],
   id: String,
   name: String,
-  createdDate: Date,
-  updatedDate: Date,
-  webUrl: String,
   parentId: String,
-  folders: [ 'Folder' ],
-  files: [ 'File' ]
+  updatedDate: Date,
+  webUrl: String
 });
 
 createMap<DriveItem, File>(

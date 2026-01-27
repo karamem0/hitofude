@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
-import { DialogType } from '../../../types/Model';
 import IntlProvider from '../../../providers/IntlProvider';
 import ThemeProvider from '../../../providers/ThemeProvider';
+import { DialogType } from '../../../types/Model';
 
 import Presenter from './DialogFactory.presenter';
 
@@ -112,8 +112,8 @@ it('should match the snapshot when the type is changeTheme', () => {
   // Setup
   const params = {
     action: {
-      type: 'changeTheme' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'changeTheme' as DialogType
     }
   };
   // Execute
@@ -133,8 +133,8 @@ it('should match the snapshot when the type is copyFile', () => {
   // Setup
   const params = {
     action: {
-      type: 'copyFile' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'copyFile' as DialogType
     }
   };
   // Execute
@@ -154,8 +154,8 @@ it('should match the snapshot when the type is copyLink', () => {
   // Setup
   const params = {
     action: {
-      type: 'copyLink' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'copyLink' as DialogType
     }
   };
   // Execute
@@ -175,8 +175,8 @@ it('should match the snapshot when the type is createFile', () => {
   // Setup
   const params = {
     action: {
-      type: 'createFile' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'createFile' as DialogType
     }
   };
   // Execute
@@ -196,8 +196,8 @@ it('should match the snapshot when the type is createFolder', () => {
   // Setup
   const params = {
     action: {
-      type: 'createFolder' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'createFolder' as DialogType
     }
   };
   // Execute
@@ -217,8 +217,8 @@ it('should match the snapshot when the type is deleteFile', () => {
   // Setup
   const params = {
     action: {
-      type: 'deleteFile' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'deleteFile' as DialogType
     }
   };
   // Execute
@@ -238,8 +238,8 @@ it('should match the snapshot when the type is deleteFolder', () => {
   // Setup
   const params = {
     action: {
-      type: 'deleteFolder' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'deleteFolder' as DialogType
     }
   };
   // Execute
@@ -259,8 +259,8 @@ it('should match the snapshot when the type is overwriteFile', () => {
   // Setup
   const params = {
     action: {
-      type: 'overwriteFile' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'overwriteFile' as DialogType
     }
   };
   // Execute
@@ -280,8 +280,8 @@ it('should match the snapshot when the type is renameFile', () => {
   // Setup
   const params = {
     action: {
-      type: 'renameFile' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'renameFile' as DialogType
     }
   };
   // Execute
@@ -301,8 +301,8 @@ it('should match the snapshot when the type is restoreFile', () => {
   // Setup
   const params = {
     action: {
-      type: 'restoreFile' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'restoreFile' as DialogType
     }
   };
   // Execute
@@ -322,8 +322,8 @@ it('should match the snapshot when the type is renameFolder', () => {
   // Setup
   const params = {
     action: {
-      type: 'renameFolder' as DialogType,
-      data: undefined
+      data: undefined,
+      type: 'renameFolder' as DialogType
     }
   };
   // Execute

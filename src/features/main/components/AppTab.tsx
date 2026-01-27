@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,17 +8,15 @@
 
 import React from 'react';
 
-import {
-  DependencyNullError,
-  FolderNotFoundError,
-  InvalidOperationError
-} from '../../../types/Error';
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentFile,
   setContentLoading,
   setContentPreviewUrl,
   setContentText,
-  setError,
   setExplorerSelectedFile,
   setExplorerSelectedFolder,
   setSearchQuery,
@@ -26,13 +24,15 @@ import {
   setSearchSelectedFile,
   setTabLoading
 } from '../../../stores/Action';
+import {
+  DependencyNullError,
+  FolderNotFoundError,
+  InvalidOperationError
+} from '../../../types/Error';
 import { TabType } from '../../../types/Model';
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { isMarkdown } from '../../../utils/File';
 
 import Presenter from './AppTab.presenter';
-import { isMarkdown } from '../../../utils/File';
 
 function AppTab() {
 
@@ -43,8 +43,8 @@ function AppTab() {
       explorerProps,
       tabProps = {
         loading: false,
-        type: undefined,
-        open: true
+        open: true,
+        type: undefined
       }
     }
   } = useStore();
@@ -52,6 +52,7 @@ function AppTab() {
     graph,
     storage
   } = useService();
+  const dispatchToast = useToast();
   const [ tabOpen, setTabOpen ] = React.useState(tabProps.open);
   const [ tabType, setTabType ] = React.useState(tabProps.type);
 
@@ -90,7 +91,11 @@ function AppTab() {
         dispatch(setContentFile());
       }
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       dispatch(setTabLoading(false));
     }
@@ -100,7 +105,8 @@ function AppTab() {
     explorerProps?.selectedFolder,
     graph,
     route,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   const handleSearchOpen = React.useCallback(async () => {
@@ -132,14 +138,19 @@ function AppTab() {
         dispatch(setContentFile());
       }
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       dispatch(setTabLoading(false));
     }
   }, [
     graph,
     route,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   React.useEffect(() => {
@@ -158,9 +169,9 @@ function AppTab() {
             }
             if (params.folder == null) {
               route.setParams({
-                tab: params.tab,
+                file: storage.getExplorerFileId(),
                 folder: storage.getExplorerFolderId() ?? rootFolder.id,
-                file: storage.getExplorerFileId()
+                tab: params.tab
               });
             } else {
               await handleExplorerOpen();
@@ -178,7 +189,11 @@ function AppTab() {
         }
         setTabType(params.tab);
       } catch (error) {
-        dispatch(setError(error as Error));
+        if (error instanceof Error) {
+          dispatchToast(error, 'error');
+        } else {
+          throw error;
+        }
       } finally {
         executionLock.current = false;
       }
@@ -188,6 +203,7 @@ function AppTab() {
     route,
     storage,
     dispatch,
+    dispatchToast,
     handleExplorerOpen,
     handleSearchOpen
   ]);

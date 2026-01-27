@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,18 +8,18 @@
 
 import React from 'react';
 
-import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
+import { css } from '@emotion/react';
+import ScrollPanel from '../../../common/components/ScrollPanel';
+import ScrollSynchronizer from '../../../common/components/ScrollSynchronizer';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
+import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
 import MarkdownEditor from '../../markdown/components/MarkdownEditor';
-import { MarkdownEditorHandle } from '../../markdown/types/Handle';
 import MarkdownSplitter from '../../markdown/components/MarkdownSplitter';
 import MarkdownToolbar from '../../markdown/components/MarkdownToolbar';
 import MarkdownViewer from '../../markdown/components/MarkdownViewer';
-import ScrollPanel from '../../../common/components/ScrollPanel';
-import ScrollSynchronizer from '../../../common/components/ScrollSynchronizer';
-import { css } from '@emotion/react';
-import { layouts } from '../../../themes/Layout';
-import { useTheme } from '../../../providers/ThemeProvider';
+import { MarkdownEditorHandle } from '../../markdown/types/Handle';
 
 interface ContentMarkdownProps {
   defaultText?: string,
@@ -95,11 +95,11 @@ function ContentMarkdown(props: Readonly<ContentMarkdownProps>, ref: React.Ref<M
               onMouseLeave={state.onElement1MouseLeave}
               onResize={state.onElement1Resize}
               onSave={onSave}
-              onTextChange={onTextChange}
               onScrollPositonChange={(event, data) => {
                 state.onElement1ScrollChange?.(event, data);
                 onScrollPositonChange?.(event, data);
-              }} />
+              }}
+              onTextChange={onTextChange} />
             <MarkdownSplitter
               css={css`
                 grid-row: 2 / 3;

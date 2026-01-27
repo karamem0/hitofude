@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
-import { File } from '../../../types/Model';
 import IntlProvider from '../../../providers/IntlProvider';
 import ThemeProvider from '../../../providers/ThemeProvider';
+import { File } from '../../../types/Model';
 
 import Presenter from './FileRestoreDialog.presenter';
 
@@ -35,9 +35,9 @@ it('should match the snapshot when the loading is true', () => {
     loading: true,
     mountNode: container,
     value: {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
-      extension: '.docx'
+      extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
     } as File
   };
   // Execute
@@ -53,7 +53,7 @@ it('should match the snapshot when the loading is true', () => {
   );
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('OK')).toBeDisabled();
+  expect(screen.getByText('OK')).toBeDisabled();
 });
 
 it('should match the snapshot when the loading is false', () => {
@@ -63,9 +63,9 @@ it('should match the snapshot when the loading is false', () => {
     loading: false,
     mountNode: container,
     value: {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
-      extension: '.docx'
+      extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
     } as File
   };
   // Execute
@@ -81,5 +81,5 @@ it('should match the snapshot when the loading is false', () => {
   );
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('OK')).not.toBeDisabled();
+  expect(screen.getByText('OK')).not.toBeDisabled();
 });

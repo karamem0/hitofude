@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,16 +8,16 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+import { useIntl } from 'react-intl';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+import { useTheme } from '../../../providers/ThemeProvider';
+import messages from '../messages';
 import MarkdownCodeRenderer from './MarkdownCodeRenderer';
 import MarkdownImageRenderer from './MarkdownImageRenderer';
 import MarkdownLinkRenderer from './MarkdownLinkRenderer';
-import ReactMarkdown from 'react-markdown';
-import { css } from '@emotion/react';
-import messages from '../messages';
-import rehypeRaw from 'rehype-raw';
-import remarkGfm from 'remark-gfm';
-import { useIntl } from 'react-intl';
-import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownViewerProps {
   className?: string,

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -26,10 +26,10 @@ function VideoViewer(props: Readonly<VideoViewerProps>, ref: React.Ref<HTMLVideo
 
   return (
     <video
-      ref={ref}
-      className={className}
       controls
+      className={className}
       preload="metadata"
+      ref={ref}
       src={src}
       css={css`
         display: ${loading ? 'none' : 'block'};

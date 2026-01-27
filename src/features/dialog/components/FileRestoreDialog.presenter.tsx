@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -10,6 +10,7 @@ import React from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { css } from '@emotion/react';
 import {
   Button,
   DialogActions,
@@ -18,11 +19,11 @@ import {
   DialogSurface,
   DialogTitle,
   DialogTrigger,
-  Text
+  Text,
+  Tooltip
 } from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
 import ModalDialog from '../../../common/components/ModalDialog';
-import { css } from '@emotion/react';
+import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface FileRestoreDialogProps {
@@ -64,21 +65,24 @@ function FileRestoreDialog(props: Readonly<FileRestoreDialogProps>) {
             </div>
           </DialogContent>
           <DialogActions>
-            <Button
-              appearance="primary"
-              aria-label={intl.formatMessage(messages.OK)}
-              disabled={loading}
-              title={intl.formatMessage(messages.OK)}
-              onClick={onSubmit}>
-              <FormattedMessage {...messages.OK} />
-            </Button>
-            <DialogTrigger disableButtonEnhancement>
+            <Tooltip
+              content={intl.formatMessage(messages.OK)}
+              relationship="label">
               <Button
-                appearance="secondary"
-                aria-label={intl.formatMessage(messages.Cancel)}
-                title={intl.formatMessage(messages.Cancel)}>
-                <FormattedMessage {...messages.Cancel} />
+                appearance="primary"
+                disabled={loading}
+                onClick={onSubmit}>
+                <FormattedMessage {...messages.OK} />
               </Button>
+            </Tooltip>
+            <DialogTrigger disableButtonEnhancement>
+              <Tooltip
+                content={intl.formatMessage(messages.Cancel)}
+                relationship="label">
+                <Button appearance="secondary">
+                  <FormattedMessage {...messages.Cancel} />
+                </Button>
+              </Tooltip>
             </DialogTrigger>
           </DialogActions>
         </DialogBody>

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,12 +8,13 @@
 
 import React from 'react';
 
-import { ExplorerMenuAction, Folder } from '../../../types/Model';
+import { useStore } from '../../../providers/StoreProvider';
+import { setDialogAction } from '../../../stores/Action';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
+import { ExplorerMenuAction, Folder } from '../../../types/Model';
+
 import Presenter from './ExplorerFolderMenuList.presenter';
-import { setDialogAction } from '../../../stores/Action';
-import { useStore } from '../../../providers/StoreProvider';
 
 interface ExplorerFolderMenuListProps {
   folder?: Folder
@@ -31,8 +32,8 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: 'copyLink',
-          data: value.webUrl
+          data: value.webUrl,
+          type: 'copyLink'
         }));
         break;
       }
@@ -42,8 +43,8 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: 'deleteFolder',
-          data: value
+          data: value,
+          type: 'deleteFolder'
         }));
         break;
       }
@@ -61,8 +62,8 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: 'renameFolder',
-          data: value
+          data: value,
+          type: 'renameFolder'
         }));
         break;
       }

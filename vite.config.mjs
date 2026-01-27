@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
+import reactPlugin from '@vitejs/plugin-react';
+import fs from 'fs';
 import {
   defineConfig,
   loadEnv
 } from 'vite';
-import fs from 'fs';
-import reactPlugin from '@vitejs/plugin-react';
 
 const htmlPlugin = (env) => ({
   name: 'html-transform',

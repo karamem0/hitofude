@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,13 +8,14 @@
 
 import React from 'react';
 
-import { AppBarMenuAction, TabType } from '../../../types/Model';
-import { moveNext, movePrevious } from '../../../utils/Keyboard';
-import { setDialogAction, setTabOpen } from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import Presenter from './AppBar.presenter';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { setDialogAction, setTabOpen } from '../../../stores/Action';
+import { Event } from '../../../types/Event';
+import { AppBarMenuAction, TabType } from '../../../types/Model';
+import { moveNext, movePrevious } from '../../../utils/Keyboard';
+
+import Presenter from './AppBar.presenter';
 
 function AppBar() {
 
@@ -33,8 +34,8 @@ function AppBar() {
     switch (data?.type) {
       case 'changeTheme': {
         dispatch(setDialogAction({
-          type: 'changeTheme',
-          data: undefined
+          data: undefined,
+          type: 'changeTheme'
         }));
         break;
       }
@@ -52,15 +53,15 @@ function AppBar() {
       switch (data) {
         case TabType.explorer:
           route.setParams({
-            tab: data,
+            file: explorerProps?.selectedFile?.id,
             folder: explorerProps?.selectedFolder?.id,
-            file: explorerProps?.selectedFile?.id
+            tab: data
           });
           break;
         case TabType.search:
           route.setParams({
-            tab: data,
-            search: searchProps?.query
+            search: searchProps?.query,
+            tab: data
           });
           break;
         default:

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { FluentProvider as Provider, Theme } from '@fluentui/react-components';
+import { themes } from '../themes/Theme';
 import { InvalidOperationError } from '../types/Error';
 import { ThemeName } from '../types/Model';
-import { themes } from '../themes/Theme';
 
 interface ThemeContextState {
   theme: Theme,
@@ -40,9 +40,9 @@ function ThemeProvider(props: Readonly<React.PropsWithChildren<unknown>>) {
   }, []);
 
   const value = React.useMemo<ThemeContextState>(() => ({
+    changeTheme: handleChangeTheme,
     theme: themes[themeName],
-    themeName,
-    changeTheme: handleChangeTheme
+    themeName
   }), [
     themeName,
     handleChangeTheme

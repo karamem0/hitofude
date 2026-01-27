@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,20 +8,21 @@
 
 import React from 'react';
 
-import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 import {
   appendExplorerFile,
   setContentFile,
   setContentText,
-  setDialogAction,
-  setError
+  setDialogAction
 } from '../../../stores/Action';
+import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { File } from '../../../types/Model';
 import { FileCopyDialogFormState } from '../types/Form';
+
 import Presenter from './FileCopyDialog.presenter';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 
 interface FileCopyDialogProps {
   value?: File
@@ -33,6 +34,7 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
 
   const { dispatch } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async (_: Event, data?: FileCopyDialogFormState) => {
@@ -49,7 +51,11 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
       dispatch(setContentFile(file));
       dispatch(setContentText(await graph.getFileText(file)));
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
@@ -57,7 +63,8 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
   }, [
     graph,
     value,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -21,6 +21,8 @@ const messages = {
     DragDropFile: { defaultMessage: 'Drag and drop files here' },
     Explorer: { defaultMessage: 'Explorer' },
     HideUnsupportedFiles: { defaultMessage: 'Hide other files' },
+    LastModified: { defaultMessage: 'Last modified' },
+    Name: { defaultMessage: 'Name' },
     NewFile: { defaultMessage: 'New file' },
     NewFolder: { defaultMessage: 'New folder' },
     OpenWithOneDrive: { defaultMessage: 'Open with OneDrive' },
@@ -28,7 +30,8 @@ const messages = {
     RenameFile: { defaultMessage: 'Rename file' },
     RenameFolder: { defaultMessage: 'Rename folder' },
     RootFolder: { defaultMessage: 'OneDrive' },
-    ShowUnsupportedFiles: { defaultMessage: 'Show other files' }
+    ShowUnsupportedFiles: { defaultMessage: 'Show other files' },
+    Size: { defaultMessage: 'Size' }
   })
 };
 

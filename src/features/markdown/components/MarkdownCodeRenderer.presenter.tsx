@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,8 +8,8 @@
 
 import React from 'react';
 
-import Mermaid from '../../../common/components/Mermaid';
 import SyntaxHighlighter from 'react-syntax-highlighter';
+import Mermaid from '../../../common/components/Mermaid';
 import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownCodeRendererProps {

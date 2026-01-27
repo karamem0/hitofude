@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -10,6 +10,7 @@ import React from 'react';
 
 import { Event, EventHandler } from '../../types/Event';
 import { ScrollPosition, ScrollSize } from '../../types/Model';
+
 import Presenter from './ScrollPanel.presenter';
 
 interface ScrollPanelState {
@@ -30,9 +31,9 @@ interface ScrollPanelProps {
 function ScrollPanel(props: Readonly<ScrollPanelProps>) {
 
   const {
-    render,
     className,
     position,
+    render,
     onMouseEnter,
     onMouseLeave,
     onResize,
@@ -161,8 +162,8 @@ function ScrollPanel(props: Readonly<ScrollPanelProps>) {
 
   return (
     <Presenter
-      ref={ref}
-      className={className}>
+      className={className}
+      ref={ref}>
       {render?.(state)}
     </Presenter>
   );

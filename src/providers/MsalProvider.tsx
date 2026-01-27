@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,9 +8,9 @@
 
 import React from 'react';
 
-import MsalAdapter from '../common/components/MsalAdapter';
-import { MsalProvider as Provider } from '@azure/msal-react';
 import { PublicClientApplication } from '@azure/msal-browser';
+import { MsalProvider as Provider } from '@azure/msal-react';
+import MsalAdapter from '../common/components/MsalAdapter';
 import { msalConfig } from '../config/MsalConfig';
 
 function MsalProvider(props: Readonly<React.PropsWithChildren<unknown>>) {

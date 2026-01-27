@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,19 +8,17 @@
 
 import React from 'react';
 
-import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
-import {
-  appendExplorerFile,
-  setDialogAction,
-  setError
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { FileCreateDialogFormState } from '../types/Form';
-import Presenter from './FileCreateDialog.presenter';
-import { TabType } from '../../../types/Model';
+import { useToast } from '../../../common/providers/ToastProvider';
 import { useRoute } from '../../../providers/RouteProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { appendExplorerFile, setDialogAction } from '../../../stores/Action';
+import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
+import { TabType } from '../../../types/Model';
+import { FileCreateDialogFormState } from '../types/Form';
+
+import Presenter from './FileCreateDialog.presenter';
 
 function FileCreateDialog() {
 
@@ -32,6 +30,7 @@ function FileCreateDialog() {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async (_: Event, data?: FileCreateDialogFormState) => {
@@ -49,21 +48,26 @@ function FileCreateDialog() {
         .then((file) => graph.getFileById(file.id));
       dispatch(appendExplorerFile(file));
       route.setParams({
-        tab: TabType.explorer,
+        file: file?.id,
         folder: selectedFolder.id,
-        file: file?.id
+        tab: TabType.explorer
       });
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
     }
   }, [
     explorerProps?.selectedFolder,
-    graph,
     route,
-    dispatch
+    graph,
+    dispatch,
+    dispatchToast
   ]);
 
   return (

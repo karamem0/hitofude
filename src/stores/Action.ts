@@ -1,16 +1,11 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import {
-  Action,
-  ActionType,
-  InitialState
-} from '../types/Store';
 import {
   DialogAction,
   File,
@@ -20,178 +15,178 @@ import {
   SidePanelAction,
   TabType
 } from '../types/Model';
+import {
+  Action,
+  ActionType,
+  InitialState
+} from '../types/Store';
 
 export const appendExplorerFile = (data?: File): Action => ({
-  type: ActionType.appendExplorerFile,
-  data
+  data,
+  type: ActionType.appendExplorerFile
 });
 
 export const appendExplorerFileConflict = (data?: FileConflict): Action => ({
-  type: ActionType.appendExplorerFileConflict,
-  data
+  data,
+  type: ActionType.appendExplorerFileConflict
 });
 
 export const appendExplorerFolder = (data?: Folder): Action => ({
-  type: ActionType.appendExplorerFolder,
-  data
+  data,
+  type: ActionType.appendExplorerFolder
 });
 
 export const removeExplorerFile = (data?: File): Action => ({
-  type: ActionType.removeExplorerFile,
-  data
+  data,
+  type: ActionType.removeExplorerFile
 });
 
 export const removeExplorerFileConflict = (data?: FileConflict): Action => ({
-  type: ActionType.removeExplorerFileConflict,
-  data
+  data,
+  type: ActionType.removeExplorerFileConflict
 });
 
 export const removeExplorerFolder = (data?: Folder): Action => ({
-  type: ActionType.removeExplorerFolder,
-  data
+  data,
+  type: ActionType.removeExplorerFolder
 });
 
 export const setContentEditing = (data?: boolean): Action => ({
-  type: ActionType.setContentEditing,
-  data
+  data,
+  type: ActionType.setContentEditing
 });
 
 export const setContentFile = (data?: File): Action => ({
-  type: ActionType.setContentFile,
-  data
+  data,
+  type: ActionType.setContentFile
 });
 
 export const setContentLoading = (data?: boolean): Action => ({
-  type: ActionType.setContentLoading,
-  data
+  data,
+  type: ActionType.setContentLoading
 });
 
 export const setContentPreviewUrl = (data?: string): Action => ({
-  type: ActionType.setContentPreviewUrl,
-  data
+  data,
+  type: ActionType.setContentPreviewUrl
 });
 
 export const setContentScrollPosition = (data?: ScrollPosition): Action => ({
-  type: ActionType.setContentScrollPosition,
-  data
+  data,
+  type: ActionType.setContentScrollPosition
 });
 
 export const setContentShowMinimap = (data?: boolean): Action => ({
-  type: ActionType.setContentShowMinimap,
-  data
+  data,
+  type: ActionType.setContentShowMinimap
 });
 
 export const setContentShowPreview = (data?: boolean): Action => ({
-  type: ActionType.setContentShowPreview,
-  data
+  data,
+  type: ActionType.setContentShowPreview
 });
 
 export const setContentSyncScroll = (data?: boolean): Action => ({
-  type: ActionType.setContentSyncScroll,
-  data
+  data,
+  type: ActionType.setContentSyncScroll
 });
 
 export const setContentText = (data?: string): Action => ({
-  type: ActionType.setContentText,
-  data
+  data,
+  type: ActionType.setContentText
 });
 
 export const setContentWordWrap = (data?: boolean): Action => ({
-  type: ActionType.setContentWordWrap,
-  data
+  data,
+  type: ActionType.setContentWordWrap
 });
 
 export const setDialogAction = (data?: DialogAction): Action => ({
-  type: ActionType.setDialogAction,
-  data
-});
-
-export const setError = (data?: Error): Action => ({
-  type: ActionType.setError,
-  data
+  data,
+  type: ActionType.setDialogAction
 });
 
 export const setExplorerAllFiles = (data?: boolean): Action => ({
-  type: ActionType.setExplorerAllFiles,
-  data
+  data,
+  type: ActionType.setExplorerAllFiles
 });
 
 export const setExplorerSelectedFile = (data?: File): Action => ({
-  type: ActionType.setExplorerSelectedFile,
-  data
+  data,
+  type: ActionType.setExplorerSelectedFile
 });
 
 export const setExplorerSelectedFolder = (data?: Folder): Action => ({
-  type: ActionType.setExplorerSelectedFolder,
-  data
+  data,
+  type: ActionType.setExplorerSelectedFolder
 });
 
 export const setInitialState = (data?: InitialState): Action => ({
-  type: ActionType.setInitialState,
-  data
+  data,
+  type: ActionType.setInitialState
 });
 
 export const setMarkdownChanged = (data?: boolean): Action => ({
-  type: ActionType.setMarkdownChanged,
-  data
+  data,
+  type: ActionType.setMarkdownChanged
 });
 
 export const setMarkdownDefaultText = (data?: string): Action => ({
-  type: ActionType.setMarkdownDefaultText,
-  data
+  data,
+  type: ActionType.setMarkdownDefaultText
 });
 
 export const setMarkdownScrollPosition = (data?: ScrollPosition): Action => ({
-  type: ActionType.setMarkdownScrollPosition,
-  data
+  data,
+  type: ActionType.setMarkdownScrollPosition
 });
 
 export const setMarkdownText = (data?: string): Action => ({
-  type: ActionType.setMarkdownText,
-  data
+  data,
+  type: ActionType.setMarkdownText
 });
 
 export const setSearchQuery = (data?: string): Action => ({
-  type: ActionType.setSearchQuery,
-  data
+  data,
+  type: ActionType.setSearchQuery
 });
 
 export const setSearchResultFiles = (data?: File[]): Action => ({
-  type: ActionType.setSearchResultFiles,
-  data
+  data,
+  type: ActionType.setSearchResultFiles
 });
 
 export const setSearchSelectedFile = (data?: File): Action => ({
-  type: ActionType.setSearchSelectedFile,
-  data
+  data,
+  type: ActionType.setSearchSelectedFile
 });
 
 export const setSidePanelAction = (data?: SidePanelAction): Action => ({
-  type: ActionType.setSidePanelAction,
-  data
+  data,
+  type: ActionType.setSidePanelAction
 });
 
 export const setTabLoading = (data?: boolean): Action => ({
-  type: ActionType.setTabLoading,
-  data
+  data,
+  type: ActionType.setTabLoading
 });
 
 export const setTabOpen = (data?: boolean): Action => ({
-  type: ActionType.setTabOpen,
-  data
+  data,
+  type: ActionType.setTabOpen
 });
 
 export const setTabType = (data?: TabType): Action => ({
-  type: ActionType.setTabType,
-  data
+  data,
+  type: ActionType.setTabType
 });
 
 export const updateExplorerFile = (data?: File): Action => ({
-  type: ActionType.updateExplorerFile,
-  data
+  data,
+  type: ActionType.updateExplorerFile
 });
 
 export const updateExplorerFolder = (data?: Folder): Action => ({
-  type: ActionType.updateExplorerFolder,
-  data
+  data,
+  type: ActionType.updateExplorerFolder
 });

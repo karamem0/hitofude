@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,12 +8,12 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+import { Text } from '@fluentui/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Communication from '../../../common/components/Communication';
-import { Text } from '@fluentui/react-components';
-import { css } from '@emotion/react';
-import messages from '../messages';
 import { useTheme } from '../../../providers/ThemeProvider';
+import messages from '../messages';
 
 function Error500Page() {
 
@@ -29,7 +29,7 @@ function Error500Page() {
         content={intl.formatMessage(messages.AppDescription)}
         name="description" />
       <title>
-        {`${intl.formatMessage(messages.Error404Title)} - ${intl.formatMessage(messages.AppTitle)}`}
+        {`${intl.formatMessage(messages.Error500Title)} - ${intl.formatMessage(messages.AppTitle)}`}
       </title>
       <div
         css={css`

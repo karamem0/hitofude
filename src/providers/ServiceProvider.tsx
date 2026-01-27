@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,15 +8,15 @@
 
 import React from 'react';
 
-import { CacheRepository } from '../repositories/CacheRepository';
+import { useMsal } from '@azure/msal-react';
 import { Client } from '@microsoft/microsoft-graph-client';
-import { GraphRepository } from '../repositories/GraphRepository';
-import { GraphService } from '../services/GraphService';
-import { InvalidOperationError } from '../types/Error';
-import { StorageService } from '../services/StorageService';
 import { database } from '../config/DatabaseConfig';
 import { loginParams } from '../config/MsalConfig';
-import { useMsal } from '@azure/msal-react';
+import { CacheRepository } from '../repositories/CacheRepository';
+import { GraphRepository } from '../repositories/GraphRepository';
+import { GraphService } from '../services/GraphService';
+import { StorageService } from '../services/StorageService';
+import { InvalidOperationError } from '../types/Error';
 
 interface ServiceContextState {
   graph: GraphService,

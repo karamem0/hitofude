@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,12 +8,12 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
+import { TabType } from '../../../types/Model';
 import ExplorerTabPanel from '../../explorer/components/ExplorerTabPanel';
 import SearchTabPanel from '../../search/components/SearchTabPanel';
-import { TabType } from '../../../types/Model';
-import { css } from '@emotion/react';
-import { layouts } from '../../../themes/Layout';
-import { useTheme } from '../../../providers/ThemeProvider';
 
 interface AppTabProps {
   tabOpen?: boolean,

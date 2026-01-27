@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -47,7 +47,7 @@ it('should match the snapshot when the loading is true', () => {
   );
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('OK')).toBeDisabled();
+  expect(screen.getByText('OK')).toBeDisabled();
 });
 
 it('should match the snapshot when the loading is false', () => {
@@ -70,5 +70,5 @@ it('should match the snapshot when the loading is false', () => {
   );
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('OK')).not.toBeDisabled();
+  expect(screen.getByText('OK')).not.toBeDisabled();
 });

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   DialogActions,
@@ -16,16 +17,16 @@ import {
   DialogSurface,
   DialogTitle,
   DialogTrigger,
-  Input
+  Input,
+  Tooltip
 } from '@fluentui/react-components';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+import ModalDialog from '../../../common/components/ModalDialog';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
-import { FileCopyDialogFormState } from '../types/Form';
-import ModalDialog from '../../../common/components/ModalDialog';
-import { css } from '@emotion/react';
 import messages from '../messages';
+import { FileCopyDialogFormState } from '../types/Form';
 
 interface FileCopyDialogProps {
   loading?: boolean,
@@ -73,11 +74,11 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
                   name="baseName"
                   render={({ field }) => (
                     <Input
-                      ref={field.ref}
                       appearance="outline"
                       aria-label={intl.formatMessage(messages.FileName)}
                       contentAfter={value?.extension}
                       placeholder={intl.formatMessage(messages.FileName)}
+                      ref={field.ref}
                       value={field.value}
                       onBlur={field.onBlur}
                       onChange={field.onChange} />
@@ -89,21 +90,24 @@ function FileCopyDialog(props: Readonly<FileCopyDialogProps>) {
               </div>
             </DialogContent>
             <DialogActions>
-              <Button
-                appearance="primary"
-                aria-label={intl.formatMessage(messages.Save)}
-                disabled={!form.formState.isValid || loading}
-                title={intl.formatMessage(messages.Save)}
-                type="submit">
-                <FormattedMessage {...messages.Save} />
-              </Button>
-              <DialogTrigger disableButtonEnhancement>
+              <Tooltip
+                content={intl.formatMessage(messages.Save)}
+                relationship="label">
                 <Button
-                  appearance="secondary"
-                  aria-label={intl.formatMessage(messages.Cancel)}
-                  title={intl.formatMessage(messages.Cancel)}>
-                  <FormattedMessage {...messages.Cancel} />
+                  appearance="primary"
+                  disabled={!form.formState.isValid || loading}
+                  type="submit">
+                  <FormattedMessage {...messages.Save} />
                 </Button>
+              </Tooltip>
+              <DialogTrigger disableButtonEnhancement>
+                <Tooltip
+                  content={intl.formatMessage(messages.Cancel)}
+                  relationship="label">
+                  <Button appearance="secondary">
+                    <FormattedMessage {...messages.Cancel} />
+                  </Button>
+                </Tooltip>
               </DialogTrigger>
             </DialogActions>
           </DialogBody>

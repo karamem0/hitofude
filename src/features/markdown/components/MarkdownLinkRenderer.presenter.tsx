@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,8 +8,8 @@
 
 import React from 'react';
 
-import { EventHandler } from '../../../types/Event';
 import { Link } from '@fluentui/react-components';
+import { EventHandler } from '../../../types/Event';
 
 interface MarkdownLinkRendererProps {
   href?: string,
@@ -21,8 +21,8 @@ function MarkdownLinkRenderer(props: Readonly<React.PropsWithChildren<MarkdownLi
 
   const {
     children,
-    id,
     href,
+    id,
     onClick,
     ...extraProps
   } = props;

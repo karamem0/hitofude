@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,13 +8,14 @@
 
 import React from 'react';
 
-import { DependencyNullError, FileNotFoundError } from '../../../types/Error';
-import Presenter from './MarkdownImageRenderer.presenter';
-import { getMimeType } from '../../../utils/File';
-import { isAbsoluteUrl } from '../../../utils/Url';
 import mime from 'mime';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { DependencyNullError, FileNotFoundError } from '../../../types/Error';
+import { getMimeType } from '../../../utils/File';
+import { isAbsoluteUrl } from '../../../utils/Url';
+
+import Presenter from './MarkdownImageRenderer.presenter';
 
 interface MarkdownImageRendereState {
   downloadUrl?: string,

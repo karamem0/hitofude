@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,21 +8,22 @@
 
 import React from 'react';
 
-import * as ReactDOM from 'react-dom/client';
-import * as ress from 'ress';
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
+import { Global } from '@emotion/react';
+import * as ReactDOM from 'react-dom/client';
+import { ErrorBoundary } from 'react-error-boundary';
 import {
   BrowserRouter,
   Route,
   Routes
 } from 'react-router-dom';
+import * as ress from 'ress';
+import ToastProvider from './common/providers/ToastProvider';
 import Error404Page from './features/error/pages/Error404Page';
 import Error500Page from './features/error/pages/Error500Page';
-import { ErrorBoundary } from 'react-error-boundary';
-import { Global } from '@emotion/react';
 import HomePage from './features/home/pages/HomePage';
-import IntlProvider from './providers/IntlProvider';
 import MainPage from './features/main/pages/MainPage';
+import IntlProvider from './providers/IntlProvider';
 import MsalProvider from './providers/MsalProvider';
 import RouteProvider from './providers/RouteProvider';
 import ServiceProvider from './providers/ServiceProvider';
@@ -46,14 +47,16 @@ root.render(
                 element={(
                   <ErrorBoundary
                     fallbackRender={(props) => (
-                      <Error500Page {...props} />
+                      <Error500Page error={props.error as Error} />
                     )}>
                     <MsalProvider>
                       <AuthenticatedTemplate>
                         <RouteProvider>
                           <ServiceProvider>
                             <StoreProvider>
-                              <MainPage />
+                              <ToastProvider>
+                                <MainPage />
+                              </ToastProvider>
                             </StoreProvider>
                           </ServiceProvider>
                         </RouteProvider>

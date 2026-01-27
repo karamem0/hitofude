@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,12 +8,12 @@
 
 import React from 'react';
 
-import ContentHeader from './ContentHeader';
-import ContentMarkdown from './ContentMarkdown';
-import { EventHandler } from '../../../types/Event';
-import { File } from '../../../types/Model';
 import { css } from '@emotion/react';
 import { layouts } from '../../../themes/Layout';
+import { EventHandler } from '../../../types/Event';
+import { File } from '../../../types/Model';
+import ContentHeader from './ContentHeader';
+import ContentMarkdown from './ContentMarkdown';
 
 interface ContentSupportedProps {
   changed?: boolean,

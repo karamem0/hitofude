@@ -1,0 +1,101 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should match the snapshot when the disabled is false 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProvider_r_4_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      aria-label="Save"
+      class="fui-SplitButton ___oimal70_1uoj7b8 ftuwxu6 fsxf2b5 f10pi13n fmrv4ls f14uur2j fye5tvs f1e8brtx fxp12j1 fr7y8no f1b65x5h f4rm5b0 fdwdeeo f1ju2vgk f2z0mmn f1btorfl f161sdhp"
+    >
+      <button
+        class="fui-Button r1f29ykk fui-SplitButton__primaryActionButton ___q50prb0_1crxw1s ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl fecsdlb f1rq72xc f1ksv2xa fhvnf4x fb6swo4 f1klyf7k f232fm2 f1d6mv4x f1nz3ub2 fag2qd2 fmvhcg7 f1o3dhpw f14bpyus fqc85l4 f1h3a8gf fkiggi6 f8gmj8i f1ap8nzx f1igan7k fjag8bx f1v3eptx f1ysmecq faulsx f79t15f fbtzoaq f8qmx7k fd4bjan f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5 f1x37qnr fn4c73s"
+        id="splitButton-_r_7___primaryActionButton"
+        type="button"
+      >
+        Save
+      </button>
+      <button
+        aria-expanded="false"
+        aria-haspopup="menu"
+        aria-labelledby="splitButton-_r_7___primaryActionButton"
+        class="fui-Button r1f29ykk fui-MenuButton fui-SplitButton__menuButton ___129qol8_1tncgmv ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl fecsdlb f1rq72xc f1ksv2xa fhvnf4x fb6swo4 f1klyf7k f232fm2 f1d6mv4x f1nz3ub2 fag2qd2 fmvhcg7 f1o3dhpw f14bpyus fqc85l4 f1h3a8gf fkiggi6 f8gmj8i f1ap8nzx f1igan7k fjag8bx f1v3eptx f1ysmecq faulsx f79t15f fbtzoaq f8qmx7k fd4bjan f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5 f18ktai2 fwbmr0d f44c6la frrbwxo f1um7c6d f6pwzcr"
+        id="menu_r_5_"
+        type="button"
+      >
+        <span
+          class="fui-MenuButton__menuIcon ___1gqzbv5_ogidrh0 fwrc4pm f1ugzwwg fvblgha frx94fk"
+        >
+          <svg
+            aria-hidden="true"
+            class="fui-Icon ___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
+            fill="currentColor"
+            height="1em"
+            viewBox="0 0 20 20"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.85 7.65c.2.2.2.5 0 .7l-5.46 5.49a.55.55 0 0 1-.78 0L4.15 8.35a.5.5 0 1 1 .7-.7L10 12.8l5.15-5.16c.2-.2.5-.2.7 0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should match the snapshot when the disabled is true 1`] = `
+<DocumentFragment>
+  <div
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      aria-label="Save"
+      class="fui-SplitButton ___4r76t00_1rxehod ftuwxu6 fsxf2b5 f10pi13n fmrv4ls f14uur2j fye5tvs f1e8brtx fxp12j1 fr7y8no f1b65x5h f10xrnr8 f11fwhjz f12kx9re fslo9ob f1fuq5cn f1t6bo0o"
+    >
+      <button
+        class="fui-Button r1f29ykk fui-SplitButton__primaryActionButton ___2yeijs0_15nupom f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1jct5ie fhvnf4x fb6swo4 f1klyf7k f232fm2 f1uhomfy f14ptb23 f9dbb4x f3qs60o fwd1oij f5u9ap2 f1cyfu5x f1h3a8gf fj8k9ua fifrq0d f196mwp7 f1l6uprw fnekfq fa9u7a5 fw24f3 f1nznrny fq8nxuu ftoixeo f1ao3jkc fpmuzpx fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq fy9mucy f1g9va8i fwgvudy fom6jww f127ot8j f19etb0b f4f984j f3d22hf fw441p0 f1m71e0y f168odog f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5 f1x37qnr fn4c73s"
+        disabled=""
+        id="splitButton-_r_3___primaryActionButton"
+        type="button"
+      >
+        Save
+      </button>
+      <button
+        aria-expanded="false"
+        aria-haspopup="menu"
+        aria-labelledby="splitButton-_r_3___primaryActionButton"
+        class="fui-Button r1f29ykk fui-MenuButton fui-SplitButton__menuButton ___pq42xs0_5bdy270 f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1jct5ie fhvnf4x fb6swo4 f1klyf7k f232fm2 f1uhomfy f14ptb23 f9dbb4x f3qs60o fwd1oij f5u9ap2 f1cyfu5x f1h3a8gf fj8k9ua fifrq0d f196mwp7 f1l6uprw fnekfq fa9u7a5 fw24f3 f1nznrny fq8nxuu ftoixeo f1ao3jkc fpmuzpx fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq fy9mucy f1g9va8i fwgvudy fom6jww f127ot8j f19etb0b f4f984j f3d22hf fw441p0 f1m71e0y f168odog f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5 f18ktai2 fwbmr0d f44c6la frrbwxo f1um7c6d f6pwzcr"
+        disabled=""
+        id="menu_r_1_"
+        type="button"
+      >
+        <span
+          class="fui-MenuButton__menuIcon ___1gqzbv5_ogidrh0 fwrc4pm f1ugzwwg fvblgha frx94fk"
+        >
+          <svg
+            aria-hidden="true"
+            class="fui-Icon ___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
+            fill="currentColor"
+            height="1em"
+            viewBox="0 0 20 20"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.85 7.65c.2.2.2.5 0 .7l-5.46 5.49a.55.55 0 0 1-.78 0L4.15 8.35a.5.5 0 1 1 .7-.7L10 12.8l5.15-5.16c.2-.2.5-.2.7 0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

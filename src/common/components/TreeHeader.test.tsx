@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import IntlProvider from '../../providers/IntlProvider';
 import ThemeProvider from '../../providers/ThemeProvider';
-import userEvent from '@testing-library/user-event';
 
 import Presenter from './TreeHeader.presenter';
 
@@ -23,10 +23,10 @@ beforeEach(() => {
 it('should match the snapshot when the root is true', () => {
   // Setup
   const params = {
-    name: 'Explorer',
     menu: (
       <div data-testid="test-Menu" />
     ),
+    name: 'Explorer',
     root: true
   };
   // Execute
@@ -44,10 +44,10 @@ it('should match the snapshot when the root is true', () => {
 it('should match the snapshot when the root is false', () => {
   // Setup
   const params = {
-    name: 'Explorer',
     menu: (
       <div data-testid="test-Menu" />
     ),
+    name: 'Explorer',
     root: false
   };
   // Execute
@@ -67,11 +67,11 @@ it('should match the snapshot when the menu is opened', async () => {
   const user = userEvent.setup();
   const container = document.body.appendChild(document.createElement('div'));
   const params = {
-    name: 'Explorer',
     menu: (
       <div data-testid="test-Menu" />
     ),
     mountNode: container,
+    name: 'Explorer',
     root: true
   };
   // Execute
@@ -85,7 +85,7 @@ it('should match the snapshot when the menu is opened', async () => {
       container
     }
   );
-  await user.click(screen.getByTitle('More option'));
+  await user.click(screen.getByLabelText('More option'));
   // Assert
   expect(asFragment()).toMatchSnapshot();
   expect(screen.getByTestId('test-Menu')).toBeInTheDocument();

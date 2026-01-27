@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,19 +8,20 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   Menu,
   MenuPopover,
   MenuTrigger,
-  Text
+  Text,
+  Tooltip
 } from '@fluentui/react-components';
 import { ChevronLeft16Regular, MoreVertical16Regular } from '@fluentui/react-icons';
-import { EventHandler } from '../../types/Event';
 import { GrOnedrive } from 'react-icons/gr';
-import { css } from '@emotion/react';
-import messages from '../../features/main/messages';
 import { useIntl } from 'react-intl';
+import messages from '../../features/main/messages';
+import { EventHandler } from '../../types/Event';
 
 interface TreeHeaderProps {
   menu?: React.ReactNode,
@@ -78,19 +79,21 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
             <GrOnedrive />
           </div>
         ) : (
-          <Button
-            appearance="transparent"
-            aria-label={intl.formatMessage(messages.Back)}
-            tabIndex={0}
-            title={intl.formatMessage(messages.Back)}
-            css={css`
-              max-width: 2rem;
-              height: 2rem;
-            `}
-            icon={(
-              <ChevronLeft16Regular />
-            )}
-            onClick={(event) => !root && onClick?.(event)} />
+          <Tooltip
+            content={intl.formatMessage(messages.Back)}
+            relationship="label">
+            <Button
+              appearance="transparent"
+              tabIndex={0}
+              css={css`
+                max-width: 2rem;
+                height: 2rem;
+              `}
+              icon={(
+                <ChevronLeft16Regular />
+              )}
+              onClick={(event) => !root && onClick?.(event)} />
+          </Tooltip>
         )
       }
       <div
@@ -111,19 +114,20 @@ function TreeHeader(props: Readonly<TreeHeaderProps>) {
       </div>
       <Menu mountNode={mountNode}>
         <MenuTrigger>
-          <Button
-            appearance="transparent"
-            aria-label={intl.formatMessage(messages.MoreOption)}
-            role="button"
-            tabIndex={0}
-            title={intl.formatMessage(messages.MoreOption)}
-            css={css`
-              max-width: 2rem;
-              height: 2rem;
-            `}
-            icon={(
-              <MoreVertical16Regular />
-            )} />
+          <Tooltip
+            content={intl.formatMessage(messages.MoreOption)}
+            relationship="label">
+            <Button
+              appearance="transparent"
+              tabIndex={0}
+              css={css`
+                max-width: 2rem;
+                height: 2rem;
+              `}
+              icon={(
+                <MoreVertical16Regular />
+              )} />
+          </Tooltip>
         </MenuTrigger>
         <MenuPopover>
           {menu}

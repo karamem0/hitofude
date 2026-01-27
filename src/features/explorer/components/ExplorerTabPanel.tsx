@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,28 +8,29 @@
 
 import React from 'react';
 
+import { useProgress } from '../../../common/providers/ProgressProvider';
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
+import {
+  appendExplorerFile,
+  appendExplorerFileConflict,
+  setDialogAction,
+  setExplorerSelectedFile
+} from '../../../stores/Action';
 import {
   ArgumentNullError,
   DependencyNullError,
   FileConflictError,
   FileNotFoundError
 } from '../../../types/Error';
-import {
-  appendExplorerFile,
-  appendExplorerFileConflict,
-  setDialogAction,
-  setError,
-  setExplorerSelectedFile
-} from '../../../stores/Action';
-import { DropEventData } from '../types/Event';
 import { Event } from '../../../types/Event';
-import Presenter from './ExplorerTabPanel.presenter';
 import { TabType } from '../../../types/Model';
 import { fromFile } from '../../../utils/Blob';
-import { useProgress } from '../../../common/providers/ProgressProvider';
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+import { DropEventData } from '../types/Event';
+
+import Presenter from './ExplorerTabPanel.presenter';
 
 function ExplorerTabPanel() {
 
@@ -42,6 +43,7 @@ function ExplorerTabPanel() {
   } = useStore();
   const { graph } = useService();
   const { setProgress } = useProgress();
+  const dispatchToast = useToast();
 
   const handleDropFiles = React.useCallback(async (_: Event, data?: DropEventData) => {
     try {
@@ -56,48 +58,54 @@ function ExplorerTabPanel() {
       for (const acceptedFile of data.acceptedFiles) {
         const fileName = acceptedFile.name;
         const fileBlob = fromFile(acceptedFile);
-        try {
-          const file = await Promise.resolve()
-            .then(() => graph.createFile(folder, fileName, fileBlob))
-            .then((file) => graph.getFileById(file.id));
-          dispatch(appendExplorerFile(file));
-          route.setParams({
-            tab: TabType.explorer,
-            folder: folder.id,
-            file: file?.id
-          });
-        } catch (error) {
-          if (error instanceof FileConflictError) {
-            const file = folder.files?.find((item) => item.fullName === fileName);
-            if (file == null) {
-              throw new FileNotFoundError();
+        await Promise.resolve()
+          .then(() => graph.createFile(folder, fileName, fileBlob))
+          .then((file) => graph.getFileById(file.id))
+          .then((file) => {
+            dispatch(appendExplorerFile(file));
+            route.setParams({
+              file: file?.id,
+              folder: folder.id,
+              tab: TabType.explorer
+            });
+          })
+          .catch((error) => {
+            if (error instanceof FileConflictError) {
+              const file = folder.files?.find((item) => item.fullName === fileName);
+              if (file == null) {
+                throw new FileNotFoundError();
+              }
+              dispatch(appendExplorerFileConflict({
+                data: fileBlob,
+                id: file.id,
+                name: fileName
+              }));
+            } else {
+              throw error;
             }
-            dispatch(appendExplorerFileConflict({
-              id: file.id,
-              name: fileName,
-              data: fileBlob
-            }));
-          } else {
-            throw error;
-          }
-        }
+          });
       }
       setProgress();
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     }
   }, [
     explorerProps?.selectedFolder,
     graph,
     route,
     dispatch,
+    dispatchToast,
     setProgress
   ]);
 
   const handleCreateFile = React.useCallback(() => {
     dispatch(setDialogAction({
-      type: 'createFile',
-      data: undefined
+      data: undefined,
+      type: 'createFile'
     }));
   }, [
     dispatch
@@ -119,18 +127,23 @@ function ExplorerTabPanel() {
       const file = selectedFolder.files?.find((item) => item.id === data);
       dispatch(setExplorerSelectedFile(file));
       route.setParams({
-        tab: TabType.explorer,
+        file: file?.id,
         folder: selectedFolder.id,
-        file: file?.id
+        tab: TabType.explorer
       });
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     }
   }, [
     explorerProps?.selectedFolder,
     explorerProps?.selectedFile,
     route,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   const handleSelectFolder = React.useCallback(async (_: Event, data?: string) => {
@@ -139,15 +152,19 @@ function ExplorerTabPanel() {
         throw new ArgumentNullError();
       }
       route.setParams({
-        tab: TabType.explorer,
-        folder: data
+        folder: data,
+        tab: TabType.explorer
       });
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     }
   }, [
     route,
-    dispatch
+    dispatchToast
   ]);
 
   return (

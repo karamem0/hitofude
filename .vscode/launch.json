@@ -1,10 +1,10 @@
 {
-  "version": "0.2.0",
+  "version": "1.0.0",
   "configurations": [
     {
-      "type": "chrome",
+      "name": "Launch Client",
+      "type": "msedge",
       "request": "launch",
-      "name": "Launch Chrome",
       "url": "https://localhost:5173",
       "webRoot": "${workspaceFolder}",
       "runtimeArgs": [

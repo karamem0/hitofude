@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import IntlProvider from '../../../providers/IntlProvider';
 import ThemeProvider from '../../../providers/ThemeProvider';
-import userEvent from '@testing-library/user-event';
 
 import Presenter from './FolderCreateDialog.presenter';
 
@@ -48,7 +48,7 @@ it('should match the snapshot when the loading is true', () => {
   );
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('Save')).toBeDisabled();
+  expect(screen.getByText('Save')).toBeDisabled();
 });
 
 it('should match the snapshot when the loading is false', async () => {
@@ -74,5 +74,5 @@ it('should match the snapshot when the loading is false', async () => {
   await user.keyboard('1');
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('Save')).not.toBeDisabled();
+  expect(screen.getByText('Save')).not.toBeDisabled();
 });

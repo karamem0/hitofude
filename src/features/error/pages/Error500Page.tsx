@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,13 +8,17 @@
 
 import React from 'react';
 
-import { FallbackProps } from 'react-error-boundary';
-import Presenter from './Error500Page.presenter';
-import { ThemeName } from '../../../types/Model';
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js';
 import { useTheme } from '../../../providers/ThemeProvider';
+import { ThemeName } from '../../../types/Model';
 
-function Error500Page(props: Readonly<FallbackProps>) {
+import Presenter from './Error500Page.presenter';
+
+interface Error500PageProps {
+  error: Error
+}
+
+function Error500Page(props: Readonly<Error500PageProps>) {
 
   const { error } = props;
 

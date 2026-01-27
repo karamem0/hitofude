@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,18 +8,18 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+import { Toolbar, ToolbarButton, Tooltip } from '@fluentui/react-components';
 import {
   TextBold16Regular,
   TextItalic16Regular,
   TextStrikethrough16Regular,
   TextUnderline16Regular
 } from '@fluentui/react-icons';
-import { Toolbar, ToolbarButton } from '@fluentui/react-components';
+import { useIntl } from 'react-intl';
 import { EventHandler } from '../../../types/Event';
 import { MarkdownToolbarAction } from '../../../types/Model';
-import { css } from '@emotion/react';
 import messages from '../messages';
-import { useIntl } from 'react-intl';
 
 interface MarkdownToolbarProps {
   className?: string,
@@ -42,34 +42,46 @@ function MarkdownToolbar(props: Readonly<MarkdownToolbarProps>) {
         height: 2.5rem;
       `}>
       <Toolbar>
-        <ToolbarButton
-          aria-label={intl.formatMessage(messages.Bold)}
-          title={intl.formatMessage(messages.Bold)}
-          icon={(
-            <TextBold16Regular />
-          )}
-          onClick={(event) => onClick?.(event, 'bold')} />
-        <ToolbarButton
-          aria-label={intl.formatMessage(messages.Italic)}
-          title={intl.formatMessage(messages.Italic)}
-          icon={(
-            <TextItalic16Regular />
-          )}
-          onClick={(event) => onClick?.(event, 'italic')} />
-        <ToolbarButton
-          aria-label={intl.formatMessage(messages.Underline)}
-          title={intl.formatMessage(messages.Underline)}
-          icon={(
-            <TextUnderline16Regular />
-          )}
-          onClick={(event) => onClick?.(event, 'underline')} />
-        <ToolbarButton
-          aria-label={intl.formatMessage(messages.Strikethrough)}
-          title={intl.formatMessage(messages.Strikethrough)}
-          icon={(
-            <TextStrikethrough16Regular />
-          )}
-          onClick={(event) => onClick?.(event, 'strike')} />
+        <Tooltip
+          content={intl.formatMessage(messages.Bold)}
+          relationship="label">
+          <ToolbarButton
+            aria-label={intl.formatMessage(messages.Bold)}
+            icon={(
+              <TextBold16Regular />
+            )}
+            onClick={(event) => onClick?.(event, 'bold')} />
+        </Tooltip>
+        <Tooltip
+          content={intl.formatMessage(messages.Italic)}
+          relationship="label">
+          <ToolbarButton
+            aria-label={intl.formatMessage(messages.Italic)}
+            icon={(
+              <TextItalic16Regular />
+            )}
+            onClick={(event) => onClick?.(event, 'italic')} />
+        </Tooltip>
+        <Tooltip
+          content={intl.formatMessage(messages.Underline)}
+          relationship="label">
+          <ToolbarButton
+            aria-label={intl.formatMessage(messages.Underline)}
+            icon={(
+              <TextUnderline16Regular />
+            )}
+            onClick={(event) => onClick?.(event, 'underline')} />
+        </Tooltip>
+        <Tooltip
+          content={intl.formatMessage(messages.Strikethrough)}
+          relationship="label">
+          <ToolbarButton
+            aria-label={intl.formatMessage(messages.Strikethrough)}
+            icon={(
+              <TextStrikethrough16Regular />
+            )}
+            onClick={(event) => onClick?.(event, 'strike')} />
+        </Tooltip>
       </Toolbar>
     </div>
   );

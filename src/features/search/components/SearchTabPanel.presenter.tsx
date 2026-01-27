@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,23 +8,23 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   Input,
   Text
 } from '@fluentui/react-components';
+import { Dismiss16Regular } from '@fluentui/react-icons';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
-import { Dismiss16Regular } from '@fluentui/react-icons';
+import Tree from '../../../common/components/Tree';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
 import { File } from '../../../types/Model';
-import SearchTreeItem from './SearchFileTreeItem';
-import Tree from '../../../common/components/Tree';
-import { css } from '@emotion/react';
-import { layouts } from '../../../themes/Layout';
 import messages from '../messages';
-import { useTheme } from '../../../providers/ThemeProvider';
+import { SearchTabPanelFormField, SearchTabPanelFormState } from '../types/Form';
+import SearchTreeItem from './SearchFileTreeItem';
 
 interface SearchTabPanelProps {
   form?: UseFormReturn<SearchTabPanelFormState>,
@@ -80,11 +80,11 @@ function SearchTabPanel(props: Readonly<SearchTabPanelProps>) {
           name="query"
           render={({ field }) => (
             <Input
-              ref={field.ref}
               appearance="outline"
               aria-label={intl.formatMessage(messages.Search)}
               disabled={loading}
               placeholder={intl.formatMessage(messages.Search)}
+              ref={field.ref}
               value={field.value}
               contentAfter={(
                 <Button

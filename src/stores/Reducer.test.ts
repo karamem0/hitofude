@@ -1,15 +1,15 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { File, Folder } from '../types/Model';
-import { appendExplorerFile, appendExplorerFolder } from './Action';
-import { State } from '../types/Store';
 import { StorageService } from '../services/StorageService';
+import { File, Folder } from '../types/Model';
+import { State } from '../types/Store';
+import { appendExplorerFile, appendExplorerFolder } from './Action';
 import { reducer } from './Reducer';
 
 beforeEach(() => {
@@ -22,51 +22,51 @@ describe('appendExplorerFile', () => {
   it('should update the state', () => {
     // Setup
     const param = {
-      storage: {} as unknown as Storage,
       accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
-      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
+      data: {
+        baseName: 'qux',
+        id: 'qux'
+      } as File,
       state: {
         explorerProps: {
           selectedFile: {
-            id: 'foo',
-            baseName: 'foo'
+            baseName: 'foo',
+            id: 'foo'
           },
           selectedFolder: {
-            id: 'bar',
-            name: 'bar',
             files: [
               {
-                id: 'baz',
-                baseName: 'baz'
+                baseName: 'baz',
+                id: 'baz'
               }
-            ]
+            ],
+            id: 'bar',
+            name: 'bar'
           }
         }
       } as State,
-      data: {
-        id: 'qux',
-        baseName: 'qux'
-      } as File
+      storage: {} as unknown as Storage,
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     const expected = {
       explorerProps: {
         selectedFile: {
-          id: 'qux',
-          baseName: 'qux'
+          baseName: 'qux',
+          id: 'qux'
         },
         selectedFolder: {
-          id: 'bar',
-          name: 'bar',
           files: [
             {
-              id: 'baz',
-              baseName: 'baz'
+              baseName: 'baz',
+              id: 'baz'
             },
             {
-              id: 'qux',
-              baseName: 'qux'
+              baseName: 'qux',
+              id: 'qux'
             }
-          ]
+          ],
+          id: 'bar',
+          name: 'bar'
         }
       }
     } as State;
@@ -80,44 +80,44 @@ describe('appendExplorerFile', () => {
   it('should not update the state when the payload is undefined', () => {
     // Setup
     const param = {
-      storage: {} as unknown as Storage,
       accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
-      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
+      data: undefined,
       state: {
         explorerProps: {
           selectedFile: {
-            id: 'foo',
-            baseName: 'foo'
+            baseName: 'foo',
+            id: 'foo'
           },
           selectedFolder: {
-            id: 'bar',
-            name: 'bar',
             files: [
               {
-                id: 'baz',
-                baseName: 'baz'
+                baseName: 'baz',
+                id: 'baz'
               }
-            ]
+            ],
+            id: 'bar',
+            name: 'bar'
           }
         }
       } as State,
-      data: undefined
+      storage: {} as unknown as Storage,
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     const expected = {
       explorerProps: {
         selectedFile: {
-          id: 'foo',
-          baseName: 'foo'
+          baseName: 'foo',
+          id: 'foo'
         },
         selectedFolder: {
-          id: 'bar',
-          name: 'bar',
           files: [
             {
-              id: 'baz',
-              baseName: 'baz'
+              baseName: 'baz',
+              id: 'baz'
             }
-          ]
+          ],
+          id: 'bar',
+          name: 'bar'
         }
       }
     } as State;
@@ -135,41 +135,39 @@ describe('appendExplorerFolder', () => {
   it('should update the state', () => {
     // Setup
     const param = {
-      storage: {} as unknown as Storage,
       accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
-      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
+      data: {
+        id: 'qux',
+        name: 'qux'
+      } as Folder,
       state: {
         explorerProps: {
           selectedFile: {
-            id: 'foo',
-            baseName: 'foo'
+            baseName: 'foo',
+            id: 'foo'
           },
           selectedFolder: {
-            id: 'bar',
-            name: 'bar',
             folders: [
               {
                 id: 'baz',
                 name: 'baz'
               }
-            ]
+            ],
+            id: 'bar',
+            name: 'bar'
           }
         }
       } as State,
-      data: {
-        id: 'qux',
-        name: 'qux'
-      } as Folder
+      storage: {} as unknown as Storage,
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     const expected = {
       explorerProps: {
         selectedFile: {
-          id: 'foo',
-          baseName: 'foo'
+          baseName: 'foo',
+          id: 'foo'
         },
         selectedFolder: {
-          id: 'bar',
-          name: 'bar',
           folders: [
             {
               id: 'baz',
@@ -179,7 +177,9 @@ describe('appendExplorerFolder', () => {
               id: 'qux',
               name: 'qux'
             }
-          ]
+          ],
+          id: 'bar',
+          name: 'bar'
         }
       }
     } as State;
@@ -193,44 +193,44 @@ describe('appendExplorerFolder', () => {
   it('should not update the state when the payload is undefined', () => {
     // Setup
     const param = {
-      storage: {} as unknown as Storage,
       accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
-      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059',
+      data: undefined,
       state: {
         explorerProps: {
           selectedFile: {
-            id: 'foo',
-            baseName: 'foo'
+            baseName: 'foo',
+            id: 'foo'
           },
           selectedFolder: {
-            id: 'bar',
-            name: 'bar',
             folders: [
               {
                 id: 'baz',
                 name: 'baz'
               }
-            ]
+            ],
+            id: 'bar',
+            name: 'bar'
           }
         }
       } as State,
-      data: undefined
+      storage: {} as unknown as Storage,
+      tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     const expected = {
       explorerProps: {
         selectedFile: {
-          id: 'foo',
-          baseName: 'foo'
+          baseName: 'foo',
+          id: 'foo'
         },
         selectedFolder: {
-          id: 'bar',
-          name: 'bar',
           folders: [
             {
               id: 'baz',
               name: 'baz'
             }
-          ]
+          ],
+          id: 'bar',
+          name: 'bar'
         }
       }
     } as State;

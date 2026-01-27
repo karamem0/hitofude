@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,16 +8,16 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   DrawerBody,
   DrawerHeader,
   DrawerHeaderTitle
 } from '@fluentui/react-components';
-import { Dismiss16Regular } from '@fluentui/react-icons';
 import { DrawerOverlay } from '@fluentui/react-components/unstable';
+import { Dismiss16Regular } from '@fluentui/react-icons';
 import { EventHandler } from '../../types/Event';
-import { css } from '@emotion/react';
 
 interface SidePanelProps {
   mountNode?: HTMLElement,

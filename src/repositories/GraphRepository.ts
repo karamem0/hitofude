@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -12,19 +12,23 @@ import {
   PageIterator,
   ResponseType
 } from '@microsoft/microsoft-graph-client';
-import { DriveItem, DriveItemVersion, ItemPreviewInfo } from '@microsoft/microsoft-graph-types';
 import {
-  File,
-  FileVersion,
-  Folder
-} from '../types/Model';
+  DriveItem,
+  DriveItemVersion,
+  ItemPreviewInfo
+} from '@microsoft/microsoft-graph-types';
+import { mapper } from '../mappings/AutoMapperProfile';
 import {
   FileConflictError,
   FileNotFoundError,
   FolderConflictError,
   FolderNotFoundError
 } from '../types/Error';
-import { mapper } from '../mappings/AutoMapperProfile';
+import {
+  File,
+  FileVersion,
+  Folder
+} from '../types/Model';
 
 export class GraphRepository {
 
@@ -84,15 +88,15 @@ export class GraphRepository {
       const data = await this.client
         .api(`/me/drive/items/${folder.id}/children`)
         .post({
-          name,
+          '@microsoft.graph.conflictBehavior': 'fail',
           'folder': {},
-          '@microsoft.graph.conflictBehavior': 'fail'
+          name
         });
       const value = data as DriveItem;
       return mapper.map(value, 'DriveItem', 'Folder');
     } catch (error) {
       if (error instanceof GraphError && [ 409 ].includes(error.statusCode)) {
-        throw new FileConflictError(error.message);
+        throw new FolderConflictError(error.message);
       }
       throw error;
     }
@@ -128,7 +132,7 @@ export class GraphRepository {
     try {
       const data = await this.client
         .api(`/me/drive/items/${id}`)
-        .select('content.downloadUrl,createdDateTime,file,id,lastModifiedDateTime,name,parentReference,webUrl')
+        .select('content.downloadUrl,createdDateTime,file,id,lastModifiedDateTime,name,size,parentReference,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.file == null) {
@@ -147,7 +151,7 @@ export class GraphRepository {
     try {
       const data = await this.client
         .api(`/me/drive/root:/${url}`)
-        .select('content.downloadUrl,createdDateTime,file,id,lastModifiedDateTime,name,parentReference,webUrl')
+        .select('content.downloadUrl,createdDateTime,file,id,lastModifiedDateTime,name,size,parentReference,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.file == null) {
@@ -222,8 +226,8 @@ export class GraphRepository {
     try {
       const data = await this.client
         .api(`/me/drive/items/${id}`)
-        .expand('children($select=content.downloadUrl,createdDateTime,file,folder,id,lastModifiedDateTime,name,parentReference,webUrl)')
-        .select('createdDateTime,folder,id,lastModifiedDateTime,name,parentReference,webUrl')
+        .expand('children($select=content.downloadUrl,createdDateTime,file,folder,id,lastModifiedDateTime,name,parentReference,root,size,webUrl)')
+        .select('createdDateTime,folder,id,lastModifiedDateTime,name,parentReference,root,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.folder == null) {
@@ -258,8 +262,8 @@ export class GraphRepository {
     try {
       const data = await this.client
         .api('/me/drive/items/root:/')
-        .expand('children($select=content.downloadUrl,createdDateTime,file,folder,id,lastModifiedDateTime,name,parentReference,webUrl)')
-        .select('createdDateTime,folder,id,lastModifiedDateTime,name,parentReference,webUrl')
+        .expand('children($select=content.downloadUrl,createdDateTime,file,folder,id,lastModifiedDateTime,name,parentReference,root,size,webUrl)')
+        .select('createdDateTime,folder,id,lastModifiedDateTime,name,parentReference,root,webUrl')
         .get();
       const value = data as DriveItem;
       if (value.folder == null) {

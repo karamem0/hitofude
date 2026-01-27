@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,17 +8,15 @@
 
 import React from 'react';
 
-import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
-import {
-  appendExplorerFolder,
-  setDialogAction,
-  setError
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { FolderCreateDialogFormState } from '../types/Form';
-import Presenter from './FolderCreateDialog.presenter';
+import { useToast } from '../../../common/providers/ToastProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { appendExplorerFolder, setDialogAction } from '../../../stores/Action';
+import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
+import { FolderCreateDialogFormState } from '../types/Form';
+
+import Presenter from './FolderCreateDialog.presenter';
 
 function FolderCreateDialog() {
 
@@ -29,6 +27,7 @@ function FolderCreateDialog() {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async (_: Event, data?: FolderCreateDialogFormState) => {
@@ -44,7 +43,11 @@ function FolderCreateDialog() {
       const folder = await graph.createFolder(selectedFolder, `${data.name}`);
       dispatch(appendExplorerFolder(folder));
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
@@ -52,7 +55,8 @@ function FolderCreateDialog() {
   }, [
     explorerProps?.selectedFolder,
     graph,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

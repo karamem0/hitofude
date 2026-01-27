@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,18 +8,16 @@
 
 import React from 'react';
 
-import {
-  setDialogAction,
-  setError,
-  updateExplorerFolder
-} from '../../../stores/Action';
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
+import { setDialogAction, updateExplorerFolder } from '../../../stores/Action';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { Folder } from '../../../types/Model';
 import { FolderRenameDialogFormState } from '../types/Form';
+
 import Presenter from './FolderRenameDialog.presenter';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 
 interface FolderRenameDialogProps {
   value?: Folder
@@ -31,6 +29,7 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
 
   const { dispatch } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async (_: Event, data?: FolderRenameDialogFormState) => {
@@ -45,14 +44,19 @@ function FolderRenameDialog(props: Readonly<FolderRenameDialogProps>) {
       const folder = await graph.renameFolder(data, data.name);
       dispatch(updateExplorerFolder(folder));
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
     }
   }, [
     graph,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

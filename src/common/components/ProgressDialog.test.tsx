@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -10,8 +10,8 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 import IntlProvider from '../../providers/IntlProvider';
-import { ProgressType } from '../../types/Model';
 import ThemeProvider from '../../providers/ThemeProvider';
+import { ProgressType } from '../../types/Model';
 
 import Presenter from './ProgressDialog.presenter';
 

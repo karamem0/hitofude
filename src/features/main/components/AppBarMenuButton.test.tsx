@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,24 +8,22 @@
 
 import React from 'react';
 
-import IntlProvider from '../../providers/IntlProvider';
-import ThemeProvider from '../../providers/ThemeProvider';
 import { render } from '@testing-library/react';
+import IntlProvider from '../../../providers/IntlProvider';
+import ThemeProvider from '../../../providers/ThemeProvider';
 
-import Presenter from './ErrorNotification.presenter';
+import Presenter from './AppBarMenuButton.presenter';
 
 beforeEach(() => {
   vi.clearAllMocks();
   vi.resetModules();
 });
 
-it('should match the snapshot when the message is not undedined', () => {
+it('should match the snapshot when the disabled is true', async () => {
   // Setup
   const params = {
-    message: {
-      id: 'ErrorMessage',
-      defaultMessage: 'Something went wrong'
-    }
+    disabled: true,
+    title: 'Settings'
   };
   // Execute
   const { asFragment } = render(
@@ -39,10 +37,11 @@ it('should match the snapshot when the message is not undedined', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should match the snapshot when the message is undedined', () => {
+it('should match the snapshot when the disabled is false', async () => {
   // Setup
   const params = {
-    message: undefined
+    disabled: false,
+    title: 'Settings'
   };
   // Execute
   const { asFragment } = render(

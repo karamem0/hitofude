@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -40,9 +40,9 @@ function VideoViewer(props: Readonly<VideoViewerProps>) {
 
   return (
     <Presenter
-      ref={ref}
       className={className}
       loading={loading}
+      ref={ref}
       src={src} />
   );
 

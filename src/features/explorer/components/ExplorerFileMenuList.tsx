@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,13 +8,14 @@
 
 import React from 'react';
 
-import { ExplorerMenuAction, File } from '../../../types/Model';
+import { useStore } from '../../../providers/StoreProvider';
+import { setDialogAction } from '../../../stores/Action';
 import { ArgumentNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
-import Presenter from './ExplorerFileMenuList.presenter';
+import { ExplorerMenuAction, File } from '../../../types/Model';
 import { downloadFile } from '../../../utils/File';
-import { setDialogAction } from '../../../stores/Action';
-import { useStore } from '../../../providers/StoreProvider';
+
+import Presenter from './ExplorerFileMenuList.presenter';
 
 interface ExplorerFileMenuListProps {
   file?: File
@@ -32,8 +33,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: 'copyFile',
-          data: value
+          data: value,
+          type: 'copyFile'
         }));
         break;
       }
@@ -43,8 +44,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: 'copyLink',
-          data: value.webUrl
+          data: value.webUrl,
+          type: 'copyLink'
         }));
         break;
       }
@@ -54,8 +55,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: 'deleteFile',
-          data: value
+          data: value,
+          type: 'deleteFile'
         }));
         break;
       }
@@ -84,8 +85,8 @@ function ExplorerFileMenuList(props: Readonly<ExplorerFileMenuListProps>) {
           throw new ArgumentNullError();
         }
         dispatch(setDialogAction({
-          type: 'renameFile',
-          data: value
+          data: value,
+          type: 'renameFile'
         }));
         break;
       }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,8 +8,9 @@
 
 import React from 'react';
 
-import Presenter from './AppContent.presenter';
 import { useStore } from '../../../providers/StoreProvider';
+
+import Presenter from './AppContent.presenter';
 
 function AppContent() {
 

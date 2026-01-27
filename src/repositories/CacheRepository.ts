@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -34,8 +34,8 @@ export class CacheRepository {
 
   async setFolder(folder: Folder): Promise<void> {
     await this.database.table<DexieEntity<Folder>>('folders').put({
-      id: folder.id,
       expired: Date.now() + this.timeout * 1000,
+      id: folder.id,
       value: folder
     });
   }
