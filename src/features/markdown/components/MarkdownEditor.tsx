@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,17 +9,18 @@
 import React from 'react';
 
 import * as monaco from 'monaco-editor';
+import { useEvent } from 'react-use';
+import { useStore } from '../../../providers/StoreProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { EventHandler } from '../../../types/Event';
 import {
   ScrollPosition,
   ScrollSize,
   ThemeName
 } from '../../../types/Model';
-import { EventHandler } from '../../../types/Event';
 import { MarkdownEditorHandle } from '../types/Handle';
+
 import Presenter from './MarkdownEditor.presenter';
-import { useEvent } from 'react-use';
-import { useStore } from '../../../providers/StoreProvider';
-import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MarkdownEditorProps {
   className?: string,
@@ -397,9 +398,9 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<Mar
 
   return (
     <Presenter
-      ref={editorRef}
       className={className}
       preview={showPreview}
+      ref={editorRef}
       tabOpen={tabProps?.open} />
   );
 

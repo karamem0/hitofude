@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,16 +8,17 @@
 
 import React from 'react';
 
-import { Event, EventHandler } from '../../../types/Event';
-import { FormattedMessage, useIntl } from 'react-intl';
 import {
   Menu,
   MenuItem,
   MenuList,
   MenuPopover,
   MenuTrigger,
-  SplitButton
+  SplitButton,
+  Tooltip
 } from '@fluentui/react-components';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Event, EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface ContentSaveButtonProps {
@@ -39,21 +40,23 @@ function ContentSaveButton(props: Readonly<ContentSaveButtonProps>) {
       <MenuTrigger disableButtonEnhancement>
         {
           (trigger) => (
-            <SplitButton
-              appearance="primary"
-              aria-label={intl.formatMessage(messages.Save)}
-              disabled={disabled}
-              menuButton={trigger}
-              title={intl.formatMessage(messages.Save)}
-              onClick={(event: Event) => {
-                const { target } = event;
-                const text = intl.formatMessage(messages.Save);
-                if (target instanceof HTMLButtonElement && target.innerText === text) {
-                  onClick?.(event, true);
-                }
-              }}>
-              <FormattedMessage {...messages.Save} />
-            </SplitButton>
+            <Tooltip
+              content={intl.formatMessage(messages.Save)}
+              relationship="label">
+              <SplitButton
+                appearance="primary"
+                disabled={disabled}
+                menuButton={trigger}
+                onClick={(event: Event) => {
+                  const { target } = event;
+                  const text = intl.formatMessage(messages.Save);
+                  if (target instanceof HTMLButtonElement && target.innerText === text) {
+                    onClick?.(event, true);
+                  }
+                }}>
+                <FormattedMessage {...messages.Save} />
+              </SplitButton>
+            </Tooltip>
           )
         }
       </MenuTrigger>

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   DialogActions,
@@ -18,17 +19,18 @@ import {
   DialogTrigger,
   Input,
   MessageBar,
-  MessageBarTitle
+  MessageBarTitle,
+  Tooltip
 } from '@fluentui/react-components';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { Copy16Regular } from '@fluentui/react-icons';
-import { EventHandler } from '../../../types/Event';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ModalDialog from '../../../common/components/ModalDialog';
-import { css } from '@emotion/react';
+import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface LinkCopyDialogProps {
   copied?: boolean,
+  mountNode?: HTMLElement,
   value?: string,
   onCopy?: EventHandler
 }
@@ -37,6 +39,7 @@ function LinkCopyDialog(props: Readonly<LinkCopyDialogProps>) {
 
   const {
     copied,
+    mountNode,
     value,
     onCopy
   } = props;
@@ -45,7 +48,7 @@ function LinkCopyDialog(props: Readonly<LinkCopyDialogProps>) {
 
   return (
     <ModalDialog>
-      <DialogSurface>
+      <DialogSurface mountNode={mountNode}>
         <DialogBody>
           <DialogTitle>
             <FormattedMessage {...messages.CopyLink} />
@@ -76,14 +79,16 @@ function LinkCopyDialog(props: Readonly<LinkCopyDialogProps>) {
                     readOnly={true}
                     value={value}
                     contentAfter={(
-                      <Button
-                        appearance="transparent"
-                        aria-label={intl.formatMessage(messages.Copy)}
-                        title={intl.formatMessage(messages.Copy)}
-                        icon={(
-                          <Copy16Regular />
-                        )}
-                        onClick={onCopy} />
+                      <Tooltip
+                        content={intl.formatMessage(messages.Copy)}
+                        relationship="label">
+                        <Button
+                          appearance="transparent"
+                          icon={(
+                            <Copy16Regular />
+                          )}
+                          onClick={onCopy} />
+                      </Tooltip>
                     )} />
                 )
               }
@@ -91,12 +96,13 @@ function LinkCopyDialog(props: Readonly<LinkCopyDialogProps>) {
           </DialogContent>
           <DialogActions>
             <DialogTrigger disableButtonEnhancement>
-              <Button
-                appearance="secondary"
-                aria-label={intl.formatMessage(messages.Close)}
-                title={intl.formatMessage(messages.Close)}>
-                <FormattedMessage {...messages.Close} />
-              </Button>
+              <Tooltip
+                content={intl.formatMessage(messages.Close)}
+                relationship="label">
+                <Button appearance="secondary">
+                  <FormattedMessage {...messages.Close} />
+                </Button>
+              </Tooltip>
             </DialogTrigger>
           </DialogActions>
         </DialogBody>

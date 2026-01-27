@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,13 +8,18 @@
 
 import React from 'react';
 
-import { File, Folder } from '../../../types/Model';
+import { css } from '@emotion/react';
+import { Caption1 } from '@fluentui/react-components';
 import { DocumentOnePage16Regular } from '@fluentui/react-icons';
+import bytes from 'bytes';
+import { useIntl } from 'react-intl';
+import TreeItem from '../../../common/components/TreeItem';
 import { EventHandler } from '../../../types/Event';
+import { File, Folder } from '../../../types/Model';
+import { isMarkdown } from '../../../utils/File';
+import messages from '../messages';
 import ExplorerFileConflictButton from './ExplorerFileConflictButton';
 import ExplorerFileMenuList from './ExplorerFileMenuList';
-import TreeItem from '../../../common/components/TreeItem';
-import { isMarkdown } from '../../../utils/File';
 
 interface ExplorerFileTreeItemProps {
   allFiles?: boolean,
@@ -32,6 +37,8 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
     onClick
   } = props;
 
+  const intl = useIntl();
+
   return selectedFolder?.files?.filter((file) => (allFiles ?? false) || isMarkdown(file)).map((file) => (
     <TreeItem
       key={file.id}
@@ -45,6 +52,34 @@ function ExplorerFileTreeItem(props: Readonly<ExplorerFileTreeItemProps>) {
       )}
       menu={(
         <ExplorerFileMenuList file={file} />
+      )}
+      title={(
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+          `}>
+          <Caption1
+            css={css`
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            `}>
+            {intl.formatMessage(messages.Name)}: {file.fullName}
+          </Caption1>
+          <Caption1>
+            {intl.formatMessage(messages.LastModified)}: {intl.formatDate(file.updatedDate, {
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            })}
+          </Caption1>
+          <Caption1>
+            {intl.formatMessage(messages.Size)}: {bytes(file?.size ?? 0, { unitSeparator: ' ' })}
+          </Caption1>
+        </div>
       )}
       onClick={(event) => onClick?.(event, file)} />
   ));

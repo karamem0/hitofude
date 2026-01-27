@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,13 +8,13 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+import Loader from '../../../common/components/Loader';
+import { File } from '../../../types/Model';
+import { isMarkdown } from '../../../utils/File';
 import ContentEmpty from './ContentEmpty';
 import ContentSupported from './ContentSupported';
 import ContentUnsupported from './ContentUnsupported';
-import { File } from '../../../types/Model';
-import Loader from '../../../common/components/Loader';
-import { css } from '@emotion/react';
-import { isMarkdown } from '../../../utils/File';
 
 interface AppContentProps {
   file?: File,

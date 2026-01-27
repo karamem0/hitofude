@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,28 +8,29 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   Menu,
   MenuPopover,
   MenuTrigger,
-  Text
+  Text,
+  Tooltip
 } from '@fluentui/react-components';
-import { ContentMenuAction, File } from '../../../types/Model';
+import { MoreVertical16Regular } from '@fluentui/react-icons';
 import {
   FormattedDate,
   FormattedMessage,
   useIntl
 } from 'react-intl';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
+import { EventHandler } from '../../../types/Event';
+import { ContentMenuAction, File } from '../../../types/Model';
+import { isMarkdown } from '../../../utils/File';
+import messages from '../messages';
 import ContentMenuList from './ContentMenuList';
 import ContentSaveButton from './ContentSaveButton';
-import { EventHandler } from '../../../types/Event';
-import { MoreVertical16Regular } from '@fluentui/react-icons';
-import { css } from '@emotion/react';
-import { isMarkdown } from '../../../utils/File';
-import { layouts } from '../../../themes/Layout';
-import messages from '../messages';
-import { useTheme } from '../../../providers/ThemeProvider';
 
 interface ContentHeaderProps {
   changed?: boolean,
@@ -103,12 +104,13 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
               <ContentSaveButton
                 disabled={!changed}
                 onClick={onSave} />
-              <Button
-                aria-label={intl.formatMessage(messages.Cancel)}
-                title={intl.formatMessage(messages.Cancel)}
-                onClick={onCancel}>
-                <FormattedMessage {...messages.Cancel} />
-              </Button>
+              <Tooltip
+                content={intl.formatMessage(messages.Cancel)}
+                relationship="label">
+                <Button onClick={onCancel}>
+                  <FormattedMessage {...messages.Cancel} />
+                </Button>
+              </Tooltip>
             </div>
           ) : (
             <div
@@ -116,13 +118,15 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
                 display: flex;
                 grid-gap: 0.5rem;
               `}>
-              <Button
-                aria-label={intl.formatMessage(messages.Edit)}
-                disabled={!isMarkdown(file)}
-                title={intl.formatMessage(messages.Edit)}
-                onClick={onEdit}>
-                <FormattedMessage {...messages.Edit} />
-              </Button>
+              <Tooltip
+                content={intl.formatMessage(messages.Edit)}
+                relationship="label">
+                <Button
+                  disabled={!isMarkdown(file)}
+                  onClick={onEdit}>
+                  <FormattedMessage {...messages.Edit} />
+                </Button>
+              </Tooltip>
             </div>
           )
         }
@@ -136,11 +140,11 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
             file.createdDate ? (
               <FormattedDate
                 {...{
-                  year: 'numeric',
-                  month: '2-digit',
                   day: '2-digit',
                   hour: '2-digit',
-                  minute: '2-digit'
+                  minute: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric'
                 }}
                 value={file.updatedDate} />
             ) : null
@@ -150,13 +154,15 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
           file ? (
             <Menu>
               <MenuTrigger>
-                <Button
-                  appearance="transparent"
-                  aria-label={intl.formatMessage(messages.MoreOption)}
-                  title={intl.formatMessage(messages.MoreOption)}
-                  icon={(
-                    <MoreVertical16Regular />
-                  )} />
+                <Tooltip
+                  content={intl.formatMessage(messages.MoreOption)}
+                  relationship="label">
+                  <Button
+                    appearance="transparent"
+                    icon={(
+                      <MoreVertical16Regular />
+                    )} />
+                </Tooltip>
               </MenuTrigger>
               <MenuPopover>
                 <ContentMenuList />
@@ -177,13 +183,15 @@ function ContentHeader(props: Readonly<ContentHeaderProps>) {
         `}>
         <Menu>
           <MenuTrigger>
-            <Button
-              appearance="transparent"
-              aria-label={intl.formatMessage(messages.MoreOption)}
-              title={intl.formatMessage(messages.MoreOption)}
-              icon={(
-                <MoreVertical16Regular />
-              )} />
+            <Tooltip
+              content={intl.formatMessage(messages.MoreOption)}
+              relationship="label">
+              <Button
+                appearance="transparent"
+                icon={(
+                  <MoreVertical16Regular />
+                )} />
+            </Tooltip>
           </MenuTrigger>
           <MenuPopover>
             <ContentMenuList

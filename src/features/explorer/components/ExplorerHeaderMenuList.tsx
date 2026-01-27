@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,24 +8,25 @@
 
 import React from 'react';
 
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
+import {
+  setDialogAction,
+  setExplorerAllFiles,
+  setExplorerSelectedFolder
+} from '../../../stores/Action';
 import { ArgumentNullError, DependencyNullError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
 import {
   ExplorerMenuAction,
   Folder,
   TabType
 } from '../../../types/Model';
-import {
-  setDialogAction,
-  setError,
-  setExplorerAllFiles,
-  setExplorerSelectedFolder
-} from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import Presenter from './ExplorerHeaderMenuList.presenter';
 import { isMarkdown } from '../../../utils/File';
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+
+import Presenter from './ExplorerHeaderMenuList.presenter';
 
 function ExplorerHeaderMenuList() {
 
@@ -37,57 +38,54 @@ function ExplorerHeaderMenuList() {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
 
   const handleMenuClick = React.useCallback(async (_: Event, data?: ExplorerMenuAction) => {
-    switch (data?.type) {
-      case 'copyLink': {
-        const value = data?.data as Folder | undefined;
-        if (value?.webUrl == null) {
-          throw new ArgumentNullError();
+    try {
+      switch (data?.type) {
+        case 'copyLink': {
+          const value = data?.data as Folder | undefined;
+          if (value?.webUrl == null) {
+            throw new ArgumentNullError();
+          }
+          dispatch(setDialogAction({
+            data: value.webUrl,
+            type: 'copyLink'
+          }));
+          break;
         }
-        dispatch(setDialogAction({
-          type: 'copyLink',
-          data: value.webUrl
-        }));
-        break;
-      }
-      case 'createFile': {
-        dispatch(setDialogAction({
-          type: 'createFile',
-          data: null
-        }));
-        break;
-      }
-      case 'createFolder': {
-        dispatch(setDialogAction({
-          type: 'createFolder',
-          data: null
-        }));
-        break;
-      }
-      case 'openWithOneDrive': {
-        const value = data?.data as Folder | undefined;
-        if (value?.webUrl == null) {
-          throw new ArgumentNullError();
+        case 'createFile': {
+          dispatch(setDialogAction({
+            data: null,
+            type: 'createFile'
+          }));
+          break;
         }
-        window.open(value.webUrl, '_blank', 'noreferrer');
-        break;
-      }
-      case 'refreshFolder': {
-        try {
+        case 'createFolder': {
+          dispatch(setDialogAction({
+            data: null,
+            type: 'createFolder'
+          }));
+          break;
+        }
+        case 'openWithOneDrive': {
+          const value = data?.data as Folder | undefined;
+          if (value?.webUrl == null) {
+            throw new ArgumentNullError();
+          }
+          window.open(value.webUrl, '_blank', 'noreferrer');
+          break;
+        }
+        case 'refreshFolder': {
           const value = data?.data as Folder | undefined;
           if (value == null) {
             throw new ArgumentNullError();
           }
           const folder = await graph.getFolderById(value.id, true);
           dispatch(setExplorerSelectedFolder(folder));
-        } catch (error) {
-          dispatch(setError(error as Error));
+          break;
         }
-        break;
-      }
-      case 'toggleAllFiles': {
-        try {
+        case 'toggleAllFiles': {
           const value = data?.data as boolean | undefined;
           if (value == null) {
             throw new ArgumentNullError();
@@ -99,24 +97,29 @@ function ExplorerHeaderMenuList() {
           }
           const file = folder?.files?.find((item) => isMarkdown(explorerProps?.selectedFile) && isMarkdown(item));
           route.setParams({
-            tab: TabType.explorer,
+            file: file?.id,
             folder: folder.id,
-            file: file?.id
+            tab: TabType.explorer
           });
-        } catch (error) {
-          dispatch(setError(error as Error));
+          break;
         }
-        break;
+        default:
+          break;
       }
-      default:
-        break;
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     }
   }, [
     explorerProps?.selectedFile,
     explorerProps?.selectedFolder,
     graph,
     route,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

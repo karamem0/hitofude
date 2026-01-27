@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -19,10 +19,10 @@ describe('getContentShowMinimap', () => {
   it('should get false when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -36,10 +36,10 @@ describe('getContentShowMinimap', () => {
   it('should get true when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -53,10 +53,10 @@ describe('getContentShowMinimap', () => {
   it('should get false when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -74,10 +74,10 @@ describe('getContentShowPreview', () => {
   it('should get false when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -91,10 +91,10 @@ describe('getContentShowPreview', () => {
   it('should get true when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -108,10 +108,10 @@ describe('getContentShowPreview', () => {
   it('should get false when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -129,10 +129,10 @@ describe('getContentSyncScroll', () => {
   it('should get false when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -146,10 +146,10 @@ describe('getContentSyncScroll', () => {
   it('should get true when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -163,10 +163,10 @@ describe('getContentSyncScroll', () => {
   it('should get false when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -184,10 +184,10 @@ describe('getContentWordWrap', () => {
   it('should get false when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -201,10 +201,10 @@ describe('getContentWordWrap', () => {
   it('should get true when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -218,10 +218,10 @@ describe('getContentWordWrap', () => {
   it('should get false when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -239,10 +239,10 @@ describe('getExplorerAllFiles', () => {
   it('should get false when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -256,10 +256,10 @@ describe('getExplorerAllFiles', () => {
   it('should get true when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -273,10 +273,10 @@ describe('getExplorerAllFiles', () => {
   it('should get false when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -294,10 +294,10 @@ describe('getExplorerFileId', () => {
   it('should get the stored value when the it exists', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '5afaf657-ba0d-4086-b265-dd49223554df')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -311,10 +311,10 @@ describe('getExplorerFileId', () => {
   it('should get undefined when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -332,10 +332,10 @@ describe('getExplorerFolderId', () => {
   it('should get the stored value when the it exists', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '2852c972-c060-4d93-a871-225ec23c4524')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -349,10 +349,10 @@ describe('getExplorerFolderId', () => {
   it('should get undefined when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -370,10 +370,10 @@ describe('getTabOpen', () => {
   it('should get false when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -387,10 +387,10 @@ describe('getTabOpen', () => {
   it('should get true when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -404,10 +404,10 @@ describe('getTabOpen', () => {
   it('should get true when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -425,10 +425,10 @@ describe('getTabType', () => {
   it('should get the stored value when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -442,10 +442,10 @@ describe('getTabType', () => {
   it('should get the stored value when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -459,10 +459,10 @@ describe('getTabType', () => {
   it('should get the default value when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -480,10 +480,10 @@ describe('getThemeName', () => {
   it('should get the stored value when the stored value is 0', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '0')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -497,10 +497,10 @@ describe('getThemeName', () => {
   it('should get the stored value when the stored value is 1', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn(() => '1')
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -514,10 +514,10 @@ describe('getThemeName', () => {
   it('should get the default value when the stored value does not exist', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         getItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -535,10 +535,10 @@ describe('setContentShowMinimap', () => {
   it('should set the value to 0 when the false is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -551,10 +551,10 @@ describe('setContentShowMinimap', () => {
   it('should set the value to 1 when the true is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -567,10 +567,10 @@ describe('setContentShowMinimap', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -587,10 +587,10 @@ describe('setContentShowPreview', () => {
   it('should set the value to 0 when the false is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -603,10 +603,10 @@ describe('setContentShowPreview', () => {
   it('should set the value to 1 when the true is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -619,10 +619,10 @@ describe('setContentShowPreview', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -639,10 +639,10 @@ describe('setContentSyncScroll', () => {
   it('should set the value to 0 when the false is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -655,10 +655,10 @@ describe('setContentSyncScroll', () => {
   it('should set the value to 1 when the true is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -671,10 +671,10 @@ describe('setContentSyncScroll', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -691,10 +691,10 @@ describe('setContentWordWrap', () => {
   it('should set the value to 0 when the false is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -707,10 +707,10 @@ describe('setContentWordWrap', () => {
   it('should set the value to 1 when the true is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -723,10 +723,10 @@ describe('setContentWordWrap', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -743,10 +743,10 @@ describe('setExplorerAllFiles', () => {
   it('should set the value to 0 when the false is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -759,10 +759,10 @@ describe('setExplorerAllFiles', () => {
   it('should set the value to 1 when the true is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -775,10 +775,10 @@ describe('setExplorerAllFiles', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -795,10 +795,10 @@ describe('setExplorerFileId', () => {
   it('should set the value when the a value is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -811,10 +811,10 @@ describe('setExplorerFileId', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -831,10 +831,10 @@ describe('setExplorerFileId', () => {
   it('should set the value when the a value is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -847,10 +847,10 @@ describe('setExplorerFileId', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -867,10 +867,10 @@ describe('setTabOpen', () => {
   it('should set the value to 0 when the false is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -883,10 +883,10 @@ describe('setTabOpen', () => {
   it('should set the value to 1 when the true is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -899,10 +899,10 @@ describe('setTabOpen', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -919,10 +919,10 @@ describe('setTabType', () => {
   it('should set the value to 0 when the explorer is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -935,10 +935,10 @@ describe('setTabType', () => {
   it('should set the value to 1 when the search is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -951,10 +951,10 @@ describe('setTabType', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -971,10 +971,10 @@ describe('setThemeName', () => {
   it('should set the value to 0 when the light is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -987,10 +987,10 @@ describe('setThemeName', () => {
   it('should set the value to 1 when the dark is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         setItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute
@@ -1003,10 +1003,10 @@ describe('setThemeName', () => {
   it('should remove the value when the undefined is passed', () => {
     // Setup
     const params = {
+      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       storage: {
         removeItem: vi.fn()
       } as unknown as Storage,
-      accountId: '3a2bc284-f11c-4676-a9e1-6310eea60f26',
       tenantId: 'dd172b04-e4e2-4084-885c-47c9cc57f059'
     };
     // Execute

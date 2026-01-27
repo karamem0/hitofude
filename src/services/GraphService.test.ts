@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { CacheRepository } from '../repositories/CacheRepository';
 import { Client } from '@microsoft/microsoft-graph-client';
 import Dexie from 'dexie';
+import { Mock } from 'vitest';
+import { CacheRepository } from '../repositories/CacheRepository';
 import { GraphRepository } from '../repositories/GraphRepository';
 import { GraphService } from './GraphService';
-import { Mock } from 'vitest';
 
 vi.mock('../repositories/CacheRepository');
 vi.mock('../repositories/GraphRepository');
@@ -26,24 +26,24 @@ describe('copyFile', () => {
   it('should copy the file when the parentId is provided', async () => {
     // Setup
     const params = {
-      sourceFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
-        baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.docx',
-        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
       destinationFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (FINAL)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       },
-      name: 'Annual Financial Report (FINAL).docx'
+      name: 'Annual Financial Report (FINAL).docx',
+      sourceFile: {
+        baseName: 'Annual Financial Report (DRAFT)',
+        extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
+      }
     };
     const expected = {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (FINAL)',
       extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
     };
     const cacheRepository = new CacheRepository({} as Dexie);
@@ -65,19 +65,19 @@ describe('copyFile', () => {
   it('should throw an error when the parentId is undefined', async () => {
     // Setup
     const params = {
-      sourceFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
-        baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.docx',
-        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
       destinationFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (FINAL)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: undefined
       },
-      name: 'Annual Financial Report (FINAL).docx'
+      name: 'Annual Financial Report (FINAL).docx',
+      sourceFile: {
+        baseName: 'Annual Financial Report (DRAFT)',
+        extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
+      }
     };
     const cacheRepository = new CacheRepository({} as Dexie);
     const graphRepository = new GraphRepository({} as Client);
@@ -101,24 +101,24 @@ describe('createFile', () => {
   it('should create a new file when the parentId is provided', async () => {
     // Setup
     const params = {
+      content: new Blob([ '' ], { type: 'text/markdown' }),
+      name: 'Annual Financial Report (DRAFT).md',
+      newFile: {
+        baseName: 'Annual Financial Report (DRAFT)',
+        extension: '.md',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+        parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
+      },
       parentFolder: {
         id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
         name: 'Attachments',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
-      newFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
-        baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.md',
-        parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
-      },
-      name: 'Annual Financial Report (DRAFT).md',
-      content: new Blob([ '' ], { type: 'text/markdown' })
+      }
     };
     const expected = {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
       extension: '.md',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
     };
     const cacheRepository = new CacheRepository({} as Dexie);
@@ -140,19 +140,19 @@ describe('createFile', () => {
   it('should throw an error when the parentId is undefined', async () => {
     // Setup
     const params = {
+      content: new Blob([ '' ], { type: 'text/markdown' }),
+      name: 'Annual Financial Report (DRAFT).md',
+      newFile: {
+        baseName: 'Annual Financial Report (DRAFT)',
+        extension: '.md',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+        parentId: undefined
+      },
       parentFolder: {
         id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
         name: 'Attachments',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
-      newFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
-        baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.md',
-        parentId: undefined
-      },
-      name: 'Annual Financial Report (DRAFT).md',
-      content: new Blob([ '' ], { type: 'text/markdown' })
+      }
     };
     const cacheRepository = new CacheRepository({} as Dexie);
     const graphRepository = new GraphRepository({} as Client);
@@ -176,17 +176,17 @@ describe('createFolder', () => {
   it('should create a new folder when the parentId is provided', async () => {
     // Setup
     const params = {
-      parentFolder: {
-        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
-        name: 'Attachments',
-        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
+      name: 'Demo Files',
       newFolder: {
         id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
         name: 'Demo Files',
         parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
       },
-      name: 'Demo Files'
+      parentFolder: {
+        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
+        name: 'Attachments',
+        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
+      }
     };
     const expected = {
       id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
@@ -212,17 +212,17 @@ describe('createFolder', () => {
   it('should throw an error when the parentId is undefined', async () => {
     // Setup
     const params = {
-      parentFolder: {
-        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
-        name: 'Attachments',
-        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
+      name: 'Demo Files',
       newFolder: {
         id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
         name: 'Demo Files',
         parentId: undefined
       },
-      name: 'Demo Files'
+      parentFolder: {
+        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
+        name: 'Attachments',
+        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
+      }
     };
     const cacheRepository = new CacheRepository({} as Dexie);
     const graphRepository = new GraphRepository({} as Client);
@@ -247,9 +247,9 @@ describe('deleteFile', () => {
     // Setup
     const params = {
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       }
     };
@@ -271,9 +271,9 @@ describe('deleteFile', () => {
     // Setup
     const params = {
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: undefined
       }
     };
@@ -349,17 +349,17 @@ describe('getFileById', () => {
     // Setup
     const params = {
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       },
       id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
     };
     const expected = {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
       extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
     };
     const cacheRepository = new CacheRepository({} as Dexie);
@@ -382,17 +382,17 @@ describe('getFileByUrl', () => {
     // Setup
     const params = {
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       },
       url: 'Attachments/Annual%20Financial%20Report%20(DRAFT).docx'
     };
     const expected = {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
       extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
     };
     const cacheRepository = new CacheRepository({} as Dexie);
@@ -415,9 +415,9 @@ describe('getFilePreviewUrl', () => {
     // Setup
     const params = {
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       },
       previewUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=5adb5f85-9453-4e1d-889b-7a72e76e214c'
@@ -443,10 +443,10 @@ describe('getFileText', () => {
     // Setup
     const params = {
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.docx',
         downloadUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/_layouts/15/download.aspx?UniqueId=5adb5f85-9453-4e1d-889b-7a72e76e214c&Translate=false&tempauth=v1.eyJzaXRlaWQiOiJkODIzMTJmOS1iMjNiLTRjYmMtOTVkNS0zZTBkOTRlNjhjMWUiLCJhcHBfZGlzcGxheW5hbWUiOiJhcGlzYW5kYm94cHJveHkiLCJhcHBpZCI6IjA1YjEwYTJkLTYyZGItNDIwYy04NjI2LTU1ZjNhNWU3ODY1YiIsImF1ZCI6IjAwMDAwMDAzLTAwMDAtMGZmMS1jZTAwLTAwMDAwMDAwMDAwMC9tMzY1eDIxNDM1NS1teS5zaGFyZXBvaW50LmNvbUBkY2QyMTlkZC1iYzY4LTRiOWItYmYwYi00YTMzYTc5NmJlMzUiLCJleHAiOiIxNzQ0MTYxNjk2In0.CgoKBHNuaWQSAjY0EgsIiprM2dDB-z0QBRoOMjAuMTkwLjE0NC4xNzAqLHJXOGFHck92ckUzbGc2bUZEeHVQQUNFeFJUZ1g2NGdpYkwyNmlWMGl6eDg9MKkBOAFCEKGSoZUzoAAAlxBRVhTEOzpKEGhhc2hlZHByb29mdG9rZW5yKTBoLmZ8bWVtYmVyc2hpcHwxMDAzYmZmZGEzODEzMWFmQGxpdmUuY29tegEyggESCd0Z0txovJtLEb8LSjOnlr41kgEFTWVnYW6aAQVCb3dlbqIBIm1lZ2FuYkBtMzY1eDIxNDM1NS5vbm1pY3Jvc29mdC5jb22qARAxMDAzQkZGREEzODEzMUFGsgFWbXlmaWxlcy5yZWFkIGdyb3VwLnJlYWQgYWxsc2l0ZXMucmVhZCBhbGxwcm9maWxlcy5yZWFkIGFsbHByb2ZpbGVzLnJlYWQgdGVybXN0b3JlLnJlYWTIAQE.98_0VuXaD1fwkqDhqlKpGFwTSPzEitJYd3wxh5tAKcI&ApiVersion=2.0',
+        extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       },
       text: 'Annual Financial Report'
@@ -472,9 +472,9 @@ describe('getFileVersion', () => {
     // Setup
     const params = {
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       },
       fileVersions: [
@@ -514,8 +514,8 @@ describe('getFolderById', () => {
         name: 'Demo Files',
         parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
       },
-      id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
-      force: false
+      force: false,
+      id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL'
     };
     const expected = {
       id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
@@ -546,8 +546,8 @@ describe('getFolderById', () => {
         name: 'Demo Files',
         parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
       },
-      id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
-      force: true
+      force: true,
+      id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL'
     };
     const expected = {
       id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
@@ -577,24 +577,24 @@ describe('renameFile', () => {
   it('should rename a file when the parentId is provided', async () => {
     // Setup
     const params = {
-      sourceFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
-        baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.docx',
-        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
       destinationFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (FINAL)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
       },
-      name: 'Annual Financial Report (FINAL).docx'
+      name: 'Annual Financial Report (FINAL).docx',
+      sourceFile: {
+        baseName: 'Annual Financial Report (DRAFT)',
+        extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
+      }
     };
     const expected = {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (FINAL)',
       extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
     };
     const cacheRepository = new CacheRepository({} as Dexie);
@@ -616,19 +616,19 @@ describe('renameFile', () => {
   it('should throw an error when the parentId is undefined', async () => {
     // Setup
     const params = {
-      sourceFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
-        baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.docx',
-        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
       destinationFile: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (FINAL)',
         extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: undefined
       },
-      name: 'Annual Financial Report (FINAL).docx'
+      name: 'Annual Financial Report (FINAL).docx',
+      sourceFile: {
+        baseName: 'Annual Financial Report (DRAFT)',
+        extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
+        parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
+      }
     };
     const cacheRepository = new CacheRepository({} as Dexie);
     const graphRepository = new GraphRepository({} as Client);
@@ -652,17 +652,17 @@ describe('renameFolder', () => {
   it('should rename a folder when the parentId is provided', async () => {
     // Setup
     const params = {
-      sourceFolder: {
-        id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
-        name: 'Demo Files',
-        parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
-      },
       destinationFolder: {
         id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
         name: 'Review Files',
         parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
       },
-      name: 'Review Files'
+      name: 'Review Files',
+      sourceFolder: {
+        id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
+        name: 'Demo Files',
+        parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
+      }
     };
     const expected = {
       id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
@@ -688,17 +688,17 @@ describe('renameFolder', () => {
   it('should throw an error when the parentId is undefined', async () => {
     // Setup
     const params = {
-      sourceFolder: {
-        id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
-        name: 'Demo Files',
-        parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
-      },
       destinationFolder: {
         id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
         name: 'Review Files',
         parentId: undefined
       },
-      name: 'Review Files'
+      name: 'Review Files',
+      sourceFolder: {
+        id: '01Y2C275TA3MBZ4IEGIFCJPWWFSSPSHADL',
+        name: 'Demo Files',
+        parentId: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
+      }
     };
     const cacheRepository = new CacheRepository({} as Dexie);
     const graphRepository = new GraphRepository({} as Client);
@@ -795,20 +795,20 @@ describe('searchFiles', () => {
   it('should search for files', async () => {
     // Setup
     const params = {
-      query: 'Annual Financial Report (DRAFT)',
       files: [
         {
-          id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
           baseName: 'Annual Financial Report (DRAFT)',
-          extension: '.docx'
+          extension: '.docx',
+          id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
         }
-      ]
+      ],
+      query: 'Annual Financial Report (DRAFT)'
     };
     const expected = [
       {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
-        extension: '.docx'
+        extension: '.docx',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
       }
     ];
     const cacheRepository = new CacheRepository({} as Dexie);
@@ -830,18 +830,18 @@ describe('setFileContent', () => {
   it('should set the content of a file', async () => {
     // Setup
     const params = {
+      content: new Blob([ '' ], { type: 'text/markdown' }),
       file: {
-        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         baseName: 'Annual Financial Report (DRAFT)',
         extension: '.md',
+        id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
-      },
-      content: new Blob([ '' ], { type: 'text/markdown' })
+      }
     };
     const expected = {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
       extension: '.md',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
     };
     const cacheRepository = new CacheRepository({} as Dexie);

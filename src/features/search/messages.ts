@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -13,8 +13,11 @@ const messages = {
   ...parentMessages,
   ...defineMessages({
     CopyLink: { defaultMessage: 'Copy link' },
+    LastModified: { defaultMessage: 'Last modified' },
+    Name: { defaultMessage: 'Name' },
     OpenFileLocation: { defaultMessage: 'Open file location' },
-    Search: { defaultMessage: 'Search' }
+    Search: { defaultMessage: 'Search' },
+    Size: { defaultMessage: 'Size' }
   })
 };
 

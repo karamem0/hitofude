@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,17 +8,18 @@
 
 import React from 'react';
 
-import { Event, EventHandler } from '../../../types/Event';
-import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
+import { useStore } from '../../../providers/StoreProvider';
 import {
   setMarkdownChanged,
   setMarkdownScrollPosition,
   setMarkdownText
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
+import { Event, EventHandler } from '../../../types/Event';
+import { MarkdownToolbarAction, ScrollPosition } from '../../../types/Model';
 import { MarkdownEditorHandle } from '../../markdown/types/Handle';
+
 import Presenter from './ContentMarkdown.presenter';
-import { useStore } from '../../../providers/StoreProvider';
 
 interface ContentMarkdownProps {
   onSave?: EventHandler

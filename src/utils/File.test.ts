@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -323,8 +323,8 @@ describe('isMimeType', () => {
   it('should get true when the value matches the type pattern', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: 'text/*'
+      match: 'text/*',
+      value: 'text/plain'
     };
     const expected = {
       value: true
@@ -338,8 +338,8 @@ describe('isMimeType', () => {
   it('should get true when the value matches the subtype pattern', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: '*/plain'
+      match: '*/plain',
+      value: 'text/plain'
     };
     const expected = {
       value: true
@@ -353,8 +353,8 @@ describe('isMimeType', () => {
   it('should get true when the value matches both type and subtype', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: 'text/plain'
+      match: 'text/plain',
+      value: 'text/plain'
     };
     const expected = {
       value: true
@@ -368,8 +368,8 @@ describe('isMimeType', () => {
   it('should get false when the value does not match the type pattern', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: 'image/*'
+      match: 'image/*',
+      value: 'text/plain'
     };
     const expected = {
       value: false
@@ -383,8 +383,8 @@ describe('isMimeType', () => {
   it('should get false when the value does not match the subtype pattern', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: '*/markdown'
+      match: '*/markdown',
+      value: 'text/plain'
     };
     const expected = {
       value: false
@@ -398,8 +398,8 @@ describe('isMimeType', () => {
   it('should get false when the value is null', () => {
     // Setup
     const param = {
-      value: undefined,
-      match: 'text/plain'
+      match: 'text/plain',
+      value: undefined
     };
     const expected = {
       value: false
@@ -413,8 +413,8 @@ describe('isMimeType', () => {
   it('should get false when the value is null', () => {
     // Setup
     const param = {
-      value: null,
-      match: 'text/plain'
+      match: 'text/plain',
+      value: null
     };
     const expected = {
       value: false
@@ -428,8 +428,8 @@ describe('isMimeType', () => {
   it('should get false when the value is undefined', () => {
     // Setup
     const param = {
-      value: undefined,
-      match: 'text/plain'
+      match: 'text/plain',
+      value: undefined
     };
     const expected = {
       value: false
@@ -443,8 +443,8 @@ describe('isMimeType', () => {
   it('should get false when the value is invalid', () => {
     // Setup
     const param = {
-      value: 'unknown',
-      match: 'text/plain'
+      match: 'text/plain',
+      value: 'unknown'
     };
     const expected = {
       value: false
@@ -458,8 +458,8 @@ describe('isMimeType', () => {
   it('should get false when the match pattern is null', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: null
+      match: null,
+      value: 'text/plain'
     };
     const expected = {
       value: false
@@ -473,8 +473,8 @@ describe('isMimeType', () => {
   it('should get false when the match pattern is undefined', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: undefined
+      match: undefined,
+      value: 'text/plain'
     };
     const expected = {
       value: false
@@ -488,8 +488,8 @@ describe('isMimeType', () => {
   it('should get false when the match pattern is invalid', () => {
     // Setup
     const param = {
-      value: 'text/plain',
-      match: 'unknown'
+      match: 'unknown',
+      value: 'text/plain'
     };
     const expected = {
       value: false

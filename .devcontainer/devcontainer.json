@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/git-lfs:1": {},
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "22.21.1"
+      "version": "22.22.0"
     }
   },
   "postCreateCommand": {
@@ -17,7 +17,8 @@
         "github.vscode-github-actions",
         "redhat.vscode-yaml",
         "redhat.vscode-xml",
-        "styled-components.vscode-styled-components"
+        "styled-components.vscode-styled-components",
+        "vitest.explorer"
       ],
       "settings": {
         "redhat.telemetry.enabled": false

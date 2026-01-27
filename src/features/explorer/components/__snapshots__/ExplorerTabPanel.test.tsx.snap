@@ -83,8 +83,7 @@ exports[`should match the snapshot when the folder is not undedined 1`] = `
       >
         <button
           aria-label="New file"
-          class="fui-Button r1alrhcs ___1xubhwp_oht9j80 f1c21dwh fjxutwb fwiml72"
-          title="New file"
+          class="fui-Button r1f29ykk ___vr05s10_nie39z0 f1c21dwh fjxutwb fkoldzo"
           type="button"
         >
           <span
@@ -92,7 +91,7 @@ exports[`should match the snapshot when the folder is not undedined 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
+              class="fui-Icon ___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
               fill="currentColor"
               height="16"
               viewBox="0 0 16 16"
@@ -116,7 +115,7 @@ exports[`should match the snapshot when the folder is not undedined 1`] = `
 exports[`should match the snapshot when the folder is undedined 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProvider_r_1_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_2_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   />
 </DocumentFragment>

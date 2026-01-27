@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,13 +8,14 @@
 
 import React from 'react';
 
-import { FileNotFoundError } from '../../../types/Error';
-import Presenter from './MeControl.presenter';
-import messages from '../messages';
-import { useError } from 'react-use';
-import { useIntl } from 'react-intl';
 import { useMsal } from '@azure/msal-react';
+import { useIntl } from 'react-intl';
+import { useError } from 'react-use';
 import { useService } from '../../../providers/ServiceProvider';
+import { FileNotFoundError } from '../../../types/Error';
+import messages from '../messages';
+
+import Presenter from './MeControl.presenter';
 
 function MeControl() {
 

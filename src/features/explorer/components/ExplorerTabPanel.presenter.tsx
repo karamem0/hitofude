@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,23 +8,23 @@
 
 import React from 'react';
 
-import { Button, Text } from '@fluentui/react-components';
-import { File, Folder } from '../../../types/Model';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { css } from '@emotion/react';
+import { Button, Text, Tooltip } from '@fluentui/react-components';
 import { Add16Regular } from '@fluentui/react-icons';
-import { DropEventData } from '../types/Event';
+import { useDropzone } from 'react-dropzone';
+import { FormattedMessage, useIntl } from 'react-intl';
+import Tree from '../../../common/components/Tree';
+import TreeHeader from '../../../common/components/TreeHeader';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
 import { EventHandler } from '../../../types/Event';
+import { File, Folder } from '../../../types/Model';
+import { isEmpty } from '../../../utils/Folder';
+import messages from '../messages';
+import { DropEventData } from '../types/Event';
 import ExplorerFileTreeItem from './ExplorerFileTreeItem';
 import ExplorerFolderTreeItem from './ExplorerFolderTreeItem';
 import ExplorerHeaderMenuList from './ExplorerHeaderMenuList';
-import Tree from '../../../common/components/Tree';
-import TreeHeader from '../../../common/components/TreeHeader';
-import { css } from '@emotion/react';
-import { isEmpty } from '../../../utils/Folder';
-import { layouts } from '../../../themes/Layout';
-import messages from '../messages';
-import { useDropzone } from 'react-dropzone';
-import { useTheme } from '../../../providers/ThemeProvider';
 
 interface ExplorerTabPanelProps {
   allFiles?: boolean,
@@ -50,9 +50,9 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
   const intl = useIntl();
   const { theme } = useTheme();
   const {
-    isDragActive,
+    getInputProps,
     getRootProps,
-    getInputProps
+    isDragActive
   } = useDropzone({
     accept: {
       'text/markdown': [ '.md' ]
@@ -130,16 +130,18 @@ function ExplorerTabPanel(props: Readonly<ExplorerTabPanelProps>) {
           display: grid;
           padding: 0 0.5rem;
         `}>
-        <Button
-          appearance="outline"
-          aria-label={intl.formatMessage(messages.NewFile)}
-          title={intl.formatMessage(messages.NewFile)}
-          icon={(
-            <Add16Regular />
-          )}
-          onClick={onCreateFile}>
-          <FormattedMessage {...messages.NewFile} />
-        </Button>
+        <Tooltip
+          content={intl.formatMessage(messages.NewFile)}
+          relationship="label">
+          <Button
+            appearance="outline"
+            icon={(
+              <Add16Regular />
+            )}
+            onClick={onCreateFile}>
+            <FormattedMessage {...messages.NewFile} />
+          </Button>
+        </Tooltip>
       </div>
     </div>
   ) : null;

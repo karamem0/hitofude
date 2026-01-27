@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,17 +8,18 @@
 
 import React from 'react';
 
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentText,
   setDialogAction,
-  setError,
   setSidePanelAction
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { FileVersion } from '../../../types/Model';
+
 import Presenter from './FileRestoreDialog.presenter';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 
 interface FileRestoreDialogProps {
   value?: FileVersion
@@ -35,6 +36,7 @@ function FileDeleteDialog(props: Readonly<FileRestoreDialogProps>) {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async () => {
@@ -49,7 +51,11 @@ function FileDeleteDialog(props: Readonly<FileRestoreDialogProps>) {
       await graph.restoreFile(value);
       dispatch(setContentText(await graph.getFileText(contentFile)));
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
@@ -59,7 +65,8 @@ function FileDeleteDialog(props: Readonly<FileRestoreDialogProps>) {
     contentProps?.file,
     graph,
     value,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

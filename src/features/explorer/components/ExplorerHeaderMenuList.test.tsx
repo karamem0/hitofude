@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { Menu, MenuPopover } from '@fluentui/react-components';
+import { render } from '@testing-library/react';
 import IntlProvider from '../../../providers/IntlProvider';
 import ThemeProvider from '../../../providers/ThemeProvider';
-import { render } from '@testing-library/react';
 
 import Presenter from './ExplorerHeaderMenuList.presenter';
 
@@ -26,17 +26,17 @@ it('should match the snapshot when the folder is not undefined', () => {
   const params = {
     allFiles: true,
     selectedFolder: {
-      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
-      name: 'Attachments',
-      parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ',
       files: [
         {
-          id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
           baseName: 'Annual Financial Report (DRAFT)',
+          extension: '.docx',
           fullName: 'Annual Financial Report (DRAFT).docx',
-          extension: '.docx'
+          id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
         }
-      ]
+      ],
+      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
+      name: 'Attachments',
+      parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ'
     }
   };
   // Execute
@@ -44,8 +44,8 @@ it('should match the snapshot when the folder is not undefined', () => {
     <IntlProvider>
       <ThemeProvider>
         <Menu
-          mountNode={container}
-          open>
+          open
+          mountNode={container}>
           <MenuPopover>
             <Presenter {...params} />
           </MenuPopover>
@@ -72,8 +72,8 @@ it('should match the snapshot when the folder is undefined', () => {
     <IntlProvider>
       <ThemeProvider>
         <Menu
-          mountNode={container}
-          open>
+          open
+          mountNode={container}>
           <MenuPopover>
             <Presenter {...params} />
           </MenuPopover>

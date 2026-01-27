@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,20 +8,21 @@
 
 import React from 'react';
 
+import { useProgress } from '../../../common/providers/ProgressProvider';
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 import {
   setContentEditing,
   setContentFile,
   setContentScrollPosition,
-  setContentText,
-  setError
+  setContentText
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
-import Presenter from './ContentSupported.presenter';
 import { fromText } from '../../../utils/Blob';
-import { useProgress } from '../../../common/providers/ProgressProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
+
+import Presenter from './ContentSupported.presenter';
 
 function ContentSupported() {
 
@@ -33,6 +34,7 @@ function ContentSupported() {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const { setProgress } = useProgress();
 
   const handleCancel = React.useCallback(() => {
@@ -55,8 +57,8 @@ function ContentSupported() {
       }
       const {
         changed,
-        text,
-        scrollPosition
+        scrollPosition,
+        text
       } = markdownProps;
       if (changed) {
         const contentFile = contentProps?.file;
@@ -73,7 +75,11 @@ function ContentSupported() {
         dispatch(setContentEditing(data));
       }
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setProgress();
     }
@@ -82,6 +88,7 @@ function ContentSupported() {
     graph,
     markdownProps,
     dispatch,
+    dispatchToast,
     setProgress
   ]);
 

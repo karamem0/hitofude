@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -26,18 +26,18 @@ interface ScrollSynchronizerState {
 }
 
 interface ScrollSynchronizerProps {
-  enabled?: boolean,
   defaultElement1Position?: ScrollPosition,
   defaultElement2Position?: ScrollPosition,
+  enabled?: boolean,
   render?: (state: ScrollSynchronizerState) => React.ReactNode
 }
 
 function ScrollSynchronizer(props: Readonly<ScrollSynchronizerProps>) {
 
   const {
-    enabled,
     defaultElement1Position,
     defaultElement2Position,
+    enabled,
     render
   } = props;
 

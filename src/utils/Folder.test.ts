@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -18,12 +18,12 @@ describe('isEmpty', () => {
   it('should get true when the folder is empty', () => {
     // Setup
     const param = {
+      allFiles: false,
       folder: {
-        id: 'foo',
+        files: [],
         folders: [],
-        files: []
-      },
-      allFiles: false
+        id: 'foo'
+      }
     };
     const expected = {
       value: true
@@ -37,19 +37,19 @@ describe('isEmpty', () => {
   it('should get true when the folder contains unsupported files', () => {
     // Setup
     const param = {
+      allFiles: false,
       folder: {
-        id: 'foo',
-        folders: [],
         files: [
           {
-            id: 'bar',
-            fullName: 'bar.dat',
             baseName: 'bar',
+            fullName: 'bar.dat',
+            id: 'bar',
             mimeType: 'application/octet-stream'
           }
-        ]
-      },
-      allFiles: false
+        ],
+        folders: [],
+        id: 'foo'
+      }
     };
     const expected = {
       value: true
@@ -63,18 +63,18 @@ describe('isEmpty', () => {
   it('should get false when the folder contains subfolders', () => {
     // Setup
     const param = {
+      allFiles: false,
       folder: {
-        id: 'foo',
+        files: [],
         folders: [
           {
-            id: 'bar',
+            files: [],
             folders: [],
-            files: []
+            id: 'bar'
           }
         ],
-        files: []
-      },
-      allFiles: false
+        id: 'foo'
+      }
     };
     const expected = {
       value: false
@@ -88,19 +88,19 @@ describe('isEmpty', () => {
   it('should get false when the folder contains supported files', () => {
     // Setup
     const param = {
+      allFiles: false,
       folder: {
-        id: 'foo',
-        folders: [],
         files: [
           {
-            id: 'bar',
-            fullName: 'bar.md',
             baseName: 'bar',
+            fullName: 'bar.md',
+            id: 'bar',
             mimeType: 'text/markdown'
           }
-        ]
-      },
-      allFiles: false
+        ],
+        folders: [],
+        id: 'foo'
+      }
     };
     const expected = {
       value: false
@@ -114,19 +114,19 @@ describe('isEmpty', () => {
   it('should get false when the folder contains unsupported files but is configured to show all files', () => {
     // Setup
     const param = {
+      allFiles: true,
       folder: {
-        id: 'foo',
-        folders: [],
         files: [
           {
-            id: 'bar',
-            fullName: 'bar.dat',
             baseName: 'bar',
+            fullName: 'bar.dat',
+            id: 'bar',
             mimeType: 'application/octet-stream'
           }
-        ]
-      },
-      allFiles: true
+        ],
+        folders: [],
+        id: 'foo'
+      }
     };
     const expected = {
       value: false

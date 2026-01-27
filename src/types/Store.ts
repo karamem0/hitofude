@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -17,8 +17,8 @@ import {
 } from './Model';
 
 export interface Action {
-  type: ActionType,
-  data: unknown
+  data: unknown,
+  type: ActionType
 }
 
 export enum ActionType {
@@ -39,7 +39,6 @@ export enum ActionType {
   setContentText = 'setContentText',
   setContentWordWrap = 'setContentWordWrap',
   setDialogAction = 'setDialogAction',
-  setError = 'setError',
   setExplorerAllFiles = 'setExplorerAllFiles',
   setExplorerSelectedFile = 'setExplorerSelectedFile',
   setExplorerSelectedFolder = 'setExplorerSelectedFolder',
@@ -62,7 +61,6 @@ export enum ActionType {
 export interface State {
   contentProps?: ContentProps,
   dialogAction?: DialogAction,
-  error?: Error,
   explorerProps?: ExplorerProps,
   markdownProps?: MarkdownProps,
   searchProps?: SearchProps,

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,17 +8,18 @@
 
 import React from 'react';
 
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useRoute } from '../../../providers/RouteProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
+import { setDialogAction } from '../../../stores/Action';
 import { ArgumentNullError, FolderNotFoundError } from '../../../types/Error';
+import { Event } from '../../../types/Event';
 import {
   File,
   SearchMenuAction,
   TabType
 } from '../../../types/Model';
-import { setDialogAction, setError } from '../../../stores/Action';
-import { Event } from '../../../types/Event';
-import { useRoute } from '../../../providers/RouteProvider';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 
 import Presenter from './SearchFileTreeItem.presenter';
 
@@ -32,27 +33,24 @@ function SearchFileTreeItem() {
     }
   } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
 
   const handleMenuClick = React.useCallback(async (_: Event, data?: SearchMenuAction) => {
-    switch (data?.type) {
-      case 'copyLink': {
-        try {
+    try {
+      switch (data?.type) {
+        case 'copyLink': {
           const value = data?.data as File | undefined;
           if (value?.id == null) {
             throw new ArgumentNullError();
           }
           const file = await graph.getFileById(value?.id);
           dispatch(setDialogAction({
-            type: 'copyLink',
-            data: file.webUrl
+            data: file.webUrl,
+            type: 'copyLink'
           }));
-        } catch (error) {
-          dispatch(setError(error as Error));
+          break;
         }
-        break;
-      }
-      case 'openFileLocation': {
-        try {
+        case 'openFileLocation': {
           const value = data?.data as File | undefined;
           if (value?.id == null) {
             throw new ArgumentNullError();
@@ -63,22 +61,27 @@ function SearchFileTreeItem() {
           }
           const folder = await graph.getFolderById(file.parentId);
           route.setParams({
-            tab: TabType.explorer,
+            file: value.id,
             folder: folder.id,
-            file: value.id
+            tab: TabType.explorer
           });
-        } catch (error) {
-          dispatch(setError(error as Error));
+          break;
         }
-        break;
+        default:
+          break;
       }
-      default:
-        break;
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     }
   }, [
     graph,
     route,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   const handleClick = React.useCallback(async (_: Event, data?: File) => {
@@ -86,9 +89,9 @@ function SearchFileTreeItem() {
       throw new ArgumentNullError();
     }
     route.setParams({
-      tab: TabType.search,
+      file: data.id,
       search: searchProps?.query,
-      file: data.id
+      tab: TabType.search
     });
   }, [
     route,

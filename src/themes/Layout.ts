@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -11,9 +11,9 @@ export const layouts = {
     width: '3.5rem'
   },
   appTab: {
+    height: 'calc(100svh - 5.5rem)',
     maxWidth: 'calc(100vw - 4rem)',
-    width: '20rem',
-    height: 'calc(100svh - 5.5rem)'
+    width: '20rem'
   },
   contentBody: {
     height: {

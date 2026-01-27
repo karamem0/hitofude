@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,8 +8,10 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Avatar,
+  Caption1,
   Menu,
   MenuDivider,
   MenuGroup,
@@ -18,11 +20,11 @@ import {
   MenuList,
   MenuPopover,
   MenuTrigger,
-  Text
+  Text,
+  Tooltip
 } from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
 import { FormattedMessage } from 'react-intl';
-import { css } from '@emotion/react';
+import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface MeControlProps {
@@ -48,15 +50,41 @@ function MeControl(props: Readonly<MeControlProps>) {
   return (
     <Menu>
       <MenuTrigger>
-        <Avatar
-          name={userName}
-          title={userName}
-          css={css`
-            cursor: pointer;
-          `}
-          image={{
-            src: photo
-          }} />
+        <Tooltip
+          relationship="label"
+          content={(
+            <div
+              css={css`
+                display: flex;
+                flex-direction: column;
+              `}>
+              <Caption1
+                css={css`
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                `}>
+                {userName}
+              </Caption1>
+              <Caption1
+                css={css`
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                `}>
+                {userId}
+              </Caption1>
+            </div>
+          )}>
+          <Avatar
+            name={userName}
+            css={css`
+              cursor: pointer;
+            `}
+            image={{
+              src: photo
+            }} />
+        </Tooltip>
       </MenuTrigger>
       <MenuPopover>
         <MenuList>

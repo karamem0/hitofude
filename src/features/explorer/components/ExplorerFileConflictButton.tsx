@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,11 +8,12 @@
 
 import React from 'react';
 
-import { File, FileConflict } from '../../../types/Model';
-import { Event } from '../../../types/Event';
-import Presenter from './ExplorerFileConflictButton.presenter';
-import { setDialogAction } from '../../../stores/Action';
 import { useStore } from '../../../providers/StoreProvider';
+import { setDialogAction } from '../../../stores/Action';
+import { Event } from '../../../types/Event';
+import { File, FileConflict } from '../../../types/Model';
+
+import Presenter from './ExplorerFileConflictButton.presenter';
 
 interface ExplorerFileConflictButtonProps {
   file?: File
@@ -34,8 +35,8 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
   const handleClick = React.useCallback((event: Event) => {
     event.stopPropagation();
     dispatch(setDialogAction({
-      type: 'overwriteFile',
-      data: conflictedFile
+      data: conflictedFile,
+      type: 'overwriteFile'
     }));
   }, [
     conflictedFile,

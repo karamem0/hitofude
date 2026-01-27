@@ -79,9 +79,6 @@ exports[`should match the snapshot 1`] = `
     dir="ltr"
   >
     <div
-      data-testid="test-ErrorNotification"
-    />
-    <div
       data-testid="test-DialogFactory"
     />
     <div

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,11 +8,7 @@
 
 import React from 'react';
 
-import {
-  FormattedDate,
-  FormattedMessage,
-  useIntl
-} from 'react-intl';
+import { css } from '@emotion/react';
 import {
   Table,
   TableBody,
@@ -21,14 +17,19 @@ import {
   TableCellLayout,
   TableHeader,
   TableHeaderCell,
-  TableRow
+  TableRow,
+  Tooltip
 } from '@fluentui/react-components';
+import { History16Regular } from '@fluentui/react-icons';
+import bytes from 'bytes';
+import {
+  FormattedDate,
+  FormattedMessage,
+  useIntl
+} from 'react-intl';
+import SidePanel from '../../../common/components/SidePanel';
 import { EventHandler } from '../../../types/Event';
 import { FileVersion } from '../../../types/Model';
-import { History16Regular } from '@fluentui/react-icons';
-import SidePanel from '../../../common/components/SidePanel';
-import bytes from 'bytes';
-import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface FileVersionPanelProps {
@@ -81,19 +82,21 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
                                 css={css`
                                   padding: 0 0.5rem;
                                 `}>
-                                <div
-                                  aria-label={intl.formatMessage(messages.RestoreFile)}
-                                  role="button"
-                                  tabIndex={0}
-                                  title={intl.formatMessage(messages.RestoreFile)}
-                                  css={css`
-                                    font-size: 1rem;
-                                    line-height: 1rem;
-                                  `}
-                                  onClick={(event) => onClick?.(event, item)}
-                                  onKeyDown={(event) => onKeyDown?.(event, item)}>
-                                  <History16Regular />
-                                </div>
+                                <Tooltip
+                                  content={intl.formatMessage(messages.RestoreFile)}
+                                  relationship="label">
+                                  <div
+                                    role="button"
+                                    tabIndex={0}
+                                    css={css`
+                                      font-size: 1rem;
+                                      line-height: 1rem;
+                                    `}
+                                    onClick={(event) => onClick?.(event, item)}
+                                    onKeyDown={(event) => onKeyDown?.(event, item)}>
+                                    <History16Regular />
+                                  </div>
+                                </Tooltip>
                               </div>
                             )
                           }
@@ -103,11 +106,11 @@ function FileVersionPanel(props: Readonly<FileVersionPanelProps>) {
                         <TableCellLayout>
                           <FormattedDate
                             {...{
-                              year: 'numeric',
-                              month: '2-digit',
                               day: '2-digit',
                               hour: '2-digit',
-                              minute: '2-digit'
+                              minute: '2-digit',
+                              month: '2-digit',
+                              year: 'numeric'
                             }}
                             value={item.updatedDate} />
                         </TableCellLayout>

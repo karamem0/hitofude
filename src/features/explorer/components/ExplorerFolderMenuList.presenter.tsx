@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -10,21 +10,21 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import {
-  Delete16Regular,
-  Link16Regular,
-  Rename16Regular
-} from '@fluentui/react-icons';
-import { ExplorerMenuAction, Folder } from '../../../types/Model';
+import { css } from '@emotion/react';
 import {
   MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
+import {
+  Delete16Regular,
+  Link16Regular,
+  Rename16Regular
+} from '@fluentui/react-icons';
 import { GrOnedrive } from 'react-icons/gr';
-import { css } from '@emotion/react';
+import { EventHandler } from '../../../types/Event';
+import { ExplorerMenuAction, Folder } from '../../../types/Model';
 import messages from '../messages';
 
 interface ExplorerFolderMenuListProps {
@@ -48,8 +48,8 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
             <Link16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'copyLink',
-            data: folder
+            data: folder,
+            type: 'copyLink'
           })}>
           <FormattedMessage {...messages.CopyLink} />
         </MenuItem>
@@ -62,8 +62,8 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
             <Rename16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'renameFolder',
-            data: folder
+            data: folder,
+            type: 'renameFolder'
           })}>
           <FormattedMessage {...messages.RenameFolder} />
         </MenuItem>
@@ -73,8 +73,8 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
             <Delete16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'deleteFolder',
-            data: folder
+            data: folder,
+            type: 'deleteFolder'
           })}>
           <FormattedMessage {...messages.DeleteFolder} />
         </MenuItem>
@@ -91,8 +91,8 @@ function ExplorerFolderMenuList(props: Readonly<ExplorerFolderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'openWithOneDrive',
-            data: folder
+            data: folder,
+            type: 'openWithOneDrive'
           })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,8 +9,8 @@
 import React from 'react';
 
 import { InvalidOperationError } from '../../types/Error';
-import ProgressDialog from '../components/ProgressDialog';
 import { ProgressType } from '../../types/Model';
+import ProgressDialog from '../components/ProgressDialog';
 
 interface ProgressContextState {
   progress?: ProgressType,

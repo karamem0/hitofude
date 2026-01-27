@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "github.vscode-github-actions",
+    "redhat.vscode-yaml",
+    "redhat.vscode-xml",
+    "styled-components.vscode-styled-components",
+    "vitest.explorer"
+  ]
+}

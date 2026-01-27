@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,19 +8,20 @@
 
 import React from 'react';
 
+import { useToast } from '../../../common/providers/ToastProvider';
+import { useService } from '../../../providers/ServiceProvider';
+import { useStore } from '../../../providers/StoreProvider';
 import {
   removeExplorerFileConflict,
   setContentFile,
   setContentText,
-  setDialogAction,
-  setError
+  setDialogAction
 } from '../../../stores/Action';
 import { DependencyNullError } from '../../../types/Error';
 import { Event } from '../../../types/Event';
 import { FileConflict } from '../../../types/Model';
+
 import Presenter from './FileOverwriteDialog.presenter';
-import { useService } from '../../../providers/ServiceProvider';
-import { useStore } from '../../../providers/StoreProvider';
 
 interface FileOverwriteDialogProps {
   value?: FileConflict
@@ -32,6 +33,7 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
 
   const { dispatch } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async (_: Event, data?: boolean) => {
@@ -49,8 +51,11 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
       }
       dispatch(removeExplorerFileConflict(value));
     } catch (error) {
-      dispatch(setError(error as Error));
-      throw error;
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
@@ -58,7 +63,8 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
   }, [
     graph,
     value,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

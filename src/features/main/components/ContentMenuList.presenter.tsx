@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,24 +8,27 @@
 
 import React from 'react';
 
-import {
-  ArrowDownload16Regular,
-  Checkmark16Regular,
-  Dismiss16Regular,
-  Edit16Regular,
-  History16Regular,
-  Save16Regular
-} from '@fluentui/react-icons';
-import { ContentMenuAction, File } from '../../../types/Model';
+import { css } from '@emotion/react';
 import {
   MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
+import {
+  ArrowDownload16Regular,
+  Checkmark16Regular,
+  Dismiss16Regular,
+  Edit16Regular,
+  History16Regular,
+  Link16Regular,
+  Save16Regular
+} from '@fluentui/react-icons';
+import { GrOnedrive } from 'react-icons/gr';
 import { FormattedMessage } from 'react-intl';
-import { css } from '@emotion/react';
+import { EventHandler } from '../../../types/Event';
+import { ContentMenuAction, File } from '../../../types/Model';
+import { isMarkdown } from '../../../utils/File';
 import messages from '../messages';
 
 interface ContentMenuListProps {
@@ -52,7 +55,7 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
     onMenuClick
   } = props;
 
-  return (
+  return editing ? (
     <MenuList
       css={css`
         @media not all and (width <= 960px) {
@@ -63,64 +66,46 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
         }
       `}>
       <MenuGroup>
-        {
-          editing ? (
-            <React.Fragment>
-              <MenuItem
-                key="saveFile"
-                disabled={!changed}
-                icon={(
-                  <Save16Regular />
-                )}
-                onClick={(event) => onMenuClick?.(event, {
-                  type: 'saveFile',
-                  data: true
-                })}>
-                <FormattedMessage {...messages.Save} />
-              </MenuItem>
-              <MenuItem
-                key="saveAndCloseFile"
-                disabled={!changed}
-                icon={(
-                  <div
-                    css={css`
-                    display: transparent;
-                    font-size: 1rem;
-                    line-height: 1rem;
-                  `} />
-                )}
-                onClick={(event) => onMenuClick?.(event, {
-                  type: 'saveFile',
-                  data: false
-                })}>
-                <FormattedMessage {...messages.SaveAndClose} />
-              </MenuItem>
-              <MenuItem
-                key="closeFile"
-                icon={(
-                  <Dismiss16Regular />
-                )}
-                onClick={(event) => onMenuClick?.(event, {
-                  type: 'closeFile',
-                  data: undefined
-                })}>
-                <FormattedMessage {...messages.Cancel} />
-              </MenuItem>
-            </React.Fragment>
-          ) : (
-            <MenuItem
-              key="editFile"
-              icon={(
-                <Edit16Regular />
-              )}
-              onClick={(event) => onMenuClick?.(event, {
-                type: 'editFile',
-                data: undefined
-              })}>
-              <FormattedMessage {...messages.Edit} />
-            </MenuItem>
-          )
-        }
+        <MenuItem
+          disabled={!changed}
+          key="saveFile"
+          icon={(
+            <Save16Regular />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: true,
+            type: 'saveFile'
+          })}>
+          <FormattedMessage {...messages.Save} />
+        </MenuItem>
+        <MenuItem
+          disabled={!changed}
+          key="saveAndCloseFile"
+          icon={(
+            <div
+              css={css`
+                display: transparent;
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: false,
+            type: 'saveFile'
+          })}>
+          <FormattedMessage {...messages.SaveAndClose} />
+        </MenuItem>
+        <MenuItem
+          key="closeFile"
+          icon={(
+            <Dismiss16Regular />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: undefined,
+            type: 'closeFile'
+          })}>
+          <FormattedMessage {...messages.Cancel} />
+        </MenuItem>
       </MenuGroup>
       <MenuDivider />
       <MenuGroup>
@@ -130,92 +115,162 @@ function ContentMenuList(props: Readonly<ContentMenuListProps>) {
             <History16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'openFileVersionPanel',
             data: {
-              type: 'fileVersion',
-              data: file
-            }
+              data: file,
+              type: 'fileVersion'
+            },
+            type: 'openFileVersionPanel'
           })}>
           <FormattedMessage {...messages.VersionHistory} />
         </MenuItem>
       </MenuGroup>
       <MenuDivider />
-      {
-        editing ? (
-          <MenuGroup>
-            <MenuItem
-              key="toggleShowMinimap"
-              icon={(
-                <Checkmark16Regular
-                  css={css`
-                    color: ${showMinimap ? 'inherit' : 'transparent'};
-                  `} />
-              )}
-              onClick={(event) => onMenuClick?.(event, {
-                type: 'toggleShowMinimap',
-                data: !showMinimap
-              })}>
-              <FormattedMessage {...messages.Minimap} />
-            </MenuItem>
-            <MenuItem
-              key="toggleWordWrap"
-              icon={(
-                <Checkmark16Regular
-                  css={css`
-                    color: ${wordWrap ? 'inherit' : 'transparent'};
-                  `} />
-              )}
-              onClick={(event) => onMenuClick?.(event, {
-                type: 'toggleWordWrap',
-                data: !wordWrap
-              })}>
-              <FormattedMessage {...messages.WordWrap} />
-            </MenuItem>
-            <MenuItem
-              key="toggleSyncScroll"
-              icon={(
-                <Checkmark16Regular
-                  css={css`
-                    color: ${syncScroll ? 'inherit' : 'transparent'};
-                  `} />
-              )}
-              onClick={(event) => onMenuClick?.(event, {
-                type: 'toggleSyncScroll',
-                data: !syncScroll
-              })}>
-              <FormattedMessage {...messages.SyncScroll} />
-            </MenuItem>
-            <MenuItem
-              key="toggleShowPreview"
-              icon={(
-                <Checkmark16Regular
-                  css={css`
-                    color: ${showPreview ? 'inherit' : 'transparent'};
-                  `} />
-              )}
-              onClick={(event) => onMenuClick?.(event, {
-                type: 'toggleShowPreview',
-                data: !showPreview
-              })}>
-              <FormattedMessage {...messages.Preview} />
-            </MenuItem>
-          </MenuGroup>
-        ) : (
-          <MenuGroup>
-            <MenuItem
-              key="downloadFile"
-              icon={(
-                <ArrowDownload16Regular />
-              )}
-              onClick={(event) => onMenuClick?.(event, {
-                type: 'downloadFile',
-                data: file
-              })}>
-              <FormattedMessage {...messages.Download} />
-            </MenuItem>
-          </MenuGroup>
-        )
-      }
+      <MenuGroup>
+        <MenuItem
+          key="toggleShowMinimap"
+          icon={(
+            <Checkmark16Regular
+              css={css`
+                color: ${showMinimap ? 'inherit' : 'transparent'};
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: !showMinimap,
+            type: 'toggleShowMinimap'
+          })}>
+          <FormattedMessage {...messages.Minimap} />
+        </MenuItem>
+        <MenuItem
+          key="toggleWordWrap"
+          icon={(
+            <Checkmark16Regular
+              css={css`
+                color: ${wordWrap ? 'inherit' : 'transparent'};
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: !wordWrap,
+            type: 'toggleWordWrap'
+          })}>
+          <FormattedMessage {...messages.WordWrap} />
+        </MenuItem>
+        <MenuItem
+          key="toggleSyncScroll"
+          icon={(
+            <Checkmark16Regular
+              css={css`
+                color: ${syncScroll ? 'inherit' : 'transparent'};
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: !syncScroll,
+            type: 'toggleSyncScroll'
+          })}>
+          <FormattedMessage {...messages.SyncScroll} />
+        </MenuItem>
+        <MenuItem
+          key="toggleShowPreview"
+          icon={(
+            <Checkmark16Regular
+              css={css`
+                color: ${showPreview ? 'inherit' : 'transparent'};
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: !showPreview,
+            type: 'toggleShowPreview'
+          })}>
+          <FormattedMessage {...messages.Preview} />
+        </MenuItem>
+      </MenuGroup>
+    </MenuList>
+  ) : (
+    <MenuList
+      css={css`
+        @media not all and (width <= 960px) {
+          & > div:nth-of-type(1),
+          & > div:nth-of-type(2) {
+            display: none;
+          }
+        }
+      `}>
+      <MenuGroup>
+        <MenuItem
+          disabled={!isMarkdown(file)}
+          key="editFile"
+          icon={(
+            <Edit16Regular />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: undefined,
+            type: 'editFile'
+          })}>
+          <FormattedMessage {...messages.Edit} />
+        </MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup>
+        <MenuItem
+          key="openFileVersionPanel"
+          icon={(
+            <History16Regular />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: {
+              data: file,
+              type: 'fileVersion'
+            },
+            type: 'openFileVersionPanel'
+          })}>
+          <FormattedMessage {...messages.VersionHistory} />
+        </MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup>
+        <MenuItem
+          key="copyLink"
+          icon={(
+            <Link16Regular />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: file,
+            type: 'copyLink'
+          })}>
+          <FormattedMessage {...messages.CopyLink} />
+        </MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup>
+        <MenuItem
+          key="downloadFile"
+          icon={(
+            <ArrowDownload16Regular />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: file,
+            type: 'downloadFile'
+          })}>
+          <FormattedMessage {...messages.Download} />
+        </MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup>
+        <MenuItem
+          key="openWithOneDrive"
+          icon={(
+            <GrOnedrive
+              css={css`
+                font-size: 1rem;
+                line-height: 1rem;
+              `} />
+          )}
+          onClick={(event) => onMenuClick?.(event, {
+            data: file,
+            type: 'openWithOneDrive'
+          })}>
+          <FormattedMessage {...messages.OpenWithOneDrive} />
+        </MenuItem>
+      </MenuGroup>
     </MenuList>
   );
 

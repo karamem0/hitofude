@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Dialog,
   DialogBody,
@@ -16,11 +17,10 @@ import {
   Spinner,
   Text
 } from '@fluentui/react-components';
-import { ProgressType } from '../../types/Model';
-import { css } from '@emotion/react';
-import messages from '../messages';
 import { useIntl } from 'react-intl';
 import { useTheme } from '../../providers/ThemeProvider';
+import { ProgressType } from '../../types/Model';
+import messages from '../messages';
 
 interface ProgressDialogProps {
   mountNode?: HTMLElement,

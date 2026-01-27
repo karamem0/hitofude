@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,8 +9,8 @@
 import React from 'react';
 
 import { css } from '@emotion/react';
-import { layouts } from '../../../themes/Layout';
 import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
 
 interface MarkdownEditorProps {
   className?: string,
@@ -40,8 +40,8 @@ function MarkdownEditor(props: Readonly<MarkdownEditorProps>, ref: React.Ref<HTM
         }
       `}>
       <div
-        ref={ref}
         className={className}
+        ref={ref}
         css={css`
         width: inherit;
         height: inherit;

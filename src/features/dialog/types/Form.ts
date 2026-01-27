@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -15,8 +15,8 @@ export interface FileCreateDialogFormState {
 }
 
 export interface FileRenameDialogFormState {
-  id: string,
-  baseName?: string
+  baseName?: string,
+  id: string
 }
 
 export interface FolderCreateDialogFormState {

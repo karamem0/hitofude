@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,8 +8,9 @@
 
 import React from 'react';
 
-import { moveNext, movePrevious } from '../../utils/Keyboard';
 import { Event } from '../../types/Event';
+import { moveNext, movePrevious } from '../../utils/Keyboard';
+
 import Presenter from './Tree.presenter';
 
 interface TreeProps {
@@ -43,8 +44,8 @@ function Tree(props: Readonly<React.PropsWithChildren<TreeProps>>) {
 
   return (
     <Presenter
-      ref={ref}
       disabled={disabled}
+      ref={ref}
       onKeyDown={handleKeyDown}>
       {children}
     </Presenter>

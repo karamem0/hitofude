@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,9 +8,9 @@
 
 import React from 'react';
 
-import { ThemeName } from '../../types/Model';
 import { css } from '@emotion/react';
 import { useTheme } from '../../providers/ThemeProvider';
+import { ThemeName } from '../../types/Model';
 
 interface ScrollPanelProps {
   className?: string
@@ -43,8 +43,8 @@ function ScrollPanel(props: Readonly<React.PropsWithChildren<ScrollPanelProps>>,
 
   return (
     <div
-      ref={ref}
       className={className}
+      ref={ref}
       tabIndex={-1}
       css={css`
         ::-webkit-scrollbar {

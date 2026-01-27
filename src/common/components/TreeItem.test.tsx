@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,9 +8,9 @@
 
 import React from 'react';
 
+import { render } from '@testing-library/react';
 import IntlProvider from '../../providers/IntlProvider';
 import ThemeProvider from '../../providers/ThemeProvider';
-import { render } from '@testing-library/react';
 
 import Presenter from './TreeItem.presenter';
 

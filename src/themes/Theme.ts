@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -15,6 +15,13 @@ import { ThemeName } from '../types/Model';
 
 const themePalette = {
   10: '#3f2e2e',
+  100: '#957a7a',
+  110: '#a98f8f',
+  120: '#bfaaaa',
+  130: '#d4c4c4',
+  140: '#ded1d1',
+  150: '#e8dede',
+  160: '#f1ebeb',
   20: '#4a3737',
   30: '#553f3f',
   40: '#5d4545',
@@ -22,14 +29,7 @@ const themePalette = {
   60: '#6b5050',
   70: '#715454',
   80: '#795c5c',
-  90: '#816464',
-  100: '#957a7a',
-  110: '#a98f8f',
-  120: '#bfaaaa',
-  130: '#d4c4c4',
-  140: '#ded1d1',
-  150: '#e8dede',
-  160: '#f1ebeb'
+  90: '#816464'
 };
 
 export const themes: Record<ThemeName, Theme> = {

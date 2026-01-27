@@ -1,8 +1,11 @@
 # Hitofude
 
-[![.github/workflows/trigger-on-main.yml](https://github.com/karamem0/hitofude/actions/workflows/trigger-on-main.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/trigger-on-main.yml)
+[![.github/workflows/push-on-main.yml](https://github.com/karamem0/hitofude/actions/workflows/push-on-main.yml/badge.svg)](https://github.com/karamem0/hitofude/actions/workflows/push-on-main.yml)
 [![codecov](https://codecov.io/gh/karamem0/hitofude/graph/badge.svg?token=T44FVSHRYS)](https://codecov.io/gh/karamem0/hitofude)
 [![License](https://img.shields.io/github/license/karamem0/hitofude.svg)](https://github.com/karamem0/hitofude/blob/main/LICENSE)
+
+> [!IMPORTANT]
+> MC1261592 の更新により OneDrive および SharePoint での Markdown の表示および編集がサポートされます。これにより Hitofude はその役目を終えたため開発を終了します。
 
 オンライン Markdown エディター for Microsoft 365
 

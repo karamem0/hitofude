@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,21 +8,24 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
-  Document16Regular,
-  FolderOpen16Regular,
-  Link16Regular
-} from '@fluentui/react-icons';
-import { File, SearchMenuAction } from '../../../types/Model';
-import {
+  Caption1,
   MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList
 } from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
-import { FormattedMessage } from 'react-intl';
+import {
+  Document16Regular,
+  FolderOpen16Regular,
+  Link16Regular
+} from '@fluentui/react-icons';
+import bytes from 'bytes';
+import { FormattedMessage, useIntl } from 'react-intl';
 import TreeItem from '../../../common/components/TreeItem';
+import { EventHandler } from '../../../types/Event';
+import { File, SearchMenuAction } from '../../../types/Model';
 import messages from '../messages';
 
 interface SearchFileTreeItemProps {
@@ -41,6 +44,8 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
     onMenuClick
   } = props;
 
+  const intl = useIntl();
+
   return resultFiles?.map((item) => (
     <TreeItem
       key={item.id}
@@ -58,8 +63,8 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
                 <Link16Regular />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: 'copyLink',
-                data: item
+                data: item,
+                type: 'copyLink'
               })}>
               <FormattedMessage {...messages.CopyLink} />
             </MenuItem>
@@ -72,13 +77,41 @@ function SearchFileTreeItem(props: Readonly<SearchFileTreeItemProps>) {
                 <FolderOpen16Regular />
               )}
               onClick={(event) => onMenuClick?.(event, {
-                type: 'openFileLocation',
-                data: item
+                data: item,
+                type: 'openFileLocation'
               })}>
               <FormattedMessage {...messages.OpenFileLocation} />
             </MenuItem>
           </MenuGroup>
         </MenuList>
+      )}
+      title={(
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+          `}>
+          <Caption1
+            css={css`
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            `}>
+            {intl.formatMessage(messages.Name)}: {item.fullName}
+          </Caption1>
+          <Caption1>
+            {intl.formatMessage(messages.LastModified)}: {intl.formatDate(item.updatedDate, {
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            })}
+          </Caption1>
+          <Caption1>
+            {intl.formatMessage(messages.Size)}: {bytes(item?.size ?? 0, { unitSeparator: ' ' })}
+          </Caption1>
+        </div>
       )}
       onClick={(event) => onClick?.(event, item)} />
   ));

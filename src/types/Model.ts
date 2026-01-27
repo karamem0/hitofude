@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -21,9 +21,11 @@ export interface ContentMenuAction {
 
 export type ContentMenuType =
   | 'closeFile'
+  | 'copyLink'
   | 'downloadFile'
   | 'editFile'
   | 'openFileVersionPanel'
+  | 'openWithOneDrive'
   | 'saveFile'
   | 'toggleShowMinimap'
   | 'toggleShowPreview'
@@ -103,6 +105,7 @@ export interface File {
   id: string,
   mimeType?: string,
   parentId?: string,
+  size?: number,
   updatedDate?: Date,
   webUrl?: string
 }

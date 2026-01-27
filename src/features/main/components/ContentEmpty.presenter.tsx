@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,10 +8,10 @@
 
 import React from 'react';
 
-import Communication from '../../../common/components/Communication';
 import { css } from '@emotion/react';
-import messages from '../messages';
 import { useIntl } from 'react-intl';
+import Communication from '../../../common/components/Communication';
+import messages from '../messages';
 
 function ContentEmpty() {
 

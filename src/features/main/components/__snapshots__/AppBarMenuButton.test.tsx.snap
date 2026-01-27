@@ -1,0 +1,93 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should match the snapshot when the disabled is false 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 2.5rem;
+  grid-gap: 0.25rem;
+  margin: 0 0.5rem;
+}
+
+.emotion-1 {
+  max-width: 2.5rem;
+  height: 2.5rem;
+  color: #bdbdbd;
+}
+
+.emotion-1[aria-selected='true'] {
+  color: #242424;
+}
+
+.emotion-1>span {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProvider_r_3_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+    >
+      <button
+        aria-haspopup="menu"
+        aria-label="Settings"
+        class="fui-Button r1f29ykk emotion-1 ___1936867_1dyyxi7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fkoldzo fhvnf4x fb6swo4 f1klyf7k f232fm2 f1l983o9 f1nhwcv0 f1gm6xmp fxoo9op f1v3eptx f1i0gk12 fd4bjan"
+        id="menu_r_4_"
+        role="button"
+        tabindex="0"
+        type="button"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should match the snapshot when the disabled is true 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 2.5rem;
+  grid-gap: 0.25rem;
+  margin: 0 0.5rem;
+}
+
+.emotion-1 {
+  max-width: 2.5rem;
+  height: 2.5rem;
+  color: #bdbdbd;
+}
+
+.emotion-1[aria-selected='true'] {
+  color: #242424;
+}
+
+.emotion-1>span {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+<div
+    class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    dir="ltr"
+  >
+    <div
+      class="emotion-0"
+    >
+      <button
+        aria-haspopup="menu"
+        aria-label="Settings"
+        class="fui-Button r1f29ykk emotion-1 ___1936867_1dyyxi7 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fkoldzo fhvnf4x fb6swo4 f1klyf7k f232fm2 f1l983o9 f1nhwcv0 f1gm6xmp fxoo9op f1v3eptx f1i0gk12 fd4bjan"
+        id="menu_r_1_"
+        role="button"
+        tabindex="0"
+        type="button"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

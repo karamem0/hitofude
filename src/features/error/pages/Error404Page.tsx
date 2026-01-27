@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,9 +8,10 @@
 
 import React from 'react';
 
-import Presenter from './Error404Page.presenter';
-import { ThemeName } from '../../../types/Model';
 import { useTheme } from '../../../providers/ThemeProvider';
+import { ThemeName } from '../../../types/Model';
+
+import Presenter from './Error404Page.presenter';
 
 function Error404Page() {
 

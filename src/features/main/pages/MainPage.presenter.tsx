@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,29 +8,30 @@
 
 import React from 'react';
 
-import { FormattedMessage, useIntl } from 'react-intl';
 import { Global, css } from '@emotion/react';
 import { Spinner, Text } from '@fluentui/react-components';
+import { FormattedMessage, useIntl } from 'react-intl';
+import ProgressProvider from '../../../common/providers/ProgressProvider';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
+import DialogFactory from '../../dialog/factories/DialogFactory';
+import SidePanelFactory from '../../panel/factories/SidePanelFactory';
 import AppBar from '../components/AppBar';
 import AppContent from '../components/AppContent';
 import AppTab from '../components/AppTab';
-import DialogFactory from '../../dialog/factories/DialogFactory';
-import ErrorNotification from '../../../common/components/ErrorNotification';
 import MeControl from '../components/MeControl';
-import ProgressProvider from '../../../common/providers/ProgressProvider';
-import SidePanelFactory from '../../panel/factories/SidePanelFactory';
-import { layouts } from '../../../themes/Layout';
 import messages from '../messages';
-import { useTheme } from '../../../providers/ThemeProvider';
 
 interface MainPageProps {
-  loading?: boolean
+  loading?: boolean,
+  title?: string
 }
 
 function MainPage(props: Readonly<MainPageProps>) {
 
   const {
-    loading
+    loading,
+    title
   } = props;
 
   const intl = useIntl();
@@ -45,7 +46,7 @@ function MainPage(props: Readonly<MainPageProps>) {
         content={intl.formatMessage(messages.AppDescription)}
         name="description" />
       <title>
-        {`${intl.formatMessage(messages.AppTitle)} - ${intl.formatMessage(messages.AppDescription)}`}
+        {title == null ? intl.formatMessage(messages.AppTitle) : `${title} - ${intl.formatMessage(messages.AppTitle)}`}
       </title>
       {
         loading ? (
@@ -67,7 +68,6 @@ function MainPage(props: Readonly<MainPageProps>) {
                 overflow: hidden;
               }
             `} />
-            <ErrorNotification />
             <DialogFactory />
             <SidePanelFactory />
             <div

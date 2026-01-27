@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,12 +8,12 @@
 
 import React from 'react';
 
-import { ChevronDoubleLeft16Regular, ChevronDoubleRight16Regular } from '@fluentui/react-icons';
-import { Button } from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
 import { css } from '@emotion/react';
-import { layouts } from '../../../themes/Layout';
+import { Button } from '@fluentui/react-components';
+import { ChevronDoubleLeft16Regular, ChevronDoubleRight16Regular } from '@fluentui/react-icons';
 import { useTheme } from '../../../providers/ThemeProvider';
+import { layouts } from '../../../themes/Layout';
+import { EventHandler } from '../../../types/Event';
 
 interface MarkdownSplitterProps {
   className?: string,

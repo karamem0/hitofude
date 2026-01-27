@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,12 +8,13 @@
 
 import React from 'react';
 
-import { EventHandler } from '../../../types/Event';
-import { Warning16Regular } from '@fluentui/react-icons';
 import { css } from '@emotion/react';
-import messages from '../messages';
+import { Tooltip } from '@fluentui/react-components';
+import { Warning16Regular } from '@fluentui/react-icons';
 import { useIntl } from 'react-intl';
 import { useTheme } from '../../../providers/ThemeProvider';
+import { EventHandler } from '../../../types/Event';
+import messages from '../messages';
 
 interface ExplorerFileConflictButtonProps {
   disabled: boolean,
@@ -33,20 +34,22 @@ function ExplorerFileConflictButton(props: Readonly<ExplorerFileConflictButtonPr
   const { theme } = useTheme();
 
   return disabled ? null : (
-    <div
-      aria-label={intl.formatMessage(messages.ConflictFile)}
-      role="button"
-      tabIndex={0}
-      title={intl.formatMessage(messages.ConflictFile)}
-      css={css`
-        font-size: 1rem;
-        line-height: 1rem;
-        color: ${theme.colorPaletteYellowForeground1};
-      `}
-      onClick={onClick}
-      onKeyDown={onKeyDown}>
-      <Warning16Regular />
-    </div>
+    <Tooltip
+      content={intl.formatMessage(messages.ConflictFile)}
+      relationship="label">
+      <div
+        role="button"
+        tabIndex={0}
+        css={css`
+          font-size: 1rem;
+          line-height: 1rem;
+          color: ${theme.colorPaletteYellowForeground1};
+        `}
+        onClick={onClick}
+        onKeyDown={onKeyDown}>
+        <Warning16Regular />
+      </div>
+    </Tooltip>
   );
 
 }

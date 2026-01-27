@@ -65,17 +65,15 @@ exports[`should match the snapshot when the loading is false 1`] = `
         >
           <button
             aria-label="Save"
-            class="fui-Button r1alrhcs ___lkb4hm0_1iawwqv ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl fecsdlb f1rq72xc fnp9lpt f1h0usnq fs4ktlq f16h9ulv fx2bmrt f1d6v5y2 f1nz3ub2 fag2qd2 fmvhcg7 f1o3dhpw f14bpyus fqc85l4 f1h3a8gf fkiggi6 f8gmj8i f1ap8nzx f1igan7k fjag8bx f1v3eptx fpelvsg f1r9enuy fdvt4n0 f1l34yyb f1grx941 fqfbdvs f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5"
-            title="Save"
+            class="fui-Button r1f29ykk ___dhqv000_ql4wmo0 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl fecsdlb f1rq72xc f1ksv2xa fhvnf4x fb6swo4 f1klyf7k f232fm2 f1d6mv4x f1nz3ub2 fag2qd2 fmvhcg7 f1o3dhpw f14bpyus fqc85l4 f1h3a8gf fkiggi6 f8gmj8i f1ap8nzx f1igan7k fjag8bx f1v3eptx f1ysmecq faulsx f79t15f fbtzoaq f8qmx7k fd4bjan f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5"
             type="submit"
           >
             Save
           </button>
           <button
             aria-label="Cancel"
-            class="fui-Button r1alrhcs"
+            class="fui-Button r1f29ykk"
             data-tabster="{"restorer":{"type":1}}"
-            title="Cancel"
             type="button"
           >
             Cancel
@@ -88,7 +86,7 @@ exports[`should match the snapshot when the loading is false 1`] = `
     hidden=""
   />
   <div
-    class="fui-FluentProvider fui-FluentProvider_r_2_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    class="fui-FluentProvider fui-FluentProvider_r_4_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -167,18 +165,16 @@ exports[`should match the snapshot when the loading is true 1`] = `
         >
           <button
             aria-label="Save"
-            class="fui-Button r1alrhcs ___jiv9070_dxr8m30 f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1t6o4dc f1h0usnq fs4ktlq f16h9ulv fx2bmrt fcvwxyo f14ptb23 f9dbb4x f3qs60o fwd1oij f5u9ap2 f1cyfu5x f1h3a8gf fj8k9ua fifrq0d f196mwp7 f1l6uprw fnekfq fa9u7a5 f1xxg0vq f16oldlo f17g64ui fjvf891 fqbrke7 f1efp33f fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq f8w4c43 f1ol4fw6 f1q1lw4e f1dwjv2g f127ot8j f19etb0b f4f984j f3d22hf fw441p0 f1m71e0y f1gue8i f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5"
+            class="fui-Button r1f29ykk ___hak8ra0_1wqosrr f1bg9a2p f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f1falr9n f1s2uweq fr80ssc f1ukrpxl fecsdlb fvgxktp f1jct5ie fhvnf4x fb6swo4 f1klyf7k f232fm2 f1uhomfy f14ptb23 f9dbb4x f3qs60o fwd1oij f5u9ap2 f1cyfu5x f1h3a8gf fj8k9ua fifrq0d f196mwp7 f1l6uprw fnekfq fa9u7a5 fw24f3 f1nznrny fq8nxuu ftoixeo f1ao3jkc fpmuzpx fdrzuqr f15x8b5r fphbwmw f19vpps7 fv5swzo f1al02dq fy9mucy f1g9va8i fwgvudy fom6jww f127ot8j f19etb0b f4f984j f3d22hf fw441p0 f1m71e0y f168odog f17t0x8g f194v5ow f1qgg65p fk7jm04 fhgccpy f32wu9k fu5nqqq f13prjl2 f1czftr5 f1nl83rv fixhny3 feygou5"
             disabled=""
-            title="Save"
             type="submit"
           >
             Save
           </button>
           <button
             aria-label="Cancel"
-            class="fui-Button r1alrhcs"
+            class="fui-Button r1f29ykk"
             data-tabster="{"restorer":{"type":1}}"
-            title="Cancel"
             type="button"
           >
             Cancel

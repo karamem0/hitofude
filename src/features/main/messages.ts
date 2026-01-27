@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -15,18 +15,21 @@ const messages = {
     Back: { defaultMessage: 'Back' },
     Cancel: { defaultMessage: 'Cancel' },
     ChangeTheme: { defaultMessage: 'Change theme' },
+    CopyLink: { defaultMessage: 'Copy link' },
     Download: { defaultMessage: 'Download' },
     Edit: { defaultMessage: 'Edit' },
     Explorer: { defaultMessage: 'Explorer' },
     File: { defaultMessage: 'File' },
     Minimap: { defaultMessage: 'Minimap' },
     MoreOption: { defaultMessage: 'More option' },
+    Name: { defaultMessage: 'Name' },
     NoDataDescription: { defaultMessage: 'Please select or create a file to start' },
     NoDataTitle: { defaultMessage: 'There is nothing here' },
-    Name: { defaultMessage: 'Name' },
+    OpenWithOneDrive: { defaultMessage: 'Open with OneDrive' },
     Preview: { defaultMessage: 'Preview' },
     PrivacyPolicy: { defaultMessage: 'Privacy Policy' },
     PrivacyPolicyLink: { defaultMessage: 'https://github.com/karamem0/hitofude/blob/main/PRIVACY_POLICY.md' },
+    RootFolder: { defaultMessage: 'OneDrive' },
     Save: { defaultMessage: 'Save' },
     SaveAndClose: { defaultMessage: 'Save and Close' },
     Search: { defaultMessage: 'Search' },

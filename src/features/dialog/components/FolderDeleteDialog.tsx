@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,16 +8,14 @@
 
 import React from 'react';
 
-import {
-  removeExplorerFolder,
-  setDialogAction,
-  setError
-} from '../../../stores/Action';
-import { DependencyNullError } from '../../../types/Error';
-import { Folder } from '../../../types/Model';
-import Presenter from './FolderDeleteDialog.presenter';
+import { useToast } from '../../../common/providers/ToastProvider';
 import { useService } from '../../../providers/ServiceProvider';
 import { useStore } from '../../../providers/StoreProvider';
+import { removeExplorerFolder, setDialogAction } from '../../../stores/Action';
+import { DependencyNullError } from '../../../types/Error';
+import { Folder } from '../../../types/Model';
+
+import Presenter from './FolderDeleteDialog.presenter';
 
 interface FolderDeleteDialogProps {
   value?: Folder
@@ -29,6 +27,7 @@ function FileDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
 
   const { dispatch } = useStore();
   const { graph } = useService();
+  const dispatchToast = useToast();
   const [ loading, setLoading ] = React.useState<boolean>(false);
 
   const handleSubmit = React.useCallback(async () => {
@@ -39,7 +38,11 @@ function FileDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
       await graph.deleteFolder(value);
       dispatch(removeExplorerFolder(value));
     } catch (error) {
-      dispatch(setError(error as Error));
+      if (error instanceof Error) {
+        dispatchToast(error, 'error');
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
       dispatch(setDialogAction());
@@ -47,7 +50,8 @@ function FileDeleteDialog(props: Readonly<FolderDeleteDialogProps>) {
   }, [
     graph,
     value,
-    dispatch
+    dispatch,
+    dispatchToast
   ]);
 
   return (

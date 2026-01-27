@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,10 +9,10 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
-import { File } from '../../../types/Model';
+import userEvent from '@testing-library/user-event';
 import IntlProvider from '../../../providers/IntlProvider';
 import ThemeProvider from '../../../providers/ThemeProvider';
-import userEvent from '@testing-library/user-event';
+import { File } from '../../../types/Model';
 
 import Presenter from './FileRenameDialog.presenter';
 
@@ -36,9 +36,9 @@ it('should match the snapshot when the loading is true', () => {
     loading: true,
     mountNode: container,
     value: {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
-      extension: '.docx'
+      extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
     } as File
   };
   // Execute
@@ -54,7 +54,7 @@ it('should match the snapshot when the loading is true', () => {
   );
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('Save')).toBeDisabled();
+  expect(screen.getByText('Save')).toBeDisabled();
 });
 
 it('should match the snapshot when the loading is false', async () => {
@@ -65,9 +65,9 @@ it('should match the snapshot when the loading is false', async () => {
     loading: false,
     mountNode: container,
     value: {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
-      extension: '.docx'
+      extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM'
     } as File
   };
   // Execute
@@ -85,5 +85,5 @@ it('should match the snapshot when the loading is false', async () => {
   await user.keyboard('1');
   // Assert
   expect(asFragment()).toMatchSnapshot();
-  expect(screen.getByTitle('Save')).not.toBeDisabled();
+  expect(screen.getByText('Save')).not.toBeDisabled();
 });

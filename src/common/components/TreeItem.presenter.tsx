@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,19 +8,20 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   Menu,
   MenuPopover,
   MenuTrigger,
-  Text
+  Tooltip
 } from '@fluentui/react-components';
-import { EventHandler } from '../../types/Event';
 import { MoreVertical16Regular } from '@fluentui/react-icons';
-import { css } from '@emotion/react';
-import messages from '../../features/main/messages';
 import { useIntl } from 'react-intl';
+import messages from '../../features/main/messages';
 import { useTheme } from '../../providers/ThemeProvider';
+import { EventHandler } from '../../types/Event';
+import TreeItemButton from './TreeItemButton';
 
 interface TreeItemProps {
   icon?: React.ReactElement,
@@ -28,6 +29,7 @@ interface TreeItemProps {
   menu?: React.ReactNode,
   name?: string,
   selected?: boolean,
+  title?: React.ReactElement,
   onClick?: EventHandler,
   onKeyDown?: EventHandler
 }
@@ -40,6 +42,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
     menu,
     name,
     selected,
+    title,
     onClick,
     onKeyDown
   } = props;
@@ -83,59 +86,27 @@ function TreeItem(props: Readonly<TreeItemProps>) {
             }
           }
         `}>
-        <Button
-          appearance="transparent"
-          tabIndex={-1}
-          css={css`
-            display: flex;
-            align-items: center;
-            justify-content: start;
-            padding: 0;
-            border: 0;
-          `}
-          onClick={onClick}>
-          <div
-            css={css`
-              display: grid;
-              grid-template-rows: auto;
-              grid-template-columns: auto 1fr;
-              grid-gap: 0.25rem;
-              align-items: center;
-              justify-content: start;
-            `}>
-            <div
-              css={css`
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 2rem;
-                height: 2rem;
-              `}>
-              {icon}
-            </div>
-            <Text
-              css={css`
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-              `}>
-              {name}
-            </Text>
-          </div>
-        </Button>
+        <TreeItemButton
+          icon={icon}
+          name={name}
+          title={title}
+          onClick={onClick} />
         {info}
         {
           menu ? (
             <Menu>
               <MenuTrigger>
-                <Button
-                  appearance="transparent"
-                  aria-label={intl.formatMessage(messages.MoreOption)}
-                  tabIndex={0}
-                  title={intl.formatMessage(messages.MoreOption)}
-                  icon={(
-                    <MoreVertical16Regular />
-                  )} />
+                <Tooltip
+                  content={intl.formatMessage(messages.MoreOption)}
+                  relationship="label">
+                  <Button
+                    appearance="transparent"
+                    aria-label={intl.formatMessage(messages.MoreOption)}
+                    tabIndex={0}
+                    icon={(
+                      <MoreVertical16Regular />
+                    )} />
+                </Tooltip>
               </MenuTrigger>
               <MenuPopover>
                 {menu}

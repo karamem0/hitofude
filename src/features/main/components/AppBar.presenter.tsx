@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,7 +8,8 @@
 
 import React from 'react';
 
-import { AppBarMenuAction, TabType } from '../../../types/Model';
+import { css } from '@emotion/react';
+import { MenuItem, MenuList } from '@fluentui/react-components';
 import {
   Color16Regular,
   Document24Regular,
@@ -16,13 +17,12 @@ import {
   Settings24Regular
 } from '@fluentui/react-icons';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { MenuItem, MenuList } from '@fluentui/react-components';
+import { useTheme } from '../../../providers/ThemeProvider';
+import { EventHandler } from '../../../types/Event';
+import { AppBarMenuAction, TabType } from '../../../types/Model';
+import messages from '../messages';
 import AppBarButton from './AppBarButton';
 import AppBarMenuButton from './AppBarMenuButton';
-import { EventHandler } from '../../../types/Event';
-import { css } from '@emotion/react';
-import messages from '../messages';
-import { useTheme } from '../../../providers/ThemeProvider';
 
 interface AppBarProps {
   onKeyDown?: EventHandler,
@@ -97,8 +97,8 @@ function AppBar(props: Readonly<AppBarProps>, ref: React.Ref<HTMLDivElement>) {
                   <Color16Regular />
                 )}
                 onClick={(event) => onMenuClick?.(event, {
-                  type: 'changeTheme',
-                  data: undefined
+                  data: undefined,
+                  type: 'changeTheme'
                 })}>
                 <FormattedMessage {...messages.ChangeTheme} />
               </MenuItem>

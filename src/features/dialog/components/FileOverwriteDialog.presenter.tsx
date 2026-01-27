@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   DialogActions,
@@ -16,12 +17,12 @@ import {
   DialogSurface,
   DialogTitle,
   DialogTrigger,
-  Text
+  Text,
+  Tooltip
 } from '@fluentui/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { EventHandler } from '../../../types/Event';
 import ModalDialog from '../../../common/components/ModalDialog';
-import { css } from '@emotion/react';
+import { EventHandler } from '../../../types/Event';
 import messages from '../messages';
 
 interface FileOverwriteDialogProps {
@@ -63,29 +64,34 @@ function FileOverwriteDialog(props: Readonly<FileOverwriteDialogProps>) {
             </div>
           </DialogContent>
           <DialogActions>
-            <Button
-              appearance="primary"
-              aria-label={intl.formatMessage(messages.Yes)}
-              disabled={loading}
-              title={intl.formatMessage(messages.Yes)}
-              onClick={(event) => onSubmit?.(event, true)}>
-              <FormattedMessage {...messages.Yes} />
-            </Button>
-            <Button
-              appearance="secondary"
-              aria-label={intl.formatMessage(messages.No)}
-              disabled={loading}
-              title={intl.formatMessage(messages.No)}
-              onClick={(event) => onSubmit?.(event, false)}>
-              <FormattedMessage {...messages.No} />
-            </Button>
-            <DialogTrigger disableButtonEnhancement>
+            <Tooltip
+              content={intl.formatMessage(messages.Yes)}
+              relationship="label">
+              <Button
+                appearance="primary"
+                disabled={loading}
+                onClick={(event) => onSubmit?.(event, true)}>
+                <FormattedMessage {...messages.Yes} />
+              </Button>
+            </Tooltip>
+            <Tooltip
+              content={intl.formatMessage(messages.No)}
+              relationship="label">
               <Button
                 appearance="secondary"
-                aria-label={intl.formatMessage(messages.Cancel)}
-                title={intl.formatMessage(messages.Cancel)}>
-                <FormattedMessage {...messages.Cancel} />
+                disabled={loading}
+                onClick={(event) => onSubmit?.(event, false)}>
+                <FormattedMessage {...messages.No} />
               </Button>
+            </Tooltip>
+            <DialogTrigger disableButtonEnhancement>
+              <Tooltip
+                content={intl.formatMessage(messages.Cancel)}
+                relationship="label">
+                <Button appearance="secondary">
+                  <FormattedMessage {...messages.Cancel} />
+                </Button>
+              </Tooltip>
             </DialogTrigger>
           </DialogActions>
         </DialogBody>

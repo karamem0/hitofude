@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -7,8 +7,8 @@
 //
 
 import { Location, NavigateFunction } from 'react-router-dom';
-import { RouteService } from './RouteService';
 import { TabType } from '../types/Model';
+import { RouteService } from './RouteService';
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -26,10 +26,10 @@ describe('getParams', () => {
       navigate: vi.fn()
     };
     const expected = {
-      tab: 1,
-      folder: 'folder1',
       file: 'file1',
-      search: 'search1'
+      folder: 'folder1',
+      search: 'search1',
+      tab: 1
     };
     // Execute
     const target = new RouteService(param.location, param.navigate);
@@ -64,9 +64,9 @@ describe('setParams', () => {
       location: {} as Location<unknown>,
       navigate: vi.fn(),
       route: {
-        tab: TabType.explorer,
+        file: 'file1',
         folder: 'folder1',
-        file: 'file1'
+        tab: TabType.explorer
       }
     };
     // Execute
@@ -82,9 +82,9 @@ describe('setParams', () => {
       location: {} as Location<unknown>,
       navigate: vi.fn(),
       route: {
-        tab: TabType.search,
+        file: 'file1',
         search: 'search1',
-        file: 'file1'
+        tab: TabType.search
       }
     };
     // Execute

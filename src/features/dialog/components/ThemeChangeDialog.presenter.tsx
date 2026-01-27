@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
 import {
   Button,
   Card,
@@ -19,13 +20,13 @@ import {
   DialogSurface,
   DialogTitle,
   DialogTrigger,
-  Text
+  Text,
+  Tooltip
 } from '@fluentui/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { EventHandler } from '../../../types/Event';
 import ModalDialog from '../../../common/components/ModalDialog';
+import { EventHandler } from '../../../types/Event';
 import { ThemeName } from '../../../types/Model';
-import { css } from '@emotion/react';
 import messages from '../messages';
 
 interface ThemeChangeDialogProps {
@@ -64,11 +65,14 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
               `}>
               <Card
                 floatingAction={(
-                  <Checkbox
-                    checked={themeName === ThemeName.light}
-                    name="light"
-                    title={intl.formatMessage(messages.Light)}
-                    onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.light)} />
+                  <Tooltip
+                    content={intl.formatMessage(messages.Light)}
+                    relationship="label">
+                    <Checkbox
+                      checked={themeName === ThemeName.light}
+                      name="light"
+                      onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.light)} />
+                  </Tooltip>
                 )}>
                 <CardHeader
                   header={(
@@ -79,11 +83,14 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
               </Card>
               <Card
                 floatingAction={(
-                  <Checkbox
-                    checked={themeName === ThemeName.dark}
-                    name="dark"
-                    title={intl.formatMessage(messages.Dark)}
-                    onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.dark)} />
+                  <Tooltip
+                    content={intl.formatMessage(messages.Dark)}
+                    relationship="label">
+                    <Checkbox
+                      checked={themeName === ThemeName.dark}
+                      name="dark"
+                      onChange={(event, data) => data.checked && onChangeTheme?.(event, ThemeName.dark)} />
+                  </Tooltip>
                 )}>
                 <CardHeader
                   header={(
@@ -96,12 +103,13 @@ function ThemeChangeDialog(props: Readonly<ThemeChangeDialogProps>) {
           </DialogContent>
           <DialogActions>
             <DialogTrigger disableButtonEnhancement>
-              <Button
-                appearance="secondary"
-                aria-label={intl.formatMessage(messages.Close)}
-                title={intl.formatMessage(messages.Close)}>
-                <FormattedMessage {...messages.Close} />
-              </Button>
+              <Tooltip
+                content={intl.formatMessage(messages.Close)}
+                relationship="label">
+                <Button appearance="secondary">
+                  <FormattedMessage {...messages.Close} />
+                </Button>
+              </Tooltip>
             </DialogTrigger>
           </DialogActions>
         </DialogBody>

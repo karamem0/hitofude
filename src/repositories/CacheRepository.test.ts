@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/hitofude/blob/main/LICENSE
 //
 
-import { CacheRepository } from './CacheRepository';
 import Dexie from 'dexie';
+import { CacheRepository } from './CacheRepository';
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -19,33 +19,33 @@ describe('getFolder', () => {
   it('should get the value value when the folder is cached', async () => {
     // Setup
     const params = {
-      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
       folder: {
-        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
         expired: Date.now() + 10000,
+        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
         value: {
+          createdDate: new Date('2017-07-31T18:56:29Z'),
+          files: [],
+          folders: [],
           id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
           name: 'Attachments',
-          createdDate: new Date('2017-07-31T18:56:29Z'),
-          updatedDate: new Date('2017-07-31T18:56:29Z'),
-          root: false,
-          webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments',
           parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ',
-          folders: [],
-          files: []
+          root: false,
+          updatedDate: new Date('2017-07-31T18:56:29Z'),
+          webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments'
         }
-      }
+      },
+      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
     };
     const expected = {
+      createdDate: new Date('2017-07-31T18:56:29Z'),
+      files: [],
+      folders: [],
       id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
       name: 'Attachments',
-      createdDate: new Date('2017-07-31T18:56:29Z'),
-      updatedDate: new Date('2017-07-31T18:56:29Z'),
-      root: false,
-      webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments',
       parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ',
-      folders: [],
-      files: []
+      root: false,
+      updatedDate: new Date('2017-07-31T18:56:29Z'),
+      webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments'
     };
     const mockGet = vi.fn().mockResolvedValue(params.folder);
     const database = {
@@ -64,8 +64,8 @@ describe('getFolder', () => {
   it('should get undefined when the folder is not cached', async () => {
     // Setup
     const params = {
-      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
-      folder: undefined
+      folder: undefined,
+      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
     };
     const expected = undefined;
     const mockGet = vi.fn().mockResolvedValue(params.folder);
@@ -85,22 +85,22 @@ describe('getFolder', () => {
   it('should get undefined when the cached folder is expired', async () => {
     // Setup
     const params = {
-      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
       folder: {
-        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
         expired: Date.now() - 10000,
+        id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
         value: {
+          createdDate: new Date('2017-07-31T18:56:29Z'),
+          files: [],
+          folders: [],
           id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
           name: 'Attachments',
-          createdDate: new Date('2017-07-31T18:56:29Z'),
-          updatedDate: new Date('2017-07-31T18:56:29Z'),
-          root: false,
-          webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments',
           parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ',
-          folders: [],
-          files: []
+          root: false,
+          updatedDate: new Date('2017-07-31T18:56:29Z'),
+          webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments'
         }
-      }
+      },
+      id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K'
     };
     const expected = undefined;
     const mockGet = vi.fn().mockResolvedValue(params.folder);
@@ -125,15 +125,15 @@ describe('setFolder', () => {
     // Setup
     const params = {
       folder: {
+        createdDate: new Date('2017-07-31T18:56:29Z'),
+        files: [],
+        folders: [],
         id: '01BYE5RZ6QN3ZWBTUFOFD3GSPGOHDJD36K',
         name: 'Attachments',
-        createdDate: new Date('2017-07-31T18:56:29Z'),
-        updatedDate: new Date('2017-07-31T18:56:29Z'),
-        root: false,
-        webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments',
         parentId: '01BYE5RZ56Y2GOVW7725BZO354PWSELRRZ',
-        folders: [],
-        files: []
+        root: false,
+        updatedDate: new Date('2017-07-31T18:56:29Z'),
+        webUrl: 'https://m365x214355-my.sharepoint.com/personal/meganb_m365x214355_onmicrosoft_com/Documents/Attachments'
       }
     };
     const mockPut = vi.fn().mockResolvedValue(undefined);

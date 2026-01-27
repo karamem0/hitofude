@@ -17,11 +17,10 @@ exports[`should match the snapshot when the disabled is false 1`] = `
       class="emotion-0"
       role="button"
       tabindex="0"
-      title="Conflict file"
     >
       <svg
         aria-hidden="true"
-        class="___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
+        class="fui-Icon ___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
         fill="currentColor"
         height="16"
         viewBox="0 0 16 16"

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,6 +9,7 @@
 import React from 'react';
 
 import { Event, EventHandler } from '../../types/Event';
+
 import Presenter from './TreeItem.presenter';
 
 interface TreeItemProps {
@@ -18,6 +19,7 @@ interface TreeItemProps {
   menuEnabled?: boolean,
   name?: string,
   selected?: boolean,
+  title?: React.ReactElement,
   onClick?: EventHandler
 }
 
@@ -29,6 +31,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
     menu,
     name,
     selected,
+    title,
     onClick
   } = props;
 
@@ -48,6 +51,7 @@ function TreeItem(props: Readonly<TreeItemProps>) {
       menu={menu}
       name={name}
       selected={selected}
+      title={title}
       onClick={onClick}
       onKeyDown={handleKeyDown} />
   );

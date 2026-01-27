@@ -1,4 +1,4 @@
-name: Trigger on main
+name: Push on main
 
 on:
   push:

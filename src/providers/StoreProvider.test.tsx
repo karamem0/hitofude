@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,10 +8,10 @@
 
 import React from 'react';
 
-import StoreProvider, { useStore } from './StoreProvider';
 import { renderHook, waitFor } from '@testing-library/react';
 import { ActionType } from '../types/Store';
 import ServiceProvider from './ServiceProvider';
+import StoreProvider, { useStore } from './StoreProvider';
 import ThemeProvider from './ThemeProvider';
 
 const mockReducer = vi.hoisted(() => vi.fn());
@@ -29,14 +29,14 @@ vi.mock('./ServiceProvider', () => ({
   useService: () => ({
     graph: {
       getRootFolder: () => Promise.resolve({
+        createdDate: new Date('2025-05-23T05:22:56Z'),
+        files: [],
+        folders: [],
         id: '01HLPWYXN6Y2GOVW7725BZO354PWSELRRZ',
         name: 'root',
-        createdDate: new Date('2025-05-23T05:22:56Z'),
-        updatedDate: new Date('2025-05-23T05:22:56Z'),
         root: true,
-        webUrl: 'https://m365x63639251-my.sharepoint.com/personal/adelev_m365x63639251_onmicrosoft_com/Documents',
-        folders: [],
-        files: []
+        updatedDate: new Date('2025-05-23T05:22:56Z'),
+        webUrl: 'https://m365x63639251-my.sharepoint.com/personal/adelev_m365x63639251_onmicrosoft_com/Documents'
       })
     },
     storage: {
@@ -69,7 +69,6 @@ beforeEach(() => {
 it('should get the initial state', async () => {
   // Setup
   const actual = {
-    type: ActionType.setInitialState,
     data: {
       contentProps: {
         editing: false,
@@ -87,14 +86,14 @@ it('should get the initial state', async () => {
       explorerProps: {
         allFiles: false,
         rootFolder: {
+          createdDate: new Date('2025-05-23T05:22:56Z'),
+          files: [],
+          folders: [],
           id: '01HLPWYXN6Y2GOVW7725BZO354PWSELRRZ',
           name: 'root',
-          createdDate: new Date('2025-05-23T05:22:56Z'),
-          updatedDate: new Date('2025-05-23T05:22:56Z'),
           root: true,
-          webUrl: 'https://m365x63639251-my.sharepoint.com/personal/adelev_m365x63639251_onmicrosoft_com/Documents',
-          folders: [],
-          files: []
+          updatedDate: new Date('2025-05-23T05:22:56Z'),
+          webUrl: 'https://m365x63639251-my.sharepoint.com/personal/adelev_m365x63639251_onmicrosoft_com/Documents'
         }
       },
       markdownProps: {
@@ -108,7 +107,8 @@ it('should get the initial state', async () => {
       searchProps: {
         query: ''
       }
-    }
+    },
+    type: ActionType.setInitialState
   };
   const wrapper = ({ children }: React.PropsWithChildren<unknown>) => (
     <ThemeProvider>

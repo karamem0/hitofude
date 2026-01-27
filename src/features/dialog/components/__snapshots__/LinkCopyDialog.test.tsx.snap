@@ -3,7 +3,106 @@
 exports[`should match the snapshot when the loading copied is false 1`] = `
 <DocumentFragment>
   <div
-    class="fui-FluentProvider fui-FluentProvider_r_3_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
+    aria-hidden="true"
+    class="fui-DialogSurface__backdrop r1e18s3l"
+  />
+  .emotion-0 {
+  overflow: hidden;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 3.5rem;
+  padding: 1rem 0;
+}
+
+<div
+    aria-modal="true"
+    class="fui-DialogSurface r1u3t6p6"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="fui-DialogBody rhwx3p8"
+    >
+      <h2
+        class="fui-DialogTitle rxjm636 ___mh25s00_kwrsjh0 fsyjsko"
+      >
+        Copy link
+      </h2>
+      <div
+        class="fui-DialogContent r1v5zwsm emotion-0"
+      >
+        <div
+          class="emotion-1"
+        >
+          <span
+            class="fui-Input r1oeeo9n ___xay2ks0_8jjmwj0 f11gcy0p fvcxoqz f1ub3y4t f1l4zc64 f1m52nbi f8vnjqi fz1etlk f1klwx88 f1hc16gm"
+          >
+            <input
+              aria-label="Link"
+              class="fui-Input__input r12stul0 ___1q6bera_bzdj540 ffczdla"
+              placeholder="Link"
+              readonly=""
+              type="text"
+              value="https://example.com"
+            />
+            <span
+              class="fui-Input__contentAfter r1572tok"
+            >
+              <button
+                aria-label="Copy"
+                class="fui-Button r1f29ykk ___1cf351u_11vbq2i f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fecsdlb f139oj5f ft1hn21 fuxngvv fkoldzo fhvnf4x fb6swo4 f1klyf7k f232fm2 f1l983o9 f1nhwcv0 f1gm6xmp fxoo9op f1v3eptx f1i0gk12 fd4bjan f18ktai2 fwbmr0d f44c6la"
+                type="button"
+              >
+                <span
+                  class="fui-Button__icon rywnvv2"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="fui-Icon ___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
+                    fill="currentColor"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M4 4.09v6.41A2.5 2.5 0 0 0 6.34 13h4.57c-.2.58-.76 1-1.41 1H6a3 3 0 0 1-3-3V5.5c0-.65.42-1.2 1-1.41ZM11.5 2c.83 0 1.5.67 1.5 1.5v7c0 .83-.67 1.5-1.5 1.5h-5A1.5 1.5 0 0 1 5 10.5v-7C5 2.67 5.67 2 6.5 2h5Zm0 1h-5a.5.5 0 0 0-.5.5v7c0 .28.22.5.5.5h5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="fui-DialogActions rhfpeu0 ___1w6yguj_o4tqhn0 f1a7i8kp fd46tj4 fsyjsko f1n00o3b f1mvsp37 flbz1vp"
+      >
+        <button
+          aria-label="Close"
+          class="fui-Button r1f29ykk"
+          data-tabster="{"restorer":{"type":1}}"
+          type="button"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+  />
+  <div
+    class="fui-FluentProvider fui-FluentProvider_r_4_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"
   >
     <div
@@ -19,6 +118,95 @@ exports[`should match the snapshot when the loading copied is false 1`] = `
 
 exports[`should match the snapshot when the loading copied is true 1`] = `
 <DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="fui-DialogSurface__backdrop r1e18s3l"
+  />
+  .emotion-0 {
+  overflow: hidden;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 3.5rem;
+  padding: 1rem 0;
+}
+
+<div
+    aria-modal="true"
+    class="fui-DialogSurface r1u3t6p6"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="fui-DialogBody rhwx3p8"
+    >
+      <h2
+        class="fui-DialogTitle rxjm636 ___mh25s00_kwrsjh0 fsyjsko"
+      >
+        Copy link
+      </h2>
+      <div
+        class="fui-DialogContent r1v5zwsm emotion-0"
+      >
+        <div
+          class="emotion-1"
+        >
+          <div
+            aria-labelledby="fui-_r_1_"
+            class="fui-MessageBar r2oyxsj ___1e8ylb3_17hk5n0 f64thcm f1b4u7v f1nyd2b1 fk173vo f70v3om"
+            role="group"
+          >
+            <div
+              class="fui-MessageBar__icon r1df1z33 ___kbmbi50_8ki2l30 f36rra6"
+            >
+              <svg
+                aria-hidden="true"
+                class="fui-Icon ___9ctc0p0_1xvj9ao f1w7gpdv fez10in f1dd5bof"
+                fill="currentColor"
+                height="1em"
+                viewBox="0 0 20 20"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm3.36 5.65a.5.5 0 0 0-.64-.06l-.07.06L9 11.3 7.35 9.65l-.07-.06a.5.5 0 0 0-.7.7l.07.07 2 2 .07.06c.17.11.4.11.56 0l.07-.06 4-4 .07-.08a.5.5 0 0 0-.06-.63Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <span
+              class="fui-MessageBarTitle r168xkm9"
+              id="fui-_r_1_"
+            >
+              Link copied
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="fui-DialogActions rhfpeu0 ___1w6yguj_o4tqhn0 f1a7i8kp fd46tj4 fsyjsko f1n00o3b f1mvsp37 flbz1vp"
+      >
+        <button
+          aria-label="Close"
+          class="fui-Button r1f29ykk"
+          data-tabster="{"restorer":{"type":1}}"
+          type="button"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+  />
   <div
     class="fui-FluentProvider fui-FluentProvider_r_0_ ___jdtuxv0_17k0bs4 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"
     dir="ltr"

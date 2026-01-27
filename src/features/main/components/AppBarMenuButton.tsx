@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,13 +9,14 @@
 import React from 'react';
 
 import { MenuProps } from '@fluentui/react-components';
+
 import Presenter from './AppBarMenuButton.presenter';
 
 interface AppBarMenuButtonProps {
   icon?: React.ReactElement,
   menu?: React.ReactNode,
   menuProps?: Partial<MenuProps>,
-  title?: string
+  title?: string | React.ReactElement
 }
 
 function AppBarMenuButton(props: Readonly<AppBarMenuButtonProps>) {

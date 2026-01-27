@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -25,10 +25,10 @@ export class RouteService {
       return {};
     }
     return {
-      tab: Number(params.get('tab') ?? undefined),
-      folder: params.get('folder') ?? undefined,
       file: params.get('file') ?? undefined,
-      search: params.get('search') ?? undefined
+      folder: params.get('folder') ?? undefined,
+      search: params.get('search') ?? undefined,
+      tab: Number(params.get('tab') ?? undefined)
     };
   }
 

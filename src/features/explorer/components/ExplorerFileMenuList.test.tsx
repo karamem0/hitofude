@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,9 +9,9 @@
 import React from 'react';
 
 import { Menu, MenuPopover } from '@fluentui/react-components';
+import { render } from '@testing-library/react';
 import IntlProvider from '../../../providers/IntlProvider';
 import ThemeProvider from '../../../providers/ThemeProvider';
-import { render } from '@testing-library/react';
 
 import Presenter from './ExplorerFileMenuList.presenter';
 
@@ -25,9 +25,9 @@ it('should match the snapshot when the file type is markdown', () => {
   const container = document.createElement('div');
   const params = {
     file: {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
       extension: '.md',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       mimeType: 'text/markdown'
     }
   };
@@ -36,8 +36,8 @@ it('should match the snapshot when the file type is markdown', () => {
     <IntlProvider>
       <ThemeProvider>
         <Menu
-          mountNode={container}
-          open>
+          open
+          mountNode={container}>
           <MenuPopover>
             <Presenter {...params} />
           </MenuPopover>
@@ -57,9 +57,9 @@ it('should match the snapshot when the file type is not markdown', () => {
   const container = document.createElement('div');
   const params = {
     file: {
-      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       baseName: 'Annual Financial Report (DRAFT)',
       extension: '.docx',
+      id: '01BYE5RZ4FL7NVUU4UDVHIRG32OLTW4IKM',
       mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     }
   };
@@ -68,8 +68,8 @@ it('should match the snapshot when the file type is not markdown', () => {
     <IntlProvider>
       <ThemeProvider>
         <Menu
-          mountNode={container}
-          open>
+          open
+          mountNode={container}>
           <MenuPopover>
             <Presenter {...params} />
           </MenuPopover>

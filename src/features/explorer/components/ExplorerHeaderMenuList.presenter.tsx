@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,6 +8,13 @@
 
 import React from 'react';
 
+import { css } from '@emotion/react';
+import {
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList
+} from '@fluentui/react-components';
 import {
   ArrowClockwise16Regular,
   DocumentAdd16Regular,
@@ -16,17 +23,10 @@ import {
   FolderAdd16Regular,
   Link16Regular
 } from '@fluentui/react-icons';
-import { ExplorerMenuAction, Folder } from '../../../types/Model';
-import {
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList
-} from '@fluentui/react-components';
-import { EventHandler } from '../../../types/Event';
-import { FormattedMessage } from 'react-intl';
 import { GrOnedrive } from 'react-icons/gr';
-import { css } from '@emotion/react';
+import { FormattedMessage } from 'react-intl';
+import { EventHandler } from '../../../types/Event';
+import { ExplorerMenuAction, Folder } from '../../../types/Model';
 import messages from '../messages';
 
 interface ExplorerHeaderMenuListProps {
@@ -52,8 +52,8 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
             <ArrowClockwise16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'refreshFolder',
-            data: selectedFolder
+            data: selectedFolder,
+            type: 'refreshFolder'
           })}>
           <FormattedMessage {...messages.Refresh} />
         </MenuItem>
@@ -70,8 +70,8 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
             )
           }
           onClick={(event) => onMenuClick?.(event, {
-            type: 'toggleAllFiles',
-            data: !allFiles
+            data: !allFiles,
+            type: 'toggleAllFiles'
           })}>
           {
             allFiles ? (
@@ -94,8 +94,8 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
               `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'copyLink',
-            data: selectedFolder
+            data: selectedFolder,
+            type: 'copyLink'
           })}>
           <FormattedMessage {...messages.CopyLink} />
         </MenuItem>
@@ -108,8 +108,8 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
             <DocumentAdd16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'createFile',
-            data: null
+            data: null,
+            type: 'createFile'
           })}>
           <FormattedMessage {...messages.NewFile} />
         </MenuItem>
@@ -119,8 +119,8 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
             <FolderAdd16Regular />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'createFolder',
-            data: null
+            data: null,
+            type: 'createFolder'
           })}>
           <FormattedMessage {...messages.NewFolder} />
         </MenuItem>
@@ -137,8 +137,8 @@ function ExplorerHeaderMenuList(props: Readonly<ExplorerHeaderMenuListProps>) {
             `} />
           )}
           onClick={(event) => onMenuClick?.(event, {
-            type: 'openWithOneDrive',
-            data: selectedFolder
+            data: selectedFolder,
+            type: 'openWithOneDrive'
           })}>
           <FormattedMessage {...messages.OpenWithOneDrive} />
         </MenuItem>

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,11 +8,11 @@
 
 import React from 'react';
 
-import { Action, State } from '../types/Store';
+import { setInitialState } from '../stores/Action';
+import { reducer } from '../stores/Reducer';
 import { InvalidOperationError } from '../types/Error';
 import { ThemeName } from '../types/Model';
-import { reducer } from '../stores/Reducer';
-import { setInitialState } from '../stores/Action';
+import { Action, State } from '../types/Store';
 import { useService } from './ServiceProvider';
 import { useTheme } from './ThemeProvider';
 

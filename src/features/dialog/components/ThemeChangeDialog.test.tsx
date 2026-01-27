@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2025 karamem0
+// Copyright (c) 2023-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,10 +9,10 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
-import IntlProvider from '../../../providers/IntlProvider';
-import { ThemeName } from '../../../types/Model';
-import ThemeProvider from '../../../providers/ThemeProvider';
 import userEvent from '@testing-library/user-event';
+import IntlProvider from '../../../providers/IntlProvider';
+import ThemeProvider from '../../../providers/ThemeProvider';
+import { ThemeName } from '../../../types/Model';
 
 import Presenter from './ThemeChangeDialog.presenter';
 
@@ -72,7 +72,7 @@ it('should raise onChangeTheme event when the click a light checkbox', async () 
       container
     }
   );
-  await user.click(screen.getByTitle('Light'));
+  await user.click(screen.getByLabelText('Light'));
   // Assert
   expect(mock).toHaveBeenCalledWith(expect.anything(), ThemeName.light);
 });
@@ -98,7 +98,7 @@ it('should raise onChangeTheme event when the click a dark checkbox', async () =
       container
     }
   );
-  await user.click(screen.getByTitle('Dark'));
+  await user.click(screen.getByLabelText('Dark'));
   // Assert
   expect(mock).toHaveBeenCalledWith(expect.anything(), ThemeName.dark);
 });
